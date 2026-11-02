@@ -123,11 +123,11 @@ jobs:
               df["_is_unblocked"]=is_unblocked
               sort_cols=["game_id","event_idx"] if "event_idx" in df.columns else ["game_id","game_seconds_num"]
               df=df.sort_values(sort_cols,kind="stable")
-              prev_team=df.groupby("game_id")["event_team_abbr"].shift(1)
+              prev_team=df.groupby("game_id")["event_team_type"].shift(1)
               prev_unblocked=df.groupby("game_id")["_is_unblocked"].shift(1).fillna(False)
               prev_secs=df.groupby("game_id")["game_seconds_num"].shift(1)
               dt=df["game_seconds_num"]-prev_secs
-              rebound=is_unblocked & prev_unblocked.astype(bool) & df["event_team_abbr"].eq(prev_team) & dt.ge(0) & dt.le(3)
+              rebound=is_unblocked & prev_unblocked.astype(bool) & df["event_team_type"].eq(prev_team) & dt.ge(0) & dt.le(3)
 
               # Build metric event columns.
               df["goals_ev"]=is_goal.astype("int16")
@@ -169,8 +169,9 @@ jobs:
               df["faceoff_wins"]=et.eq("FACEOFF").astype("int16")
 
               # Aggregate only rows with an owning team.
-              ev=df[df["event_team_abbr"].notna()].copy()
-              group_keys=["game_id","event_team_abbr"]
+              ev=df[df["event_team_type"].astype("string").str.lower().isin(["home","away"])].copy()
+              ev["home_away"]=ev["event_team_type"].astype("string").str.lower()
+              group_keys=["game_id","home_away"]
               agg=ev.groupby(group_keys,dropna=False)[metric_cols].sum().reset_index()
               quality=ev[is_unblocked.loc[ev.index]].groupby(group_keys).agg(
                   mean_xg_per_unblocked=("xg_num","mean"),
@@ -179,30 +180,38 @@ jobs:
               ).reset_index()
               agg=agg.merge(quality,on=group_keys,how="left")
 
-              # Game metadata and OT/shootout flags.
-              meta=df.groupby("game_id",dropna=False).agg(
+              # Game metadata and OT/shootout flags, enriched from authoritative schedule.
+              meta_pbp=df.groupby("game_id",dropna=False).agg(
                   season_full=("season","first"),
                   season_type=("season_type","first"),
-                  game_date=("game_date","first"),
-                  home_abbr=("home_abbr","first"),
-                  away_abbr=("away_abbr","first"),
-                  final_home_score=("home_score_num","max"),
-                  final_away_score=("away_score_num","max"),
               ).reset_index()
               flags=df.groupby("game_id").agg(
                   went_ot=("period_type",lambda s: s.astype("string").str.upper().eq("OVERTIME").any()),
                   went_shootout=("period_type",lambda s: s.astype("string").str.upper().eq("SHOOTOUT").any()),
               ).reset_index()
-              meta=meta.merge(flags,on="game_id",how="left")
+              meta=meta_pbp.merge(flags,on="game_id",how="left")
+              meta=meta.merge(schedule_keep,on="game_id",how="left")
               meta["source_season"]=end_year
+              meta=meta.rename(columns={
+                  "home_team_abbr":"home_abbr","away_team_abbr":"away_abbr",
+                  "home_score":"final_home_score","away_score":"final_away_score"
+              })
 
+              # Guarantee exactly one home and one away row for every game in PBP.
+              skeleton=pd.concat([
+                  meta[["game_id"]].assign(home_away="home"),
+                  meta[["game_id"]].assign(home_away="away")
+              ],ignore_index=True)
+              agg=skeleton.merge(agg,on=["game_id","home_away"],how="left")
+              for _m in metric_cols:
+                  if _m in agg.columns: agg[_m]=agg[_m].fillna(0)
               agg=agg.merge(meta,on="game_id",how="left")
-              agg["home_away"]=np.where(agg["event_team_abbr"].eq(agg["home_abbr"]),"home","away")
+              agg["event_team_abbr"]=np.where(agg["home_away"].eq("home"),agg["home_abbr"],agg["away_abbr"])
               agg["opponent_abbr"]=np.where(agg["home_away"].eq("home"),agg["away_abbr"],agg["home_abbr"])
               agg["team_final_score"]=np.where(agg["home_away"].eq("home"),agg["final_home_score"],agg["final_away_score"])
               agg["opp_final_score"]=np.where(agg["home_away"].eq("home"),agg["final_away_score"],agg["final_home_score"])
-              agg["win"]=(agg["team_final_score"]>agg["opp_final_score"]).astype("int8")
-              agg["goal_diff"]=agg["team_final_score"]-agg["opp_final_score"]
+              agg["win"]=(pd.to_numeric(agg["team_final_score"],errors="coerce")>pd.to_numeric(agg["opp_final_score"],errors="coerce")).astype("int8")
+              agg["goal_diff"]=pd.to_numeric(agg["team_final_score"],errors="coerce")-pd.to_numeric(agg["opp_final_score"],errors="coerce")
               # Normalize mixed legacy metadata types before cross-season concat/parquet.
               for _c in ["season_full","season_type","game_date","home_abbr","away_abbr","event_team_abbr","opponent_abbr","home_away"]:
                   agg[_c]=agg[_c].astype("string")
@@ -213,9 +222,10 @@ jobs:
                   "tied_fivev5_corsi","tied_fivev5_xg","close_fivev5_corsi","close_fivev5_xg",
                   "early_fivev5_corsi","early_fivev5_xg","pp_xg","pp_sog","pp_goals"
               ]
-              opp=agg[["game_id","event_team_abbr"]+for_cols].copy()
-              opp=opp.rename(columns={"event_team_abbr":"opponent_abbr",**{c:f"{c}_against" for c in for_cols}})
-              agg=agg.merge(opp,on=["game_id","opponent_abbr"],how="left")
+              opp=agg[["game_id","home_away"]+for_cols].copy()
+              opp["home_away"]=opp["home_away"].map({"home":"away","away":"home"})
+              opp=opp.rename(columns={c:f"{c}_against" for c in for_cols})
+              agg=agg.merge(opp,on=["game_id","home_away"],how="left")
               for c in ["corsi","fenwick","sog","xg","fivev5_corsi","fivev5_fenwick","fivev5_sog","fivev5_xg","tied_fivev5_corsi","tied_fivev5_xg","close_fivev5_corsi","close_fivev5_xg","early_fivev5_corsi","early_fivev5_xg"]:
                   denom=agg[c]+agg[f"{c}_against"]
                   agg[f"{c}_share"]=np.where(denom>0,agg[c]/denom,np.nan)
