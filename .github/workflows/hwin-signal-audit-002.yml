@@ -30,7 +30,7 @@ jobs:
           ls -lh /tmp/features/pbp_feature_output/
       - name: Run leakage-safe signal audit
         run: |
-          python research/hwin_signal_audit_002.py \
+          python research/hwin_signal_audit.py \
             --input /tmp/features/pbp_feature_output/game_team_event_features.parquet \
             --out hwin_signal_audit_002
       - name: Print research results
