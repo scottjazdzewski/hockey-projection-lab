@@ -124,7 +124,23 @@ Goalie feature ETL 001:
 - cross-era comparable xG metric: SOG-based GSAx
 - richer unblocked-shot attribution available in modern seasons
 
-Confirmed-starter HWIN layer is under evaluation against the fusion backbone.
+Confirmed-starter HWIN Layer 001:
+- broad goalie bundle did **not** improve the 2026 development test
+- backbone Brier 0.246230
+- backbone + broad goalie bundle Brier 0.246556
+- broad goalie bundle is not promoted
+
+Goalie Signal Audit 002:
+- best single incremental signal so far: 20-game starter save percentage
+  - 2026 Brier 0.245949
+  - delta vs same backbone: -0.000281
+- second: 20-game SOG-based GSAx
+  - 2026 Brier 0.246009
+  - delta vs backbone: -0.000221
+- effects are small and require rolling-origin confirmation before inclusion
+- short/medium/long goalie features were highly correlated and unstable when bundled
+
+Rolling-origin goalie test is required before any goalie feature is promoted.
 
 ## Promotion rules
 
