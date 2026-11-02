@@ -1,0 +1,41 @@
+name: Hockey Legacy ID Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hockey-legacy-id-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow requests
+      - name: Compare 2015-2018 game IDs
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pandas as pd, requests, io
+          B="https://github.com/sportsdataverse/sportsdataverse-data/releases/download"
+          def pq(url):
+              r=requests.get(url,timeout=120); r.raise_for_status()
+              return pd.read_parquet(io.BytesIO(r.content))
+          for y in range(2015,2019):
+              p=pq(f"{B}/nhl_pbp_full/play_by_play_{y}.parquet")
+              ids=set(pd.to_numeric(p.game_id,errors="coerce").dropna().astype(int))
+              print("\nPBP",y,"games",len(ids),"id_minmax",(min(ids),max(ids)),"season_values",p["season"].astype("string").value_counts().head(5).to_dict())
+              for sy in [y-1,y,y+1]:
+                  s=pq(f"{B}/nhl_schedules/nhl_schedule_{sy}.parquet")
+                  sids=set(pd.to_numeric(s.game_id,errors="coerce").dropna().astype(int))
+                  inter=len(ids&sids)
+                  print(" schedule",sy,"games",len(sids),"intersect",inter,"id_minmax",(min(sids),max(sids)) if sids else None,
+                        "season_vals",s["season"].astype("string").value_counts().head(3).to_dict())
+          PY
