@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "hockey-projection-lab",
+  "compatibility_date": "2026-11-02",
+  "assets": {
+    "directory": "./public/"
+  }
+}
