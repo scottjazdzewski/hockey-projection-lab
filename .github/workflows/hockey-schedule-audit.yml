@@ -1,0 +1,46 @@
+name: Hockey Schedule Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hockey-schedule-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit-schedule:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow requests
+      - name: Audit master game population
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pandas as pd, requests, json
+          u="https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_schedules/nhl_schedule_master.parquet"
+          b=requests.get(u,timeout=120); b.raise_for_status()
+          open("/tmp/games.parquet","wb").write(b.content)
+          g=pd.read_parquet("/tmp/games.parquet")
+          print("ROWS",len(g),"UNIQUE_GAME_ID",g.game_id.nunique(),"DUP_GAME_ID",g.game_id.duplicated().sum())
+          print("GAME_TYPE_COUNTS")
+          print(g.game_type.astype("string").value_counts(dropna=False).to_string())
+          print("GAME_STATE_COUNTS")
+          print(g.game_state.astype("string").value_counts(dropna=False).to_string())
+          print("SEASON_RANGE",g.season.min(),g.season.max())
+          print("SEASON_COUNTS")
+          print(g.groupby(["season","game_type"],dropna=False).size().to_string())
+          completed=g[g.home_score.notna() & g.away_score.notna()].copy()
+          print("COMPLETED_ROWS",len(completed),"COMPLETED_UNIQUE",completed.game_id.nunique())
+          print("COMPLETED_BY_SEASON_TYPE")
+          print(completed.groupby(["season","game_type"],dropna=False).size().to_string())
+          print("DATE_RANGE",g.game_date.min(),g.game_date.max())
+          print("SAMPLE_RECENT")
+          print(g.sort_values("game_date").tail(12)[["game_id","season_full","season","game_type","game_date","away_team_abbr","home_team_abbr","away_score","home_score","game_state"]].to_string(index=False))
+          PY
