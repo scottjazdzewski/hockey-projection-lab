@@ -25,7 +25,7 @@ jobs:
           cat > /tmp/spine_v3.py <<'PY'
           import json, hashlib
           from pathlib import Path
-          import pandas as pd, requests, numpy as np
+          import pandas as pd, requests, numpy as np, numpy as np
 
           BASE="https://github.com/sportsdataverse/sportsdataverse-data/releases/download"
           OUT=Path("spine_v3"); OUT.mkdir(exist_ok=True)
@@ -54,6 +54,10 @@ jobs:
               sched=sched.dropna(subset=["game_id"]).drop_duplicates("game_id").copy()
               sched["source_season"]=season
               sched["source_url"]=su
+              sched=sched.rename(columns={
+                  "home_score":"provider_schedule_home_score_untrusted",
+                  "away_score":"provider_schedule_away_score_untrusted"
+              })
               frames["games"].append(sched)
               ids=set(sched["game_id"].astype(int).tolist())
               audit={"games":len(sched),"game_types":sched["game_type"].astype("string").value_counts(dropna=False).to_dict()}
@@ -101,15 +105,42 @@ jobs:
               print("OUTPUT",fam,outputs[fam],flush=True)
 
           games=pd.read_parquet(OUT/"games.parquet")
-          completed=games[games["home_score"].notna() & games["away_score"].notna()]
+          goalies=pd.read_parquet(OUT/"goalie_box.parquet")
+          goalies["decision_norm"]=goalies["decision"].astype("string").str.upper().str.strip()
+          w=goalies[goalies["decision_norm"].eq("W")][["game_id","home_away","team_abbrev"]].copy()
+          wc=w.groupby("game_id").size()
+          if int((wc!=1).sum()):
+              raise RuntimeError(f"goalie winner integrity failure: games_not_exactly_one_winner={int((wc!=1).sum())}")
+          w=w.drop_duplicates("game_id").rename(columns={
+              "home_away":"winner_home_away","team_abbrev":"winner_team_abbrev"
+          })
+          w["winner_home_away"]=w["winner_home_away"].astype("string").str.lower()
+          games=games.merge(w,on="game_id",how="left")
+          games["result_available"]=games["winner_home_away"].notna()
+          games["home_win"]=pd.Series(pd.NA,index=games.index,dtype="boolean")
+          mask=games["result_available"]
+          games.loc[mask,"home_win"]=games.loc[mask,"winner_home_away"].eq("home").astype(bool)
+          expected=pd.Series(
+              np.where(games["winner_home_away"].eq("home"),games["home_team_abbr"],games["away_team_abbr"]),
+              index=games.index,dtype="string"
+          )
+          bad_identity=mask & ~games["winner_team_abbrev"].astype("string").eq(expected)
+          if int(bad_identity.sum()):
+              raise RuntimeError(f"winner identity mismatch={int(bad_identity.sum())}")
+          games.to_parquet(OUT/"games.parquet",index=False)
+          completed=games[games["result_available"]].copy()
           summary={
-              "outputs":outputs,
-              "completed_games":len(completed),
-              "completed_regular":int((completed["game_type"].astype("string")=="R").sum()),
-              "completed_playoffs":int((completed["game_type"].astype("string")=="P").sum()),
+              "outputs":{**outputs,"games":{"rows":len(games),"games":int(games["game_id"].nunique())}},
+              "result_games":len(completed),
+              "result_regular":int((completed["game_type"].astype("string")=="R").sum()),
+              "result_playoffs":int((completed["game_type"].astype("string")=="P").sum()),
+              "home_win_rate_regular":float(completed.loc[completed["game_type"].astype("string").eq("R"),"home_win"].astype(float).mean()),
+              "home_win_rate_playoffs":float(completed.loc[completed["game_type"].astype("string").eq("P"),"home_win"].astype(float).mean()),
+              "winner_identity_mismatches":int(bad_identity.sum()),
               "preseason":int((games["game_type"].astype("string")=="PR").sum()),
               "date_min":str(games["game_date"].min()),
               "date_max":str(games["game_date"].max()),
+              "outcome_authority":"Goalie W decision. Provider schedule score fields retained only under *_untrusted names.",
               "season_audit":season_audit
           }
           pd.DataFrame(manifest).to_csv(OUT/"source_manifest.csv",index=False)
