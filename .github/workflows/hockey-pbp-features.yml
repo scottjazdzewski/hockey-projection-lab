@@ -93,6 +93,21 @@ jobs:
                   "season","game_type"
               ]].dropna(subset=["game_id"]).drop_duplicates("game_id")
 
+              # Goalie decision is the authoritative HWIN winner label.
+              goalie_url=f"{BASE}/nhl_goalie_boxscores/goalie_box_{season_year}.parquet"
+              goalie_path=download(goalie_url,Path("/tmp")/f"goalie_box_{season_year}.parquet")
+              goalies=pd.read_parquet(goalie_path)
+              goalie_path.unlink()
+              goalies["game_id"]=pd.to_numeric(goalies["game_id"],errors="coerce").astype("Int64")
+              goalies["decision_norm"]=goalies["decision"].astype("string").str.upper().str.strip()
+              winner_rows=goalies[goalies["decision_norm"].eq("W")].copy()
+              winner_counts=winner_rows.groupby("game_id").size()
+              if int((winner_counts>1).sum()):
+                  raise RuntimeError(f"Multiple winning goalies found in season {season_year}")
+              winner_side=winner_rows[["game_id","home_away"]].drop_duplicates("game_id")
+              winner_side["winner_home_away"]=winner_side["home_away"].astype("string").str.lower()
+              winner_side=winner_side[["game_id","winner_home_away"]]
+
               # Normalize required fields robustly across eras.
               for c in ["event_type","event_team_abbr","event_team_type","period_type","strength_state","strength_code","home_abbr","away_abbr","season_type","game_date","season"]:
                   if c not in df: df[c]=None
@@ -215,6 +230,7 @@ jobs:
               ).reset_index()
               meta=meta_pbp.merge(flags,on="game_id",how="left")
               meta=meta.merge(schedule_keep,on="game_id",how="inner")
+              meta=meta.merge(winner_side,on="game_id",how="left")
               meta["source_season"]=season_year
               meta=meta.rename(columns={
                   "home_team_abbr":"home_abbr","away_team_abbr":"away_abbr"
@@ -237,7 +253,7 @@ jobs:
               agg["opponent_abbr"]=np.where(agg["home_away"].eq("home"),agg["away_abbr"],agg["home_abbr"])
               agg["team_final_score"]=np.where(agg["home_away"].eq("home"),agg["final_home_score"],agg["final_away_score"])
               agg["opp_final_score"]=np.where(agg["home_away"].eq("home"),agg["final_away_score"],agg["final_home_score"])
-              agg["win"]=(pd.to_numeric(agg["team_final_score"],errors="coerce")>pd.to_numeric(agg["opp_final_score"],errors="coerce")).astype("int8")
+              agg["win"]=(agg["home_away"].astype("string")==agg["winner_home_away"].astype("string")).astype("int8")
               agg["goal_diff"]=pd.to_numeric(agg["team_final_score"],errors="coerce")-pd.to_numeric(agg["opp_final_score"],errors="coerce")
               # Normalize mixed legacy metadata types before cross-season concat/parquet.
               for _c in ["season_full","season_type","game_date","home_abbr","away_abbr","event_team_abbr","opponent_abbr","home_away"]:
@@ -266,13 +282,22 @@ jobs:
           home_rows=out[out["home_away"].eq("home")].copy()
           unresolved_scores=int((home_rows["final_home_score"].isna() | home_rows["final_away_score"].isna()).sum())
           tied_final_scores=int((pd.to_numeric(home_rows["final_home_score"],errors="coerce") == pd.to_numeric(home_rows["final_away_score"],errors="coerce")).sum())
+          unresolved_winners=int(home_rows["winner_home_away"].isna().sum())
+          win_counts=out.groupby("game_id")["win"].sum()
+          bad_winner_games=int((win_counts!=1).sum())
+          unexpected_tied_nonshootout=int((
+              (pd.to_numeric(home_rows["final_home_score"],errors="coerce") == pd.to_numeric(home_rows["final_away_score"],errors="coerce"))
+              & ~home_rows["went_shootout"].fillna(False).astype(bool)
+          ).sum())
           sides_per_game=out.groupby("game_id")["home_away"].nunique()
           bad_side_games=int((sides_per_game.ne(2)).sum())
-          if duplicate_keys or bad_side_games or unresolved_scores or tied_final_scores or len(out) != 2*out["game_id"].nunique():
+          if duplicate_keys or bad_side_games or unresolved_scores or unresolved_winners or bad_winner_games or unexpected_tied_nonshootout or len(out) != 2*out["game_id"].nunique():
               raise RuntimeError(
                   f"Ledger integrity failure: rows={len(out)} games={out['game_id'].nunique()} "
                   f"duplicate_keys={duplicate_keys} bad_side_games={bad_side_games} "
-                  f"unresolved_scores={unresolved_scores} tied_final_scores={tied_final_scores}"
+                  f"unresolved_scores={unresolved_scores} unresolved_winners={unresolved_winners} "
+                  f"bad_winner_games={bad_winner_games} tied_scores={tied_final_scores} "
+                  f"unexpected_tied_nonshootout={unexpected_tied_nonshootout}"
               )
           out.to_parquet(OUT/"game_team_event_features.parquet",index=False)
           pd.DataFrame(manifest).to_csv(OUT/"source_manifest.csv",index=False)
@@ -288,9 +313,12 @@ jobs:
               "games_without_exactly_two_sides":bad_side_games,
               "unresolved_pbp_final_scores":unresolved_scores,
               "tied_pbp_final_scores":tied_final_scores,
+              "unresolved_goalie_winner_labels":unresolved_winners,
+              "bad_winner_games":bad_winner_games,
+              "unexpected_tied_nonshootout_games":unexpected_tied_nonshootout,
               "two_row_ledger_pass":bool(len(out)==2*out["game_id"].nunique() and duplicate_keys==0 and bad_side_games==0),
-              "score_target_pass":bool(unresolved_scores==0 and tied_final_scores==0),
-              "outcome_source":"PBP scoreboard only; schedule scores explicitly excluded",
+              "winner_target_pass":bool(unresolved_winners==0 and bad_winner_games==0),
+              "outcome_source":"Goalie W decision for winner; PBP scoreboard for non-shootout goal totals; schedule scores excluded",
           }
           with open(OUT/"summary.json","w") as f: json.dump(summary,f,indent=2,default=str)
           print("FINAL_SUMMARY",json.dumps({k:v for k,v in summary.items() if k!="columns"}),flush=True)
