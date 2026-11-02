@@ -28,17 +28,15 @@
       if(!r.ok) throw new Error('schedule');
       const d=await r.json();
       const games=Array.isArray(d.games)?d.games:[];
-      const home=document.getElementById('home-today-games');
       const count=document.getElementById('home-today-count');
-      if(count) count.textContent=games.length+' game'+(games.length===1?'':'s')+' · '+(d.display_date||d.date||'Today');
-      if(home) home.innerHTML=games.length?games.map(miniGame).join(''):'<div class="today-no-games">No NHL games scheduled today.</div>';
+      if(count) count.textContent=games.length ? games.length+' game'+(games.length===1?'':'s')+' today' : 'No games today';
       const grid=document.getElementById('todays-game-grid');
       const slate=document.getElementById('today-slate-label');
       if(slate) slate.textContent=(d.display_date||d.date||'Today')+' · '+games.length+' game'+(games.length===1?'':'s');
       if(grid) grid.innerHTML=games.length?games.map(fullGame).join(''):'<article class="profile-placeholder"><div class="eyebrow">Off day</div><h2>No NHL games today.</h2><p>The next slate will populate automatically.</p></article>';
     }catch(e){
-      const home=document.getElementById('home-today-games');
-      if(home) home.innerHTML='<div class="today-no-games">Schedule temporarily unavailable.</div>';
+      const count=document.getElementById('home-today-count');
+      if(count) count.textContent='Today’s NHL slate';
     }
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',load); else load();
