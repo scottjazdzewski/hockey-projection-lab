@@ -202,6 +202,9 @@ jobs:
               ).reset_index()
               meta=meta_pbp.merge(flags,on="game_id",how="left")
               meta=meta.merge(schedule_keep,on="game_id",how="left")
+              # Release files can overlap adjacent seasons; master schedule season is authoritative.
+              schedule_season=pd.to_numeric(meta["season"],errors="coerce")
+              meta=meta[schedule_season.eq(end_year)].copy()
               meta["source_season"]=end_year
               meta=meta.rename(columns={
                   "home_team_abbr":"home_abbr","away_team_abbr":"away_abbr",
@@ -246,6 +249,14 @@ jobs:
 
           out=pd.concat(all_features,ignore_index=True,sort=False)
           out=out.sort_values(["game_date","game_id","home_away"]).reset_index(drop=True)
+          duplicate_keys=int(out.duplicated(["game_id","home_away"]).sum())
+          sides_per_game=out.groupby("game_id")["home_away"].nunique()
+          bad_side_games=int((sides_per_game.ne(2)).sum())
+          if duplicate_keys or bad_side_games or len(out) != 2*out["game_id"].nunique():
+              raise RuntimeError(
+                  f"Ledger integrity failure: rows={len(out)} games={out['game_id'].nunique()} "
+                  f"duplicate_keys={duplicate_keys} bad_side_games={bad_side_games}"
+              )
           out.to_parquet(OUT/"game_team_event_features.parquet",index=False)
           pd.DataFrame(manifest).to_csv(OUT/"source_manifest.csv",index=False)
 
@@ -256,6 +267,9 @@ jobs:
               "columns":list(out.columns),
               "regular_rows":int((out["season_type"].astype("string")=="R").sum()),
               "playoff_rows":int((out["season_type"].astype("string")=="P").sum()),
+              "duplicate_game_side_keys":duplicate_keys,
+              "games_without_exactly_two_sides":bad_side_games,
+              "two_row_ledger_pass":bool(len(out)==2*out["game_id"].nunique() and duplicate_keys==0 and bad_side_games==0),
           }
           with open(OUT/"summary.json","w") as f: json.dump(summary,f,indent=2,default=str)
           print("FINAL_SUMMARY",json.dumps({k:v for k,v in summary.items() if k!="columns"}),flush=True)
