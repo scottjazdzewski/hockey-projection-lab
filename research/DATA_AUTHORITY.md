@@ -105,6 +105,9 @@ Season shift files contain keyed game IDs plus player on/off changes and can sup
 - Market odds are not model inputs for the independent HWIN baseline.
 - Same-game results are never fed backward into that game's prediction.
 - Train/validation/test splits are chronological.
-- Current 2026-27 data is shadow/live, not training.
+- 2024-25 (source_season 2025) is the primary development-validation season.
+- 2025-26 (source_season 2026) was inspected during early signal/fusion research and is therefore a **development test**, not an untouched final holdout.
+- Current 2026-27 (source_season 2027) remains prospective shadow/live and is not training data.
+- Promotion research must also use rolling-origin season backtests so no single season determines a feature's value.
 - Evaluate Brier score, log loss and calibration in addition to winner accuracy.
 - No candidate is promoted from a single favorable test.
