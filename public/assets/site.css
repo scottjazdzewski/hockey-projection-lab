@@ -183,3 +183,64 @@ footer{background:#160b29;color:#efe5f0;border-top:1px solid #6e4a9b}.footer-inn
   .live-slate-card .hwin-team img{width:50px;height:50px}
   .live-slate-card .hwin-team strong{font-size:21px}
 }
+
+
+/* 2026-11-02 readability pass: preserve four-across desktop cards */
+@media(min-width:1181px){
+  .live-slate-card .hwin-matchup{
+    grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr);
+    gap:7px;
+    padding:18px 10px 14px;
+  }
+  .live-slate-card .hwin-team img{
+    width:58px;
+    height:58px;
+    margin-bottom:8px;
+  }
+  .live-slate-card .hwin-team strong{
+    font-size:21px;
+    line-height:1;
+  }
+  .live-slate-card .hwin-team small{
+    font-size:7.5px;
+  }
+  .live-slate-card .hwin-center strong{
+    font-size:31px;
+  }
+  .live-slate-card .hwin-center span{
+    font-size:7px;
+  }
+  .live-slate-card .hwin-top{
+    padding:10px 12px;
+    font-size:8px;
+  }
+  .live-slate-card .hwin-metrics div{
+    min-height:58px;
+    padding:10px 6px;
+  }
+  .live-slate-card .hwin-metrics strong{
+    font-size:17px;
+  }
+  .live-slate-card .hwin-metrics span{
+    font-size:6.3px;
+  }
+  .live-slate-card .hwin-context{
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    padding:12px 8px 8px;
+  }
+  .live-slate-card .context-chip{
+    padding:6px 8px;
+    font-size:6.5px;
+    text-align:center;
+  }
+  .live-slate-card .hwin-footer{
+    justify-content:center;
+    text-align:center;
+    padding:8px 12px 12px;
+  }
+  .live-slate-card .hwin-footer small{
+    font-size:6.8px;
+  }
+}
