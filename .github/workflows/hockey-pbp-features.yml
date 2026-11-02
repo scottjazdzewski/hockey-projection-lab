@@ -203,6 +203,9 @@ jobs:
               agg["opp_final_score"]=np.where(agg["home_away"].eq("home"),agg["final_away_score"],agg["final_home_score"])
               agg["win"]=(agg["team_final_score"]>agg["opp_final_score"]).astype("int8")
               agg["goal_diff"]=agg["team_final_score"]-agg["opp_final_score"]
+              # Normalize mixed legacy metadata types before cross-season concat/parquet.
+              for _c in ["season_full","season_type","game_date","home_abbr","away_abbr","event_team_abbr","opponent_abbr","home_away"]:
+                  agg[_c]=agg[_c].astype("string")
 
               # Add against/share metrics via opponent self-join.
               for_cols=[
