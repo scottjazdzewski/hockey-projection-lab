@@ -1,0 +1,46 @@
+name: HWIN Elo Baseline 001
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'research/hwin_elo_baseline.py'
+      - '.github/workflows/hwin-elo-baseline-001.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  elo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow scikit-learn numpy
+      - name: Download canonical spine V3
+        run: |
+          mkdir -p /tmp/spine /tmp/unpack
+          gh run download 41537437104 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
+          unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/unpack
+      - name: Run Elo baseline
+        run: |
+          python research/hwin_elo_baseline.py \
+            --input /tmp/unpack/spine_v3/games.parquet \
+            --out hwin_elo_001
+      - name: Show results
+        run: cat hwin_elo_001/elo_metrics.json
+      - name: Package research
+        run: zip -r -9 hwin-elo-baseline-001-20261102.zip hwin_elo_001 >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hwin-elo-baseline-001-20261102
+          path: hwin-elo-baseline-001-20261102.zip
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
