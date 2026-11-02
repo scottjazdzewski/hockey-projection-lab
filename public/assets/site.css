@@ -244,3 +244,72 @@ footer{background:#160b29;color:#efe5f0;border-top:1px solid #6e4a9b}.footer-inn
     font-size:6.8px;
   }
 }
+
+
+/* Uniformity contract for live Game Cards */
+@media(min-width:1181px){
+  .game-design-grid{align-items:stretch}
+  .live-slate-card{
+    height:100%;
+    display:grid;
+    grid-template-rows:46px 202px 116px 68px 54px;
+  }
+  .live-slate-card .hwin-top{
+    height:46px;
+    align-items:center;
+  }
+  .live-slate-card .hwin-matchup{
+    height:202px;
+    padding:18px 10px 14px;
+  }
+  .live-slate-card .hwin-team{
+    display:grid;
+    grid-template-rows:62px 46px 16px;
+    align-items:center;
+    justify-items:center;
+    min-width:0;
+  }
+  .live-slate-card .hwin-team img{
+    width:60px;
+    height:60px;
+    margin:0;
+  }
+  .live-slate-card .hwin-team strong{
+    width:100%;
+    height:46px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-size:20px;
+    line-height:1;
+    white-space:nowrap;
+    overflow:hidden;
+  }
+  .live-slate-card .hwin-team strong.team-name-long{
+    font-size:17px;
+    letter-spacing:-.02em;
+  }
+  .live-slate-card .hwin-team small{
+    height:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .live-slate-card .hwin-metrics{
+    height:116px;
+  }
+  .live-slate-card .hwin-context{
+    height:68px;
+    padding:12px 8px;
+    justify-content:center;
+    align-content:center;
+  }
+  .live-slate-card .hwin-footer{
+    height:54px;
+    padding:8px 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+}
