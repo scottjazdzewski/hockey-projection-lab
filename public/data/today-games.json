@@ -2,44 +2,7 @@
   "date": "2026-11-02",
   "timezone": "America/New_York",
   "display_date": "Monday, November 2",
-  "updated_at": "2026-11-02T18:21:00-05:00",
-  "source": "NHL.com schedule; daily updater uses SportsDataverse NHL schedule",
-  "games": [
-    {
-      "game_id": null,
-      "away_abbr": "VGK",
-      "away_name": "Vegas Golden Knights",
-      "home_abbr": "BOS",
-      "home_name": "Boston Bruins",
-      "time_et": "7:00 PM ET",
-      "state": "PRE"
-    },
-    {
-      "game_id": null,
-      "away_abbr": "DET",
-      "away_name": "Detroit Red Wings",
-      "home_abbr": "FLA",
-      "home_name": "Florida Panthers",
-      "time_et": "7:00 PM ET",
-      "state": "PRE"
-    },
-    {
-      "game_id": null,
-      "away_abbr": "COL",
-      "away_name": "Colorado Avalanche",
-      "home_abbr": "CHI",
-      "home_name": "Chicago Blackhawks",
-      "time_et": "8:00 PM ET",
-      "state": "PRE"
-    },
-    {
-      "game_id": null,
-      "away_abbr": "CGY",
-      "away_name": "Calgary Flames",
-      "home_abbr": "SJS",
-      "home_name": "San Jose Sharks",
-      "time_et": "9:00 PM ET",
-      "state": "PRE"
-    }
-  ]
+  "updated_at": "2026-11-02T18:28:16.054199-05:00",
+  "source": "SportsDataverse NHL schedule master",
+  "games": []
 }
