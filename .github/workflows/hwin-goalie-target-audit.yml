@@ -1,0 +1,64 @@
+name: HWIN Goalie Decision Target Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hwin-goalie-target-audit.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow numpy
+      - name: Download canonical spine V2
+        run: |
+          mkdir -p /tmp/spine /tmp/unpack
+          gh run download 41535099476 -n hockey-canonical-spine-v2-20261102 -D /tmp/spine
+          unzip -q /tmp/spine/hockey-canonical-spine-v2-20261102.zip -d /tmp/unpack
+      - name: Audit goalie W/L decisions
+        run: |
+          python - <<'PY'
+          import pandas as pd, numpy as np
+          root="/tmp/unpack/spine_v2"
+          g=pd.read_parquet(f"{root}/goalie_box.parquet")
+          s=pd.read_parquet(f"{root}/games.parquet")[["game_id","source_season","game_type","game_date","home_team_abbr","away_team_abbr"]].copy()
+          g["decision_norm"]=g["decision"].astype("string").str.upper().str.strip()
+          print("DECISION VALUES",g["decision_norm"].value_counts(dropna=False).head(20).to_dict())
+          w=g[g.decision_norm.eq("W")].copy()
+          l=g[g.decision_norm.eq("L")].copy()
+          wc=w.groupby("game_id").size()
+          lc=l.groupby("game_id").size()
+          allids=set(g.game_id.dropna().astype(int))
+          print("GOALIE_GAMES",len(allids))
+          print("ONE_WIN_GAMES",int((wc==1).sum()),"MULTI_WIN",int((wc>1).sum()))
+          print("ONE_LOSS_GAMES",int((lc==1).sum()),"MULTI_LOSS",int((lc>1).sum()))
+          print("NO_WIN_GAMES",len(allids-set(w.game_id.dropna().astype(int))))
+          print("NO_LOSS_GAMES",len(allids-set(l.game_id.dropna().astype(int))))
+          cols=[c for c in ["game_id","home_away","team_abbrev","player_id","player_name","starter","decision_norm"] if c in g.columns]
+          winners=w[cols].drop_duplicates("game_id")
+          x=s.merge(winners,on="game_id",how="inner")
+          x["home_win"]=x["home_away"].astype("string").str.lower().eq("home")
+          print("\nOVERALL HOME WIN",x.home_win.mean(),"N",len(x))
+          print("\nBY SEASON")
+          print(x.groupby("source_season").agg(games=("game_id","nunique"),home_win_rate=("home_win","mean")).to_string())
+          print("\nBY TYPE")
+          print(x.groupby("game_type").agg(games=("game_id","nunique"),home_win_rate=("home_win","mean")).to_string())
+          # Identity consistency: winning goalie team abbreviation should equal schedule home/away identity.
+          expected=np.where(x.home_win,x.home_team_abbr,x.away_team_abbr)
+          bad=~x.team_abbrev.astype("string").eq(pd.Series(expected,index=x.index).astype("string"))
+          print("\nWINNER TEAM IDENTITY MISMATCH",int(bad.sum()))
+          if bad.any():
+              print(x.loc[bad,["game_id","source_season","home_away","team_abbrev","home_team_abbr","away_team_abbr"]].head(30).to_string(index=False))
+          PY
