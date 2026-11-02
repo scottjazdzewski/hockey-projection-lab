@@ -1,0 +1,62 @@
+name: HWIN Target Integrity Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hwin-target-integrity.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow numpy
+      - name: Download canonical event artifact
+        run: |
+          mkdir -p /tmp/pbp /tmp/features
+          gh run download 41535385486 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/features
+      - name: Audit target orientation
+        run: |
+          python - <<'PY'
+          import pandas as pd, numpy as np
+          p="/tmp/features/pbp_feature_output/game_team_event_features.parquet"
+          d=pd.read_parquet(p)
+          h=d[d.home_away.eq("home")].copy()
+          a=d[d.home_away.eq("away")][["game_id","goals_ev"]].rename(columns={"goals_ev":"away_goals_ev"})
+          h=h.merge(a,on="game_id",how="left")
+          h["source_season"]=pd.to_numeric(h.source_season,errors="coerce")
+          h["sched_home"]=pd.to_numeric(h.team_final_score,errors="coerce")
+          h["sched_away"]=pd.to_numeric(h.opp_final_score,errors="coerce")
+          h["home_goals_ev"]=pd.to_numeric(h.goals_ev,errors="coerce")
+          h["away_goals_ev"]=pd.to_numeric(h.away_goals_ev,errors="coerce")
+          h["direct_err"]=(h.sched_home-h.home_goals_ev).abs()+(h.sched_away-h.away_goals_ev).abs()
+          h["swap_err"]=(h.sched_home-h.away_goals_ev).abs()+(h.sched_away-h.home_goals_ev).abs()
+          out=h.groupby("source_season").agg(
+            games=("game_id","nunique"),
+            home_win_rate=("win","mean"),
+            mean_sched_home=("sched_home","mean"),
+            mean_sched_away=("sched_away","mean"),
+            mean_pbp_home_goals=("home_goals_ev","mean"),
+            mean_pbp_away_goals=("away_goals_ev","mean"),
+            mean_direct_err=("direct_err","mean"),
+            mean_swap_err=("swap_err","mean"),
+          )
+          print(out.to_string())
+          print("\nSEASONS WHERE SWAPPED FITS BETTER")
+          print(out[out.mean_swap_err < out.mean_direct_err].to_string())
+          print("\nOVERALL HOME RATE",h.win.mean(),"N",len(h))
+          print("REGULAR",h[h.game_type.astype("string").eq("R")].win.mean())
+          print("PLAYOFF",h[h.game_type.astype("string").eq("P")].win.mean())
+          PY
