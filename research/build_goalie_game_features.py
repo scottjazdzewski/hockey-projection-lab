@@ -73,12 +73,13 @@ def main(outdir):
 
         p["game_id"]=pd.to_numeric(p["game_id"],errors="coerce").astype("Int64")
         p=p[p["game_id"].isin(valid_ids)].copy()
-        et=p["event_type"].astype("string").str.upper()
-        period_type=p["period_type"].astype("string").str.upper()
+        et=p["event_type"].astype("string").str.upper() if "event_type" in p.columns else pd.Series("",index=p.index,dtype="string")
+        period_type=p["period_type"].astype("string").str.upper() if "period_type" in p.columns else pd.Series("",index=p.index,dtype="string")
         non_so=period_type.ne("SHOOTOUT").fillna(True)
-        empty=p["empty_net"].fillna(False).astype(bool)
-        shooting_home=p["event_team_type"].astype("string").str.lower().eq("home").fillna(False)
-        shooting_away=p["event_team_type"].astype("string").str.lower().eq("away").fillna(False)
+        empty=p["empty_net"].fillna(False).astype(bool) if "empty_net" in p.columns else pd.Series(False,index=p.index)
+        team_type=p["event_team_type"].astype("string").str.lower() if "event_team_type" in p.columns else pd.Series(pd.NA,index=p.index,dtype="string")
+        shooting_home=team_type.eq("home").fillna(False)
+        shooting_away=team_type.eq("away").fillna(False)
 
         na_id=pd.Series(pd.NA,index=p.index,dtype="string")
         home_gid=norm_id(p["home_goalie_id"]) if "home_goalie_id" in p.columns else na_id.copy()
@@ -92,14 +93,16 @@ def main(outdir):
         is_goal=et.eq("GOAL") & non_so & ~empty
         is_sog=et.isin(["SHOT","GOAL"]) & non_so & ~empty
         is_unblocked=et.isin(["SHOT","GOAL","MISSED_SHOT"]) & non_so & ~empty
-        xg=pd.to_numeric(p["xg"],errors="coerce").fillna(0.0)
-        fivev5=p["strength_state"].astype("string").str.lower().eq("5v5").fillna(False)
+        xg=pd.to_numeric(p["xg"],errors="coerce").fillna(0.0) if "xg" in p.columns else pd.Series(0.0,index=p.index)
+        fivev5=(p["strength_state"].astype("string").str.lower().eq("5v5").fillna(False)
+                if "strength_state" in p.columns else pd.Series(False,index=p.index))
         high=xg.ge(.20)
 
         # Rebound proxy: same shooting team, unblocked attempt within 3 seconds.
         p["_unblocked"]=is_unblocked
-        p["_shoot_team"]=p["event_team_abbr"].astype("string")
-        p["_secs"]=pd.to_numeric(p["game_seconds"],errors="coerce")
+        p["_shoot_team"]=p["event_team_abbr"].astype("string") if "event_team_abbr" in p.columns else pd.Series(pd.NA,index=p.index,dtype="string")
+        p["_secs"]=pd.to_numeric(p["game_seconds"],errors="coerce") if "game_seconds" in p.columns else pd.Series(np.nan,index=p.index)
+        if "event_idx" not in p.columns: p["event_idx"]=np.arange(len(p))
         p=p.sort_values(["game_id","event_idx"],kind="stable")
         prev_team=p.groupby("game_id")["_shoot_team"].shift(1)
         prev_unblocked=p.groupby("game_id")["_unblocked"].shift(1).fillna(False)
