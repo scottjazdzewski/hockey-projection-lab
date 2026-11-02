@@ -101,21 +101,27 @@ def main(inp, outdir):
 
     # ---------- PREDICTIVE: lag everything one game ----------
     # Abbreviation changes intentionally reset a team history rather than falsely bridge a franchise move.
+    # Long gaps (>240 days) create a new form segment. This prevents the known missing 2014-15 PBP
+    # season (and other extreme interruptions) from being treated as continuous recent form.
     df=df.sort_values(["event_team_abbr","game_date","game_id"]).copy()
+    df["prev_game_date"]=df.groupby("event_team_abbr",sort=False)["game_date"].shift(1)
+    raw_gap=(df["game_date"]-df["prev_game_date"]).dt.total_seconds()/86400
+    new_segment=raw_gap.gt(240).fillna(True)
+    df["form_segment"]=new_segment.groupby(df["event_team_abbr"],sort=False).cumsum().astype("int32")
+    segment_keys=[df["event_team_abbr"],df["form_segment"]]
+
     for c in available:
         vals=pd.to_numeric(df[c],errors="coerce")
         df[f"{c}_r10"]=(
-            vals.groupby(df["event_team_abbr"],sort=False)
+            vals.groupby(segment_keys,sort=False)
             .transform(lambda s:s.shift(1).rolling(10,min_periods=5).mean())
         )
         df[f"{c}_r20"]=(
-            vals.groupby(df["event_team_abbr"],sort=False)
+            vals.groupby(segment_keys,sort=False)
             .transform(lambda s:s.shift(1).rolling(20,min_periods=8).mean())
         )
 
-    df["prev_game_date"]=df.groupby("event_team_abbr",sort=False)["game_date"].shift(1)
-    df["rest_days"]=(df["game_date"]-df["prev_game_date"]).dt.total_seconds()/86400
-    df["rest_days"]=df["rest_days"].clip(lower=0,upper=14)
+    df["rest_days"]=raw_gap.clip(lower=0,upper=14)
 
     rollcols=[f"{c}_r10" for c in available]+[f"{c}_r20" for c in available]+["rest_days"]
     home=df[df.home_away.eq("home")][["game_id","source_season","game_type","win"]+rollcols].copy()
