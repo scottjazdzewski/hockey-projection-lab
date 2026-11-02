@@ -61,10 +61,20 @@ jobs:
               "hits","takeaways","giveaways","penalties","pim","faceoff_wins"
           ]
 
-          for end_year in range(2010,2028):
-              url=f"{BASE}/nhl_pbp_full/play_by_play_{end_year}.parquet"
-              path=Path("/tmp")/f"play_by_play_{end_year}.parquet"
-              print("DOWNLOAD",end_year,url,flush=True)
+          # Provider release naming has a historical discontinuity:
+          # PBP 2015/16/17 correspond to schedule seasons 2016/17/18;
+          # PBP 2018 and 2019 both contain 2018-19, with PBP 2018 one game more complete.
+          # Full PBP for schedule season 2015 (2014-15) is not present in this archive.
+          source_pairs=[
+              (2010,2010),(2011,2011),(2012,2012),(2013,2013),(2014,2014),
+              (2016,2015),(2017,2016),(2018,2017),(2019,2018),
+              (2020,2020),(2021,2021),(2022,2022),(2023,2023),
+              (2024,2024),(2025,2025),(2026,2026),(2027,2027)
+          ]
+          for season_year,pbp_year in source_pairs:
+              url=f"{BASE}/nhl_pbp_full/play_by_play_{pbp_year}.parquet"
+              path=Path("/tmp")/f"play_by_play_{pbp_year}.parquet"
+              print("DOWNLOAD","schedule_season",season_year,"pbp_file",pbp_year,url,flush=True)
               download(url,path)
               df=pd.read_parquet(path)
               path.unlink()
@@ -73,8 +83,8 @@ jobs:
 
               # Per-season schedule is authoritative. The master schedule contains overlapping IDs
               # and does not include the active 2026-27 season, so never use it as the game key.
-              schedule_url=f"{BASE}/nhl_schedules/nhl_schedule_{end_year}.parquet"
-              schedule_path=download(schedule_url,Path("/tmp")/f"nhl_schedule_{end_year}.parquet")
+              schedule_url=f"{BASE}/nhl_schedules/nhl_schedule_{season_year}.parquet"
+              schedule_path=download(schedule_url,Path("/tmp")/f"nhl_schedule_{season_year}.parquet")
               schedule=pd.read_parquet(schedule_path)
               schedule_path.unlink()
               schedule["game_id"]=pd.to_numeric(schedule["game_id"],errors="coerce").astype("Int64")
@@ -203,7 +213,7 @@ jobs:
               ).reset_index()
               meta=meta_pbp.merge(flags,on="game_id",how="left")
               meta=meta.merge(schedule_keep,on="game_id",how="inner")
-              meta["source_season"]=end_year
+              meta["source_season"]=season_year
               meta=meta.rename(columns={
                   "home_team_abbr":"home_abbr","away_team_abbr":"away_abbr",
                   "home_score":"final_home_score","away_score":"final_away_score"
@@ -243,7 +253,7 @@ jobs:
                   agg[f"{c}_share"]=np.where(denom>0,agg[c]/denom,np.nan)
 
               all_features.append(agg)
-              print("SEASON_DONE",end_year,"events",len(df),"game_team_rows",len(agg),flush=True)
+              print("SEASON_DONE",season_year,"source_pbp",pbp_year,"events",len(df),"game_team_rows",len(agg),flush=True)
 
           out=pd.concat(all_features,ignore_index=True,sort=False)
           out=out.sort_values(["game_date","game_id","home_away"]).reset_index(drop=True)
