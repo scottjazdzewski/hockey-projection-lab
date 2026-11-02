@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '.github/workflows/hockey-game-spine-v2.yml'
+      - '.github/workflows/hockey-game-spine-v3.yml'
 
 permissions:
   contents: read
