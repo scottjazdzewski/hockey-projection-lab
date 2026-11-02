@@ -38,4 +38,16 @@ jobs:
                   inter=len(ids&sids)
                   print(" schedule",sy,"games",len(sids),"intersect",inter,"id_minmax",(min(sids),max(sids)) if sids else None,
                         "season_vals",s["season"].astype("string").value_counts().head(3).to_dict())
+          print("\nDIRECT 2018 VS 2019")
+          p18=pq(f"{B}/nhl_pbp_full/play_by_play_2018.parquet")
+          p19=pq(f"{B}/nhl_pbp_full/play_by_play_2019.parquet")
+          i18=set(pd.to_numeric(p18.game_id,errors="coerce").dropna().astype(int))
+          i19=set(pd.to_numeric(p19.game_id,errors="coerce").dropna().astype(int))
+          s19=pq(f"{B}/nhl_schedules/nhl_schedule_2019.parquet")
+          s19ids=set(pd.to_numeric(s19.game_id,errors="coerce").dropna().astype(int))
+          print("p18 season",p18["season"].astype("string").value_counts().head().to_dict(),"games",len(i18),"match_sched2019",len(i18&s19ids))
+          print("p19 season",p19["season"].astype("string").value_counts().head().to_dict(),"games",len(i19),"match_sched2019",len(i19&s19ids))
+          print("intersection",len(i18&i19),"p18_only",len(i18-i19),"p19_only",len(i19-i18))
+          print("p18_only_ids",sorted(i18-i19)[:20])
+          print("p19_only_ids",sorted(i19-i18)[:20])
           PY
