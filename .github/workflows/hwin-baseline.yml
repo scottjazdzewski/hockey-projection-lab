@@ -1,0 +1,279 @@
+name: HWIN Baseline Research
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hwin-baseline.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  hwin-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install research stack
+        run: python -m pip install --quiet pandas pyarrow requests numpy scikit-learn
+      - name: Build leakage-safe pregame table and baseline
+        shell: bash
+        run: |
+          cat > /tmp/hwin_baseline.py <<'PY'
+          import json, math, hashlib
+          from pathlib import Path
+          import numpy as np
+          import pandas as pd
+          import requests
+          from sklearn.compose import ColumnTransformer
+          from sklearn.impute import SimpleImputer
+          from sklearn.pipeline import Pipeline
+          from sklearn.preprocessing import StandardScaler
+          from sklearn.linear_model import LogisticRegression
+          from sklearn.ensemble import HistGradientBoostingClassifier
+          from sklearn.metrics import brier_score_loss, log_loss, accuracy_score, roc_auc_score
+
+          BASE="https://github.com/sportsdataverse/sportsdataverse-data/releases/download"
+          OUT=Path("hwin_research")
+          OUT.mkdir(exist_ok=True)
+          ses=requests.Session(); ses.headers.update({"User-Agent":"HockeyProjectionLab/0.1"})
+
+          def get_parquet(url,name):
+              p=Path("/tmp")/name
+              with ses.get(url,stream=True,timeout=180) as r:
+                  r.raise_for_status()
+                  with open(p,"wb") as f:
+                      for ch in r.iter_content(1024*1024):
+                          if ch: f.write(ch)
+              return pd.read_parquet(p)
+
+          sched=get_parquet(f"{BASE}/nhl_schedules/nhl_schedule_master.parquet","schedule.parquet")
+          sched["game_date"]=pd.to_datetime(sched["game_date"],errors="coerce")
+          sched["game_type_num"]=pd.to_numeric(sched["game_type"],errors="coerce")
+          sched["home_score_num"]=pd.to_numeric(sched["home_score"],errors="coerce")
+          sched["away_score_num"]=pd.to_numeric(sched["away_score"],errors="coerce")
+          # NHL game type 2 = regular season. Require a known final score.
+          games=sched[(sched["game_type_num"]==2)&sched["home_score_num"].notna()&sched["away_score_num"].notna()].copy()
+          games=games[["game_id","game_date","season","season_full","home_team_abbr","away_team_abbr","home_score_num","away_score_num"]]
+          games["home_win"]=(games["home_score_num"]>games["away_score_num"]).astype(int)
+
+          team_rows=[]
+          for end_year in range(2010,2027):  # completed seasons only; current 2026-27 held out
+              url=f"{BASE}/nhl_pbp_full/play_by_play_{end_year}.parquet"
+              print("PBP",end_year,flush=True)
+              df=get_parquet(url,f"pbp_{end_year}.parquet")
+              for c in ["event_type","event_team_abbr","event_team_type","period_type","strength_state","strength_code","empty_net","xg","game_id"]:
+                  if c not in df: df[c]=pd.NA
+              et=df["event_type"].astype("string").str.upper()
+              team=df["event_team_abbr"].astype("string")
+              ptype=df["period_type"].astype("string").str.upper()
+              strength=df["strength_state"].astype("string").str.lower()
+              scode=df["strength_code"].astype("string").str.upper()
+              empty=df["empty_net"].fillna(False).astype(bool)
+              xg=pd.to_numeric(df["xg"],errors="coerce").fillna(0.0)
+              non_so=ptype.ne("SHOOTOUT").fillna(True)
+              goal=et.eq("GOAL")&non_so
+              sog=et.isin(["SHOT","GOAL"])&non_so
+              miss=et.eq("MISSED_SHOT")&non_so
+              block=et.eq("BLOCKED_SHOT")&non_so
+              corsi=sog|miss|block
+              fenwick=sog|miss
+              five=strength.eq("5v5").fillna(False)&non_so&~empty
+              pp=scode.eq("PP").fillna(False)&non_so&~empty
+              sh=scode.eq("SH").fillna(False)&non_so&~empty
+              pen=et.eq("PENALTY")&non_so
+              pim=pd.to_numeric(df.get("penalty_minutes",0),errors="coerce").fillna(0.0) if "penalty_minutes" in df else pd.Series(0,index=df.index)
+
+              ev=pd.DataFrame({
+                  "game_id":df["game_id"],
+                  "team":team,
+                  "goals":goal.astype("int8"),
+                  "sog":sog.astype("int8"),
+                  "corsi":corsi.astype("int8"),
+                  "fenwick":fenwick.astype("int8"),
+                  "xg":np.where(fenwick,xg,0.0),
+                  "five_sog":(sog&five).astype("int8"),
+                  "five_corsi":(corsi&five).astype("int8"),
+                  "five_fenwick":(fenwick&five).astype("int8"),
+                  "five_xg":np.where(fenwick&five,xg,0.0),
+                  "pp_goals":(goal&pp).astype("int8"),
+                  "pp_sog":(sog&pp).astype("int8"),
+                  "pp_xg":np.where(fenwick&pp,xg,0.0),
+                  "sh_xg":np.where(fenwick&sh,xg,0.0),
+                  "penalties":pen.astype("int8"),
+                  "pim":np.where(pen,pim,0.0),
+                  "high_xg":(fenwick & xg.ge(.15)).astype("int8"),
+              })
+              ev=ev[ev["team"].notna()]
+              a=ev.groupby(["game_id","team"],as_index=False).sum(numeric_only=True)
+              a["source_season"]=end_year
+              team_rows.append(a)
+
+          tg=pd.concat(team_rows,ignore_index=True)
+          # Pair each team with opponent's game totals to create shares/differentials.
+          core=["goals","sog","corsi","fenwick","xg","five_sog","five_corsi","five_fenwick","five_xg","pp_goals","pp_sog","pp_xg","sh_xg","penalties","pim","high_xg"]
+          opp=tg[["game_id","team"]+core].copy().rename(columns={"team":"opp_team",**{c:f"opp_{c}" for c in core}})
+          # Schedule-derived home/away identity.
+          sides=pd.concat([
+              games[["game_id","game_date","season","home_team_abbr","away_team_abbr"]].rename(columns={"home_team_abbr":"team","away_team_abbr":"opp_team"}).assign(home=1),
+              games[["game_id","game_date","season","home_team_abbr","away_team_abbr"]].rename(columns={"away_team_abbr":"team","home_team_abbr":"opp_team"}).assign(home=0)
+          ],ignore_index=True)
+          tg=tg.merge(sides,on=["game_id","team"],how="inner")
+          tg=tg.merge(opp,on=["game_id","opp_team"],how="left")
+          tg=tg.sort_values(["team","game_date","game_id"]).reset_index(drop=True)
+
+          # Stable per-game rate/share features.
+          for c in ["sog","corsi","fenwick","xg","five_sog","five_corsi","five_fenwick","five_xg","high_xg"]:
+              den=tg[c]+tg[f"opp_{c}"]
+              tg[f"{c}_share"]=np.where(den>0,tg[c]/den,np.nan)
+          tg["goal_diff"]=tg["goals"]-tg["opp_goals"]
+          tg["xg_diff"]=tg["xg"]-tg["opp_xg"]
+          tg["five_xg_diff"]=tg["five_xg"]-tg["opp_five_xg"]
+          tg["shot_diff"]=tg["sog"]-tg["opp_sog"]
+          tg["five_corsi_diff"]=tg["five_corsi"]-tg["opp_five_corsi"]
+          tg["pp_xg_diff"]=tg["pp_xg"]-tg["opp_pp_xg"]
+          tg["penalty_diff"]=tg["penalties"]-tg["opp_penalties"]
+          tg["shooting_pct"]=np.where(tg["sog"]>0,tg["goals"]/tg["sog"],np.nan)
+          tg["save_pct"]=np.where(tg["opp_sog"]>0,1-tg["opp_goals"]/tg["opp_sog"],np.nan)
+
+          state_cols=[
+              "goal_diff","xg_diff","five_xg_diff","shot_diff","five_corsi_diff","pp_xg_diff","penalty_diff",
+              "xg_share","five_xg_share","corsi_share","five_corsi_share","sog_share","five_sog_share",
+              "high_xg_share","shooting_pct","save_pct","pp_xg","pp_goals","sh_xg","penalties"
+          ]
+
+          # Pregame rolling state. Every statistic is shifted by one game first.
+          for c in state_cols:
+              g=tg.groupby("team",sort=False)[c]
+              tg[f"{c}_r5"]=g.transform(lambda s:s.shift(1).rolling(5,min_periods=3).mean())
+              tg[f"{c}_r10"]=g.transform(lambda s:s.shift(1).rolling(10,min_periods=5).mean())
+              tg[f"{c}_ewm20"]=g.transform(lambda s:s.shift(1).ewm(span=20,min_periods=8,adjust=False).mean())
+          tg["prev_game_date"]=tg.groupby("team",sort=False)["game_date"].shift(1)
+          tg["rest_days"]=(tg["game_date"]-tg["prev_game_date"]).dt.days.clip(lower=0,upper=14)
+          tg["games_played_prior"]=tg.groupby("team").cumcount()
+
+          # Home/away wide row per game.
+          pre_cols=[c for c in tg.columns if c.endswith(("_r5","_r10","_ewm20"))]+["rest_days","games_played_prior"]
+          home=tg[tg.home==1][["game_id","team"]+pre_cols].rename(columns={"team":"home_team",**{c:f"home_{c}" for c in pre_cols}})
+          away=tg[tg.home==0][["game_id","team"]+pre_cols].rename(columns={"team":"away_team",**{c:f"away_{c}" for c in pre_cols}})
+          model=games.merge(home,on="game_id",how="inner").merge(away,on="game_id",how="inner")
+          # Differences reduce dimensionality and encode matchup.
+          diff_features=[]
+          for c in pre_cols:
+              n=f"diff_{c}"
+              model[n]=pd.to_numeric(model[f"home_{c}"],errors="coerce")-pd.to_numeric(model[f"away_{c}"],errors="coerce")
+              diff_features.append(n)
+          model["home_rest"]=model["home_rest_days"]
+          model["away_rest"]=model["away_rest_days"]
+          model["rest_diff"]=model["home_rest_days"]-model["away_rest_days"]
+          model["home_b2b"]=(model["home_rest_days"]<=1).astype(float)
+          model["away_b2b"]=(model["away_rest_days"]<=1).astype(float)
+          features=diff_features+["home_rest","away_rest","rest_diff","home_b2b","away_b2b"]
+
+          # Require minimum history for both clubs.
+          model=model[(model["home_games_played_prior"]>=8)&(model["away_games_played_prior"]>=8)].copy()
+          # source season from NHL game ID / schedule season start year is less convenient; use date boundaries.
+          d=model["game_date"]
+          train=model[d < pd.Timestamp("2023-07-01")].copy()
+          val=model[(d >= pd.Timestamp("2023-07-01"))&(d < pd.Timestamp("2024-07-01"))].copy()
+          test24=model[(d >= pd.Timestamp("2024-07-01"))&(d < pd.Timestamp("2025-07-01"))].copy()
+          test25=model[(d >= pd.Timestamp("2025-07-01"))&(d < pd.Timestamp("2026-07-01"))].copy()
+
+          def eval_set(name, y, p):
+              p=np.clip(np.asarray(p),1e-6,1-1e-6)
+              return {
+                  "split":name,"n":int(len(y)),
+                  "accuracy":float(accuracy_score(y,p>=.5)),
+                  "brier":float(brier_score_loss(y,p)),
+                  "log_loss":float(log_loss(y,p,labels=[0,1])),
+                  "auc":float(roc_auc_score(y,p)) if len(np.unique(y))>1 else None,
+                  "mean_pred_home":float(np.mean(p)),
+                  "actual_home_win":float(np.mean(y))
+              }
+
+          results=[]
+          # Home-ice only empirical baseline learned on training period.
+          home_rate=float(train["home_win"].mean())
+          for nm,ds in [("validation_2023_24",val),("test_2024_25",test24),("test_2025_26",test25)]:
+              results.append({"model":"home_only",**eval_set(nm,ds.home_win,np.full(len(ds),home_rate))})
+
+          pipe=Pipeline([
+              ("impute",SimpleImputer(strategy="median",add_indicator=True)),
+              ("scale",StandardScaler()),
+              ("model",LogisticRegression(C=.35,max_iter=4000))
+          ])
+          pipe.fit(train[features],train.home_win)
+          for nm,ds in [("validation_2023_24",val),("test_2024_25",test24),("test_2025_26",test25)]:
+              results.append({"model":"logit",**eval_set(nm,ds.home_win,pipe.predict_proba(ds[features])[:,1])})
+
+          hgb=Pipeline([
+              ("impute",SimpleImputer(strategy="median",add_indicator=True)),
+              ("model",HistGradientBoostingClassifier(max_iter=220,learning_rate=.035,max_leaf_nodes=15,l2_regularization=2.0,min_samples_leaf=35,random_state=42))
+          ])
+          hgb.fit(train[features],train.home_win)
+          for nm,ds in [("validation_2023_24",val),("test_2024_25",test24),("test_2025_26",test25)]:
+              results.append({"model":"hgb",**eval_set(nm,ds.home_win,hgb.predict_proba(ds[features])[:,1])})
+
+          # Logistic coefficients: map only original feature coefficients; imputer indicators follow later.
+          imputed=pipe.named_steps["impute"].transform(train[features])
+          coef=pipe.named_steps["model"].coef_[0][:len(features)]
+          coef_table=pd.DataFrame({"feature":features,"standardized_coef":coef})
+          coef_table["abs_coef"]=coef_table.standardized_coef.abs()
+          coef_table=coef_table.sort_values("abs_coef",ascending=False)
+
+          # Simple descriptive winner-v-loser differentials on pregame features for sanity.
+          desc=[]
+          for f in features:
+              a=pd.to_numeric(test25.loc[test25.home_win==1,f],errors="coerce")
+              b=pd.to_numeric(test25.loc[test25.home_win==0,f],errors="coerce")
+              desc.append({"feature":f,"home_winner_mean":float(a.mean()) if a.notna().any() else None,
+                           "home_loser_mean":float(b.mean()) if b.notna().any() else None,
+                           "difference":float(a.mean()-b.mean()) if a.notna().any() and b.notna().any() else None})
+          desc=pd.DataFrame(desc)
+          desc["abs_difference"]=desc["difference"].abs()
+          desc=desc.sort_values("abs_difference",ascending=False)
+
+          # Calibration for best model on untouched 2025-26.
+          p=hgb.predict_proba(test25[features])[:,1]
+          cal=pd.DataFrame({"p":p,"y":test25.home_win.to_numpy()})
+          cal["bin"]=pd.cut(cal.p,bins=[0,.35,.4,.45,.5,.55,.6,.65,1],include_lowest=True)
+          cal=cal.groupby("bin",observed=True).agg(n=("y","size"),mean_pred=("p","mean"),actual=("y","mean")).reset_index()
+          cal["bin"]=cal["bin"].astype(str)
+
+          model_out=model[["game_id","game_date","home_team_abbr","away_team_abbr","home_win"]+features].copy()
+          model_out.to_parquet(OUT/"pregame_team_features.parquet",index=False)
+          pd.DataFrame(results).to_csv(OUT/"baseline_metrics.csv",index=False)
+          coef_table.to_csv(OUT/"logit_feature_coefficients.csv",index=False)
+          desc.to_csv(OUT/"test_2025_26_feature_differences.csv",index=False)
+          cal.to_csv(OUT/"hgb_calibration_2025_26.csv",index=False)
+
+          summary={
+              "games_total_model_table":int(len(model)),
+              "train":int(len(train)),"validation_2023_24":int(len(val)),
+              "test_2024_25":int(len(test24)),"test_2025_26":int(len(test25)),
+              "feature_count":len(features),
+              "training_home_win_rate":home_rate,
+              "metrics":results,
+              "top_logit_features":coef_table.head(15).to_dict(orient="records"),
+              "top_2025_26_differences":desc.head(15).to_dict(orient="records"),
+              "calibration_2025_26":cal.to_dict(orient="records")
+          }
+          with open(OUT/"summary.json","w") as f: json.dump(summary,f,indent=2,default=str)
+          print("HWIN_SUMMARY",json.dumps(summary,default=str),flush=True)
+          PY
+          python /tmp/hwin_baseline.py
+      - name: Package HWIN research
+        run: |
+          zip -r -9 hwin-baseline-research-20261102.zip hwin_research >/dev/null
+          ls -lh hwin-baseline-research-20261102.zip hwin_research/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hwin-baseline-research-20261102
+          path: hwin-baseline-research-20261102.zip
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
