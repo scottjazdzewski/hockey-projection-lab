@@ -63,13 +63,12 @@ jobs:
                   u=f"{BASE}/{tag}/{name}"
                   p=dl(u,f"/tmp/{name}")
                   df=pd.read_parquet(p); p.unlink()
-                  if "game_id" not in df.columns:
-                      if len(df)==0:
-                          print("EMPTY_LEGACY_FILE",season,fam,list(df.columns),flush=True)
-                          continue
-                      raise RuntimeError(f"missing game_id season={season} family={fam} columns={list(df.columns)}")
-                  df["game_id"]=pd.to_numeric(df["game_id"],errors="coerce").astype("Int64")
                   before=len(df)
+                  if "game_id" not in df.columns:
+                      print("UNJOINABLE_LEGACY_FILE",season,fam,"rows",before,"columns",list(df.columns),flush=True)
+                      audit[fam]={"raw_rows":before,"kept_rows":0,"dropped_unjoinable_rows":before}
+                      continue
+                  df["game_id"]=pd.to_numeric(df["game_id"],errors="coerce").astype("Int64")
                   df=df[df["game_id"].isin(ids)].copy()
                   df["source_season"]=season
                   df["source_url"]=u
