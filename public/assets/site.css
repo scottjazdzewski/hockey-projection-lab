@@ -93,3 +93,93 @@ footer{background:#160b29;color:#efe5f0;border-top:1px solid #6e4a9b}.footer-inn
   .today-game-mini-list{grid-template-columns:1fr}
   .hero-destination-today{min-height:250px}
 }
+
+/* 2026-11-02 compact homepage badges + four-across laptop game cards */
+.hero-destinations{gap:12px}
+.hero-destination,
+.hero-destination-today{
+  min-height:118px;
+  padding:18px 20px;
+  grid-template-columns:44px 1fr 16px;
+  align-items:center;
+}
+.hero-destination strong{font-size:clamp(27px,2.2vw,35px)}
+.hero-destination small{margin-top:5px}
+.today-game-mini-list{display:none!important}
+
+/* Laptop/desktop slate: four compact cards per row */
+.game-design-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.live-slate-card{min-width:0}
+.live-slate-card .hwin-top{
+  padding:9px 10px;
+  gap:7px;
+  font-size:7px;
+  letter-spacing:.055em;
+}
+.live-slate-card .hwin-matchup{
+  grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);
+  gap:5px;
+  padding:15px 8px 12px;
+}
+.live-slate-card .hwin-team img{
+  width:42px;
+  height:42px;
+  margin-bottom:6px;
+}
+.live-slate-card .hwin-team strong{
+  font-size:18px;
+  line-height:.95;
+  overflow-wrap:anywhere;
+}
+.live-slate-card .hwin-team small{
+  font-size:6.5px;
+  letter-spacing:.05em;
+}
+.live-slate-card .hwin-center strong{font-size:27px}
+.live-slate-card .hwin-center span{font-size:6px}
+.live-slate-card .hwin-metrics{
+  grid-template-columns:repeat(2,1fr);
+}
+.live-slate-card .hwin-metrics div{
+  min-height:52px;
+  padding:8px 5px;
+}
+.live-slate-card .hwin-metrics div:nth-child(2){border-right:0}
+.live-slate-card .hwin-metrics div:nth-child(-n+2){border-bottom:1px solid #e1d5ba}
+.live-slate-card .hwin-metrics strong{font-size:15px}
+.live-slate-card .hwin-metrics span{font-size:5.5px}
+.live-slate-card .hwin-context{
+  gap:4px;
+  padding:9px 8px 6px;
+}
+.live-slate-card .context-chip{
+  padding:5px 6px;
+  font-size:5.8px;
+}
+.live-slate-card .hwin-footer{
+  padding:7px 9px 10px;
+}
+.live-slate-card .hwin-footer small{
+  font-size:6px;
+  line-height:1.35;
+}
+
+/* Four across on standard laptops, then step down cleanly */
+@media(max-width:1180px){
+  .game-design-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+  .hero-destination,
+  .hero-destination-today{
+    min-height:88px;
+    padding:14px 15px;
+    grid-template-columns:36px 1fr 14px;
+  }
+  .hero-destination strong{font-size:26px}
+  .game-design-grid{grid-template-columns:1fr}
+  .live-slate-card .hwin-team img{width:50px;height:50px}
+  .live-slate-card .hwin-team strong{font-size:21px}
+}
