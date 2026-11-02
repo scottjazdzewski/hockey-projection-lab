@@ -1,0 +1,93 @@
+name: Hockey Player Usage ETL
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hockey-player-usage.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-player-usage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install data tools
+        run: python -m pip install --quiet pandas pyarrow requests
+      - name: Build normalized player tables
+        shell: bash
+        run: |
+          cat > /tmp/build_player_usage.py <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          import pandas as pd
+          import requests
+
+          BASE="https://github.com/sportsdataverse/sportsdataverse-data/releases/download"
+          OUT=Path("player_usage_output"); OUT.mkdir(exist_ok=True)
+          session=requests.Session(); session.headers.update({"User-Agent":"HockeyProjectionLab/0.1"})
+          manifest=[]
+
+          def dl(url,path):
+              path=Path(path)
+              with session.get(url,stream=True,timeout=120) as r:
+                  if r.status_code==404: return None
+                  r.raise_for_status()
+                  h=hashlib.sha256(); n=0
+                  with open(path,"wb") as f:
+                      for ch in r.iter_content(1024*1024):
+                          if ch: f.write(ch); h.update(ch); n+=len(ch)
+              manifest.append({"url":url,"bytes":n,"sha256":h.hexdigest()})
+              return path
+
+          families={
+              "skater_box":("nhl_skater_boxscores","skater_box_{season}.parquet"),
+              "player_box":("nhl_player_boxscores","player_box_{season}.parquet"),
+          }
+          report={}
+          for fam,(tag,pat) in families.items():
+              frames=[]
+              season_counts={}
+              for season in range(2010,2028):
+                  name=pat.format(season=season)
+                  url=f"{BASE}/{tag}/{name}"
+                  p=dl(url,Path("/tmp")/name)
+                  if p is None: continue
+                  df=pd.read_parquet(p); p.unlink()
+                  df["source_season"]=season
+                  frames.append(df)
+                  season_counts[str(season)]=len(df)
+              out=pd.concat(frames,ignore_index=True,sort=False)
+              for c in out.columns:
+                  if out[c].dtype=="object":
+                      out[c]=out[c].astype("string")
+              out.to_parquet(OUT/f"{fam}.parquet",index=False)
+              report[fam]={
+                  "rows":len(out),
+                  "columns":[{"name":c,"dtype":str(out[c].dtype)} for c in out.columns],
+                  "season_counts":season_counts
+              }
+              print(fam,"rows",len(out),"columns",len(out.columns),flush=True)
+              print("COLS",fam,list(out.columns),flush=True)
+
+          pd.DataFrame(manifest).to_csv(OUT/"source_manifest.csv",index=False)
+          with open(OUT/"schema_report.json","w") as f: json.dump(report,f,indent=2,default=str)
+          PY
+          python /tmp/build_player_usage.py
+      - name: Package player usage
+        run: |
+          zip -r -9 hockey-player-usage-2010-2027-20261102.zip player_usage_output >/dev/null
+          ls -lh hockey-player-usage-2010-2027-20261102.zip player_usage_output/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hockey-player-usage-2010-2027-20261102
+          path: hockey-player-usage-2010-2027-20261102.zip
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
