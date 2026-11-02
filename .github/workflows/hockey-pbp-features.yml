@@ -72,7 +72,7 @@ jobs:
                   continue
 
               # Normalize required fields robustly across eras.
-              for c in ["event_type","event_team_abbr","event_team_type","period_type","strength_state","strength_code","home_abbr","away_abbr","season_type"]:
+              for c in ["event_type","event_team_abbr","event_team_type","period_type","strength_state","strength_code","home_abbr","away_abbr","season_type","game_date","season"]:
                   if c not in df: df[c]=None
               for c in ["home_score","away_score","game_seconds","event_idx","penalty_minutes","xg","shot_distance","shot_angle"]:
                   if c not in df: df[c]=np.nan
