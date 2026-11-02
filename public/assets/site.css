@@ -67,3 +67,29 @@ footer{background:#160b29;color:#efe5f0;border-top:1px solid #6e4a9b}.footer-inn
  .hwin-matchup{grid-template-columns:1fr 64px 1fr;padding:20px 12px 15px}.hwin-team img{width:56px;height:56px}.hwin-team strong{font-size:21px}.hwin-center strong{font-size:32px}
  .hwin-metrics{grid-template-columns:repeat(2,1fr)}.hwin-metrics div:nth-child(2){border-right:0}.hwin-metrics div:nth-child(-n+2){border-bottom:1px solid #e1d5ba}
 }
+
+/* Live daily NHL slate */
+.hero-destination-today{min-height:220px;align-items:start}
+.hero-destination-main{min-width:0}
+.today-game-mini-list{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;margin-top:12px}
+.today-mini-game{display:grid;grid-template-columns:auto auto 12px auto;align-items:center;gap:5px;padding:7px 8px;border:1px solid rgba(41,19,75,.18);background:rgba(255,248,232,.35);border-radius:8px}
+.today-mini-time{grid-column:1/-1;font-size:7px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#5a4267}
+.today-mini-team{display:flex;align-items:center;gap:4px;font-size:8px;color:#29134b}
+.today-mini-team img{width:18px;height:18px;object-fit:contain}
+.today-mini-team b{font-size:8px}
+.today-mini-at{font-size:8px;color:#6d5e70;text-align:center}
+.today-no-games{grid-column:1/-1;font-size:9px;font-weight:700;color:#4d3d54;padding-top:6px}
+.live-slate-card .hwin-footer{padding-top:14px}
+@media(max-width:900px){
+  .hero-destination-today{min-height:205px}
+}
+@media(max-width:650px){
+  .hero-destination-today{min-height:195px}
+  .today-game-mini-list{grid-template-columns:1fr 1fr;gap:5px}
+  .today-mini-game{padding:6px}
+  .today-mini-team img{width:16px;height:16px}
+}
+@media(max-width:390px){
+  .today-game-mini-list{grid-template-columns:1fr}
+  .hero-destination-today{min-height:250px}
+}
