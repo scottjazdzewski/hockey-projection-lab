@@ -1,0 +1,61 @@
+name: HWIN Signal Audit 002
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hwin-signal-audit-002.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow scikit-learn numpy
+      - name: Download canonical PBP feature artifact
+        run: |
+          mkdir -p /tmp/pbp /tmp/features
+          gh run download 41537361054 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/features
+          ls -lh /tmp/features/pbp_feature_output/
+      - name: Run leakage-safe signal audit
+        run: |
+          python research/hwin_signal_audit_002.py \
+            --input /tmp/features/pbp_feature_output/game_team_event_features.parquet \
+            --out hwin_signal_audit_002
+      - name: Print research results
+        run: |
+          echo '=== QUALITY ==='
+          cat hwin_signal_audit_002/quality.json
+          echo '=== DESCRIPTIVE TOP ==='
+          python - <<'PY'
+          import pandas as pd
+          x=pd.read_csv("hwin_signal_audit_002/descriptive_win_drivers.csv")
+          print(x.head(20).to_string(index=False))
+          print("\n=== PREDICTIVE UNIVARIATE TOP ===")
+          y=pd.read_csv("hwin_signal_audit_002/predictive_univariate_audit.csv")
+          print(y.head(25).to_string(index=False))
+          print("\n=== BENCHMARK METRICS ===")
+          print(open("hwin_signal_audit_002/benchmark_metrics.json").read())
+          print("\n=== COEFFICIENTS ===")
+          print(pd.read_csv("hwin_signal_audit_002/benchmark_coefficients.csv").to_string(index=False))
+          PY
+      - name: Package research
+        run: zip -r -9 hwin-signal-audit-002-20261102.zip hwin_signal_audit_002 >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hwin-signal-audit-002-20261102
+          path: hwin-signal-audit-002-20261102.zip
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
