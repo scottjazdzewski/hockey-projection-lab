@@ -1,0 +1,151 @@
+name: Hockey Game Spine ETL
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hockey-game-spine.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-game-spine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install data tools
+        run: python -m pip install --quiet pandas pyarrow requests
+
+      - name: Build canonical game spine and inspect heavy schemas
+        shell: bash
+        run: |
+          cat > /tmp/build_hockey_spine.py <<'PY'
+          import json, hashlib, os, sys
+          from pathlib import Path
+          import pandas as pd
+          import pyarrow.parquet as pq
+          import requests
+
+          BASE = "https://github.com/sportsdataverse/sportsdataverse-data/releases/download"
+          OUT = Path("warehouse")
+          OUT.mkdir(exist_ok=True)
+          raw = OUT / "raw"
+          norm = OUT / "normalized"
+          raw.mkdir(exist_ok=True)
+          norm.mkdir(exist_ok=True)
+
+          session = requests.Session()
+          session.headers.update({"User-Agent":"HockeyProjectionLab/0.1"})
+
+          manifest=[]
+
+          def download(url, dest):
+              dest=Path(dest)
+              dest.parent.mkdir(parents=True, exist_ok=True)
+              with session.get(url, stream=True, timeout=120) as r:
+                  r.raise_for_status()
+                  h=hashlib.sha256()
+                  n=0
+                  with open(dest,"wb") as f:
+                      for chunk in r.iter_content(chunk_size=1024*1024):
+                          if chunk:
+                              f.write(chunk); h.update(chunk); n+=len(chunk)
+              manifest.append({"url":url,"file":str(dest),"bytes":n,"sha256":h.hexdigest()})
+              return dest
+
+          # Authoritative master schedule/result spine.
+          sched_url=f"{BASE}/nhl_schedules/nhl_schedule_master.parquet"
+          sched_path=download(sched_url, raw/"nhl_schedule_master.parquet")
+          schedule=pd.read_parquet(sched_path)
+          schedule["source_url"]=sched_url
+          schedule.to_parquet(norm/"games_master.parquet", index=False)
+
+          families={
+            "team_box":("nhl_team_boxscores","team_box_{season}.parquet"),
+            "goalie_box":("nhl_goalie_boxscores","goalie_box_{season}.parquet"),
+            "game_rosters":("nhl_game_rosters","game_rosters_{season}.parquet"),
+            "scratches":("nhl_scratches","scratches_{season}.parquet"),
+          }
+
+          schemas={"schedule":{"rows":len(schedule),"columns":[{"name":c,"dtype":str(schedule[c].dtype)} for c in schedule.columns]}}
+
+          for family,(tag,pattern) in families.items():
+              frames=[]
+              for season in range(2010,2028):
+                  name=pattern.format(season=season)
+                  url=f"{BASE}/{tag}/{name}"
+                  path=raw/family/name
+                  try:
+                      download(url,path)
+                  except requests.HTTPError as e:
+                      if e.response is not None and e.response.status_code==404:
+                          continue
+                      raise
+                  df=pd.read_parquet(path)
+                  df["source_season"]=season
+                  df["source_url"]=url
+                  frames.append(df)
+                  path.unlink()  # keep the compact canonical union, not 18 duplicate season files
+              union=pd.concat(frames,ignore_index=True,sort=False) if frames else pd.DataFrame()
+              union.to_parquet(norm/f"{family}.parquet",index=False)
+              schemas[family]={"rows":len(union),"columns":[{"name":c,"dtype":str(union[c].dtype)} for c in union.columns]}
+
+          # Probe heavy data without archiving it yet.
+          probes={}
+          for season in (2026,2027):
+              for family,tag,pattern in [
+                  ("pbp","nhl_pbp_full","play_by_play_{season}.parquet"),
+                  ("shifts","nhl_shifts","shifts_{season}.parquet"),
+              ]:
+                  url=f"{BASE}/{tag}/{pattern.format(season=season)}"
+                  path=Path("/tmp")/pattern.format(season=season)
+                  download(url,path)
+                  pf=pq.ParquetFile(path)
+                  names=pf.schema_arrow.names
+                  table=pf.read_row_group(0)
+                  sample=table.slice(0,min(5,table.num_rows)).to_pandas()
+                  key=f"{family}_{season}"
+                  probes[key]={
+                      "url":url,
+                      "rows":pf.metadata.num_rows,
+                      "row_groups":pf.metadata.num_row_groups,
+                      "columns":[{"name":f.name,"type":str(f.type)} for f in pf.schema_arrow],
+                      "sample":sample.astype(object).where(pd.notnull(sample),None).to_dict(orient="records")
+                  }
+                  path.unlink()
+
+          pd.DataFrame(manifest).to_csv(OUT/"source_manifest.csv",index=False)
+          with open(OUT/"schema_report.json","w") as f:
+              json.dump(schemas,f,indent=2,default=str)
+          with open(OUT/"heavy_probe.json","w") as f:
+              json.dump(probes,f,indent=2,default=str)
+
+          print("GAME_SPINE_ROWS")
+          for k,v in schemas.items():
+              print(k, v["rows"])
+          print("HEAVY_PROBE_ROWS")
+          for k,v in probes.items():
+              print(k, v["rows"], "cols", len(v["columns"]))
+          print("SCHEDULE_COLUMNS", list(schedule.columns))
+          PY
+          python /tmp/build_hockey_spine.py
+
+      - name: Package game spine
+        run: |
+          zip -r -9 hockey-game-spine-20261102.zip warehouse >/dev/null
+          ls -lh hockey-game-spine-20261102.zip warehouse/normalized/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hockey-game-spine-20261102
+          path: hockey-game-spine-20261102.zip
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
