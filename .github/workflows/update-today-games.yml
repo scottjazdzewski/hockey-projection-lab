@@ -1,0 +1,98 @@
+name: Update Today's NHL Games
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 11 * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-today-games.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-slate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow requests
+      - name: Build today's slate from SportsDataverse
+        run: |
+          python - <<'PY'
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          from pathlib import Path
+          import json, re, requests, pandas as pd
+
+          TZ=ZoneInfo("America/New_York")
+          now=datetime.now(TZ)
+          today=now.date().isoformat()
+          url="https://github.com/sportsdataverse/sportsdataverse-data/releases/download/nhl_schedules/nhl_schedule_master.parquet"
+          p=Path("/tmp/nhl_schedule_master.parquet")
+          r=requests.get(url,timeout=120)
+          r.raise_for_status()
+          p.write_bytes(r.content)
+          df=pd.read_parquet(p)
+          day=df[df["game_date"].astype(str).str[:10].eq(today)].copy()
+
+          def nice_time(v):
+              if pd.isna(v): return "TBD"
+              s=str(v).strip()
+              # Common schedule formats: 19:00:00, 19:00, ISO timestamp, or already formatted text.
+              m=re.match(r"^(\d{1,2}):(\d{2})(?::\d{2})?$",s)
+              if m:
+                  h=int(m.group(1)); minute=int(m.group(2))
+                  ap="AM" if h<12 else "PM"
+                  hh=h%12 or 12
+                  return f"{hh}:{minute:02d} {ap} ET"
+              try:
+                  t=pd.to_datetime(s,utc=True)
+                  if pd.notna(t):
+                      t=t.tz_convert("America/New_York")
+                      return t.strftime("%-I:%M %p ET")
+              except Exception:
+                  pass
+              return s
+
+          games=[]
+          for _,g in day.sort_values(["game_time","game_id"],na_position="last").iterrows():
+              games.append({
+                  "game_id": None if pd.isna(g.get("game_id")) else int(g["game_id"]),
+                  "away_abbr": str(g.get("away_team_abbr","")),
+                  "away_name": str(g.get("away_team_name","")),
+                  "home_abbr": str(g.get("home_team_abbr","")),
+                  "home_name": str(g.get("home_team_name","")),
+                  "time_et": nice_time(g.get("game_time")),
+                  "state": str(g.get("game_state","PRE"))
+              })
+
+          payload={
+              "date":today,
+              "timezone":"America/New_York",
+              "display_date":now.strftime("%A, %B %-d"),
+              "updated_at":now.isoformat(),
+              "source":"SportsDataverse NHL schedule master",
+              "games":games
+          }
+          out=Path("public/data/today-games.json")
+          out.parent.mkdir(parents=True,exist_ok=True)
+          out.write_text(json.dumps(payload,indent=2)+"\n",encoding="utf-8")
+          print(json.dumps(payload,indent=2))
+          PY
+      - name: Commit slate when changed
+        run: |
+          git config user.name "hockey-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/data/today-games.json
+          if git diff --cached --quiet; then
+            echo "No slate change."
+          else
+            git commit -m "Update today's NHL slate"
+            git push
+          fi
