@@ -120,11 +120,12 @@ jobs:
           games["home_win"]=pd.Series(pd.NA,index=games.index,dtype="boolean")
           mask=games["result_available"]
           games.loc[mask,"home_win"]=games.loc[mask,"winner_home_away"].eq("home").astype(bool)
-          expected=pd.Series(
-              np.where(games["winner_home_away"].eq("home"),games["home_team_abbr"],games["away_team_abbr"]),
-              index=games.index,dtype="string"
-          )
-          bad_identity=mask & ~games["winner_team_abbrev"].astype("string").eq(expected)
+          expected=pd.Series(pd.NA,index=games.index,dtype="string")
+          home_mask=games["winner_home_away"].eq("home").fillna(False)
+          away_mask=games["winner_home_away"].eq("away").fillna(False)
+          expected.loc[home_mask]=games.loc[home_mask,"home_team_abbr"].astype("string")
+          expected.loc[away_mask]=games.loc[away_mask,"away_team_abbr"].astype("string")
+          bad_identity=mask & ~games["winner_team_abbrev"].astype("string").eq(expected).fillna(False)
           if int(bad_identity.sum()):
               raise RuntimeError(f"winner identity mismatch={int(bad_identity.sum())}")
           games.to_parquet(OUT/"games.parquet",index=False)
