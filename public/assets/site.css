@@ -28,3 +28,42 @@ footer{background:#160b29;color:#efe5f0;border-top:1px solid #6e4a9b}.footer-inn
 @media(max-width:650px){.header-inner{height:76px}.brand img{width:56px;height:56px}.brand-copy strong{font-size:20px}.brand-copy small{font-size:6px;letter-spacing:.15em}.hero-shell{min-height:0}.hero-grid{display:block;min-height:0;padding-top:38px;padding-bottom:30px}.hero-mark{display:none}.hero h1{font-size:clamp(46px,12.1vw,61px);line-height:.92}.hero-copy>p{font-size:11px;line-height:1.55}.kicker{font-size:9px;line-height:1.5;max-width:330px}.pill{min-height:39px;padding:9px 13px;font-size:8px}.feature-wrap{gap:10px;padding-top:13px}.feature-card{min-height:190px;padding:22px}.feature-card h2{font-size:34px}.section{padding-top:45px;padding-bottom:55px}.section-heading{align-items:flex-start;flex-direction:column;gap:10px}.section-heading h2,.section-title-row h2{font-size:42px}.game-card{padding:21px}.team strong{font-size:40px}.more-band{padding:42px 0}.section-title-row .line{display:none}.model-section{padding:58px 0}.model-copy h2{font-size:51px}.footer-inner{padding-block:14px;min-height:0;flex-wrap:wrap}.footer-inner nav{order:3;width:100%}}
 @media(max-width:390px){.brand-copy small{display:none}.hero h1{font-size:45px}.metric-grid{grid-template-columns:1fr}.matchup{gap:12px}.team strong{font-size:36px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+/* Locked shell refinements: approved mark, CSS-only arrows, shared interior pages */
+.brand img,.footer-brand img,.hero-mark img{object-fit:contain}
+.css-arrow{display:inline-block;width:10px;height:10px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;position:relative}
+.css-arrow:after{content:"";position:absolute;width:13px;height:1.5px;background:currentColor;transform:rotate(-45deg);transform-origin:right center;right:-1px;top:-1px}
+.compact-card{color:inherit;text-decoration:none}
+.inner-hero{background:linear-gradient(135deg,#190b31,#4d1887 62%,#251043);color:var(--ivory);border-bottom:1px solid rgba(240,198,64,.45)}
+.inner-hero .header-inner{height:86px}
+.inner-lead{padding:58px 0 52px}
+.inner-lead h1{font:600 clamp(48px,5vw,76px)/.92 var(--serif);letter-spacing:-.03em;margin:10px 0 12px}
+.inner-lead p{max-width:720px;font-size:12px;line-height:1.7;color:#eadff0}
+.content-shell{padding-top:40px;padding-bottom:80px}
+.team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.team-tile{display:flex;align-items:center;gap:14px;min-height:94px;padding:14px 16px;border:1px solid #c0ac78;background:#fffaf0}
+.team-tile img{width:54px;height:54px;object-fit:contain}
+.team-tile strong{display:block;font:600 20px/1.05 var(--serif);color:#311653}
+.team-tile small{display:block;margin-top:4px;color:#827780;font-size:9px;letter-spacing:.08em;text-transform:uppercase}
+.game-design-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.hwin-card{border:1px solid #b9a675;background:#fffaf0;box-shadow:0 10px 30px rgba(45,23,70,.08);overflow:hidden}
+.hwin-top{display:flex;justify-content:space-between;gap:16px;padding:14px 18px;background:#281147;color:#fff4d8;border-bottom:1px solid #b99935;font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.hwin-matchup{display:grid;grid-template-columns:1fr 86px 1fr;gap:14px;align-items:center;padding:24px 20px 18px}
+.hwin-team{text-align:center}.hwin-team img{width:68px;height:68px;object-fit:contain;margin:0 auto 8px}.hwin-team strong{display:block;font:600 25px/1 var(--serif);color:#32175a}.hwin-team small{font-size:9px;color:#7b7179;text-transform:uppercase;letter-spacing:.07em}
+.hwin-center{text-align:center}.hwin-center strong{display:block;font:600 40px/1 var(--serif);color:#32175a}.hwin-center span{display:block;font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:#8b7d84;margin-top:5px}
+.hwin-metrics{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #d8c8a6;border-bottom:1px solid #d8c8a6}
+.hwin-metrics div{padding:12px 8px;text-align:center;border-right:1px solid #e1d5ba}.hwin-metrics div:last-child{border-right:0}.hwin-metrics strong{display:block;font:600 18px var(--serif);color:#35185e}.hwin-metrics span{display:block;font-size:7px;line-height:1.3;text-transform:uppercase;letter-spacing:.07em;color:#847a80}
+.hwin-context{display:flex;gap:7px;flex-wrap:wrap;padding:14px 16px}.context-chip{border:1px solid #cbb57a;border-radius:999px;padding:7px 9px;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#503868;background:#f7efd9}
+.hwin-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:0 16px 16px}.hwin-footer small{color:#8b8087;font-size:8px}.hwin-footer a{min-height:34px;padding:8px 12px}
+.profile-placeholder{border:1px solid #c1ad79;background:#fffaf0;padding:26px;margin-top:14px}.profile-placeholder h2{font:600 34px var(--serif);color:#32175a;margin:4px 0 9px}.profile-placeholder p{font-size:12px;line-height:1.7;color:#706770}
+@media(max-width:900px){.team-grid{grid-template-columns:repeat(3,1fr)}.game-design-grid{grid-template-columns:1fr}}
+@media(max-width:650px){
+ .hero-grid{padding-top:26px;padding-bottom:24px}
+ .hero h1{font-size:clamp(43px,10.8vw,55px);line-height:.93;margin:12px 0}
+ .hero-copy>p{font-size:10.5px;line-height:1.5;max-width:350px}
+ .hero-actions{margin-top:18px}.gold-rule{margin:14px 0}
+ .feature-card{min-height:165px;padding:20px}.feature-card h2{font-size:31px}.feature-card p{font-size:11px}
+ .team-grid{grid-template-columns:repeat(2,1fr)}.team-tile{min-height:82px;padding:11px}.team-tile img{width:44px;height:44px}.team-tile strong{font-size:17px}
+ .inner-lead{padding:38px 0 34px}.inner-lead h1{font-size:48px}.content-shell{padding-top:24px}
+ .hwin-matchup{grid-template-columns:1fr 64px 1fr;padding:20px 12px 15px}.hwin-team img{width:56px;height:56px}.hwin-team strong{font-size:21px}.hwin-center strong{font-size:32px}
+ .hwin-metrics{grid-template-columns:repeat(2,1fr)}.hwin-metrics div:nth-child(2){border-right:0}.hwin-metrics div:nth-child(-n+2){border-bottom:1px solid #e1d5ba}
+}
