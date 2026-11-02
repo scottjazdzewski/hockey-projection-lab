@@ -61,6 +61,17 @@ jobs:
               "hits","takeaways","giveaways","penalties","pim","faceoff_wins"
           ]
 
+          # Master schedule is authoritative for game identity, teams, date and outcome.
+          schedule_url=f"{BASE}/nhl_schedules/nhl_schedule_master.parquet"
+          schedule_path=download(schedule_url,Path("/tmp")/"nhl_schedule_master.parquet")
+          schedule=pd.read_parquet(schedule_path)
+          schedule_path.unlink()
+          schedule["game_id"]=pd.to_numeric(schedule["game_id"],errors="coerce").astype("Int64")
+          schedule_keep=schedule[[
+              "game_id","game_date","home_team_abbr","away_team_abbr",
+              "home_score","away_score","season","game_type"
+          ]].dropna(subset=["game_id"]).drop_duplicates("game_id")
+
           for end_year in range(2010,2028):
               url=f"{BASE}/nhl_pbp_full/play_by_play_{end_year}.parquet"
               path=Path("/tmp")/f"play_by_play_{end_year}.parquet"
