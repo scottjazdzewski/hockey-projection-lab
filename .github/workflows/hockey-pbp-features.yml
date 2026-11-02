@@ -114,7 +114,7 @@ jobs:
               tied=pre_diff.eq(0)
               close=pre_diff.abs().le(1)
 
-              event_is_home=df["event_team_type"].astype("string").str.lower().eq("home")
+              event_is_home=df["event_team_type"].astype("string").str.lower().eq("home").fillna(False)
               team_pre_diff=np.where(event_is_home,pre_diff,-pre_diff)
               leading=pd.Series(team_pre_diff,index=df.index).gt(0)
               trailing=pd.Series(team_pre_diff,index=df.index).lt(0)
