@@ -153,3 +153,35 @@ A candidate layer must:
 6. be versioned and archived before promotion
 
 Market odds remain comparison data, not an input to the independent HWIN baseline.
+
+
+## Goalie Rolling Backtest 003
+
+Five nested rolling-origin target seasons (2022-2026), 6,993 games.
+
+Backbone:
+- Brier 0.236064
+- log loss 0.664431
+- accuracy 59.32%
+
+Best goalie candidate: **shrunk prior starter save percentage**
+- Brier 0.235900
+- log loss 0.664074
+- accuracy 59.57%
+- delta Brier vs backbone: -0.000165
+- improved 4 of 5 target seasons; 2023 was very slightly worse
+
+20-game raw starter save percentage:
+- Brier 0.236004
+- delta -0.000060
+
+20-game SOG-based GSAx:
+- Brier 0.236018
+- delta -0.000047
+
+Interpretation:
+- broad goalie bundles overfit and are rejected
+- goalie skill adds only a **small** incremental signal after team strength/territorial play
+- heavily shrunk long-run starter quality is more stable than stacking several recent goalie metrics
+- shrunk prior save percentage remains a research candidate, not a production weight
+- current 2026-27 shadow results are not used for feature selection
