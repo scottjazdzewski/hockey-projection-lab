@@ -90,7 +90,7 @@ jobs:
               schedule["game_id"]=pd.to_numeric(schedule["game_id"],errors="coerce").astype("Int64")
               schedule_keep=schedule[[
                   "game_id","game_date","home_team_abbr","away_team_abbr",
-                  "home_score","away_score","season","game_type"
+                  "season","game_type"
               ]].dropna(subset=["game_id"]).drop_duplicates("game_id")
 
               # Normalize required fields robustly across eras.
@@ -206,6 +206,8 @@ jobs:
               meta_pbp=df.groupby("game_id",dropna=False).agg(
                   season_full=("season","first"),
                   season_type=("season_type","first"),
+                  pbp_final_home_score=("home_score_num","max"),
+                  pbp_final_away_score=("away_score_num","max"),
               ).reset_index()
               flags=df.groupby("game_id").agg(
                   went_ot=("period_type",lambda s: s.astype("string").str.upper().eq("OVERTIME").any()),
@@ -215,9 +217,12 @@ jobs:
               meta=meta.merge(schedule_keep,on="game_id",how="inner")
               meta["source_season"]=season_year
               meta=meta.rename(columns={
-                  "home_team_abbr":"home_abbr","away_team_abbr":"away_abbr",
-                  "home_score":"final_home_score","away_score":"final_away_score"
+                  "home_team_abbr":"home_abbr","away_team_abbr":"away_abbr"
               })
+              # Final scores come ONLY from the PBP scoreboard. Historical schedule score
+              # fields are known to be corrupted/constant in multiple seasons.
+              meta["final_home_score"]=pd.to_numeric(meta["pbp_final_home_score"],errors="coerce")
+              meta["final_away_score"]=pd.to_numeric(meta["pbp_final_away_score"],errors="coerce")
 
               # Guarantee exactly one home and one away row for every game in PBP.
               skeleton=pd.concat([
@@ -258,12 +263,16 @@ jobs:
           out=pd.concat(all_features,ignore_index=True,sort=False)
           out=out.sort_values(["game_date","game_id","home_away"]).reset_index(drop=True)
           duplicate_keys=int(out.duplicated(["game_id","home_away"]).sum())
+          home_rows=out[out["home_away"].eq("home")].copy()
+          unresolved_scores=int((home_rows["final_home_score"].isna() | home_rows["final_away_score"].isna()).sum())
+          tied_final_scores=int((pd.to_numeric(home_rows["final_home_score"],errors="coerce") == pd.to_numeric(home_rows["final_away_score"],errors="coerce")).sum())
           sides_per_game=out.groupby("game_id")["home_away"].nunique()
           bad_side_games=int((sides_per_game.ne(2)).sum())
-          if duplicate_keys or bad_side_games or len(out) != 2*out["game_id"].nunique():
+          if duplicate_keys or bad_side_games or unresolved_scores or tied_final_scores or len(out) != 2*out["game_id"].nunique():
               raise RuntimeError(
                   f"Ledger integrity failure: rows={len(out)} games={out['game_id'].nunique()} "
-                  f"duplicate_keys={duplicate_keys} bad_side_games={bad_side_games}"
+                  f"duplicate_keys={duplicate_keys} bad_side_games={bad_side_games} "
+                  f"unresolved_scores={unresolved_scores} tied_final_scores={tied_final_scores}"
               )
           out.to_parquet(OUT/"game_team_event_features.parquet",index=False)
           pd.DataFrame(manifest).to_csv(OUT/"source_manifest.csv",index=False)
@@ -277,7 +286,11 @@ jobs:
               "playoff_rows":int((out["season_type"].astype("string")=="P").sum()),
               "duplicate_game_side_keys":duplicate_keys,
               "games_without_exactly_two_sides":bad_side_games,
+              "unresolved_pbp_final_scores":unresolved_scores,
+              "tied_pbp_final_scores":tied_final_scores,
               "two_row_ledger_pass":bool(len(out)==2*out["game_id"].nunique() and duplicate_keys==0 and bad_side_games==0),
+              "score_target_pass":bool(unresolved_scores==0 and tied_final_scores==0),
+              "outcome_source":"PBP scoreboard only; schedule scores explicitly excluded",
           }
           with open(OUT/"summary.json","w") as f: json.dump(summary,f,indent=2,default=str)
           print("FINAL_SUMMARY",json.dumps({k:v for k,v in summary.items() if k!="columns"}),flush=True)
