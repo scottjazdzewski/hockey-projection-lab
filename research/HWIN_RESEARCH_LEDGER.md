@@ -185,3 +185,45 @@ Interpretation:
 - heavily shrunk long-run starter quality is more stable than stacking several recent goalie metrics
 - shrunk prior save percentage remains a research candidate, not a production weight
 - current 2026-27 shadow results are not used for feature selection
+
+
+## Team Strength 004 — Recency / Opponent Adjustment
+
+Nested rolling-origin targets 2022-2026, 6,993 games.
+
+Flat-20 backbone:
+- Brier 0.236064
+- log loss 0.664431
+- accuracy 59.32%
+
+Exponentially weighted recent form:
+- Brier 0.235665
+- log loss 0.663555
+- accuracy 59.62%
+- delta Brier vs flat-20: -0.000399
+
+Pure opponent-adjusted SOG/xG ratings:
+- Brier 0.235509
+- log loss 0.663242
+- accuracy 59.57%
+- delta Brier: -0.000556
+
+**Flat-20 + opponent-adjusted SOG/xG hybrid:**
+- Brier **0.235382**
+- log loss **0.662976**
+- accuracy 59.47%
+- delta Brier: **-0.000683**
+- Brier improved vs flat-20 in 2023, 2024, 2025 and 2026; 2022 was slightly worse
+
+Opponent-adjusted offense/defense components separately:
+- Brier 0.235411
+- log loss 0.663031
+- accuracy 59.53%
+- slightly worse Brier than the simpler aggregate opponent-adjusted hybrid
+
+Interpretation:
+- schedule/opponent quality materially improves the team-strength representation
+- recency decay also helps, but opponent adjustment adds more
+- the simpler aggregate opponent-adjusted SOG/xG signal is preferred over four separate offense/defense component terms
+- **new research backbone candidate = Elo + flat-20 5v5 form + opponent-adjusted 5v5 SOG/xG + recent scoring + rest**
+- still research-only; not production HWIN
