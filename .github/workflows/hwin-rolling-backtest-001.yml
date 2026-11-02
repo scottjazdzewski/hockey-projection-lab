@@ -1,0 +1,51 @@
+name: HWIN Rolling Backtest 001
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'research/hwin_rolling_backtest_001.py'
+      - '.github/workflows/hwin-rolling-backtest-001.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow scikit-learn numpy
+      - name: Download canonical inputs
+        run: |
+          mkdir -p /tmp/pbp /tmp/pbp_u /tmp/spine /tmp/spine_u
+          gh run download 41537361054 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/pbp_u
+          gh run download 41537437104 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
+          unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/spine_u
+      - name: Run rolling-origin backtest
+        run: |
+          python research/hwin_rolling_backtest_001.py \
+            --pbp /tmp/pbp_u/pbp_feature_output/game_team_event_features.parquet \
+            --spine /tmp/spine_u/spine_v3/games.parquet \
+            --out hwin_rolling_backtest_001
+      - name: Show results
+        run: |
+          cat hwin_rolling_backtest_001/summary.json
+          cat hwin_rolling_backtest_001/rolling_backtest.csv
+      - name: Package research
+        run: zip -r -9 hwin-rolling-backtest-001-20261102.zip hwin_rolling_backtest_001 >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hwin-rolling-backtest-001-20261102
+          path: hwin-rolling-backtest-001-20261102.zip
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
