@@ -80,9 +80,10 @@ def main(outdir):
         shooting_home=p["event_team_type"].astype("string").str.lower().eq("home").fillna(False)
         shooting_away=p["event_team_type"].astype("string").str.lower().eq("away").fillna(False)
 
-        home_gid=norm_id(p["home_goalie_id"])
-        away_gid=norm_id(p["away_goalie_id"])
-        event_gid=norm_id(p["event_goalie_id"])
+        na_id=pd.Series(pd.NA,index=p.index,dtype="string")
+        home_gid=norm_id(p["home_goalie_id"]) if "home_goalie_id" in p.columns else na_id.copy()
+        away_gid=norm_id(p["away_goalie_id"]) if "away_goalie_id" in p.columns else na_id.copy()
+        event_gid=norm_id(p["event_goalie_id"]) if "event_goalie_id" in p.columns else na_id.copy()
         defending=np.where(shooting_home,away_gid,np.where(shooting_away,home_gid,pd.NA))
         defending=pd.Series(defending,index=p.index,dtype="string")
         defending=defending.fillna(event_gid)
@@ -108,6 +109,7 @@ def main(outdir):
         p["shots_against_pbp"]=is_sog.loc[p.index].astype("int16")
         p["goals_against_pbp"]=is_goal.loc[p.index].astype("int16")
         p["xg_against"]=np.where(is_unblocked.loc[p.index],xg.loc[p.index],0.0)
+        p["sog_xg_against"]=np.where(is_sog.loc[p.index],xg.loc[p.index],0.0)
         p["fivev5_shots_against"]=np.where(fivev5.loc[p.index]&is_sog.loc[p.index],1,0)
         p["fivev5_goals_against"]=np.where(fivev5.loc[p.index]&is_goal.loc[p.index],1,0)
         p["fivev5_xg_against"]=np.where(fivev5.loc[p.index]&is_unblocked.loc[p.index],xg.loc[p.index],0.0)
@@ -120,6 +122,7 @@ def main(outdir):
             shots_against_pbp=("shots_against_pbp","sum"),
             goals_against_pbp=("goals_against_pbp","sum"),
             xg_against=("xg_against","sum"),
+            sog_xg_against=("sog_xg_against","sum"),
             fivev5_shots_against=("fivev5_shots_against","sum"),
             fivev5_goals_against=("fivev5_goals_against","sum"),
             fivev5_xg_against=("fivev5_xg_against","sum"),
@@ -130,12 +133,13 @@ def main(outdir):
         agg["saves_pbp"]=agg["shots_against_pbp"]-agg["goals_against_pbp"]
         agg["save_pct_pbp"]=np.where(agg["shots_against_pbp"]>0,agg["saves_pbp"]/agg["shots_against_pbp"],np.nan)
         agg["gsax"]=agg["xg_against"]-agg["goals_against_pbp"]
+        agg["sog_gsax"]=agg["sog_xg_against"]-agg["goals_against_pbp"]
         agg["gsax_per_30_shots"]=np.where(agg["shots_against_pbp"]>0,agg["gsax"]/agg["shots_against_pbp"]*30,np.nan)
         agg["fivev5_gsax"]=agg["fivev5_xg_against"]-agg["fivev5_goals_against"]
 
         merged=box.merge(agg,on=["game_id","goalie_id_key"],how="left")
         metric_cols=[
-            "shots_against_pbp","goals_against_pbp","xg_against","fivev5_shots_against",
+            "shots_against_pbp","goals_against_pbp","xg_against","sog_xg_against","sog_gsax","fivev5_shots_against",
             "fivev5_goals_against","fivev5_xg_against","high_xg_against",
             "rebound_attempts_against","rebound_xg_against","saves_pbp","gsax","fivev5_gsax"
         ]
@@ -156,6 +160,7 @@ def main(outdir):
             "starter_games":int(starter["game_id"].nunique()),
             "starter_with_pbp_shots":int((starter["shots_against_pbp"]>0).sum()),
             "starter_pbp_coverage":float((starter["shots_against_pbp"]>0).mean()) if len(starter) else None,
+            "modern_goalie_on_ice_ids":bool("home_goalie_id" in p.columns and "away_goalie_id" in p.columns),
             "box_pbp_shots_mae":float((pd.to_numeric(starter["shots_against"],errors="coerce")-starter["shots_against_pbp"]).abs().mean()) if len(starter) else None,
         })
         frames.append(merged)
@@ -178,7 +183,7 @@ def main(outdir):
         "starter_pbp_shot_coverage":float((allg.loc[allg["starter_bool"],"shots_against_pbp"]>0).mean()),
         "duplicate_goalie_game_keys":dup,
         "seasons":sorted(int(x) for x in allg["source_season"].unique()),
-        "note":"Same-game goalie metrics are descriptive. HWIN research must shift/roll them before the game being predicted."
+        "note":"Same-game goalie metrics are descriptive. HWIN research must shift/roll them before the game being predicted. sog_gsax uses only shots-on-goal/goals and is the cross-era comparable xG-based goalie metric; full unblocked xG attribution has better modern coverage."
     }
     with open(out/"summary.json","w") as f: json.dump(summary,f,indent=2,default=str)
     print("FINAL",json.dumps(summary,indent=2),flush=True)
