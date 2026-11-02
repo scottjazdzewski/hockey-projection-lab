@@ -2,11 +2,11 @@
   "date": "2026-11-02",
   "timezone": "America/New_York",
   "display_date": "Monday, November 2",
-  "updated_at": "2026-11-02T18:31:00-05:00",
-  "source": "NHL.com current schedule; automatic updater enabled",
+  "updated_at": "2026-11-02T18:30:10.789329-05:00",
+  "source": "NHL live score feed fallback",
   "games": [
     {
-      "game_id": null,
+      "game_id": 2026020232,
       "away_abbr": "VGK",
       "away_name": "Vegas Golden Knights",
       "home_abbr": "BOS",
@@ -15,7 +15,7 @@
       "state": "PRE"
     },
     {
-      "game_id": null,
+      "game_id": 2026020233,
       "away_abbr": "DET",
       "away_name": "Detroit Red Wings",
       "home_abbr": "FLA",
@@ -24,22 +24,22 @@
       "state": "PRE"
     },
     {
-      "game_id": null,
+      "game_id": 2026020234,
       "away_abbr": "COL",
       "away_name": "Colorado Avalanche",
       "home_abbr": "CHI",
       "home_name": "Chicago Blackhawks",
       "time_et": "8:00 PM ET",
-      "state": "PRE"
+      "state": "FUT"
     },
     {
-      "game_id": null,
+      "game_id": 2026020235,
       "away_abbr": "CGY",
       "away_name": "Calgary Flames",
       "home_abbr": "SJS",
       "home_name": "San Jose Sharks",
       "time_et": "9:00 PM ET",
-      "state": "PRE"
+      "state": "FUT"
     }
   ]
 }
