@@ -1,0 +1,251 @@
+name: Hockey Full PBP Feature ETL
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hockey-pbp-features.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-pbp-features:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install data tools
+        run: python -m pip install --quiet pandas pyarrow requests numpy
+      - name: Build full historical game-team event features
+        shell: bash
+        run: |
+          cat > /tmp/build_pbp_features.py <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          import numpy as np
+          import pandas as pd
+          import requests
+
+          BASE="https://github.com/sportsdataverse/sportsdataverse-data/releases/download"
+          OUT=Path("pbp_feature_output")
+          OUT.mkdir(exist_ok=True)
+          session=requests.Session()
+          session.headers.update({"User-Agent":"HockeyProjectionLab/0.1"})
+          manifest=[]
+          all_features=[]
+
+          def download(url,dest):
+              dest=Path(dest)
+              with session.get(url,stream=True,timeout=180) as r:
+                  r.raise_for_status()
+                  h=hashlib.sha256(); n=0
+                  with open(dest,"wb") as f:
+                      for chunk in r.iter_content(1024*1024):
+                          if chunk:
+                              f.write(chunk); h.update(chunk); n+=len(chunk)
+              manifest.append({"url":url,"bytes":n,"sha256":h.hexdigest()})
+              return dest
+
+          metric_cols=[
+              "goals_ev","goals_non_en","sog","missed","blocked_attempts","corsi","fenwick","xg",
+              "fivev5_goals","fivev5_sog","fivev5_corsi","fivev5_fenwick","fivev5_xg",
+              "tied_fivev5_corsi","tied_fivev5_xg","close_fivev5_corsi","close_fivev5_xg",
+              "early_fivev5_corsi","early_fivev5_xg","leading_fivev5_corsi","leading_fivev5_xg",
+              "trailing_fivev5_corsi","trailing_fivev5_xg",
+              "pp_goals","pp_sog","pp_fenwick","pp_xg","sh_goals","sh_sog","sh_fenwick","sh_xg",
+              "high_xg_10","high_xg_20","rebound_attempts","rebound_xg",
+              "hits","takeaways","giveaways","penalties","pim","faceoff_wins"
+          ]
+
+          for end_year in range(2010,2028):
+              url=f"{BASE}/nhl_pbp_full/play_by_play_{end_year}.parquet"
+              path=Path("/tmp")/f"play_by_play_{end_year}.parquet"
+              print("DOWNLOAD",end_year,url,flush=True)
+              download(url,path)
+              df=pd.read_parquet(path)
+              path.unlink()
+              if df.empty:
+                  continue
+
+              # Normalize required fields robustly across eras.
+              for c in ["event_type","event_team_abbr","event_team_type","period_type","strength_state","strength_code","home_abbr","away_abbr","season_type"]:
+                  if c not in df: df[c]=None
+              for c in ["home_score","away_score","game_seconds","event_idx","penalty_minutes","xg","shot_distance","shot_angle"]:
+                  if c not in df: df[c]=np.nan
+              if "empty_net" not in df: df["empty_net"]=False
+
+              df["event_type"]=df["event_type"].astype("string")
+              df["event_team_abbr"]=df["event_team_abbr"].astype("string")
+              df["period_type"]=df["period_type"].astype("string")
+              df["strength_state"]=df["strength_state"].astype("string")
+              df["strength_code"]=df["strength_code"].astype("string")
+              df["xg_num"]=pd.to_numeric(df["xg"],errors="coerce").fillna(0.0)
+              df["penalty_minutes_num"]=pd.to_numeric(df["penalty_minutes"],errors="coerce").fillna(0.0)
+              df["game_seconds_num"]=pd.to_numeric(df["game_seconds"],errors="coerce")
+              df["home_score_num"]=pd.to_numeric(df["home_score"],errors="coerce")
+              df["away_score_num"]=pd.to_numeric(df["away_score"],errors="coerce")
+              df["empty_net_bool"]=df["empty_net"].fillna(False).astype(bool)
+
+              non_so=df["period_type"].str.upper().ne("SHOOTOUT").fillna(True)
+              et=df["event_type"].str.upper()
+              is_goal=et.eq("GOAL") & non_so
+              is_sog=et.isin(["SHOT","GOAL"]) & non_so
+              is_miss=et.eq("MISSED_SHOT") & non_so
+              is_block=et.eq("BLOCKED_SHOT") & non_so
+              is_corsi=(is_sog|is_miss|is_block)
+              is_fenwick=(is_sog|is_miss)
+              is_unblocked=is_fenwick
+              fivev5=df["strength_state"].str.lower().eq("5v5").fillna(False) & non_so & ~df["empty_net_bool"]
+              pp=df["strength_code"].str.upper().eq("PP").fillna(False) & non_so & ~df["empty_net_bool"]
+              sh=df["strength_code"].str.upper().eq("SH").fillna(False) & non_so & ~df["empty_net_bool"]
+
+              # Score immediately before each event (goal rows often contain post-goal score).
+              pre_home=df["home_score_num"].copy()
+              pre_away=df["away_score_num"].copy()
+              home_goal=is_goal & df["event_team_type"].astype("string").str.lower().eq("home")
+              away_goal=is_goal & df["event_team_type"].astype("string").str.lower().eq("away")
+              pre_home=pre_home-home_goal.astype(int)
+              pre_away=pre_away-away_goal.astype(int)
+              pre_diff=pre_home-pre_away
+              tied=pre_diff.eq(0)
+              close=pre_diff.abs().le(1)
+
+              event_is_home=df["event_team_type"].astype("string").str.lower().eq("home")
+              team_pre_diff=np.where(event_is_home,pre_diff,-pre_diff)
+              leading=pd.Series(team_pre_diff,index=df.index).gt(0)
+              trailing=pd.Series(team_pre_diff,index=df.index).lt(0)
+
+              # Rebound proxy: same team, unblocked attempt within 3 seconds of previous unblocked attempt.
+              df["_is_unblocked"]=is_unblocked
+              sort_cols=["game_id","event_idx"] if "event_idx" in df.columns else ["game_id","game_seconds_num"]
+              df=df.sort_values(sort_cols,kind="stable")
+              prev_team=df.groupby("game_id")["event_team_abbr"].shift(1)
+              prev_unblocked=df.groupby("game_id")["_is_unblocked"].shift(1).fillna(False)
+              prev_secs=df.groupby("game_id")["game_seconds_num"].shift(1)
+              dt=df["game_seconds_num"]-prev_secs
+              rebound=is_unblocked & prev_unblocked.astype(bool) & df["event_team_abbr"].eq(prev_team) & dt.ge(0) & dt.le(3)
+
+              # Build metric event columns.
+              df["goals_ev"]=is_goal.astype("int16")
+              df["goals_non_en"]=(is_goal & ~df["empty_net_bool"]).astype("int16")
+              df["sog"]=is_sog.astype("int16")
+              df["missed"]=is_miss.astype("int16")
+              df["blocked_attempts"]=is_block.astype("int16")
+              df["corsi"]=is_corsi.astype("int16")
+              df["fenwick"]=is_fenwick.astype("int16")
+              df["xg"]=np.where(is_unblocked,df["xg_num"],0.0)
+
+              for prefix,mask in [
+                  ("fivev5",fivev5),("tied_fivev5",fivev5&tied),("close_fivev5",fivev5&close),
+                  ("early_fivev5",fivev5 & df["game_seconds_num"].lt(2400)),
+                  ("leading_fivev5",fivev5 & leading),("trailing_fivev5",fivev5 & trailing)
+              ]:
+                  if prefix=="fivev5":
+                      df[f"{prefix}_goals"]=(is_goal&mask).astype("int16")
+                      df[f"{prefix}_sog"]=(is_sog&mask).astype("int16")
+                      df[f"{prefix}_fenwick"]=(is_fenwick&mask).astype("int16")
+                  df[f"{prefix}_corsi"]=(is_corsi&mask).astype("int16")
+                  df[f"{prefix}_xg"]=np.where(is_unblocked&mask,df["xg_num"],0.0)
+
+              for prefix,mask in [("pp",pp),("sh",sh)]:
+                  df[f"{prefix}_goals"]=(is_goal&mask).astype("int16")
+                  df[f"{prefix}_sog"]=(is_sog&mask).astype("int16")
+                  df[f"{prefix}_fenwick"]=(is_fenwick&mask).astype("int16")
+                  df[f"{prefix}_xg"]=np.where(is_unblocked&mask,df["xg_num"],0.0)
+
+              df["high_xg_10"]=(is_unblocked & df["xg_num"].ge(.10)).astype("int16")
+              df["high_xg_20"]=(is_unblocked & df["xg_num"].ge(.20)).astype("int16")
+              df["rebound_attempts"]=rebound.astype("int16")
+              df["rebound_xg"]=np.where(rebound,df["xg_num"],0.0)
+              df["hits"]=et.eq("HIT").astype("int16")
+              df["takeaways"]=et.eq("TAKEAWAY").astype("int16")
+              df["giveaways"]=et.eq("GIVEAWAY").astype("int16")
+              df["penalties"]=et.eq("PENALTY").astype("int16")
+              df["pim"]=np.where(et.eq("PENALTY"),df["penalty_minutes_num"],0.0)
+              df["faceoff_wins"]=et.eq("FACEOFF").astype("int16")
+
+              # Aggregate only rows with an owning team.
+              ev=df[df["event_team_abbr"].notna()].copy()
+              group_keys=["game_id","event_team_abbr"]
+              agg=ev.groupby(group_keys,dropna=False)[metric_cols].sum().reset_index()
+              quality=ev[is_unblocked.loc[ev.index]].groupby(group_keys).agg(
+                  mean_xg_per_unblocked=("xg_num","mean"),
+                  mean_shot_distance=("shot_distance","mean"),
+                  mean_shot_angle=("shot_angle","mean"),
+              ).reset_index()
+              agg=agg.merge(quality,on=group_keys,how="left")
+
+              # Game metadata and OT/shootout flags.
+              meta=df.groupby("game_id",dropna=False).agg(
+                  season_full=("season","first"),
+                  season_type=("season_type","first"),
+                  game_date=("game_date","first"),
+                  home_abbr=("home_abbr","first"),
+                  away_abbr=("away_abbr","first"),
+                  final_home_score=("home_score_num","max"),
+                  final_away_score=("away_score_num","max"),
+              ).reset_index()
+              flags=df.groupby("game_id").agg(
+                  went_ot=("period_type",lambda s: s.astype("string").str.upper().eq("OVERTIME").any()),
+                  went_shootout=("period_type",lambda s: s.astype("string").str.upper().eq("SHOOTOUT").any()),
+              ).reset_index()
+              meta=meta.merge(flags,on="game_id",how="left")
+              meta["source_season"]=end_year
+
+              agg=agg.merge(meta,on="game_id",how="left")
+              agg["home_away"]=np.where(agg["event_team_abbr"].eq(agg["home_abbr"]),"home","away")
+              agg["opponent_abbr"]=np.where(agg["home_away"].eq("home"),agg["away_abbr"],agg["home_abbr"])
+              agg["team_final_score"]=np.where(agg["home_away"].eq("home"),agg["final_home_score"],agg["final_away_score"])
+              agg["opp_final_score"]=np.where(agg["home_away"].eq("home"),agg["final_away_score"],agg["final_home_score"])
+              agg["win"]=(agg["team_final_score"]>agg["opp_final_score"]).astype("int8")
+              agg["goal_diff"]=agg["team_final_score"]-agg["opp_final_score"]
+
+              # Add against/share metrics via opponent self-join.
+              for_cols=[
+                  "corsi","fenwick","sog","xg","fivev5_corsi","fivev5_fenwick","fivev5_sog","fivev5_xg",
+                  "tied_fivev5_corsi","tied_fivev5_xg","close_fivev5_corsi","close_fivev5_xg",
+                  "early_fivev5_corsi","early_fivev5_xg","pp_xg","pp_sog","pp_goals"
+              ]
+              opp=agg[["game_id","event_team_abbr"]+for_cols].copy()
+              opp=opp.rename(columns={"event_team_abbr":"opponent_abbr",**{c:f"{c}_against" for c in for_cols}})
+              agg=agg.merge(opp,on=["game_id","opponent_abbr"],how="left")
+              for c in ["corsi","fenwick","sog","xg","fivev5_corsi","fivev5_fenwick","fivev5_sog","fivev5_xg","tied_fivev5_corsi","tied_fivev5_xg","close_fivev5_corsi","close_fivev5_xg","early_fivev5_corsi","early_fivev5_xg"]:
+                  denom=agg[c]+agg[f"{c}_against"]
+                  agg[f"{c}_share"]=np.where(denom>0,agg[c]/denom,np.nan)
+
+              all_features.append(agg)
+              print("SEASON_DONE",end_year,"events",len(df),"game_team_rows",len(agg),flush=True)
+
+          out=pd.concat(all_features,ignore_index=True,sort=False)
+          out=out.sort_values(["game_date","game_id","home_away"]).reset_index(drop=True)
+          out.to_parquet(OUT/"game_team_event_features.parquet",index=False)
+          pd.DataFrame(manifest).to_csv(OUT/"source_manifest.csv",index=False)
+
+          summary={
+              "rows":len(out),
+              "games":int(out["game_id"].nunique()),
+              "seasons":sorted([int(x) for x in out["source_season"].dropna().unique()]),
+              "columns":list(out.columns),
+              "regular_rows":int((out["season_type"].astype("string")=="R").sum()),
+              "playoff_rows":int((out["season_type"].astype("string")=="P").sum()),
+          }
+          with open(OUT/"summary.json","w") as f: json.dump(summary,f,indent=2,default=str)
+          print("FINAL_SUMMARY",json.dumps({k:v for k,v in summary.items() if k!="columns"}),flush=True)
+          print("COLUMN_COUNT",len(out.columns),flush=True)
+          PY
+          python /tmp/build_pbp_features.py
+      - name: Package features
+        run: |
+          zip -r -9 hockey-pbp-features-2010-2027-20261102.zip pbp_feature_output >/dev/null
+          ls -lh hockey-pbp-features-2010-2027-20261102.zip pbp_feature_output/*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hockey-pbp-features-2010-2027-20261102
+          path: hockey-pbp-features-2010-2027-20261102.zip
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 0
