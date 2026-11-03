@@ -18,8 +18,8 @@ permissions:
   actions: read
 
 concurrency:
-  group: hockey-lab-game-v1-production
-  cancel-in-progress: true
+  group: hockey-lab-production-data
+  cancel-in-progress: false
 
 jobs:
   score:
