@@ -5,14 +5,9 @@
   }
   async function load(){
     try{
-      const [mr,dr]=await Promise.all([
-        fetch('/data/production-manifest.json',{cache:'no-store'}),
-        fetch('/data/team-ratings.json',{cache:'no-store'})
-      ]);
-      if(!mr.ok || !dr.ok) return;
-      const manifest=await mr.json();
-      if(manifest?.surfaces?.team_ratings?.state!=='READY') return;
-      const d=await dr.json();
+      const result=await window.HockeyData.loadSurface('team_ratings','/data/team-ratings.json');
+      if(!result.ready) return;
+      const d=result.data;
       if(d?.schema_version!=='1.1' || d?.model?.status!=='PROMOTED' || !Array.isArray(d.teams)) return;
       const byAbbr=new Map(d.teams.map(t=>[t.abbr,t]));
       document.querySelectorAll('.ip-team-card[data-team]').forEach(card=>{
