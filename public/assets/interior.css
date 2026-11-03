@@ -17,22 +17,22 @@
   background-position:center top;
   background-attachment:fixed;
 }
-.ip-page-teams{background-image:linear-gradient(rgba(10,5,22,.20),rgba(10,5,22,.20)),url('/assets/hero-teams.webp')}
-.ip-page-players{background-image:linear-gradient(rgba(10,5,22,.20),rgba(10,5,22,.20)),url('/assets/hero-players-v2.webp')}
-.ip-page-fantasy{background-image:linear-gradient(rgba(10,5,22,.20),rgba(10,5,22,.20)),url('/assets/hero-fantasy.webp')}
-.ip-page-performance{background-image:linear-gradient(rgba(10,5,22,.20),rgba(10,5,22,.20)),url('/assets/hero-performance.webp')}
+.ip-page-teams{background-image:url('/assets/hero-teams.webp')}
+.ip-page-players{background-image:url('/assets/hero-players-v2.webp')}
+.ip-page-fantasy{background-image:url('/assets/hero-fantasy.webp')}
+.ip-page-performance{background-image:url('/assets/hero-performance.webp')}
 
 .ip-hero{
   position:relative;
   min-height:208px;
   border-bottom:1px solid rgba(240,198,64,.42);
-  background:rgba(10,5,22,.12);
+  background:rgba(10,5,22,.20);
 }
 .ip-header{
   position:absolute;
   inset:0 0 auto 0;
   z-index:5;
-  background:rgba(10,5,22,.12)!important;
+  background:transparent!important;
   border-bottom:1px solid rgba(255,255,255,.12);
   backdrop-filter:blur(5px);
   -webkit-backdrop-filter:blur(5px);
@@ -70,7 +70,7 @@
   color:rgba(255,248,232,.88);
 }
 
-.ip-main{position:relative;background:rgba(10,5,22,.12)}
+.ip-main{position:relative;background:rgba(10,5,22,.20)}
 .ip-content{padding-top:14px;padding-bottom:36px}
 .ip-section-head{
   display:grid;
@@ -165,6 +165,6 @@
 /* Fantasy is intentionally artwork-only below the hero for now */
 .ip-fantasy-empty{
   min-height:calc(100vh - 208px - 108px);
-  background:rgba(10,5,22,.12);
+  background:rgba(10,5,22,.20);
 }
 .ip-fantasy-empty .ip-content{min-height:100%}
