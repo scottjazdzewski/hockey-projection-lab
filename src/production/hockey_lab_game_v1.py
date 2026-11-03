@@ -266,6 +266,7 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
         gid=str(int(r["_game_id_int"]))
         away_rest=r.get("a_sched_rest_days",np.nan)
         home_rest=r.get("h_sched_rest_days",np.nan)
+
         def rest_label(v):
             if pd.isna(v):
                 return None
@@ -274,9 +275,28 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
                 return "B2B"
             days_off=max(0,gap-1)
             return f"{days_off}d rest"
+
+        def load_flags(prefix):
+            out=[]
+            if float(r.get(f"{prefix}_sched_3in4",0) or 0)>=1: out.append("3-in-4")
+            if float(r.get(f"{prefix}_sched_4in6",0) or 0)>=1: out.append("4-in-6")
+            if float(r.get(f"{prefix}_sched_5in8",0) or 0)>=1: out.append("5-in-8")
+            return out
+
+        def severity(v):
+            if pd.isna(v): return "UNKNOWN"
+            gap=int(round(float(v)))
+            if gap<=1: return "B2B"
+            if gap==2: return "SHORT"
+            return "RESTED"
+
         restmap[gid]={
-            "away": rest_label(away_rest),
-            "home": rest_label(home_rest)
+            "away":rest_label(away_rest),
+            "home":rest_label(home_rest),
+            "away_flags":load_flags("a"),
+            "home_flags":load_flags("h"),
+            "away_severity":severity(away_rest),
+            "home_severity":severity(home_rest)
         }
 
     now=pd.Timestamp.now(tz="America/New_York")
@@ -293,7 +313,16 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
             "overtime_probability":None,
             "goalie_state":{"status":"UNKNOWN","away":None,"home":None,"updated_at":None},
             "lineup_state":{"status":"UNKNOWN","away":None,"home":None,"updated_at":None},
-            "rest_state":{"status":"CONFIRMED","away":restmap.get(gid,{}).get("away"),"home":restmap.get(gid,{}).get("home"),"updated_at":now.isoformat()},
+            "rest_state":{
+                "status":"CONFIRMED",
+                "away":restmap.get(gid,{}).get("away"),
+                "home":restmap.get(gid,{}).get("home"),
+                "away_flags":restmap.get(gid,{}).get("away_flags",[]),
+                "home_flags":restmap.get(gid,{}).get("home_flags",[]),
+                "away_severity":restmap.get(gid,{}).get("away_severity","UNKNOWN"),
+                "home_severity":restmap.get(gid,{}).get("home_severity","UNKNOWN"),
+                "updated_at":now.isoformat()
+            },
             "flags":[f"source_data_through_{cutoff}","no_goalie_layer","b2b_context"]
         })
 
