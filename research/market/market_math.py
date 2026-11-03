@@ -8,7 +8,7 @@ from typing import Any
 
 PRIMARY_BOOKS = frozenset({
     "pinnacle", "circa", "draftkings", "fanduel", "betmgm", "caesars",
-    "espnbet", "bet365",
+    "espnbet", "bet365", "unibet", "pointsbet",
 })
 
 BOOK_ALIASES = {
@@ -18,6 +18,7 @@ BOOK_ALIASES = {
     "bet mgm": "betmgm", "betmgm sportsbook": "betmgm",
     "caesars sportsbook": "caesars", "espn bet": "espnbet",
     "espnbet sportsbook": "espnbet", "bet 365": "bet365",
+    "points bet": "pointsbet", "unibet sportsbook": "unibet",
 }
 
 
