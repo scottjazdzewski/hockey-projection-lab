@@ -2,7 +2,7 @@
   "date": "2026-11-02",
   "timezone": "America/New_York",
   "display_date": "Monday, November 2",
-  "updated_at": "2026-11-02T18:30:10.789329-05:00",
+  "updated_at": "2026-11-02T22:12:43.492617-05:00",
   "source": "NHL live score feed fallback",
   "games": [
     {
@@ -12,7 +12,8 @@
       "home_abbr": "BOS",
       "home_name": "Boston Bruins",
       "time_et": "7:00 PM ET",
-      "state": "PRE"
+      "start_time_et": "2026-11-02T19:00:00-05:00",
+      "state": "FINAL"
     },
     {
       "game_id": 2026020233,
@@ -21,7 +22,8 @@
       "home_abbr": "FLA",
       "home_name": "Florida Panthers",
       "time_et": "7:00 PM ET",
-      "state": "PRE"
+      "start_time_et": "2026-11-02T19:00:00-05:00",
+      "state": "OFF"
     },
     {
       "game_id": 2026020234,
@@ -30,7 +32,8 @@
       "home_abbr": "CHI",
       "home_name": "Chicago Blackhawks",
       "time_et": "8:00 PM ET",
-      "state": "FUT"
+      "start_time_et": "2026-11-02T20:00:00-05:00",
+      "state": "LIVE"
     },
     {
       "game_id": 2026020235,
@@ -39,7 +42,8 @@
       "home_abbr": "SJS",
       "home_name": "San Jose Sharks",
       "time_et": "9:00 PM ET",
-      "state": "FUT"
+      "start_time_et": "2026-11-02T21:00:00-05:00",
+      "state": "LIVE"
     }
   ]
 }
