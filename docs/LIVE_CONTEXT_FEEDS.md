@@ -102,3 +102,8 @@ SportsDataIO currently documents:
 A SportsDataIO adapter can replace the current provider by writing the same normalized `live-context.json` contract. No frontend or model-interface rewrite should be necessary.
 
 Do not commit API keys. Any licensed provider credential must be stored as a GitHub/Cloudflare secret.
+
+
+## Refresh cadence
+
+Production live context uses a quarter-hour scheduler with a gate. Full provider pulls occur at the established daily checkpoints (5:15 AM, 10:30 AM, 2:30 PM, and 5:30 PM America/New_York) and once more for each game when it enters the approximately 15-minute pregame window. The pregame gate reads the actual `start_time_et` values from `public/data/today-games.json`, so staggered start times receive their own final pregame check. The scheduler does not perform a provider pull on quarter-hour ticks that match neither a fixed checkpoint nor a pregame window.
