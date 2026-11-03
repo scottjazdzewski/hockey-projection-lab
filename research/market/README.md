@@ -6,8 +6,9 @@ calibration. No market field is added to `public/data/game-projections.json`.
 
 ## Source decision
 
-PuckAPI is the preferred historical source. Its NHL odds archive starts in
-2019-20, carries NHL game IDs, and `get_game_detail` returns sportsbook odds
+PuckAPI is the preferred historical source. Its [NHL historical odds archive](https://puckapi.com/data/historical-odds)
+starts in 2019-20, carries NHL game IDs, and [`get_game_detail`](https://puckapi.com/docs/get-game-detail)
+returns sportsbook odds
 snapshots with captured timestamps. This supports a direct game-ID join and
 per-book latest-timestamp selection. The collector uses `get_game_detail` to
 request all sportsbook snapshots held for each game; it immediately excludes
@@ -27,6 +28,13 @@ Published historical coverage, last checked 2026-11-03:
 | 2025-26 | 1,394 | 100% | 8 books/game; 60+ books for about 300 games |
 | 2026-27 | 235 | 100% of completed games | Current partial season |
 
+The provider also lists 18 games from the 2019 playoffs. Its 2018-19 coverage
+is only 1%, so that season is excluded from the reliable historical window.
+Summing the published counts yields 9,392 games across the rows above, or an
+indicative 93,920 credits at the documented 10 credits per game-detail call;
+the actual canonical input count and source billing must be confirmed by the
+local dry run and provider response before a paid backfill.
+
 The provider says its sportsbook archive includes DraftKings, FanDuel,
 BetMGM, Pinnacle, ESPN BET, Bet365, Caesars and additional books, with
 availability varying by season and game. These are provider-published counts,
@@ -34,14 +42,15 @@ not a successful query or a verified Hockey Lab join. The benchmark report
 will replace these planning figures with observed per-game and per-book
 coverage after an authenticated backfill.
 
-The Odds API is the fallback/validation source. It documents NHL historical
-odds from June 6, 2020, with snapshots every ten minutes through September
-2022 and every five minutes afterward. Querying at scheduled start minus one
+The Odds API is the fallback/validation source. Its [historical odds docs](https://the-odds-api.com/historical-odds-data/)
+document NHL historical odds from June 6, 2020, with snapshots every ten
+minutes through September 2022 and every five minutes afterward. Querying at scheduled start minus one
 second returns the latest available snapshot at or before that time. Its
 events do not carry NHL game IDs, so matching must use exact date, both teams,
 and scheduled start; ambiguous rows remain unmatched.
 
-The published source pages were reviewed on 2026-11-03. No paid endpoint was
+The published source pages and [timing and rights terms](https://puckapi.com/docs/timing-and-rights)
+were reviewed on 2026-11-03. No paid endpoint was
 queried for this implementation. Exact fetched sportsbook/game coverage and
 exact join counts therefore remain unverified until an account key is
 available. PuckAPI lists 10 credits per game detail call and a 500-credit
