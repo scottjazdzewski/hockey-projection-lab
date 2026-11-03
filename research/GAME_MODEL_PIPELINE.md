@@ -10,7 +10,7 @@ This is the canonical research path for independent NHL pregame win probabilitie
 - Winner target: the verified goalie-box `W` decision, cross-checked against PBP home/away winner labels. Never use historical schedule score fields.
 - Canonical historical hockey features: the normalized SportsDataverse PBP team-game event dataset. Apply the documented release-to-season mapping in `DATA_AUTHORITY.md`.
 - Markets are comparison-only. They are not training labels or feature inputs for the independent model.
-- The current pregame-eligible comparison model is Team Strength 004. Goalie Rolling 003, Goalie Layer 001, and Schedule 006 use current-game actual starter identity from a postgame box and are not eligible pregame comparisons.
+- The current pregame-eligible comparison model is Team Strength 004. Schedule 007's B2B-only variant is the strongest current research candidate; it is not promoted. Goalie Rolling 003, Goalie Layer 001, and Schedule 006 use current-game actual starter identity from a postgame box and are not eligible pregame comparisons.
 
 ## Feature contract
 
@@ -33,14 +33,16 @@ At minimum report Brier score, log loss, accuracy, calibration intercept/slope, 
 
 ## Current benchmark
 
-Team Strength 004 combines dynamic Elo, lagged 20-game 5v5 SOG/xG share and non-empty-net scoring, rest, and online opponent-adjusted 5v5 SOG/xG. Its 2022–2026 rolling-origin result is 6,993 games, Brier 0.235382, log loss 0.662976, accuracy 59.47%. It is the current research candidate, not a promoted champion.
+Team Strength 004 combines dynamic Elo, lagged 20-game 5v5 SOG/xG share and non-empty-net scoring, rest, and online opponent-adjusted 5v5 SOG/xG. Its 2022–2026 rolling-origin result is 6,993 games, Brier 0.235382, log loss 0.662976, accuracy 59.47%. It is the no-goalie comparison baseline.
+
+Schedule 007 reuses Team Strength 004's fold-specific Elo/opponent-adjusted choices and adds strictly lagged schedule features. The B2B-only variant scored Brier 0.234726, log loss 0.661540, accuracy 59.92%; Brier improved in all five target seasons. Pooled calibration intercept/slope are -0.0174/0.9979, with decile reliability data saved. Schedule density added a smaller score gain, location-sequence features worsened Brier/log loss, and the full schedule bundle was weaker than B2B alone. Treat B2B as a research candidate only: source season 2026 and early 2026–27 shadow games were previously inspected, and no untouched final test remains.
 
 ## Canonical code and artifacts
 
 - `hwin_team_strength_004.py`: benchmark feature construction and nested rolling-origin research.
 - `hwin_schedule_007.py`: leakage-safe schedule increment study with no goalie inputs; it writes game-level OOF Parquet, fold metrics, reliability bins, and a JSON summary.
 - `.github/workflows/hwin-schedule-007-no-goalie.yml`: research run referencing the audited historical input artifact run IDs. It runs on the isolated research branch, not `main`. The source Actions artifacts currently expire after one day, so durable reruns need a Drive-to-runner handoff or a versioned rebuild from immutable source releases; the current workflow is not yet durable on its own.
-- Experiment registry: the existing Google Sheet `NHL Prediction Model — EXPERIMENT REGISTRY` is canonical for candidate status and decisions.
+- Experiment registry: the existing Google Sheet `NHL Prediction Model — EXPERIMENT REGISTRY` is canonical for candidate status and decisions; Schedule 007 variants are EXP-0010 through EXP-0013.
 - Canonical large-data/artifact warehouse: Google Drive `HOCKEY_PREDICTION_MODEL`; store versioned research results in `04_VALIDATION`, promoted models in `03_MODELS/GAME_MODEL`, and raw source releases immutably under `00_SOURCE_DATA`.
 - Reproducibility gap: lock exact Python dependency versions and record the manifest/source checksums for each run. Current experiment workflows install unpinned packages and some source artifacts have one-day retention.
 - Website exports: only small production JSON files in `public/data/`, after promotion. No model calculations or research database belong in the frontend.
