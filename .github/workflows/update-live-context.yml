@@ -3,7 +3,10 @@ name: Update Live NHL Context
 on:
   workflow_dispatch:
   schedule:
-    # Target local refreshes around 10:30 AM, 2:30 PM and 5:30 PM ET.
+    # Early context pass follows the 5:00 AM slate build.
+    - cron: '15 9 * * *'
+    - cron: '15 10 * * *'
+    # Target later local refreshes around 10:30 AM, 2:30 PM and 5:30 PM ET.
     # Paired UTC hours let the script run year-round through DST transitions.
     - cron: '30 14 * * *'
     - cron: '30 15 * * *'
@@ -38,7 +41,7 @@ jobs:
           from zoneinfo import ZoneInfo
           import os
           now=datetime.now(ZoneInfo("America/New_York"))
-          allowed_hours={10,14,17}
+          allowed_hours={5,10,14,17}
           run=now.hour in allowed_hours
           with open(os.environ["GITHUB_OUTPUT"],"a") as f:
               f.write(f"run={'true' if run else 'false'}\n")
