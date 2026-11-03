@@ -31,9 +31,18 @@
   function restSide(abbr,label,flags,severity){
     let displayLabel=String(label||'Rest unknown');
     displayLabel=displayLabel.replace(/^(\d+)d rest$/i,(_,n)=>n+' '+(Number(n)===1?'day':'days')+' rest');
+    let defaultLoad='Normal load';
+    const m=displayLabel.match(/^(\d+)\s+days?\s+rest$/i);
+    if(m){
+      const days=Number(m[1]);
+      if(days>=3) defaultLoad='Very light load';
+      else if(days===2) defaultLoad='Light load';
+    } else if(/^B2B$/i.test(displayLabel)){
+      defaultLoad='Heavy load';
+    }
     const tags=Array.isArray(flags)&&flags.length
       ? '<span class="gc-rest-flags">'+flags.map(x=>'<b>'+esc(x)+'</b>').join('')+'</span>'
-      : '<span class="gc-rest-flags gc-rest-flags-clear"><b>Normal load</b></span>';
+      : '<span class="gc-rest-flags gc-rest-flags-clear"><b>'+esc(defaultLoad)+'</b></span>';
     return '<span class="gc-rest-side '+restSeverityClass(severity)+'">'+
       '<strong>'+esc(abbr)+' · '+esc(displayLabel)+'</strong>'+
       tags+
