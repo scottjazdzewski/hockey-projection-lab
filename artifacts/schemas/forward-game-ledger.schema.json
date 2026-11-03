@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hockey-lab.local/schemas/forward-game-ledger.schema.json",
+  "title": "Hockey Lab Forward Game Ledger Record",
+  "type": "object",
+  "required": ["schema_version","game_id","game_date","start_time_et","matchup","frozen_at","forecast","result"],
+  "properties": {
+    "schema_version": {"const":"1.0"},
+    "game_id": {"type":["integer","string"]},
+    "game_date": {"type":"string"},
+    "start_time_et": {"type":"string"},
+    "matchup": {"type":"object"},
+    "frozen_at": {"type":"string"},
+    "minutes_before_start": {"type":"number"},
+    "forecast": {
+      "type":"object",
+      "required":["model","away","home","goalie_context","market_benchmark"]
+    },
+    "result": {
+      "type":"object",
+      "required":["status"],
+      "properties":{"status":{"enum":["OPEN","FINAL"]}}
+    },
+    "evaluation": {"type":["object","null"]}
+  }
+}
