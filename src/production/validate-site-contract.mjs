@@ -11,6 +11,7 @@ const required=[
   'public/data/fantasy-rankings.json',
   'public/data/production-manifest.json',
   'public/data/team-identities.json',
+  'public/data/live-context.json',
   'public/assets/production-data.js',
   'public/assets/game-cards.js',
   'public/assets/team-ratings.js',
