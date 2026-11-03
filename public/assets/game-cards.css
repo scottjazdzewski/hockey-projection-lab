@@ -7,7 +7,7 @@
   --gc-ink:#321653;
   --gc-line:rgba(240,198,64,.46);
   --gc-glass:rgba(255,250,240,.90);
-  --gc-tint:rgba(10,5,22,.46);
+  --gc-tint:rgba(10,5,22,.54);
 }
 
 .gc-page{
@@ -262,4 +262,12 @@
   .gc-content{padding-bottom:18px}
   .gc-page{background-color:#11091f}
   .gc-page footer{margin-bottom:0}
+}
+
+/* Section stacking: menu lives in hero, so hero must outrank cards below */
+.gc-hero{z-index:100}
+.gc-main{z-index:1}
+@media(max-width:700px){
+  .gc-header{z-index:1000}
+  .gc-page{background-position:64% top}
 }
