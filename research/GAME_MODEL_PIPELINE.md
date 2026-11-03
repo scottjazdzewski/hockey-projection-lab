@@ -1,6 +1,6 @@
 # Game Model Research Pipeline
 
-Last updated: 2026-11-03 (Score State 009)
+Last updated: 2026-11-03 (Shadow Ledger 010)
 
 This is the canonical research path for independent NHL pregame win probabilities. `HWIN` is an internal engineering label only; it is not a public model name. No production model is currently promoted.
 
@@ -41,25 +41,29 @@ Special Teams 008 tested lagged PP xG generation, PK xG allowed, penalty-event e
 
 Score State 009 tested lagged tied- and close-state 5v5 xG share on top of Team Strength 004 + B2B, across the same five chronological folds and 6,993 held-out games. Tied-state xG lowered Brier from 0.234726 to 0.234630 and log loss from 0.661540 to 0.661329; accuracy moved from 59.92% to 59.96%, and Brier improved in 4/5 seasons. The paired-game bootstrap 95% interval for ΔBrier was [-0.000223, +0.000029], crossing zero. Close-only worsened pooled Brier, and tied+close was weaker than tied-only. The same-day team-game order guard passed. Decision: **RESEARCH**, not candidate or promoted; do not recalibrate or publish this layer.
 
+Shadow Ledger 010 froze 11 pregame probabilities for the 2026-11-03 ET slate at 2026-11-03T10:33:32Z. The training fit uses completed seasons through source season 2026; parameter selection is restricted to source season 2026. The PBP input snapshot ends at game date 2026-11-01, so each row carries a two-day lag flag; schedule stubs preserve rest context while missing event performance remains missing. Actual goalie and lineup snapshots were unavailable. This is a candidate forward shadow batch only; outcomes are pending, metrics are not yet available, and no site export was created. The `today-games.json` file was dated 2026-11-02; the model used the canonical spine schedule.
+
 ## Canonical code and artifacts
 
 - `hwin_team_strength_004.py`: benchmark feature construction and nested rolling-origin research.
 - `hwin_schedule_007.py`: leakage-safe schedule increment study with no goalie inputs; it writes game-level OOF Parquet, fold metrics, reliability bins, and a JSON summary.
 - `hwin_special_teams_008.py`: leakage-safe incremental test of lagged PP/PK features; it writes game-level OOF Parquet, fold metrics, reliability bins, and a provenance manifest. Official PP opportunities are not available; penalty-event counts are labeled as a proxy.
 - `hwin_score_state_009.py`: tied/close 5v5 xG state-share ablation on the frozen Team Strength 004 + B2B comparison; writes per-game OOF Parquet, folds, reliability, subgroup diagnostics, and a checksum-bearing manifest.
-- `requirements-game-model.txt`: exact Python package pins used in Score State 009.
+- `hwin_shadow_score_010.py`: research-only current-slate scorer; refuses to overwrite nonempty run folders, checks prediction time against puck drop, and writes an immutable per-slate Parquet snapshot.
+- `SHADOW_LEDGER_PROTOCOL.md`: prediction freeze, data freshness, separate outcomes, and prospective-scoring rules.
+- `requirements-game-model.txt`: exact Python package pins used in the research runs.
 - `.github/workflows/hwin-schedule-007-no-goalie.yml`: research run referencing audited historical input artifact IDs.
 - `.github/workflows/hwin-special-teams-008-no-goalie.yml`: repeatable, pinned-dependency run on branch `codex/hwin-special-teams-008-no-goalie`; run 41571326250 succeeded and writes a checksum-bearing manifest. It references the same source Actions artifacts, which expire after one day; durable reruns still need a Drive-to-runner handoff or a versioned rebuild from immutable releases.
 - Experiment registry: the existing Google Sheet `NHL Prediction Model — EXPERIMENT REGISTRY` is canonical for candidate status and decisions; Schedule 007 variants are EXP-0010 through EXP-0013, Special Teams 008 is EXP-0014, and Score State 009 is EXP-0015.
 - Canonical large-data/artifact warehouse: Google Drive `HOCKEY_PREDICTION_MODEL`; store versioned research results in `04_VALIDATION`, promoted models in `03_MODELS/GAME_MODEL`, and raw source releases immutably under `00_SOURCE_DATA`.
-- Reproducibility: Score State 009 pins Python dependencies and records Drive input/output checksums; its frozen result bundle and manifest are in Drive `04_VALIDATION`. It ran locally from retained Drive source bundles. Earlier workflow artifacts still expire after one day, and an automated Drive-to-runner handoff remains open.
+- Reproducibility: Score State 009 and Shadow Ledger 010 pin dependencies and record input/output checksums. Their bundles and manifests are archived in Drive `04_VALIDATION`. Shadow Ledger 010 ran locally from the retained Drive source bundles. An automated Drive-to-runner handoff remains open.
 - Website exports: only small production JSON files in `public/data/`, after promotion. No model calculations or research database belong in the frontend.
 
 ## Next research priorities
 
-1. Retest tied-state xG with a predeclared 10/20/40 prior-game window set and a small fixed shrinkage option. Select only on each fold's validation season and report window-by-season stability plus team/season-clustered uncertainty.
-2. Test a few predeclared B2B interactions (home/away, team-strength difference, and density state) without expanding the search on the inspected 2026 target season.
-3. Freeze a prospective 2026–27 shadow ledger with prediction timestamp, input cutoff, model/feature version, goalie and lineup state, and immutable pregame probabilities; append outcomes only after final results.
+1. Score the first 2026–27 shadow batch after all 11 games are final. Append verified outcomes separately, then compute Brier, log loss, accuracy, calibration, and reliability without changing frozen probabilities.
+2. Retest tied-state xG with a predeclared 10/20/40 prior-game window set and one fixed shrinkage option. Select only on each fold's validation season and report season stability plus team/season-clustered uncertainty.
+3. Test a few predeclared B2B interactions (home/away, team-strength difference, and density state) without expanding the search on the inspected 2026 target season.
 4. Investigate trusted free pregame goalie/lineup sources and timestamped availability before building those layers.
 5. Revisit PP/PK only if a free, legally reusable source supplies a defensible opportunity denominator or time-on-advantage.
 
