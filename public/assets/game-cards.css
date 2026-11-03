@@ -355,24 +355,66 @@
 }
 
 /* Context-state color system */
-.gc-goalie{
+.gc-goalie-strip{
   grid-column:1/-1;
-  border-width:1px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  min-height:38px;
+  overflow:hidden;
+  border:1px solid #bbb6b8;
+  border-radius:999px;
+  background:#e5e3e1;
+}
+.gc-goalie-side{
+  min-width:0;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:5px;
+  padding:7px 10px;
+  border-right:1px solid rgba(75,43,103,.16);
+  text-transform:uppercase;
+}
+.gc-goalie-side:last-child{border-right:0}
+.gc-goalie-side strong{
+  font-size:6.4px;
+  letter-spacing:.05em;
+  opacity:.72;
+}
+.gc-goalie-side span{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  text-align:center;
+  font-size:6.7px;
+  font-weight:900;
+}
+.gc-goalie-side b{
+  font-size:5.8px;
+  letter-spacing:.035em;
 }
 .gc-goalie-projected{
   background:#e5e3e1;
-  border-color:#bbb6b8;
   color:#514b50;
 }
 .gc-goalie-confirmed{
   background:#dcefe1;
-  border-color:#78ad86;
   color:#225d35;
 }
 .gc-goalie-unknown{
   background:#eee9df;
-  border-color:#c9bea5;
   color:#766d71;
+}
+.gc-goalie-strip-unknown{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#766d71;
+  font-size:6.7px;
+  font-weight:800;
+  letter-spacing:.035em;
+  text-transform:uppercase;
 }
 
 .gc-rest-strip{
@@ -461,10 +503,25 @@
 }
 
 @media(max-width:700px){
-  .gc-goalie{
-    padding:10px 12px;
-    font-size:9.5px;
+  .gc-goalie-strip{
+    min-height:44px;
+    border-radius:16px;
   }
+  .gc-goalie-side{
+    grid-template-columns:1fr;
+    justify-items:center;
+    gap:2px;
+    padding:7px 7px 8px;
+    text-align:center;
+  }
+  .gc-goalie-side strong{font-size:7px}
+  .gc-goalie-side span{
+    width:100%;
+    white-space:normal;
+    font-size:8.8px;
+    line-height:1.1;
+  }
+  .gc-goalie-side b{font-size:6.8px}
   .gc-rest-side{
     min-height:56px;
     gap:5px;
