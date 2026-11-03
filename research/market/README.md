@@ -29,9 +29,12 @@ Published historical coverage, last checked 2026-11-03:
 | 2026-27 | 235 | 100% of completed games | Current partial season |
 
 The provider also lists 18 games from the 2019 playoffs. Its 2018-19 coverage
-is only 1%, so that season is excluded from the reliable historical window.
-Summing the published counts yields 9,392 games across the rows above, or an
-indicative 93,920 credits at the documented 10 credits per game-detail call;
+is only 1%, so that season is excluded from the default reliable historical
+window. Those 18 playoff games are also excluded from the default collector
+range until their exact supported IDs are known; querying the entire partial
+season would spend credits on mostly unsupported games. Summing the table rows
+yields 9,392 games, or an indicative 93,920 credits at the documented 10
+credits per game-detail call. This estimate excludes those 18 playoff games;
 the actual canonical input count and source billing must be confirmed by the
 local dry run and provider response before a paid backfill.
 
