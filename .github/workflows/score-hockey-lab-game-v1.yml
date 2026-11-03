@@ -15,7 +15,7 @@ on:
 
 permissions:
   contents: write
-  actions: read
+  actions: write
 
 concurrency:
   group: hockey-lab-production-data
@@ -84,3 +84,7 @@ jobs:
             git pull --rebase origin main
             git push
           fi
+
+      - name: Trigger final forward snapshot after confirmed-goalie rescore
+        if: github.event_name == 'workflow_dispatch' && inputs.reason == 'confirmed-goalie-change'
+        run: gh workflow run update-forward-ledger.yml
