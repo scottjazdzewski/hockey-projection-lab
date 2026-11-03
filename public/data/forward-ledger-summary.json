@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03T13:43:03.515622-05:00",
+  "generated_at": "2026-11-03T14:00:56.030543-05:00",
   "sample": {
     "games_frozen": 0,
     "games_settled": 0,
@@ -17,5 +17,19 @@
     "total_goals_mae": null
   },
   "by_model": {},
+  "by_pick_side": {
+    "away": {
+      "games": 0,
+      "accuracy": null,
+      "brier": null,
+      "log_loss": null
+    },
+    "home": {
+      "games": 0,
+      "accuracy": null,
+      "brier": null,
+      "log_loss": null
+    }
+  },
   "games": []
 }
