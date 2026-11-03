@@ -274,7 +274,8 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
             if gap<=1:
                 return "B2B"
             days_off=max(0,gap-1)
-            return f"{days_off}d rest"
+            unit="day" if days_off==1 else "days"
+            return f"{days_off} {unit} rest"
 
         def load_flags(prefix):
             out=[]
