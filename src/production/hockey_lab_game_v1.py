@@ -261,6 +261,15 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
     if len(today)!=len(today_games): raise RuntimeError(f"Today's feature rows {len(today)} != schedule games {len(today_games)}")
     probs=model.predict_proba(today[features])[:,1]
     pmap={str(int(gid)):float(p) for gid,p in zip(today["_game_id_int"],probs)}
+    restmap={}
+    for r in today.itertuples(index=False):
+        gid=str(int(r._game_id_int))
+        away_rest=getattr(r,"a_sched_rest_days",np.nan)
+        home_rest=getattr(r,"h_sched_rest_days",np.nan)
+        restmap[gid]={
+            "away": None if pd.isna(away_rest) else f"{int(round(float(away_rest)))}d",
+            "home": None if pd.isna(home_rest) else f"{int(round(float(home_rest)))}d"
+        }
 
     now=pd.Timestamp.now(tz="America/New_York")
     cutoff_ts=pd.Timestamp(cutoff+" 23:59:59",tz="America/New_York")
@@ -276,7 +285,7 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
             "overtime_probability":None,
             "goalie_state":{"status":"UNKNOWN","away":None,"home":None,"updated_at":None},
             "lineup_state":{"status":"UNKNOWN","away":None,"home":None,"updated_at":None},
-            "rest_state":{"status":"CONFIRMED","away":None,"home":None,"updated_at":now.isoformat()},
+            "rest_state":{"status":"CONFIRMED","away":restmap.get(gid,{}).get("away"),"home":restmap.get(gid,{}).get("home"),"updated_at":now.isoformat()},
             "flags":[f"source_data_through_{cutoff}","no_goalie_layer","b2b_context"]
         })
 
