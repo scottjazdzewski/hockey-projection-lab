@@ -1,0 +1,4171 @@
+Warning: truncated output (original token count: 76013)
+Total output lines: 7843
+
+{
+  "model_version": "HOCKEY-LAB-GOALS-TEAM-FORM-60-009-RESEARCH",
+  "feature_version": "pregame-goals-process-team-form-60-league-environment-20-009",
+  "source_version": "sportsdataverse-pbp-features-20261102+canonical-spine-v3-20261102",
+  "retrieval_date": "2026-11-03",
+  "validation_design": "rolling origin; train<=S-2; tune on S-1; test S; regular season",
+  "target_seasons": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "target_season_games": {
+    "2022": 1312,
+    "2023": 1312,
+    "2024": 1312,
+    "2025": 1312,
+    "2026": 1312
+  },
+  "regulation_target_validation": {
+    "regulation_tie_matches_went_ot_for_2022_2026_regular": true,
+    "canonical_winner_crosscheck": "pass",
+    "shootout_handling": "PBP regulation tie retained; add one official final goal to shootout winner",
+    "historical_rows_excluded_for_label_quality": 605,
+    "rows_excluded_by_source_season": {
+      "2010": 141,
+      "2011": 149,
+      "2012": 181,
+      "2013": 97,
+      "2014": 29,
+      "2017": 1,
+      "2018": 2,
+      "2019": 2,
+      "2020": 3
+    },
+    "rows_excluded_from_2016_onward": 8
+  },
+  "features": {
+    "home_ice_only": [
+      "is_home"
+    ],
+    "team_goal_form": [
+      "is_home",
+      "team_r_reg_gf",
+      "opp_r_reg_ga",
+      "rest_days",
+      "b2b"
+    ],
+    "goal_form_plus_xg": [
+      "is_home",
+      "team_r_reg_gf",
+      "opp_r_reg_ga",
+      "team_r_fivev5_xg",
+      "opp_r_fivev5_xg_against",
+      "team_r_pp_xg",
+      "opp_r_pp_xg_against",
+      "rest_days",
+      "b2b",
+      "games_prior_3_days",
+      "games_prior_5_days"
+    ],
+    "fivev5_xg_pace": [
+      "is_home",
+      "team_r_fivev5_xg",
+      "opp_r_fivev5_xg_against",
+      "team_r_fivev5_xg_against",
+      "opp_r_fivev5_xg",
+      "team_r_fivev5_sog",
+      "opp_r_fivev5_sog_against",
+      "rest_days",
+      "b2b",
+      "games_prior_3_days",
+      "games_prior_5_days"
+    ],
+    "process_without_recent_goals": [
+      "is_home",
+      "team_r_reg_ga",
+      "opp_r_reg_gf",
+      "team_r_fivev5_xg",
+      "opp_r_fivev5_xg_against",
+      "team_r_fivev5_xg_against",
+      "opp_r_fivev5_xg",
+      "team_r_fivev5_sog",
+      "opp_r_fivev5_sog_against",
+      "team_r_pp_xg",
+      "opp_r_pp_xg_against",
+      "opp_r_pp_goals_against",
+      "team_r_penalties",
+      "opp_r_penalties",
+      "rest_days",
+      "b2b",
+      "games_prior_3_days",
+      "games_prior_5_days",
+      "oa_xg_attack_rel",
+      "oa_xg_defense_rel",
+      "oa_sog_attack_rel",
+      "oa_sog_defense_rel"
+    ],
+    "hockey_process": [
+      "is_home",
+      "team_r_reg_gf",
+      "opp_r_reg_ga",
+      "team_r_reg_ga",
+      "opp_r_reg_gf",
+      "team_r_fivev5_xg",
+      "opp_r_fivev5_xg_against",
+      "team_r_fivev5_xg_against",
+      "opp_r_fivev5_xg",
+      "team_r_fivev5_sog",
+      "opp_r_fivev5_sog_against",
+      "team_r_pp_xg",
+      "opp_r_pp_xg_against",
+      "team_r_pp_goals",
+      "opp_r_pp_goals_against",
+      "team_r_penalties",
+      "opp_r_penalties",
+      "rest_days",
+      "b2b",
+      "games_prior_3_days",
+      "games_prior_5_days",
+      "oa_xg_attack_rel",
+      "oa_xg_defense_rel",
+      "oa_sog_attack_rel",
+      "oa_sog_defense_rel"
+    ],
+    "hockey_process_plus_league_scoring": [
+      "is_home",
+      "team_r_reg_gf",
+      "opp_r_reg_ga",
+      "team_r_reg_ga",
+      "opp_r_reg_gf",
+      "team_r_fivev5_xg",
+      "opp_r_fivev5_xg_against",
+      "team_r_fivev5_xg_against",
+      "opp_r_fivev5_xg",
+      "team_r_fivev5_sog",
+      "opp_r_fivev5_sog_against",
+      "team_r_pp_xg",
+      "opp_r_pp_xg_against",
+      "team_r_pp_goals",
+      "opp_r_pp_goals_against",
+      "team_r_penalties",
+      "opp_r_penalties",
+      "rest_days",
+      "b2b",
+      "games_prior_3_days",
+      "games_prior_5_days",
+      "oa_xg_attack_rel",
+      "oa_xg_defense_rel",
+      "oa_sog_attack_rel",
+      "oa_sog_defense_rel",
+      "league_r_reg_gf"
+    ]
+  },
+  "team_form_window": "previous 60 unique team-game dates; shifted one full date; minimum 8 dates",
+  "league_scoring_environment": "mean regulation goals per team-game across the prior 20 unique game dates; shifted one full date; minimum 8 dates",
+  "distribution_families": [
+    "independent_poisson",
+    "independent_negative_binomial",
+    "bivariate_poisson",
+    "dixon_coles",
+    "diagonal_inflated_poisson"
+  ],
+  "goalie_lineup_status": "excluded: no timestamped pregame starter/lineup snapshot in current historical warehouse",
+  "win_probability_or_market_inputs": "none",
+  "overtime_winner_method": "empirical home OT win rate from training games with symmetric Beta(10,10) prior",
+  "distribution_selection": {
+    "2022": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.45,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.7895055752942297,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.791830790915723,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.7895055752942297,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.7884450474664977,
+          "parameter": -0.075
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.779538419349896,
+          "parameter": 1.45
+        }
+      }
+    },
+    "2023": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.45,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.8494930633484055,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.852763685692803,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.8494930633484055,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8476703323430805,
+          "parameter": -0.15
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.837950709055004,
+          "parameter": 1.45
+        }
+      }
+    },
+    "2024": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.6,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.8209558465463003,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.8272032384464603,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.8209558465463003,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8166680206054897,
+          "parameter": -0.15
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.8029224541832343,
+          "parameter": 1.6
+        }
+      }
+    },
+    "2025": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.3,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.85540490255167,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.857858738765514,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.85540490255167,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8545335296518206,
+          "parameter": -0.1
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.8479993844261053,
+          "parameter": 1.3
+        }
+      }
+    },
+    "2026": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.3,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.8561647959587892,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.857203657981127,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.8561647959587892,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8532681980405252,
+          "parameter": -0.15
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.8507735639143448,
+          "parameter": 1.3
+        }
+      }
+    }
+  },
+  "models": {
+    "fivev5_xg_pace_independent_poisson": {
+      "pooled": {
+        "games": 6560,
+        "reg_home_goals": {
+          "mae": 1.399772059560125,
+          "rmse": 1.7576961105993825,
+          "mean_error_pred_minus_actual": -0.18262336158957956,
+          "calibration_intercept": -0.3483765034738085,
+          "calibration_slope": 1.1810855058340517
+        },
+        "reg_away_goals": {
+          "mae": 1.369325162153715,
+          "rmse": 1.7092198592123804,
+          "mean_error_pred_minus_actual": -0.2246730797451596,
+          "calibration_intercept": -0.28389375924259846,
+          "calibration_slope": 1.1897816156739094
+        },
+        "final_home_goals": {
+          "mae": 1.4044861195675222,
+          "rmse": 1.757260448178879,
+          "mean_error_pred_minus_actual": -0.21360110956256032,
+          "calibration_intercept": -0.42262538945678174,
+          "calibration_slope": 1.210813865229768
+        },
+        "final_away_goals": {
+          "mae": 1.3869174150539232,
+          "rmse": 1.7249508746341287,
+          "mean_error_pred_minus_actual": -0.2465120295449288,
+          "calibration_intercept": -0.37295991821147156,
+          "calibration_slope": 1.224145760138404
+        },
+        "reg_total_goals": {
+          "mae": 1.8819351673759346,
+          "rmse": 2.3771363329881057,
+          "mean_error_pred_minus_actual": -0.40729644133473913,
+          "calibration_intercept": 3.2329824313013296,
+          "calibration_slope": 0.4964978419731133
+        },
+        "final_total_goals": {
+          "mae": 1.875279108632632,
+          "rmse": 2.3561470484238507,
+          "mean_error_pred_minus_actual": -0.4601131391074892,
+          "calibration_intercept": 3.460567675222807,
+          "calibration_slope": 0.48103882773779527
+        },
+        "reg_score_logloss": 3.8720259297875064,
+        "final_score_logloss": 3.730404814410376,
+        "final_total_logloss": 2.1978653715089354,
+        "reg_outcome_multiclass_logloss": 1.0547486084096553,
+        "reg_outcome_multiclass_brier": 0.6340415270343845,
+        "reg_outcome_accuracy": 0.463109756097561,
+        "reg_home_win_calibration": {
+          "games_non_tied": 5101,
+          "brier": 0.23559973988995617,
+          "log_loss": 0.663625993615178,
+          "calibration": {
+            "intercept": -0.13609520732237798,
+            "slope": 1.5287892363028772,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "overtime_brier": 0.1756087575704322,
+        "overtime_logloss": 0.5387187008744385,
+        "overtime_predicted_rate": 0.1695918388126158,
+        "overtime_observed_rate": 0.22240853658536586,
+        "overtime_calibration": {
+          "intercept": 0.33693603817056833,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "regulation_tie_calibration": {
+          "intercept": 0.33693603817056833,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "full_game_home_win": {
+          "brier": 0.23945155107099797,
+          "log_loss": 0.6716762271969943,
+          "accuracy": 0.5810975609756097,
+          "calibration": {
+            "intercept": -0.11227653795638554,
+            "slope": 1.5740921168306077,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "final_total_over_4.5": {
+          "brier": 0.17063647551243302,
+          "observed_rate": 0.7923780487804878,
+          "predicted_rate": 0.7143476930300505
+        },
+        "final_total_over_5.5": {
+          "brier": 0.25131970458666664,
+          "observed_rate": 0.5716463414634146,
+          "predicted_rate": 0.4897079713691709
+        },
+        "final_total_over_6.5": {
+          "brier": 0.2551143962943908,
+          "observed_rate": 0.4617378048780488,
+          "predicted_rate": 0.3801588524020182
+        }
+      },
+      "season_metrics": {
+        "2022": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.427669857622711,
+            "rmse": 1.7949368101833865,
+            "mean_error_pred_minus_actual": -0.15089331366953407,
+            "calibration_intercept": -1.9477972244597457,
+            "calibration_slope": 1.6992032573861255
+          },
+          "reg_away_goals": {
+            "mae": 1.353127143536728,
+            "rmse": 1.6947722727368602,
+            "mean_error_pred_minus_actual": -0.19707898196618193,
+            "calibration_intercept": -1.3152568604627217,
+            "calibration_slope": 1.5558823970995188
+          },
+          "final_home_goals": {
+            "mae": 1.4230133349594367,
+            "rmse": 1.7902804276192896,
+            "mean_error_pred_minus_actual": -0.1823794781675711,
+            "calibration_intercept": -2.12196647540514,
+            "calibration_slope": 1.7467306436288694
+          },
+          "final_away_goals": {
+            "mae": 1.3618230741790518,
+            "rmse": 1.7014010094988092,
+            "mean_error_pred_minus_actual": -0.21757184066739463,
+            "calibration_intercept": -1.5346412751442635,
+            "calibration_slope": 1.624949033471149
+          },
+          "reg_total_goals": {
+            "mae": 1.9045875468591011,
+            "rmse": 2.4014699371082115,
+            "mean_error_pred_minus_actual": -0.34797229563571597,
+            "calibration_intercept": -0.9223235917267635,
+            "calibration_slope": 1.2219962713004011
+          },
+          "final_total_goals": {
+            "mae": 1.8843680898865354,
+            "rmse": 2.3646017014754808,
+            "mean_error_pred_minus_actual": -0.39995131883496576,
+            "calibration_intercept": -0.6144704403290351,
+            "calibration_slope": 1.1722370777635704
+          },
+          "reg_score_logloss": 3.8807664367935035,
+          "final_score_logloss": 3.7375278080036236,
+          "final_total_logloss": 2.203218437680559,
+          "reg_outcome_multiclass_logloss": 1.0441001780606765,
+          "reg_outcome_multiclass_brier": 0.6256943500481507,
+          "reg_outcome_accuracy": 0.49314024390243905,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1024,
+            "brier": 0.2304366137062165,
+            "log_loss": 0.6530724846612207,
+            "calibration": {
+              "intercept": -0.2677608707895671,
+              "slope": 1.9453556229556583,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.17377279825354974,
+          "overtime_logloss": 0.5343850680811871,
+          "overtime_predicted_rate": 0.1675331719227013,
+          "overtime_observed_rate": 0.21951219512195122,
+          "overtime_calibration": {
+            "intercept": 0.3347853269144059,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.3347853269144059,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23481538520610667,
+            "log_loss": 0.6623069797541948,
+            "accuracy": 0.6158536585365854,
+            "calibration": {
+              "intercept": -0.23441171285333146,
+              "slope": 2.1115714890264607,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.1655867789423633,
+            "observed_rate": 0.7987804878048781,
+            "predicted_rate": 0.7293477178202341
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24741836352034735,
+            "observed_rate": 0.5769817073170732,
+            "predicted_rate": 0.5084134843114957
+          },
+          "final_total_over_6.5": {
+            "brier": 0.25391099010091006,
+            "observed_rate": 0.4725609756097561,
+            "predicted_rate": 0.3978650274668368
+          }
+        },
+        "2023": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3994641068366829,
+            "rmse": 1.7260383458532464,
+            "mean_error_pred_minus_actual": -0.20507134125442342,
+            "calibration_intercept": 0.18492424154442239,
+            "calibration_slope": 1.0068462475463638
+          },
+          "reg_away_goals": {
+            "mae": 1.3757263143125325,
+            "rmse": 1.712772965729452,
+            "mean_error_pred_minus_actual": -0.3033271519301428,
+            "calibration_intercept": -0.686923032414719,
+            "calibration_slope": 1.3698250442863071
+          },
+          "final_home_goals": {
+            "mae": 1.4079209430234283,
+            "rmse": 1.7267658499275882,
+            "mean_error_pred_minus_actual": -0.24044407992605274,
+            "calibration_intercept": 0.2310298477689227,
+            "calibration_slope": 1.0031099978291422
+          },
+          "final_away_goals": {
+            "mae": 1.4006400722979877,
+            "rmse": 1.7377865062037143,
+            "mean_error_pred_minus_actual": -0.3294473880609335,
+            "calibration_intercept": -0.7919395634354004,
+            "calibration_slope": 1.406003057443377
+          },
+          "reg_total_goals": {
+            "mae": 1.8680307703407886,
+            "rmse": 2.3574691064919953,
+            "mean_error_pred_minus_actual": -0.5083984931845662,
+            "calibration_intercept": 3.7792628125417598,
+            "calibration_slope": 0.4180383860463866
+          },
+          "final_total_goals": {
+            "mae": 1.8685591383651763,
+            "rmse": 2.349868882269056,
+            "mean_error_pred_minus_actual": -0.5698914679869862,
+            "calibration_intercept": 4.195744872935344,
+            "calibration_slope": 0.37367606705830203
+          },
+          "reg_score_logloss": 3.866999657338906,
+          "final_score_logloss": 3.725622769780487,
+          "final_total_logloss": 2.192835455711316,
+          "reg_outcome_multiclass_logloss": 1.0570721040429507,
+          "reg_outcome_multiclass_brier": 0.6342274416836028,
+          "reg_outcome_accuracy": 0.4634146341463415,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1010,
+            "brier": 0.2327974376189359,
+            "log_loss": 0.6579835254339108,
+            "calibration": {
+              "intercept": -0.23816454113308336,
+              "slope": 1.559848786357563,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.1806028447603321,
+          "overtime_logloss": 0.5505451522988578,
+          "overtime_predicted_rate": 0.16868995202684817,
+          "overtime_observed_rate": 0.2301829268292683,
+          "overtime_calibration": {
+            "intercept": 0.3878248507430022,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.3878248507430022,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.2378677742572497,
+            "log_loss": 0.6684767174908364,
+            "accuracy": 0.5815548780487805,
+            "calibration": {
+              "intercept": -0.1728265704001908,
+              "slope": 1.5580484746880194,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.1621942582163503,
+            "observed_rate": 0.8117378048780488,
+            "predicted_rate": 0.7147943373839085
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2524640234979205,
+            "observed_rate": 0.5975609756097561,
+            "predicted_rate": 0.49090063735623946
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2616739668897835,
+            "observed_rate": 0.4878048780487805,
+            "predicted_rate": 0.38121998130357443
+          }
+        },
+        "2024": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3750891314961085,
+            "rmse": 1.744641358240995,
+            "mean_error_pred_minus_actual": -0.16438005197533515,
+            "calibration_intercept": -0.6183985363783059,
+            "calibration_slope": 1.2652846989098858
+          },
+          "reg_away_goals": {
+            "mae": 1.393301907232133,
+            "rmse": 1.743151017198719,
+            "mean_error_pred_minus_actual": -0.19570161088620677,
+            "calibration_intercept": -0.23897323682385924,
+            "calibration_slope": 1.1605447499697528
+          },
+          "final_home_goals": {
+            "mae": 1.3860188023984457,
+            "rmse": 1.7445706858110754,
+            "mean_error_pred_minus_actual": -0.19366820331617376,
+            "calibration_intercept": -0.7749750019920505,
+            "calibration_slope": 1.3190784480122217
+          },
+          "final_away_goals": {
+            "mae": 1.4107219155537836,
+            "rmse": 1.75693971405259,
+            "mean_error_pred_minus_actual": -0.2049967308993855,
+            "calibration_intercept": -0.23333722888357997,
+            "calibration_slope": 1.157041835062804
+          },
+          "reg_total_goals": {
+            "mae": 1.8726540758043841,
+            "rmse": 2.369777575430878,
+            "mean_error_pred_minus_actual": -0.36008166286154203,
+            "calibration_intercept": 5.063150579388644,
+            "calibration_slope": 0.1688063771660391
+          },
+          "final_total_goals": {
+            "mae": 1.8700931686052253,
+            "rmse": 2.34969791370477,
+            "mean_error_pred_minus_actual": -0.39866493421555926,
+            "calibration_intercept": 5.0898644816468375,
+            "calibration_slope": 0.1949126530571636
+          },
+          "reg_score_logloss": 3.881599837760491,
+          "final_score_logloss": 3.7456882376632152,
+          "final_total_logloss": 2.195917640593601,
+          "reg_outcome_multiclass_logloss": 1.0419177329320863,
+          "reg_outcome_multiclass_brier": 0.6269504161064705,
+          "reg_outcome_accuracy": 0.47865853658536583,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1040,
+            "brier": 0.23566279723416464,
+            "log_loss": 0.6637139664057684,
+            "calibration": {
+              "intercept": -0.11750744642683272,
+              "slope": 1.4874416015115852,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16593214002927767,
+          "overtime_logloss": 0.5158030034640991,
+          "overtime_predicted_rate": 0.16873380181671435,
+          "overtime_observed_rate": 0.2073170731707317,
+          "overtime_calibration": {
+            "intercept": 0.25351949993032813,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.25351949993032813,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23951984496168685,
+            "log_loss": 0.671775978172574,
+            "accuracy": 0.5891768292682927,
+            "calibration": {
+              "intercept": -0.065089959935744,
+              "slope": 1.4525425556417157,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.17148533197299706,
+            "observed_rate": 0.7888719512195121,
+            "predicted_rate": 0.7206499289497296
+          },
+          "final_total_over_5.5": {
+            "brier": 0.25067217663489055,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.49753708603198366
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2533973555396021,
+            "observed_rate": 0.4565548780487805,
+            "predicted_rate": 0.3875628541579325
+          }
+        },
+        "2025": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4102725808018486,
+            "rmse": 1.7691260383735279,
+            "mean_error_pred_minus_actual": -0.20353266841398765,
+            "calibration_intercept": 0.6557705461063753,
+            "calibration_slope": 0.8432800953675091
+          },
+          "reg_away_goals": {
+            "mae": 1.372827084307865,
+            "rmse": 1.6952169735973601,
+            "mean_error_pred_minus_actual": -0.13679891978734268,
+            "calibration_intercept": 0.05254244112839222,
+            "calibration_slope": 1.0318157632752771
+          },
+          "final_home_goals": {
+            "mae": 1.4073986321017222,
+            "rmse": 1.7653723479418,
+            "mean_error_pred_minus_actual": -0.22821411861841057,
+            "calibration_intercept": 0.43656878738179133,
+            "calibration_slope": 0.9298998585069664
+          },
+          "final_away_goals": {
+            "mae": 1.3925062011946843,
+            "rmse": 1.713456266530917,
+            "mean_error_pred_minus_actual": -0.14759410381357535,
+            "calibration_intercept": 0.03597527944041835,
+            "calibration_slope": 1.040845002753692
+          },
+          "reg_total_goals": {
+            "mae": 1.884396709592055,
+            "rmse": 2.3653953823530536,
+            "mean_error_pred_minus_actual": -0.3403315882013303,
+            "calibration_intercept": 2.3503019334934345,
+            "calibration_slope": 0.6367899515111121
+          },
+          "final_total_goals": {
+            "mae": 1.8767633862066933,
+            "rmse": 2.347669558233646,
+            "mean_error_pred_minus_actual": -0.37580822243198586,
+            "calibration_intercept": 2.3017450684211367,
+            "calibration_slope": 0.66241155268246
+          },
+          "reg_score_logloss": 3.8703632713277165,
+          "final_score_logloss": 3.7335788344518104,
+          "final_total_logloss": 2.208345205597907,
+          "reg_outcome_multiclass_logloss": 1.0417024406086695,
+          "reg_outcome_multiclass_brier": 0.6271562985719554,
+          "reg_outcome_accuracy": 0.4611280487804878,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1041,
+            "brier": 0.23655904055845728,
+            "log_loss": 0.6654670715952593,
+            "calibration": {
+              "intercept": 0.0474714723688597,
+              "slope": 1.302663320446982,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16517579239944863,
+          "overtime_logloss": 0.5136908388322479,
+          "overtime_predicted_rate": 0.1710782438181248,
+          "overtime_observed_rate": 0.20655487804878048,
+          "overtime_calibration": {
+            "intercept": 0.23224635489772438,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.23224635489772438,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.2392681892531716,
+            "log_loss": 0.6712521220497171,
+            "accuracy": 0.5777439024390244,
+            "calibration": {
+              "intercept": 0.028629738892583325,
+              "slope": 1.4260219871898674,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.18648732716803917,
+            "observed_rate": 0.7560975609756098,
+            "predicted_rate": 0.7038765133091126
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2515473024866869,
+            "observed_rate": 0.5373475609756098,
+            "predicted_rate": 0.4765155425527801
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24620116233395375,
+            "observed_rate": 0.42301829268292684,
+            "predicted_rate": 0.36761846877108373
+          }
+        },
+        "2026": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3863646210432747,
+            "rmse": 1.7529663869103884,
+            "mean_error_pred_minus_actual": -0.18923943263461745,
+            "calibration_intercept": -0.5210037226003092,
+            "calibration_slope": 1.2465366604341082
+          },
+          "reg_away_goals": {
+            "mae": 1.351643361379317,
+            "rmse": 1.6997006473862095,
+            "mean_error_pred_minus_actual": -0.2904587341559239,
+            "calibration_intercept": 1.356092473250535,
+            "calibration_slope": 0.597076527754957
+          },
+          "final_home_goals": {
+            "mae": 1.3980788853545776,
+            "rmse": 1.7586729937675882,
+            "mean_error_pred_minus_actual": -0.2232996677845934,
+            "calibration_intercept": -0.38137289631284244,
+            "calibration_slope": 1.2036775670145166
+          },
+          "final_away_goals": {
+            "mae": 1.3688958120441082,
+            "rmse": 1.714596374400892,
+            "mean_error_pred_minus_actual": -0.332950084283355,
+            "calibration_intercept": 1.1449607343071038,
+            "calibration_slope": 0.7024280621407999
+          },
+          "reg_total_goals": {
+            "mae": 1.8800067342833442,
+            "rmse": 2.39128129028975,
+            "mean_error_pred_minus_actual": -0.4796981667905412,
+            "calibration_intercept": 5.186875805249753,
+            "calibration_slope": 0.14812039428550822
+          },
+          "final_total_goals": {
+            "mae": 1.8766117600995307,
+            "rmse": 2.368815517970837,
+            "mean_error_pred_minus_actual": -0.5562497520679484,
+            "calibration_intercept": 5.3719242088698005,
+            "calibration_slope": 0.1547832014680385
+          },
+          "reg_score_logloss": 3.8604004457169148,
+          "final_score_logloss": 3.7096064221527443,
+          "final_total_logloss": 2.189010117961294,
+          "reg_outcome_multiclass_logloss": 1.0889505864038942,
+          "reg_outcome_multiclass_brier": 0.6561791287617433,
+          "reg_outcome_accuracy": 0.4192073170731707,
+          "reg_home_win_calibration": {
+            "games_non_tied": 986,
+            "brier": 0.2427530409771705,
+            "log_loss": 0.6783294745000192,
+            "calibration": {
+              "intercept": -0.11955900688625487,
+              "slope": 1.3100008435925803,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.19256021240955287,
+          "overtime_logloss": 0.5791694416958005,
+          "overtime_predicted_rate": 0.1719240244786904,
+          "overtime_observed_rate": 0.24847560975609756,
+          "overtime_calibration": {
+            "intercept": 0.46537046218109823,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.46537046218109823,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.2457865616767752,
+            "log_loss": 0.6845693385176491,
+            "accuracy": 0.5411585365853658,
+            "calibration": {
+              "intercept": -0.11484410245421982,
+              "slope": 1.2441262798586872,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16742868126241525,
+            "observed_rate": 0.8064024390243902,
+            "predicted_rate": 0.7030699676872683
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2544966567934879,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.47517310659335543
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2603885066077046,
+            "observed_rate": 0.46875,
+            "predicted_rate": 0.3665279303106638
+          }
+        }
+      }
+    },
+    "goal_form_plus_xg_independent_poisson": {
+      "pooled": {
+        "games": 6560,
+        "reg_home_goals": {
+          "mae": 1.401672218283091,
+          "rmse": 1.7462634198956768,
+          "mean_error_pred_minus_actual": -0.07281848823951464,
+          "calibration_intercept": 0.1836729186895492,
+          "calibration_slope": 0.9635601452563352
+        },
+        "reg_away_goals": {
+          "mae": 1.3546735988192287,
+          "rmse": 1.687646753829468,
+          "mean_error_pred_minus_actual": -0.12900450291351234,
+          "calibration_intercept": -0.2716603796044051,
+          "calibration_slope": 1.1443620882378531
+        },
+        "final_home_goals": {
+          "mae": 1.4022280303422903,
+          "rmse": 1.743326478613996,
+          "mean_error_pred_minus_actual": -0.10570569495487957,
+          "calibration_intercept": 0.12116342938066953,
+          "calibration_slope": 0.9950548687667303
+        },
+        "final_away_goals": {
+          "mae": 1.3715407171917022,
+          "rmse": 1.702729667697138,
+          "mean_error_pred_minus_actual": -0.15272528461775783,
+          "calibration_intercept": -0.31494429449925443,
+          "calibration_slope": 1.163664574562664
+        },
+        "reg_total_goals": {
+          "mae": 1.8611849770570135,
+          "rmse": 2.3458260163108093,
+          "mean_error_pred_minus_actual": -0.20182299115302701,
+          "calibration_intercept": 2.6316548899009637,
+          "calibration_slope": 0.5823263355395198
+        },
+        "final_total_goals": {
+          "mae": 1.855514139529841,
+          "rmse": 2.3201168502523255,
+          "mean_error_pred_minus_actual": -0.2584309795726374,
+          "calibration_intercept": 2.7538198180339486,
+          "calibration_slope": 0.5829436470189323
+        },
+        "reg_score_logloss": 3.8527385554616407,
+        "final_score_logloss": 3.7083254144230056,
+        "final_total_logloss": 2.1835293322590243,
+        "reg_outcome_multiclass_logloss": 1.051962054643456,
+        "reg_outcome_multiclass_brier": 0.6313624415923998,
+        "reg_outcome_accuracy": 0.4719512195121951,
+        "reg_home_win_calibration": {
+          "games_non_tied": 5101,
+          "brier": 0.23296797996492838,
+          "log_loss": 0.658081186128404,
+          "calibration": {
+            "intercept": -0.1287275246335262,
+            "slope": 1.4600350205949741,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "overtime_brier": 0.1760281741070352,
+        "overtime_logloss": 0.540243742076232,
+        "overtime_predicted_rate": 0.16580054816575537,
+        "overtime_observed_rate": 0.22240853658536586,
+        "overtime_calibration": {
+          "intercept": 0.3642086422649703,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "regulation_tie_calibration": {
+          "intercept": 0.3642086422649703,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "full_game_home_win": {
+          "brier": 0.2376416358562641,
+          "log_loss": 0.6679035439390376,
+          "accuracy": 0.5890243902439024,
+          "calibration": {
+            "intercept": -0.10482737769410566,
+            "slope": 1.4823227077167611,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "final_total_over_4.5": {
+          "brier": 0.16708378908233776,
+          "observed_rate": 0.7923780487804878,
+          "predicted_rate": 0.7390759776216448
+        },
+        "final_total_over_5.5": {
+          "brier": 0.24646394098505095,
+          "observed_rate": 0.5716463414634146,
+          "predicted_rate": 0.5229809892212994
+        },
+        "final_total_over_6.5": {
+          "brier": 0.24986086759813983,
+          "observed_rate": 0.4617378048780488,
+          "predicted_rate": 0.41286912406409565
+        }
+      },
+      "season_metrics": {
+        "2022": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4221867840852882,
+            "rmse": 1.7797228690542322,
+            "mean_error_pred_minus_actual": -0.08992159446751369,
+            "calibration_intercept": -1.0749252939261709,
+            "calibration_slope": 1.3803560028793285
+          },
+          "reg_away_goals": {
+            "mae": 1.3365547895578906,
+            "rmse": 1.6715615495133753,
+            "mean_error_pred_minus_actual": -0.14720889959746278,
+            "calibration_intercept": -1.1378119830965927,
+            "calibration_slope": 1.4638270815980234
+          },
+          "final_home_goals": {
+            "mae": 1.4130109169980751,
+            "rmse": 1.7724650263299597,
+            "mean_error_pred_minus_actual": -0.12264154886693104,
+            "calibration_intercept": -1.2663498247214706,
+            "calibration_slope": 1.4415592557448393
+          },
+          "final_away_goals": {
+            "mae": 1.3459455676362286,
+            "rmse": 1.6775202297816165,
+            "mean_error_pred_minus_actual": -0.16891797284533533,
+            "calibration_intercept": -1.2986270208066077,
+            "calibration_slope": 1.5144905721411803
+          },
+          "reg_total_goals": {
+            "mae": 1.8868823865296391,
+            "rmse": 2.3695990593336207,
+            "mean_error_pred_minus_actual": -0.2371304940649764,
+            "calibration_intercept": -0.29853505693799753,
+            "calibration_slope": 1.0918337623049226
+          },
+          "final_total_goals": {
+            "mae": 1.8646794516874934,
+            "rmse": 2.328773257271109,
+            "mean_error_pred_minus_actual": -0.2915595217122664,
+            "calibration_intercept": -0.4420997203857757,
+            "calibration_slope": 1.1223157909849106
+          },
+          "reg_score_logloss": 3.8587592769558015,
+          "final_score_logloss": 3.713641645270447,
+          "final_total_logloss": 2.189187803095317,
+          "reg_outcome_multiclass_logloss": 1.0368825341366041,
+          "reg_outcome_multiclass_brier": 0.6195547990715368,
+          "reg_outcome_accuracy": 0.5038109756097561,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1024,
+            "brier": 0.2250146263837667,
+            "log_loss": 0.641830344612544,
+            "calibration": {
+              "intercept": -0.2574936815842501,
+              "slope": 1.903693577488385,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.17419419790218324,
+          "overtime_logloss": 0.5359417773658381,
+          "overtime_predicted_rate": 0.16508316747466123,
+          "overtime_observed_rate": 0.21951219512195122,
+          "overtime_calibration": {
+            "intercept": 0.352568525511357,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.352568525511357,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23094614637586566,
+            "log_loss": 0.654361761163235,
+            "accuracy": 0.631859756097561,
+            "calibration": {
+              "intercept": -0.22491456394212522,
+              "slope": 2.013824955453558,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.1631984712119833,
+            "observed_rate": 0.7987804878048781,
+            "predicted_rate": 0.7415134864508928
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24442946631167053,
+            "observed_rate": 0.5769817073170732,
+            "predicted_rate": 0.5257892219052223
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2491129227567904,
+            "observed_rate": 0.4725609756097561,
+            "predicted_rate": 0.4152357597898609
+          }
+        },
+        "2023": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.401892815324467,
+            "rmse": 1.7070897435179038,
+            "mean_error_pred_minus_actual": 0.02969773600111244,
+            "calibration_intercept": 0.17243943454865118,
+            "calibration_slope": 0.9363861131819499
+          },
+          "reg_away_goals": {
+            "mae": 1.3558468984985983,
+            "rmse": 1.6761922339142703,
+            "mean_error_pred_minus_actual": -0.0900680786098807,
+            "calibration_intercept": -0.7979165432197118,
+            "calibration_slope": 1.30716789697954
+          },
+          "final_home_goals": {
+            "mae": 1.4024826940273771,
+            "rmse": 1.7023021690814992,
+            "mean_error_pred_minus_actual": -0.009300463443238018,
+            "calibration_intercept": 0.1879245638175383,
+            "calibration_slope": 0.9451775660285687
+          },
+          "final_away_goals": {
+            "mae": 1.378490859139303,
+            "rmse": 1.6982215053909904,
+            "mean_error_pred_minus_actual": -0.1198183415848946,
+            "calibration_intercept": -0.8976507119245803,
+            "calibration_slope": 1.3423925228275766
+          },
+          "reg_total_goals": {
+            "mae": 1.8286602569717267,
+            "rmse": 2.300323278282114,
+            "mean_error_pred_minus_actual": -0.060370342608768265,
+            "calibration_intercept": 3.1012527666454095,
+            "calibration_slope": 0.4989021714244149
+          },
+          "final_total_goals": {
+            "mae": 1.8251800849793436,
+            "rmse": 2.2810366203834174,
+            "mean_error_pred_minus_actual": -0.12911880502813264,
+            "calibration_intercept": 3.391040735319437,
+            "calibration_slope": 0.4764065283352234
+          },
+          "reg_score_logloss": 3.8345546230775764,
+          "final_score_logloss": 3.686216435005751,
+          "final_total_logloss": 2.165392946136982,
+          "reg_outcome_multiclass_logloss": 1.0569422491210014,
+          "reg_outcome_multiclass_brier": 0.6329095150256725,
+          "reg_outcome_accuracy": 0.4763719512195122,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1010,
+            "brier": 0.23071391782526515,
+            "log_loss": 0.6535903337358687,
+            "calibration": {
+              "intercept": -0.22519901413369114,
+              "slope": 1.4872576532075956,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.18150344259103526,
+          "overtime_logloss": 0.553797251351773,
+          "overtime_predicted_rate": 0.16143446440990383,
+          "overtime_observed_rate": 0.2301829268292683,
+          "overtime_calibration": {
+            "intercept": 0.4405639773066729,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.4405639773066729,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23585999229782895,
+            "log_loss": 0.6642627108007775,
+            "accuracy": 0.6013719512195121,
+            "calibration": {
+              "intercept": -0.1791269785400856,
+              "slope": 1.5361477361336555,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.15432035294829693,
+            "observed_rate": 0.8117378048780488,
+            "predicted_rate": 0.7689251947293493
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24095307194745993,
+            "observed_rate": 0.5975609756097561,
+            "predicted_rate": 0.5632062211247028
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2501105489542106,
+            "observed_rate": 0.4878048780487805,
+            "predicted_rate": 0.45262473248318263
+          }
+        },
+        "2024": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3820524989941683,
+            "rmse": 1.726445742885128,
+            "mean_error_pred_minus_actual": -0.02301350376086866,
+            "calibration_intercept": -0.31803796545801527,
+            "calibration_slope": 1.110298470371384
+          },
+          "reg_away_goals": {
+            "mae": 1.38200749388235,
+            "rmse": 1.724905233723476,
+            "mean_error_pred_minus_actual": -0.07829247589123646,
+            "calibration_intercept": -0.017888398424255016,
+            "calibration_slope": 1.034047427030228
+          },
+          "final_home_goals": {
+            "mae": 1.3866068291321811,
+            "rmse": 1.7234346048839662,
+            "mean_error_pred_minus_actual": -0.054980577938127224,
+            "calibration_intercept": -0.4367274289457727,
+            "calibration_slope": 1.154895976318868
+          },
+          "final_away_goals": {
+            "mae": 1.3963564419425112,
+            "rmse": 1.7383207303350345,
+            "mean_error_pred_minus_actual": -0.09022404110600814,
+            "calibration_intercept": -0.0045465838566510165,
+            "calibration_slope": 1.0326124456102523
+          },
+          "reg_total_goals": {
+            "mae": 1.851043654553329,
+            "rmse": 2.3341534023782184,
+            "mean_error_pred_minus_actual": -0.10130597965210511,
+            "calibration_intercept": 2.480362095096032,
+            "calibration_slope": 0.5979277570241526
+          },
+          "final_total_goals": {
+            "mae": 1.8533428756442087,
+            "rmse": 2.3107793279348434,
+            "mean_error_pred_minus_actual": -0.14520461904413537,
+            "calibration_intercept": 2.6104807034900963,
+            "calibration_slope": 0.5945539764410104
+          },
+          "reg_score_logloss": 3.860655758671401,
+          "final_score_logloss": 3.7217472507104556,
+          "final_total_logloss": 2.1805181266179114,
+          "reg_outcome_multiclass_logloss": 1.0371526458810185,
+          "reg_outcome_multiclass_brier": 0.6229715000720861,
+          "reg_outcome_accuracy": 0.4878048780487805,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1040,
+            "brier": 0.23234459515453496,
+            "log_loss": 0.6562768625546874,
+            "calibration": {
+              "intercept": -0.10455877983320612,
+              "slope": 1.3158638991247393,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16623061119131577,
+          "overtime_logloss": 0.5169331816608393,
+          "overtime_predicted_rate": 0.1634184337787013,
+          "overtime_observed_rate": 0.2073170731707317,
+          "overtime_calibration": {
+            "intercept": 0.29199694699921724,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.29199694699921724,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23658255257434493,
+            "log_loss": 0.6654878550122615,
+            "accuracy": 0.5983231707317073,
+            "calibration": {
+              "intercept": -0.05810217724876176,
+              "slope": 1.3223743274169104,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16736766562198765,
+            "observed_rate": 0.7888719512195121,
+            "predicted_rate": 0.7520354201760829
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24541920299864875,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.5396912432373866
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24824015407359376,
+            "observed_rate": 0.4565548780487805,
+            "predicted_rate": 0.4286938752703448
+          }
+        },
+        "2025": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4117583618036518,
+            "rmse": 1.7696466133061912,
+            "mean_error_pred_minus_actual": -0.19118642006899536,
+            "calibration_intercept": 1.091840001572544,
+            "calibration_slope": 0.689214436788837
+          },
+          "reg_away_goals": {
+            "mae": 1.3629129618699456,
+            "rmse": 1.6875069279423525,
+            "mean_error_pred_minus_actual": -0.12942554735811557,
+            "calibration_intercept": 0.035399912265412496,
+            "calibration_slope": 1.035406077992641
+          },
+          "final_home_goals": {
+            "mae": 1.406581583270504,
+            "rmse": 1.7646049723109523,
+            "mean_error_pred_minus_actual": -0.21615332423570222,
+            "calibration_intercept": 0.8926279171602874,
+            "calibration_slope": 0.7733224917608352
+          },
+          "final_away_goals": {
+            "mae": 1.3826116381559064,
+            "rmse": 1.7059471049823642,
+            "mean_error_pred_minus_actual": -0.14049919780630435,
+            "calibration_intercept": 0.02773132723767091,
+            "calibration_slope": 1.0411586181260613
+          },
+          "reg_total_goals": {
+            "mae": 1.8845512105900566,
+            "rmse": 2.3690218565758987,
+            "mean_error_pred_minus_actual": -0.3206119674271109,
+            "calibration_intercept": 3.5583974242321004,
+            "calibration_slope": 0.41699611180664153
+          },
+          "final_total_goals": {
+            "mae": 1.877349736902209,
+            "rmse": 2.350569572269992,
+            "mean_error_pred_minus_actual": -0.3566525220420066,
+            "calibration_intercept": 3.6002069615194587,
+            "calibration_slope": 0.4333551680579276
+          },
+          "reg_score_logloss": 3.8662375245726386,
+          "final_score_logloss": 3.728766308926755,
+          "final_total_logloss": 2.2101240930956334,
+          "reg_outcome_multiclass_logloss": 1.0394938755936458,
+          "reg_outcome_multiclass_brier": 0.625413976537525,
+          "reg_outcome_accuracy": 0.4679878048780488,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1041,
+            "brier": 0.23473297476221466,
+            "log_loss": 0.6617626459063903,
+            "calibration": {
+              "intercept": 0.03934596681822666,
+              "slope": 1.345503582577636,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16537788367873493,
+          "overtime_logloss": 0.5144215323096883,
+          "overtime_predicted_rate": 0.1705143234338849,
+          "overtime_observed_rate": 0.20655487804878048,
+          "overtime_calibration": {
+            "intercept": 0.23627202320022356,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.23627202320022356,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23787804529844106,
+            "log_loss": 0.6684074528135046,
+            "accuracy": 0.583079268292683,
+            "calibration": {
+              "intercept": 0.02385450236437597,
+              "slope": 1.4396547682445735,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.18705682375917976,
+            "observed_rate": 0.7560975609756098,
+            "predicted_rate": 0.7049566974221623
+          },
+          "final_total_over_5.5": {
+            "brier": 0.25233858024246325,
+            "observed_rate": 0.5373475609756098,
+            "predicted_rate": 0.4792488583751269
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24703862761241346,
+            "observed_rate": 0.42301829268292684,
+            "predicted_rate": 0.37072177941262796
+          }
+        },
+        "2026": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3904706312078796,
+            "rmse": 1.7473828247289769,
+            "mean_error_pred_minus_actual": -0.08966865890130789,
+            "calibration_intercept": 0.2143560151856267,
+            "calibration_slope": 0.958164968863732
+          },
+          "reg_away_goals": {
+            "mae": 1.3360458502873582,
+            "rmse": 1.677510570020219,
+            "mean_error_pred_minus_actual": -0.20002751311086628,
+            "calibration_intercept": 0.43584888691840296,
+            "calibration_slope": 0.9137823232869818
+          },
+          "final_home_goals": {
+            "mae": 1.4024581282833144,
+            "rmse": 1.752830158670498,
+            "mean_error_pred_minus_actual": -0.12545256029039936,
+            "calibration_intercept": 0.5040901836913697,
+            "calibration_slope": 0.8765293554371286
+          },
+          "final_away_goals": {
+            "mae": 1.3542990790845628,
+            "rmse": 1.693043625271004,
+            "mean_error_pred_minus_actual": -0.24416686974624663,
+            "calibration_intercept": 0.5455963298128491,
+            "calibration_slope": 0.89301796937634
+          },
+          "reg_total_goals": {
+            "mae": 1.8547873766403167,
+            "rmse": 2.3553078237533454,
+            "mean_error_pred_minus_actual": -0.2896961720121742,
+            "calibration_intercept": 3.1894679605134026,
+            "calibration_slope": 0.4926601049930346
+          },
+          "final_total_goals": {
+            "mae": 1.8570185484359505,
+            "rmse": 2.3288451280237643,
+            "mean_error_pred_minus_actual": -0.36961943003664594,
+            "calibration_intercept": 3.7511592604525865,
+            "calibration_slope": 0.42531785306003606
+          },
+          "reg_score_logloss": 3.843485594030787,
+          "final_score_logloss": 3.69125543220162,
+          "final_total_logloss": 2.1724236923492772,
+          "reg_outcome_multiclass_logloss": 1.0893389684850103,
+          "reg_outcome_multiclass_brier": 0.6559624172551788,
+          "reg_outcome_accuracy": 0.42378048780487804,
+          "reg_home_win_calibration": {
+            "games_non_tied": 986,
+            "brier": 0.24233085770022603,
+            "log_loss": 0.6775748164696642,
+            "calibration": {
+              "intercept": -0.10137456095486062,
+              "slope": 1.178757585189044,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.1928347351719069,
+          "overtime_logloss": 0.5801249676930217,
+          "overtime_predicted_rate": 0.16855235173162567,
+          "overtime_observed_rate": 0.24847560975609756,
+          "overtime_calibration": {
+            "intercept": 0.489297932811558,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.489297932811558,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.24694144273483998,
+            "log_loss": 0.6869979399054102,
+            "accuracy": 0.5304878048780488,
+            "calibration": {
+              "intercept": -0.06525760313531068,
+              "slope": 0.921138708883442,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16347563187024097,
+            "observed_rate": 0.8064024390243902,
+            "predicted_rate": 0.7279490893297366
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24917938342501228,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.5069694014640583
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2548020845936909,
+            "observed_rate": 0.46875,
+            "predicted_rate": 0.3970694733644622
+          }
+        }
+      }
+    },
+    "hockey_process_independent_poisson": {
+      "pooled": {
+        "games": 6560,
+        "reg_home_goals": {
+          "mae": 1.396622221648266,
+          "rmse": 1.7379934919915219,
+          "mean_error_pred_minus_actual": -0.03943831885486443,
+          "calibration_intercept": 0.3643832360739247,
+          "calibration_slope": 0.8943440602584704
+        },
+        "reg_away_goals": {
+          "mae": 1.348184020906383,
+          "rmse": 1.679137234553085,
+          "mean_error_pred_minus_actual": -0.09332974367823278,
+          "calibration_intercept": 0.039214901776382656,
+          "calibration_slope": 1.0192504768192419
+        },
+        "final_home_goals": {
+          "mae": 1.397132490235098,
+          "rmse": 1.7344304831029158,
+          "mean_error_pred_minus_actual": -0.07413645997148563,
+          "calibration_intercept": 0.3373583601321236,
+          "calibration_slope": 0.9166338238056695
+        },
+        "final_away_goals": {
+          "mae": 1.3635063607485605,
+          "rmse": 1.6930411431719543,
+          "mean_error_pred_minus_actual": -0.11882817099335563,
+          "calibration_intercept": 0.0014223874388888777,
+          "calibration_slope": 1.0406053755073517
+        },
+        "reg_total_goals": {
+          "mae": 1.8552930045661389,
+          "rmse": 2.338881008952077,
+          "mean_error_pred_minus_actual": -0.13276806253309723,
+          "calibration_intercept": 2.0939117283157525,
+          "calibration_slope": 0.6668456438168294
+        },
+        "final_total_goals": {
+          "mae": 1.8521480129261036,
+          "rmse": 2.3118104421343575,
+          "mean_error_pred_minus_actual": -0.19296463096484126,
+          "calibration_intercept": 2.197188869026817,
+          "calibration_slope": 0.6686577462008892
+        },
+        "reg_score_logloss": 3.8432057932679307,
+        "final_score_logloss": 3.697768635415515,
+        "final_total_logloss": 2.1801166867206985,
+        "reg_outcome_multiclass_logloss": 1.0474973235969636,
+        "reg_outcome_multiclass_brier": 0.6278833780380159,
+        "reg_outcome_accuracy": 0.4792682926829268,
+        "reg_home_win_calibration": {
+          "games_non_tied": 5101,
+          "brier": 0.2295581078535936,
+          "log_loss": 0.6506612087031436,
+          "calibration": {
+            "intercept": -0.05739462152841758,
+            "slope": 1.1334633882298655,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "overtime_brier": 0.17637848666253111,
+        "overtime_logloss": 0.5415487221343516,
+        "overtime_predicted_rate": 0.1622119681536217,
+        "overtime_observed_rate": 0.22240853658536586,
+        "overtime_calibration": {
+          "intercept": 0.39056683099682593,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "regulation_tie_calibration": {
+          "intercept": 0.39056683099682593,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "full_game_home_win": {
+          "brier": 0.23515675013288992,
+          "log_loss": 0.6625786887312153,
+          "accuracy": 0.5972560975609756,
+          "calibration": {
+            "intercept": -0.041302099384287035,
+            "slope": 1.1412069454803437,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "final_total_over_4.5": {
+          "brier": 0.16604749510155595,
+          "observed_rate": 0.7923780487804878,
+          "predicted_rate": 0.748019718019536
+        },
+        "final_total_over_5.5": {
+          "brier": 0.24516016580065578,
+          "observed_rate": 0.5716463414634146,
+          "predicted_rate": 0.5347343419105947
+        },
+        "final_total_over_6.5": {
+          "brier": 0.24878752344025504,
+          "observed_rate": 0.4617378048780488,
+          "predicted_rate": 0.42323073398335603
+        }
+      },
+      "season_metrics": {
+        "2022": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4118451905727516,
+            "rmse": 1.768404050983834,
+            "mean_error_pred_minus_actual": -0.0812629876025998,
+            "calibration_intercept": -0.2150452387100039,
+            "calibration_slope": 1.0964803784489445
+          },
+          "reg_away_goals": {
+            "mae": 1.3310322163003856,
+            "rmse": 1.6647307844898207,
+            "mean_error_pred_minus_actual": -0.1330556796958769,
+            "calibration_intercept": -0.1785634961164394,
+            "calibration_slope": 1.111906962101698
+          },
+          "final_home_goals": {
+            "mae": 1.4040393086553635,
+            "rmse": 1.7617081366409475,
+            "mean_error_pred_minus_actual": -0.11590328572610202,
+            "calibration_intercept": -0.2794384478152824,
+            "calibration_slope": 1.1254101837458403
+          },
+          "final_away_goals": {
+            "mae": 1.3412708954427923,
+            "rmse": 1.669349316603108,
+            "mean_error_pred_minus_actual": -0.15665774134412946,
+            "calibration_intercept": -0.27892343282553944,
+            "calibration_slope": 1.1520520994390409
+          },
+          "reg_total_goals": {
+            "mae": 1.8794288991017791,
+            "rmse": 2.3657415131977166,
+            "mean_error_pred_minus_actual": -0.21431866729847665,
+            "calibration_intercept": -1.4071250064111835,
+            "calibration_slope": 1.2768951747682238
+          },
+          "final_total_goals": {
+            "mae": 1.8602944435967876,
+            "rmse": 2.325461695054227,
+            "mean_error_pred_minus_actual": -0.27256102707023155,
+            "calibration_intercept": -1.6163173491664802,
+            "calibration_slope": 1.313919797681548
+          },
+          "reg_score_logloss": 3.8496704929576384,
+          "final_score_logloss": 3.7044195968977087,
+          "final_total_logloss": 2.1878185072361447,
+          "reg_outcome_multiclass_logloss": 1.0308678381240288,
+          "reg_outcome_multiclass_brier": 0.6151166522107201,
+          "reg_outcome_accuracy": 0.506859756097561,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1024,
+            "brier": 0.2208817067191743,
+            "log_loss": 0.6326113716137003,
+            "calibration": {
+              "intercept": -0.11811449816246372,
+              "slope": 1.2850592827389944,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.17449541470943947,
+          "overtime_logloss": 0.5371223773523603,
+          "overtime_predicted_rate": 0.1612698353501963,
+          "overtime_observed_rate": 0.21951219512195122,
+          "overtime_calibration": {
+            "intercept": 0.380798206957536,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.380798206957536,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.22797316198636902,
+            "log_loss": 0.6479494476752155,
+            "accuracy": 0.6379573170731707,
+            "calibration": {
+              "intercept": -0.08752541021352578,
+              "slope": 1.3192515861594505,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16278154552346058,
+            "observed_rate": 0.7987804878048781,
+            "predicted_rate": 0.7440643238274555
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24324314072257142,
+            "observed_rate": 0.5769817073170732,
+            "predicted_rate": 0.5297814145401349
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24832731293357793,
+            "observed_rate": 0.4725609756097561,
+            "predicted_rate": 0.41783881957907576
+          }
+        },
+        "2023": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4005416144379077,
+            "rmse": 1.7024399619772603,
+            "mean_error_pred_minus_actual": 0.05688008179646929,
+            "calibration_intercept": 0.5324729470564822,
+            "calibration_slope": 0.8160999215779403
+          },
+          "reg_away_goals": {
+            "mae": 1.3429991468511762,
+            "rmse": 1.6555152328878313,
+            "mean_error_pred_minus_actual": -0.06644947589925414,
+            "calibration_intercept": -0.5486128181775975,
+            "calibration_slope": 1.2110355851483345
+          },
+          "final_home_goals": {
+            "mae": 1.4007921356656012,
+            "rmse": 1.6974683062116713,
+            "mean_error_pred_minus_actual": 0.01580903279709941,
+            "calibration_intercept": 0.5836573524721362,
+            "calibration_slope": 0.8174217495608472
+          },
+          "final_away_goals": {
+            "mae": 1.363333200614006,
+            "rmse": 1.6761341884081185,
+            "mean_error_pred_minus_actual": -0.09827519907104444,
+            "calibration_intercept": -0.6276083725402763,
+            "calibration_slope": 1.2425118366553372
+          },
+          "reg_total_goals": {
+            "mae": 1.823910036641029,
+            "rmse": 2.295944946002243,
+            "mean_error_pred_minus_actual": -0.00956939410278486,
+            "calibration_intercept": 2.589459906028219,
+            "calibration_slope": 0.5783970157801657
+          },
+          "final_total_goals": {
+            "mae": 1.8232846348743221,
+            "rmse": 2.2755640386131533,
+            "mean_error_pred_minus_actual": -0.08246616627394504,
+            "calibration_intercept": 2.955340474146684,
+            "calibration_slope": 0.5422828626536034
+          },
+          "reg_score_logloss": 3.820981484234164,
+          "final_score_logloss": 3.671967916385083,
+          "final_total_logloss": 2.163637286318679,
+          "reg_outcome_multiclass_logloss": 1.0489329803534466,
+          "reg_outcome_multiclass_brier": 0.6264383357368235,
+          "reg_outcome_accuracy": 0.49314024390243905,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1010,
+            "brier": 0.22469954381986948,
+            "log_loss": 0.6412161816523521,
+            "calibration": {
+              "intercept": -0.16179505364373817,
+              "slope": 1.1652008968305823,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.18190830063033614,
+          "overtime_logloss": 0.5553138161241207,
+          "overtime_predicted_rate": 0.157286154658108,
+          "overtime_observed_rate": 0.2301829268292683,
+          "overtime_calibration": {
+            "intercept": 0.47185432806784366,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.47185432806784366,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.2318419515521313,
+            "log_loss": 0.6559012692651959,
+            "accuracy": 0.6150914634146342,
+            "calibration": {
+              "intercept": -0.11344460865544172,
+              "slope": 1.1677806031118567,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.1538494174584945,
+            "observed_rate": 0.8117378048780488,
+            "predicted_rate": 0.7749033717548748
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24037716532670325,
+            "observed_rate": 0.5975609756097561,
+            "predicted_rate": 0.5717756779871735
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24955737669776837,
+            "observed_rate": 0.4878048780487805,
+            "predicted_rate": 0.4598281040050041
+          }
+        },
+        "2024": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3740316929077134,
+            "rmse": 1.7217223070133827,
+            "mean_error_pred_minus_actual": -0.008847735113529934,
+            "calibration_intercept": 0.10146193322843136,
+            "calibration_slope": 0.9701845037879366
+          },
+          "reg_away_goals": {
+            "mae": 1.3779142686949428,
+            "rmse": 1.7219220827819433,
+            "mean_error_pred_minus_actual": -0.054184533449800336,
+            "calibration_intercept": 0.34454278358798146,
+            "calibration_slope": 0.898084749184292
+          },
+          "final_home_goals": {
+            "mae": 1.3784902230365672,
+            "rmse": 1.7174857900827707,
+            "mean_error_pred_minus_actual": -0.04229790283803521,
+            "calibration_intercept": 0.0053874042739416065,
+            "calibration_slope": 1.011581134630192
+          },
+          "final_away_goals": {
+            "mae": 1.3919956410345178,
+            "rmse": 1.734925520523484,
+            "mean_error_pred_minus_actual": -0.06757567592935712,
+            "calibration_intercept": 0.3619330234842168,
+            "calibration_slope": 0.8994891737041493
+          },
+          "reg_total_goals": {
+            "mae": 1.8500922120563184,
+            "rmse": 2.3357525737698084,
+            "mean_error_pred_minus_actual": -0.06303226856333033,
+            "calibration_intercept": 2.8023172347114627,
+            "calibration_slope": 0.5400226395572464
+          },
+          "final_total_goals": {
+            "mae": 1.8542277822588724,
+            "rmse": 2.3112306335048967,
+            "mean_error_pred_minus_actual": -0.10987357876739234,
+            "calibration_intercept": 2.8438497525022526,
+            "calibration_slope": 0.5529604131929082
+          },
+          "reg_score_logloss": 3.8554374890053777,
+          "final_score_logloss": 3.7155177811049853,
+          "final_total_logloss": 2.180781591071258,
+          "reg_outcome_multiclass_logloss": 1.034931787063861,
+          "reg_outcome_multiclass_brier": 0.6214478586082376,
+          "reg_outcome_accuracy": 0.48246951219512196,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1040,
+            "brier": 0.23047511854393765,
+            "log_loss": 0.6518941928359807,
+            "calibration": {
+              "intercept": -0.03725214493917087,
+              "slope": 1.0488731802503193,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16655685844857424,
+          "overtime_logloss": 0.5181863903036322,
+          "overtime_predicted_rate": 0.16047576296666957,
+          "overtime_observed_rate": 0.2073170731707317,
+          "overtime_calibration": {
+            "intercept": 0.31381246471386076,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.31381246471386076,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23511016447015348,
+            "log_loss": 0.6622059866810169,
+            "accuracy": 0.5952743902439024,
+            "calibration": {
+              "intercept": -0.003960916665588667,
+              "slope": 1.055902328825698,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16714801489140074,
+            "observed_rate": 0.7888719512195121,
+            "predicted_rate": 0.7568499822911801
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2452179300858447,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.5462600358404556
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24837084446762558,
+            "observed_rate": 0.4565548780487805,
+            "predicted_rate": 0.434155896336178
+          }
+        },
+        "2025": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4095822507507592,
+            "rmse": 1.7600468904825983,
+            "mean_error_pred_minus_actual": -0.11767201047695945,
+            "calibration_intercept": 1.0126761615486863,
+            "calibration_slope": 0.6988044086579085
+          },
+          "reg_away_goals": {
+            "mae": 1.3591089487110446,
+            "rmse": 1.6811137516474621,
+            "mean_error_pred_minus_actual": -0.053776126228116006,
+            "calibration_intercept": 0.177656315775417,
+            "calibration_slope": 0.9546439875813939
+          },
+          "final_home_goals": {
+            "mae": 1.403131570697025,
+            "rmse": 1.7540086846747365,
+            "mean_error_pred_minus_actual": -0.1446418540280346,
+            "calibration_intercept": 0.8628920859783421,
+            "calibration_slope": 0.7649562806928887
+          },
+          "final_away_goals": {
+            "mae": 1.3752734191709044,
+            "rmse": 1.6984992355624655,
+            "mean_error_pred_minus_actual": -0.06680368671944188,
+            "calibration_intercept": 0.15333645925039566,
+            "calibration_slope": 0.9692440738546841
+          },
+          "reg_total_goals": {
+            "mae": 1.87604408513945,
+            "rmse": 2.3487439794631557,
+            "mean_error_pred_minus_actual": -0.17144813670507544,
+            "calibration_intercept": 2.8744340125425962,
+            "calibration_slope": 0.5260239228315268
+          },
+          "final_total_goals": {
+            "mae": 1.872002076963547,
+            "rmse": 2.328586191446879,
+            "mean_error_pred_minus_actual": -0.2114455407474765,
+            "calibration_intercept": 2.892388090178991,
+            "calibration_slope": 0.5432298542771058
+          },
+          "reg_score_logloss": 3.856164656146669,
+          "final_score_logloss": 3.717024686722137,
+          "final_total_logloss": 2.2001537661900112,
+          "reg_outcome_multiclass_logloss": 1.0371691972045274,
+          "reg_outcome_multiclass_brier": 0.6234401659537213,
+          "reg_outcome_accuracy": 0.4801829268292683,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1041,
+            "brier": 0.23301605270946404,
+            "log_loss": 0.6579485611545888,
+            "calibration": {
+              "intercept": 0.09126245364058973,
+              "slope": 1.1047547332465042,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16556899308101955,
+          "overtime_logloss": 0.5151231208615954,
+          "overtime_predicted_rate": 0.16655747400637938,
+          "overtime_observed_rate": 0.20655487804878048,
+          "overtime_calibration": {
+            "intercept": 0.26455913518043456,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.26455913518043456,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.2362590986929195,
+            "log_loss": 0.664836490727094,
+            "accuracy": 0.5884146341463414,
+            "calibration": {
+              "intercept": 0.06898518698368901,
+              "slope": 1.196003610609762,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.18486565200147437,
+            "observed_rate": 0.7560975609756098,
+            "predicted_rate": 0.7254885817823138
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24939347802343592,
+            "observed_rate": 0.5373475609756098,
+            "predicted_rate": 0.5046980390529191
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24444418000497103,
+            "observed_rate": 0.42301829268292684,
+            "predicted_rate": 0.39422900281532114
+          }
+        },
+        "2026": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3871103595721967,
+            "rmse": 1.736507823243622,
+            "mean_error_pred_minus_actual": -0.04628894287770223,
+            "calibration_intercept": 0.16683139620938536,
+            "calibration_slope": 0.9601358762209593
+          },
+          "reg_away_goals": {
+            "mae": 1.3298655239743649,
+            "rmse": 1.6716132585053451,
+            "mean_error_pred_minus_actual": -0.15918290311811653,
+            "calibration_intercept": 0.7476477678133907,
+            "calibration_slope": 0.7880193094945819
+          },
+          "final_home_goals": {
+            "mae": 1.399209213120933,
+            "rmse": 1.740668661529928,
+            "mean_error_pred_minus_actual": -0.08364829006235576,
+            "calibration_intercept": 0.3252020365349087,
+            "calibration_slope": 0.9222906276504451
+          },
+          "final_away_goals": {
+            "mae": 1.3456586474805816,
+            "rmse": 1.685503601005119,
+            "mean_error_pred_minus_actual": -0.2048285519028052,
+            "calibration_intercept": 0.7986199066021628,
+            "calibration_slope": 0.7921560322292445
+          },
+          "reg_total_goals": {
+            "mae": 1.846989789892119,
+            "rmse": 2.347634426589125,
+            "mean_error_pred_minus_actual": -0.20547184599581877,
+            "calibration_intercept": 3.5365093127621314,…36013 tokens truncated…902532994,
+          "final_total_logloss": 2.2012545461090847,
+          "reg_outcome_multiclass_logloss": 1.0317299277178162,
+          "reg_outcome_multiclass_brier": 0.6212532274128303,
+          "reg_outcome_accuracy": 0.4801829268292683,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1041,
+            "brier": 0.23300468409091452,
+            "log_loss": 0.6579289814592425,
+            "calibration": {
+              "intercept": 0.0910009382263057,
+              "slope": 1.1076183272990356,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16400426657410533,
+          "overtime_logloss": 0.5096993867886459,
+          "overtime_predicted_rate": 0.20638335427429372,
+          "overtime_observed_rate": 0.20655487804878048,
+          "overtime_calibration": {
+            "intercept": 0.0010475448648305096,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.0010475448648305096,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23639890020381116,
+            "log_loss": 0.6651753513997531,
+            "accuracy": 0.5876524390243902,
+            "calibration": {
+              "intercept": 0.06175688267103394,
+              "slope": 1.260169116432221,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.18464942789055808,
+            "observed_rate": 0.7560975609756098,
+            "predicted_rate": 0.7286901876995214
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24934812443152662,
+            "observed_rate": 0.5373475609756098,
+            "predicted_rate": 0.5025939399603624
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24416290176706204,
+            "observed_rate": 0.42301829268292684,
+            "predicted_rate": 0.3973917851895806
+          }
+        },
+        "2026": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3866086542836362,
+            "rmse": 1.7374589883896354,
+            "mean_error_pred_minus_actual": -0.054525093182130425,
+            "calibration_intercept": 0.10856311138941098,
+            "calibration_slope": 0.9820804899490264
+          },
+          "reg_away_goals": {
+            "mae": 1.3294420664144624,
+            "rmse": 1.6713512339679606,
+            "mean_error_pred_minus_actual": -0.15705325975168646,
+            "calibration_intercept": 0.6714726876006537,
+            "calibration_slope": 0.8148344950722486
+          },
+          "final_home_goals": {
+            "mae": 1.399784519826851,
+            "rmse": 1.740796373709037,
+            "mean_error_pred_minus_actual": -0.07134709828418642,
+            "calibration_intercept": 0.24772243188767926,
+            "calibration_slope": 0.9434825968351752
+          },
+          "final_away_goals": {
+            "mae": 1.343304251877196,
+            "rmse": 1.6830465334766318,
+            "mean_error_pred_minus_actual": -0.18415952943474967,
+            "calibration_intercept": 0.7047218606890014,
+            "calibration_slope": 0.819097073502176
+          },
+          "reg_total_goals": {
+            "mae": 1.8480206636825618,
+            "rmse": 2.3493541923634917,
+            "mean_error_pred_minus_actual": -0.2115783529338169,
+            "calibration_intercept": 3.9411085121637286,
+            "calibration_slope": 0.3562846783333825
+          },
+          "final_total_goals": {
+            "mae": 1.8499907746464999,
+            "rmse": 2.3151519742231477,
+            "mean_error_pred_minus_actual": -0.2555066277189361,
+            "calibration_intercept": 4.526758714992475,
+            "calibration_slope": 0.2879234130933289
+          },
+          "reg_score_logloss": 3.81667460863521,
+          "final_score_logloss": 3.6830227763780994,
+          "final_total_logloss": 2.1642185012751365,
+          "reg_outcome_multiclass_logloss": 1.0689111867083285,
+          "reg_outcome_multiclass_brier": 0.6453005269860813,
+          "reg_outcome_accuracy": 0.4336890243902439,
+          "reg_home_win_calibration": {
+            "games_non_tied": 986,
+            "brier": 0.23892300603299915,
+            "log_loss": 0.6700740478366622,
+            "calibration": {
+              "intercept": -0.06823111371232454,
+              "slope": 1.0237112124159296,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.18835960815237462,
+          "overtime_logloss": 0.5653341964896175,
+          "overtime_predicted_rate": 0.20454733497097824,
+          "overtime_observed_rate": 0.24847560975609756,
+          "overtime_calibration": {
+            "intercept": 0.25148791637278545,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.25148791637278545,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.24450737944276013,
+            "log_loss": 0.6818247024774821,
+            "accuracy": 0.5464939024390244,
+            "calibration": {
+              "intercept": -0.06307865528666794,
+              "slope": 0.9273159541234895,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16078058062122344,
+            "observed_rate": 0.8064024390243902,
+            "predicted_rate": 0.7455764668260204
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24740729040535794,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.524031812221975
+          },
+          "final_total_over_6.5": {
+            "brier": 0.25250253784620164,
+            "observed_rate": 0.46875,
+            "predicted_rate": 0.41812562103237677
+          }
+        }
+      }
+    },
+    "home_ice_only_independent_poisson": {
+      "pooled": {
+        "games": 6560,
+        "reg_home_goals": {
+          "mae": 1.4020316519941283,
+          "rmse": 1.779567652919827,
+          "mean_error_pred_minus_actual": -0.15777886135450434,
+          "calibration_intercept": 5.981933878449919,
+          "calibration_slope": -0.9695094942427827
+        },
+        "reg_away_goals": {
+          "mae": 1.3882895756840423,
+          "rmse": 1.724513996912403,
+          "mean_error_pred_minus_actual": -0.16878022637231604,
+          "calibration_intercept": 4.63514700318855,
+          "calibration_slope": -0.632658519314221
+        },
+        "final_home_goals": {
+          "mae": 1.4064336704085993,
+          "rmse": 1.7791687882326281,
+          "mean_error_pred_minus_actual": -0.18822657786336006,
+          "calibration_intercept": 6.072895495203592,
+          "calibration_slope": -0.9336293481652072
+        },
+        "final_away_goals": {
+          "mae": 1.4002477080265694,
+          "rmse": 1.7404212278224234,
+          "mean_error_pred_minus_actual": -0.1900835330048181,
+          "calibration_intercept": 4.903647523556935,
+          "calibration_slope": -0.6713996122153314
+        },
+        "reg_total_goals": {
+          "mae": 1.8800755868309924,
+          "rmse": 2.3673807677620893,
+          "mean_error_pred_minus_actual": -0.32655908772682035,
+          "calibration_intercept": 10.537712766965669,
+          "calibration_slope": -0.7936959809557621
+        },
+        "final_total_goals": {
+          "mae": 1.8703875496980455,
+          "rmse": 2.3438906837695557,
+          "mean_error_pred_minus_actual": -0.37831011086817806,
+          "calibration_intercept": 10.82256374391287,
+          "calibration_slope": -0.7812446698156856
+        },
+        "reg_score_logloss": 3.8936621379991863,
+        "final_score_logloss": 3.7508974134819644,
+        "final_total_logloss": 2.1925624892454203,
+        "reg_outcome_multiclass_logloss": 1.0753816552912376,
+        "reg_outcome_multiclass_brier": 0.6504437239932263,
+        "reg_outcome_accuracy": 0.42057926829268294,
+        "reg_home_win_calibration": {
+          "games_non_tied": 5101,
+          "brier": 0.24847044304269478,
+          "log_loss": 0.6900866586233106,
+          "calibration": {
+            "intercept": -0.010705231468930826,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          }
+        },
+        "overtime_brier": 0.17562987036884609,
+        "overtime_logloss": 0.5387761605294223,
+        "overtime_predicted_rate": 0.17065751344400815,
+        "overtime_observed_rate": 0.22240853658536586,
+        "overtime_calibration": {
+          "intercept": 0.32929197917150893,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "regulation_tie_calibration": {
+          "intercept": 0.32929197917150893,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "full_game_home_win": {
+          "brier": 0.2487418753280597,
+          "log_loss": 0.6906298140167669,
+          "accuracy": 0.5371951219512195,
+          "calibration": {
+            "intercept": 0.0007613653118190392,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          }
+        },
+        "final_total_over_4.5": {
+          "brier": 0.16906323739355342,
+          "observed_rate": 0.7923780487804878,
+          "predicted_rate": 0.7267391250921378
+        },
+        "final_total_over_5.5": {
+          "brier": 0.24986572809980612,
+          "observed_rate": 0.5716463414634146,
+          "predicted_rate": 0.5037550872090392
+        },
+        "final_total_over_6.5": {
+          "brier": 0.25353658559210407,
+          "observed_rate": 0.4617378048780488,
+          "predicted_rate": 0.3940409006322733
+        }
+      },
+      "season_metrics": {
+        "2022": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4491266645748662,
+            "rmse": 1.8411788427722287,
+            "mean_error_pred_minus_actual": -0.22780847092295453,
+            "calibration_intercept": 0.329978640823578,
+            "calibration_slope": 0.9650656149442495
+          },
+          "reg_away_goals": {
+            "mae": 1.3857867459541113,
+            "rmse": 1.7338129969006633,
+            "mean_error_pred_minus_actual": -0.2689513492608835,
+            "calibration_intercept": 0.36399243763409606,
+            "calibration_slope": 0.9641182635575141
+          },
+          "final_home_goals": {
+            "mae": 1.434362448737832,
+            "rmse": 1.8383990498169853,
+            "mean_error_pred_minus_actual": -0.25694610013143465,
+            "calibration_intercept": 0.324615125597624,
+            "calibration_slope": 0.9775286491920971
+          },
+          "final_away_goals": {
+            "mae": 1.3974162617851649,
+            "rmse": 1.7429229359835248,
+            "mean_error_pred_minus_actual": -0.28712912759119186,
+            "calibration_intercept": 0.3564618941769136,
+            "calibration_slope": 0.9746425083095004
+          },
+          "reg_total_goals": {
+            "mae": 1.9391622328740805,
+            "rmse": 2.4362780612815644,
+            "mean_error_pred_minus_actual": -0.496759820183838,
+            "calibration_intercept": 0.1893223368651751,
+            "calibration_slope": 1.0551619428435541
+          },
+          "final_total_goals": {
+            "mae": 1.912650227468746,
+            "rmse": 2.401142139322673,
+            "mean_error_pred_minus_actual": -0.5440752277226264,
+            "calibration_intercept": 0.18492697747343975,
+            "calibration_slope": 1.0625088447157525
+          },
+          "reg_score_logloss": 3.9317339361857426,
+          "final_score_logloss": 3.7906787583106363,
+          "final_total_logloss": 2.218578170505864,
+          "reg_outcome_multiclass_logloss": 1.0726485354168072,
+          "reg_outcome_multiclass_brier": 0.6491807121501084,
+          "reg_outcome_accuracy": 0.42073170731707316,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1024,
+            "brier": 0.24872513591785445,
+            "log_loss": 0.6905993644701818,
+            "calibration": {
+              "intercept": -0.06394396037824665,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "overtime_brier": 0.1735653391052552,
+          "overtime_logloss": 0.5336441533912994,
+          "overtime_predicted_rate": 0.17219678758316337,
+          "overtime_observed_rate": 0.21951219512195122,
+          "overtime_calibration": {
+            "intercept": 0.30162619784185146,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.30162619784185146,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.24875144947107075,
+            "log_loss": 0.6906490238843485,
+            "accuracy": 0.5365853658536586,
+            "calibration": {
+              "intercept": -0.03819648209905984,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16847564757676692,
+            "observed_rate": 0.7987804878048781,
+            "predicted_rate": 0.7107723775553803
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2527917278322333,
+            "observed_rate": 0.5769817073170732,
+            "predicted_rate": 0.4836119526120034
+          },
+          "final_total_over_6.5": {
+            "brier": 0.25885007190159687,
+            "observed_rate": 0.4725609756097561,
+            "predicted_rate": 0.3745662208466301
+          }
+        },
+        "2023": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4044716950983251,
+            "rmse": 1.7517282623065789,
+            "mean_error_pred_minus_actual": -0.22194071067838853,
+            "calibration_intercept": 0.32923892496274576,
+            "calibration_slope": 0.9633284485962446
+          },
+          "reg_away_goals": {
+            "mae": 1.4091468613357163,
+            "rmse": 1.739417579210889,
+            "mean_error_pred_minus_actual": -0.2545752432284719,
+            "calibration_intercept": 0.3534818390451899,
+            "calibration_slope": 0.9637222386483224
+          },
+          "final_home_goals": {
+            "mae": 1.404685088671394,
+            "rmse": 1.7519677944428367,
+            "mean_error_pred_minus_actual": -0.25594217627589705,
+            "calibration_intercept": 0.3244924991032787,
+            "calibration_slope": 0.9772378174782579
+          },
+          "final_away_goals": {
+            "mae": 1.4282386446886308,
+            "rmse": 1.7646140677966826,
+            "mean_error_pred_minus_actual": -0.27932247924097037,
+            "calibration_intercept": 0.34703816739566246,
+            "calibration_slope": 0.9759202366771734
+          },
+          "reg_total_goals": {
+            "mae": 1.8673875567408986,
+            "rmse": 2.348316639754691,
+            "mean_error_pred_minus_actual": -0.4765159539068601,
+            "calibration_intercept": 0.18601218022223295,
+            "calibration_slope": 1.0513957202462316
+          },
+          "final_total_goals": {
+            "mae": 1.8644247810883594,
+            "rmse": 2.3380163929809035,
+            "mean_error_pred_minus_actual": -0.5352646555168669,
+            "calibration_intercept": 0.18212356106786456,
+            "calibration_slope": 1.0606383091445415
+          },
+          "reg_score_logloss": 3.897380029973193,
+          "final_score_logloss": 3.7549081040833747,
+          "final_total_logloss": 2.187386433043751,
+          "reg_outcome_multiclass_logloss": 1.0836984107209537,
+          "reg_outcome_multiclass_brier": 0.6555291710055607,
+          "reg_outcome_accuracy": 0.40396341463414637,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1010,
+            "brier": 0.24960327403810967,
+            "log_loss": 0.6923553211048953,
+            "calibration": {
+              "intercept": -0.059029806885265566,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "overtime_brier": 0.18065015696644154,
+          "overtime_logloss": 0.5507114638338009,
+          "overtime_predicted_rate": 0.171434225219262,
+          "overtime_observed_rate": 0.2301829268292683,
+          "overtime_calibration": {
+            "intercept": 0.36821796483236297,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.36821796483236297,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.24952277449403507,
+            "log_loss": 0.6921928879158457,
+            "accuracy": 0.5236280487804879,
+            "calibration": {
+              "intercept": -0.03612848896986307,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.1609541445095519,
+            "observed_rate": 0.8117378048780488,
+            "predicted_rate": 0.7215457680913328
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2505966504310731,
+            "observed_rate": 0.5975609756097561,
+            "predicted_rate": 0.4969886414765531
+          },
+          "final_total_over_6.5": {
+            "brier": 0.25990709727191375,
+            "observed_rate": 0.4878048780487805,
+            "predicted_rate": 0.3875261750689409
+          }
+        },
+        "2024": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3864721756711127,
+            "rmse": 1.7711735431951539,
+            "mean_error_pred_minus_actual": -0.1614433652627105,
+            "calibration_intercept": 0.3203496074022216,
+            "calibration_slope": 0.9462000086472897
+          },
+          "reg_away_goals": {
+            "mae": 1.4139470139868733,
+            "rmse": 1.7578516846737589,
+            "mean_error_pred_minus_actual": -0.13921947209144434,
+            "calibration_intercept": 0.33603440738640156,
+            "calibration_slope": 0.9287929685213642
+          },
+          "final_home_goals": {
+            "mae": 1.3927644279704277,
+            "rmse": 1.7723399301383642,
+            "mean_error_pred_minus_actual": -0.1898639245777875,
+            "calibration_intercept": 0.315406827935512,
+            "calibration_slope": 0.9586969708665205
+          },
+          "final_away_goals": {
+            "mae": 1.4228727620510477,
+            "rmse": 1.771124117329221,
+            "mean_error_pred_minus_actual": -0.14766075682345708,
+            "calibration_intercept": 0.32874169199840325,
+            "calibration_slope": 0.9364300023851864
+          },
+          "reg_total_goals": {
+            "mae": 1.8660175835747306,
+            "rmse": 2.3552877940260126,
+            "mean_error_pred_minus_actual": -0.3006628373541548,
+            "calibration_intercept": 0.1786305153405838,
+            "calibration_slope": 1.0213431658413543
+          },
+          "final_total_goals": {
+            "mae": 1.8593655988249294,
+            "rmse": 2.334570253913947,
+            "mean_error_pred_minus_actual": -0.33752468140124403,
+            "calibration_intercept": 0.1745357169061156,
+            "calibration_slope": 1.027681149716323
+          },
+          "reg_score_logloss": 3.906227650873733,
+          "final_score_logloss": 3.769787667745968,
+          "final_total_logloss": 2.1894180339219393,
+          "reg_outcome_multiclass_logloss": 1.0620383947773369,
+          "reg_outcome_multiclass_brier": 0.6430260395376272,
+          "reg_outcome_accuracy": 0.4268292682926829,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1040,
+            "brier": 0.24852218129422946,
+            "log_loss": 0.6901886352717326,
+            "calibration": {
+              "intercept": 0.004879752457558646,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "overtime_brier": 0.16569549988920523,
+          "overtime_logloss": 0.5149376473058412,
+          "overtime_predicted_rate": 0.17045522912364108,
+          "overtime_observed_rate": 0.2073170731707317,
+          "overtime_calibration": {
+            "intercept": 0.24123047920672291,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.24123047920672291,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.2483977142156947,
+            "log_loss": 0.6899396678837463,
+            "accuracy": 0.5411585365853658,
+            "calibration": {
+              "intercept": 0.03851726060780524,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.17000135642471725,
+            "observed_rate": 0.7888719512195121,
+            "predicted_rate": 0.7301492075328833
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24889722309161777,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.5079696652267602
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2515257691187754,
+            "observed_rate": 0.4565548780487805,
+            "predicted_rate": 0.39813187110689363
+          }
+        },
+        "2025": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3919288821974274,
+            "rmse": 1.7719044495038136,
+            "mean_error_pred_minus_actual": -0.11922138528089628,
+            "calibration_intercept": 0.314559773634546,
+            "calibration_slope": 0.9342285121653592
+          },
+          "reg_away_goals": {
+            "mae": 1.3880526502106385,
+            "rmse": 1.7044125125167011,
+            "mean_error_pred_minus_actual": -0.0011335052720087822,
+            "calibration_intercept": 0.3182835105380026,
+            "calibration_slope": 0.8860782083422837
+          },
+          "final_home_goals": {
+            "mae": 1.3979496254200385,
+            "rmse": 1.769420249490334,
+            "mean_error_pred_minus_actual": -0.14449469280987273,
+            "calibration_intercept": 0.309554689238018,
+            "calibration_slope": 0.945987560476817
+          },
+          "final_away_goals": {
+            "mae": 1.3962522633187304,
+            "rmse": 1.7219923079232533,
+            "mean_error_pred_minus_actual": -0.012506058728178936,
+            "calibration_intercept": 0.31225026396817557,
+            "calibration_slope": 0.895480458165604
+          },
+          "reg_total_goals": {
+            "mae": 1.878902038411689,
+            "rmse": 2.3463863548136463,
+            "mean_error_pred_minus_actual": -0.12035489055290532,
+            "calibration_intercept": 0.17222883186781826,
+            "calibration_slope": 0.9909845330384169
+          },
+          "final_total_goals": {
+            "mae": 1.8700216392712652,
+            "rmse": 2.3255893190346444,
+            "mean_error_pred_minus_actual": -0.157000751538052,
+            "calibration_intercept": 0.1684835640580651,
+            "calibration_slope": 0.9980615773387973
+          },
+          "reg_score_logloss": 3.877322582993141,
+          "final_score_logloss": 3.73801137033353,
+          "final_total_logloss": 2.1991013311402274,
+          "reg_outcome_multiclass_logloss": 1.0580056405645575,
+          "reg_outcome_multiclass_brier": 0.6398111021360976,
+          "reg_outcome_accuracy": 0.45121951219512196,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1041,
+            "brier": 0.24632465673550222,
+            "log_loss": 0.6857858166277185,
+            "calibration": {
+              "intercept": 0.1306187850796866,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "overtime_brier": 0.16523287953037658,
+          "overtime_logloss": 0.5138722296579608,
+          "overtime_predicted_rate": 0.16990901706363415,
+          "overtime_observed_rate": 0.20655487804878048,
+          "overtime_calibration": {
+            "intercept": 0.2404539650037412,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.2404539650037412,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.24706909960141782,
+            "log_loss": 0.6872789984698606,
+            "accuracy": 0.5625,
+            "calibration": {
+              "intercept": 0.1260733310015015,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.1848661035254366,
+            "observed_rate": 0.7560975609756098,
+            "predicted_rate": 0.7348357580630448
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2491491221649151,
+            "observed_rate": 0.5373475609756098,
+            "predicted_rate": 0.5140245578297452
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24443507917500593,
+            "observed_rate": 0.42301829268292684,
+            "predicted_rate": 0.4040113877150599
+          }
+        },
+        "2026": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3781588424289108,
+            "rmse": 1.7604296697884043,
+            "mean_error_pred_minus_actual": -0.05848037462757173,
+            "calibration_intercept": 0.3048785033474538,
+            "calibration_slope": 0.9181847764903236
+          },
+          "reg_away_goals": {
+            "mae": 1.344514606932872,
+            "rmse": 1.68611893012046,
+            "mean_error_pred_minus_actual": -0.18002156200877165,
+            "calibration_intercept": 0.3416581712491114,
+            "calibration_slope": 0.9413338098084408
+          },
+          "final_home_goals": {
+            "mae": 1.4024067612433042,
+            "rmse": 1.7624042722098707,
+            "mean_error_pred_minus_actual": -0.0938859955218084,
+            "calibration_intercept": 0.3011741028678593,
+            "calibration_slope": 0.9330937430105422
+          },
+          "final_away_goals": {
+            "mae": 1.3564586082892731,
+            "rmse": 1.7004555080034027,
+            "mean_error_pred_minus_actual": -0.22379924264029225,
+            "calibration_intercept": 0.33816801599359436,
+            "calibration_slope": 0.9597000531036497
+          },
+          "reg_total_goals": {
+            "mae": 1.8489085225535637,
+            "rmse": 2.3493631363999232,
+            "mean_error_pred_minus_actual": -0.23850193663634353,
+            "calibration_intercept": 0.1753056658211853,
+            "calibration_slope": 1.0109585739888043
+          },
+          "final_total_goals": {
+            "mae": 1.8454755018369287,
+            "rmse": 2.3192088109875386,
+            "mean_error_pred_minus_actual": -0.31768523816210065,
+            "calibration_intercept": 0.1725780105063437,
+            "calibration_slope": 1.0244447698842236
+          },
+          "reg_score_logloss": 3.855646489970124,
+          "final_score_logloss": 3.701101166936312,
+          "final_total_logloss": 2.168328477615319,
+          "reg_outcome_multiclass_logloss": 1.100517294976533,
+          "reg_outcome_multiclass_brier": 0.6646715951367376,
+          "reg_outcome_accuracy": 0.40015243902439024,
+          "reg_home_win_calibration": {
+            "games_non_tied": 986,
+            "brier": 0.24925643792571597,
+            "log_loss": 0.6916634952454768,
+            "calibration": {
+              "intercept": -0.07088592644883779,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "overtime_brier": 0.193005476352952,
+          "overtime_logloss": 0.5807153084582096,
+          "overtime_predicted_rate": 0.16929230823034033,
+          "overtime_observed_rate": 0.24847560975609756,
+          "overtime_calibration": {
+            "intercept": 0.483892149622517,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.483892149622517,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.2499683388580801,
+            "log_loss": 0.6930884919300342,
+            "accuracy": 0.5221036585365854,
+            "calibration": {
+              "intercept": -0.08588457352837968,
+              "slope": null,
+              "fit_success": true,
+              "slope_identifiable": false
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16101893493129446,
+            "observed_rate": 0.8064024390243902,
+            "predicted_rate": 0.7363925142180482
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24789391697919125,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.5161806189001342
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2529649104932286,
+            "observed_rate": 0.46875,
+            "predicted_rate": 0.4059688484238419
+          }
+        }
+      }
+    },
+    "process_without_recent_goals_independent_poisson": {
+      "pooled": {
+        "games": 6560,
+        "reg_home_goals": {
+          "mae": 1.3970199706191069,
+          "rmse": 1.753439400595691,
+          "mean_error_pred_minus_actual": -0.1825187350585877,
+          "calibration_intercept": 0.0697669534952297,
+          "calibration_slope": 1.0384500755139154
+        },
+        "reg_away_goals": {
+          "mae": 1.3615602905873971,
+          "rmse": 1.7019231085603264,
+          "mean_error_pred_minus_actual": -0.20082510909711734,
+          "calibration_intercept": 0.06757694339021088,
+          "calibration_slope": 1.0492855383373667
+        },
+        "final_home_goals": {
+          "mae": 1.4021202998697524,
+          "rmse": 1.7531902905963108,
+          "mean_error_pred_minus_actual": -0.21441936919713894,
+          "calibration_intercept": 0.04385098064200264,
+          "calibration_slope": 1.0565332210153322
+        },
+        "final_away_goals": {
+          "mae": 1.3786442650942676,
+          "rmse": 1.717129814061754,
+          "mean_error_pred_minus_actual": -0.22356595608963784,
+          "calibration_intercept": 0.004498422935303187,
+          "calibration_slope": 1.0786132930028898
+        },
+        "reg_total_goals": {
+          "mae": 1.8817266287109236,
+          "rmse": 2.3741762540431117,
+          "mean_error_pred_minus_actual": -0.38334384415570516,
+          "calibration_intercept": 3.5745747433616977,
+          "calibration_slope": 0.43377894082160495
+        },
+        "final_total_goals": {
+          "mae": 1.874956618360261,
+          "rmse": 2.3531067070087857,
+          "mean_error_pred_minus_actual": -0.43798532528677675,
+          "calibration_intercept": 3.9096083114579194,
+          "calibration_slope": 0.4018344576849875
+        },
+        "reg_score_logloss": 3.865573950922154,
+        "final_score_logloss": 3.723637574529714,
+        "final_total_logloss": 2.1965416374526736,
+        "reg_outcome_multiclass_logloss": 1.0512875718649342,
+        "reg_outcome_multiclass_brier": 0.6313608554105584,
+        "reg_outcome_accuracy": 0.47073170731707314,
+        "reg_home_win_calibration": {
+          "games_non_tied": 5101,
+          "brier": 0.23323851406085602,
+          "log_loss": 0.6585575694707483,
+          "calibration": {
+            "intercept": -0.0512831526026631,
+            "slope": 1.2223553357336505,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "overtime_brier": 0.17574136548687738,
+        "overtime_logloss": 0.5391988276773905,
+        "overtime_predicted_rate": 0.16776705545429407,
+        "overtime_observed_rate": 0.22240853658536586,
+        "overtime_calibration": {
+          "intercept": 0.35001900503749506,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "regulation_tie_calibration": {
+          "intercept": 0.35001900503749506,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "full_game_home_win": {
+          "brier": 0.2378226247128067,
+          "log_loss": 0.6682493045477162,
+          "accuracy": 0.5876524390243902,
+          "calibration": {
+            "intercept": -0.035778630245181124,
+            "slope": 1.2432300460177959,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "final_total_over_4.5": {
+          "brier": 0.17029047239641726,
+          "observed_rate": 0.7923780487804878,
+          "predicted_rate": 0.7174560056549542
+        },
+        "final_total_over_5.5": {
+          "brier": 0.25095325307889343,
+          "observed_rate": 0.5716463414634146,
+          "predicted_rate": 0.49385749934573603
+        },
+        "final_total_over_6.5": {
+          "brier": 0.2548501551462783,
+          "observed_rate": 0.4617378048780488,
+          "predicted_rate": 0.38354787660713563
+        }
+      },
+      "season_metrics": {
+        "2022": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4205992947916226,
+            "rmse": 1.7865263744536553,
+            "mean_error_pred_minus_actual": -0.1694330511885392,
+            "calibration_intercept": -0.6055453323221798,
+            "calibration_slope": 1.2597977980845008
+          },
+          "reg_away_goals": {
+            "mae": 1.3508837858238563,
+            "rmse": 1.692109832938133,
+            "mean_error_pred_minus_actual": -0.20844819945006213,
+            "calibration_intercept": -0.07111729737353399,
+            "calibration_slope": 1.1031898395507538
+          },
+          "final_home_goals": {
+            "mae": 1.4161945013308714,
+            "rmse": 1.7830192974232049,
+            "mean_error_pred_minus_actual": -0.20191600134011467,
+            "calibration_intercept": -0.6388946570427051,
+            "calibration_slope": 1.2742033173653453
+          },
+          "final_away_goals": {
+            "mae": 1.3616774885078502,
+            "rmse": 1.6986450223378031,
+            "mean_error_pred_minus_actual": -0.22992364457897946,
+            "calibration_intercept": -0.1707917246843632,
+            "calibration_slope": 1.1435526299787269
+          },
+          "reg_total_goals": {
+            "mae": 1.9100374263996538,
+            "rmse": 2.4060614658718573,
+            "mean_error_pred_minus_actual": -0.37788125063860134,
+            "calibration_intercept": -0.2124329177326801,
+            "calibration_slope": 1.103705060875418
+          },
+          "final_total_goals": {
+            "mae": 1.889309012807928,
+            "rmse": 2.370775597907889,
+            "mean_error_pred_minus_actual": -0.43183964591909413,
+            "calibration_intercept": 0.21830270712481292,
+            "calibration_slope": 1.036453470462114
+          },
+          "reg_score_logloss": 3.8757186854539065,
+          "final_score_logloss": 3.733339778504718,
+          "final_total_logloss": 2.205870123214879,
+          "reg_outcome_multiclass_logloss": 1.0384912539232185,
+          "reg_outcome_multiclass_brier": 0.6216361569395463,
+          "reg_outcome_accuracy": 0.49085365853658536,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1024,
+            "brier": 0.22696330254950303,
+            "log_loss": 0.6453553721979097,
+            "calibration": {
+              "intercept": -0.13120608538405815,
+              "slope": 1.3398635118867595,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.17388420157708587,
+          "overtime_logloss": 0.5347992561102158,
+          "overtime_predicted_rate": 0.16555379984145832,
+          "overtime_observed_rate": 0.21951219512195122,
+          "overtime_calibration": {
+            "intercept": 0.34920197743439785,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.34920197743439785,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23275623871386833,
+            "log_loss": 0.6578229516817349,
+            "accuracy": 0.6105182926829268,
+            "calibration": {
+              "intercept": -0.09406006834976832,
+              "slope": 1.3773891120234794,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16640717782926576,
+            "observed_rate": 0.7987804878048781,
+            "predicted_rate": 0.7247099561600306
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24824280639694069,
+            "observed_rate": 0.5769817073170732,
+            "predicted_rate": 0.503348585159432
+          },
+          "final_total_over_6.5": {
+            "brier": 0.25476827643025746,
+            "observed_rate": 0.4725609756097561,
+            "predicted_rate": 0.3921945428607915
+          }
+        },
+        "2023": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3985083064259525,
+            "rmse": 1.72516951850222,
+            "mean_error_pred_minus_actual": -0.23896804371256816,
+            "calibration_intercept": 0.5747948865721703,
+            "calibration_slope": 0.8845518595698479
+          },
+          "reg_away_goals": {
+            "mae": 1.3636202904320935,
+            "rmse": 1.7031138377617516,
+            "mean_error_pred_minus_actual": -0.3270679208303269,
+            "calibration_intercept": -0.4068365938749578,
+            "calibration_slope": 1.2765404949389934
+          },
+          "final_home_goals": {
+            "mae": 1.4082288713574804,
+            "rmse": 1.7273089132930595,
+            "mean_error_pred_minus_actual": -0.2750351137328705,
+            "calibration_intercept": 0.6504028444437893,
+            "calibration_slope": 0.8745636387734359
+          },
+          "final_away_goals": {
+            "mae": 1.3906943263119802,
+            "rmse": 1.7278325391782356,
+            "mean_error_pred_minus_actual": -0.35388336278252175,
+            "calibration_intercept": -0.49617804620255945,
+            "calibration_slope": 1.3105156352999134
+          },
+          "reg_total_goals": {
+            "mae": 1.8814803127633433,
+            "rmse": 2.3742245266224447,
+            "mean_error_pred_minus_actual": -0.566035964542895,
+            "calibration_intercept": 4.565937229325346,
+            "calibration_slope": 0.2809521764182711
+          },
+          "final_total_goals": {
+            "mae": 1.8819936410860105,
+            "rmse": 2.368456329510675,
+            "mean_error_pred_minus_actual": -0.6289184765153922,
+            "calibration_intercept": 5.042882234764821,
+            "calibration_slope": 0.2296848766981209
+          },
+          "reg_score_logloss": 3.8616777681949226,
+          "final_score_logloss": 3.7212177763584147,
+          "final_total_logloss": 2.200840041241788,
+          "reg_outcome_multiclass_logloss": 1.0488499627816077,
+          "reg_outcome_multiclass_brier": 0.6278831098690159,
+          "reg_outcome_accuracy": 0.4923780487804878,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1010,
+            "brier": 0.22729921051917584,
+            "log_loss": 0.6467067191419796,
+            "calibration": {
+              "intercept": -0.17338218478582118,
+              "slope": 1.2865672683675617,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.18072010956806625,
+          "overtime_logloss": 0.5510040890518826,
+          "overtime_predicted_rate": 0.16730041485677108,
+          "overtime_observed_rate": 0.2301829268292683,
+          "overtime_calibration": {
+            "intercept": 0.3979157166407562,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.3979157166407562,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23446567396865625,
+            "log_loss": 0.6615877889774956,
+            "accuracy": 0.6097560975609756,
+            "calibration": {
+              "intercept": -0.11084875592498483,
+              "slope": 1.248868609638359,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.1641751092950266,
+            "observed_rate": 0.8117378048780488,
+            "predicted_rate": 0.7064461730130603
+          },
+          "final_total_over_5.5": {
+            "brier": 0.255164391738903,
+            "observed_rate": 0.5975609756097561,
+            "predicted_rate": 0.4812006112612936
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2644241009625115,
+            "observed_rate": 0.4878048780487805,
+            "predicted_rate": 0.37114733698220476
+          }
+        },
+        "2024": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.372654109016373,
+            "rmse": 1.7429998126787725,
+            "mean_error_pred_minus_actual": -0.18932662403677145,
+            "calibration_intercept": -0.5241644532660009,
+            "calibration_slope": 1.2438648068019325
+          },
+          "reg_away_goals": {
+            "mae": 1.387285385195581,
+            "rmse": 1.7372968972477354,
+            "mean_error_pred_minus_actual": -0.1652640983311013,
+            "calibration_intercept": -0.1354664116211971,
+            "calibration_slope": 1.1098383551710511
+          },
+          "final_home_goals": {
+            "mae": 1.3833517654221776,
+            "rmse": 1.7427402879193177,
+            "mean_error_pred_minus_actual": -0.21893615579356646,
+            "calibration_intercept": -0.6945130385937622,
+            "calibration_slope": 1.3034226455420626
+          },
+          "final_away_goals": {
+            "mae": 1.4035786044788519,
+            "rmse": 1.7509639286087046,
+            "mean_error_pred_minus_actual": -0.17487550287626252,
+            "calibration_intercept": -0.12651373981232447,
+            "calibration_slope": 1.1068258597955647
+          },
+          "reg_total_goals": {
+            "mae": 1.8722408710650364,
+            "rmse": 2.3668116293121457,
+            "mean_error_pred_minus_actual": -0.35459072236787276,
+            "calibration_intercept": 5.154047574896873,
+            "calibration_slope": 0.15259367707700838
+          },
+          "final_total_goals": {
+            "mae": 1.8680333600694832,
+            "rmse": 2.3470461712825377,
+            "mean_error_pred_minus_actual": -0.393811658669829,
+            "calibration_intercept": 5.22885456265623,
+            "calibration_slope": 0.17091730145475592
+          },
+          "reg_score_logloss": 3.876935427725484,
+          "final_score_logloss": 3.7406155166673343,
+          "final_total_logloss": 2.1947973434220005,
+          "reg_outcome_multiclass_logloss": 1.0403834203638072,
+          "reg_outcome_multiclass_brier": 0.6257676076894538,
+          "reg_outcome_accuracy": 0.47865853658536583,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1040,
+            "brier": 0.2346975378613224,
+            "log_loss": 0.6617145653564115,
+            "calibration": {
+              "intercept": -0.0216414485991062,
+              "slope": 1.2878390967116997,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16594434595853985,
+          "overtime_logloss": 0.5158535819715296,
+          "overtime_predicted_rate": 0.16809613686877548,
+          "overtime_observed_rate": 0.2073170731707317,
+          "overtime_calibration": {
+            "intercept": 0.25808064113591184,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.25808064113591184,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23857256532511384,
+            "log_loss": 0.6698969790296301,
+            "accuracy": 0.5922256097560976,
+            "calibration": {
+              "intercept": 0.00859453923431887,
+              "slope": 1.2928368648087831,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.17121189947178045,
+            "observed_rate": 0.7888719512195121,
+            "predicted_rate": 0.7216273605557805
+          },
+          "final_total_over_5.5": {
+            "brier": 0.25036196408994915,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.49863440963895944
+          },
+          "final_total_over_6.5": {
+            "brier": 0.25314303107166475,
+            "observed_rate": 0.4565548780487805,
+            "predicted_rate": 0.38828647222788004
+          }
+        },
+        "2025": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4112001853168445,
+            "rmse": 1.7662910397801468,
+            "mean_error_pred_minus_actual": -0.15519982478168723,
+            "calibration_intercept": 1.0813434737789234,
+            "calibration_slope": 0.6843384772338063
+          },
+          "reg_away_goals": {
+            "mae": 1.3693149085885568,
+            "rmse": 1.6930999794479493,
+            "mean_error_pred_minus_actual": -0.09201150231617873,
+            "calibration_intercept": 0.5230662044696336,
+            "calibration_slope": 0.8399380678193474
+          },
+          "final_home_goals": {
+            "mae": 1.4091744825931973,
+            "rmse": 1.762160732721366,
+            "mean_error_pred_minus_actual": -0.1813072533578849,
+            "calibration_intercept": 0.9744594662798254,
+            "calibration_slope": 0.7372928817105855
+          },
+          "final_away_goals": {
+            "mae": 1.3867280977874377,
+            "rmse": 1.7105098398095135,
+            "mean_error_pred_minus_actual": -0.10419775862530323,
+            "calibration_intercept": 0.4902835904112325,
+            "calibration_slope": 0.8609269833092336
+          },
+          "reg_total_goals": {
+            "mae": 1.8789824002407047,
+            "rmse": 2.3528301329136023,
+            "mean_error_pred_minus_actual": -0.247211327097866,
+            "calibration_intercept": 1.8635342116623035,
+            "calibration_slope": 0.7127571922849614
+          },
+          "final_total_goals": {
+            "mae": 1.8725592760440652,
+            "rmse": 2.334053311152526,
+            "mean_error_pred_minus_actual": -0.28550501198318823,
+            "calibration_intercept": 1.8046900056658564,
+            "calibration_slope": 0.7378585706280736
+          },
+          "reg_score_logloss": 3.867436649785905,
+          "final_score_logloss": 3.729535024504567,
+          "final_total_logloss": 2.2021916969790922,
+          "reg_outcome_multiclass_logloss": 1.0425248673609566,
+          "reg_outcome_multiclass_brier": 0.6278311911831619,
+          "reg_outcome_accuracy": 0.46265243902439024,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1041,
+            "brier": 0.23700769968558305,
+            "log_loss": 0.6660698542295317,
+            "calibration": {
+              "intercept": 0.10441761995821026,
+              "slope": 0.9745660996325706,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16527409528542786,
+          "overtime_logloss": 0.5140349906437749,
+          "overtime_predicted_rate": 0.1682611931634582,
+          "overtime_observed_rate": 0.20655487804878048,
+          "overtime_calibration": {
+            "intercept": 0.2522815837361857,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.2522815837361857,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23926192519568468,
+            "log_loss": 0.6709802086901256,
+            "accuracy": 0.5754573170731707,
+            "calibration": {
+              "intercept": 0.08298538716310049,
+              "slope": 1.078261157529205,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.18524026251162037,
+            "observed_rate": 0.7560975609756098,
+            "predicted_rate": 0.7163661951375206
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2499212866735656,
+            "observed_rate": 0.5373475609756098,
+            "predicted_rate": 0.49234709901309465
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24496604778126174,
+            "observed_rate": 0.42301829268292684,
+            "predicted_rate": 0.3822092463350325
+          }
+        },
+        "2026": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3821379575447412,
+            "rmse": 1.7455743809455129,
+            "mean_error_pred_minus_actual": -0.15966613157337253,
+            "calibration_intercept": -0.5153611016585935,
+            "calibration_slope": 1.2319317918091723
+          },
+          "reg_away_goals": {
+            "mae": 1.3366970828968978,
+            "rmse": 1.6834758259516198,
+            "mean_error_pred_minus_actual": -0.2113338245579177,
+            "calibration_intercept": 0.8952817932548758,
+            "calibration_slope": 0.7489066803140809
+          },
+          "final_home_goals": {
+            "mae": 1.3936518786450351,
+            "rmse": 1.7502208201248444,
+            "mean_error_pred_minus_actual": -0.19490232176125827,
+            "calibration_intercept": -0.46477139478578144,
+            "calibration_slope": 1.2200988031008109
+          },
+          "final_away_goals": {
+            "mae": 1.3505428083852178,
+            "rmse": 1.697102001934081,
+            "mean_error_pred_minus_actual": -0.2549495115851221,
+            "calibration_intercept": 0.7945820246793942,
+            "calibration_slope": 0.8077402152546469
+          },
+          "reg_total_goals": {
+            "mae": 1.8658921330858795,
+            "rmse": 2.3706293727507166,
+            "mean_error_pred_minus_actual": -0.3709999561312902,
+            "calibration_intercept": 5.851884479695797,
+            "calibration_slope": 0.027234957630152205
+          },
+          "final_total_goals": {
+            "mae": 1.862887801793819,
+            "rmse": 2.3449867724530726,
+            "mean_error_pred_minus_actual": -0.4498518333463803,
+            "calibration_intercept": 6.093817539053872,
+            "calibration_slope": 0.027566258244452163
+          },
+          "reg_score_logloss": 3.8461012234505523,
+          "final_score_logloss": 3.693479776613537,
+          "final_total_logloss": 2.179008982405608,
+          "reg_outcome_multiclass_logloss": 1.0861883548950813,
+          "reg_outcome_multiclass_brier": 0.6536862113716142,
+          "reg_outcome_accuracy": 0.4291158536585366,
+          "reg_home_win_calibration": {
+            "games_non_tied": 986,
+            "brier": 0.24032107610639014,
+            "log_loss": 0.673146661442817,
+            "calibration": {
+              "intercept": -0.04603411440104536,
+              "slope": 1.2072877000101558,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.19288407504526708,
+          "overtime_logloss": 0.5803022206095496,
+          "overtime_predicted_rate": 0.16962373254100732,
+          "overtime_observed_rate": 0.24847560975609756,
+          "overtime_calibration": {
+            "intercept": 0.4816256534451431,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.4816256534451431,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.24405672036071058,
+            "log_loss": 0.6809585943595952,
+            "accuracy": 0.5503048780487805,
+            "calibration": {
+              "intercept": -0.06087353554556121,
+              "slope": 1.1588897586235112,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16441791287439306,
+            "observed_rate": 0.8064024390243902,
+            "predicted_rate": 0.7181303434083789
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2510758164951088,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.4937567916559002
+          },
+          "final_total_over_6.5": {
+            "brier": 0.25694931948569594,
+            "observed_rate": 0.46875,
+            "predicted_rate": 0.38390178462976937
+          }
+        }
+      }
+    },
+    "team_goal_form_independent_poisson": {
+      "pooled": {
+        "games": 6560,
+        "reg_home_goals": {
+          "mae": 1.411535077097097,
+          "rmse": 1.747233419516859,
+          "mean_error_pred_minus_actual": 0.04981541166018616,
+          "calibration_intercept": 0.09272203022075931,
+          "calibration_slope": 0.954960978881241
+        },
+        "reg_away_goals": {
+          "mae": 1.3550438705138828,
+          "rmse": 1.6829956783908588,
+          "mean_error_pred_minus_actual": -0.013788268880175527,
+          "calibration_intercept": -0.445234905249174,
+          "calibration_slope": 1.1587967962140686
+        },
+        "final_home_goals": {
+          "mae": 1.4088130193664996,
+          "rmse": 1.742143726485043,
+          "mean_error_pred_minus_actual": 0.015252561235396955,
+          "calibration_intercept": 0.03824300413328056,
+          "calibration_slope": 0.9835236408782869
+        },
+        "final_away_goals": {
+          "mae": 1.3692658884095419,
+          "rmse": 1.6963629922547323,
+          "mean_error_pred_minus_actual": -0.03914745138360642,
+          "calibration_intercept": -0.5019751752038726,
+          "calibration_slope": 1.1821308019682735
+        },
+        "reg_total_goals": {
+          "mae": 1.8641482960527043,
+          "rmse": 2.3382006214014357,
+          "mean_error_pred_minus_actual": 0.03602714278001064,
+          "calibration_intercept": 2.5591175335200806,
+          "calibration_slope": 0.5714320621228769
+        },
+        "final_total_goals": {
+          "mae": 1.8540886498723106,
+          "rmse": 2.3064555427304883,
+          "mean_error_pred_minus_actual": -0.023894890148209474,
+          "calibration_intercept": 2.6717856056337985,
+          "calibration_slope": 0.5741484999668566
+        },
+        "reg_score_logloss": 3.850529175410479,
+        "final_score_logloss": 3.7028196399956688,
+        "final_total_logloss": 2.1779789681578525,
+        "reg_outcome_multiclass_logloss": 1.0546956458880121,
+        "reg_outcome_multiclass_brier": 0.6329268742636551,
+        "reg_outcome_accuracy": 0.47210365853658537,
+        "reg_home_win_calibration": {
+          "games_non_tied": 5101,
+          "brier": 0.233710580616121,
+          "log_loss": 0.6596736462259126,
+          "calibration": {
+            "intercept": -0.13687303682771965,
+            "slope": 1.4915350323308347,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "overtime_brier": 0.17643984551718456,
+        "overtime_logloss": 0.5417390499431368,
+        "overtime_predicted_rate": 0.16248650365714562,
+        "overtime_observed_rate": 0.22240853658536586,
+        "overtime_calibration": {
+          "intercept": 0.38834836596013683,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "regulation_tie_calibration": {
+          "intercept": 0.38834836596013683,
+          "slope": null,
+          "fit_success": true,
+          "slope_identifiable": false
+        },
+        "full_game_home_win": {
+          "brier": 0.23817488711579077,
+          "log_loss": 0.6690226074818878,
+          "accuracy": 0.5897865853658537,
+          "calibration": {
+            "intercept": -0.11135364177480102,
+            "slope": 1.5055784791007991,
+            "fit_success": true,
+            "slope_identifiable": true
+          }
+        },
+        "final_total_over_4.5": {
+          "brier": 0.16490324699895595,
+          "observed_rate": 0.7923780487804878,
+          "predicted_rate": 0.7679420394089076
+        },
+        "final_total_over_5.5": {
+          "brier": 0.24431607087919358,
+          "observed_rate": 0.5716463414634146,
+          "predicted_rate": 0.5613529472114982
+        },
+        "final_total_over_6.5": {
+          "brier": 0.24766325401694442,
+          "observed_rate": 0.4617378048780488,
+          "predicted_rate": 0.4509298691915369
+        }
+      },
+      "season_metrics": {
+        "2022": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4255545785236656,
+            "rmse": 1.7826007737056238,
+            "mean_error_pred_minus_actual": -0.07057387773314708,
+            "calibration_intercept": -0.9007064649739437,
+            "calibration_slope": 1.3151599101474754
+          },
+          "reg_away_goals": {
+            "mae": 1.334375786188503,
+            "rmse": 1.6691643079687306,
+            "mean_error_pred_minus_actual": -0.13142084509780086,
+            "calibration_intercept": -1.2519899192966788,
+            "calibration_slope": 1.4965113560081111
+          },
+          "final_home_goals": {
+            "mae": 1.4153373789110484,
+            "rmse": 1.7749366283892394,
+            "mean_error_pred_minus_actual": -0.10345311161784834,
+            "calibration_intercept": -1.0887989166873917,
+            "calibration_slope": 1.3767179983193023
+          },
+          "final_away_goals": {
+            "mae": 1.3436931820747244,
+            "rmse": 1.6745956641370094,
+            "mean_error_pred_minus_actual": -0.1532869288924206,
+            "calibration_intercept": -1.4421835352135792,
+            "calibration_slope": 1.5562901419417343
+          },
+          "reg_total_goals": {
+            "mae": 1.887670002697608,
+            "rmse": 2.369627733731811,
+            "mean_error_pred_minus_actual": -0.2019947228309479,
+            "calibration_intercept": 0.4097899900574555,
+            "calibration_slope": 0.9645891680362267
+          },
+          "final_total_goals": {
+            "mae": 1.8636593627002727,
+            "rmse": 2.3272415706075376,
+            "mean_error_pred_minus_actual": -0.25674004051026894,
+            "calibration_intercept": 0.23427710759036804,
+            "calibration_slope": 1.003723409117722
+          },
+          "reg_score_logloss": 3.859167509065758,
+          "final_score_logloss": 3.7133030501346465,
+          "final_total_logloss": 2.188803864720636,
+          "reg_outcome_multiclass_logloss": 1.0381884589901769,
+          "reg_outcome_multiclass_brier": 0.6204962785782013,
+          "reg_outcome_accuracy": 0.5053353658536586,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1024,
+            "brier": 0.22555374307782328,
+            "log_loss": 0.6429100291165999,
+            "calibration": {
+              "intercept": -0.2742420258513312,
+              "slope": 1.9715916912301625,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.17432001670026442,
+          "overtime_logloss": 0.5364050216308796,
+          "overtime_predicted_rate": 0.1647668774426301,
+          "overtime_observed_rate": 0.21951219512195122,
+          "overtime_calibration": {
+            "intercept": 0.35486362831234886,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.35486362831234886,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.2313763946760336,
+            "log_loss": 0.6552241668078385,
+            "accuracy": 0.6310975609756098,
+            "calibration": {
+              "intercept": -0.24002215126287066,
+              "slope": 2.0754235767124207,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16281020839238913,
+            "observed_rate": 0.7987804878048781,
+            "predicted_rate": 0.7456375304991926
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24439584085237342,
+            "observed_rate": 0.5769817073170732,
+            "predicted_rate": 0.5313714667678825
+          },
+          "final_total_over_6.5": {
+            "brier": 0.248635110352903,
+            "observed_rate": 0.4725609756097561,
+            "predicted_rate": 0.4209016634427437
+          }
+        },
+        "2023": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4162642100028884,
+            "rmse": 1.7158563183541267,
+            "mean_error_pred_minus_actual": 0.16710335943514665,
+            "calibration_intercept": 0.02953481090303677,
+            "calibration_slope": 0.9406817506595565
+          },
+          "reg_away_goals": {
+            "mae": 1.3608064355914853,
+            "rmse": 1.6690484809591182,
+            "mean_error_pred_minus_actual": 0.0342948588979195,
+            "calibration_intercept": -1.315425227433668,
+            "calibration_slope": 1.4248850428730913
+          },
+          "final_home_goals": {
+            "mae": 1.4118589737115406,
+            "rmse": 1.7074566097821475,
+            "mean_error_pred_minus_actual": 0.12636717579704623,
+            "calibration_intercept": 0.026885498943490866,
+            "calibration_slope": 0.9548446388398489
+          },
+          "final_away_goals": {
+            "mae": 1.378948026827786,
+            "rmse": 1.6887039446720487,
+            "mean_error_pred_minus_actual": 0.0028044228321862145,
+            "calibration_intercept": -1.4409539002578782,
+            "calibration_slope": 1.4647786012613841
+          },
+          "reg_total_goals": {
+            "mae": 1.837428926261743,
+            "rmse": 2.299511504494101,
+            "mean_error_pred_minus_actual": 0.20139821833306618,
+            "calibration_intercept": 1.9899402244486875,
+            "calibration_slope": 0.653828431945254
+          },
+          "final_total_goals": {
+            "mae": 1.8193809539940387,
+            "rmse": 2.2716896302206515,
+            "mean_error_pred_minus_actual": 0.12917159862923244,
+            "calibration_intercept": 2.1986157324728017,
+            "calibration_slope": 0.6412256545060742
+          },
+          "reg_score_logloss": 3.836071548905425,
+          "final_score_logloss": 3.6835805906802497,
+          "final_total_logloss": 2.161945441865401,
+          "reg_outcome_multiclass_logloss": 1.0611363822703683,
+          "reg_outcome_multiclass_brier": 0.6354846500361468,
+          "reg_outcome_accuracy": 0.4733231707317073,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1010,
+            "brier": 0.23212119792267735,
+            "log_loss": 0.6564509245027268,
+            "calibration": {
+              "intercept": -0.22612583031633918,
+              "slope": 1.4683410297749486,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.18204394076091668,
+          "overtime_logloss": 0.5557892528894581,
+          "overtime_predicted_rate": 0.15795630712543451,
+          "overtime_observed_rate": 0.2301829268292683,
+          "overtime_calibration": {
+            "intercept": 0.46648112990391033,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.46648112990391033,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23660151990774675,
+            "log_loss": 0.6657252348872024,
+            "accuracy": 0.6021341463414634,
+            "calibration": {
+              "intercept": -0.1858412800397172,
+              "slope": 1.5351143413673465,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.15239723127590332,
+            "observed_rate": 0.8117378048780488,
+            "predicted_rate": 0.7978624236094033
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2385032985283552,
+            "observed_rate": 0.5975609756097561,
+            "predicted_rate": 0.6037329754112002
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24749906094364474,
+            "observed_rate": 0.4878048780487805,
+            "predicted_rate": 0.4939467549915094
+          }
+        },
+        "2024": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.3983375273447356,
+            "rmse": 1.7330699224494674,
+            "mean_error_pred_minus_actual": 0.10253588256398269,
+            "calibration_intercept": -0.33549769289839587,
+            "calibration_slope": 1.072401737455882
+          },
+          "reg_away_goals": {
+            "mae": 1.3899351250827783,
+            "rmse": 1.7254963353134851,
+            "mean_error_pred_minus_actual": 0.046818019578482126,
+            "calibration_intercept": -0.10851012759605537,
+            "calibration_slope": 1.0209124426037928
+          },
+          "final_home_goals": {
+            "mae": 1.3970909225561061,
+            "rmse": 1.728103060268272,
+            "mean_error_pred_minus_actual": 0.06895548839891262,
+            "calibration_intercept": -0.43156240492676046,
+            "calibration_slope": 1.1099349777983076
+          },
+          "final_away_goals": {
+            "mae": 1.4028712205723417,
+            "rmse": 1.7376996098164816,
+            "mean_error_pred_minus_actual": 0.03329871555963796,
+            "calibration_intercept": -0.11104612513506398,
+            "calibration_slope": 1.0256635498306086
+          },
+          "reg_total_goals": {
+            "mae": 1.868286406865986,
+            "rmse": 2.338565120537976,
+            "mean_error_pred_minus_actual": 0.1493539021424648,
+            "calibration_intercept": 2.608848047483463,
+            "calibration_slope": 0.5527950715751094
+          },
+          "final_total_goals": {
+            "mae": 1.8605675599112366,
+            "rmse": 2.310341309674536,
+            "mean_error_pred_minus_actual": 0.10225420395855056,
+            "calibration_intercept": 2.760709504918677,
+            "calibration_slope": 0.5475623801413322
+          },
+          "reg_score_logloss": 3.8647850655526614,
+          "final_score_logloss": 3.7228737937033864,
+          "final_total_logloss": 2.1802817909808803,
+          "reg_outcome_multiclass_logloss": 1.0397245477169514,
+          "reg_outcome_multiclass_brier": 0.6244371323634851,
+          "reg_outcome_accuracy": 0.49314024390243905,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1040,
+            "brier": 0.23312740813717814,
+            "log_loss": 0.6581454702952554,
+            "calibration": {
+              "intercept": -0.10738414889734896,
+              "slope": 1.3536502593375992,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.16652854373498865,
+          "overtime_logloss": 0.518023870043883,
+          "overtime_predicted_rate": 0.1602173749868174,
+          "overtime_observed_rate": 0.2073170731707317,
+          "overtime_calibration": {
+            "intercept": 0.3155874816443266,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.3155874816443266,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.2371499224596634,
+            "log_loss": 0.6667926385985881,
+            "accuracy": 0.6028963414634146,
+            "calibration": {
+              "intercept": -0.05949770987556786,
+              "slope": 1.3536130247646014,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.16609607658174014,
+            "observed_rate": 0.7888719512195121,
+            "predicted_rate": 0.7811574986486984
+          },
+          "final_total_over_5.5": {
+            "brier": 0.2445022270683247,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.5794170613503982
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24785665268612983,
+            "observed_rate": 0.4565548780487805,
+            "predicted_rate": 0.46872383454445754
+          }
+        },
+        "2025": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4147155544895362,
+            "rmse": 1.7576455252058152,
+            "mean_error_pred_minus_actual": -0.00471016723958139,
+            "calibration_intercept": 0.7322186455589463,
+            "calibration_slope": 0.7641379991959867
+          },
+          "reg_away_goals": {
+            "mae": 1.3633466204912834,
+            "rmse": 1.6831245323777597,
+            "mean_error_pred_minus_actual": 0.04796066498037424,
+            "calibration_intercept": -0.3532969776223706,
+            "calibration_slope": 1.1077776139325184
+          },
+          "final_home_goals": {
+            "mae": 1.4078508020066032,
+            "rmse": 1.7504760301271138,
+            "mean_error_pred_minus_actual": -0.03241244075073074,
+            "calibration_intercept": 0.5101465957146127,
+            "calibration_slope": 0.8492022134741811
+          },
+          "final_away_goals": {
+            "mae": 1.3783379538753402,
+            "rmse": 1.7002165843772183,
+            "mean_error_pred_minus_actual": 0.03421860345818715,
+            "calibration_intercept": -0.3780903784571317,
+            "calibration_slope": 1.117984356652738
+          },
+          "reg_total_goals": {
+            "mae": 1.882282626055321,
+            "rmse": 2.345370791181046,
+            "mean_error_pred_minus_actual": 0.043250497740792815,
+            "calibration_intercept": 3.1809453815933106,
+            "calibration_slope": 0.45514114866822647
+          },
+          "final_total_goals": {
+            "mae": 1.8809401736887639,
+            "rmse": 2.321187050299111,
+            "mean_error_pred_minus_actual": 0.0018061627074563984,
+            "calibration_intercept": 3.189953753579345,
+            "calibration_slope": 0.4752637816025546
+          },
+          "reg_score_logloss": 3.8560607001614065,
+          "final_score_logloss": 3.7142608330446727,
+          "final_total_logloss": 2.1971505980996504,
+          "reg_outcome_multiclass_logloss": 1.0419769857382604,
+          "reg_outcome_multiclass_brier": 0.6266910363013375,
+          "reg_outcome_accuracy": 0.4641768292682927,
+          "reg_home_win_calibration": {
+            "games_non_tied": 1041,
+            "brier": 0.23532264645674375,
+            "log_loss": 0.6630709074033007,
+            "calibration": {
+              "intercept": 0.022065791225150896,
+              "slope": 1.4279147373552834,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.1657774615040833,
+          "overtime_logloss": 0.5158666087513427,
+          "overtime_predicted_rate": 0.16511054301544395,
+          "overtime_observed_rate": 0.20655487804878048,
+          "overtime_calibration": {
+            "intercept": 0.2749487497167197,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.2749487497167197,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.23839660695651574,
+            "log_loss": 0.6695242098656132,
+            "accuracy": 0.583079268292683,
+            "calibration": {
+              "intercept": 0.010162202115941954,
+              "slope": 1.5102378040072795,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.18422705163677455,
+            "observed_rate": 0.7560975609756098,
+            "predicted_rate": 0.7527032959830261
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24894174389661217,
+            "observed_rate": 0.5373475609756098,
+            "predicted_rate": 0.5398560587363923
+          },
+          "final_total_over_6.5": {
+            "brier": 0.24417281211284106,
+            "observed_rate": 0.42301829268292684,
+            "predicted_rate": 0.429330628595375
+          }
+        },
+        "2026": {
+          "games": 1312,
+          "reg_home_goals": {
+            "mae": 1.4028035151246583,
+            "rmse": 1.7462661708216731,
+            "mean_error_pred_minus_actual": 0.054721861274529965,
+            "calibration_intercept": 0.15001722960140867,
+            "calibration_slope": 0.9344802162407807
+          },
+          "reg_away_goals": {
+            "mae": 1.3267553852153635,
+            "rmse": 1.6674214086279289,
+            "mean_error_pred_minus_actual": -0.06659404275985265,
+            "calibration_intercept": 0.4093580867565591,
+            "calibration_slope": 0.8805125394615334
+          },
+          "final_home_goals": {
+            "mae": 1.4119270196472007,
+            "rmse": 1.7490023415110998,
+            "mean_error_pred_minus_actual": 0.016805694349604997,
+            "calibration_intercept": 0.4756146199392176,
+            "calibration_slope": 0.8465444365484492
+          },
+          "final_away_goals": {
+            "mae": 1.3424790586975173,
+            "rmse": 1.679853859302066,
+            "mean_error_pred_minus_actual": -0.11277206987562281,
+            "calibration_intercept": 0.5435918351344629,
+            "calibration_slope": 0.8539081820635376
+          },
+          "reg_total_goals": {
+            "mae": 1.8450735183828637,
+            "rmse": 2.337385505798436,
+            "mean_error_pred_minus_actual": -0.011872181485322696,
+            "calibration_intercept": 3.0359201367910162,
+            "calibration_slope": 0.49544230734698164
+          },
+          "final_total_goals": {
+            "mae": 1.8458951990672414,
+            "rmse": 2.3014066262353863,
+            "mean_error_pred_minus_actual": -0.09596637552601787,
+            "calibration_intercept": 3.6278009996511953,
+            "calibration_slope": 0.4264495365672022
+          },
+          "reg_score_logloss": 3.8365610533671433,
+          "final_score_logloss": 3.680079932415387,
+          "final_total_logloss": 2.1617131451226963,
+          "reg_outcome_multiclass_logloss": 1.0924518547243032,
+          "reg_outcome_multiclass_brier": 0.6575252740391048,
+          "reg_outcome_accuracy": 0.4245426829268293,
+          "reg_home_win_calibration": {
+            "games_non_tied": 986,
+            "brier": 0.2427229710802256,
+            "log_loss": 0.6784095964719339,
+            "calibration": {
+              "intercept": -0.10178437825353366,
+              "slope": 1.1622375512460015,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "overtime_brier": 0.1935292648856698,
+          "overtime_logloss": 0.5826104964001211,
+          "overtime_predicted_rate": 0.16438141571540235,
+          "overtime_observed_rate": 0.24847560975609756,
+          "overtime_calibration": {
+            "intercept": 0.5193592719009875,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "regulation_tie_calibration": {
+            "intercept": 0.5193592719009875,
+            "slope": null,
+            "fit_success": true,
+            "slope_identifiable": false
+          },
+          "full_game_home_win": {
+            "brier": 0.24734999157899434,
+            "log_loss": 0.6878467872501971,
+            "accuracy": 0.5297256097560976,
+            "calibration": {
+              "intercept": -0.06008463647863674,
+              "slope": 0.8727474642212889,
+              "fit_success": true,
+              "slope_identifiable": true
+            }
+          },
+          "final_total_over_4.5": {
+            "brier": 0.15898566710797288,
+            "observed_rate": 0.8064024390243902,
+            "predicted_rate": 0.7623494483042185
+          },
+          "final_total_over_5.5": {
+            "brier": 0.24523724405030245,
+            "observed_rate": 0.573170731707317,
+            "predicted_rate": 0.5523871737916178
+          },
+          "final_total_over_6.5": {
+            "brier": 0.2501526339892035,
+            "observed_rate": 0.46875,
+            "predicted_rate": 0.44174646438359877
+          }
+        }
+      }
+    }
+  }
+}
