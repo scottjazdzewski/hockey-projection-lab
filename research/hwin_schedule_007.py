@@ -8,6 +8,7 @@ season, with predictions saved per game before any pooled scoring.
 """
 
 import json
+from bisect import bisect_left
 from pathlib import Path
 import sys
 
@@ -23,17 +24,33 @@ sys.path.insert(0, "research")
 import hwin_team_strength_004 as ts
 
 MODEL_VERSION = "HWIN-SCHEDULE-007-NOGOALIE-RESEARCH"
-FEATURE_VERSION = "pregame-team-strength-004-plus-schedule-001"
+FEATURE_VERSION = "pregame-team-strength-004-plus-schedule-002"
 SOURCE_VERSION = "sportsdataverse-pbp-features-20261102+canonical-spine-v3-20261102"
 RETRIEVAL_DATE = "2026-11-02"
 TARGET_SEASONS = [2022, 2023, 2024, 2025, 2026]
 C_GRID = [0.05, 0.1, 0.25, 0.5, 1.0, 2.0]
+FOLD_CHOICES = {
+    2022: ((10, 20, 0.85), (0.08, 0.85)),
+    2023: ((10, 20, 0.85), (0.12, 0.70)),
+    2024: ((10, 20, 0.70), (0.12, 0.85)),
+    2025: ((10, 20, 0.85), (0.12, 0.70)),
+    2026: ((5, 40, 0.70), (0.12, 0.70)),
+}
+TEAM_STRENGTH_004_BRIER = {
+    2022: 0.22908032961303176,
+    2023: 0.23212407205600694,
+    2024: 0.2338178377053722,
+    2025: 0.2361573080170964,
+    2026: 0.24577854852410305,
+}
 
 
 def build_schedule_features(spine: pd.DataFrame) -> pd.DataFrame:
     """Create strictly lagged schedule features from games on earlier dates."""
     s = spine[["game_id", "game_date", "source_season", "home_team_abbr", "away_team_abbr"]].copy()
     s["game_date"] = pd.to_datetime(s.game_date, errors="coerce").dt.normalize()
+    if s.game_date.isna().any():
+        raise ValueError("Canonical spine has missing game dates; schedule context cannot be built safely")
     h = s.rename(columns={"home_team_abbr": "team", "away_team_abbr": "opp"}).assign(home_away="home")
     a = s.rename(columns={"away_team_abbr": "team", "home_team_abbr": "opp"}).assign(home_away="away")
     long = pd.concat([h, a], ignore_index=True)
@@ -42,77 +59,67 @@ def build_schedule_features(spine: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for team, group in long.groupby("team", sort=False):
         history_dates = []
-        history_locations = []
-        for r in group.itertuples(index=False):
-            d = r.game_date
-            # Exclude same-date games: the source has date-only timestamps, so
-            # their before/after-puck-drop order cannot be established safely.
-            prior_dates = [x for x in history_dates if pd.notna(d) and x < d]
-            prev_date = prior_dates[-1] if prior_dates else pd.NaT
-            rest = (d - prev_date).days if pd.notna(prev_date) and pd.notna(d) else np.nan
-            prior3 = sum(1 for x in prior_dates if (d - x).days <= 3)
-            prior5 = sum(1 for x in prior_dates if (d - x).days <= 5)
-            prior7 = sum(1 for x in prior_dates if (d - x).days <= 7)
+        dates_with_games = []
+        locations_by_date = {}
+        for d, day_games in group.groupby("game_date", sort=True):
+            # Date-only feeds cannot establish the order of same-day games.
+            # Every game on a date uses state accumulated before that date.
+            prev_date = dates_with_games[-1] if dates_with_games else pd.NaT
+            rest = (d - prev_date).days if pd.notna(prev_date) else np.nan
+            prior3 = len(history_dates) - bisect_left(history_dates, d - pd.Timedelta(days=3))
+            prior5 = len(history_dates) - bisect_left(history_dates, d - pd.Timedelta(days=5))
+            prior7 = len(history_dates) - bisect_left(history_dates, d - pd.Timedelta(days=7))
 
-            # Location history is likewise restricted to earlier dates. When
-            # a team has multiple games on one prior date, date-only data cannot
-            # establish their sequence, so location streak features are null.
-            prior_unique_dates = sorted(set(prior_dates), reverse=True)
-            indices_by_date = {
-                prior_date: [i for i, x in enumerate(history_dates) if x == prior_date]
-                for prior_date in prior_unique_dates
-            }
-            latest_group = indices_by_date.get(prior_unique_dates[0], []) if prior_unique_dates else []
-            prev_away = (
-                float(history_locations[latest_group[0]] == "away")
-                if len(latest_group) == 1 else np.nan
-            )
-            latest_two = [indices_by_date[x] for x in prior_unique_dates[:2]]
-            prev2_away = (
-                float(
-                    len(latest_two) == 2
-                    and len(latest_two[0]) == 1
-                    and len(latest_two[1]) == 1
-                    and history_locations[latest_two[0][0]] == "away"
-                    and history_locations[latest_two[1][0]] == "away"
-                )
-                if len(latest_two) == 2 and all(len(x) == 1 for x in latest_two)
-                else np.nan
-            )
-            current_home = r.home_away == "home"
-            trip_no = 0.0 if current_home else 1.0
-            if not current_home:
-                if prior_unique_dates and len(latest_group) != 1:
-                    trip_no = np.nan
-                else:
-                    for prior_date in prior_unique_dates:
-                        indices = indices_by_date[prior_date]
-                        if len(indices) != 1:
-                            trip_no = np.nan
-                            break
-                        if history_locations[indices[0]] != "away":
-                            break
-                        trip_no += 1
+            last_locations = locations_by_date.get(prev_date, []) if pd.notna(prev_date) else []
+            prev_away = float(last_locations[0] == "away") if len(last_locations) == 1 else np.nan
+            prior_two_locations = [locations_by_date[x] for x in dates_with_games[-2:]]
+            if len(prior_two_locations) == 2 and all(len(x) == 1 for x in prior_two_locations):
+                prev2_away = float(all(x[0] == "away" for x in prior_two_locations))
+            else:
+                prev2_away = np.nan
 
-            rows.append({
-                "game_id": r.game_id,
-                "team": team,
-                "home_away": r.home_away,
-                "sched_rest_days": rest,
-                "sched_b2b": float(pd.notna(rest) and rest <= 1),
-                "sched_3in4": float(prior3 >= 2),
-                "sched_4in6": float(prior5 >= 3),
-                "sched_5in8": float(prior7 >= 4),
-                "sched_prior3_games": float(prior3),
-                "sched_prior5_games": float(prior5),
-                "sched_prior7_games": float(prior7),
-                "sched_prev_away": prev_away,
-                "sched_home_after_road": float(current_home and prev_away) if pd.notna(prev_away) else np.nan,
-                "sched_home_after_2road": float(current_home and prev2_away) if pd.notna(prev2_away) else np.nan,
-                "sched_away_trip_no": float(trip_no) if pd.notna(trip_no) else np.nan,
-            })
-            history_dates.append(d)
-            history_locations.append(r.home_away)
+            away_trip_no = 1.0
+            if len(day_games) != 1:
+                away_trip_no = np.nan
+            else:
+                for prior_date in reversed(dates_with_games):
+                    prior_locations = locations_by_date[prior_date]
+                    if len(prior_locations) != 1:
+                        away_trip_no = np.nan
+                        break
+                    if prior_locations[0] != "away":
+                        break
+                    away_trip_no += 1
+
+            for r in day_games.itertuples(index=False):
+                current_home = r.home_away == "home"
+                rows.append({
+                    "game_id": r.game_id,
+                    "team": team,
+                    "home_away": r.home_away,
+                    "sched_rest_days": rest,
+                    "sched_b2b": float(pd.notna(rest) and rest <= 1),
+                    "sched_3in4": float(prior3 >= 2),
+                    "sched_4in6": float(prior5 >= 3),
+                    "sched_5in8": float(prior7 >= 4),
+                    "sched_prior3_games": float(prior3),
+                    "sched_prior5_games": float(prior5),
+                    "sched_prior7_games": float(prior7),
+                    "sched_prev_away": prev_away,
+                    "sched_home_after_road": (
+                        float(prev_away == 1.0) if current_home and pd.notna(prev_away)
+                        else (0.0 if not current_home else np.nan)
+                    ),
+                    "sched_home_after_2road": (
+                        float(prev2_away == 1.0) if current_home and pd.notna(prev2_away)
+                        else (0.0 if not current_home else np.nan)
+                    ),
+                    "sched_away_trip_no": 0.0 if current_home else away_trip_no,
+                })
+
+            dates_with_games.append(d)
+            locations_by_date[d] = day_games.home_away.tolist()
+            history_dates.extend([d] * len(day_games))
 
     z = pd.DataFrame(rows)
     sched_cols = [c for c in z.columns if c.startswith("sched_")]
@@ -128,7 +135,6 @@ def build_schedule_features(spine: pd.DataFrame) -> pd.DataFrame:
             out[f"a_{c}"], errors="coerce"
         )
     return out
-
 
 def fit_pipeline(train: pd.DataFrame, features: list[str], C: float) -> Pipeline:
     model = Pipeline([
@@ -219,16 +225,17 @@ def main(pbp_path: str, spine_path: str, outdir: str) -> None:
     schedule = build_schedule_features(spine)
     games = games.merge(schedule, on="game_id", how="left", validate="one_to_one")
 
-    # Candidate Elo streams and opponent-adjusted ratings are generated online:
-    # each row is recorded before its result updates the corresponding rating.
+    # Reuse the fold-specific Elo and opponent-adjusted choices already selected
+    # by Team Strength 004. This isolates schedule increments and avoids a second
+    # round of feature selection on the same validation seasons.
+    selected_elo = sorted(set(choice[0] for choice in FOLD_CHOICES.values()))
     elo = {}
-    for k, ha, retain in ts.ELO_GRID:
+    for k, ha, retain in selected_elo:
         key = f"k{k}_h{ha}_r{retain}"
         elo[key] = ts.elo_all(spine, k, ha, retain)
-    oa = {}
-    for alpha, retain in ts.OA_GRID:
-        z, tag = ts.opponent_adjusted_features(games, alpha, retain)
-        oa[tag] = z
+    selected_oa = sorted(set(choice[1] for choice in FOLD_CHOICES.values()))
+    for alpha, retain in selected_oa:
+        z, _ = ts.opponent_adjusted_features(games, alpha, retain)
         games = games.merge(z, on="game_id", how="left", validate="one_to_one")
 
     schedule_groups = {
@@ -252,52 +259,20 @@ def main(pbp_path: str, spine_path: str, outdir: str) -> None:
     fold_rows = []
     for target in TARGET_SEASONS:
         val_season = target - 1
-
-        # Select Elo hyperparameters using the immediately prior season only.
-        elo_choice = None
-        for key, pred in elo.items():
-            valid = games.loc[games.source_season.eq(val_season), ["game_id", "home_win"]].merge(
-                pred.loc[pred.source_season.eq(val_season), ["game_id", "elo_p"]],
-                on="game_id", how="inner", validate="one_to_one",
-            )
-            if len(valid) < 100:
-                continue
-            score = log_loss(valid.home_win.astype(int), np.clip(valid.elo_p, 1e-6, 1 - 1e-6), labels=[0, 1])
-            if elo_choice is None or score < elo_choice[0]:
-                elo_choice = (score, key)
-        if elo_choice is None:
-            raise RuntimeError(f"No usable Elo validation data for target season {target}")
-        elo_key = elo_choice[1]
+        (k, ha, retain), (alpha, oa_retain) = FOLD_CHOICES[target]
+        elo_key = f"k{k}_h{ha}_r{retain}"
+        oa_tag = f"a{alpha:.2f}_r{oa_retain:.2f}".replace(".", "p")
         frame = games.merge(
             elo[elo_key][["game_id", "elo_p"]], on="game_id", how="left", validate="one_to_one"
         )
         frame["elo_logit"] = np.log(
             np.clip(frame.elo_p, 1e-6, 1 - 1e-6) / np.clip(1 - frame.elo_p, 1e-6, 1 - 1e-6)
         )
-
         train = frame.loc[frame.source_season.le(target - 2)].copy()
         val = frame.loc[frame.source_season.eq(val_season)].copy()
         test = frame.loc[frame.source_season.eq(target)].copy()
         if len(test) == 0 or len(val) < 100:
             raise RuntimeError(f"Insufficient chronological data for target season {target}")
-
-        # Match Team Strength 004's validation-only OA selection procedure.
-        oa_choice = None
-        for alpha, retain in ts.OA_GRID:
-            tag = f"a{alpha:.2f}_r{retain:.2f}".replace(".", "p")
-            features = [
-                "elo_logit", f"oa_sog_diff_{tag}", f"oa_xg_diff_{tag}",
-                "d_goals_r20", "d_rest_days",
-            ]
-            for C in C_GRID:
-                model = fit_pipeline(train, features, C)
-                p = np.clip(model.predict_proba(val[features])[:, 1], 1e-6, 1 - 1e-6)
-                score = log_loss(val.home_win.astype(int), p, labels=[0, 1])
-                if oa_choice is None or score < oa_choice[0]:
-                    oa_choice = (score, tag)
-        if oa_choice is None:
-            raise RuntimeError(f"No usable OA validation data for target season {target}")
-        oa_tag = oa_choice[1]
 
         base_features = [
             "elo_logit", "d_sog_share_r20", "d_xg_share_r20", "d_goals_r20", "d_rest_days",
@@ -313,6 +288,16 @@ def main(pbp_path: str, spine_path: str, outdir: str) -> None:
             model = fit_pipeline(fit, features, C)
             p_home = model.predict_proba(test[features])[:, 1]
             fold_metric = score_predictions(test.home_win, p_home)
+            if model_name == "team_strength_004":
+                reference = TEAM_STRENGTH_004_BRIER.get(target)
+                if reference is not None:
+                    fold_metric["team_strength_004_reference_brier"] = reference
+                    fold_metric["baseline_reproduction_delta"] = fold_metric["brier"] - reference
+                    if abs(fold_metric["baseline_reproduction_delta"]) > 1e-5:
+                        raise RuntimeError(
+                            f"Team Strength 004 baseline did not reproduce for {target}: "
+                            f"{fold_metric['brier']:.8f} vs {reference:.8f}"
+                        )
             fold_rows.append({
                 "model_variant": model_name,
                 "target_season": target,
