@@ -1,0 +1,23 @@
+name: Validate Production Data
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/data/**'
+      - 'src/production/validate-public-data.mjs'
+  pull_request:
+    paths:
+      - 'public/data/**'
+      - 'src/production/validate-public-data.mjs'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate production exports
+        run: node src/production/validate-public-data.mjs
