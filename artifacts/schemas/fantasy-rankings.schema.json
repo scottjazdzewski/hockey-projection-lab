@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"fantasy-rankings.schema.json",
+  "title":"Hockey Lab Fantasy Rankings",
+  "type":"object",
+  "required":["schema_version","generated_at","rankings"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "generated_at":{"type":"string","format":"date-time"},
+    "scoring_profile":{"type":["string","null"]},
+    "rankings":{"type":"array","items":{"type":"object","required":["rank","player_id","name","team_abbr","position"],"properties":{
+      "rank":{"type":"integer","minimum":1},"player_id":{"type":["integer","string"]},"name":{"type":"string"},
+      "team_abbr":{"type":"string"},"position":{"type":"string"},
+      "ros_projection":{"type":["number","null"]},"trend":{"type":["number","null"]},
+      "role":{"type":["string","null"]},"pp_unit":{"type":["string","null"]},"schedule_score":{"type":["number","null"]}
+    },"additionalProperties":true}}
+  },
+  "additionalProperties":false
+}
