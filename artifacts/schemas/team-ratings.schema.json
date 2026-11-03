@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"team-ratings.schema.json",
+  "title":"Hockey Lab Team Ratings",
+  "type":"object",
+  "required":["schema_version","generated_at","model_version","teams"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "generated_at":{"type":"string","format":"date-time"},
+    "model_version":{"type":"string"},
+    "teams":{"type":"array","items":{"type":"object","required":["abbr","name"],"properties":{
+      "abbr":{"type":"string"},"name":{"type":"string"},
+      "overall":{"type":["number","null"]},"offense":{"type":["number","null"]},"defense":{"type":["number","null"]},
+      "five_on_five":{"type":["number","null"]},"power_play":{"type":["number","null"]},"penalty_kill":{"type":["number","null"]},
+      "goaltending":{"type":["number","null"]},"form":{"type":["number","null"]},"as_of":{"type":["string","null"]}
+    },"additionalProperties":true}}
+  },
+  "additionalProperties":false
+}
