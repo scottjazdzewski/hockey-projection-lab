@@ -359,7 +359,7 @@
   grid-column:1/-1;
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  min-height:38px;
+  min-height:46px;
   overflow:hidden;
   border:1px solid #bbb6b8;
   border-radius:999px;
@@ -368,29 +368,38 @@
 .gc-goalie-side{
   min-width:0;
   display:grid;
-  grid-template-columns:auto minmax(0,1fr) auto;
+  grid-template-columns:auto 1fr;
+  grid-template-areas:
+    "side status"
+    "name name";
   align-items:center;
-  gap:5px;
-  padding:7px 10px;
+  column-gap:8px;
+  row-gap:3px;
+  padding:7px 11px 8px;
   border-right:1px solid rgba(75,43,103,.16);
   text-transform:uppercase;
 }
 .gc-goalie-side:last-child{border-right:0}
 .gc-goalie-side strong{
+  grid-area:side;
+  justify-self:start;
   font-size:6.4px;
   letter-spacing:.05em;
   opacity:.72;
 }
 .gc-goalie-side span{
+  grid-area:name;
   min-width:0;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  text-align:center;
-  font-size:6.7px;
+  text-align:left;
+  font-size:7px;
   font-weight:900;
 }
 .gc-goalie-side b{
+  grid-area:status;
+  justify-self:end;
   font-size:5.8px;
   letter-spacing:.035em;
 }
@@ -421,7 +430,7 @@
   grid-column:1/-1;
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  min-height:50px;
+  min-height:54px;
   overflow:hidden;
   border:1px solid #d7bc72;
   border-radius:16px;
@@ -509,12 +518,16 @@
   }
   .gc-goalie-side{
     grid-template-columns:1fr;
+    grid-template-areas:
+      "side"
+      "name"
+      "status";
     justify-items:center;
     gap:2px;
     padding:7px 7px 8px;
     text-align:center;
   }
-  .gc-goalie-side strong{font-size:7px}
+  .gc-goalie-side strong{font-size:7px;justify-self:center}
   .gc-goalie-side span{
     width:100%;
     white-space:normal;
