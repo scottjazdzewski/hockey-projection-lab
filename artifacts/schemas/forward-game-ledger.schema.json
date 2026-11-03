@@ -32,8 +32,8 @@
             "home_probability_min":{"type":["number","null"],"minimum":0,"maximum":1},
             "home_probability_max":{"type":["number","null"],"minimum":0,"maximum":1},
             "home_probability_std":{"type":["number","null"],"minimum":0},
-            "earliest_closing_timestamp":{"type":["string","null"]},
-            "latest_closing_timestamp":{"type":["string","null"]},
+            "earliest_odds_timestamp":{"type":["string","null"]},
+            "latest_odds_timestamp":{"type":["string","null"]},
             "books":{"type":"array","items":{"type":"object"}}
           }
         }
