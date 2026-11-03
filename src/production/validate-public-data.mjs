@@ -154,6 +154,7 @@ if(manifest){
       const s=manifest.surfaces[key];
       if(!s) { fail('production-manifest missing surface '+key); continue; }
       if(!['EMPTY','READY','WITHHELD'].includes(s.state)) fail('invalid manifest state '+key);
+      if(s.max_age_minutes!==null && (!Number.isInteger(s.max_age_minutes) || s.max_age_minutes<1)) fail('invalid max_age_minutes '+key);
       const rel=s.file?.replace(/^public\/data\//,'');
       if(rel!==file) fail('manifest file mismatch for '+key);
       if(!fs.existsSync(path.join(dataDir,file))) fail('manifest points to missing file '+file);
