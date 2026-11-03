@@ -24,6 +24,10 @@ permissions:
   contents: write
   actions: write
 
+concurrency:
+  group: hockey-lab-production-data
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
