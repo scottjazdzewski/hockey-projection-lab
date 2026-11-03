@@ -142,6 +142,24 @@ Goalie Signal Audit 002:
 
 Rolling-origin goalie test is required before any goalie feature is promoted.
 
+## Schedule Increment 007 — No-Goalie
+
+Five nested rolling-origin target seasons (2022–2026), 6,993 games. The experiment froze the fold-specific Elo/opponent-adjusted choices from Team Strength 004 and tuned logistic regularization on each prior validation season. The Team Strength 004 baseline Brier reproduced exactly in every fold. All variants exclude goalie inputs and use schedule features from prior dates only; ambiguous same-date location sequence is missing.
+
+| Variant | Brier | Log loss | Accuracy | Brier folds better than baseline |
+|---|---:|---:|---:|---:|
+| Team Strength 004 baseline | 0.235382 | 0.662976 | 59.47% | — |
+| + back-to-back | **0.234726** | **0.661540** | 59.92% | 5/5 |
+| + schedule density | 0.235248 | 0.662693 | 59.13% | 5/5 |
+| + location sequence | 0.235420 | 0.663052 | 59.97% | 3/5 |
+| + all schedule groups | 0.234800 | 0.661700 | 59.65% | 5/5 |
+
+**Best schedule signal so far: back-to-back indicators.** Versus Team Strength 004, B2B lowered Brier by 0.000655, lowered log loss by 0.001437, and raised accuracy by 0.44 percentage points. The full schedule bundle was weaker than B2B alone; location sequence worsened Brier/log loss despite higher accuracy. This suggests a specific fatigue signal may help, while adding loosely related schedule features can dilute the probability improvement.
+
+Pooled calibration for Team Strength 004 + B2B: intercept -0.0174, slope 0.9979; mean home probability 0.5407 versus actual home win rate 0.5365. Reliability deciles are included in the frozen artifact. Calibration was measured diagnostically and not applied to the predictions.
+
+Status: B2B remains **CANDIDATE**, not promoted. The historical test seasons were already inspected and the early 2026–27 shadow slice has been viewed, so there is no untouched historical holdout. A genuine prospective forward test is still required. Output bundle and source manifest: `HWIN_SCHEDULE_007_NO_GOALIE_20261103.zip` and `HWIN_SCHEDULE_007_MANIFEST_20261103.json` in Drive `04_VALIDATION`.
+
 ## Promotion rules
 
 A candidate layer must:
