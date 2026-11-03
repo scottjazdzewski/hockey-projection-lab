@@ -72,3 +72,15 @@ A surface is:
 - `WITHHELD` when an expected export is intentionally blocked because a production gate failed.
 
 The manifest does not override the validator. A surface marked READY with invalid underlying data must still fail validation.
+
+
+## Website publication switch
+
+The browser requires **two independent conditions** before displaying model-derived values:
+
+1. the underlying export must satisfy its contract (for example, a `PROMOTED` game or team model), and
+2. the matching surface in `public/data/production-manifest.json` must be `READY`.
+
+This prevents a research or candidate file from appearing simply because it was copied into `public/data/`.
+
+For a promotion, update the export and its manifest surface together, run the validator, then commit.
