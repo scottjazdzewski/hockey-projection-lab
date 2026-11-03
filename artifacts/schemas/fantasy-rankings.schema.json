@@ -3,14 +3,25 @@
   "$id":"fantasy-rankings.schema.json",
   "title":"Hockey Lab Fantasy Rankings",
   "type":"object",
-  "required":["schema_version","generated_at","rankings"],
+  "required":["schema_version","generated_at","model","rankings"],
   "properties":{
-    "schema_version":{"const":"1.0"},
+    "schema_version":{"const":"1.1"},
     "generated_at":{"type":"string","format":"date-time"},
+    "model":{
+      "type":"object",
+      "required":["model_id","version","status"],
+      "properties":{
+        "model_id":{"type":"string","minLength":1},
+        "version":{"type":"string","minLength":1},
+        "status":{"enum":["RESEARCH","CANDIDATE","PROMOTED"]},
+        "trained_through":{"type":["string","null"]}
+      },
+      "additionalProperties":true
+    },
     "scoring_profile":{"type":["string","null"]},
     "rankings":{"type":"array","items":{"type":"object","required":["rank","player_id","name","team_abbr","position"],"properties":{
-      "rank":{"type":"integer","minimum":1},"player_id":{"type":["integer","string"]},"name":{"type":"string"},
-      "team_abbr":{"type":"string"},"position":{"type":"string"},
+      "rank":{"type":"integer","minimum":1},"player_id":{"type":["integer","string"]},"name":{"type":"string","minLength":1},
+      "team_abbr":{"type":"string","minLength":2,"maxLength":3},"position":{"type":"string","minLength":1},
       "ros_projection":{"type":["number","null"]},"trend":{"type":["number","null"]},
       "role":{"type":["string","null"]},"pp_unit":{"type":["string","null"]},"schedule_score":{"type":["number","null"]}
     },"additionalProperties":true}}
