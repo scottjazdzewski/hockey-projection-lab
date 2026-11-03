@@ -105,10 +105,11 @@ Quality labels are fixed: 3+ books `CONSENSUS`, 2 `LIMITED_CONSENSUS`, 1
 `SINGLE_BOOK`, and 0 `UNAVAILABLE`. Primary comparison metrics use only
 `CONSENSUS`; limited and single-book rows remain visible as secondary samples.
 The primary comparison allow-list is Pinnacle, Circa, DraftKings, FanDuel,
-BetMGM, Caesars, ESPN BET and Bet365. Other authenticated sportsbook rows are
-retained in the book-line artifact and coverage audit but do not count toward
-the consensus threshold. Common display-name aliases are normalized before
-deduplication; the source display name remains in `sportsbook_source_name`.
+BetMGM, Caesars, ESPN BET, Bet365, Unibet and PointsBet. Other authenticated
+rows (including exchanges) are retained in the book-line artifact and coverage
+audit but do not count toward the sportsbook consensus threshold. Common
+display-name aliases are normalized before deduplication; the source display
+name remains in `sportsbook_source_name`.
 
 ## Forecast eligibility and model isolation
 
