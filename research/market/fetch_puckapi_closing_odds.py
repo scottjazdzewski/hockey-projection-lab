@@ -62,8 +62,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--games", required=True, help="Canonical NHL games parquet")
     parser.add_argument("--out", default=str(ROOT / "artifacts/market/staging/puckapi-closing-lines.parquet"))
-    parser.add_argument("--start-season", type=int, default=2019, help="First source_season start year to include")
-    parser.add_argument("--end-season", type=int, default=2026, help="Last source_season start year to include")
+    parser.add_argument("--start-season", type=int, default=2019, help="First NHL season start year to include (for example, 2019 means 2019-20)")
+    parser.add_argument("--end-season", type=int, default=2026, help="Last NHL season start year to include (for example, 2026 means 2026-27)")
     parser.add_argument("--max-credits", type=int, default=0,
                         help="Maximum credits explicitly approved for this run; omit to remain dry-run")
     parser.add_argument("--sleep-seconds", type=float, default=1.05,
@@ -71,9 +71,17 @@ def main() -> None:
     args = parser.parse_args()
 
     games = _schedule(Path(args.games))
-    if "source_season" in games:
-        seasons = pd.to_numeric(games.source_season, errors="coerce")
-        games = games[seasons.between(args.start_season, args.end_season)]
+    if "season_full" in games:
+        # The canonical spine stores season_full as YYYY + YYYY (for example,
+        # 20252026). Filtering on its first year avoids the source_season
+        # field's end-year convention.
+        seasons = pd.to_numeric(games.season_full.astype("string").str.slice(0, 4), errors="coerce")
+    elif "source_season" in games:
+        # In the canonical spine source_season is the season's ending year.
+        seasons = pd.to_numeric(games.source_season, errors="coerce") - 1
+    else:
+        raise ValueError("Canonical games file must include season_full or source_season")
+    games = games[seasons.between(args.start_season, args.end_season)]
     # Historical closing prices are only queried for games with an authoritative
     # result already in the canonical spine; scheduled future games are not part
     # of a historical backfill.
