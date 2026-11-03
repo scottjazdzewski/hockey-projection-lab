@@ -196,6 +196,38 @@ if(liveContext){
 }else fail('live-context.json missing');
 
 
+
+const forwardGamesDir=path.join(root,'artifacts','forward','games');
+if(fs.existsSync(forwardGamesDir)){
+  const files=fs.readdirSync(forwardGamesDir).filter(x=>x.endsWith('.json'));
+  for(const file of files){
+    const rec=JSON.parse(fs.readFileSync(path.join(forwardGamesDir,file),'utf8'));
+    const id=String(rec.game_id);
+    if(rec.schema_version!=='1.0') fail('forward game '+id+' schema_version must be 1.0');
+    const startMs=Date.parse(rec.start_time_et);
+    const frozenMs=Date.parse(rec.frozen_at);
+    const generatedMs=Date.parse(rec.forecast?.generated_at);
+    const cutoffMs=Date.parse(rec.forecast?.data_cutoff);
+    if(!Number.isFinite(startMs) || !Number.isFinite(frozenMs)) fail('forward game '+id+' invalid start/freeze timestamp');
+    if(Number.isFinite(startMs) && Number.isFinite(frozenMs) && frozenMs>=startMs) fail('forward game '+id+' frozen at or after puck drop');
+    if(!Number.isFinite(generatedMs) || generatedMs>startMs) fail('forward game '+id+' projection generated after puck drop');
+    if(!Number.isFinite(cutoffMs) || cutoffMs>startMs) fail('forward game '+id+' data cutoff after puck drop');
+    if(Number.isFinite(generatedMs) && Number.isFinite(cutoffMs) && cutoffMs>generatedMs) fail('forward game '+id+' data cutoff later than projection generation');
+    const a=rec.forecast?.away?.win_probability;
+    const h=rec.forecast?.home?.win_probability;
+    if(typeof a!=='number' || typeof h!=='number' || Math.abs((a+h)-1)>0.001) fail('forward game '+id+' invalid frozen win probabilities');
+    const status=rec.result?.status;
+    if(!['OPEN','FINAL'].includes(status)) fail('forward game '+id+' invalid result status');
+    if(status==='FINAL'){
+      if(!rec.result?.winner_abbr) fail('forward game '+id+' FINAL without winner');
+      if(!rec.evaluation || typeof rec.evaluation.winner_correct!=='boolean') fail('forward game '+id+' FINAL without evaluation');
+    }else if(rec.evaluation!==null){
+      fail('forward game '+id+' OPEN record must not have evaluation');
+    }
+  }
+  ok('forward per-game immutability/timestamp checks complete');
+}
+
 if(forwardLedger){
   if(forwardLedger.schema_version!=='1.0') fail('forward-ledger summary schema_version must be 1.0');
   const s=forwardLedger.sample||{};
