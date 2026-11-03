@@ -37,6 +37,12 @@ if(projections){
       const id=String(g.game_id);
       if(seen.has(id)) fail('duplicate projection game_id '+id); else seen.add(id);
       if(schedule && !scheduleIds.has(id)) fail('projection game_id not in today schedule: '+id);
+      const scheduled=scheduleById.get(id);
+      if(scheduled){
+        if(g.away?.abbr!==scheduled.away_abbr) fail(id+' away abbreviation does not match schedule');
+        if(g.home?.abbr!==scheduled.home_abbr) fail(id+' home abbreviation does not match schedule');
+        if(g.game_date && schedule?.date && g.game_date!==schedule.date) fail(id+' game_date does not match schedule date');
+      }
       for(const side of ['away','home']){
         const p=g?.[side]?.win_probability;
         if(!finiteOrNull(p)) fail(id+' '+side+' win_probability must be finite or null');
@@ -52,7 +58,6 @@ if(projections){
         if(a===null || h===null) fail(id+' published with missing win probability');
         if(typeof a==='number' && typeof h==='number' && Math.abs((a+h)-1)>0.001) fail(id+' away+home win_probability must equal 1');
 
-        const scheduled=scheduleById.get(id);
         if(!scheduled?.start_time_et) fail(id+' published without exact scheduled start_time_et');
         const startMs=scheduled?.start_time_et ? Date.parse(scheduled.start_time_et) : NaN;
         const generatedMs=Date.parse(projections.generated_at);
@@ -175,11 +180,35 @@ if(manifest){
       if(rel!==file) fail('manifest file mismatch for '+key);
       if(!fs.existsSync(path.join(dataDir,file))) fail('manifest points to missing file '+file);
     }
-    if(manifest.surfaces.game_projections?.state==='READY' && projections?.model?.status!=='PROMOTED') fail('manifest game_projections READY without PROMOTED model');
-    if(manifest.surfaces.model_performance?.state==='READY' && !(perf?.sample?.games_scored>0)) fail('manifest model_performance READY without scored games');
-    if(manifest.surfaces.team_ratings?.state==='READY' && teams?.model?.status!=='PROMOTED') fail('manifest team_ratings READY without PROMOTED model');
-    if(manifest.surfaces.player_ratings?.state==='READY' && players?.model?.status!=='PROMOTED') fail('manifest player_ratings READY without PROMOTED model');
-    if(manifest.surfaces.fantasy_rankings?.state==='READY' && fantasy?.model?.status!=='PROMOTED') fail('manifest fantasy_rankings READY without PROMOTED model');
+    if(manifest.surfaces.game_projections?.state==='READY'){
+      if(projections?.model?.status!=='PROMOTED') fail('manifest game_projections READY without PROMOTED model');
+      const scheduledIds=new Set((schedule?.games||[]).map(g=>String(g.game_id)));
+      const projectedIds=new Set((projections?.projections||[]).map(g=>String(g.game_id)));
+      for(const id of scheduledIds) if(!projectedIds.has(id)) fail('READY game projections missing scheduled game '+id);
+      if(projectedIds.size!==scheduledIds.size) fail('READY game projections coverage does not exactly match slate');
+      const ms=manifest.surfaces.game_projections;
+      if(ms.model_id!==projections?.model?.model_id || ms.model_version!==projections?.model?.version) fail('game projection manifest model metadata mismatch');
+    }
+    if(manifest.surfaces.model_performance?.state==='READY'){
+      if(!(perf?.sample?.games_scored>0)) fail('manifest model_performance READY without scored games');
+      const ms=manifest.surfaces.model_performance;
+      if(ms.model_id!==perf?.model?.model_id || ms.model_version!==perf?.model?.version) fail('model performance manifest metadata mismatch');
+    }
+    if(manifest.surfaces.team_ratings?.state==='READY'){
+      if(teams?.model?.status!=='PROMOTED') fail('manifest team_ratings READY without PROMOTED model');
+      const ms=manifest.surfaces.team_ratings;
+      if(ms.model_id!==teams?.model?.model_id || ms.model_version!==teams?.model?.version) fail('team ratings manifest metadata mismatch');
+    }
+    if(manifest.surfaces.player_ratings?.state==='READY'){
+      if(players?.model?.status!=='PROMOTED') fail('manifest player_ratings READY without PROMOTED model');
+      const ms=manifest.surfaces.player_ratings;
+      if(ms.model_id!==players?.model?.model_id || ms.model_version!==players?.model?.version) fail('player ratings manifest metadata mismatch');
+    }
+    if(manifest.surfaces.fantasy_rankings?.state==='READY'){
+      if(fantasy?.model?.status!=='PROMOTED') fail('manifest fantasy_rankings READY without PROMOTED model');
+      const ms=manifest.surfaces.fantasy_rankings;
+      if(ms.model_id!==fantasy?.model?.model_id || ms.model_version!==fantasy?.model?.version) fail('fantasy rankings manifest metadata mismatch');
+    }
     ok('production manifest readable');
   }
 }else fail('production-manifest.json missing');
