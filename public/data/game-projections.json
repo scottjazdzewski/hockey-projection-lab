@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03T09:46:20.704571-05:00",
+  "generated_at": "2026-11-03T11:27:06.909635-05:00",
   "data_cutoff": "2026-11-01T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -34,6 +34,8 @@
         "status": "PROJECTED",
         "away": "Sebastian Cossa",
         "home": "Sergei Bobrovsky",
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -50,7 +52,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -84,6 +86,8 @@
         "status": "PROJECTED",
         "away": "Nico Daws",
         "home": "Jacob Fowler",
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -103,7 +107,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -137,6 +141,8 @@
         "status": "PROJECTED",
         "away": "John Gibson",
         "home": "Andrei Vasilevskiy",
+        "away_status": "PROJECTED",
+        "home_status": "PROJECTED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -156,7 +162,7 @@
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -190,6 +196,8 @@
         "status": "PROJECTED",
         "away": "Joel Hofer",
         "home": "Dylan Garand",
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -206,7 +214,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -240,6 +248,8 @@
         "status": "PROJECTED",
         "away": "Jesper Wallstedt",
         "home": "Dan Vladar",
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -256,7 +266,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -290,6 +300,8 @@
         "status": "PROJECTED",
         "away": "Adin Hill",
         "home": "Arturs Silovs",
+        "away_status": "PROJECTED",
+        "home_status": "PROJECTED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -306,7 +318,7 @@
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -340,6 +352,8 @@
         "status": "PROJECTED",
         "away": "Jake Oettinger",
         "home": "Logan Thompson",
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -356,7 +370,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -390,6 +404,8 @@
         "status": "PROJECTED",
         "away": "Scott Wedgewood",
         "home": "Jet Greaves",
+        "away_status": "CONFIRMED",
+        "home_status": "PROJECTED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -408,7 +424,7 @@
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -442,6 +458,8 @@
         "status": "PROJECTED",
         "away": "Tristan Jarry",
         "home": "Connor Hellebuyck",
+        "away_status": "PROJECTED",
+        "home_status": "PROJECTED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -460,7 +478,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -494,6 +512,8 @@
         "status": "PROJECTED",
         "away": "Pyotr Kochetkov",
         "home": "Juuse Saros",
+        "away_status": "PROJECTED",
+        "home_status": "PROJECTED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -510,7 +530,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -544,6 +564,8 @@
         "status": "PROJECTED",
         "away": "Lukas Dostal",
         "home": "Kevin Lankinen",
+        "away_status": "PROJECTED",
+        "home_status": "PROJECTED",
         "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
@@ -560,7 +582,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T09:46:20.704571-05:00"
+        "updated_at": "2026-11-03T11:27:06.909635-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
