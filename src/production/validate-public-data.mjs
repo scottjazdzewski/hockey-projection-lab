@@ -65,13 +65,21 @@ if(perf){
 }
 
 if(teams){
+  if(teams.schema_version!=='1.1') fail('team-ratings schema_version must be 1.1');
+  if(!teams.model?.model_id || !teams.model?.version || !teams.model?.status) fail('team-ratings model metadata incomplete');
   if(!Array.isArray(teams.teams)) fail('team-ratings teams must be array');
   else {
+    const canonical=new Set(['ANA','BOS','BUF','CAR','CBJ','CGY','CHI','COL','DAL','DET','EDM','FLA','LAK','MIN','MTL','NJD','NSH','NYI','NYR','OTT','PHI','PIT','SEA','SJS','STL','TBL','TOR','UTA','VAN','VGK','WPG','WSH']);
     const ids=new Set();
     for(const t of teams.teams){
       if(!t.abbr || !t.name) fail('team rating missing identity');
+      if(!canonical.has(t.abbr)) fail('unknown current team abbreviation '+t.abbr);
       if(ids.has(t.abbr)) fail('duplicate team '+t.abbr); else ids.add(t.abbr);
+      for(const k of ['overall','offense','defense','five_on_five','power_play','penalty_kill','goaltending','form']){
+        if(!finiteOrNull(t[k])) fail(t.abbr+' '+k+' must be finite or null');
+      }
     }
+    if(teams.model.status==='PROMOTED' && ids.size!==32) fail('PROMOTED team-ratings export must contain all 32 teams');
     ok('team ratings readable');
   }
 }
