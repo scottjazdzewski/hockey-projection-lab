@@ -75,7 +75,7 @@ It also performs **two game-specific pregame pulls for every scheduled start tim
 - approximately **30 minutes before puck drop**
 - approximately **15 minutes before puck drop**
 
-The scheduler runs on a quarter-hour heartbeat and gates against each game's actual `start_time_et` in `public/data/today-games.json`. This means staggered starts receive their own 30-minute and 15-minute checks.
+The scheduler runs on a five-minute heartbeat and gates against each game's actual `start_time_et` in `public/data/today-games.json`. This means staggered starts receive their own 30-minute and 15-minute checks.
 
 ## Freeze policy
 
@@ -111,4 +111,9 @@ Do not commit API keys. Any licensed provider credential must be stored as a Git
 
 ## Refresh cadence
 
-Production live context uses a quarter-hour scheduler with a gate. Full provider pulls occur at the established daily checkpoints (5:15 AM, 10:30 AM, 2:30 PM, and 5:30 PM America/New_York), plus **two pregame checks for every game: about 30 minutes and 15 minutes before its scheduled start**. The gate reads the actual `start_time_et` values from `public/data/today-games.json`, so staggered start times receive independent checks. The scheduler does not perform a provider pull on quarter-hour ticks that match neither a fixed checkpoint nor one of the pregame windows.
+Production live context uses a five-minute scheduler with a gate. Full provider pulls occur at the established daily checkpoints (5:15 AM, 10:30 AM, 2:30 PM, and 5:30 PM America/New_York), plus **two pregame checks for every game: about 30 minutes and 15 minutes before its scheduled start**. The gate reads the actual `start_time_et` values from `public/data/today-games.json`, so staggered start times receive independent checks. The scheduler does not perform a provider pull on quarter-hour ticks that match neither a fixed checkpoint nor one of the pregame windows.
+
+
+### Scheduler reliability guard
+
+The workflow wakes every five minutes, but it does **not** pull on every wake-up. It computes exact target times for each game's T-30 and T-15 checks and compares them with the last successful `live-context.json generated_at`. A target is pulled once, with a short grace window for normal GitHub Actions scheduling delay. This prevents duplicate provider requests while making the pregame checks much less sensitive to a delayed cron delivery.
