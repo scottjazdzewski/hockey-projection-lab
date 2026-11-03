@@ -177,6 +177,10 @@ def main(pbp_path: str, spine_path: str, outdir: str) -> None:
                     "away_team_abbr": game.away_team,
                     "game_type": game.game_type,
                     "game_start_time": str(game.game_time) if hasattr(game, "game_time") else None,
+                    "home_tied_xg_share_r20": getattr(game, "h_tied_xg_share_r20"),
+                    "away_tied_xg_share_r20": getattr(game, "a_tied_xg_share_r20"),
+                    "home_close_xg_share_r20": getattr(game, "h_close_xg_share_r20"),
+                    "away_close_xg_share_r20": getattr(game, "a_close_xg_share_r20"),
                     "home_win": int(game.home_win),
                     "p_home": float(probability),
                     "p_away": float(1 - probability),
@@ -253,6 +257,34 @@ def main(pbp_path: str, spine_path: str, outdir: str) -> None:
             for season, g in group.groupby("target_season")
         }
         summary["models"][name] = score
+    tied = pred.loc[pred.model_variant.eq("plus_tied_state_xg_share")].merge(
+        pred.loc[pred.model_variant.eq("team_strength_004_plus_b2b"), ["game_id", "p_home"]].rename(
+            columns={"p_home": "baseline_p_home"}
+        ),
+        on="game_id", how="inner", validate="one_to_one",
+    )
+    y = tied.home_win.to_numpy(dtype=float)
+    p_candidate = tied.p_home.to_numpy(dtype=float)
+    p_baseline = tied.baseline_p_home.to_numpy(dtype=float)
+    paired_delta = (y - p_candidate) ** 2 - (y - p_baseline) ** 2
+    rng = np.random.default_rng(9009)
+    boot = np.empty(5000)
+    for i in range(len(boot)):
+        boot[i] = paired_delta[rng.integers(0, len(paired_delta), len(paired_delta))].mean()
+    summary["paired_game_bootstrap_diagnostic"] = {
+        "comparison": "plus_tied_state_xg_share minus team_strength_004_plus_b2b",
+        "delta_brier": float(paired_delta.mean()),
+        "resamples": len(boot),
+        "seed": 9009,
+        "delta_brier_95pct_interval": [float(x) for x in np.quantile(boot, [0.025, 0.975])],
+        "interpretation": "Exploratory paired-game bootstrap; interval is not cluster-adjusted for repeated teams or seasons.",
+    }
+    summary["test_feature_availability"] = {
+        "home_tied_xg_share_r20": float(pred.loc[pred.model_variant.eq("plus_tied_state_xg_share"), "home_tied_xg_share_r20"].notna().mean()),
+        "away_tied_xg_share_r20": float(pred.loc[pred.model_variant.eq("plus_tied_state_xg_share"), "away_tied_xg_share_r20"].notna().mean()),
+        "home_close_xg_share_r20": float(pred.loc[pred.model_variant.eq("plus_tied_state_xg_share"), "home_close_xg_share_r20"].notna().mean()),
+        "away_close_xg_share_r20": float(pred.loc[pred.model_variant.eq("plus_tied_state_xg_share"), "away_close_xg_share_r20"].notna().mean()),
+    }
     baseline = summary["models"]["team_strength_004_plus_b2b"]
     for name, score in summary["models"].items():
         score["delta_brier_vs_b2b"] = score["brier"] - baseline["brier"]
