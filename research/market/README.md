@@ -6,15 +6,33 @@ calibration. No market field is added to `public/data/game-projections.json`.
 
 ## Source decision
 
-PuckAPI is the preferred historical source to preflight. Its documented NHL
-odds archive starts in 2019-20, uses NHL-assigned game IDs, and includes
-bookmaker-specific moneylines and `capturedAt` timestamps. Its published
-coverage describes seven sportsbook archives including DraftKings, FanDuel,
-BetMGM and Pinnacle beginning in 2020-21, ESPN BET beginning in 2023-24, and
-additional closing-only books across 2019-20 through 2023-24. Per-game and
-per-book coverage is not guaranteed; the fetched data must establish actual
-coverage. The collector stores raw American prices and source timestamps, and
-the benchmark rejects any timestamp at or after scheduled puck drop.
+PuckAPI is the preferred historical source. Its NHL odds archive starts in
+2019-20, carries NHL game IDs, and `get_game_detail` returns sportsbook odds
+snapshots with captured timestamps. This supports a direct game-ID join and
+per-book latest-timestamp selection. The collector uses `get_game_detail` to
+request all sportsbook snapshots held for each game; it immediately excludes
+any row without a valid timestamp or timestamped at/after puck drop. The
+benchmark independently repeats the strict timing check.
+
+Published historical coverage, last checked 2026-11-03:
+
+| Season | Completed games with odds | Published coverage | Published book coverage |
+| --- | ---: | ---: | --- |
+| 2019-20 | 1,212 | 100% | About 6 books/game |
+| 2020-21 | 952 | 100% | About 16–18 books/game through 2023-24 |
+| 2021-22 | 1,401 | 100% | Same archive period |
+| 2022-23 | 1,400 | 100% | Same archive period |
+| 2023-24 | 1,400 | 100% | Same archive period; ESPN BET begins |
+| 2024-25 | 1,398 | 100% | 8 books/game |
+| 2025-26 | 1,394 | 100% | 8 books/game; 60+ books for about 300 games |
+| 2026-27 | 235 | 100% of completed games | Current partial season |
+
+The provider says its sportsbook archive includes DraftKings, FanDuel,
+BetMGM, Pinnacle, ESPN BET, Bet365, Caesars and additional books, with
+availability varying by season and game. These are provider-published counts,
+not a successful query or a verified Hockey Lab join. The benchmark report
+will replace these planning figures with observed per-game and per-book
+coverage after an authenticated backfill.
 
 The Odds API is the fallback/validation source. It documents NHL historical
 odds from June 6, 2020, with snapshots every ten minutes through September
@@ -24,13 +42,13 @@ events do not carry NHL game IDs, so matching must use exact date, both teams,
 and scheduled start; ambiguous rows remain unmatched.
 
 The published source pages were reviewed on 2026-11-03. No paid endpoint was
-queried for this implementation. Exact sportsbook/game coverage and exact
-match counts therefore remain unverified until a source account/key is
-available. PuckAPI's published 2025-26 full-season example costs 13,940
-credits; its free allowance is 500 credits/month. The historical fetcher is
-dry-run by default and requires a caller-supplied `--max-credits` before it
-will make any request. Do not add a subscription, buy credits, or run a paid
-backfill without explicit approval.
+queried for this implementation. Exact fetched sportsbook/game coverage and
+exact join counts therefore remain unverified until an account key is
+available. PuckAPI lists 10 credits per game detail call and a 500-credit
+monthly free allowance; its published 2025-26 season example is 13,940
+credits. The historical fetcher is dry-run by default and requires a
+caller-supplied `--max-credits` before it will make any request. Do not add a
+subscription, buy credits, or run a paid backfill without explicit approval.
 
 PuckAPI allows account holders to store data for internal research/backtesting
 while the account is open, but prohibits redistributing raw odds as a bulk
@@ -58,11 +76,13 @@ label can be derived from the canonical spine's `home_win` field.
 ## Timing, line selection, and no-vig math
 
 For each game and sportsbook, source observations must include both sides of
-the full-game moneyline and a UTC odds timestamp. The latest timestamp
-strictly earlier than scheduled start is selected. Rows at/after scheduled
-start, with one-sided prices, invalid prices, or conflicting prices at the
-same timestamp are rejected and listed in `line-rejections.json`. No later
-line is carried backward to fill a missing close.
+the full-game moneyline and a timestamp. The latest timestamp strictly earlier
+than scheduled start is selected. A `closing` label is not accepted as proof
+that a line predates puck drop: the source documents that some closing
+snapshots are captured at or just after the scheduled start. Rows at/after
+scheduled start, with one-sided prices, invalid prices, or conflicting prices
+at the same timestamp are rejected and listed in `line-rejections.json`. No
+later line is carried backward to fill a missing close.
 
 American odds are converted to raw implied probabilities per side. Negative
 price `-x` uses `x/(x+100)`; positive price `+x` uses `100/(x+100)`. Each
@@ -117,9 +137,9 @@ python research/market/fetch_puckapi_closing_odds.py \
 ```
 
 After data-use approval and with `PUCKAPI_API_KEY` set, pass a reviewed credit
-cap to fetch. The script stores only rows with an explicit provider timestamp;
-the benchmark performs the strict pre-start check and writes the final
-canonical artifacts.
+cap to fetch. The script stores only timestamped rows strictly before the
+canonical scheduled start; the benchmark repeats this guard and writes the
+final canonical artifacts.
 
 ```bash
 python research/market/fetch_puckapi_closing_odds.py \
