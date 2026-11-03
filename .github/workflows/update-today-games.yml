@@ -3,13 +3,13 @@ name: Update Today's NHL Games
 on:
   workflow_dispatch:
   schedule:
-    # Two early UTC runs keep the slate populated by roughly 5:15 AM Eastern
-    # across both EST and EDT without relying on a fixed local-time cron.
-    - cron: '15 9 * * *'
-    - cron: '15 10 * * *'
+    # Morning target: 4:30 AM America/New_York.
+    # GitHub cron is UTC, so both entries cover EST/EDT automatically.
+    - cron: '30 8 * * *'
+    - cron: '30 9 * * *'
     # Daytime refreshes keep game states/current slate metadata fresh.
-    - cron: '15 16 * * *'
-    - cron: '15 21 * * *'
+    - cron: '30 16 * * *'
+    - cron: '30 21 * * *'
   push:
     branches: [main]
     paths:
