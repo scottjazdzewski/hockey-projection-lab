@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-11-03T16:27:07.157653+00:00",
+  "updated_at": "2026-11-03T18:42:43.498Z",
   "surfaces": {
     "schedule": {
       "file": "public/data/today-games.json",
@@ -73,6 +73,15 @@
       "model_id": null,
       "model_version": null,
       "max_age_minutes": 360
+    },
+    "forward_ledger": {
+      "file": "public/data/forward-ledger-summary.json",
+      "schema": "forward-ledger-summary-inline-v1",
+      "state": "READY",
+      "owner": "forward-audit",
+      "model_id": null,
+      "model_version": null,
+      "max_age_minutes": null
     }
   }
 }
