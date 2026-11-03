@@ -8,6 +8,9 @@
 .gc-page{
   position:relative;
   min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
   isolation:isolate;
   background:url('/assets/hero-game-cards.webp') center top / cover fixed no-repeat;
   color:var(--gc-ivory);
@@ -68,7 +71,11 @@
   line-height:1.5;
 }
 
-.gc-main{z-index:1;background:transparent}
+.gc-main{
+  z-index:1;
+  flex:1 0 auto;
+  background:transparent;
+}
 .gc-content{padding:14px 0 28px}
 .gc-grid{
   display:grid;
