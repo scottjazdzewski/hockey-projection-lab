@@ -33,8 +33,7 @@
       ? '<span class="gc-rest-flags">'+flags.map(x=>'<b>'+esc(x)+'</b>').join('')+'</span>'
       : '<span class="gc-rest-flags gc-rest-flags-clear"><b>Normal load</b></span>';
     return '<span class="gc-rest-side '+restSeverityClass(severity)+'">'+
-      '<strong>'+esc(abbr)+'</strong>'+
-      '<span>'+esc(label||'Rest unknown')+'</span>'+
+      '<strong>'+esc(abbr)+' · '+esc(label||'Rest unknown')+'</strong>'+
       tags+
     '</span>';
   }
