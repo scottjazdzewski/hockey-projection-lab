@@ -12,6 +12,15 @@
     if(!state || !state.status || state.status==='UNKNOWN') return label+' —';
     return label+' '+String(state.status).toLowerCase();
   }
+  function goalieContext(state){
+    if(!state || !state.away || !state.home) return 'Goalies —';
+    const suffix=state.status==='CONFIRMED' ? 'confirmed' : 'projected';
+    return 'Goalies: '+state.away+' / '+state.home+' · '+suffix;
+  }
+  function restContext(g,state){
+    if(!state || !state.away || !state.home) return 'Rest —';
+    return 'Rest: '+g.away_abbr+' '+state.away+' / '+g.home_abbr+' '+state.home;
+  }
 
   function usableProjection(bundle,p,manifestReady){
     if(!manifestReady || !bundle || bundle.model?.status!=='PROMOTED' || !p || p.publish_state!=='PUBLISHED') return false;
@@ -39,8 +48,8 @@
     const xg=live ? goals(p.away.expected_goals,p.home.expected_goals) : '—';
     const reg=live ? pairPct(p.away.regulation_win_probability,p.home.regulation_win_probability) : '—';
     const ot=live ? pct(p.overtime_probability) : '—';
-    const goalies=live ? context('Goalies',p.goalie_state) : 'Goalies —';
-    const rest=live ? context('Rest',p.rest_state) : 'Rest —';
+    const goalies=live ? goalieContext(p.goalie_state) : 'Goalies —';
+    const rest=live ? restContext(g,p.rest_state) : 'Rest —';
     const lineup=live ? context('Lineup',p.lineup_state) : 'Lineup —';
     const modelPill=live ? 'Model live' : (surfaceState==='WITHHELD'?'Model withheld':'Model —');
     const footer=live
@@ -61,7 +70,7 @@
         '<div class="gc-metric"><strong>'+reg+'</strong><span>Reg win A · H</span></div>'+
         '<div class="gc-metric"><strong>'+ot+'</strong><span>OT probability</span></div>'+
       '</div>'+
-      '<div class="gc-pills"><span class="gc-pill">'+esc(goalies)+'</span><span class="gc-pill">'+esc(rest)+'</span><span class="gc-pill">'+esc(lineup)+'</span><span class="gc-pill">'+esc(modelPill)+'</span></div>'+
+      '<div class="gc-pills"><span class="gc-pill gc-pill-wide">'+esc(goalies)+'</span><span class="gc-pill gc-pill-wide">'+esc(rest)+'</span><span class="gc-pill">'+esc(lineup)+'</span><span class="gc-pill">'+esc(modelPill)+'</span></div>'+
       '<div class="gc-card-foot">'+footer+'</div>'+
     '</article>';
   }
