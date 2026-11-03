@@ -1,0 +1,39 @@
+name: Install Homepage Hurricanes Hero
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-home-hero.yml'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pillow
+      - name: Download supplied Hurricanes artwork
+        run: curl -fL 'https://sdmntpreastus2.oaiusercontent.com/files/00000000-fbe0-81f6-85a8-0de704c3453e/raw?se=2026-11-03T00%3A46%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=4c214db1-78d1-54f9-967b-f8bbad3cecb8&skoid=dd316919-ffbf-4550-9c54-dfc99f412009&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-02T22%3A21%3A55Z&ske=2026-11-03T22%3A21%3A55Z&sks=b&skv=2026-02-06&sig=Ek0664jeckncglxhwqSOV8XBUGRmsl5Tzl8RpkRg6rw%3D' -o /tmp/home.png
+      - name: Optimize hero
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          im=Image.open('/tmp/home.png').convert('RGB')
+          im=im.resize((1600,900),Image.Resampling.LANCZOS)
+          out=Path('public/assets/hero-home.webp')
+          im.save(out,'WEBP',quality=78,method=6)
+          print(out.stat().st_size)
+          PY
+      - name: Commit hero
+        run: |
+          git config user.name "hockey-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/assets/hero-home.webp
+          git commit -m "Install Hurricanes homepage hero"
+          git pull --rebase origin main
+          git push
