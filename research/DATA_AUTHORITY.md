@@ -1,6 +1,6 @@
 # Hockey Projection Lab — Data Authority Contract
 
-Last updated: 2026-11-02
+Last updated: 2026-11-03
 
 This file defines which source fields are allowed to become canonical inputs/targets. It exists to prevent silent leakage, historical key errors, and accidental reuse of provider fields already proven unreliable.
 
@@ -68,6 +68,10 @@ PBP 2018 and PBP 2019 both contain the 2018-19 season. PBP 2018 is more complete
 Never infer the mapping from filename alone.
 
 ## PBP feature ledger integrity gate
+
+Canonical feature artifact: `CANONICAL_HWIN_EVENT_FEATURES_GOALIE_WIN_TARGET_2010_2027_20261102.zip` (20,819 games; 41,638 team-game rows). It passes the two-side and duplicate-key checks. Use this artifact for model research.
+
+A superseded Drive copy named `SUPERSEDED_UNCANONICAL_HWIN_GAME_TEAM_EVENT_FEATURES_2010_2027_20261102.zip` has 44,352 rows, 2,714 duplicate game-side keys, and lacks `game_type`; it is archived and must not be used.
 
 Canonical event features must satisfy:
 - one home row and one away row per game
