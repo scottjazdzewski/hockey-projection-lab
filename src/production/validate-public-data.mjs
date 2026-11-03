@@ -148,7 +148,8 @@ if(manifest){
       model_performance:'model-performance.json',
       team_ratings:'team-ratings.json',
       player_ratings:'player-ratings.json',
-      fantasy_rankings:'fantasy-rankings.json'
+      fantasy_rankings:'fantasy-rankings.json',
+      team_identities:'team-identities.json'
     };
     for(const [key,file] of Object.entries(expected)){
       const s=manifest.surfaces[key];
