@@ -161,3 +161,12 @@
 @media(max-width:520px){
   .ip-team-grid,.ip-metric-grid{grid-template-columns:1fr}
 }
+
+
+/* Interior mobile: consistent one-line eyebrow and footer boundary. */
+@media(max-width:760px){
+  .ip-hero-inner{padding-top:100px}
+  .ip-eyebrow{white-space:nowrap;font-size:8px;letter-spacing:.09em}
+  .ip-content{padding-bottom:18px}
+  .ip-page footer{margin-bottom:0}
+}
