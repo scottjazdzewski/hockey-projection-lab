@@ -1,0 +1,81 @@
+.status-page{
+  min-height:100vh;
+  background:linear-gradient(180deg,#160b29,#21103f);
+  color:#fff8e8;
+}
+.status-back{
+  padding:9px 14px;
+  border:1px solid rgba(240,198,64,.65);
+  border-radius:999px;
+  color:#fff3c8;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.status-main{padding:48px 0 70px}
+.status-kicker{
+  color:#f0c640;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.status-main h1{
+  margin:8px 0 10px;
+  font:600 clamp(44px,5vw,72px)/.92 var(--serif);
+}
+.status-intro{
+  max-width:760px;
+  margin:0 0 28px;
+  color:rgba(255,248,232,.72);
+  font-size:11px;
+  line-height:1.6;
+}
+.status-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.status-card,.status-loading{
+  border:1px solid rgba(240,198,64,.35);
+  background:rgba(255,255,255,.06);
+  border-radius:12px;
+  padding:20px;
+}
+.status-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:flex-start;
+}
+.status-card h2{
+  margin:0;
+  font:600 27px/1 var(--serif);
+}
+.status-pill{
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.07em;
+}
+.status-ready{background:rgba(52,171,102,.17);color:#a8f1c7;border:1px solid rgba(82,210,133,.40)}
+.status-empty{background:rgba(240,198,64,.10);color:#f7dc75;border:1px solid rgba(240,198,64,.38)}
+.status-withheld{background:rgba(213,70,70,.12);color:#ffb4b4;border:1px solid rgba(235,91,91,.38)}
+.status-meta{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:7px 12px;
+  margin-top:18px;
+  font-size:8px;
+}
+.status-meta dt{color:rgba(255,248,232,.48);text-transform:uppercase;letter-spacing:.07em}
+.status-meta dd{margin:0;color:rgba(255,248,232,.86);overflow-wrap:anywhere}
+.status-stale{color:#ffb4b4!important}
+@media(max-width:900px){.status-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){
+  .status-main{padding-top:28px}
+  .status-grid{grid-template-columns:1fr}
+  .status-card{padding:17px}
+}
