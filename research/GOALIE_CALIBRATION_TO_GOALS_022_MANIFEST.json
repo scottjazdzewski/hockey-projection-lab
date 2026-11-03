@@ -1,0 +1,110 @@
+{
+  "experiment_id": "EXP-0036",
+  "model_id": "HOCKEY-LAB-GOALIE-CALIBRATION-TO-GOALS-022-RESEARCH",
+  "status": "RESEARCH",
+  "run_date": "2026-11-03",
+  "repository": "scottjazdzewski/hockey-projection-lab",
+  "branch": "codex/hockey-goalie-pregame-018",
+  "inputs": [
+    {
+      "name": "goals_009_oof",
+      "path": "research/exports/GOALS_TEAM_FORM_60_009_VALIDATION/oof_predictions.parquet",
+      "sha256": "51b3dbb639c368bbaf76eefd756e89d94a8de3a334cd84fe34d12df00ce3afa5"
+    },
+    {
+      "name": "calibrated_goalie_pool",
+      "path": "research/.tmp_goalie_probability_016/out/goalie_pool_calibration_021/goalie_pool_oof_calibration.parquet",
+      "sha256": "fb14dbf655b2a1b903711229e7121ac21e60770bff56ad71e15eb5c3bf7f2287"
+    },
+    {
+      "name": "actual_goalie_starters",
+      "path": "research/.tmp_goalie_probability_016/goalie/data/goalie_feature_output/goalie_game_features.parquet",
+      "sha256": "9fc54bacceb0c67d451ef8cc97f0f1851794f6a4eab28ff2fa91497d1e8684fa"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "exports/GOALIE_CALIBRATION_TO_GOALS_022_20261103/GOALIE_CALIBRATION_TO_GOALS_022_20261103.md",
+      "sha256": "5de0684515e9c92a34c308b6bcffb16cfb25ff9e783f1f63d8d224a73ffc17c5",
+      "bytes": 2582
+    },
+    {
+      "path": "exports/GOALIE_CALIBRATION_TO_GOALS_022_20261103/hockey_goalie_calibration_to_goals_022.py",
+      "sha256": "7efbad36f410f2e9556fb5976b052ed0eb8c907efaf8438086f44da96c0ad219",
+      "bytes": 18818
+    },
+    {
+      "path": "exports/GOALIE_CALIBRATION_TO_GOALS_022_20261103/oof_goalie_adjusted_scores.parquet",
+      "sha256": "39d483552cf5e09ae71da56860d35c02e707175afb0a46ecd38499801d4e459c",
+      "bytes": 699594
+    },
+    {
+      "path": "exports/GOALIE_CALIBRATION_TO_GOALS_022_20261103/summary.json",
+      "sha256": "62f53a0c7feb848e5dcbf030a7f8189a3c7043e7aa5cc268f6839e1d24f3188c",
+      "bytes": 6625
+    }
+  ],
+  "reproducibility": {
+    "scripted_run": true,
+    "independent_exact_second_run_check": false
+  },
+  "target_seasons": [
+    2024,
+    2025,
+    2026
+  ],
+  "pooled_win_metrics": {
+    "no_goalie": {
+      "games": 3936,
+      "full_game_home_win_brier": 0.23872373642918931,
+      "full_game_home_win_log_loss": 0.6698753964408838
+    },
+    "calibrated_named_goalie": {
+      "games": 3936,
+      "full_game_home_win_brier": 0.23922238126359924,
+      "full_game_home_win_log_loss": 0.6709170784927494
+    }
+  },
+  "decision": "Do not promote; pooled full-game win Brier/log loss worsen. Starter ID is retrospective.",
+  "drive_archive": {
+    "folder_id": "10fpCjyoPtV1TP4SyLiJF2WBY8aJVaqcV",
+    "folder_url": "https://drive.google.com/drive/folders/10fpCjyoPtV1TP4SyLiJF2WBY8aJVaqcV",
+    "files": [
+      {
+        "name": "hockey_goalie_calibration_to_goals_022.py",
+        "id": "1U0Y3Ez7_xZCPv1zv7OQCMtoBvxBpZqxv",
+        "url": "https://drive.google.com/file/d/1U0Y3Ez7_xZCPv1zv7OQCMtoBvxBpZqxv/view"
+      },
+      {
+        "name": "GOALIE_CALIBRATION_TO_GOALS_022_20261103.md",
+        "id": "1bsQMZE34VvUQvzxPe04HkQ96bb25QdSw",
+        "url": "https://drive.google.com/file/d/1bsQMZE34VvUQvzxPe04HkQ96bb25QdSw/view"
+      },
+      {
+        "name": "summary.json",
+        "id": "16EUy_IshsvbhktQCQFzNXwyiiUXEOYbY",
+        "url": "https://drive.google.com/file/d/16EUy_IshsvbhktQCQFzNXwyiiUXEOYbY/view"
+      },
+      {
+        "name": "oof_goalie_adjusted_scores.parquet",
+        "id": "1wdkmwfxrpa92fnJTzf-FbMt8O6wL8Vp4",
+        "url": "https://drive.google.com/file/d/1wdkmwfxrpa92fnJTzf-FbMt8O6wL8Vp4/view"
+      },
+      {
+        "name": "manifest.json",
+        "id": "1rtGltY2HRxHvQy1lDMXIq0AO6sQkgDfz",
+        "url": "https://drive.google.com/file/d/1rtGltY2HRxHvQy1lDMXIq0AO6sQkgDfz/view"
+      }
+    ]
+  },
+  "repository_artifacts": [
+    {
+      "path": "research/hockey_goalie_calibration_to_goals_022.py",
+      "sha256": "7efbad36f410f2e9556fb5976b052ed0eb8c907efaf8438086f44da96c0ad219"
+    },
+    {
+      "path": "research/GOALIE_CALIBRATION_TO_GOALS_022_20261103.md",
+      "sha256": "5de0684515e9c92a34c308b6bcffb16cfb25ff9e783f1f63d8d224a73ffc17c5"
+    }
+  ]
+}

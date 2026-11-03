@@ -1,0 +1,178 @@
+{
+  "experiment_id": "EXP-0037",
+  "model_id": "HOCKEY-LAB-GOALIE-TEAM-WIN-PCT-023-RESEARCH",
+  "status": "RESEARCH",
+  "run_date": "2026-11-03",
+  "repository": "scottjazdzewski/hockey-projection-lab",
+  "branch": "codex/hockey-goalie-pregame-018",
+  "feature_version": "TEAM_GOALIE_WIN_RESIDUAL_023",
+  "baseline": "Goals Team Form 60 009 validation-selected score-distribution OOF full-game home-win probability",
+  "target_seasons": [
+    2024,
+    2025,
+    2026
+  ],
+  "target_game_count": 3936,
+  "goalie_identity": "Postgame actual starter flag / ID; retrospective upper-bound test, not eligible as a live pregame input until timestamped starter snapshots exist.",
+  "pregame_cutoff": "All team-goalie starts and outcomes used for a prediction are strictly before that game date. Same-day team duplicate check passed.",
+  "tested_signal": "Shrinkage-adjusted team win-percentage residual for the named team-goalie pair: prior wins minus frozen-model expected wins, divided by prior starts plus selected prior-start equivalent.",
+  "model_selection": "For each target season S, fit through S-2; select feature window, shrinkage and ridge on S-1; refit through S-1; score S. No random split.",
+  "non_hockey_inputs": [],
+  "reproducibility": {
+    "second_run_summary_exact_match": true,
+    "second_run_all_3936_predictions_exact_match": true
+  },
+  "pooled_results": {
+    "frozen_goal_baseline": {
+      "games": 3936,
+      "home_win_brier": 0.23872373642918931,
+      "home_win_log_loss": 0.6698753964408838,
+      "home_win_accuracy": 0.5759654471544715,
+      "calibration_intercept": 0.4989540834908938,
+      "calibration_slope": 0.2667605762795233,
+      "mean_predicted_home_win_pct": 0.5388838750207524,
+      "observed_home_win_pct": 0.541920731707317
+    },
+    "goalie_team_win_history": {
+      "games": 3936,
+      "home_win_brier": 0.23838026772092177,
+      "home_win_log_loss": 0.6690124175319129,
+      "home_win_accuracy": 0.5795223577235772,
+      "calibration_intercept": 0.5040652492629756,
+      "calibration_slope": 0.2264021628211095,
+      "mean_predicted_home_win_pct": 0.5398255381409617,
+      "observed_home_win_pct": 0.541920731707317
+    },
+    "named_goalie_score_distribution": {
+      "games": 3936,
+      "home_win_brier": 0.23922238126359924,
+      "home_win_log_loss": 0.6709170784927494,
+      "home_win_accuracy": 0.5790142276422764,
+      "calibration_intercept": 0.5012581504142481,
+      "calibration_slope": 0.2448224829786098,
+      "mean_predicted_home_win_pct": 0.5399516614458755,
+      "observed_home_win_pct": 0.541920731707317
+    }
+  },
+  "paired_loss_deltas": {
+    "brier": {
+      "candidate_minus_baseline_mean_loss": -0.0003434687082675458,
+      "paired_14_day_block_bootstrap_95pct_ci": [
+        -0.0011766009417757736,
+        0.00043932403986053284
+      ],
+      "bootstrap_replicates": 5000,
+      "calendar_blocks": 42
+    },
+    "log_loss": {
+      "candidate_minus_baseline_mean_loss": -0.0008629789089709365,
+      "paired_14_day_block_bootstrap_95pct_ci": [
+        -0.0025642981010430806,
+        0.000734844964377283
+      ],
+      "bootstrap_replicates": 5000,
+      "calendar_blocks": 42
+    },
+    "named_goalie_score_distribution_vs_baseline": {
+      "brier": {
+        "candidate_minus_baseline_mean_loss": 0.0004986448344099421,
+        "paired_14_day_block_bootstrap_95pct_ci": [
+          -2.498398298406243e-05,
+          0.0010520217593955618
+        ],
+        "bootstrap_replicates": 5000,
+        "calendar_blocks": 42
+      },
+      "log_loss": {
+        "candidate_minus_baseline_mean_loss": 0.0010416820518656493,
+        "paired_14_day_block_bootstrap_95pct_ci": [
+          -8.452638465161973e-05,
+          0.0022249394295526174
+        ],
+        "bootstrap_replicates": 5000,
+        "calendar_blocks": 42
+      }
+    }
+  },
+  "decision": "Do not promote. Pooled improvement is small with paired time-block intervals crossing zero and test-season direction is mixed. Keep Hockey Lab Game v1.0.0 frozen. No site output changed.",
+  "inputs": [
+    {
+      "name": "goals_009_oof",
+      "path": "research/exports/GOALS_TEAM_FORM_60_009_VALIDATION/oof_predictions.parquet",
+      "sha256": "51b3dbb639c368bbaf76eefd756e89d94a8de3a334cd84fe34d12df00ce3afa5"
+    },
+    {
+      "name": "actual_goalie_starter_features",
+      "path": "research/.tmp_goalie_probability_016/goalie/data/goalie_feature_output/goalie_game_features.parquet",
+      "sha256": "9fc54bacceb0c67d451ef8cc97f0f1851794f6a4eab28ff2fa91497d1e8684fa"
+    },
+    {
+      "name": "goalie_skill_distribution_test_exp0036",
+      "path": "research/.tmp_goalie_probability_016/out/goalie_calibration_to_goals_022/oof_goalie_adjusted_scores.parquet",
+      "sha256": "39d483552cf5e09ae71da56860d35c02e707175afb0a46ecd38499801d4e459c"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "exports/GOALIE_TEAM_WIN_PCT_023_20261103/GOALIE_TEAM_WIN_PCT_023_20261103.md",
+      "sha256": "b80ff39353681663ef6577c2594d3840014fbebfc0a3dab35f785b552f67e3a7",
+      "bytes": 5368
+    },
+    {
+      "path": "exports/GOALIE_TEAM_WIN_PCT_023_20261103/hockey_goalie_team_win_pct_023.py",
+      "sha256": "8042fcf471e690fc91cdd932d086aeb07d5e49bcb75a07796329a040e489e3f6",
+      "bytes": 23921
+    },
+    {
+      "path": "exports/GOALIE_TEAM_WIN_PCT_023_20261103/oof_team_goalie_win_pct.parquet",
+      "sha256": "7e05a6ec494549d4bf3d49746bd3c720085bc6ef37f0b8f83985239b6e5948ef",
+      "bytes": 398567
+    },
+    {
+      "path": "exports/GOALIE_TEAM_WIN_PCT_023_20261103/summary.json",
+      "sha256": "36dc7255ffe7caa1ae049a88a4293c63d4224492b49e544447d314d4c4c1e144",
+      "bytes": 23473
+    }
+  ],
+  "drive_archive": {
+    "folder_id": "1Qq3zzpKLXpE3BgKICKQI2hUAtqTxlhZB",
+    "folder_url": "https://drive.google.com/drive/folders/1Qq3zzpKLXpE3BgKICKQI2hUAtqTxlhZB",
+    "files": [
+      {
+        "name": "hockey_goalie_team_win_pct_023.py",
+        "id": "1SU5SEYpvxWYOqQtiLh74xZX5FMaZap5e",
+        "url": "https://drive.google.com/file/d/1SU5SEYpvxWYOqQtiLh74xZX5FMaZap5e/view"
+      },
+      {
+        "name": "GOALIE_TEAM_WIN_PCT_023_20261103.md",
+        "id": "174YUtnWu4nwkNQmzRnyLodDHfxpaX0YS",
+        "url": "https://drive.google.com/file/d/174YUtnWu4nwkNQmzRnyLodDHfxpaX0YS/view"
+      },
+      {
+        "name": "summary.json",
+        "id": "1vIUVkkoeUtV7lTrTXfiWMnN2PUPfFDEt",
+        "url": "https://drive.google.com/file/d/1vIUVkkoeUtV7lTrTXfiWMnN2PUPfFDEt/view"
+      },
+      {
+        "name": "oof_team_goalie_win_pct.parquet",
+        "id": "1bX7PPczwGrKosE_ry6HmXZout3ZvEz7R",
+        "url": "https://drive.google.com/file/d/1bX7PPczwGrKosE_ry6HmXZout3ZvEz7R/view"
+      },
+      {
+        "name": "manifest.json",
+        "id": "1wrpUTdj0XzVdrokMnTcnHxK8SprH3xdd",
+        "url": "https://drive.google.com/file/d/1wrpUTdj0XzVdrokMnTcnHxK8SprH3xdd/view"
+      }
+    ]
+  },
+  "repository_artifacts": [
+    {
+      "path": "research/hockey_goalie_team_win_pct_023.py",
+      "sha256": "8042fcf471e690fc91cdd932d086aeb07d5e49bcb75a07796329a040e489e3f6"
+    },
+    {
+      "path": "research/GOALIE_TEAM_WIN_PCT_023_20261103.md",
+      "sha256": "b80ff39353681663ef6577c2594d3840014fbebfc0a3dab35f785b552f67e3a7"
+    }
+  ]
+}

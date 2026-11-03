@@ -1,0 +1,151 @@
+{
+  "experiment_id": "EXP-0035",
+  "model_id": "HOCKEY-LAB-GOALIE-POOL-CALIBRATION-021-RESEARCH",
+  "status": "RESEARCH",
+  "run_date": "2026-11-03",
+  "repository": "scottjazdzewski/hockey-projection-lab",
+  "branch": "codex/hockey-goalie-pregame-018",
+  "inputs": [
+    {
+      "name": "goalie_starts",
+      "path": "research/.tmp_goalie_probability_016/goalie/data/goalie_feature_output/goalie_game_features.parquet",
+      "sha256": "9fc54bacceb0c67d451ef8cc97f0f1851794f6a4eab28ff2fa91497d1e8684fa"
+    },
+    {
+      "name": "canonical_game_spine",
+      "path": "research/.tmp_goalie_probability_016/spine/data/spine_v3/games.parquet",
+      "sha256": "e3b6a3cb9784a91ec6e396e1a7e72330451abee055ed0ba54e0408e37f40a0e3"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "exports/GOALIE_POOL_CALIBRATION_021_20261103/GOALIE_POOL_CALIBRATION_021_20261103.md",
+      "sha256": "8b6a82d18596e8f153a4742cabc0d0fd9826ade714966bba786be535d1a8ea5e",
+      "bytes": 2300
+    },
+    {
+      "path": "exports/GOALIE_POOL_CALIBRATION_021_20261103/goalie_pool_oof_calibration.parquet",
+      "sha256": "fb14dbf655b2a1b903711229e7121ac21e60770bff56ad71e15eb5c3bf7f2287",
+      "bytes": 9845456
+    },
+    {
+      "path": "exports/GOALIE_POOL_CALIBRATION_021_20261103/goalie_pool_season_oof.parquet",
+      "sha256": "8612af43aa81305f10526102e57ef5f80786283b60d9f77807330fd54674f017",
+      "bytes": 416514
+    },
+    {
+      "path": "exports/GOALIE_POOL_CALIBRATION_021_20261103/hockey_goalie_pool_calibration_021.py",
+      "sha256": "74f19c64355e0dda5821b7f87e2a35caa225c813e87c93559b641ee7b4f4ba0f",
+      "bytes": 27119
+    },
+    {
+      "path": "exports/GOALIE_POOL_CALIBRATION_021_20261103/pool_ratings_asof_20261102.parquet",
+      "sha256": "e7a30360374224f4a4b5e2d1f192cee53825bb1f9436495d5f8733078eae3e95",
+      "bytes": 174947
+    },
+    {
+      "path": "exports/GOALIE_POOL_CALIBRATION_021_20261103/reliability_by_rating_band.parquet",
+      "sha256": "6c6946c3f03bd9404f04558d7efd8601ca5a935a880439484cca6894245e0133",
+      "bytes": 7572
+    },
+    {
+      "path": "exports/GOALIE_POOL_CALIBRATION_021_20261103/season_reliability_by_rating_band.parquet",
+      "sha256": "fe3ceb5a81e4ccd5a2e6f16daa476f5e489e774454a95d36f10eff06d087cd12",
+      "bytes": 7113
+    },
+    {
+      "path": "exports/GOALIE_POOL_CALIBRATION_021_20261103/summary.json",
+      "sha256": "0492b0ceff74e706b183a1362660f7042160d9ab5314ba330417c43245958074",
+      "bytes": 51669
+    }
+  ],
+  "reproducibility": {
+    "scripted_run": true,
+    "independent_exact_second_run_check": false
+  },
+  "target_seasons": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "pooled_test_metrics": {
+    "goalie_starts": 22100,
+    "goalies": 204,
+    "shots_against": 649896.0,
+    "neutral_pool_weighted_rmse_goals_per30": 1.817411083568173,
+    "calibrated_pool_weighted_rmse_goals_per30": 1.8031923485497086,
+    "relative_weighted_mse_improvement_vs_neutral": 0.015586032407894877,
+    "test_calibration_slope_through_origin": 0.782355798267597,
+    "correlation": 0.08252128784050794,
+    "mean_predicted_skill_delta_per30": -0.10034089798654743,
+    "mean_actual_skill_delta_per30": -0.2166154206103465
+  },
+  "decision": "Research only; small predictive skill signal, no win-probability promotion.",
+  "drive_archive": {
+    "folder_id": "1MqUyeFbVvtinAFSr18b1WbcG526oMPaM",
+    "folder_url": "https://drive.google.com/drive/folders/1MqUyeFbVvtinAFSr18b1WbcG526oMPaM",
+    "files": [
+      {
+        "name": "hockey_goalie_pool_calibration_021.py",
+        "id": "1ajWFx6MdGVeU8SODqZWvnihFYKcMT6x4",
+        "url": "https://drive.google.com/file/d/1ajWFx6MdGVeU8SODqZWvnihFYKcMT6x4/view"
+      },
+      {
+        "name": "GOALIE_POOL_CALIBRATION_021_20261103.md",
+        "id": "1dqWJ7FEV5mzJRk0QWw05T3Sap2K0GvWn",
+        "url": "https://drive.google.com/file/d/1dqWJ7FEV5mzJRk0QWw05T3Sap2K0GvWn/view"
+      },
+      {
+        "name": "summary.json",
+        "id": "15kljl90jJ6jmdYOOr5EuGD8MeJSZXZHz",
+        "url": "https://drive.google.com/file/d/15kljl90jJ6jmdYOOr5EuGD8MeJSZXZHz/view"
+      },
+      {
+        "name": "goalie_pool_oof_calibration.parquet",
+        "id": "1nOqsfODLn9l8Eeld1Lp45_ayqUVo8qEf",
+        "url": "https://drive.google.com/file/d/1nOqsfODLn9l8Eeld1Lp45_ayqUVo8qEf/view"
+      },
+      {
+        "name": "goalie_pool_season_oof.parquet",
+        "id": "1iV0uz863LcXnPuuSTCG0_FFp9HX0yc1Z",
+        "url": "https://drive.google.com/file/d/1iV0uz863LcXnPuuSTCG0_FFp9HX0yc1Z/view"
+      },
+      {
+        "name": "pool_ratings_asof_20261102.parquet",
+        "id": "1pmYZdn5CWcGEC2AM4J4F86ZCJhHf-_t8",
+        "url": "https://drive.google.com/file/d/1pmYZdn5CWcGEC2AM4J4F86ZCJhHf-_t8/view"
+      },
+      {
+        "name": "reliability_by_rating_band.parquet",
+        "id": "1tzipw9MjhhCdduohxN6gaxENhDYWIqMZ",
+        "url": "https://drive.google.com/file/d/1tzipw9MjhhCdduohxN6gaxENhDYWIqMZ/view"
+      },
+      {
+        "name": "season_reliability_by_rating_band.parquet",
+        "id": "1vCYmSFWA9DtcnPZaprEU9D-wBkMhEx8m",
+        "url": "https://drive.google.com/file/d/1vCYmSFWA9DtcnPZaprEU9D-wBkMhEx8m/view"
+      },
+      {
+        "name": "manifest.json",
+        "id": "1c8OIGMs3jRkAT3yX6GdmAfyGzcqSzaFT",
+        "url": "https://drive.google.com/file/d/1c8OIGMs3jRkAT3yX6GdmAfyGzcqSzaFT/view"
+      }
+    ]
+  },
+  "repository_artifacts": [
+    {
+      "path": "research/hockey_goalie_pool_calibration_021.py",
+      "sha256": "74f19c64355e0dda5821b7f87e2a35caa225c813e87c93559b641ee7b4f4ba0f"
+    },
+    {
+      "path": "research/GOALIE_POOL_CALIBRATION_021_20261103.md",
+      "sha256": "8b6a82d18596e8f153a4742cabc0d0fd9826ade714966bba786be535d1a8ea5e"
+    }
+  ]
+}

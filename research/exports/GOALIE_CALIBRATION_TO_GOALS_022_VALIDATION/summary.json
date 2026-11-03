@@ -1,0 +1,150 @@
+{
+  "experiment_id": "EXP-0036",
+  "model_id": "HOCKEY-LAB-GOALIE-CALIBRATION-TO-GOALS-022-RESEARCH",
+  "status": "RESEARCH; no promotion or public export",
+  "goal_baseline": "Goals Team Form 60 009, validation-selected distribution, OOF, no goalie input",
+  "goalie_rating": "EXP-0035 calibrated named-goalie GSAx/30 relative to the prior-date goalie-pool mean",
+  "identity_caveat": "The actual starter ID is from postgame goalie-box identity; goalie skill is strictly prior-date. Upper-bound diagnostic only until time-stamped pregame starter snapshots exist.",
+  "validation_design": "Train coefficient through S-2; select ridge penalty on S-1; refit through S-1; test S. The first scored target is 2024 because the Goals 009 OOF ledger begins in 2022.",
+  "adjustment": "One shared nonpositive log-rate coefficient: log(team goal rate)=log(frozen team-only rate)+beta*opposing-goalie skill. Positive goalie skill lowers opponent expected goals; below-average skill raises them.",
+  "target_seasons": [
+    2024,
+    2025,
+    2026
+  ],
+  "folds": {
+    "2024": {
+      "train_through_season": 2022,
+      "validation_season": 2023,
+      "test_games": 1312,
+      "selected_alpha": 10.0,
+      "validation_goal_count_logloss_by_alpha": {
+        "0.01": 1.9099988074460004,
+        "0.1": 1.909997933833632,
+        "1.0": 1.9099893770019107,
+        "10.0": 1.9099195492181538
+      },
+      "refit_beta_on_train_plus_validation": -0.1456379257997918,
+      "baseline_metrics": {
+        "games": 1312,
+        "reg_home_goal_mae": 1.371608895637357,
+        "reg_away_goal_mae": 1.3776851322314854,
+        "regulation_score_log_loss": 3.8498221316524064,
+        "regulation_3way_brier": 0.6192478051110206,
+        "full_game_home_win_log_loss": 0.6626261354454162,
+        "full_game_home_win_brier": 0.23526492964099666,
+        "full_game_home_win_accuracy": 0.59375,
+        "overtime_brier": 0.16514378581113817,
+        "p_home_mean_abs_shift_pp": 0.0,
+        "goal_count_log_loss_mean_sides": 1.9277024512758498
+      },
+      "calibrated_named_goalie_metrics": {
+        "games": 1312,
+        "reg_home_goal_mae": 1.3748952141677542,
+        "reg_away_goal_mae": 1.3796807414345817,
+        "regulation_score_log_loss": 3.8510031751695446,
+        "regulation_3way_brier": 0.6198526201188223,
+        "full_game_home_win_log_loss": 0.6631309392060386,
+        "full_game_home_win_brier": 0.23550096727809744,
+        "full_game_home_win_accuracy": 0.5975609756097561,
+        "overtime_brier": 0.1650894261816851,
+        "p_home_mean_abs_shift_pp": 0.6853788775234682,
+        "goal_count_log_loss_mean_sides": 1.9284999907065004
+      }
+    },
+    "2025": {
+      "train_through_season": 2023,
+      "validation_season": 2024,
+      "test_games": 1312,
+      "selected_alpha": 10.0,
+      "validation_goal_count_logloss_by_alpha": {
+        "0.01": 1.928535037617987,
+        "0.1": 1.928534709678367,
+        "1.0": 1.9285314428828455,
+        "10.0": 1.928499990706465
+      },
+      "refit_beta_on_train_plus_validation": -0.09756159201304336,
+      "baseline_metrics": {
+        "games": 1312,
+        "reg_home_goal_mae": 1.4089167268493128,
+        "reg_away_goal_mae": 1.3594174297803807,
+        "regulation_score_log_loss": 3.8507735639143448,
+        "regulation_3way_brier": 0.6212532274128303,
+        "full_game_home_win_log_loss": 0.6651753513997531,
+        "full_game_home_win_brier": 0.23639890020381116,
+        "full_game_home_win_accuracy": 0.5876524390243902,
+        "overtime_brier": 0.16400426657410533,
+        "p_home_mean_abs_shift_pp": 0.0,
+        "goal_count_log_loss_mean_sides": 1.9280823979793977
+      },
+      "calibrated_named_goalie_metrics": {
+        "games": 1312,
+        "reg_home_goal_mae": 1.4101069635191246,
+        "reg_away_goal_mae": 1.3596046596821192,
+        "regulation_score_log_loss": 3.8494660872774293,
+        "regulation_3way_brier": 0.6212991706024287,
+        "full_game_home_win_log_loss": 0.6652795705066086,
+        "full_game_home_win_brier": 0.23645640822612776,
+        "full_game_home_win_accuracy": 0.5891768292682927,
+        "overtime_brier": 0.1640148867332606,
+        "p_home_mean_abs_shift_pp": 0.2933911968409807,
+        "goal_count_log_loss_mean_sides": 1.92756372366192
+      }
+    },
+    "2026": {
+      "train_through_season": 2024,
+      "validation_season": 2025,
+      "test_games": 1312,
+      "selected_alpha": 0.01,
+      "validation_goal_count_logloss_by_alpha": {
+        "0.01": 1.927555977783432,
+        "0.1": 1.927556048258947,
+        "1.0": 1.9275567523259998,
+        "10.0": 1.92756372366192
+      },
+      "refit_beta_on_train_plus_validation": -0.11647570460032294,
+      "baseline_metrics": {
+        "games": 1312,
+        "reg_home_goal_mae": 1.3866086542836362,
+        "reg_away_goal_mae": 1.3294420664144624,
+        "regulation_score_log_loss": 3.81667460863521,
+        "regulation_3way_brier": 0.6453005269860813,
+        "full_game_home_win_log_loss": 0.6818247024774821,
+        "full_game_home_win_brier": 0.24450737944276013,
+        "full_game_home_win_accuracy": 0.5464939024390244,
+        "overtime_brier": 0.18835960815237462,
+        "p_home_mean_abs_shift_pp": 0.0,
+        "goal_count_log_loss_mean_sides": 1.916754856233487
+      },
+      "calibrated_named_goalie_metrics": {
+        "games": 1312,
+        "reg_home_goal_mae": 1.432348868718127,
+        "reg_away_goal_mae": 1.3469888288645246,
+        "regulation_score_log_loss": 3.8266576548767164,
+        "regulation_3way_brier": 0.6490974660461833,
+        "full_game_home_win_log_loss": 0.684340725765601,
+        "full_game_home_win_brier": 0.2457097682865725,
+        "full_game_home_win_accuracy": 0.5503048780487805,
+        "overtime_brier": 0.18935845196658496,
+        "p_home_mean_abs_shift_pp": 2.375298863905452,
+        "goal_count_log_loss_mean_sides": 1.9229911426447823
+      }
+    }
+  },
+  "pooled_test_comparison": {
+    "no_goalie": {
+      "games": 3936,
+      "full_game_home_win_brier": 0.23872373642918931,
+      "full_game_home_win_log_loss": 0.6698753964408838
+    },
+    "calibrated_named_goalie": {
+      "games": 3936,
+      "full_game_home_win_brier": 0.23922238126359924,
+      "full_game_home_win_log_loss": 0.6709170784927494
+    }
+  },
+  "decision": "Do not promote yet. This experiment tests whether a calibrated named-goalie rating adds to the team-only goal distribution and derived win probabilities; all reported results remain retrospective until a timestamped starter source is available.",
+  "artifacts": {
+    "oof_goalie_adjusted_scores": "oof_goalie_adjusted_scores.parquet"
+  }
+}
