@@ -1,0 +1,278 @@
+/* Game Cards — clean standalone base. Do not layer old HWIN card rules onto this page. */
+:root{
+  --gc-purple:#2b0e4b;
+  --gc-purple-2:#3c1764;
+  --gc-gold:#f0c640;
+  --gc-ivory:#fff8e8;
+  --gc-ink:#321653;
+  --gc-line:rgba(240,198,64,.46);
+  --gc-glass:rgba(255,250,240,.90);
+  --gc-muted:#847985;
+}
+
+.gc-page{
+  min-height:100vh;
+  margin:0;
+  background:
+    linear-gradient(180deg,rgba(10,5,22,.24) 0%,rgba(12,7,25,.50) 100%),
+    url('/assets/hero-game-cards.webp') center top / cover fixed no-repeat;
+  color:var(--gc-ivory);
+}
+
+.gc-hero{
+  position:relative;
+  min-height:208px;
+  border-bottom:1px solid rgba(240,198,64,.42);
+  background:linear-gradient(90deg,rgba(9,5,20,.76),rgba(22,10,40,.38) 56%,rgba(14,8,26,.10));
+}
+
+.gc-header{
+  position:absolute;
+  inset:0 0 auto 0;
+  z-index:5;
+  background:rgba(10,5,22,.08)!important;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+.gc-header .header-inner{height:78px}
+
+.gc-hero-inner{
+  padding-top:108px;
+  padding-bottom:22px;
+}
+.gc-eyebrow{
+  color:var(--gc-gold);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.gc-title-row{
+  display:flex;
+  align-items:baseline;
+  gap:22px;
+  flex-wrap:wrap;
+  margin-top:5px;
+}
+.gc-title-row h1{
+  margin:0;
+  font:600 clamp(46px,4.8vw,70px)/.88 var(--serif);
+  letter-spacing:-.035em;
+  color:var(--gc-ivory);
+  text-shadow:0 4px 18px rgba(0,0,0,.48);
+}
+.gc-date{
+  font:600 clamp(25px,2.15vw,34px)/1 var(--serif);
+  color:#f4e8d0;
+  white-space:nowrap;
+  text-shadow:0 3px 14px rgba(0,0,0,.42);
+}
+.gc-hero-inner p{
+  margin:8px 0 0;
+  max-width:680px;
+  font-size:10.5px;
+  line-height:1.5;
+  color:rgba(255,248,232,.88);
+}
+
+.gc-main{
+  position:relative;
+  background:linear-gradient(180deg,rgba(12,7,25,.16),rgba(12,7,25,.46));
+}
+.gc-content{
+  padding-top:14px;
+  padding-bottom:34px;
+}
+.gc-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  align-items:stretch;
+}
+.gc-loading{
+  grid-column:1/-1;
+  padding:30px;
+  border:1px solid var(--gc-line);
+  background:rgba(20,10,38,.52);
+  color:var(--gc-ivory);
+  font-size:12px;
+}
+
+.gc-card{
+  display:grid;
+  grid-template-rows:38px 148px 92px 48px 36px;
+  min-width:0;
+  height:362px;
+  overflow:hidden;
+  border:1px solid rgba(240,198,64,.58);
+  background:var(--gc-glass);
+  color:var(--gc-ink);
+  box-shadow:0 16px 34px rgba(0,0,0,.23);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.gc-card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:0 11px;
+  background:rgba(42,13,73,.96);
+  color:#fff5de;
+  border-bottom:1px solid rgba(240,198,64,.75);
+  font-size:7.5px;
+  font-weight:800;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+}
+.gc-card-head span:last-child{white-space:nowrap}
+
+.gc-matchup{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 46px minmax(0,1fr);
+  align-items:center;
+  gap:4px;
+  padding:13px 9px 10px;
+}
+.gc-team{
+  min-width:0;
+  height:118px;
+  display:grid;
+  grid-template-rows:61px 39px 18px;
+  align-items:center;
+  justify-items:center;
+  text-align:center;
+}
+.gc-team img{
+  width:60px;
+  height:60px;
+  object-fit:contain;
+}
+.gc-team-name{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding:0 2px;
+  font:600 20px/.95 var(--serif);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:clip;
+}
+.gc-team-name.gc-long{font-size:17px;letter-spacing:-.025em}
+.gc-team small{
+  font-size:6.8px;
+  line-height:1;
+  color:#867982;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+}
+.gc-prob{
+  display:grid;
+  place-items:center;
+  text-align:center;
+  align-content:center;
+}
+.gc-prob strong{
+  font:600 31px/1 var(--serif);
+  color:var(--gc-ink);
+}
+.gc-prob span{
+  margin-top:5px;
+  font-size:6.2px;
+  line-height:1.1;
+  letter-spacing:.07em;
+  color:#8b7d84;
+  text-transform:uppercase;
+}
+.gc-prob b{
+  margin-top:7px;
+  font-size:7px;
+  font-weight:500;
+  color:#9b8d96;
+}
+
+.gc-metrics{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  grid-template-rows:repeat(2,1fr);
+  border-top:1px solid #dbcaa7;
+  border-bottom:1px solid #dbcaa7;
+}
+.gc-metric{
+  display:grid;
+  place-items:center;
+  align-content:center;
+  border-right:1px solid #e2d5ba;
+  border-bottom:1px solid #e2d5ba;
+}
+.gc-metric:nth-child(2n){border-right:0}
+.gc-metric:nth-child(n+3){border-bottom:0}
+.gc-metric strong{
+  font:600 16px/1 var(--serif);
+  color:var(--gc-ink);
+}
+.gc-metric span{
+  margin-top:4px;
+  font-size:5.8px;
+  line-height:1.1;
+  letter-spacing:.06em;
+  color:#867985;
+  text-transform:uppercase;
+}
+
+.gc-pills{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:0 7px;
+  flex-wrap:nowrap;
+}
+.gc-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding:5px 7px;
+  border:1px solid #d7bc72;
+  border-radius:999px;
+  background:rgba(248,240,217,.84);
+  color:#4b2b67;
+  font-size:5.9px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:.035em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.gc-card-foot{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 8px;
+  border-top:1px solid rgba(218,202,166,.75);
+  color:#8d8188;
+  font-size:6.1px;
+  line-height:1.2;
+  text-align:center;
+}
+
+@media(max-width:1180px){
+  .gc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .gc-card{height:380px;grid-template-rows:38px 160px 98px 48px 36px}
+}
+@media(max-width:700px){
+  .gc-page{background-attachment:scroll}
+  .gc-hero{min-height:190px}
+  .gc-header .header-inner{height:72px}
+  .gc-hero-inner{padding-top:96px;padding-bottom:18px}
+  .gc-title-row{gap:8px}
+  .gc-title-row h1{font-size:43px}
+  .gc-date{font-size:23px}
+  .gc-grid{grid-template-columns:1fr}
+  .gc-card{height:386px}
+}
