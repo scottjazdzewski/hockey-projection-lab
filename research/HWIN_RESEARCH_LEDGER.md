@@ -1,6 +1,6 @@
 # HWIN Research Ledger
 
-Last updated: 2026-11-02
+Last updated: 2026-11-03
 
 ## Status
 
@@ -173,37 +173,16 @@ A candidate layer must:
 Market odds remain comparison data, not an input to the independent HWIN baseline.
 
 
-## Goalie Rolling Backtest 003
+## Goalie Rolling Backtest 003 — Invalid Pregame Comparison
 
-Five nested rolling-origin target seasons (2022-2026), 6,993 games.
+**Status: REJECTED for pregame use.** Although this backtest reports five rolling-origin seasons, it selects each game's actual starter from a postgame goalie box. That starter identity was not known at the historical pregame cutoff, so the performance below is retrospective and cannot support a pregame goalie feature or production decision. Schedule 006 has the same starter-selection leakage.
 
-Backbone:
-- Brier 0.236064
-- log loss 0.664431
-- accuracy 59.32%
+Archived retrospective results:
+- shrunk prior starter save percentage: Brier 0.235900, log loss 0.664074, accuracy 59.57%
+- raw 20-game starter save percentage: Brier 0.236004
+- 20-game SOG-based GSAx: Brier 0.236018
 
-Best goalie candidate: **shrunk prior starter save percentage**
-- Brier 0.235900
-- log loss 0.664074
-- accuracy 59.57%
-- delta Brier vs backbone: -0.000165
-- improved 4 of 5 target seasons; 2023 was very slightly worse
-
-20-game raw starter save percentage:
-- Brier 0.236004
-- delta -0.000060
-
-20-game SOG-based GSAx:
-- Brier 0.236018
-- delta -0.000047
-
-Interpretation:
-- broad goalie bundles overfit and are rejected
-- goalie skill adds only a **small** incremental signal after team strength/territorial play
-- heavily shrunk long-run starter quality is more stable than stacking several recent goalie metrics
-- shrunk prior save percentage remains a research candidate, not a production weight
-- current 2026-27 shadow results are not used for feature selection
-
+These values are retained only as descriptive diagnostics. A valid goalie experiment requires a timestamped expected/confirmed starter source or a model that predicts starter identity using only pregame information.
 
 ## Team Strength 004 — Recency / Opponent Adjustment
 
@@ -245,3 +224,21 @@ Interpretation:
 - the simpler aggregate opponent-adjusted SOG/xG signal is preferred over four separate offense/defense component terms
 - **new research backbone candidate = Elo + flat-20 5v5 form + opponent-adjusted 5v5 SOG/xG + recent scoring + rest**
 - still research-only; not production HWIN
+
+
+## Special Teams Increment 008 — No-Goalie
+
+Five nested rolling-origin target seasons (2022–2026), 6,993 games; train through T-2, tune on T-1, test T. Team Strength 004 + B2B is the comparison baseline.
+
+| Variant | Brier | Log loss | Accuracy | Brier folds better than B2B |
+|---|---:|---:|---:|---:|
+| Team Strength 004 + B2B | **0.234726** | **0.661540** | **59.92%** | — |
+| + PP xG quality | 0.234812 | 0.661708 | 59.63% | 2/5 |
+| + PP xG, exposure proxy | 0.234810 | 0.661705 | 59.75% | 2/5 |
+| + PP xG, exposure, and finishing | 0.234863 | 0.661813 | 59.85% | 1/5 |
+
+Features use a 20-game-half-life exponentially weighted mean from earlier dates only. Same-date results never update a feature before puck drop; actual starter identity is excluded. The PBP package lacks official power-play opportunity counts, so opponent penalty events proxy PP exposure and team penalty events proxy PK exposure. This denominator is noisy. The PP layer slightly worsened pooled Brier/log loss and did not show a repeatable lift in seasons or the highest pregame penalty-exposure quartile.
+
+**Decision: REJECTED as an incremental probability feature.** The candidate adds no production signal now. Do not recalibrate it after the fact. An experiment with official PP opportunity counts would need a free, legally usable source and timestamped pregame availability.
+
+Reproducible outputs: GitHub Actions run 41571326250 on isolated branch `codex/hwin-special-teams-008-no-goalie`; artifact `hwin-special-teams-008-no-goalie-20261103`. Store the artifact bundle and manifest under Drive `04_VALIDATION`. The permanent registry ID is EXP-0014.
