@@ -5,7 +5,7 @@
   --ip-ivory:#fff8e8;
   --ip-purple:#2b0e4b;
   --ip-ink:#321653;
-  --ip-tint:rgba(10,5,22,.46);
+  --ip-tint:rgba(10,5,22,.54);
 }
 
 .ip-page{
@@ -169,4 +169,18 @@
   .ip-eyebrow{white-space:nowrap;font-size:8px;letter-spacing:.09em}
   .ip-content{padding-bottom:18px}
   .ip-page footer{margin-bottom:0}
+}
+
+/* Section stacking: keep mobile menu above all page content */
+.ip-hero{z-index:100}
+.ip-main{z-index:1}
+
+@media(max-width:760px){
+  .ip-header{z-index:1000}
+
+  /* Mobile subject framing for each supplied hero */
+  .ip-page-teams{background-position:60% top}
+  .ip-page-players{background-position:64% top}
+  .ip-page-fantasy{background-position:50% top}
+  .ip-page-performance{background-position:52% top}
 }
