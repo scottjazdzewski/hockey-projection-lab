@@ -1,0 +1,12 @@
+{
+  "schema_version":"1.0",
+  "updated_at":"2026-11-02T22:15:00-05:00",
+  "surfaces":{
+    "schedule":{"file":"public/data/today-games.json","schema":"schedule-inline-v1","state":"READY","owner":"schedule-updater","model_id":null,"model_version":null},
+    "game_projections":{"file":"public/data/game-projections.json","schema":"artifacts/schemas/game-projections.schema.json","state":"EMPTY","owner":"game-model","model_id":null,"model_version":null},
+    "model_performance":{"file":"public/data/model-performance.json","schema":"artifacts/schemas/model-performance.schema.json","state":"EMPTY","owner":"validation","model_id":null,"model_version":null},
+    "team_ratings":{"file":"public/data/team-ratings.json","schema":"artifacts/schemas/team-ratings.schema.json","state":"EMPTY","owner":"team-layer","model_id":null,"model_version":null},
+    "player_ratings":{"file":"public/data/player-ratings.json","schema":"artifacts/schemas/player-ratings.schema.json","state":"EMPTY","owner":"player-layer","model_id":null,"model_version":null},
+    "fantasy_rankings":{"file":"public/data/fantasy-rankings.json","schema":"artifacts/schemas/fantasy-rankings.schema.json","state":"EMPTY","owner":"fantasy-layer","model_id":null,"model_version":null}
+  }
+}
