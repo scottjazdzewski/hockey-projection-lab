@@ -38,8 +38,8 @@ jobs:
           from zoneinfo import ZoneInfo
           import os
           now=datetime.now(ZoneInfo("America/New_York"))
-          allowed={(10,30),(14,30),(17,30)}
-          run=(now.hour,now.minute) in allowed
+          allowed_hours={10,14,17}
+          run=now.hour in allowed_hours
           with open(os.environ["GITHUB_OUTPUT"],"a") as f:
               f.write(f"run={'true' if run else 'false'}\n")
           print("local",now.isoformat(),"run",run)
