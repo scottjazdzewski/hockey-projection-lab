@@ -65,6 +65,7 @@ The feed is marked `PROJECTED`, not `CONFIRMED`. NHL line combinations can chang
 
 The production workflow refreshes around:
 
+- 5:15 AM Eastern (after the 5:00 AM slate build)
 - 10:30 AM Eastern
 - 2:30 PM Eastern
 - 5:30 PM Eastern
