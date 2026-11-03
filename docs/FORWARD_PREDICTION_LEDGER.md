@@ -47,3 +47,12 @@ future Model Performance UI work. It contains overall forward metrics,
 per-model-version metrics and one summary row per frozen game.
 
 The per-game files remain the authority.
+
+
+## Reliability chain
+
+The final per-game live-context refresh can dispatch the ledger directly. If the active production model does not require a goalie-driven rescore, the ledger is eligible to freeze immediately from that final pregame evidence. If a future active model does require a confirmed-goalie rescore, the live-context workflow triggers the scorer first and the scorer dispatches the ledger after the new production probabilities are committed.
+
+The ledger workflow also retains an offset scheduled fallback and shares the production-data concurrency lock with the context/scoring workflows, so a freeze cannot overtake a queued production rescore.
+
+The derived summary also breaks forward winner performance out by whether Hockey Lab selected the home or away team. This is descriptive forward evaluation only; it is not a model input or an artificial home/road adjustment.
