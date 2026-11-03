@@ -19,7 +19,7 @@ from urllib.request import Request, urlopen
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
-API_URL = "https://mcp.puckapi.com/v1/get_odds"
+API_URL = "https://mcp.puckapi.com/v1/get_game_detail"
 CREDITS_PER_GAME = 10
 
 
@@ -45,7 +45,7 @@ def _schedule(path: Path) -> pd.DataFrame:
 
 
 def _post(game_id: str, api_key: str) -> dict:
-    body = json.dumps({"game_id": str(game_id), "snapshot_type": "closing"}).encode("utf-8")
+    body = json.dumps({"game_id": str(game_id)}).encode("utf-8")
     request = Request(API_URL, data=body, headers={
         "Content-Type": "application/json", "x-api-key": api_key,
         "User-Agent": "HockeyProjectionLab/1.0 market-benchmark",
@@ -124,18 +124,23 @@ def main() -> None:
             audit.append({"game_id": str(game.game_id), "status": "REQUEST_ERROR", "detail": str(exc)})
             continue
         successful_calls += 1
-        response_game_id = response.get("game_id")
+        response_game_id = response.get("game_id") or (response.get("game") or {}).get("id")
         if response_game_id is not None and str(response_game_id) != str(game.game_id):
             audit.append({"game_id": str(game.game_id), "status": "GAME_ID_MISMATCH", "provider_game_id": str(response_game_id)})
             continue
         odds = response.get("odds") or []
         found = 0
         for line in odds:
-            if str(line.get("snapshotType", "")).lower() != "closing":
-                continue
             stamp = line.get("capturedAt") or line.get("captured_at")
             if not stamp or line.get("mlAway") is None or line.get("mlHome") is None:
                 audit.append({"game_id": str(game.game_id), "sportsbook": line.get("bookmaker"), "status": "MISSING_PRICE_OR_TIMESTAMP"})
+                continue
+            timestamp = pd.to_datetime(stamp, utc=True, errors="coerce")
+            if pd.isna(timestamp):
+                audit.append({"game_id": str(game.game_id), "sportsbook": line.get("bookmaker"), "status": "INVALID_ODDS_TIMESTAMP", "odds_timestamp": str(stamp)})
+                continue
+            if timestamp >= game.scheduled_start_utc:
+                audit.append({"game_id": str(game.game_id), "sportsbook": line.get("bookmaker"), "status": "TIMESTAMP_AT_OR_AFTER_START", "odds_timestamp": str(stamp), "scheduled_start_utc": game.scheduled_start_utc.isoformat()})
                 continue
             rows.append({
                 "game_id": str(game.game_id), "game_date": str(game.game_date),
