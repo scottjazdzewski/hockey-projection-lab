@@ -1,0 +1,428 @@
+{
+  "experiment_id": "EXP-0025",
+  "model_id": "HOCKEY-LAB-GOALS-SIDE-SPECIFIC-RATES-007-RESEARCH",
+  "status": "REJECTED",
+  "run_date": "2026-11-03",
+  "feature_version": "pregame-goals-process-plus-league-environment-separate-home-away-rates-007",
+  "source_version": "sportsdataverse-pbp-features-20261102+canonical-spine-v3-20261102",
+  "retrieval_date": "2026-11-03",
+  "target_seasons": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "target_season_games": {
+    "2022": 1312,
+    "2023": 1312,
+    "2024": 1312,
+    "2025": 1312,
+    "2026": 1312
+  },
+  "total_test_games": 6560,
+  "validation_design": "rolling origin; train<=S-2; tune on S-1; test S; regular season",
+  "data_quality": {
+    "regulation_tie_matches_went_ot_for_2022_2026_regular": true,
+    "canonical_winner_crosscheck": "pass",
+    "shootout_handling": "PBP regulation tie retained; add one official final goal to shootout winner",
+    "historical_rows_excluded_for_label_quality": 605,
+    "rows_excluded_by_source_season": {
+      "2010": 141,
+      "2011": 149,
+      "2012": 181,
+      "2013": 97,
+      "2014": 29,
+      "2017": 1,
+      "2018": 2,
+      "2019": 2,
+      "2020": 3
+    },
+    "rows_excluded_from_2016_onward": 8
+  },
+  "candidate_selection": {
+    "2022": {
+      "home_poisson_alpha": 1.0,
+      "away_poisson_alpha": 1.0,
+      "home_validation_count_logloss": 1.956205115299729,
+      "away_validation_count_logloss": 1.8433587196886188,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.45,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.799563834988347,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.8013399626518987,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.799563834988347,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.7984518963431175,
+          "parameter": -0.075
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.789785901940643,
+          "parameter": 1.45
+        }
+      }
+    },
+    "2023": {
+      "home_poisson_alpha": 0.1,
+      "away_poisson_alpha": 0.1,
+      "home_validation_count_logloss": 1.962391061969449,
+      "away_validation_count_logloss": 1.8952188268397288,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.45,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.8576098888091397,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.8604392590177454,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.8576098888091397,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.855818251896409,
+          "parameter": -0.1
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.8462630719502005,
+          "parameter": 1.45
+        }
+      }
+    },
+    "2024": {
+      "home_poisson_alpha": 1.0,
+      "away_poisson_alpha": 0.0001,
+      "home_validation_count_logloss": 1.9261638461627422,
+      "away_validation_count_logloss": 1.901500323407796,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.6,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.8276641695705242,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.833550521831512,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.8276641695705242,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8234989369755357,
+          "parameter": -0.15
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.8119863650488406,
+          "parameter": 1.6
+        }
+      }
+    },
+    "2025": {
+      "home_poisson_alpha": 0.1,
+      "away_poisson_alpha": 1.0,
+      "home_validation_count_logloss": 1.9350737653226424,
+      "away_validation_count_logloss": 1.9323318435612764,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.3,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.867405608883908,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.869168072464293,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.867405608883908,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.866548320058339,
+          "parameter": -0.1
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.860638169602757,
+          "parameter": 1.3
+        }
+      }
+    },
+    "2026": {
+      "home_poisson_alpha": 1.0,
+      "away_poisson_alpha": 0.0001,
+      "home_validation_count_logloss": 1.954702354488794,
+      "away_validation_count_logloss": 1.9042332649502374,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.3,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.8589356194390287,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.859804166315776,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.8589356194390287,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8559344485078952,
+          "parameter": -0.15
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.853641517869023,
+          "parameter": 1.3
+        }
+      }
+    }
+  },
+  "candidate_fold_summary": [
+    {
+      "target_season": 2022,
+      "home_poisson_alpha": 1.0,
+      "away_poisson_alpha": 1.0,
+      "distribution_family": "diagonal_inflated_poisson",
+      "distribution_parameter": 1.45,
+      "validation_reg_score_logloss": 3.789785901940643
+    },
+    {
+      "target_season": 2023,
+      "home_poisson_alpha": 0.1,
+      "away_poisson_alpha": 0.1,
+      "distribution_family": "diagonal_inflated_poisson",
+      "distribution_parameter": 1.45,
+      "validation_reg_score_logloss": 3.846263071950201
+    },
+    {
+      "target_season": 2024,
+      "home_poisson_alpha": 1.0,
+      "away_poisson_alpha": 0.0001,
+      "distribution_family": "diagonal_inflated_poisson",
+      "distribution_parameter": 1.6,
+      "validation_reg_score_logloss": 3.8119863650488406
+    },
+    {
+      "target_season": 2025,
+      "home_poisson_alpha": 0.1,
+      "away_poisson_alpha": 1.0,
+      "distribution_family": "diagonal_inflated_poisson",
+      "distribution_parameter": 1.3,
+      "validation_reg_score_logloss": 3.860638169602757
+    },
+    {
+      "target_season": 2026,
+      "home_poisson_alpha": 1.0,
+      "away_poisson_alpha": 0.0001,
+      "distribution_family": "diagonal_inflated_poisson",
+      "distribution_parameter": 1.3,
+      "validation_reg_score_logloss": 3.853641517869023
+    }
+  ],
+  "metrics_comparison": {
+    "baseline": {
+      "reg_score_logloss": 3.837516381093117,
+      "final_score_logloss": 3.7135583416144433,
+      "final_total_logloss": 2.1798367353602215,
+      "reg_outcome_multiclass_brier": 0.625644013173242,
+      "reg_outcome_multiclass_logloss": 1.0396503494554932,
+      "reg_outcome_accuracy": 0.4766768292682927,
+      "overtime_brier": 0.1731954406766948,
+      "overtime_logloss": 0.5306641841791868,
+      "reg_home_goals": {
+        "mae": 1.3976546510157906,
+        "rmse": 1.7429753427193244,
+        "mean_error_pred_minus_actual": -0.07153435875945154,
+        "calibration_intercept": 0.21511463438673661,
+        "calibration_slope": 0.9528224829091062
+      },
+      "reg_away_goals": {
+        "mae": 1.351110699073396,
+        "rmse": 1.685301670177337,
+        "mean_error_pred_minus_actual": -0.10807421281097453,
+        "calibration_intercept": -0.12731741478184658,
+        "calibration_slope": 1.0841782754755693
+      },
+      "reg_total_goals": {
+        "mae": 1.8572576339018203,
+        "rmse": 2.3458713546214236,
+        "mean_error_pred_minus_actual": -0.17960857157042606,
+        "calibration_intercept": 2.5391704249388414,
+        "calibration_slope": 0.5959482212837648
+      },
+      "final_total_goals": {
+        "mae": 1.8543201716168396,
+        "rmse": 2.314646776058349,
+        "mean_error_pred_minus_actual": -0.1858601689331386,
+        "calibration_intercept": 2.5577515157620017,
+        "calibration_slope": 0.6083343243721134
+      }
+    },
+    "candidate": {
+      "reg_score_logloss": 3.8398028359288574,
+      "final_score_logloss": 3.7161081410706873,
+      "final_total_logloss": 2.1814383006440203,
+      "reg_outcome_multiclass_brier": 0.6263509285933219,
+      "reg_outcome_multiclass_logloss": 1.0406190891434284,
+      "reg_outcome_accuracy": 0.475,
+      "overtime_brier": 0.17313732690176584,
+      "overtime_logloss": 0.5304786270497276,
+      "reg_home_goals": {
+        "mae": 1.3979320157985888,
+        "rmse": 1.746264571470007,
+        "mean_error_pred_minus_actual": -0.08882074477376398,
+        "calibration_intercept": -0.11248580648547082,
+        "calibration_slope": 1.0665230280703797
+      },
+      "reg_away_goals": {
+        "mae": 1.3523888367779475,
+        "rmse": 1.6861544037877672,
+        "mean_error_pred_minus_actual": -0.10723583800540012,
+        "calibration_intercept": 0.030595048296862652,
+        "calibration_slope": 1.0273992576897883
+      },
+      "reg_total_goals": {
+        "mae": 1.8604022625487537,
+        "rmse": 2.349521675271377,
+        "mean_error_pred_minus_actual": -0.1960565827791641,
+        "calibration_intercept": 2.986773373426803,
+        "calibration_slope": 0.5207673879260917
+      },
+      "final_total_goals": {
+        "mae": 1.8567186600553847,
+        "rmse": 2.3185251590007723,
+        "mean_error_pred_minus_actual": -0.20127967166741292,
+        "calibration_intercept": 3.086529897219115,
+        "calibration_slope": 0.5223482061511362
+      }
+    },
+    "candidate_minus_baseline": {
+      "reg_score_logloss": 0.0022864548357404146,
+      "final_score_logloss": 0.0025497994562440063,
+      "final_total_logloss": 0.0016015652837988448,
+      "reg_outcome_multiclass_brier": 0.0007069154200798344,
+      "reg_outcome_multiclass_logloss": 0.000968739687935205,
+      "reg_outcome_accuracy": -0.0016768292682927122,
+      "overtime_brier": -5.8113774928952866e-05,
+      "overtime_logloss": -0.00018555712945922398,
+      "reg_home_goals": {
+        "mae": 0.0002773647827982728,
+        "rmse": 0.0032892287506824935,
+        "mean_error_pred_minus_actual": -0.01728638601431244
+      },
+      "reg_away_goals": {
+        "mae": 0.0012781377045514297,
+        "rmse": 0.0008527336104302563,
+        "mean_error_pred_minus_actual": 0.0008383748055744017
+      },
+      "reg_total_goals": {
+        "mae": 0.003144628646933434,
+        "rmse": 0.003650320649953187,
+        "mean_error_pred_minus_actual": -0.01644801120873804
+      },
+      "final_total_goals": {
+        "mae": 0.0023984884385450655,
+        "rmse": 0.003878382942423375,
+        "mean_error_pred_minus_actual": -0.015419502734274337
+      }
+    }
+  },
+  "leakage_audit": {
+    "strict_prior_date_features": true,
+    "train_leq_target_minus_2": true,
+    "validation_target_minus_1_only": true,
+    "refit_through_validation_before_test": true,
+    "markets_or_win_probability_inputs": false,
+    "target_season_used_for_selection": false,
+    "goalie_lineup_same_game_inputs": false,
+    "canonical_winner_crosscheck": "pass",
+    "regulation_ties_match_overtime": "pass",
+    "regulation_and_full_game_probabilities_sum_to_one": "pass"
+  },
+  "decision": "Separate home/away rates did not yield meaningful or stable out-of-sample improvement; reject this rate structure for the current feature set.",
+  "champion_protection": "Hockey Lab Game v1.0.0 unchanged; no public data export or site deployment.",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit_learn": "1.8.0"
+  },
+  "input_files": {
+    "source_pbp_parquet": {
+      "path": "/tmp/hockey_events/data/pbp_feature_output/game_team_event_features.parquet",
+      "size_bytes": 6641987,
+      "sha256": "8fc51d8de6db68fca1ea9ab850627c044354d60364b63d6e8531f18110c6f3ef"
+    },
+    "canonical_spine_parquet": {
+      "path": "/tmp/hockey_spine/data/spine_v3/games.parquet",
+      "size_bytes": 643752,
+      "sha256": "e3b6a3cb9784a91ec6e396e1a7e72330451abee055ed0ba54e0408e37f40a0e3"
+    },
+    "model_script": {
+      "path": "research/hockey_goals_side_specific_007.py",
+      "size_bytes": 53786,
+      "sha256": "2bc4a8265b60016657ad0403f026d3c646feb610ef536d37eca7bbed7991bade"
+    },
+    "schedule_feature_script": {
+      "path": "research/hwin_schedule_007.py",
+      "size_bytes": 18212,
+      "sha256": "184e54c69e255e42282d7e74086915faef00b6fa5f16666134bbb63a307fbe3f"
+    },
+    "opponent_strength_script": {
+      "path": "research/hwin_team_strength_004.py",
+      "size_bytes": 15534,
+      "sha256": "003d704c7713c6f4981795a19d5a6c15764ed436dd17b20c44ceaaf1e1ce3ad4"
+    },
+    "requirements": {
+      "path": "research/requirements-goals-side-specific-007.txt",
+      "size_bytes": 136,
+      "sha256": "72203c3e493b17671a8da75a93e3dc08105af7f4dca47cbd91f260153cecd804"
+    }
+  },
+  "artifact_files": {
+    "oof_predictions.parquet": {
+      "size_bytes": 13465764,
+      "sha256": "fbc6cb2e3e0fa706147171dd2bd0a0ab75c86061cfc352296c96c8cdab2c0db5"
+    },
+    "context_metrics.parquet": {
+      "size_bytes": 6951,
+      "sha256": "43fcdd959db8407e478fab13de23eefd862ec736986f133e814991fa67ed7d88"
+    },
+    "GOALS_SIDE_SPECIFIC_007_20261103.md": {
+      "size_bytes": 5400,
+      "sha256": "ba71cee008c25830783f17b780fb7df1f81a027b97525b49e75d179a85f11169"
+    },
+    "fold_metrics.csv": {
+      "size_bytes": 10242,
+      "sha256": "afd3a3783e98e04c1fea1d0898f6696e982898cb9c3130f3920c8a18402dbc6d"
+    },
+    "reliability_bins.parquet": {
+      "size_bytes": 21120,
+      "sha256": "528579d62247700f41c59fab5b06ad74691a389fe4e79933bc0e80b2c267c47d"
+    },
+    "summary.json": {
+      "size_bytes": 358322,
+      "sha256": "60e9e1bd53715e2c1859f2d868a42d3d379b9469161324a701439ee27fb9dcca"
+    },
+    "requirements-goals-side-specific-007.txt": {
+      "size_bytes": 136,
+      "sha256": "72203c3e493b17671a8da75a93e3dc08105af7f4dca47cbd91f260153cecd804"
+    }
+  }
+}
