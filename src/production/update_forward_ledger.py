@@ -175,7 +175,17 @@ def freeze_records(min_before: float, max_before: float):
                     "away_implied_probability":None,
                     "home_implied_probability":None,
                     "source":None,
-                    "captured_at":None
+                    "captured_at":None,
+                    "capture_requested_at":None,
+                    "minimum_books_required":3,
+                    "book_count":0,
+                    "total_book_count":0,
+                    "home_probability_min":None,
+                    "home_probability_max":None,
+                    "home_probability_std":None,
+                    "earliest_closing_timestamp":None,
+                    "latest_closing_timestamp":None,
+                    "books":[]
                 }
             },
             "result":{
