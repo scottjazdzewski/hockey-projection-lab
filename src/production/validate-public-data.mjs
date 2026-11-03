@@ -159,6 +159,7 @@ if(manifest){
       if(!fs.existsSync(path.join(dataDir,file))) fail('manifest points to missing file '+file);
     }
     if(manifest.surfaces.game_projections?.state==='READY' && projections?.model?.status!=='PROMOTED') fail('manifest game_projections READY without PROMOTED model');
+    if(manifest.surfaces.model_performance?.state==='READY' && !(perf?.sample?.games_scored>0)) fail('manifest model_performance READY without scored games');
     if(manifest.surfaces.team_ratings?.state==='READY' && teams?.model?.status!=='PROMOTED') fail('manifest team_ratings READY without PROMOTED model');
     if(manifest.surfaces.player_ratings?.state==='READY' && players?.model?.status!=='PROMOTED') fail('manifest player_ratings READY without PROMOTED model');
     if(manifest.surfaces.fantasy_rankings?.state==='READY' && fantasy?.model?.status!=='PROMOTED') fail('manifest fantasy_rankings READY without PROMOTED model');
