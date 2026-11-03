@@ -30,6 +30,7 @@ if(projections){
   if(!Array.isArray(projections.projections)) fail('game projections array missing');
   else {
     const scheduleIds=new Set((schedule?.games||[]).map(g=>String(g.game_id)));
+    const scheduleById=new Map((schedule?.games||[]).map(g=>[String(g.game_id),g]));
     const seen=new Set();
     for(const g of projections.projections){
       const id=String(g.game_id);
@@ -49,6 +50,18 @@ if(projections){
         if(projections.model.status!=='PROMOTED') fail(id+' published from non-PROMOTED model');
         if(a===null || h===null) fail(id+' published with missing win probability');
         if(typeof a==='number' && typeof h==='number' && Math.abs((a+h)-1)>0.001) fail(id+' away+home win_probability must equal 1');
+
+        const scheduled=scheduleById.get(id);
+        if(!scheduled?.start_time_et) fail(id+' published without exact scheduled start_time_et');
+        const startMs=scheduled?.start_time_et ? Date.parse(scheduled.start_time_et) : NaN;
+        const generatedMs=Date.parse(projections.generated_at);
+        const cutoffMs=Date.parse(projections.data_cutoff);
+        if(!Number.isFinite(generatedMs) || !Number.isFinite(cutoffMs)) fail(id+' invalid projection timestamps');
+        if(Number.isFinite(startMs)){
+          if(generatedMs>startMs) fail(id+' generated after puck drop');
+          if(cutoffMs>startMs) fail(id+' data cutoff after puck drop');
+          if(cutoffMs>generatedMs) fail(id+' data cutoff later than generated_at');
+        }
       }
     }
     ok('game projections integrity checks complete');
