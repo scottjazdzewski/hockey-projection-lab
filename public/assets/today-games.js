@@ -15,10 +15,10 @@
     const awayClass=awayNick.length>12?' team-name-long':'';
     const homeClass=homeNick.length>12?' team-name-long':'';
     return '<article class="hwin-card live-slate-card">'+
-      '<div class="hwin-top"><span>TONIGHT · HWIN PENDING</span><span>'+esc(g.time_et||'TBD')+'</span></div>'+
+      '<div class="hwin-top"><span>TONIGHT · MODEL PENDING</span><span>'+esc(g.time_et||'TBD')+'</span></div>'+
       '<div class="hwin-matchup">'+
         '<div class="hwin-team"><img src="'+logo(g.away_abbr)+'" alt="'+esc(g.away_name)+'"><strong class="'+awayClass.trim()+'">'+esc(awayNick)+'</strong><small>'+esc(g.away_abbr)+' · Away</small></div>'+
-        '<div class="hwin-center"><strong>—</strong><span>HWIN</span><span style="margin-top:8px">@</span></div>'+
+        '<div class="hwin-center"><strong>—</strong<span>WIN PROB.</span><span style="margin-top:8px">@</span></div>'+
         '<div class="hwin-team"><img src="'+logo(g.home_abbr)+'" alt="'+esc(g.home_name)+'"><strong class="'+homeClass.trim()+'">'+esc(homeNick)+'</strong><small>'+esc(g.home_abbr)+' · Home</small></div>'+
       '</div>'+
       '<div class="hwin-metrics"><div><strong>—</strong><span>Expected goals</span></div><div><strong>—</strong><span>Regulation win</span></div><div><strong>—</strong><span>Fair price</span></div><div><strong>—</strong><span>OT probability</span></div></div>'+
