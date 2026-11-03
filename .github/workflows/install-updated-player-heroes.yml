@@ -1,0 +1,45 @@
+name: Install Updated Player Heroes
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-updated-player-heroes.yml'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pillow
+      - name: Download supplied artwork
+        run: |
+          curl -fL 'https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-5808-820c-a655-0215709de41d/raw?se=2026-11-03T00%3A58%3A33Z&sp=r&sv=2026-02-06&sr=b&scid=1f7c7215-3d24-57e7-aeff-174879c17268&skoid=dd316919-ffbf-4550-9c54-dfc99f412009&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-02T22%3A30%3A02Z&ske=2026-11-03T22%3A30%3A02Z&sks=b&skv=2026-02-06&sig=Q4kYV%2BY40bjVQW5Bbnk7394ohuYTjy7e/beB048l/ak%3D' -o /tmp/fantasy.png
+          curl -fL 'https://sdmntpreastus2.oaiusercontent.com/files/00000000-a084-81f6-9728-c2c3de0e04ba/raw?se=2026-11-03T00%3A58%3A34Z&sp=r&sv=2026-02-06&sr=b&scid=b8d88efb-0f2c-54ac-9187-44543b502447&skoid=dd316919-ffbf-4550-9c54-dfc99f412009&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-02T22%3A28%3A56Z&ske=2026-11-03T22%3A28%3A56Z&sks=b&skv=2026-02-06&sig=XhwcZBifTjqMD1ETysLMWkwMIMQi8bPdruS5e6xsTPY%3D' -o /tmp/players.png
+      - name: Optimize permanent web assets
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          for src,dst in [('/tmp/fantasy.png','public/assets/hero-fantasy.webp'),('/tmp/players.png','public/assets/hero-players-v2.webp')]:
+              im=Image.open(src).convert('RGB')
+              im=im.resize((1600,900),Image.Resampling.LANCZOS)
+              im.save(dst,'WEBP',quality=78,method=6)
+              print(dst,Path(dst).stat().st_size)
+          PY
+      - name: Commit updated heroes
+        run: |
+          git config user.name "hockey-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/assets/hero-fantasy.webp public/assets/hero-players-v2.webp
+          if git diff --cached --quiet; then
+            echo "No image changes."
+          else
+            git commit -m "Install Kaprizov fantasy and updated McDavid heroes"
+            git pull --rebase origin main
+            git push
+          fi
