@@ -1,0 +1,21 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"model-performance.schema.json",
+  "title":"Hockey Lab Model Performance",
+  "type":"object",
+  "required":["schema_version","generated_at","model","sample","metrics"],
+  "properties":{
+    "schema_version":{"const":"1.0"},
+    "generated_at":{"type":"string","format":"date-time"},
+    "model":{"type":"object","required":["model_id","version"],"properties":{"model_id":{"type":"string"},"version":{"type":"string"}},"additionalProperties":true},
+    "sample":{"type":"object","required":["games_scored"],"properties":{"games_scored":{"type":"integer","minimum":0},"start_date":{"type":["string","null"]},"end_date":{"type":["string","null"]}},"additionalProperties":false},
+    "metrics":{"type":"object","required":["accuracy","brier","log_loss","calibration"],"properties":{
+      "accuracy":{"type":["number","null"],"minimum":0,"maximum":1},
+      "brier":{"type":["number","null"],"minimum":0},
+      "log_loss":{"type":["number","null"],"minimum":0},
+      "calibration":{"type":["number","null"]}
+    },"additionalProperties":false},
+    "bands":{"type":"array","items":{"type":"object"}}
+  },
+  "additionalProperties":false
+}
