@@ -19,6 +19,7 @@ const perf=readJson('model-performance.json');
 const teams=readJson('team-ratings.json');
 const players=readJson('player-ratings.json');
 const fantasy=readJson('fantasy-rankings.json');
+const manifest=readJson('production-manifest.json');
 
 if(!schedule || !Array.isArray(schedule.games)) fail('today-games.json missing or malformed');
 else ok('schedule readable');
@@ -123,6 +124,34 @@ if(fantasy){
     ok('fantasy rankings readable');
   }
 }
+
+if(manifest){
+  if(manifest.schema_version!=='1.0') fail('production-manifest schema_version must be 1.0');
+  if(!manifest.surfaces || typeof manifest.surfaces!=='object') fail('production-manifest surfaces missing');
+  else {
+    const expected={
+      schedule:'today-games.json',
+      game_projections:'game-projections.json',
+      model_performance:'model-performance.json',
+      team_ratings:'team-ratings.json',
+      player_ratings:'player-ratings.json',
+      fantasy_rankings:'fantasy-rankings.json'
+    };
+    for(const [key,file] of Object.entries(expected)){
+      const s=manifest.surfaces[key];
+      if(!s) { fail('production-manifest missing surface '+key); continue; }
+      if(!['EMPTY','READY','WITHHELD'].includes(s.state)) fail('invalid manifest state '+key);
+      const rel=s.file?.replace(/^public\/data\//,'');
+      if(rel!==file) fail('manifest file mismatch for '+key);
+      if(!fs.existsSync(path.join(dataDir,file))) fail('manifest points to missing file '+file);
+    }
+    if(manifest.surfaces.game_projections?.state==='READY' && projections?.model?.status!=='PROMOTED') fail('manifest game_projections READY without PROMOTED model');
+    if(manifest.surfaces.team_ratings?.state==='READY' && teams?.model?.status!=='PROMOTED') fail('manifest team_ratings READY without PROMOTED model');
+    if(manifest.surfaces.player_ratings?.state==='READY' && players?.model?.status!=='PROMOTED') fail('manifest player_ratings READY without PROMOTED model');
+    if(manifest.surfaces.fantasy_rankings?.state==='READY' && fantasy?.model?.status!=='PROMOTED') fail('manifest fantasy_rankings READY without PROMOTED model');
+    ok('production manifest readable');
+  }
+}else fail('production-manifest.json missing');
 
 if(process.exitCode) process.exit(process.exitCode);
 console.log('All production data checks passed.');
