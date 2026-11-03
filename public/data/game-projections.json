@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03T11:27:06.909635-05:00",
+  "generated_at": "2026-11-03T14:02:49.211589-05:00",
   "data_cutoff": "2026-11-01T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -52,7 +52,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -107,7 +107,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -162,7 +162,7 @@
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -214,7 +214,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -266,7 +266,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -318,7 +318,7 @@
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -370,7 +370,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -424,7 +424,7 @@
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -478,7 +478,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -530,7 +530,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -582,7 +582,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T11:27:06.909635-05:00"
+        "updated_at": "2026-11-03T14:02:49.211589-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
