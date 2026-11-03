@@ -34,13 +34,13 @@
         "status": "PROJECTED",
         "away": "Sebastian Cossa",
         "home": "Sergei Bobrovsky",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -84,13 +84,13 @@
         "status": "PROJECTED",
         "away": "Nico Daws",
         "home": "Jacob Fowler",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -137,13 +137,13 @@
         "status": "PROJECTED",
         "away": "John Gibson",
         "home": "Andrei Vasilevskiy",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -190,13 +190,13 @@
         "status": "PROJECTED",
         "away": "Joel Hofer",
         "home": "Dylan Garand",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -239,14 +239,14 @@
       "goalie_state": {
         "status": "PROJECTED",
         "away": "Jesper Wallstedt",
-        "home": "Joseph Woll",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "home": "Dan Vladar",
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -290,13 +290,13 @@
         "status": "PROJECTED",
         "away": "Adin Hill",
         "home": "Arturs Silovs",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -340,13 +340,13 @@
         "status": "PROJECTED",
         "away": "Jake Oettinger",
         "home": "Logan Thompson",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -390,13 +390,13 @@
         "status": "PROJECTED",
         "away": "Scott Wedgewood",
         "home": "Jet Greaves",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -442,13 +442,13 @@
         "status": "PROJECTED",
         "away": "Tristan Jarry",
         "home": "Connor Hellebuyck",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -494,13 +494,13 @@
         "status": "PROJECTED",
         "away": "Pyotr Kochetkov",
         "home": "Juuse Saros",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -544,13 +544,13 @@
         "status": "PROJECTED",
         "away": "Lukas Dostal",
         "home": "Kevin Lankinen",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T07:32:09.247596-05:00"
+        "updated_at": "2026-11-03T10:59:40.282791-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
