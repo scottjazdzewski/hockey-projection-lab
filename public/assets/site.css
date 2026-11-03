@@ -728,3 +728,21 @@ body.interior-performance{
     font-size:34px;
   }
 }
+
+
+/* Homepage Hurricanes artwork + simplified editorial badges + Fantasy shell */
+.hero-shell{
+  background:
+    linear-gradient(90deg,rgba(18,7,36,.92) 0%,rgba(25,10,48,.80) 42%,rgba(25,10,48,.34) 72%,rgba(18,7,36,.46) 100%),
+    url('/assets/hero-home.webp') center 38% / cover no-repeat!important;
+}
+.home-badge-top{gap:0}
+.home-badge-number{display:none!important}
+.home-editorial-badge .eyebrow{margin-bottom:0}
+body.interior-fantasy{
+  background-image:
+    linear-gradient(180deg,rgba(12,6,25,.22) 0%,rgba(20,9,38,.48) 45%,rgba(10,7,22,.78) 100%),
+    radial-gradient(circle at 72% 24%,rgba(240,198,64,.14),transparent 24%),
+    linear-gradient(135deg,#1a0b33,#3f1777 58%,#12091f);
+}
+.page-hero-fantasy{background-image:none!important}
