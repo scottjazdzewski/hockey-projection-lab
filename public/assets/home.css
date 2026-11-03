@@ -10,7 +10,7 @@
   position:absolute;
   inset:0;
   z-index:0;
-  background:rgba(10,5,22,.46);
+  background:rgba(10,5,22,.54);
   pointer-events:none;
 }
 .hero-shell>*{position:relative;z-index:1}
@@ -161,4 +161,9 @@
   }
   .home-hero-copy h1{margin-top:14px}
   .hero-shell{overflow:visible}
+}
+
+@media(max-width:700px){
+  .hero-shell>.site-header{z-index:1000}
+  .hero-shell{background-position:50% 30%}
 }
