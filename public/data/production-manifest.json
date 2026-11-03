@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-11-03T11:26:36.177Z",
+  "updated_at": "2026-11-03T11:28:18.731Z",
   "surfaces": {
     "schedule": {
       "file": "public/data/today-games.json",
@@ -72,7 +72,7 @@
       "owner": "pregame-context",
       "model_id": null,
       "model_version": null,
-      "max_age_minutes": 300
+      "max_age_minutes": 360
     }
   }
 }
