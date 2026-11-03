@@ -5,7 +5,7 @@ on:
   schedule:
     # Quarter-hour heartbeat. The gate below performs a provider pull only at
     # fixed daily checkpoints or when a scheduled game is entering its
-    # ~15-minute pregame window.
+    # ~30-minute or ~15-minute pregame window.
     - cron: '*/15 * * * *'
   push:
     branches: [main]
@@ -44,10 +44,13 @@ jobs:
           fixed_slots={(5,15),(10,30),(14,30),(17,30)}
           fixed=(now.hour,now.minute) in fixed_slots
 
-          # Also refresh once for every game as it enters the ~15-minute
-          # pregame window. A 7-23 minute window tolerates normal Actions
-          # scheduling delay while avoiding adjacent quarter-hour duplicates.
-          pregame=[]
+          # Refresh each game twice before puck drop:
+          #   * about 30 minutes before start
+          #   * about 15 minutes before start
+          # The scheduler wakes every 15 minutes, and these non-overlapping
+          # windows tolerate ordinary GitHub Actions start delay.
+          pregame_30=[]
+          pregame_15=[]
           try:
               slate=json.loads(Path("public/data/today-games.json").read_text())
               for game in slate.get("games",[]):
@@ -56,29 +59,41 @@ jobs:
                       continue
                   start=datetime.fromisoformat(start_raw).astimezone(tz)
                   minutes=(start-now).total_seconds()/60
-                  if 7 <= minutes <= 23:
-                      pregame.append({
-                          "game_id":game.get("game_id"),
-                          "matchup":f"{game.get('away_abbr')}@{game.get('home_abbr')}",
-                          "minutes_to_start":round(minutes,1)
-                      })
+                  item={
+                      "game_id":game.get("game_id"),
+                      "matchup":f"{game.get('away_abbr')}@{game.get('home_abbr')}",
+                      "minutes_to_start":round(minutes,1)
+                  }
+                  if 23 <= minutes <= 38:
+                      pregame_30.append(item)
+                  elif 7 <= minutes < 23:
+                      pregame_15.append(item)
           except Exception as exc:
               print("pregame gate warning:",repr(exc))
 
+          pregame=bool(pregame_30 or pregame_15)
           scheduled_run=bool(fixed or pregame)
           run=True if os.environ.get("GITHUB_EVENT_NAME")!="schedule" else scheduled_run
           reason="manual_or_push"
           if os.environ.get("GITHUB_EVENT_NAME")=="schedule":
-              reason="pregame" if pregame else ("fixed_checkpoint" if fixed else "skip")
+              if pregame_15:
+                  reason="pregame_15"
+              elif pregame_30:
+                  reason="pregame_30"
+              else:
+                  reason="fixed_checkpoint" if fixed else "skip"
 
           with open(os.environ["GITHUB_OUTPUT"],"a") as f:
               f.write(f"run={'true' if run else 'false'}\n")
               f.write(f"reason={reason}\n")
+              f.write(f"pregame_30={'true' if bool(pregame_30) else 'false'}\n")
+              f.write(f"pregame_15={'true' if bool(pregame_15) else 'false'}\n")
 
           print(json.dumps({
               "local_time":now.isoformat(),
               "fixed_checkpoint":fixed,
-              "pregame_games":pregame,
+              "pregame_30_games":pregame_30,
+              "pregame_15_games":pregame_15,
               "run":run,
               "reason":reason
           },indent=2))
@@ -162,8 +177,8 @@ jobs:
             git push
           fi
 
-      - name: Trigger forward snapshot when no goalie rescore is needed
-        if: (github.event_name != 'schedule' || steps.gate.outputs.run == 'true') && steps.rescore.outputs.run != 'true'
+      - name: Trigger forward snapshot after final pregame context pass
+        if: (github.event_name != 'schedule' || steps.gate.outputs.pregame_15 == 'true') && steps.rescore.outputs.run != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run update-forward-ledger.yml
