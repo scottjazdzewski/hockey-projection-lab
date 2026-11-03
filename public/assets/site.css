@@ -763,3 +763,27 @@ body.interior-fantasy{
   background-size:cover,cover,cover;
   background-position:center top,center 34%,center;
 }
+
+
+/* Site-wide header contract — single source for transparency */
+.site-header,
+.site-header-overlay,
+.gc-header,
+.ip-header{
+  background:rgba(10,5,22,.08)!important;
+  border-bottom:1px solid rgba(255,255,255,.12)!important;
+  backdrop-filter:blur(5px)!important;
+  -webkit-backdrop-filter:blur(5px)!important;
+}
+@media(min-width:701px){
+  .site-header .header-inner,
+  .site-header-overlay .header-inner,
+  .gc-header .header-inner,
+  .ip-header .header-inner{height:78px!important}
+}
+@media(max-width:700px){
+  .site-header .header-inner,
+  .site-header-overlay .header-inner,
+  .gc-header .header-inner,
+  .ip-header .header-inner{height:72px!important}
+}
