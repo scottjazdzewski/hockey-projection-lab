@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:hockey-projection-lab:goalie-starter-snapshot:v1",
+  "title": "Hockey Lab Pregame Goalie Starter Snapshot",
+  "description": "Append-only source observation for a named goalie expected or confirmed to start an NHL game. The consumer must compare captured_at with the prediction cutoff and scheduled puck drop.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "game_id",
+    "game_start_at",
+    "team_id",
+    "goalie_id",
+    "status",
+    "source_type",
+    "source_name",
+    "source_url",
+    "source_reported_at",
+    "captured_at",
+    "ingested_at",
+    "data_quality_flags"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "game_id": {
+      "type": "string",
+      "pattern": "^[0-9]{10}$"
+    },
+    "game_start_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "team_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "goalie_id": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["projected", "likely", "confirmed", "withdrawn"]
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["official_team", "official_league", "approved_provider", "manual_user_supplied", "other_reviewed"]
+    },
+    "source_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "source_reported_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ingested_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_release": {
+      "type": ["string", "null"]
+    },
+    "data_quality_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  }
+}
