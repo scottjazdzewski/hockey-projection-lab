@@ -12,12 +12,20 @@
     if(!state || !state.status || state.status==='UNKNOWN') return label+' —';
     return label+' '+String(state.status).toLowerCase();
   }
+  function goalieSide(label,name,status){
+    const s=String(status||'UNKNOWN').toUpperCase();
+    const cls=s==='CONFIRMED'?'gc-goalie-confirmed':(s==='PROJECTED'?'gc-goalie-projected':'gc-goalie-unknown');
+    const suffix=s==='CONFIRMED'?'Confirmed':(s==='PROJECTED'?'Projected':'Unknown');
+    return '<span class="gc-goalie-side '+cls+'"><strong>'+esc(label)+'</strong><span>'+esc(name||'—')+'</span><b>'+suffix+'</b></span>';
+  }
   function goaliePill(state){
-    if(!state || !state.away || !state.home) return '<span class="gc-pill gc-pill-wide gc-goalie gc-goalie-unknown">Goalies —</span>';
-    const confirmed=state.status==='CONFIRMED';
-    const cls=confirmed?'gc-goalie-confirmed':'gc-goalie-projected';
-    const suffix=confirmed?'Confirmed':'Projected';
-    return '<span class="gc-pill gc-pill-wide gc-goalie '+cls+'">Goalies: '+esc(state.away)+' / '+esc(state.home)+' · '+suffix+'</span>';
+    if(!state || !state.away || !state.home) return '<span class="gc-goalie-strip gc-goalie-strip-unknown">Goalies —</span>';
+    const awayStatus=state.away_status||state.status||'UNKNOWN';
+    const homeStatus=state.home_status||state.status||'UNKNOWN';
+    return '<span class="gc-goalie-strip">'+
+      goalieSide('Away',state.away,awayStatus)+
+      goalieSide('Home',state.home,homeStatus)+
+    '</span>';
   }
 
   function restSeverityClass(v){
@@ -83,7 +91,7 @@
     const xg=live ? goals(p.away.expected_goals,p.home.expected_goals) : '—';
     const reg=live ? pairPct(p.away.regulation_win_probability,p.home.regulation_win_probability) : '—';
     const ot=live ? pct(p.overtime_probability) : '—';
-    const goalies=live ? goaliePill(p.goalie_state) : '<span class="gc-pill gc-pill-wide gc-goalie gc-goalie-unknown">Goalies —</span>';
+    const goalies=live ? goaliePill(p.goalie_state) : '<span class="gc-goalie-strip gc-goalie-strip-unknown">Goalies —</span>';
     const rest=live ? restPill(g,p.rest_state) : '<span class="gc-rest-strip gc-rest-strip-unknown">Rest —</span>';
     const lineup=live ? context('Lineup',p.lineup_state) : 'Lineup —';
     const modelPill=live ? 'Model live' : (surfaceState==='WITHHELD'?'Model withheld':'Model —');
