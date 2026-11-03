@@ -36,6 +36,16 @@ for url in URLS:
                     print("LIST",path,"N",len(x),"SAMPLE_KEYS",sk,flush=True)
                     if isinstance(sample,(dict,list)): walk(sample,path+"[0]",depth+1)
         walk(pp)
+        if url.endswith("/starting-goalies") and pp.get("data"):
+            wanted=["homeTeamName","homeTeamAbbreviation","homeGoalieName","homeNewsStrengthName","homeNewsCreatedAt","homeNewsSourceName","homeNewsSourceUrl","awayTeamName","awayTeamAbbreviation","awayGoalieName","awayNewsStrengthName","awayNewsCreatedAt","awayNewsSourceName","awayNewsSourceUrl","date"]
+            for rec in pp["data"][:2]:
+                print("GOALIE_SAMPLE",{k:rec.get(k) for k in wanted if k in rec},flush=True)
+        if "/line-combinations" in url and isinstance(pp.get("combinations"),dict):
+            comb=pp["combinations"]
+            print("COMB_KEYS",list(comb.keys()),flush=True)
+            print("LINES_SAMPLE",comb.get("lines",[])[:13],flush=True)
+            players=comb.get("players",[])
+            print("PLAYER_SAMPLE",[{k:x.get(k) for k in ["name","positionIdentifier","groupIdentifier","groupName","categoryIdentifier","categoryName","injuryStatus","gameTimeDecision"]} for x in players[:12]],flush=True)
     text=soup.get_text(" ",strip=True)
     print("HAS_CONFIRMED","Confirmed" in text,"HAS_UNCONFIRMED","Unconfirmed" in text,flush=True)
     print("TEXT_PREFIX",text[:500].replace("\n"," "),flush=True)
