@@ -1,29 +1,42 @@
-/* Game Cards — clean standalone base. Do not layer old HWIN card rules onto this page. */
+/* Game Cards — clean standalone base.
+   Permanent visual contract: one uniform tint over the page artwork. */
 :root{
   --gc-purple:#2b0e4b;
-  --gc-purple-2:#3c1764;
   --gc-gold:#f0c640;
   --gc-ivory:#fff8e8;
   --gc-ink:#321653;
   --gc-line:rgba(240,198,64,.46);
   --gc-glass:rgba(255,250,240,.90);
-  --gc-muted:#847985;
+  --gc-tint:rgba(10,5,22,.18);
 }
 
 .gc-page{
+  position:relative;
   min-height:100vh;
   margin:0;
-  background:url('/assets/hero-game-cards.webp') center top / cover fixed no-repeat;
   color:var(--gc-ivory);
+  background:url('/assets/hero-game-cards.webp') center top / cover fixed no-repeat;
+  isolation:isolate;
+}
+.gc-page::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background:var(--gc-tint);
+  pointer-events:none;
+}
+.gc-page>*{
+  position:relative;
+  z-index:1;
 }
 
 .gc-hero{
   position:relative;
   min-height:208px;
   border-bottom:1px solid rgba(240,198,64,.42);
-  background:rgba(10,5,22,.20);
+  background:transparent;
 }
-
 .gc-header{
   position:absolute;
   inset:0 0 auto 0;
@@ -35,10 +48,7 @@
 }
 .gc-header .header-inner{height:78px}
 
-.gc-hero-inner{
-  padding-top:108px;
-  padding-bottom:22px;
-}
+.gc-hero-inner{padding-top:108px;padding-bottom:22px}
 .gc-eyebrow{
   color:var(--gc-gold);
   font-size:9px;
@@ -74,14 +84,8 @@
   color:rgba(255,248,232,.88);
 }
 
-.gc-main{
-  position:relative;
-  background:rgba(10,5,22,.20);
-}
-.gc-content{
-  padding-top:14px;
-  padding-bottom:34px;
-}
+.gc-main{position:relative;background:transparent}
+.gc-content{padding-top:14px;padding-bottom:34px}
 .gc-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -125,7 +129,6 @@
   text-transform:uppercase;
 }
 .gc-card-head span:last-child{white-space:nowrap}
-
 .gc-matchup{
   display:grid;
   grid-template-columns:minmax(0,1fr) 46px minmax(0,1fr);
@@ -142,11 +145,7 @@
   justify-items:center;
   text-align:center;
 }
-.gc-team img{
-  width:60px;
-  height:60px;
-  object-fit:contain;
-}
+.gc-team img{width:60px;height:60px;object-fit:contain}
 .gc-team-name{
   width:100%;
   display:flex;
@@ -157,7 +156,6 @@
   font:600 20px/.95 var(--serif);
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:clip;
 }
 .gc-team-name.gc-long{font-size:17px;letter-spacing:-.025em}
 .gc-team small{
@@ -167,16 +165,8 @@
   letter-spacing:.055em;
   text-transform:uppercase;
 }
-.gc-prob{
-  display:grid;
-  place-items:center;
-  text-align:center;
-  align-content:center;
-}
-.gc-prob strong{
-  font:600 31px/1 var(--serif);
-  color:var(--gc-ink);
-}
+.gc-prob{display:grid;place-items:center;text-align:center;align-content:center}
+.gc-prob strong{font:600 31px/1 var(--serif);color:var(--gc-ink)}
 .gc-prob span{
   margin-top:5px;
   font-size:6.2px;
@@ -185,12 +175,7 @@
   color:#8b7d84;
   text-transform:uppercase;
 }
-.gc-prob b{
-  margin-top:7px;
-  font-size:7px;
-  font-weight:500;
-  color:#9b8d96;
-}
+.gc-prob b{margin-top:7px;font-size:7px;font-weight:500;color:#9b8d96}
 
 .gc-metrics{
   display:grid;
@@ -208,10 +193,7 @@
 }
 .gc-metric:nth-child(2n){border-right:0}
 .gc-metric:nth-child(n+3){border-bottom:0}
-.gc-metric strong{
-  font:600 16px/1 var(--serif);
-  color:var(--gc-ink);
-}
+.gc-metric strong{font:600 16px/1 var(--serif);color:var(--gc-ink)}
 .gc-metric span{
   margin-top:4px;
   font-size:5.8px;
@@ -246,7 +228,6 @@
   text-transform:uppercase;
   white-space:nowrap;
 }
-
 .gc-card-foot{
   display:flex;
   align-items:center;
