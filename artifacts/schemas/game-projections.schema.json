@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "game-projections.schema.json",
+  "title": "Hockey Lab Game Projections",
+  "type": "object",
+  "required": ["schema_version","generated_at","data_cutoff","model","projections"],
+  "properties": {
+    "schema_version": {"const":"1.0"},
+    "generated_at": {"type":"string","format":"date-time"},
+    "data_cutoff": {"type":"string","format":"date-time"},
+    "model": {
+      "type":"object",
+      "required":["model_id","version","status","feature_version"],
+      "properties":{
+        "model_id":{"type":"string","minLength":1},
+        "version":{"type":"string","minLength":1},
+        "status":{"enum":["RESEARCH","CANDIDATE","PROMOTED"]},
+        "feature_version":{"type":"string","minLength":1},
+        "trained_through":{"type":["string","null"]}
+      },
+      "additionalProperties":false
+    },
+    "projections":{
+      "type":"array",
+      "items":{
+        "type":"object",
+        "required":["game_id","game_date","away","home","publish_state","flags"],
+        "properties":{
+          "game_id":{"type":["integer","string"]},
+          "game_date":{"type":"string"},
+          "start_time_et":{"type":["string","null"]},
+          "publish_state":{"enum":["PENDING","PUBLISHED","WITHHELD"]},
+          "away":{"$ref":"#/$defs/teamProjection"},
+          "home":{"$ref":"#/$defs/teamProjection"},
+          "overtime_probability":{"type":["number","null"],"minimum":0,"maximum":1},
+          "goalie_state":{"$ref":"#/$defs/contextState"},
+          "lineup_state":{"$ref":"#/$defs/contextState"},
+          "rest_state":{"$ref":"#/$defs/contextState"},
+          "flags":{"type":"array","items":{"type":"string"}}
+        },
+        "additionalProperties":false
+      }
+    }
+  },
+  "$defs":{
+    "teamProjection":{
+      "type":"object",
+      "required":["abbr","win_probability","expected_goals","regulation_win_probability","fair_moneyline"],
+      "properties":{
+        "abbr":{"type":"string","minLength":2,"maxLength":3},
+        "win_probability":{"type":["number","null"],"minimum":0,"maximum":1},
+        "expected_goals":{"type":["number","null"],"minimum":0},
+        "regulation_win_probability":{"type":["number","null"],"minimum":0,"maximum":1},
+        "fair_moneyline":{"type":["integer","null"]}
+      },
+      "additionalProperties":false
+    },
+    "contextState":{
+      "type":["object","null"],
+      "properties":{
+        "status":{"enum":["UNKNOWN","PROJECTED","CONFIRMED","CLEAR"]},
+        "away":{"type":["string","null"]},
+        "home":{"type":["string","null"]},
+        "updated_at":{"type":["string","null"]}
+      },
+      "additionalProperties":true
+    }
+  },
+  "additionalProperties":false
+}
