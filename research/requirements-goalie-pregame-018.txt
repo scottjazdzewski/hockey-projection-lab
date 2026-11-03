@@ -1,0 +1,3 @@
+# Shared Hockey Lab research dependencies for goalie-choice, calibration, and score-layer experiments.
+-r requirements-game-model.txt
+-r requirements-goals-distribution-004.txt
