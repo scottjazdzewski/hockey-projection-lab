@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-11-03T11:10:33.228336+00:00",
+  "updated_at": "2026-11-03T11:26:36.177Z",
   "surfaces": {
     "schedule": {
       "file": "public/data/today-games.json",
@@ -64,6 +64,15 @@
       "model_id": null,
       "model_version": null,
       "max_age_minutes": null
+    },
+    "live_context": {
+      "file": "public/data/live-context.json",
+      "schema": "artifacts/schemas/live-context.schema.json",
+      "state": "READY",
+      "owner": "pregame-context",
+      "model_id": null,
+      "model_version": null,
+      "max_age_minutes": 300
     }
   }
 }
