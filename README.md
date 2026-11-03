@@ -82,3 +82,18 @@ The public-facing model name is intentionally not hard-coded. Internal research 
 - Do not use future information in pregame features.
 - Do not manually type model performance statistics into the site.
 - Do not create duplicate production exports for the same surface.
+
+
+## Operations
+
+Hidden development status page:
+
+`/status/`
+
+It reports the state, freshness, record count, owner, and model version for every production surface.
+
+Generic team profile route:
+
+`/teams/profile/?team=COL`
+
+All 32 Team Profile badges link through the same route and populate from the promoted team-ratings export when that surface is READY.
