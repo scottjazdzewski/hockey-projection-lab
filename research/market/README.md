@@ -59,8 +59,9 @@ credits. The historical fetcher is dry-run by default and requires a
 caller-supplied `--max-credits` before it will make any request. Do not add a
 subscription, buy credits, or run a paid backfill without explicit approval.
 
-PuckAPI allows account holders to store data for internal research/backtesting
-while the account is open, but prohibits redistributing raw odds as a bulk
+PuckAPI's [published terms](https://puckapi.com/docs/timing-and-rights) allow
+data pulled under an account to remain in use for internal research/backtesting,
+including after cancellation, but prohibit redistributing raw odds as a bulk
 dataset/feed/export. Keep these artifacts private and outside `public/data/`.
 
 ## Coverage and identity
