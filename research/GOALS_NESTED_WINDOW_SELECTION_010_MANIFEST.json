@@ -1,0 +1,104 @@
+{
+  "experiment_id": "EXP-0028",
+  "model_id": "HOCKEY-LAB-GOALS-NESTED-WINDOW-SELECTION-010-RESEARCH",
+  "feature_version": "pregame-goals-process-nested-team-windows-20-40-60-010",
+  "status": "REJECTED as a promotion candidate; diagnostic result retained",
+  "run_date": "2026-11-03",
+  "source_version": "sportsdataverse-pbp-features-20261102+canonical-spine-v3-20261102",
+  "retrieval_date": "2026-11-03",
+  "source_files": {
+    "script": {
+      "path": "/workspace/scratch/d35a67cf1915/research/hockey_goals_nested_window_selection_010.py",
+      "sha256": "c93f3cf29098e52f9b4d74955650f5b858b9c45170abe59d2fd69948f2554c65"
+    },
+    "requirements": {
+      "path": "/workspace/scratch/d35a67cf1915/research/requirements-goals-nested-window-selection-010.txt",
+      "sha256": "72203c3e493b17671a8da75a93e3dc08105af7f4dca47cbd91f260153cecd804"
+    },
+    "pbp_features": {
+      "path": "/tmp/hockey_events/data/pbp_feature_output/game_team_event_features.parquet",
+      "sha256": "8fc51d8de6db68fca1ea9ab850627c044354d60364b63d6e8531f18110c6f3ef"
+    },
+    "canonical_games": {
+      "path": "/tmp/hockey_spine/data/spine_v3/games.parquet",
+      "sha256": "e3b6a3cb9784a91ec6e396e1a7e72330451abee055ed0ba54e0408e37f40a0e3"
+    },
+    "pbp_source_manifest": {
+      "path": "/tmp/hockey_events/data/pbp_feature_output/source_manifest.csv",
+      "sha256": "3c4ab0fc8fbc56ec2591c6722e89fa36f721fad2379e4aa9d61460a6cddd5b2c"
+    },
+    "spine_source_manifest": {
+      "path": "/tmp/hockey_spine/data/spine_v3/source_manifest.csv",
+      "sha256": "8b19be878cf291c7969f0cbd67447c977cd5b3929dfa00261ce40a891dd53e66"
+    }
+  },
+  "validation_design": "rolling origin: train <= S-2; select alpha, team window, and score law on S-1; refit through S-1; score S; target seasons 2022-2026",
+  "target_season_games": {
+    "2022": 1312,
+    "2023": 1312,
+    "2024": 1312,
+    "2025": 1312,
+    "2026": 1312
+  },
+  "team_history_windows": [
+    20,
+    40,
+    60
+  ],
+  "league_scoring_window": 20,
+  "window_selection_metric": "independent-Poisson regulation score log loss on S-1",
+  "selected_windows": {
+    "2022": 60,
+    "2023": 60,
+    "2024": 60,
+    "2025": 60,
+    "2026": 40
+  },
+  "selected_score_law": "diagonal_inflated_poisson in every fold; parameters 1.45, 1.45, 1.60, 1.30, 1.30",
+  "predictor_policy": "Hockey evidence only; no betting market or HWIN predictions; no same-game goalie identity or lineups because the current warehouse lacks timestamped pregame snapshots",
+  "label_checks": "Canonical winner and regulation-tie/overtime checks passed; 6,560 regular-season OOF games scored",
+  "score_distribution_export": {
+    "file": "score_distribution_pmf.parquet",
+    "selected_model_rows": 6560,
+    "regulation_cells_per_game": 676,
+    "final_cells_per_game": 729,
+    "probability_dtype": "float32",
+    "compression": "zstd level 9",
+    "row_major_order": "home_goals by away_goals",
+    "max_pmf_sum_error": 2.143e-08,
+    "max_expected_goal_delta_vs_ledger": 1.487e-06
+  },
+  "execution": "PYTHONPATH=/tmp/hockey-pyarrow:research python research/hockey_goals_nested_window_selection_010.py --pbp /tmp/hockey_events/data/pbp_feature_output/game_team_event_features.parquet --spine /tmp/hockey_spine/data/spine_v3/games.parquet --out /tmp/hockey_runs/goals_nested_window_selection_010_verified",
+  "python_version": "3.12.14",
+  "artifacts": {
+    "context_metrics.parquet": {
+      "sha256": "b07a92ec7a3be2aea4ecd5bba6a440263e8fdd54cc037c160ebaafe3d09af0b9",
+      "bytes": 6951
+    },
+    "fold_metrics.csv": {
+      "sha256": "a0f429bc637bee9df0db9867be3a5c0fd9d739ac6e233ff91ebadf328eabf8d1",
+      "bytes": 2747
+    },
+    "oof_predictions.parquet": {
+      "sha256": "641bb159c9112765d783e6c6ff2b2614a54914b25f23b939d2639c2adac4ea22",
+      "bytes": 4934587
+    },
+    "reliability_bins.parquet": {
+      "sha256": "5e08daf27a6385037f07d29f14985a56451e534bd7ea45cd332f948ae2752f94",
+      "bytes": 11069
+    },
+    "score_distribution_pmf.parquet": {
+      "sha256": "5e47f2fac81607aeb0f2647991348df5bb7e37ba3eca4b5f810218c46c46d2e1",
+      "bytes": 35733453
+    },
+    "summary.json": {
+      "sha256": "82aa61d54e65a40d43900c2141ec5a1ddf7ca81044db7a5e92ac0443462f7d9b",
+      "bytes": 109023
+    }
+  },
+  "reproducibility": {
+    "second_full_run": "exact parity for OOF data, fold metrics, summary, context metrics, reliability bins, and score PMFs; Parquet files were byte-identical",
+    "probability_checks": "PASS: full regulation/final PMFs normalized and expected goals reconciled to float64 ledger"
+  },
+  "decision": "Do not promote. Nested selector trails fixed 60-date model slightly in regulation score log loss and three-way Brier. EXP-0027 fixed-60 remains CANDIDATE for further research; Hockey Lab Game v1.0.0 frozen; no public export."
+}
