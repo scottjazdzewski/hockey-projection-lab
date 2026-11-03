@@ -18,7 +18,8 @@
           "state":{"enum":["EMPTY","READY","WITHHELD"]},
           "owner":{"type":"string"},
           "model_id":{"type":["string","null"]},
-          "model_version":{"type":["string","null"]}
+          "model_version":{"type":["string","null"]},
+          "max_age_minutes":{"type":["integer","null"],"minimum":1}
         },
         "additionalProperties":false
       }
