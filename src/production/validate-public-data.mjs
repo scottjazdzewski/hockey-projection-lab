@@ -22,6 +22,7 @@ const fantasy=readJson('fantasy-rankings.json');
 const manifest=readJson('production-manifest.json');
 const identities=readJson('team-identities.json');
 const liveContext=readJson('live-context.json');
+const forwardLedger=readJson('forward-ledger-summary.json');
 
 if(!schedule || !Array.isArray(schedule.games)) fail('today-games.json missing or malformed');
 else ok('schedule readable');
@@ -194,6 +195,36 @@ if(liveContext){
   }
 }else fail('live-context.json missing');
 
+
+if(forwardLedger){
+  if(forwardLedger.schema_version!=='1.0') fail('forward-ledger summary schema_version must be 1.0');
+  const s=forwardLedger.sample||{};
+  for(const k of ['games_frozen','games_settled','games_open','winner_games_scored','xg_games_scored']){
+    if(!Number.isInteger(s[k]) || s[k]<0) fail('forward-ledger sample '+k+' invalid');
+  }
+  if(Number.isInteger(s.games_frozen) && Number.isInteger(s.games_settled) && Number.isInteger(s.games_open) &&
+     s.games_settled+s.games_open!==s.games_frozen) fail('forward-ledger frozen count must equal settled + open');
+  const m=forwardLedger.metrics||{};
+  for(const k of ['accuracy','brier','log_loss','avg_probability_assigned_to_winner','xg_mae_per_team','total_goals_mae']){
+    if(!finiteOrNull(m[k])) fail('forward-ledger metric '+k+' must be finite or null');
+  }
+  if(!Array.isArray(forwardLedger.games)) fail('forward-ledger games must be array');
+  else {
+    const ids=new Set();
+    for(const g of forwardLedger.games){
+      const id=String(g.game_id);
+      if(ids.has(id)) fail('duplicate forward-ledger game_id '+id); else ids.add(id);
+      if(!['OPEN','FINAL'].includes(g.status)) fail('forward-ledger '+id+' invalid status');
+      if(g.status==='FINAL' && !g.winner_abbr) fail('forward-ledger '+id+' FINAL without winner');
+      for(const k of ['brier','log_loss','probability_assigned_to_winner','goal_mae_per_team','total_goals_abs_error']){
+        if(!finiteOrNull(g[k])) fail('forward-ledger '+id+' '+k+' must be finite or null');
+      }
+    }
+    if(ids.size!==s.games_frozen) fail('forward-ledger summary row count does not match games_frozen');
+  }
+  ok('forward prediction ledger summary readable');
+}else fail('forward-ledger-summary.json missing');
+
 if(manifest){
   if(manifest.schema_version!=='1.0') fail('production-manifest schema_version must be 1.0');
   if(!manifest.surfaces || typeof manifest.surfaces!=='object') fail('production-manifest surfaces missing');
@@ -206,7 +237,8 @@ if(manifest){
       player_ratings:'player-ratings.json',
       fantasy_rankings:'fantasy-rankings.json',
       team_identities:'team-identities.json',
-      live_context:'live-context.json'
+      live_context:'live-context.json',
+      forward_ledger:'forward-ledger-summary.json'
     };
     for(const [key,file] of Object.entries(expected)){
       const s=manifest.surfaces[key];
