@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03T06:10:32.924193-05:00",
+  "generated_at": "2026-11-03T06:36:11.241532-05:00",
   "data_cutoff": "2026-11-01T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -24,36 +24,34 @@
       },
       "home": {
         "abbr": "TOR",
-        "win_probability": 0.4170805922053747,
+        "win_probability": 0.41708059220537463,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 140
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Karel Vejmelka",
-        "home": "Sergei Bobrovsky",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -63,43 +61,41 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "WPG",
-        "win_probability": 0.3613170451797606,
+        "win_probability": 0.3613170451797607,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 177
       },
       "home": {
         "abbr": "MTL",
-        "win_probability": 0.6386829548202394,
+        "win_probability": 0.6386829548202393,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -177
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Stuart Skinner",
-        "home": "Jacob Fowler",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -123,29 +119,27 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Daniil Tarasov",
-        "home": "Andrei Vasilevskiy",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -169,29 +163,27 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Joel Hofer",
-        "home": "Dylan Garand",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -215,29 +207,27 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Jesper Wallstedt",
-        "home": "Dan Vladar",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -261,29 +251,27 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Carter Hart",
-        "home": "Arturs Silovs",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -307,29 +295,27 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Jake Oettinger",
-        "home": "Logan Thompson",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -353,29 +339,27 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Scott Wedgewood",
-        "home": "Jet Greaves",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -399,29 +383,27 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Matt Tomkins",
-        "home": "Connor Hellebuyck",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -431,43 +413,41 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "CAR",
-        "win_probability": 0.7220858147384515,
+        "win_probability": 0.7220858147384516,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -260
       },
       "home": {
         "abbr": "NSH",
-        "win_probability": 0.27791418526154854,
+        "win_probability": 0.27791418526154843,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 260
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Pyotr Kochetkov",
-        "home": "Juuse Saros",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     },
     {
@@ -477,43 +457,41 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "ANA",
-        "win_probability": 0.6307609817171131,
+        "win_probability": 0.630760981717113,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -171
       },
       "home": {
         "abbr": "VAN",
-        "win_probability": 0.3692390182828869,
+        "win_probability": 0.36923901828288697,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 171
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
-        "away": "Laurent Brossoit",
-        "home": "Leevi Merilainen",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
       },
       "rest_state": {
         "status": "CONFIRMED",
         "away": null,
         "home": null,
-        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+        "updated_at": "2026-11-03T06:36:11.241532-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
         "no_goalie_layer",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff"
+        "b2b_context"
       ]
     }
   ]
