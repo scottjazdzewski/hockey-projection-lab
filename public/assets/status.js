@@ -6,14 +6,15 @@
     model_performance:'Model performance',
     team_ratings:'Team ratings',
     player_ratings:'Player ratings',
-    fantasy_rankings:'Fantasy rankings'
+    fantasy_rankings:'Fantasy rankings',
+    live_context:'Live pregame context'
   };
 
   async function load(){
     const grid=document.getElementById('status-grid');
     try{
       const m=await window.HockeyData.manifest();
-      const order=['schedule','team_identities','game_projections','model_performance','team_ratings','player_ratings','fantasy_rankings'];
+      const order=['schedule','live_context','team_identities','game_projections','model_performance','team_ratings','player_ratings','fantasy_rankings'];
       const cards=[];
       for(const key of order){
         const s=m?.surfaces?.[key];
