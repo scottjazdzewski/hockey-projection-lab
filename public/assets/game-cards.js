@@ -29,11 +29,13 @@
   }
 
   function restSide(abbr,label,flags,severity){
+    let displayLabel=String(label||'Rest unknown');
+    displayLabel=displayLabel.replace(/^(\d+)d rest$/i,(_,n)=>n+' '+(Number(n)===1?'day':'days')+' rest');
     const tags=Array.isArray(flags)&&flags.length
       ? '<span class="gc-rest-flags">'+flags.map(x=>'<b>'+esc(x)+'</b>').join('')+'</span>'
       : '<span class="gc-rest-flags gc-rest-flags-clear"><b>Normal load</b></span>';
     return '<span class="gc-rest-side '+restSeverityClass(severity)+'">'+
-      '<strong>'+esc(abbr)+' · '+esc(label||'Rest unknown')+'</strong>'+
+      '<strong>'+esc(abbr)+' · '+esc(displayLabel)+'</strong>'+
       tags+
     '</span>';
   }
