@@ -18,6 +18,14 @@ For game *G*, every feature must use information available before *G* begins. St
 
 Any new layer must have a pregame source path as well as historical backtest value. This applies to expected/confirmed goalie identity, scratches, injuries, rosters, usage, lines, and pairings. A postgame actual starter is not a safe substitute for a pregame starter snapshot.
 
+## Starting-goalie input rule
+
+- The goalie is a named game input whenever an expected or confirmed starter is available before the prediction cutoff. Use that goalie ID to retrieve only prior-date goalie skill, workload, and rest features; never average the named starter away in the primary forecast.
+- If no named starter is available at the cutoff, the chronological starter-choice distribution may be used as an explicitly uncertain fallback. A projected or confirmed starter snapshot records its status; a late change before puck drop creates a new prediction version rather than overwriting the earlier one.
+- Every snapshot retains game/team/goalie IDs, source and source URL, source report time when available, capture time, and data-quality flags. Each prediction separately records its input cutoff. Reject snapshots captured after the cutoff or after puck drop.
+- Historical starter IDs from completed-game goalie boxes may be used for retrospective research when clearly labeled. They do not prove the ID was known at a historical pregame cutoff. Goalie skill and workload still use strictly prior game dates.
+- Exact-starter goalie effects belong in the goals-rate/score-distribution challenger first. Regulation, overtime, and full-game win probabilities must be recomputed from its adjusted score distribution. Keep Hockey Lab Game v1.0.0 frozen until an exact-starter win challenger shows repeatable out-of-sample improvement against it.
+
 ## Validation protocol
 
 Use nested chronological rolling-origin folds. For target source season `T`:
