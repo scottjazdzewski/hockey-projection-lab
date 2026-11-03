@@ -83,8 +83,8 @@
 }
 .gc-card{
   display:grid;
-  grid-template-rows:38px 148px 92px 48px 36px;
-  height:362px;
+  grid-template-rows:38px 158px 92px 52px 36px;
+  height:376px;
   min-width:0;
   overflow:hidden;
   border:1px solid rgba(240,198,64,.60);
@@ -108,21 +108,21 @@
 .gc-card-head span:last-child{white-space:nowrap}
 .gc-matchup{
   display:grid;
-  grid-template-columns:minmax(0,1fr) 46px minmax(0,1fr);
+  grid-template-columns:minmax(0,1fr) 50px minmax(0,1fr);
   align-items:center;
   gap:4px;
   padding:13px 9px 10px;
 }
 .gc-team{
-  height:118px;
+  height:128px;
   min-width:0;
   display:grid;
-  grid-template-rows:61px 39px 18px;
+  grid-template-rows:74px 36px 18px;
   align-items:center;
   justify-items:center;
   text-align:center;
 }
-.gc-team img{width:60px;height:60px;object-fit:contain}
+.gc-team img{width:72px;height:72px;object-fit:contain}
 .gc-team-name{
   width:100%;
   display:flex;
@@ -130,10 +130,10 @@
   justify-content:center;
   padding:0 2px;
   overflow:hidden;
-  font:600 20px/.95 var(--serif);
+  font:600 21px/.95 var(--serif);
   white-space:nowrap;
 }
-.gc-team-name.gc-long{font-size:17px;letter-spacing:-.025em}
+.gc-team-name.gc-long{font-size:18px;letter-spacing:-.025em}
 .gc-team small{
   color:#867982;
   font-size:6.8px;
@@ -177,16 +177,16 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:5px;
-  padding:0 7px;
+  gap:7px;
+  padding:0 8px;
 }
 .gc-pill{
-  padding:5px 7px;
+  padding:7px 9px;
   border:1px solid #d7bc72;
   border-radius:999px;
   background:rgba(248,240,217,.86);
   color:#4b2b67;
-  font-size:5.9px;
+  font-size:6.7px;
   font-weight:800;
   letter-spacing:.035em;
   text-transform:uppercase;
@@ -204,7 +204,7 @@
 }
 @media(max-width:1180px){
   .gc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .gc-card{height:380px;grid-template-rows:38px 160px 98px 48px 36px}
+  .gc-card{height:394px;grid-template-rows:38px 170px 98px 52px 36px}
 }
 @media(max-width:700px){
   .gc-page{
@@ -221,6 +221,66 @@
   .gc-title-row h1{font-size:43px}
   .gc-date{font-size:23px}
   .gc-grid{grid-template-columns:1fr}
-  .gc-card{height:386px}
+  .gc-card{
+    height:462px;
+    grid-template-rows:42px 194px 104px 82px 40px;
+  }
+  .gc-card-head{
+    padding:0 14px;
+    font-size:9px;
+  }
+  .gc-matchup{
+    grid-template-columns:minmax(0,1fr) 58px minmax(0,1fr);
+    gap:8px;
+    padding:14px 12px 10px;
+  }
+  .gc-team{
+    height:154px;
+    grid-template-rows:92px 40px 22px;
+  }
+  .gc-team img{
+    width:88px;
+    height:88px;
+  }
+  .gc-team-name{
+    font-size:24px;
+  }
+  .gc-team-name.gc-long{
+    font-size:21px;
+  }
+  .gc-team small{
+    font-size:8px;
+  }
+  .gc-prob strong{
+    font-size:35px;
+  }
+  .gc-prob span{
+    font-size:7.5px;
+  }
+  .gc-metric strong{
+    font-size:18px;
+  }
+  .gc-metric span{
+    font-size:7px;
+  }
+  .gc-pills{
+    display:grid;
+    grid-template-columns:repeat(2,max-content);
+    justify-content:center;
+    align-content:center;
+    gap:8px 10px;
+    padding:8px 10px;
+  }
+  .gc-pill{
+    min-width:112px;
+    padding:9px 12px;
+    font-size:9px;
+    letter-spacing:.045em;
+    text-align:center;
+  }
+  .gc-card-foot{
+    padding:0 12px;
+    font-size:7.2px;
+  }
   .gc-content{padding-bottom:16px}
 }
