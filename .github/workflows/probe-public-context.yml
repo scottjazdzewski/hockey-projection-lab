@@ -1,0 +1,20 @@
+name: Probe Public Hockey Context Sources
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/live_context/probe_public_sources.py'
+      - '.github/workflows/probe-public-context.yml'
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet requests beautifulsoup4
+      - run: python src/live_context/probe_public_sources.py
