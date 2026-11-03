@@ -162,6 +162,12 @@ jobs:
             git push
           fi
 
+      - name: Trigger forward snapshot when no goalie rescore is needed
+        if: (github.event_name != 'schedule' || steps.gate.outputs.run == 'true') && steps.rescore.outputs.run != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update-forward-ledger.yml
+
       - name: Trigger goalie-aware pregame rescore
         if: (github.event_name != 'schedule' || steps.gate.outputs.run == 'true') && steps.rescore.outputs.run == 'true'
         env:
