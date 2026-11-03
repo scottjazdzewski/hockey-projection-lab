@@ -6,14 +6,15 @@ calibration. No market field is added to `public/data/game-projections.json`.
 
 ## Source decision
 
-PuckAPI is the preferred historical source. Its [NHL historical odds archive](https://puckapi.com/data/historical-odds)
+PuckAPI is the leading documented candidate for a historical pull,
+but its odds coverage and pre-puck timestamps have not been verified against
+the canonical spine. Its [NHL historical odds archive](https://puckapi.com/data/historical-odds)
 starts in 2019-20, carries NHL game IDs, and [`get_game_detail`](https://puckapi.com/docs/get-game-detail)
-returns sportsbook odds
-snapshots with captured timestamps. This supports a direct game-ID join and
-per-book latest-timestamp selection. The collector uses `get_game_detail` to
-request all sportsbook snapshots held for each game; it immediately excludes
-any row without a valid timestamp or timestamped at/after puck drop. The
-benchmark independently repeats the strict timing check.
+returns sportsbook odds snapshots with captured timestamps. The collector
+uses those timestamps for a direct game-ID join and keeps only the latest
+snapshot strictly before puck drop; it excludes missing timestamps and any
+capture at or after scheduled start. A provider's `closing` label alone is
+not accepted as proof of a valid pregame quote.
 
 Published odds coverage, checked 2026-11-03:
 
