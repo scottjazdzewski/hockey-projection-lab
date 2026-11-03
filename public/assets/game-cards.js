@@ -93,8 +93,6 @@
     const ot=live ? pct(p.overtime_probability) : '—';
     const goalies=live ? goaliePill(p.goalie_state) : '<span class="gc-goalie-strip gc-goalie-strip-unknown">Goalies —</span>';
     const rest=live ? restPill(g,p.rest_state) : '<span class="gc-rest-strip gc-rest-strip-unknown">Rest —</span>';
-    const lineup=live ? context('Lineup',p.lineup_state) : 'Lineup —';
-    const modelPill=live ? 'Model live' : (surfaceState==='WITHHELD'?'Model withheld':'Model —');
     const footer=live
       ? 'Pregame projection · '+esc(pBundle.model.model_id)+' '+esc(pBundle.model.version)+' · cutoff '+esc(pBundle.data_cutoff||'')
       : (surfaceState==='WITHHELD'
@@ -113,7 +111,7 @@
         '<div class="gc-metric"><strong>'+reg+'</strong><span>Reg win A · H</span></div>'+
         '<div class="gc-metric"><strong>'+ot+'</strong><span>OT probability</span></div>'+
       '</div>'+
-      '<div class="gc-pills">'+goalies+rest+'<span class="gc-pill">'+esc(lineup)+'</span><span class="gc-pill">'+esc(modelPill)+'</span></div>'+
+      '<div class="gc-pills">'+goalies+rest+'</div>'+
       '<div class="gc-card-foot">'+footer+'</div>'+
     '</article>';
   }
