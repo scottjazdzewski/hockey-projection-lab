@@ -401,8 +401,8 @@
       "sha256": "aa391c2ffa50092f484c5656edcf4a37e4b88c1f97ef2938ef093b44362197c1"
     },
     "GOALS_LONGER_TEAM_FORM_008_20261103.md": {
-      "size_bytes": 3978,
-      "sha256": "46805554d4f0bab24e2512cfb2135b23551a14908806fe3571f92b5e623c3a5d"
+      "size_bytes": 4479,
+      "sha256": "f04f7d5b799ef7ad1e4e43730e0be6378cdefb0f20b269cea39702585bd69b08"
     },
     "context_metrics.parquet": {
       "size_bytes": 6951,
@@ -424,5 +424,22 @@
       "size_bytes": 136,
       "sha256": "72203c3e493b17671a8da75a93e3dc08105af7f4dca47cbd91f260153cecd804"
     }
+  },
+  "context_diagnostic": {
+    "back_to_back_all_target_seasons": {
+      "games": 1722,
+      "regulation_score_logloss_20": 3.857584,
+      "regulation_score_logloss_40": 3.852195,
+      "regulation_three_way_brier_20": 0.618823,
+      "regulation_three_way_brier_40": 0.617737
+    },
+    "back_to_back_2026_fold": {
+      "games": 358,
+      "regulation_score_logloss_20": 3.804983,
+      "regulation_score_logloss_40": 3.813685,
+      "regulation_three_way_brier_20": 0.647202,
+      "regulation_three_way_brier_40": 0.6524
+    },
+    "interpretation": "Pooled B2B slices improve, but all B2B states in the 2026 fold show a counter-signal; no stable B2B-specific edge is claimed."
   }
 }
