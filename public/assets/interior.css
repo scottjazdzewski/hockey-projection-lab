@@ -245,3 +245,63 @@
   .tp-metric strong{font-size:28px}
   .tp-meta{flex-direction:column;gap:5px}
 }
+
+/* Forward production audit */
+.ip-forward-section{
+  margin-top:18px;
+  padding-top:20px;
+  border-top:1px solid rgba(240,198,64,.38);
+}
+.ip-section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:28px;
+  margin-bottom:14px;
+}
+.ip-section-head span{
+  color:var(--ip-gold);
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.ip-section-head h2{
+  margin:4px 0 0;
+  color:var(--ip-ivory);
+  font:600 30px/1 var(--serif);
+}
+.ip-section-head p{
+  max-width:520px;
+  margin:0;
+  color:rgba(255,248,232,.74);
+  font-size:8px;
+  line-height:1.5;
+  text-align:right;
+}
+.ip-forward-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.ip-forward-card{min-height:128px;padding:20px 22px}
+.ip-forward-card strong{font-size:34px}
+.ip-forward-card small{
+  margin-top:6px;
+  color:#8b7f88;
+  font-size:7px;
+  font-weight:700;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+@media(max-width:900px){
+  .ip-forward-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ip-section-head{align-items:flex-start;flex-direction:column;gap:8px}
+  .ip-section-head p{text-align:left}
+}
+@media(max-width:520px){
+  .ip-forward-grid{grid-template-columns:1fr 1fr}
+  .ip-forward-card{min-height:108px;padding:16px}
+  .ip-forward-card strong{font-size:29px}
+  .ip-forward-card span{font-size:7px}
+}
