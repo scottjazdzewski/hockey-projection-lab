@@ -1,0 +1,70 @@
+{
+  "experiment_id": "EXP-0034",
+  "model_id": "HOCKEY-LAB-EXACT-STARTER-GOAL-WIN-BRIDGE-020-RESEARCH",
+  "feature_version": "pregame-goal-process-plus-retrospective-exact-starter-win-bridge-020",
+  "status": "RESEARCH; no production export; Hockey Lab Game v1.0.0 remains frozen",
+  "run_date": "2026-11-03",
+  "retrieval_date": "2026-11-03",
+  "source_version": "hockey-goals-predicted-goalie-018+goals-goalie-layer-011+hwin-exact-starter-019",
+  "validation_design": "Fit HWIN-goals blend weight on 2025 regular-season OOF; evaluate unchanged on 2026 regular-season OOF; match all predictions by game ID.",
+  "starter_identity_policy": "Actual same-game starter from postgame goalie box; no availability timestamp. Retrospective upper-bound diagnostic only.",
+  "goalie_skill_cutoff": "Strictly earlier game dates; same-date goalie results excluded.",
+  "game_type": "Regular season only for matched score-derived bridge metrics.",
+  "inputs": {
+    "goals_018_oof_predictions": {
+      "path": "research/.tmp_goalie_probability_016/out/goals_018_final/oof_predictions.parquet",
+      "sha256": "733f8b6973a034a851fd8c6fd155197c88deb7002cc2a3dfbab75f9c3afe8ba5",
+      "bytes": 1407771
+    },
+    "hwin_011_oof_predictions": {
+      "path": "research/exports/HWIN_PREVIOUS_SEASON_BATTERY_011_20261103/results/goalie_battery_011/oof_predictions.parquet",
+      "sha256": "2478f98d7f1e8e64c29253281318f7bb425bb7ddc3fcf4d521d80983aac8fc5f",
+      "bytes": 1723801
+    },
+    "hwin_exact_starter_019_oof_predictions": {
+      "path": "research/.tmp_goalie_probability_016/out/hwin_exact_starter_019/oof_predictions.parquet",
+      "sha256": "31cb64591fe44b724a80a23c7f83c0e7fc665c048760b49fcc0c2b38443b29b8",
+      "bytes": 110856
+    },
+    "goals_018_code": {
+      "path": "research/hockey_goals_predicted_goalie_layer_018.py",
+      "sha256": "9deb244bed48fd5e2b1588d60c19c7517e142e15f328afa3de2eb8ea0f5882ce",
+      "bytes": 32595
+    },
+    "goals_011_code": {
+      "path": "research/hockey_goals_goalie_layer_011.py",
+      "sha256": "f41f020b42fb95f3ab7baebe9488f98ed47796c483856044f8a1aafebe7b1b40",
+      "bytes": 15734
+    },
+    "hwin_019_code": {
+      "path": "research/hockey_hwin_exact_starter_increment_019.py",
+      "sha256": "7c9482523b7a50459cbe8861928e251f3f3f5a5774379498fd563d634a119fcc",
+      "bytes": 13985
+    },
+    "bridge_code": {
+      "path": "research/hockey_exact_starter_goal_win_bridge_020.py",
+      "sha256": "d0da98b37b1c7e7d75842e966d791bd46c7b11d04841950a8c5664fd2d9aef40",
+      "bytes": 15594
+    }
+  },
+  "artifacts": {
+    "summary": {
+      "path": "research/.tmp_goalie_probability_016/out/exact_starter_goal_win_bridge_020/summary.json",
+      "sha256": "d082003122e5f233068365824911f91f99710fcc070ce07abf7c6251cf2b48f0",
+      "bytes": 9771
+    },
+    "paired_predictions": {
+      "path": "research/.tmp_goalie_probability_016/out/exact_starter_goal_win_bridge_020/paired_predictions.parquet",
+      "sha256": "ddb811e770402e7eb79d6f7270153c88c1a8245f2c3548d78d29ebd7b7660201",
+      "bytes": 150056
+    },
+    "report": {
+      "path": "research/HWIN_EXACT_STARTER_GOAL_WIN_BRIDGE_020_20261103.md",
+      "sha256": "5832e0d5f5f4e0db4edc9b4c3ca065259a195ffb414c6e33baff8bbcddfaf60e",
+      "bytes": 6406
+    }
+  },
+  "execution": "PYTHONPATH=/tmp/hockeydeps python research/hockey_exact_starter_goal_win_bridge_020.py",
+  "python_version": "3.12.14",
+  "decision": "Keep Game v1.0.0 champion. Exact-starter goal-to-win bridge is a research candidate only; 2026 block-bootstrap intervals include zero and named starter identity is retrospective."
+}
