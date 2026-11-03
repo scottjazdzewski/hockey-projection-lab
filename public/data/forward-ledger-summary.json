@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "generated_at": null,
+  "sample": {
+    "games_frozen": 0,
+    "games_settled": 0,
+    "games_open": 0,
+    "winner_games_scored": 0,
+    "xg_games_scored": 0
+  },
+  "metrics": {
+    "accuracy": null,
+    "brier": null,
+    "log_loss": null,
+    "avg_probability_assigned_to_winner": null,
+    "xg_mae_per_team": null,
+    "total_goals_mae": null
+  },
+  "by_model": {},
+  "games": []
+}
