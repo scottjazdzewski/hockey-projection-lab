@@ -40,6 +40,10 @@ for url in URLS:
             wanted=["homeTeamName","homeTeamAbbreviation","homeGoalieName","homeNewsStrengthName","homeNewsCreatedAt","homeNewsSourceName","homeNewsSourceUrl","awayTeamName","awayTeamAbbreviation","awayGoalieName","awayNewsStrengthName","awayNewsCreatedAt","awayNewsSourceName","awayNewsSourceUrl","date"]
             for rec in pp["data"][:2]:
                 print("GOALIE_SAMPLE",{k:rec.get(k) for k in wanted if k in rec},flush=True)
+            for rec in pp["data"]:
+                if rec.get("homeNewsStrengthName") or rec.get("awayNewsStrengthName"):
+                    print("GOALIE_CONFIRMED_SAMPLE",{k:rec.get(k) for k in wanted if k in rec},flush=True)
+                    break
         if "/line-combinations" in url and isinstance(pp.get("combinations"),dict):
             comb=pp["combinations"]
             print("COMB_KEYS",list(comb.keys()),flush=True)
