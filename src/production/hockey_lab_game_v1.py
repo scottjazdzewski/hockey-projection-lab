@@ -113,7 +113,67 @@ def fair_ml(p):
     if not np.isfinite(p) or p<=0 or p>=1: return None
     return int(round(-100*p/(1-p))) if p>=.5 else int(round(100*(1-p)/p))
 
-def main(pbp_path,spine_path,schedule_json,outdir):
+def apply_live_context(projections,context_path):
+    if not context_path:
+        return projections
+    path=Path(context_path)
+    if not path.exists():
+        return projections
+    try:
+        ctx=json.loads(path.read_text())
+    except Exception:
+        return projections
+    by_id={str(g.get("game_id")):g for g in ctx.get("games",[])}
+
+    def latest(*vals):
+        vals=[v for v in vals if v]
+        if not vals: return None
+        try:
+            return max(vals,key=lambda x: pd.Timestamp(x))
+        except Exception:
+            return vals[-1]
+
+    for p in projections:
+        c=by_id.get(str(p.get("game_id")))
+        if not c: continue
+        ag=(c.get("away") or {}).get("goalie") or {}
+        hg=(c.get("home") or {}).get("goalie") or {}
+        goalie_statuses={ag.get("status"),hg.get("status")}
+        if goalie_statuses=={"CONFIRMED"}:
+            goalie_status="CONFIRMED"
+        elif goalie_statuses & {"PROJECTED","CONFIRMED"}:
+            goalie_status="PROJECTED"
+        else:
+            goalie_status="UNKNOWN"
+        p["goalie_state"]={
+            "status":goalie_status,
+            "away":ag.get("name"),
+            "home":hg.get("name"),
+            "updated_at":latest(
+                ag.get("source_timestamp"),hg.get("source_timestamp"),
+                ag.get("observed_at"),hg.get("observed_at")
+            )
+        }
+
+        al=(c.get("away") or {}).get("lineup") or {}
+        hl=(c.get("home") or {}).get("lineup") or {}
+        lineup_status="PROJECTED" if "PROJECTED" in {al.get("status"),hl.get("status")} else "UNKNOWN"
+        p["lineup_state"]={
+            "status":lineup_status,
+            "away":"Projected lines" if al.get("status")=="PROJECTED" else None,
+            "home":"Projected lines" if hl.get("status")=="PROJECTED" else None,
+            "updated_at":latest(
+                al.get("updated_at"),hl.get("updated_at"),
+                al.get("observed_at"),hl.get("observed_at")
+            )
+        }
+        flags=list(p.get("flags") or [])
+        for flag in ["goalie_context_dailyfaceoff","lineup_context_dailyfaceoff"]:
+            if flag not in flags: flags.append(flag)
+        p["flags"]=flags
+    return projections
+
+def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
     out=Path(outdir); out.mkdir(parents=True,exist_ok=True)
     pbp=pd.read_parquet(pbp_path)
     spine=pd.read_parquet(spine_path)
@@ -220,6 +280,8 @@ def main(pbp_path,spine_path,schedule_json,outdir):
             "flags":[f"source_data_through_{cutoff}","no_goalie_layer","b2b_context"]
         })
 
+    projections=apply_live_context(projections,context_path)
+
     payload={
       "schema_version":"1.0","generated_at":now.isoformat(),"data_cutoff":cutoff_ts.isoformat(),
       "model":{"model_id":MODEL_ID,"version":MODEL_VERSION,"status":"PROMOTED","feature_version":FEATURE_VERSION,"trained_through":"2025-26"},
@@ -244,4 +306,5 @@ if __name__=="__main__":
     import argparse
     a=argparse.ArgumentParser()
     a.add_argument("--pbp",required=True); a.add_argument("--spine",required=True); a.add_argument("--schedule",required=True); a.add_argument("--out",required=True)
-    z=a.parse_args(); main(z.pbp,z.spine,z.schedule,z.out)
+    a.add_argument("--context",required=False,default=None)
+    z=a.parse_args(); main(z.pbp,z.spine,z.schedule,z.out,z.context)
