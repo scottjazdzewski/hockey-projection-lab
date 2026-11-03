@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03T08:10:49.260235-05:00",
+  "generated_at": "2026-11-03T09:46:20.704571-05:00",
   "data_cutoff": "2026-11-01T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -24,7 +24,7 @@
       },
       "home": {
         "abbr": "TOR",
-        "win_probability": 0.41708059220537463,
+        "win_probability": 0.4170805922053747,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 140
@@ -44,13 +44,13 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "1d rest",
-        "home": "2d rest",
+        "away": "1 day rest",
+        "home": "2 days rest",
         "away_flags": [],
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -67,14 +67,14 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "WPG",
-        "win_probability": 0.3613170451797607,
+        "win_probability": 0.3613170451797606,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 177
       },
       "home": {
         "abbr": "MTL",
-        "win_probability": 0.6386829548202393,
+        "win_probability": 0.6386829548202394,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -177
@@ -94,8 +94,8 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "1d rest",
-        "home": "2d rest",
+        "away": "1 day rest",
+        "home": "2 days rest",
         "away_flags": [
           "4-in-6",
           "5-in-8"
@@ -103,7 +103,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -148,7 +148,7 @@
       "rest_state": {
         "status": "CONFIRMED",
         "away": "B2B",
-        "home": "2d rest",
+        "home": "2 days rest",
         "away_flags": [
           "3-in-4",
           "4-in-6"
@@ -156,7 +156,7 @@
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -200,13 +200,13 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "2d rest",
-        "home": "1d rest",
+        "away": "2 days rest",
+        "home": "1 day rest",
         "away_flags": [],
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -250,13 +250,13 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "1d rest",
-        "home": "1d rest",
+        "away": "1 day rest",
+        "home": "1 day rest",
         "away_flags": [],
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -301,12 +301,12 @@
       "rest_state": {
         "status": "CONFIRMED",
         "away": "B2B",
-        "home": "2d rest",
+        "home": "2 days rest",
         "away_flags": [],
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -350,13 +350,13 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "2d rest",
-        "home": "1d rest",
+        "away": "2 days rest",
+        "home": "1 day rest",
         "away_flags": [],
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -401,14 +401,14 @@
       "rest_state": {
         "status": "CONFIRMED",
         "away": "B2B",
-        "home": "2d rest",
+        "home": "2 days rest",
         "away_flags": [
           "3-in-4"
         ],
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -452,15 +452,15 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "1d rest",
-        "home": "3d rest",
+        "away": "1 day rest",
+        "home": "3 days rest",
         "away_flags": [
           "3-in-4"
         ],
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -477,14 +477,14 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "CAR",
-        "win_probability": 0.7220858147384516,
+        "win_probability": 0.7220858147384515,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -260
       },
       "home": {
         "abbr": "NSH",
-        "win_probability": 0.27791418526154843,
+        "win_probability": 0.27791418526154854,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 260
@@ -504,13 +504,13 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "1d rest",
-        "home": "2d rest",
+        "away": "1 day rest",
+        "home": "2 days rest",
         "away_flags": [],
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -527,14 +527,14 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "ANA",
-        "win_probability": 0.630760981717113,
+        "win_probability": 0.6307609817171131,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -171
       },
       "home": {
         "abbr": "VAN",
-        "win_probability": 0.36923901828288697,
+        "win_probability": 0.3692390182828869,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 171
@@ -554,13 +554,13 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "1d rest",
-        "home": "2d rest",
+        "away": "1 day rest",
+        "home": "2 days rest",
         "away_flags": [],
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-03T08:10:49.260235-05:00"
+        "updated_at": "2026-11-03T09:46:20.704571-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
