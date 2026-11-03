@@ -13,6 +13,8 @@ on:
       - 'public/assets/team-ratings.js'
       - 'public/assets/team-profile.js'
       - 'public/assets/performance.js'
+      - 'public/assets/today-games.js'
+      - 'public/index.html'
       - 'public/game-cards/**'
       - 'public/teams/**'
       - 'public/performance/**'
