@@ -58,3 +58,17 @@ Missing file, stale file, invalid schema, unknown game ID, or non-promoted model
 **display no probability**.
 
 The frontend is a renderer, not a fallback calculator.
+
+
+## Production manifest
+
+The machine-readable inventory is:
+
+`public/data/production-manifest.json`
+
+A surface is:
+- `EMPTY` when the contract exists but no promoted output is available.
+- `READY` only when its export is promoted, validated, and safe for the site.
+- `WITHHELD` when an expected export is intentionally blocked because a production gate failed.
+
+The manifest does not override the validator. A surface marked READY with invalid underlying data must still fail validation.
