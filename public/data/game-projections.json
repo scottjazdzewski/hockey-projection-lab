@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03T06:38:11.952354-05:00",
+  "generated_at": "2026-11-03T07:28:20.503525-05:00",
   "data_cutoff": "2026-11-01T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -44,9 +44,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "2d",
+        "home": "3d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -90,9 +90,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "2d",
+        "home": "3d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -136,9 +136,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "1d",
+        "home": "3d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -182,9 +182,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "3d",
+        "home": "2d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -228,9 +228,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "2d",
+        "home": "2d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -274,9 +274,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "1d",
+        "home": "3d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -320,9 +320,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "3d",
+        "home": "2d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -366,9 +366,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "1d",
+        "home": "3d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -412,9 +412,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "2d",
+        "home": "4d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -458,9 +458,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "2d",
+        "home": "3d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
@@ -504,9 +504,9 @@
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": null,
-        "home": null,
-        "updated_at": "2026-11-03T06:38:11.952354-05:00"
+        "away": "2d",
+        "home": "3d",
+        "updated_at": "2026-11-03T07:28:20.503525-05:00"
       },
       "flags": [
         "source_data_through_2026-11-01",
