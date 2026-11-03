@@ -1,0 +1,13 @@
+{
+  "schema_version":"1.0",
+  "date":"2026-11-03",
+  "generated_at":"2026-11-03T06:25:00-05:00",
+  "provider":{
+    "name":"Daily Faceoff public pages",
+    "access_mode":"PUBLIC_PAGE_NEXT_DATA",
+    "goalie_url":"https://www.dailyfaceoff.com/starting-goalies",
+    "lineup_url_pattern":"https://www.dailyfaceoff.com/teams/{slug}/line-combinations",
+    "robots_policy":"Public pages allowed; /api/ excluded and not used"
+  },
+  "games":[]
+}
