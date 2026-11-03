@@ -13,7 +13,7 @@
 .gc-page{
   min-height:100vh;
   margin:0;
-  background:linear-gradient(rgba(10,5,22,.20),rgba(10,5,22,.20)),url('/assets/hero-game-cards.webp') center top / cover fixed no-repeat;
+  background:url('/assets/hero-game-cards.webp') center top / cover fixed no-repeat;
   color:var(--gc-ivory);
 }
 
@@ -21,14 +21,14 @@
   position:relative;
   min-height:208px;
   border-bottom:1px solid rgba(240,198,64,.42);
-  background:rgba(10,5,22,.12);
+  background:rgba(10,5,22,.20);
 }
 
 .gc-header{
   position:absolute;
   inset:0 0 auto 0;
   z-index:5;
-  background:rgba(10,5,22,.12)!important;
+  background:transparent!important;
   border-bottom:1px solid rgba(255,255,255,.12);
   backdrop-filter:blur(5px);
   -webkit-backdrop-filter:blur(5px);
@@ -76,7 +76,7 @@
 
 .gc-main{
   position:relative;
-  background:rgba(10,5,22,.12);
+  background:rgba(10,5,22,.20);
 }
 .gc-content{
   padding-top:14px;
