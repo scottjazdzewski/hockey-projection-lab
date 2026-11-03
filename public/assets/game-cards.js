@@ -35,8 +35,8 @@
     const m=displayLabel.match(/^(\d+)\s+days?\s+rest$/i);
     if(m){
       const days=Number(m[1]);
-      if(days>=3) defaultLoad='Very light load';
-      else if(days===2) defaultLoad='Light load';
+      if(days>=3) defaultLoad='Light load';
+      else defaultLoad='Normal load';
     } else if(/^B2B$/i.test(displayLabel)){
       defaultLoad='Heavy load';
     }
