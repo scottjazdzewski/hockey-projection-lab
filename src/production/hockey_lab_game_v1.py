@@ -262,10 +262,10 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
     probs=model.predict_proba(today[features])[:,1]
     pmap={str(int(gid)):float(p) for gid,p in zip(today["_game_id_int"],probs)}
     restmap={}
-    for r in today.itertuples(index=False):
-        gid=str(int(r._game_id_int))
-        away_rest=getattr(r,"a_sched_rest_days",np.nan)
-        home_rest=getattr(r,"h_sched_rest_days",np.nan)
+    for _,r in today.iterrows():
+        gid=str(int(r["_game_id_int"]))
+        away_rest=r.get("a_sched_rest_days",np.nan)
+        home_rest=r.get("h_sched_rest_days",np.nan)
         restmap[gid]={
             "away": None if pd.isna(away_rest) else f"{int(round(float(away_rest)))}d",
             "home": None if pd.isna(home_rest) else f"{int(round(float(home_rest)))}d"
