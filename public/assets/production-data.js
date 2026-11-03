@@ -35,7 +35,8 @@
     const [m,d]=await Promise.all([manifest(),json(url).catch(()=>null)]);
     const s=m?.surfaces?.[name]||null;
     if(!s || s.state!=='READY' || !d) return {ready:false,surface:s,data:d,stale:false};
-    const stale=isStale(d.generated_at,s.max_age_minutes);
+    const stamp=d.generated_at||d.updated_at||null;
+    const stale=isStale(stamp,s.max_age_minutes);
     return {ready:!stale,surface:s,data:d,stale};
   }
 
