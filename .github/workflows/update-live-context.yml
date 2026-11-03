@@ -6,7 +6,7 @@ on:
     # Quarter-hour heartbeat. The gate below performs a provider pull only at
     # fixed daily checkpoints or when a scheduled game is entering its
     # ~30-minute or ~15-minute pregame window.
-    - cron: '*/15 * * * *'
+    - cron: '*/5 * * * *'
   push:
     branches: [main]
     paths:
@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          from datetime import datetime
+          from datetime import datetime, timedelta
           from pathlib import Path
           from zoneinfo import ZoneInfo
           import json, os
@@ -40,15 +40,37 @@ jobs:
           tz=ZoneInfo("America/New_York")
           now=datetime.now(tz)
 
-          # Retain the established daily checkpoints.
-          fixed_slots={(5,15),(10,30),(14,30),(17,30)}
-          fixed=(now.hour,now.minute) in fixed_slots
+          # Read the last successful provider observation so a 5-minute
+          # heartbeat cannot duplicate the same target refresh.
+          last_generated=None
+          try:
+              current=json.loads(Path("public/data/live-context.json").read_text())
+              raw=current.get("generated_at")
+              if raw:
+                  last_generated=datetime.fromisoformat(raw).astimezone(tz)
+          except Exception as exc:
+              print("live-context timestamp warning:",repr(exc))
 
-          # Refresh each game twice before puck drop:
-          #   * about 30 minutes before start
-          #   * about 15 minutes before start
-          # The scheduler wakes every 15 minutes, and these non-overlapping
-          # windows tolerate ordinary GitHub Actions start delay.
+          def due(target, grace_minutes=10):
+              if now < target:
+                  return False
+              if (now-target).total_seconds() > grace_minutes*60:
+                  return False
+              return last_generated is None or last_generated < target
+
+          # Daily checkpoints are target times with a grace window, not exact
+          # cron minutes. This survives ordinary GitHub Actions schedule delay.
+          fixed_targets=[
+              now.replace(hour=5,minute=15,second=0,microsecond=0),
+              now.replace(hour=10,minute=30,second=0,microsecond=0),
+              now.replace(hour=14,minute=30,second=0,microsecond=0),
+              now.replace(hour=17,minute=30,second=0,microsecond=0),
+          ]
+          fixed_due=[t.isoformat() for t in fixed_targets if due(t,10)]
+
+          # Every game gets two dedicated provider refreshes. A refresh is
+          # considered complete only when live-context generated_at is at or
+          # after that exact target time.
           pregame_30=[]
           pregame_15=[]
           try:
@@ -58,21 +80,21 @@ jobs:
                   if not start_raw:
                       continue
                   start=datetime.fromisoformat(start_raw).astimezone(tz)
-                  minutes=(start-now).total_seconds()/60
                   item={
                       "game_id":game.get("game_id"),
                       "matchup":f"{game.get('away_abbr')}@{game.get('home_abbr')}",
-                      "minutes_to_start":round(minutes,1)
+                      "start_time":start.isoformat()
                   }
-                  if 23 <= minutes <= 38:
-                      pregame_30.append(item)
-                  elif 7 <= minutes < 23:
-                      pregame_15.append(item)
+                  t30=start-timedelta(minutes=30)
+                  t15=start-timedelta(minutes=15)
+                  if due(t30,10):
+                      pregame_30.append({**item,"target_time":t30.isoformat()})
+                  if due(t15,10):
+                      pregame_15.append({**item,"target_time":t15.isoformat()})
           except Exception as exc:
               print("pregame gate warning:",repr(exc))
 
-          pregame=bool(pregame_30 or pregame_15)
-          scheduled_run=bool(fixed or pregame)
+          scheduled_run=bool(fixed_due or pregame_30 or pregame_15)
           run=True if os.environ.get("GITHUB_EVENT_NAME")!="schedule" else scheduled_run
           reason="manual_or_push"
           if os.environ.get("GITHUB_EVENT_NAME")=="schedule":
@@ -80,8 +102,10 @@ jobs:
                   reason="pregame_15"
               elif pregame_30:
                   reason="pregame_30"
+              elif fixed_due:
+                  reason="fixed_checkpoint"
               else:
-                  reason="fixed_checkpoint" if fixed else "skip"
+                  reason="skip"
 
           with open(os.environ["GITHUB_OUTPUT"],"a") as f:
               f.write(f"run={'true' if run else 'false'}\n")
@@ -91,7 +115,8 @@ jobs:
 
           print(json.dumps({
               "local_time":now.isoformat(),
-              "fixed_checkpoint":fixed,
+              "last_generated":last_generated.isoformat() if last_generated else None,
+              "fixed_due":fixed_due,
               "pregame_30_games":pregame_30,
               "pregame_15_games":pregame_15,
               "run":run,
