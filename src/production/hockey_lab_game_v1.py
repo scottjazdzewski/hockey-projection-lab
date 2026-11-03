@@ -149,6 +149,8 @@ def apply_live_context(projections,context_path):
             "status":goalie_status,
             "away":ag.get("name"),
             "home":hg.get("name"),
+            "away_status":ag.get("status") or "UNKNOWN",
+            "home_status":hg.get("status") or "UNKNOWN",
             "updated_at":latest(
                 ag.get("source_timestamp"),hg.get("source_timestamp"),
                 ag.get("observed_at"),hg.get("observed_at")
