@@ -41,14 +41,29 @@ sample overlaps the 2026-27 preseason (which began September 19) and precedes
 the regular-season opener on September 29, so it cannot provide a regular-
 season historical backfill. No subscription was started.
 
-## PuckAPI free allowance
+## PuckAPI free allowance and coverage
 
-PuckAPI publishes a 500-credit monthly free allowance and charges 10 credits
-per get_game_detail game, or at most 50 game details per month before any
-other use. The broad historical pull planned in the main source audit is
-approximately 93,920 credits. No API key is present in the research
-environment, so no account-only data was requested. The existing collector
-remains dry-run by default and strict about timestamp validation.
+PuckAPI offers 500 credits per month after free-key signup, with no card
+required. Its current docs price get_game_detail and get_odds at 10 credits per
+game returned, so the free allowance covers at most 50 game responses before
+other API use. The pricing page lists 13,710 credits for 2025-26 historical
+odds; that implies about 1,371 returned games, fewer than the canonical
+season's 1,394 completed games. Do not treat the completed-game count as odds
+coverage. The API has estimate_only pricing for a season query, but no key is
+present in the research environment, so no account-only data was requested.
+
+The provider describes historical odds from 2019-20 onward (plus partial 2019
+playoffs), with about 16–18 books per game in 2020-21 through 2023-24 and about
+eight since; more than 60 books are available for roughly 300 games in
+2025-26 when requesting all books. It labels odds coverage Partial and says
+availability varies by book and game. These are provider-level coverage
+descriptions, not verified pregame line counts for Hockey Lab's canonical
+spine.
+
+Its timing guide says the strict rule is to use captured_at before scheduled
+start; the source's closing label alone is not enough. The collector therefore
+rejects missing or at/after-start timestamps and never substitutes a later
+price. Historical requests remain too large for the free monthly allowance.
 
 ## Decision
 
