@@ -383,7 +383,7 @@
 .gc-goalie-side strong{
   grid-area:side;
   justify-self:start;
-  font-size:6.4px;
+  font-size:6.8px;
   letter-spacing:.05em;
   opacity:.72;
 }
@@ -394,13 +394,14 @@
   text-overflow:ellipsis;
   white-space:nowrap;
   text-align:center;
-  font-size:7px;
+  font-size:9.2px;
+  line-height:1.05;
   font-weight:900;
 }
 .gc-goalie-side b{
   grid-area:status;
   justify-self:end;
-  font-size:5.8px;
+  font-size:6.4px;
   letter-spacing:.035em;
 }
 .gc-goalie-projected{
@@ -465,7 +466,7 @@
 .gc-rest-side:last-child{border-right:0}
 .gc-rest-side>strong{
   grid-area:main;
-  font-size:8.6px;
+  font-size:10.2px;
   font-weight:900;
   line-height:1.15;
   letter-spacing:.035em;
@@ -487,7 +488,7 @@
   padding:2px 6px;
   border:1px solid currentColor;
   border-radius:999px;
-  font-size:6.4px;
+  font-size:7.2px;
   font-weight:900;
   line-height:1.15;
   letter-spacing:.03em;
@@ -527,15 +528,15 @@
     padding:7px 7px 8px;
     text-align:center;
   }
-  .gc-goalie-side strong{font-size:7px;justify-self:center}
+  .gc-goalie-side strong{font-size:7.4px;justify-self:center}
   .gc-goalie-side span{
     width:100%;
     white-space:normal;
     text-align:center;
-    font-size:8.8px;
+    font-size:9.8px;
     line-height:1.1;
   }
-  .gc-goalie-side b{font-size:6.8px}
+  .gc-goalie-side b{font-size:7.2px}
   .gc-rest-side{
     min-height:56px;
     gap:5px;
@@ -543,7 +544,7 @@
     text-align:center;
   }
   .gc-rest-side>strong{
-    font-size:9.4px;
+    font-size:10.2px;
     white-space:normal;
   }
   .gc-rest-flags{
@@ -553,6 +554,6 @@
   }
   .gc-rest-flags b{
     padding:3px 6px;
-    font-size:7px;
+    font-size:7.4px;
   }
 }
