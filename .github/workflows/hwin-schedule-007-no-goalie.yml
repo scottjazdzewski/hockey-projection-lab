@@ -32,7 +32,7 @@ jobs:
         run: |
           python research/hwin_schedule_007.py \
             --pbp /tmp/pbp_u/pbp_feature_output/game_team_event_features.parquet \
-            --spine /tmp/spine_u/spine_v3/games.parquet \\
+            --spine /tmp/spine_u/spine_v3/games.parquet \
             --out hwin_schedule_007
       - name: Validate and summarize artifacts
         run: |
