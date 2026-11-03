@@ -90,8 +90,8 @@
 }
 .gc-card{
   display:grid;
-  grid-template-rows:40px 216px 66px 104px 38px;
-  height:464px;
+  grid-template-rows:40px 216px 66px 122px 38px;
+  height:482px;
   min-width:0;
   overflow:hidden;
   border:1px solid rgba(240,198,64,.60);
@@ -241,7 +241,7 @@
 }
 @media(max-width:1120px){
   .gc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .gc-card{height:476px;grid-template-rows:40px 220px 72px 104px 40px}
+  .gc-card{height:494px;grid-template-rows:40px 220px 72px 122px 40px}
 }
 @media(max-width:700px){
   .gc-page{
@@ -264,8 +264,8 @@
   }
   .gc-grid{grid-template-columns:1fr}
   .gc-card{
-    height:632px;
-    grid-template-rows:46px 312px 86px 146px 42px;
+    height:646px;
+    grid-template-rows:46px 312px 86px 160px 42px;
   }
   .gc-card-head{
     padding:0 15px;
@@ -379,9 +379,10 @@
   grid-column:1/-1;
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
+  min-height:50px;
   overflow:hidden;
   border:1px solid #d7bc72;
-  border-radius:999px;
+  border-radius:16px;
   background:#f8f0d9;
 }
 .gc-rest-strip-unknown{
@@ -395,15 +396,17 @@
 }
 .gc-rest-side{
   min-width:0;
+  min-height:50px;
   display:grid;
   grid-template-columns:1fr;
+  grid-template-rows:auto auto;
   grid-template-areas:
     "main"
     "flags";
   justify-items:center;
   align-content:center;
-  gap:4px;
-  padding:7px 12px 8px;
+  gap:5px;
+  padding:7px 10px 8px;
   border-right:1px solid rgba(75,43,103,.16);
   text-align:center;
   text-transform:uppercase;
@@ -411,29 +414,32 @@
 .gc-rest-side:last-child{border-right:0}
 .gc-rest-side>strong{
   grid-area:main;
-  font-size:8px;
+  font-size:8.6px;
   font-weight:900;
-  letter-spacing:.045em;
+  line-height:1.15;
+  letter-spacing:.035em;
   text-align:center;
-  white-space:nowrap;
+  white-space:normal;
 }
 .gc-rest-flags{
   grid-area:flags;
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
+  align-items:center;
   gap:4px;
   width:100%;
+  min-height:14px;
 }
 .gc-rest-flags b{
   display:inline-block;
-  padding:2px 5px;
+  padding:2px 6px;
   border:1px solid currentColor;
   border-radius:999px;
-  font-size:6px;
+  font-size:6.4px;
   font-weight:900;
-  line-height:1.1;
-  letter-spacing:.035em;
+  line-height:1.15;
+  letter-spacing:.03em;
 }
 .gc-rest-flags-clear{opacity:.55}
 
@@ -460,12 +466,13 @@
     font-size:9.5px;
   }
   .gc-rest-side{
+    min-height:56px;
     gap:5px;
     padding:9px 9px 10px;
     text-align:center;
   }
   .gc-rest-side>strong{
-    font-size:9px;
+    font-size:9.4px;
     white-space:normal;
   }
   .gc-rest-flags{
