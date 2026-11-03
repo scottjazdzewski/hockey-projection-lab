@@ -16,6 +16,8 @@ const required=[
   'public/assets/team-ratings.js',
   'public/assets/team-profile.js',
   'public/assets/performance.js',
+  'public/assets/today-games.js',
+  'public/index.html',
   'public/game-cards/index.html',
   'public/teams/index.html',
   'public/teams/profile/index.html',
@@ -33,6 +35,7 @@ for(const p of required){
 if(fs.existsSync(path.join(root,'public/assets/site.css'))) fail('legacy public/assets/site.css must not exist');
 
 const wiring=[
+  ['public/index.html',['/assets/production-data.js','/assets/today-games.js']],
   ['public/game-cards/index.html',['/assets/production-data.js','/assets/game-cards.js']],
   ['public/teams/index.html',['/assets/production-data.js','/assets/team-ratings.js']],
   ['public/teams/profile/index.html',['/assets/production-data.js','/assets/team-profile.js']],
