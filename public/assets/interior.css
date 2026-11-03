@@ -1,32 +1,50 @@
 /* Shared interior-page base: Teams / Players / Fantasy / Model Performance.
-   This file is the permanent source of truth for header transparency and title positioning. */
+   Permanent visual contract: one uniform tint over the page artwork. */
 :root{
   --ip-gold:#f0c640;
   --ip-ivory:#fff8e8;
   --ip-purple:#2b0e4b;
   --ip-ink:#321653;
+  --ip-tint:rgba(10,5,22,.18);
 }
 
 .ip-page{
+  position:relative;
   min-height:100vh;
   margin:0;
+  display:flex;
+  flex-direction:column;
   color:var(--ip-ivory);
   background-color:#11091f;
   background-repeat:no-repeat;
   background-size:cover;
   background-position:center top;
   background-attachment:fixed;
+  isolation:isolate;
+}
+.ip-page::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background:var(--ip-tint);
+  pointer-events:none;
+}
+.ip-page>*{
+  position:relative;
+  z-index:1;
 }
 .ip-page-teams{background-image:url('/assets/hero-teams.webp')}
-.ip-page-players{background-image:url('/assets/hero-players-v2.webp')}
+.ip-page-players{background-image:url('/assets/hero-players-v3.webp')}
 .ip-page-fantasy{background-image:url('/assets/hero-fantasy.webp')}
 .ip-page-performance{background-image:url('/assets/hero-performance.webp')}
 
 .ip-hero{
+  flex:0 0 auto;
   position:relative;
   min-height:208px;
   border-bottom:1px solid rgba(240,198,64,.42);
-  background:rgba(10,5,22,.20);
+  background:transparent;
 }
 .ip-header{
   position:absolute;
@@ -70,34 +88,20 @@
   color:rgba(255,248,232,.88);
 }
 
-.ip-main{position:relative;background:rgba(10,5,22,.20)}
+.ip-main{
+  flex:1 0 auto;
+  position:relative;
+  background:transparent;
+}
 .ip-content{padding-top:14px;padding-bottom:36px}
-.ip-section-head{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(300px,.55fr);
-  gap:30px;
-  align-items:end;
-  margin-bottom:14px;
-}
-.ip-section-head h2{
-  margin:3px 0 0;
-  font:600 clamp(36px,3.6vw,54px)/.95 var(--serif);
-  color:var(--ip-ivory);
-  text-shadow:0 3px 16px rgba(0,0,0,.42);
-}
-.ip-section-head p{
-  margin:0;
-  font-size:10px;
-  line-height:1.55;
-  color:rgba(255,248,232,.84);
-}
+.ip-page footer{flex:0 0 auto}
+
 .ip-team-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:12px;
 }
 .ip-team-card,
-.ip-panel,
 .ip-metric-card{
   border:1px solid rgba(240,198,64,.56);
   background:rgba(255,250,240,.88);
@@ -117,15 +121,32 @@
 .ip-team-card strong{display:block;font:600 19px/1 var(--serif)}
 .ip-team-card small{display:block;margin-top:5px;font-size:7px;color:#847985;letter-spacing:.065em;text-transform:uppercase}
 
-.ip-two-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.ip-panel{min-height:270px;padding:28px 30px}
-.ip-panel h2{margin:7px 0 14px;font:600 38px/1.02 var(--serif);color:var(--ip-ink)}
-.ip-panel p{margin:0;font-size:11px;line-height:1.7;color:#776d76}
-
-.ip-metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.ip-metric-card{min-height:170px;padding:28px 30px;display:flex;flex-direction:column;justify-content:flex-end}
+.ip-metric-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+}
+.ip-metric-card{
+  min-height:170px;
+  padding:28px 30px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
 .ip-metric-card strong{font:600 44px/1 var(--serif);color:var(--ip-ink)}
 .ip-metric-card span{margin-top:10px;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#746978}
+
+.ip-performance-main{
+  min-height:calc(100vh - 208px - 108px);
+}
+.ip-players-empty,
+.ip-fantasy-empty{
+  min-height:calc(100vh - 208px - 108px);
+}
+.ip-players-empty .ip-content,
+.ip-fantasy-empty .ip-content{
+  min-height:100%;
+}
 
 @media(max-width:1050px){
   .ip-team-grid{grid-template-columns:repeat(3,1fr)}
@@ -137,34 +158,8 @@
   .ip-header .header-inner{height:72px}
   .ip-hero-inner{padding-top:96px;padding-bottom:18px}
   .ip-title-row h1{font-size:43px}
-  .ip-section-head{grid-template-columns:1fr}
   .ip-team-grid{grid-template-columns:repeat(2,1fr)}
-  .ip-two-grid{grid-template-columns:1fr}
 }
 @media(max-width:520px){
   .ip-team-grid,.ip-metric-grid{grid-template-columns:1fr}
 }
-
-/* Permanent interior-page uniformity */
-.ip-page{display:flex;flex-direction:column;min-height:100vh}
-.ip-hero{flex:0 0 auto}
-.ip-main{flex:1 0 auto}
-.ip-page footer{flex:0 0 auto}
-
-/* Team grid starts immediately beneath hero — no duplicate title strip */
-.ip-page-teams .ip-content{padding-top:14px}
-
-/* Performance footer stays at the bottom of the viewport/content */
-.ip-performance-main{
-  min-height:calc(100vh - 208px - 108px);
-  display:flex;
-  align-items:flex-start;
-}
-.ip-performance-main .ip-content{width:100%}
-
-/* Fantasy is intentionally artwork-only below the hero for now */
-.ip-fantasy-empty{
-  min-height:calc(100vh - 208px - 108px);
-  background:rgba(10,5,22,.20);
-}
-.ip-fantasy-empty .ip-content{min-height:100%}
