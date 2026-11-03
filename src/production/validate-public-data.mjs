@@ -21,6 +21,7 @@ const players=readJson('player-ratings.json');
 const fantasy=readJson('fantasy-rankings.json');
 const manifest=readJson('production-manifest.json');
 const identities=readJson('team-identities.json');
+const liveContext=readJson('live-context.json');
 
 if(!schedule || !Array.isArray(schedule.games)) fail('today-games.json missing or malformed');
 else ok('schedule readable');
@@ -158,6 +159,41 @@ if(identities){
   }
 }else fail('team-identities.json missing');
 
+if(liveContext){
+  if(liveContext.schema_version!=='1.0') fail('live-context schema_version must be 1.0');
+  if(liveContext.date!==schedule?.date) fail('live-context date does not match schedule');
+  if(!Array.isArray(liveContext.games)) fail('live-context games must be array');
+  else {
+    const scheduleById=new Map((schedule?.games||[]).map(g=>[String(g.game_id),g]));
+    const seen=new Set();
+    for(const g of liveContext.games){
+      const id=String(g.game_id);
+      if(seen.has(id)) fail('duplicate live-context game '+id); else seen.add(id);
+      const s=scheduleById.get(id);
+      if(!s) fail('live-context game not on schedule '+id);
+      for(const side of ['away','home']){
+        const t=g?.[side];
+        if(!t?.abbr) fail('live-context '+id+' missing '+side+' team');
+        if(s && t?.abbr!==s[side+'_abbr']) fail('live-context '+id+' '+side+' team mismatch');
+        const goalie=t?.goalie||{};
+        if(!['UNKNOWN','PROJECTED','CONFIRMED'].includes(goalie.status)) fail('live-context '+id+' invalid goalie status');
+        if(['PROJECTED','CONFIRMED'].includes(goalie.status) && !goalie.name) fail('live-context '+id+' goalie status without name');
+        if(goalie.status==='CONFIRMED' && (!goalie.source_timestamp || !goalie.source_url)) fail('live-context '+id+' confirmed goalie missing source evidence');
+        const lineup=t?.lineup||{};
+        if(!['UNKNOWN','PROJECTED'].includes(lineup.status)) fail('live-context '+id+' invalid lineup status');
+        if(lineup.status==='PROJECTED'){
+          for(const group of ['f1','f2','f3','f4','d1','d2','d3']){
+            if(!Array.isArray(lineup.groups?.[group]) || lineup.groups[group].length===0) fail('live-context '+id+' '+side+' missing '+group);
+          }
+          if(!lineup.updated_at) fail('live-context '+id+' '+side+' projected lineup missing updated_at');
+        }
+      }
+    }
+    if(seen.size!==(schedule?.games||[]).length) fail('live-context must cover entire current slate');
+    ok('live pregame context readable');
+  }
+}else fail('live-context.json missing');
+
 if(manifest){
   if(manifest.schema_version!=='1.0') fail('production-manifest schema_version must be 1.0');
   if(!manifest.surfaces || typeof manifest.surfaces!=='object') fail('production-manifest surfaces missing');
@@ -169,7 +205,8 @@ if(manifest){
       team_ratings:'team-ratings.json',
       player_ratings:'player-ratings.json',
       fantasy_rankings:'fantasy-rankings.json',
-      team_identities:'team-identities.json'
+      team_identities:'team-identities.json',
+      live_context:'live-context.json'
     };
     for(const [key,file] of Object.entries(expected)){
       const s=manifest.surfaces[key];
