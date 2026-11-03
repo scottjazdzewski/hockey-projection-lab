@@ -67,12 +67,12 @@
     const dateEl=document.getElementById('gc-date');
     const grid=document.getElementById('gc-grid');
     try{
-      const [schedule,projectionResult,manifest]=await Promise.all([
-        json('/data/today-games.json'),
-        json('/data/game-projections.json').catch(()=>null),
-        json('/data/production-manifest.json').catch(()=>null)
+      const [schedule,projectionSurface]=await Promise.all([
+        window.HockeyData.json('/data/today-games.json'),
+        window.HockeyData.loadSurface('game_projections','/data/game-projections.json')
       ]);
-      const manifestReady=manifest?.surfaces?.game_projections?.state==='READY';
+      const projectionResult=projectionSurface.data;
+      const manifestReady=projectionSurface.ready;
       const games=Array.isArray(schedule.games)?schedule.games:[];
       const projections=projectionResult && Array.isArray(projectionResult.projections) ? projectionResult.projections : [];
       const byId=new Map(projections.map(p=>[String(p.game_id),p]));
