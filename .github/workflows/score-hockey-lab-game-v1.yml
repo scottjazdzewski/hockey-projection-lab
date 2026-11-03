@@ -17,6 +17,10 @@ permissions:
   contents: write
   actions: read
 
+concurrency:
+  group: hockey-lab-game-v1-production
+  cancel-in-progress: true
+
 jobs:
   score:
     runs-on: ubuntu-latest
