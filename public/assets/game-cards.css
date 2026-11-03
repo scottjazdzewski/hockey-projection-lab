@@ -398,30 +398,24 @@
   display:grid;
   grid-template-columns:1fr;
   grid-template-areas:
-    "abbr"
-    "rest"
+    "main"
     "flags";
   justify-items:center;
   align-content:center;
-  gap:3px;
-  padding:8px 14px 9px;
+  gap:4px;
+  padding:7px 12px 8px;
   border-right:1px solid rgba(75,43,103,.16);
   text-align:center;
   text-transform:uppercase;
 }
 .gc-rest-side:last-child{border-right:0}
 .gc-rest-side>strong{
-  grid-area:abbr;
-  font-size:8px;
-  letter-spacing:.07em;
-  text-align:center;
-}
-.gc-rest-side>span:not(.gc-rest-flags){
-  grid-area:rest;
+  grid-area:main;
   font-size:8px;
   font-weight:900;
-  letter-spacing:.03em;
+  letter-spacing:.045em;
   text-align:center;
+  white-space:nowrap;
 }
 .gc-rest-flags{
   grid-area:flags;
@@ -466,15 +460,13 @@
     font-size:9.5px;
   }
   .gc-rest-side{
-    gap:4px;
-    padding:9px 10px 10px;
+    gap:5px;
+    padding:9px 9px 10px;
     text-align:center;
   }
   .gc-rest-side>strong{
     font-size:9px;
-  }
-  .gc-rest-side>span:not(.gc-rest-flags){
-    font-size:9px;
+    white-space:normal;
   }
   .gc-rest-flags{
     justify-content:center;
