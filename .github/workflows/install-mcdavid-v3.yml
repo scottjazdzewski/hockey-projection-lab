@@ -1,0 +1,50 @@
+name: Install McDavid Hero V3
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-mcdavid-v3.yml'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pillow
+      - name: Download supplied McDavid artwork
+        run: |
+          curl -fL 'https://sdmntpreastus2.oaiusercontent.com/files/00000000-572c-81f6-9b1c-125872365b6d/raw?se=2026-11-03T01%3A10%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=6ef7d29b-a416-5afb-9dbb-3f8de3d9f209&skoid=dd316919-ffbf-4550-9c54-dfc99f412009&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-02T22%3A27%3A45Z&ske=2026-11-03T22%3A27%3A45Z&sks=b&skv=2026-02-06&sig=7T5OIoTWvU6uK6zDJENuMYUJpVhDjvXTMRsFD0DxjfE%3D' -o /tmp/mcdavid.png
+      - name: Optimize hero
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          im=Image.open('/tmp/mcdavid.png').convert('RGB')
+          w,h=im.size
+          target=16/9
+          if w/h>target:
+              nw=int(h*target); x=(w-nw)//2; im=im.crop((x,0,x+nw,h))
+          elif w/h<target:
+              nh=int(w/target); y=(h-nh)//2; im=im.crop((0,y,w,y+nh))
+          im=im.resize((1600,900),Image.Resampling.LANCZOS)
+          out=Path('public/assets/hero-players-v3.webp')
+          im.save(out,'WEBP',quality=80,method=6)
+          print(out.stat().st_size)
+          PY
+      - name: Commit hero
+        run: |
+          git config user.name "hockey-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/assets/hero-players-v3.webp
+          if git diff --cached --quiet; then
+            echo "No image changes."
+          else
+            git commit -m "Install updated McDavid Players hero"
+            git pull --rebase origin main
+            git push
+          fi
