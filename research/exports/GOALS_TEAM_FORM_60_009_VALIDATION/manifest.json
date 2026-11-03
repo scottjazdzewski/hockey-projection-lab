@@ -1,0 +1,485 @@
+{
+  "experiment_id": "EXP-0027",
+  "model_id": "HOCKEY-LAB-GOALS-TEAM-FORM-60-009-RESEARCH",
+  "status": "CANDIDATE",
+  "run_date": "2026-11-03",
+  "feature_version": "pregame-goals-process-team-form-60-league-environment-20-009",
+  "team_form_window": "60 previous team-game dates; one-date lag; minimum 8",
+  "league_scoring_window": "20 previous unique game dates; one-date lag; minimum 8",
+  "source_version": "sportsdataverse-pbp-features-20261102+canonical-spine-v3-20261102",
+  "retrieval_date": "2026-11-03",
+  "target_seasons": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "target_season_games": {
+    "2022": 1312,
+    "2023": 1312,
+    "2024": 1312,
+    "2025": 1312,
+    "2026": 1312
+  },
+  "total_test_games": 6560,
+  "validation_design": "rolling origin; train<=S-2; tune on S-1; test S; regular season",
+  "data_quality": {
+    "regulation_tie_matches_went_ot_for_2022_2026_regular": true,
+    "canonical_winner_crosscheck": "pass",
+    "shootout_handling": "PBP regulation tie retained; add one official final goal to shootout winner",
+    "historical_rows_excluded_for_label_quality": 605,
+    "rows_excluded_by_source_season": {
+      "2010": 141,
+      "2011": 149,
+      "2012": 181,
+      "2013": 97,
+      "2014": 29,
+      "2017": 1,
+      "2018": 2,
+      "2019": 2,
+      "2020": 3
+    },
+    "rows_excluded_from_2016_onward": 8
+  },
+  "distribution_selection": {
+    "2022": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.45,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.7895055752942297,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.791830790915723,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.7895055752942297,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.7884450474664977,
+          "parameter": -0.075
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.779538419349896,
+          "parameter": 1.45
+        }
+      }
+    },
+    "2023": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.45,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.8494930633484055,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.852763685692803,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.8494930633484055,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8476703323430805,
+          "parameter": -0.15
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.837950709055004,
+          "parameter": 1.45
+        }
+      }
+    },
+    "2024": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.6,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.8209558465463003,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.8272032384464603,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.8209558465463003,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8166680206054897,
+          "parameter": -0.15
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.8029224541832343,
+          "parameter": 1.6
+        }
+      }
+    },
+    "2025": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.3,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.85540490255167,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.857858738765514,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.85540490255167,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8545335296518206,
+          "parameter": -0.1
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.8479993844261053,
+          "parameter": 1.3
+        }
+      }
+    },
+    "2026": {
+      "count_alpha": 0.1,
+      "selected_family": "diagonal_inflated_poisson",
+      "selected_parameter": 1.3,
+      "validation_scores": {
+        "independent_poisson": {
+          "validation_reg_score_logloss": 3.8561647959587892,
+          "parameter": 0.0
+        },
+        "independent_negative_binomial": {
+          "validation_reg_score_logloss": 3.857203657981127,
+          "parameter": 0.02
+        },
+        "bivariate_poisson": {
+          "validation_reg_score_logloss": 3.8561647959587892,
+          "parameter": 0.0
+        },
+        "dixon_coles": {
+          "validation_reg_score_logloss": 3.8532681980405252,
+          "parameter": -0.15
+        },
+        "diagonal_inflated_poisson": {
+          "validation_reg_score_logloss": 3.8507735639143448,
+          "parameter": 1.3
+        }
+      }
+    }
+  },
+  "metrics_comparison": {
+    "20": {
+      "reg_home_goals": {
+        "mae": 1.3976546510157906,
+        "rmse": 1.7429753427193244,
+        "mean_error_pred_minus_actual": -0.07153435875945154,
+        "calibration_intercept": 0.21511463438673661,
+        "calibration_slope": 0.9528224829091062
+      },
+      "reg_away_goals": {
+        "mae": 1.351110699073396,
+        "rmse": 1.685301670177337,
+        "mean_error_pred_minus_actual": -0.10807421281097453,
+        "calibration_intercept": -0.12731741478184658,
+        "calibration_slope": 1.0841782754755693
+      },
+      "final_total_goals": {
+        "mae": 1.8543201716168396,
+        "rmse": 2.314646776058349,
+        "mean_error_pred_minus_actual": -0.1858601689331386,
+        "calibration_intercept": 2.5577515157620017,
+        "calibration_slope": 0.6083343243721134
+      },
+      "reg_score_logloss": 3.837516381093117,
+      "final_score_logloss": 3.7135583416144433,
+      "final_total_logloss": 2.1798367353602215,
+      "reg_outcome_multiclass_brier": 0.625644013173242,
+      "reg_outcome_multiclass_logloss": 1.0396503494554932,
+      "reg_outcome_accuracy": 0.4766768292682927,
+      "overtime_brier": 0.1731954406766948,
+      "overtime_logloss": 0.5306641841791868,
+      "overtime_predicted_rate": 0.2161569392226532,
+      "overtime_observed_rate": 0.22240853658536586
+    },
+    "40": {
+      "reg_home_goals": {
+        "mae": 1.396050838493109,
+        "rmse": 1.73963797399334,
+        "mean_error_pred_minus_actual": -0.06326003691421578,
+        "calibration_intercept": 0.20902543848524394,
+        "calibration_slope": 0.9522343594561352
+      },
+      "reg_away_goals": {
+        "mae": 1.3507274446922866,
+        "rmse": 1.6827687955367743,
+        "mean_error_pred_minus_actual": -0.09990592292706264,
+        "calibration_intercept": -0.09465909336043948,
+        "calibration_slope": 1.0693756423315544
+      },
+      "final_total_goals": {
+        "mae": 1.853261028696642,
+        "rmse": 2.311335145743266,
+        "mean_error_pred_minus_actual": -0.17015227975329136,
+        "calibration_intercept": 2.2498637349978434,
+        "calibration_slope": 0.6574698645606428
+      },
+      "reg_score_logloss": 3.834072659672844,
+      "final_score_logloss": 3.710067984956159,
+      "final_total_logloss": 2.178629684696059,
+      "reg_outcome_multiclass_brier": 0.624210944490275,
+      "reg_outcome_multiclass_logloss": 1.0377163137030807,
+      "reg_outcome_accuracy": 0.4768292682926829,
+      "overtime_brier": 0.17320288771587466,
+      "overtime_logloss": 0.5306749022795159,
+      "overtime_predicted_rate": 0.21542221667335282,
+      "overtime_observed_rate": 0.22240853658536586
+    },
+    "60": {
+      "reg_home_goals": {
+        "mae": 1.3954836073160768,
+        "rmse": 1.7386006470536814,
+        "mean_error_pred_minus_actual": -0.062163588148651985,
+        "calibration_intercept": 0.23257055900095572,
+        "calibration_slope": 0.9441796573605431
+      },
+      "reg_away_goals": {
+        "mae": 1.3487827404599992,
+        "rmse": 1.6799386010061828,
+        "mean_error_pred_minus_actual": -0.09892708939354368,
+        "calibration_intercept": -0.11698040456750576,
+        "calibration_slope": 1.076958824894348
+      },
+      "final_total_goals": {
+        "mae": 1.8516952063397045,
+        "rmse": 2.3100239330579946,
+        "mean_error_pred_minus_actual": -0.16836049106274467,
+        "calibration_intercept": 2.1693313950123514,
+        "calibration_slope": 0.6705357240434565
+      },
+      "reg_score_logloss": 3.8318036434961305,
+      "final_score_logloss": 3.707912349373803,
+      "final_total_logloss": 2.178137791963017,
+      "reg_outcome_multiclass_brier": 0.6230550192453058,
+      "reg_outcome_multiclass_logloss": 1.0362220743706447,
+      "reg_outcome_accuracy": 0.4789634146341463,
+      "overtime_brier": 0.17307992664713562,
+      "overtime_logloss": 0.5303029846232962,
+      "overtime_predicted_rate": 0.2151387230648168,
+      "overtime_observed_rate": 0.22240853658536586
+    }
+  },
+  "season_metric_deltas_vs_20": {
+    "2022": {
+      "40": {
+        "reg_score_logloss": -0.005054581288931104,
+        "reg_outcome_multiclass_brier": -0.002280387586881316,
+        "overtime_brier": -0.00015523298115119322
+      },
+      "60": {
+        "reg_score_logloss": -0.008505121815759686,
+        "reg_outcome_multiclass_brier": -0.004600055661425295,
+        "overtime_brier": -0.00028299858692049096
+      }
+    },
+    "2023": {
+      "40": {
+        "reg_score_logloss": -0.002200573341331946,
+        "reg_outcome_multiclass_brier": -0.0012293201173391166,
+        "overtime_brier": 0.0001378510635169361
+      },
+      "60": {
+        "reg_score_logloss": -0.007919413166494138,
+        "reg_outcome_multiclass_brier": -0.001782666606586547,
+        "overtime_brier": 5.2678102691855466e-05
+      }
+    },
+    "2024": {
+      "40": {
+        "reg_score_logloss": -0.007936741777882617,
+        "reg_outcome_multiclass_brier": -0.0034147830743301855,
+        "overtime_brier": -5.798269566059666e-05
+      },
+      "60": {
+        "reg_score_logloss": -0.010379522087483828,
+        "reg_outcome_multiclass_brier": -0.004327507352133497,
+        "overtime_brier": -0.00021495635398055546
+      }
+    },
+    "2025": {
+      "40": {
+        "reg_score_logloss": -0.003471521780131326,
+        "reg_outcome_multiclass_brier": -0.002070261650951699,
+        "overtime_brier": 0.00012771518436410778
+      },
+      "60": {
+        "reg_score_logloss": -0.001826090459191132,
+        "reg_outcome_multiclass_brier": -0.0029578151372945394,
+        "overtime_brier": 5.655081893107816e-05
+      }
+    },
+    "2026": {
+      "40": {
+        "reg_score_logloss": 0.0014448110869156316,
+        "reg_outcome_multiclass_brier": 0.001829409014666994,
+        "overtime_brier": -1.5115375169932888e-05
+      },
+      "60": {
+        "reg_score_logloss": 6.645954399386866e-05,
+        "reg_outcome_multiclass_brier": 0.0007230751177585981,
+        "overtime_brier": -0.0001888441285177178
+      }
+    }
+  },
+  "back_to_back_context": {
+    "20": {
+      "all_b2b": {
+        "games": 1722,
+        "reg_score_logloss": 3.857583696686432,
+        "reg_outcome_brier": 0.6188230780263707
+      },
+      "b2b_2026": {
+        "games": 358,
+        "reg_score_logloss": 3.8049825498943988,
+        "reg_outcome_brier": 0.6472024884197686
+      }
+    },
+    "40": {
+      "all_b2b": {
+        "games": 1722,
+        "reg_score_logloss": 3.85219548545136,
+        "reg_outcome_brier": 0.6177373323063091
+      },
+      "b2b_2026": {
+        "games": 358,
+        "reg_score_logloss": 3.8136852498617984,
+        "reg_outcome_brier": 0.6524002704023016
+      }
+    },
+    "60": {
+      "all_b2b": {
+        "games": 1722,
+        "reg_score_logloss": 3.8489496261948126,
+        "reg_outcome_brier": 0.6153979586912182
+      },
+      "b2b_2026": {
+        "games": 358,
+        "reg_score_logloss": 3.8086524422209913,
+        "reg_outcome_brier": 0.6487935715179882
+      }
+    }
+  },
+  "artifact_integrity_checks": {
+    "variants": 12,
+    "games_per_variant_min": 6560,
+    "games_per_variant_max": 6560,
+    "duplicate_game_variant_rows": 0,
+    "max_reg_probability_sum_error": 2.220446049250313e-16,
+    "max_full_game_probability_sum_error": 2.220446049250313e-16,
+    "max_ot_vs_reg_tie_error": 0.0
+  },
+  "leakage_audit": {
+    "strict_prior_date_features": true,
+    "train_leq_target_minus_2": true,
+    "validation_target_minus_1_only": true,
+    "refit_through_validation_before_test": true,
+    "target_season_used_for_selection": false,
+    "markets_or_win_model_inputs": false,
+    "same_game_goalie_or_lineup_inputs": false,
+    "canonical_winner_crosscheck": "pass",
+    "regulation_ties_match_overtime": "pass"
+  },
+  "selection_bias_note": "The 60-date architecture was chosen after reviewing the 20/40-date development OOF results; these same target seasons cannot serve as an untouched promotion test. EXP-0028 will nest window selection within S\u22121.",
+  "decision": "Keep 60-date model at candidate status for nested window-selection testing; no promotion or publication.",
+  "champion_protection": "Hockey Lab Game v1.0.0 unchanged; no public data export or site deployment.",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit_learn": "1.8.0"
+  },
+  "input_files": {
+    "source_pbp_parquet": {
+      "path": "/tmp/hockey_events/data/pbp_feature_output/game_team_event_features.parquet",
+      "size_bytes": 6641987,
+      "sha256": "8fc51d8de6db68fca1ea9ab850627c044354d60364b63d6e8531f18110c6f3ef"
+    },
+    "canonical_spine_parquet": {
+      "path": "/tmp/hockey_spine/data/spine_v3/games.parquet",
+      "size_bytes": 643752,
+      "sha256": "e3b6a3cb9784a91ec6e396e1a7e72330451abee055ed0ba54e0408e37f40a0e3"
+    },
+    "model_script": {
+      "path": "research/hockey_goals_team_form_60_009.py",
+      "size_bytes": 48968,
+      "sha256": "0417282f71b75869da582f3eeee56b75474de38dc418cfd906db270521c3010f"
+    },
+    "schedule_feature_script": {
+      "path": "research/hwin_schedule_007.py",
+      "size_bytes": 18212,
+      "sha256": "184e54c69e255e42282d7e74086915faef00b6fa5f16666134bbb63a307fbe3f"
+    },
+    "opponent_strength_script": {
+      "path": "research/hwin_team_strength_004.py",
+      "size_bytes": 15534,
+      "sha256": "003d704c7713c6f4981795a19d5a6c15764ed436dd17b20c44ceaaf1e1ce3ad4"
+    },
+    "requirements": {
+      "path": "research/requirements-goals-team-form-60-009.txt",
+      "size_bytes": 136,
+      "sha256": "72203c3e493b17671a8da75a93e3dc08105af7f4dca47cbd91f260153cecd804"
+    },
+    "pooled_baseline_script": {
+      "path": "research/hockey_goals_distribution_002.py",
+      "size_bytes": 48793,
+      "sha256": "bf13c23e9d3163e402a7051905c5d932e74554177ce95fcc12e01a1644ee6439"
+    },
+    "40_date_candidate_script": {
+      "path": "research/hockey_goals_longer_team_form_008.py",
+      "size_bytes": 48972,
+      "sha256": "05307209d89d9aeebaeb760f5448eb63129d84ce295f0d547d5cd450122ca20f"
+    }
+  },
+  "artifact_files": {
+    "oof_predictions.parquet": {
+      "size_bytes": 11046692,
+      "sha256": "51b3dbb639c368bbaf76eefd756e89d94a8de3a334cd84fe34d12df00ce3afa5"
+    },
+    "context_metrics.parquet": {
+      "size_bytes": 6951,
+      "sha256": "d97c9957455786a168a56d1a41dd4554d488d03cd7e377f1cdc9d56bf24cff37"
+    },
+    "fold_metrics.csv": {
+      "size_bytes": 8069,
+      "sha256": "12dc00127361370e7823d922b8c940257c94f76fd062a71595198a9c22cdd9e2"
+    },
+    "reliability_bins.parquet": {
+      "size_bytes": 18761,
+      "sha256": "7ec6e825cf25b31d52aaa4d94a78b171aa0ee72cbcd7a119c23f81f63712c54f"
+    },
+    "requirements-goals-team-form-60-009.txt": {
+      "size_bytes": 136,
+      "sha256": "72203c3e493b17671a8da75a93e3dc08105af7f4dca47cbd91f260153cecd804"
+    },
+    "summary.json": {
+      "size_bytes": 304051,
+      "sha256": "f49bbf7f6d2356d640021e00093bc83541dc987c837923be9b64907a84f17369"
+    },
+    "GOALS_TEAM_FORM_60_009_20261103.md": {
+      "size_bytes": 3879,
+      "sha256": "e9796206f1710075f122f31931aaefa4f2ae626cb0329110c75f5e5e19395278"
+    }
+  }
+}
