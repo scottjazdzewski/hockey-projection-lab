@@ -41,24 +41,23 @@ jobs:
           df=pd.read_parquet(p)
           day=df[df["game_date"].astype(str).str[:10].eq(today)].copy()
 
-          def nice_time(v):
-              if pd.isna(v): return "TBD"
+          def parse_start(v):
+              if pd.isna(v): return ("TBD", None)
               s=str(v).strip()
-              # Common schedule formats: 19:00:00, 19:00, ISO timestamp, or already formatted text.
+              # Time-only schedule values are interpreted as America/New_York on game_date.
               m=re.match(r"^(\d{1,2}):(\d{2})(?::\d{2})?$",s)
               if m:
                   h=int(m.group(1)); minute=int(m.group(2))
-                  ap="AM" if h<12 else "PM"
-                  hh=h%12 or 12
-                  return f"{hh}:{minute:02d} {ap} ET"
+                  local=pd.Timestamp(f"{today} {h:02d}:{minute:02d}:00",tz="America/New_York")
+                  return (local.strftime("%-I:%M %p ET"), local.isoformat())
               try:
                   t=pd.to_datetime(s,utc=True)
                   if pd.notna(t):
-                      t=t.tz_convert("America/New_York")
-                      return t.strftime("%-I:%M %p ET")
+                      local=t.tz_convert("America/New_York")
+                      return (local.strftime("%-I:%M %p ET"), local.isoformat())
               except Exception:
                   pass
-              return s
+              return (s, None)
 
           TEAM_NAMES={
               "ANA":"Anaheim Ducks","BOS":"Boston Bruins","BUF":"Buffalo Sabres","CAR":"Carolina Hurricanes",
@@ -73,13 +72,15 @@ jobs:
 
           games=[]
           for _,g in day.sort_values(["game_time","game_id"],na_position="last").iterrows():
+              time_et,start_time_et=parse_start(g.get("game_time"))
               games.append({
                   "game_id": None if pd.isna(g.get("game_id")) else int(g["game_id"]),
                   "away_abbr": str(g.get("away_team_abbr","")),
                   "away_name": str(g.get("away_team_name","")),
                   "home_abbr": str(g.get("home_team_abbr","")),
                   "home_name": str(g.get("home_team_name","")),
-                  "time_et": nice_time(g.get("game_time")),
+                  "time_et": time_et,
+                  "start_time_et": start_time_et,
                   "state": str(g.get("game_state","PRE"))
               })
 
@@ -97,8 +98,10 @@ jobs:
                   try:
                       t=pd.to_datetime(start,utc=True).tz_convert("America/New_York")
                       time_et=t.strftime("%-I:%M %p ET")
+                      start_time_et=t.isoformat()
                   except Exception:
                       time_et="TBD"
+                      start_time_et=None
                   away=g.get("awayTeam",{}) or {}
                   home=g.get("homeTeam",{}) or {}
                   aa=away.get("abbrev","")
@@ -110,6 +113,7 @@ jobs:
                       "home_abbr":ha,
                       "home_name":TEAM_NAMES.get(ha,ha),
                       "time_et":time_et,
+                      "start_time_et":start_time_et,
                       "state":g.get("gameState","PRE")
                   })
               source="NHL live score feed fallback"
