@@ -1,0 +1,108 @@
+name: HWIN Special Teams Increment 008 — No Goalie
+on:
+  push:
+    branches:
+      - codex/hwin-special-teams-008-no-goalie
+    paths:
+      - 'research/hwin_special_teams_008.py'
+      - '.github/workflows/hwin-special-teams-008-no-goalie.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  special-teams-increment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned research dependencies
+        run: python -m pip install --quiet numpy==2.3.5 pandas==2.2.3 scikit-learn==1.8.0 pyarrow==26.0.0
+      - name: Download canonical historical inputs
+        run: |
+          mkdir -p /tmp/pbp /tmp/pbp_u /tmp/spine /tmp/spine_u
+          gh run download 41537361054 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/pbp_u
+          gh run download 41537437104 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
+          unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/spine_u
+      - name: Run chronological special-teams increment
+        run: |
+          python research/hwin_special_teams_008.py \
+            --pbp /tmp/pbp_u/pbp_feature_output/game_team_event_features.parquet \
+            --spine /tmp/spine_u/spine_v3/games.parquet \
+            --out hwin_special_teams_008
+      - name: Validate outputs and write provenance
+        run: |
+          python - <<'PY'
+          import hashlib, json, platform
+          from pathlib import Path
+          import numpy as np
+          import pandas as pd
+          import pyarrow, sklearn
+          p = pd.read_parquet('hwin_special_teams_008/oof_predictions.parquet')
+          f = pd.read_parquet('hwin_special_teams_008/fold_metrics.parquet')
+          assert p.groupby('model_variant').size().eq(6993).all()
+          assert not p.duplicated(['model_variant', 'game_id']).any()
+          assert np.allclose(p.p_home + p.p_away, 1.0, atol=1e-12)
+          assert p.feature_cutoff_date.eq(p.game_date).all()
+          assert set(p.model_variant) == {
+              'team_strength_004', 'team_strength_004_plus_b2b',
+              'plus_pp_xg_quality', 'plus_pp_xg_and_exposure',
+              'plus_pp_full_including_finishing',
+          }
+          expected = {
+              2022: 0.22825118358382493,
+              2023: 0.23153785544406072,
+              2024: 0.23347672774228304,
+              2025: 0.23526533211413475,
+              2026: 0.24515048790226730,
+          }
+          b2b = f[f.model_variant.eq('team_strength_004_plus_b2b')].set_index('target_season')
+          for season, value in expected.items():
+              assert abs(float(b2b.loc[season, 'brier']) - value) < 1e-5
+          def sha(path):
+              h = hashlib.sha256()
+              with open(path, 'rb') as handle:
+                  for block in iter(lambda: handle.read(1024 * 1024), b''):
+                      h.update(block)
+              return h.hexdigest()
+          manifest = {
+              'experiment_id': 'HWIN-SPECIAL-TEAMS-008-NOGOALIE-RESEARCH',
+              'retrieval_date': '2026-11-03',
+              'model_code_commit': '${{ github.sha }}',
+              'source_version': 'canonical-spine-v3-and-canonical-event-features-20261102',
+              'source_run_ids': {'pbp': 41537361054, 'spine': 41537437104},
+              'source_artifact_sha256': {
+                  'pbp_zip': sha('/tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip'),
+                  'spine_zip': sha('/tmp/spine/hockey-canonical-spine-v3-20261102.zip'),
+              },
+              'python': platform.python_version(),
+              'numpy': np.__version__,
+              'pandas': pd.__version__,
+              'scikit_learn': sklearn.__version__,
+              'pyarrow': pyarrow.__version__,
+              'validation': 'rolling-origin, train through target-2, tune target-1, test target; 2022-2026',
+              'leakage_controls': [
+                  'pregame special-teams features use prior dates only',
+                  'same-date outcomes are not incorporated before any game on that date',
+                  'same-game starter identity excluded',
+                  'official power-play opportunities unavailable; opponent penalty events are an exposure proxy',
+              ],
+              'predictions': int(len(p)),
+          }
+          Path('hwin_special_teams_008/manifest.json').write_text(json.dumps(manifest, indent=2) + '\\n')
+          print(json.dumps(manifest, indent=2))
+          PY
+      - name: Package research results
+        run: zip -r -9 hwin-special-teams-008-no-goalie-20261103.zip hwin_special_teams_008 >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hwin-special-teams-008-no-goalie-20261103
+          path: hwin-special-teams-008-no-goalie-20261103.zip
+          retention-days: 90
+          compression-level: 0
+          if-no-files-found: error
