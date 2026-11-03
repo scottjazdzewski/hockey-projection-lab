@@ -1,0 +1,198 @@
+{
+  "experiment_id": "EXP-0040",
+  "model_id": "HOCKEY-LAB-HWIN-INDIVIDUAL-GOALIE-WIN-PCT-025-RESEARCH",
+  "status": "RESEARCH; no promotion or public export",
+  "question": "Does an individual named goalie's own prior team win record, adjusted for the frozen champion's expected wins across all teams, improve projected game win percentage?",
+  "baseline": "Frozen Hockey Lab Game v1.0.0 Team Strength 004 + B2B OOF probabilities",
+  "target_seasons": [
+    2024,
+    2025,
+    2026
+  ],
+  "target_games": 3936,
+  "feature": "For each individual goalie ID across all franchises, prior starts' team wins minus HWIN champion-expected wins, shrunk by prior starts. Home-goalie residual minus away-goalie residual adjusts the frozen win logit.",
+  "not_team_mix": "The feature follows the individual named goalie across teams. It does not compare the goalie to a team's previous goalie rotation.",
+  "starter_identity_caveat": "Target goalie identity comes from the postgame goalie box, so this is retrospective upper-bound evidence until a timestamped pregame starter feed is established.",
+  "history_scope": "HWIN out-of-fold regular-season predictions available from source seasons 2022\u20132026; each feature uses only the individual goalie's strictly prior starts.",
+  "selection": "For target S, train through S-2; select goalie memory, shrinkage and ridge penalty on S-1 by win log loss; refit through S-1; test on S. Baseline is retained when it wins validation.",
+  "markets_or_goal_model": "No markets or goals/xG model inputs; this is a direct projected win-percentage experiment.",
+  "same_day_leakage_check": "All history is shifted by one goalie start; same-date team duplicates and same-date goalie starts are asserted absent.",
+  "folds": {
+    "2024": {
+      "training_seasons": [
+        2022
+      ],
+      "validation_season": 2023,
+      "test_season": 2024,
+      "games": 1312,
+      "selected_feature": "individual_goalie_win_residual_career_k5",
+      "selected_ridge_penalty": 0.001,
+      "refit_beta": 0.6740519369816366,
+      "validation_base_log_loss": 0.6516539113438208,
+      "validation_selected_log_loss": 0.6509460295199317,
+      "test_baseline": {
+        "games": 1312,
+        "log_loss": 0.6585918752709687,
+        "brier": 0.23340227868723842,
+        "accuracy": 0.6021341463414634,
+        "mean_home_probability": 0.5396265611842355,
+        "home_win_rate": 0.5411585365853658,
+        "calibration_intercept_slope": {
+          "intercept": 0.011923523560869126,
+          "slope": 0.9642341914182586,
+          "converged": true
+        }
+      },
+      "test_candidate": {
+        "games": 1312,
+        "log_loss": 0.6587268010156639,
+        "brier": 0.23347002238336587,
+        "accuracy": 0.5990853658536586,
+        "mean_home_probability": 0.5401323861155926,
+        "home_win_rate": 0.5411585365853658,
+        "calibration_intercept_slope": {
+          "intercept": 0.016176078738813864,
+          "slope": 0.9221716792981409,
+          "converged": true
+        }
+      },
+      "mean_absolute_probability_shift_pp": 1.0666763152886898,
+      "mean_signed_probability_shift_pp": 0.05058249313570798,
+      "starter_individual_prior_history_available_pct": 0.9946646341463414
+    },
+    "2025": {
+      "training_seasons": [
+        2022,
+        2023
+      ],
+      "validation_season": 2024,
+      "test_season": 2025,
+      "games": 1312,
+      "selected_feature": "individual_goalie_win_residual_career_k60",
+      "selected_ridge_penalty": 0.001,
+      "refit_beta": 0.5875334141702295,
+      "validation_base_log_loss": 0.6585918752709687,
+      "validation_selected_log_loss": 0.6582925209200877,
+      "test_baseline": {
+        "games": 1312,
+        "log_loss": 0.6628628256911472,
+        "brier": 0.23545134909851084,
+        "accuracy": 0.5891768292682927,
+        "mean_home_probability": 0.5409604554548858,
+        "home_win_rate": 0.5625,
+        "calibration_intercept_slope": {
+          "intercept": 0.10082710559799056,
+          "slope": 0.9393120090393087,
+          "converged": true
+        }
+      },
+      "test_candidate": {
+        "games": 1312,
+        "log_loss": 0.6629818086919225,
+        "brier": 0.23552339971198313,
+        "accuracy": 0.5861280487804879,
+        "mean_home_probability": 0.5412611066708559,
+        "home_win_rate": 0.5625,
+        "calibration_intercept_slope": {
+          "intercept": 0.10168323507883578,
+          "slope": 0.9260785800311847,
+          "converged": true
+        }
+      },
+      "mean_absolute_probability_shift_pp": 0.4399915509024214,
+      "mean_signed_probability_shift_pp": 0.03006512159701,
+      "starter_individual_prior_history_available_pct": 0.9885670731707317
+    },
+    "2026": {
+      "training_seasons": [
+        2022,
+        2023,
+        2024
+      ],
+      "validation_season": 2025,
+      "test_season": 2026,
+      "games": 1312,
+      "selected_feature": "individual_goalie_win_residual_career_k5",
+      "selected_ridge_penalty": 0.1,
+      "refit_beta": 0.015906514704222257,
+      "validation_base_log_loss": 0.6628628256911472,
+      "validation_selected_log_loss": 0.6628622748485149,
+      "test_baseline": {
+        "games": 1312,
+        "log_loss": 0.6844127251997418,
+        "brier": 0.24577381000982518,
+        "accuracy": 0.551829268292683,
+        "mean_home_probability": 0.5410196229679649,
+        "home_win_rate": 0.5221036585365854,
+        "calibration_intercept_slope": {
+          "intercept": -0.028838062136050977,
+          "slope": 0.6952771343155977,
+          "converged": true
+        }
+      },
+      "test_candidate": {
+        "games": 1312,
+        "log_loss": 0.6843944464108085,
+        "brier": 0.24576514088768922,
+        "accuracy": 0.5503048780487805,
+        "mean_home_probability": 0.5410282421359704,
+        "home_win_rate": 0.5221036585365854,
+        "calibration_intercept_slope": {
+          "intercept": -0.028920044297072907,
+          "slope": 0.6956076704443602,
+          "converged": true
+        }
+      },
+      "mean_absolute_probability_shift_pp": 0.022355189388205833,
+      "mean_signed_probability_shift_pp": 0.0008619168005638047,
+      "starter_individual_prior_history_available_pct": 0.9916158536585366
+    }
+  },
+  "pooled_baseline": {
+    "games": 3936,
+    "log_loss": 0.668622475387286,
+    "brier": 0.23820914593185816,
+    "accuracy": 0.5810467479674797,
+    "mean_home_probability": 0.5405355465356954,
+    "home_win_rate": 0.541920731707317,
+    "calibration_intercept_slope": {
+      "intercept": 0.023971467027442347,
+      "slope": 0.8832540198516193,
+      "converged": true
+    }
+  },
+  "pooled_candidate": {
+    "games": 3936,
+    "log_loss": 0.6687010187061316,
+    "brier": 0.2382528543276794,
+    "accuracy": 0.5785060975609756,
+    "mean_home_probability": 0.5408072449741396,
+    "home_win_rate": 0.541920731707317,
+    "calibration_intercept_slope": {
+      "intercept": 0.025845437683463316,
+      "slope": 0.8645418060028005,
+      "converged": true
+    }
+  },
+  "pooled_mean_absolute_probability_shift_pp": 0.5096743518597724,
+  "pooled_mean_signed_probability_shift_pp": 0.02716984384442726,
+  "paired_14_day_block_bootstrap": {
+    "log_loss_delta_candidate_minus_base": 7.854331884568641e-05,
+    "log_loss_95pct_14_day_block_ci": [
+      -0.0004235644301003297,
+      0.0005767061982335085
+    ],
+    "brier_delta_candidate_minus_base": 4.370839582126657e-05,
+    "brier_95pct_14_day_block_ci": [
+      -0.00019600687416798082,
+      0.0002844101166007057
+    ],
+    "bootstrap_replicates": 5000,
+    "calendar_blocks": 42
+  },
+  "home_away_probability_sum_max_abs_error": 0.0,
+  "decision": "Research only; no forced nonzero adjustment. Promote only after stable proper-score improvement and replacement of retrospective target starter identity with timestamped pregame starter data.",
+  "artifacts": {
+    "predictions": "oof_individual_goalie_win_pct.parquet"
+  }
+}

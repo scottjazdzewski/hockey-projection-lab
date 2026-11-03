@@ -1,0 +1,102 @@
+{
+  "experiment_id": "EXP-0041",
+  "model_id": "HOCKEY-LAB-HWIN-INDIVIDUAL-GOALIE-SKILL-026-RESEARCH",
+  "status": "RESEARCH",
+  "run_date": "2026-11-03",
+  "repository": "scottjazdzewski/hockey-projection-lab",
+  "branch": "codex/hockey-goalie-pregame-018",
+  "feature_version": "INDIVIDUAL_GOALIE_SKILL_GSAX30_026",
+  "baseline": "Frozen Hockey Lab Game v1.0.0 Team Strength 004 + B2B OOF probabilities",
+  "target_seasons": [
+    2024,
+    2025,
+    2026
+  ],
+  "target_game_count": 3936,
+  "target_goalie_identity": "Postgame actual starter flag/ID; retrospective upper-bound test until timestamped pregame starter availability exists.",
+  "pregame_rule": "All individual goalie history and skill features are computed from strictly earlier game dates.",
+  "no_market_inputs": true,
+  "no_production_or_site_change": true,
+  "reproducibility": {
+    "second_run_summary_exact_match": true,
+    "second_run_all_3936_predictions_exact_match": true
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "pyarrow": "26.0.1"
+  },
+  "input_files": [
+    {
+      "name": "frozen_hwin_champion_oof",
+      "path": "research/exports/HWIN_PREVIOUS_SEASON_BATTERY_011_20261103/results/goalie_battery_011/oof_predictions.parquet",
+      "sha256": "2478f98d7f1e8e64c29253281318f7bb425bb7ddc3fcf4d521d80983aac8fc5f"
+    },
+    {
+      "name": "actual_goalie_starters",
+      "path": "research/.tmp_goalie_probability_016/goalie/data/goalie_feature_output/goalie_game_features.parquet",
+      "sha256": "9fc54bacceb0c67d451ef8cc97f0f1851794f6a4eab28ff2fa91497d1e8684fa"
+    },
+    {
+      "name": "goalie_pool_calibration_021_oof",
+      "path": "research/.tmp_goalie_probability_016/out/goalie_pool_calibration_021/goalie_pool_oof_calibration.parquet",
+      "sha256": "fb14dbf655b2a1b903711229e7121ac21e60770bff56ad71e15eb5c3bf7f2287"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "hockey_hwin_individual_goalie_skill_026.py",
+      "sha256": "920dab458681641ee243e2a0fa7485dbf86de8f34087bda36160c7a78c2ed3d0",
+      "bytes": 15718
+    },
+    {
+      "path": "HWIN_INDIVIDUAL_GOALIE_SKILL_026_20261103.md",
+      "sha256": "7f4dc850ee98058d761102a456cb4ea52c7e1f32786cd4ec2aa8e73be8be09ac",
+      "bytes": 2846
+    },
+    {
+      "path": "summary.json",
+      "sha256": "aedb7222732fcf711c25a2112c09a63a9bb8a1410d3e40bc8fdc5209b337544a",
+      "bytes": 7310
+    },
+    {
+      "path": "oof_individual_goalie_skill_win_pct.parquet",
+      "sha256": "1e13d7ded979e92c5196364d0e8a20647a370ff702561fa69f31f394a8d14e31",
+      "bytes": 348477
+    }
+  ],
+  "decision": "No promotion. Pooled win-probability proper scores were marginally worse and uncertainty intervals include no change. Hockey Lab Game v1.0.0 remains frozen.",
+  "drive_archive": {
+    "folder_id": "1CvnB0kMCzVxD9QV64whN60j1PUQX_baI",
+    "folder_url": "https://drive.google.com/drive/folders/1CvnB0kMCzVxD9QV64whN60j1PUQX_baI",
+    "files": [
+      {
+        "name": "hockey_hwin_individual_goalie_skill_026.py",
+        "id": "1M0Fg3gtuyp1z1j0XhuNMJUJLP50nJUYb",
+        "url": "https://drive.google.com/file/d/1M0Fg3gtuyp1z1j0XhuNMJUJLP50nJUYb/view"
+      },
+      {
+        "name": "HWIN_INDIVIDUAL_GOALIE_SKILL_026_20261103.md",
+        "id": "1fXA1x6xNRfTzMzkkdHX8fYvvVPNJX2Y4",
+        "url": "https://drive.google.com/file/d/1fXA1x6xNRfTzMzkkdHX8fYvvVPNJX2Y4/view"
+      },
+      {
+        "name": "summary.json",
+        "id": "1lrO8SSz25U_H-nXNjtwVd3HeYDLywNnE",
+        "url": "https://drive.google.com/file/d/1lrO8SSz25U_H-nXNjtwVd3HeYDLywNnE/view"
+      },
+      {
+        "name": "manifest.json",
+        "id": "13PhthgD0Z3A7Qwf8U3jlF2BFom3aEUg4",
+        "url": "https://drive.google.com/file/d/13PhthgD0Z3A7Qwf8U3jlF2BFom3aEUg4/view"
+      },
+      {
+        "name": "oof_individual_goalie_skill_win_pct.parquet",
+        "id": "1WvlRIeGvPaiUvWKotMxGtQCA2vjp_BBK",
+        "url": "https://drive.google.com/file/d/1WvlRIeGvPaiUvWKotMxGtQCA2vjp_BBK/view"
+      }
+    ]
+  }
+}

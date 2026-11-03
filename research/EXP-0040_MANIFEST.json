@@ -1,0 +1,97 @@
+{
+  "experiment_id": "EXP-0040",
+  "model_id": "HOCKEY-LAB-HWIN-INDIVIDUAL-GOALIE-WIN-PCT-025-RESEARCH",
+  "status": "RESEARCH",
+  "run_date": "2026-11-03",
+  "repository": "scottjazdzewski/hockey-projection-lab",
+  "branch": "codex/hockey-goalie-pregame-018",
+  "feature_version": "INDIVIDUAL_GOALIE_WIN_RESIDUAL_025",
+  "baseline": "Frozen Hockey Lab Game v1.0.0 Team Strength 004 + B2B OOF probabilities",
+  "target_seasons": [
+    2024,
+    2025,
+    2026
+  ],
+  "target_game_count": 3936,
+  "target_goalie_identity": "Postgame actual starter flag/ID; retrospective upper-bound test until timestamped pregame starter availability exists.",
+  "pregame_rule": "All individual goalie history and skill features are computed from strictly earlier game dates.",
+  "no_market_inputs": true,
+  "no_production_or_site_change": true,
+  "reproducibility": {
+    "second_run_summary_exact_match": true,
+    "second_run_all_3936_predictions_exact_match": true
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "pyarrow": "26.0.1"
+  },
+  "input_files": [
+    {
+      "name": "frozen_hwin_champion_oof",
+      "path": "research/exports/HWIN_PREVIOUS_SEASON_BATTERY_011_20261103/results/goalie_battery_011/oof_predictions.parquet",
+      "sha256": "2478f98d7f1e8e64c29253281318f7bb425bb7ddc3fcf4d521d80983aac8fc5f"
+    },
+    {
+      "name": "actual_goalie_starters",
+      "path": "research/.tmp_goalie_probability_016/goalie/data/goalie_feature_output/goalie_game_features.parquet",
+      "sha256": "9fc54bacceb0c67d451ef8cc97f0f1851794f6a4eab28ff2fa91497d1e8684fa"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "hockey_hwin_individual_goalie_win_pct_025.py",
+      "sha256": "29ec0f103714330f73ce4f734a0a686b2e725c9c371fc14d8b70566755e648aa",
+      "bytes": 19127
+    },
+    {
+      "path": "HWIN_INDIVIDUAL_GOALIE_WIN_PCT_025_20261103.md",
+      "sha256": "0a8015fba2f968984e049366131bc1417d5ad73a03e89383ea637aca17aa7b4c",
+      "bytes": 2863
+    },
+    {
+      "path": "summary.json",
+      "sha256": "ed32896ffbbda1a375de62f70a080fb66d89a667b49073c99e66aa99bdbd1124",
+      "bytes": 7925
+    },
+    {
+      "path": "oof_individual_goalie_win_pct.parquet",
+      "sha256": "ea97c6d47a8a7ee4c1f799ac13c67aedffd9eb0b50b0964a1434f0915f399f14",
+      "bytes": 423652
+    }
+  ],
+  "decision": "No promotion. Pooled win-probability proper scores were marginally worse and uncertainty intervals include no change. Hockey Lab Game v1.0.0 remains frozen.",
+  "drive_archive": {
+    "folder_id": "1vadUKL3yE8c2qJqbPR8LYbrbhDMNZgFM",
+    "folder_url": "https://drive.google.com/drive/folders/1vadUKL3yE8c2qJqbPR8LYbrbhDMNZgFM",
+    "files": [
+      {
+        "name": "hockey_hwin_individual_goalie_win_pct_025.py",
+        "id": "1COQ7ayzYNwZQd6fkRT3yYiDhkBfUKbL3",
+        "url": "https://drive.google.com/file/d/1COQ7ayzYNwZQd6fkRT3yYiDhkBfUKbL3/view"
+      },
+      {
+        "name": "HWIN_INDIVIDUAL_GOALIE_WIN_PCT_025_20261103.md",
+        "id": "1USHSgdMdGfd0nv4KBRa79gUevcNQVlJm",
+        "url": "https://drive.google.com/file/d/1USHSgdMdGfd0nv4KBRa79gUevcNQVlJm/view"
+      },
+      {
+        "name": "summary.json",
+        "id": "1GlAfty1UF-KbYiYTBJIAzkbjSncdU4SR",
+        "url": "https://drive.google.com/file/d/1GlAfty1UF-KbYiYTBJIAzkbjSncdU4SR/view"
+      },
+      {
+        "name": "manifest.json",
+        "id": "1GZZRlBAKIgu28Nkf1SmZABCe7nki6XJC",
+        "url": "https://drive.google.com/file/d/1GZZRlBAKIgu28Nkf1SmZABCe7nki6XJC/view"
+      },
+      {
+        "name": "oof_individual_goalie_win_pct.parquet",
+        "id": "1traHSXNBpFN7Lh0p_l2guQmUrg6uSOFs",
+        "url": "https://drive.google.com/file/d/1traHSXNBpFN7Lh0p_l2guQmUrg6uSOFs/view"
+      }
+    ]
+  }
+}
