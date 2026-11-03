@@ -264,3 +264,14 @@ Same-day repeated team-game ordering was checked against canonical start times; 
 **Decision: RESEARCH.** This small pooled improvement is hypothesis-generating, not promotion evidence. No calibration change or public prediction export is authorized by this result. Next test a predeclared 10/20/40-game tied-state window set and a limited shrinkage option, selected only on each chronological validation season. Preserve the prospective 2026–27 shadow ledger separately.
 
 Reproducible artifacts: `HWIN_SCORE_STATE_009_NO_GOALIE_20261103.zip` and `HWIN_SCORE_STATE_009_MANIFEST_20261103.json` in Drive `04_VALIDATION`. Code is on isolated branch `codex/hwin-score-state-009`; dependencies are pinned in `research/requirements-game-model.txt`. Registry ID: EXP-0015.
+
+
+## Prospective Shadow Batch 010 — 2026-11-03
+
+Eleven same-day regular-season probabilities were frozen at 2026-11-03T10:33:32.985Z, before their canonical scheduled start times. Model ID: `HWIN-SHADOW-010-SCHEDULE007-B2B-RESEARCH`; status: candidate shadow, not promoted. The model selection uses source season 2026 after training through 2025, then refits through 2026 before predicting source season 2027. Hyperparameters: Elo K=10, home advantage=20, retention=0.55; opponent-adjustment alpha=0.12, retention=0.70; logistic C=2.0. The 2026 validation log loss (0.680961) is the selection score, not a held-out performance estimate for this refit.
+
+The canonical PBP snapshot ends on 2026-11-01, so each prediction includes a two-day PBP lag flag. The canonical spine provides the slate and schedule context through 2026-11-03; schedule stubs retain rest-day context after the PBP cutoff while missing event performance stays missing. No odds, current-game outcomes, actual goalies, or lineup snapshots were used. The site `today-games.json` was dated 2026-11-02 and was not used. Probabilities are pregame and sum to one; expected goals and regulation probabilities are null because this model does not estimate them.
+
+**Forward-test status: awaiting outcomes.** These are frozen research predictions and were not exported to the site. After all games are final, append a separate verified outcome artifact and score the batch without modifying this prediction file. The historical B2B OOF reference (Brier 0.234726; log loss 0.661540; accuracy 59.92% over 6,993 games) belongs to the prior rolling-origin study and is not the score of this live refit.
+
+Reproducible bundle: `HWIN_SHADOW_2026-11-03_PREGAME.zip`; manifest: `HWIN_SHADOW_2026-11-03_MANIFEST.json`, in Drive `04_VALIDATION`. Code and protocol are on isolated branch `codex/hwin-shadow-ledger-010`.
