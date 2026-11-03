@@ -5,7 +5,18 @@ on:
     branches: [main]
     paths:
       - 'public/data/**'
+      - 'artifacts/schemas/**'
       - 'src/production/validate-public-data.mjs'
+      - 'src/production/validate-site-contract.mjs'
+      - 'public/assets/production-data.js'
+      - 'public/assets/game-cards.js'
+      - 'public/assets/team-ratings.js'
+      - 'public/assets/team-profile.js'
+      - 'public/assets/performance.js'
+      - 'public/game-cards/**'
+      - 'public/teams/**'
+      - 'public/performance/**'
+      - '.github/workflows/validate-production-data.yml'
   pull_request:
     paths:
       - 'public/data/**'
