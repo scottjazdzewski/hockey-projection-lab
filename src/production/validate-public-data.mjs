@@ -85,13 +85,43 @@ if(teams){
 }
 
 if(players){
+  if(players.schema_version!=='1.1') fail('player-ratings schema_version must be 1.1');
+  if(!players.model?.model_id || !players.model?.version || !players.model?.status) fail('player-ratings model metadata incomplete');
   if(!Array.isArray(players.players)) fail('player-ratings players must be array');
-  else ok('player ratings readable');
+  else {
+    const canonical=new Set(['ANA','BOS','BUF','CAR','CBJ','CGY','CHI','COL','DAL','DET','EDM','FLA','LAK','MIN','MTL','NJD','NSH','NYI','NYR','OTT','PHI','PIT','SEA','SJS','STL','TBL','TOR','UTA','VAN','VGK','WPG','WSH']);
+    const ids=new Set();
+    for(const p of players.players){
+      const id=String(p.player_id);
+      if(!p.name || !p.team_abbr || !p.position) fail('player rating missing identity '+id);
+      if(!canonical.has(p.team_abbr)) fail('player '+id+' unknown team '+p.team_abbr);
+      if(ids.has(id)) fail('duplicate player_id '+id); else ids.add(id);
+      for(const k of ['overall','offense','defense','shot_generation','finishing','playmaking','usage']){
+        if(!finiteOrNull(p[k])) fail('player '+id+' '+k+' must be finite or null');
+      }
+    }
+    if(players.model.status==='PROMOTED' && players.players.length===0) fail('PROMOTED player-ratings export cannot be empty');
+    ok('player ratings readable');
+  }
 }
 
 if(fantasy){
+  if(fantasy.schema_version!=='1.1') fail('fantasy-rankings schema_version must be 1.1');
+  if(!fantasy.model?.model_id || !fantasy.model?.version || !fantasy.model?.status) fail('fantasy model metadata incomplete');
   if(!Array.isArray(fantasy.rankings)) fail('fantasy rankings must be array');
-  else ok('fantasy rankings readable');
+  else {
+    const ids=new Set(), ranks=new Set();
+    for(const p of fantasy.rankings){
+      const id=String(p.player_id);
+      if(ids.has(id)) fail('duplicate fantasy player_id '+id); else ids.add(id);
+      if(ranks.has(p.rank)) fail('duplicate fantasy rank '+p.rank); else ranks.add(p.rank);
+      for(const k of ['ros_projection','trend','schedule_score']){
+        if(!finiteOrNull(p[k])) fail('fantasy player '+id+' '+k+' must be finite or null');
+      }
+    }
+    if(fantasy.model.status==='PROMOTED' && fantasy.rankings.length===0) fail('PROMOTED fantasy export cannot be empty');
+    ok('fantasy rankings readable');
+  }
 }
 
 if(process.exitCode) process.exit(process.exitCode);
