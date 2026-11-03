@@ -430,3 +430,89 @@ footer{background:#160b29;color:#efe5f0;border-top:1px solid #6e4a9b}.footer-inn
   .slate-heading{gap:5px;margin-bottom:10px}
   .slate-heading h2{font-size:30px}
 }
+
+
+/* Continuous artwork treatment: no ivory page bands on interior pages */
+body.interior-page{
+  min-height:100vh;
+  background-color:#11091f;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center top;
+  background-attachment:fixed;
+}
+body.interior-game{
+  background-image:
+    linear-gradient(180deg,rgba(12,6,25,.18) 0%,rgba(12,6,25,.32) 38%,rgba(12,6,25,.66) 100%),
+    url('/assets/hero-game-cards.webp');
+}
+body.interior-teams{
+  background-image:
+    linear-gradient(180deg,rgba(7,14,26,.22) 0%,rgba(9,20,34,.38) 38%,rgba(10,12,25,.72) 100%),
+    url('/assets/hero-teams.webp');
+}
+body.interior-players{
+  background-image:
+    linear-gradient(180deg,rgba(8,12,28,.20) 0%,rgba(10,20,38,.38) 38%,rgba(11,10,25,.72) 100%),
+    url('/assets/hero-players.webp');
+}
+body.interior-performance{
+  background-image:
+    linear-gradient(180deg,rgba(13,8,26,.20) 0%,rgba(24,11,35,.38) 38%,rgba(13,8,24,.74) 100%),
+    url('/assets/hero-performance.webp');
+}
+.interior-page .page-hero{
+  background-image:none!important;
+  background-color:transparent;
+  border-bottom:1px solid rgba(240,198,64,.34);
+}
+.interior-page main{
+  position:relative;
+  background:transparent!important;
+}
+.interior-page main:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(13,8,26,.22),rgba(13,8,26,.48));
+  pointer-events:none;
+}
+.interior-page .content-shell{
+  position:relative;
+  z-index:1;
+}
+.interior-page .section-heading h2,
+.interior-page .section-title-row h2{
+  color:#fff6e6;
+  text-shadow:0 3px 16px rgba(0,0,0,.48);
+}
+.interior-page .section-heading>p{
+  color:rgba(255,247,235,.84);
+  text-shadow:0 2px 10px rgba(0,0,0,.5);
+}
+.interior-page .section-heading .eyebrow{
+  color:var(--gold);
+}
+.interior-page .hwin-card,
+.interior-page .team-tile,
+.interior-page .profile-placeholder,
+.interior-page .metric-grid article{
+  background:rgba(255,250,240,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 14px 34px rgba(0,0,0,.24);
+}
+.interior-page .hwin-top{
+  background:rgba(35,14,67,.94);
+}
+.interior-page .context-chip{
+  background:rgba(247,239,217,.84);
+}
+.interior-page footer{
+  position:relative;
+  z-index:2;
+}
+@media(max-width:650px){
+  body.interior-page{background-attachment:scroll;background-position:center top}
+  .interior-page main:before{background:linear-gradient(180deg,rgba(13,8,26,.28),rgba(13,8,26,.62))}
+}
