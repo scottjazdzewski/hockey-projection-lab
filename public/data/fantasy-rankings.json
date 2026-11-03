@@ -1,6 +1,7 @@
 {
-  "schema_version":"1.0",
-  "generated_at":"2026-11-02T21:45:00-05:00",
+  "schema_version":"1.1",
+  "generated_at":"2026-11-02T22:15:00-05:00",
+  "model":{"model_id":"UNNAMED_INTERNAL","version":"none","status":"RESEARCH","trained_through":null},
   "scoring_profile":null,
   "rankings":[]
 }
