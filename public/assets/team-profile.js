@@ -27,7 +27,8 @@
 
       const result=await window.HockeyData.loadSurface('team_ratings','/data/team-ratings.json');
       if(!result.ready || result.data?.model?.status!=='PROMOTED'){
-        qs('tp-state').textContent=result.stale?'Ratings temporarily stale.':'Ratings pending.';
+        if(result.surface?.state==='WITHHELD') qs('tp-state').textContent='Ratings withheld by the production validation gate.';
+        else qs('tp-state').textContent=result.stale?'Ratings temporarily stale.':'Ratings pending.';
         return;
       }
       const team=(result.data.teams||[]).find(t=>t.abbr===abbr);
