@@ -183,8 +183,8 @@ def freeze_records(min_before: float, max_before: float):
                     "home_probability_min":None,
                     "home_probability_max":None,
                     "home_probability_std":None,
-                    "earliest_closing_timestamp":None,
-                    "latest_closing_timestamp":None,
+                    "earliest_odds_timestamp":None,
+                    "latest_odds_timestamp":None,
                     "books":[]
                 }
             },
