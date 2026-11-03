@@ -1,63 +1,49 @@
-/* Shared interior-page base: Teams / Players / Fantasy / Model Performance.
-   Permanent visual contract: one uniform tint over the page artwork. */
+/* INTERIOR PAGES — complete shared stylesheet */
 :root{
   --ip-gold:#f0c640;
   --ip-ivory:#fff8e8;
-  --ip-purple:#2b0e4b;
   --ip-ink:#321653;
-  --ip-tint:rgba(10,5,22,.54);
 }
-
 .ip-page{
   position:relative;
   min-height:100vh;
-  margin:0;
   display:flex;
   flex-direction:column;
-  color:var(--ip-ivory);
+  isolation:isolate;
   background-color:#11091f;
   background-repeat:no-repeat;
   background-size:cover;
   background-position:center top;
   background-attachment:fixed;
-  isolation:isolate;
+  color:var(--ip-ivory);
 }
 .ip-page::before{
   content:"";
   position:fixed;
   inset:0;
   z-index:0;
-  background:var(--ip-tint);
+  background:rgba(10,5,22,.62);
   pointer-events:none;
 }
-.ip-page>*{
-  position:relative;
-  z-index:1;
-}
+.ip-page>*{position:relative;z-index:1}
 .ip-page-teams{background-image:url('/assets/hero-teams.webp')}
 .ip-page-players{background-image:url('/assets/hero-players-v3.webp')}
 .ip-page-fantasy{background-image:url('/assets/hero-fantasy.webp')}
 .ip-page-performance{background-image:url('/assets/hero-performance.webp')}
 
 .ip-hero{
+  z-index:100;
   flex:0 0 auto;
-  position:relative;
   min-height:208px;
-  border-bottom:1px solid rgba(240,198,64,.42);
   background:transparent;
+  border-bottom:1px solid rgba(240,198,64,.42);
 }
 .ip-header{
   position:absolute;
-  inset:0 0 auto 0;
-  z-index:5;
-  background:transparent!important;
-  border-bottom:1px solid rgba(255,255,255,.12);
+  inset:0 0 auto;
+  z-index:1000;
 }
-.ip-header .header-inner{height:78px}
-.ip-hero-inner{
-  padding-top:108px;
-  padding-bottom:22px;
-}
+.ip-hero-inner{padding-top:108px;padding-bottom:22px}
 .ip-eyebrow{
   color:var(--ip-gold);
   font-size:9px;
@@ -65,34 +51,28 @@
   letter-spacing:.16em;
   text-transform:uppercase;
 }
-.ip-title-row{
-  display:flex;
-  align-items:baseline;
-  gap:22px;
-  margin-top:5px;
-}
+.ip-title-row{margin-top:5px}
 .ip-title-row h1{
   margin:0;
+  color:var(--ip-ivory);
   font:600 clamp(46px,4.8vw,70px)/.88 var(--serif);
   letter-spacing:-.035em;
-  color:var(--ip-ivory);
-  text-shadow:0 4px 18px rgba(0,0,0,.48);
+  text-shadow:0 4px 18px rgba(0,0,0,.56);
 }
 .ip-hero-inner>p{
-  margin:8px 0 0;
   max-width:760px;
+  margin:8px 0 0;
+  color:rgba(255,248,232,.92);
   font-size:10.5px;
   line-height:1.5;
-  color:rgba(255,248,232,.88);
 }
 
 .ip-main{
+  z-index:1;
   flex:1 0 auto;
-  position:relative;
   background:transparent;
 }
-.ip-content{padding-top:14px;padding-bottom:36px}
-.ip-page footer{flex:0 0 auto}
+.ip-content{padding:14px 0 28px}
 
 .ip-team-grid{
   display:grid;
@@ -101,11 +81,9 @@
 }
 .ip-team-card,
 .ip-metric-card{
-  border:1px solid rgba(240,198,64,.56);
-  background:rgba(255,250,240,.88);
+  border:1px solid rgba(240,198,64,.58);
+  background:rgba(255,250,240,.90);
   color:var(--ip-ink);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
   box-shadow:0 16px 34px rgba(0,0,0,.22);
 }
 .ip-team-card{
@@ -115,10 +93,16 @@
   gap:14px;
   padding:14px 16px;
 }
-.ip-team-card img{width:52px;height:52px;object-fit:contain;flex:0 0 auto}
+.ip-team-card img{width:52px;height:52px;object-fit:contain}
 .ip-team-card strong{display:block;font:600 19px/1 var(--serif)}
-.ip-team-card small{display:block;margin-top:5px;font-size:7px;color:#847985;letter-spacing:.065em;text-transform:uppercase}
-
+.ip-team-card small{
+  display:block;
+  margin-top:5px;
+  color:#847985;
+  font-size:7px;
+  letter-spacing:.065em;
+  text-transform:uppercase;
+}
 .ip-metric-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -131,56 +115,42 @@
   flex-direction:column;
   justify-content:flex-end;
 }
-.ip-metric-card strong{font:600 44px/1 var(--serif);color:var(--ip-ink)}
-.ip-metric-card span{margin-top:10px;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#746978}
+.ip-metric-card strong{font:600 44px/1 var(--serif)}
+.ip-metric-card span{
+  margin-top:10px;
+  color:#746978;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
 
-.ip-performance-main{
-  min-height:calc(100vh - 208px - 108px);
-}
+.ip-performance-main{min-height:calc(100vh - 208px - 92px)}
 .ip-players-empty,
-.ip-fantasy-empty{
-  min-height:calc(100vh - 208px - 108px);
-}
-.ip-players-empty .ip-content,
-.ip-fantasy-empty .ip-content{
-  min-height:100%;
-}
+.ip-fantasy-empty{min-height:calc(100vh - 208px - 92px)}
 
 @media(max-width:1050px){
   .ip-team-grid{grid-template-columns:repeat(3,1fr)}
   .ip-metric-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:760px){
-  .ip-page{background-attachment:scroll}
+  .ip-page{
+    background-attachment:scroll;
+    background-size:cover;
+  }
   .ip-hero{min-height:190px}
-  .ip-header .header-inner{height:72px}
-  .ip-hero-inner{padding-top:96px;padding-bottom:18px}
+  .ip-hero-inner{padding-top:100px;padding-bottom:18px}
+  .ip-eyebrow{font-size:8px;letter-spacing:.09em;white-space:nowrap}
   .ip-title-row h1{font-size:43px}
+  .ip-content{padding-bottom:16px}
   .ip-team-grid{grid-template-columns:repeat(2,1fr)}
+
+  /* Subject-specific mobile framing */
+  .ip-page-teams{background-position:58% top}
+  .ip-page-players{background-position:62% top}
+  .ip-page-fantasy{background-position:50% top}
+  .ip-page-performance{background-position:52% top}
 }
 @media(max-width:520px){
   .ip-team-grid,.ip-metric-grid{grid-template-columns:1fr}
-}
-
-
-/* Interior mobile: consistent one-line eyebrow and footer boundary. */
-@media(max-width:760px){
-  .ip-hero-inner{padding-top:100px}
-  .ip-eyebrow{white-space:nowrap;font-size:8px;letter-spacing:.09em}
-  .ip-content{padding-bottom:18px}
-  .ip-page footer{margin-bottom:0}
-}
-
-/* Section stacking: keep mobile menu above all page content */
-.ip-hero{z-index:100}
-.ip-main{z-index:1}
-
-@media(max-width:760px){
-  .ip-header{z-index:1000}
-
-  /* Mobile subject framing for each supplied hero */
-  .ip-page-teams{background-position:60% top}
-  .ip-page-players{background-position:64% top}
-  .ip-page-fantasy{background-position:50% top}
-  .ip-page-performance{background-position:52% top}
 }
