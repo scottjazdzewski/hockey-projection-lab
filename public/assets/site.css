@@ -746,3 +746,20 @@ body.interior-fantasy{
     linear-gradient(135deg,#1a0b33,#3f1777 58%,#12091f);
 }
 .page-hero-fantasy{background-image:none!important}
+
+
+/* Hero asset slots for updated Players + Fantasy artwork */
+body.interior-players{
+  background-image:
+    linear-gradient(180deg,rgba(8,12,28,.20) 0%,rgba(10,20,38,.38) 38%,rgba(11,10,25,.72) 100%),
+    url('/assets/hero-players-v2.webp'),
+    url('/assets/hero-players.webp');
+}
+body.interior-fantasy{
+  background-image:
+    linear-gradient(180deg,rgba(12,6,25,.22) 0%,rgba(20,9,38,.48) 45%,rgba(10,7,22,.78) 100%),
+    url('/assets/hero-fantasy.webp'),
+    linear-gradient(135deg,#1a0b33,#3f1777 58%,#12091f);
+  background-size:cover,cover,cover;
+  background-position:center top,center 34%,center;
+}
