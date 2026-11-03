@@ -1,0 +1,60 @@
+name: Install Hockey Hero Assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/install-hero-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install-heroes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pillow
+      - name: Download source artwork
+        shell: bash
+        run: |
+          mkdir -p /tmp/hockey-heroes
+          curl -fL 'https://sdmntpreastus2.oaiusercontent.com/files/00000000-df18-81f6-af81-42c7d1d0d1b2/raw?se=2026-11-03T00%3A31%3A36Z&sp=r&sv=2026-02-06&sr=b&scid=871b2eb4-dde4-5db2-ae64-1a3756ef2359&skoid=dd316919-ffbf-4550-9c54-dfc99f412009&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-02T22%3A31%3A11Z&ske=2026-11-03T22%3A31%3A11Z&sks=b&skv=2026-02-06&sig=i9jhrfbZSzav/HhbymbPglLRR/YLC1z3hPmofe3hha4%3D' -o /tmp/hockey-heroes/game.png
+          curl -fL 'https://sdmntpreastus2.oaiusercontent.com/files/00000000-673c-81f6-9b97-e5d313259425/raw?se=2026-11-03T00%3A31%3A44Z&sp=r&sv=2026-02-06&sr=b&scid=00e89f9b-8bea-5778-bed3-3126e76efaa4&skoid=dd316919-ffbf-4550-9c54-dfc99f412009&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-02T22%3A28%3A54Z&ske=2026-11-03T22%3A28%3A54Z&sks=b&skv=2026-02-06&sig=dY3fUWjUUjUyoH5sIlqm9x0sb/LncamI5WYVR2ync3M%3D' -o /tmp/hockey-heroes/teams.png
+          curl -fL 'https://sdmntpreastus2.oaiusercontent.com/files/00000000-a0dc-81f6-a2db-31630ef486ad/raw?se=2026-11-03T00%3A31%3A45Z&sp=r&sv=2026-02-06&sr=b&scid=3cdfc30f-81d9-5abc-8d5f-5fdfb5ba90d2&skoid=dd316919-ffbf-4550-9c54-dfc99f412009&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-02T22%3A35%3A07Z&ske=2026-11-03T22%3A35%3A07Z&sks=b&skv=2026-02-06&sig=0gxCufdrfj2h3lqHJfv%2BPvGsCRPzdXUcyXK%2BwIbaYqQ%3D' -o /tmp/hockey-heroes/players.png
+          curl -fL 'https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-e260-820c-af5c-25b46d453dcf/raw?se=2026-11-03T00%3A31%3A46Z&sp=r&sv=2026-02-06&sr=b&scid=34ddf2f2-2fe7-5ce5-9ace-bff34a163a5f&skoid=dd316919-ffbf-4550-9c54-dfc99f412009&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-02T22%3A21%3A58Z&ske=2026-11-03T22%3A21%3A58Z&sks=b&skv=2026-02-06&sig=pbJNMbDqDpVrseqvVCEImuQ9DE3J78gyZ8lfuON6mAY%3D' -o /tmp/hockey-heroes/performance.png
+      - name: Optimize permanent web assets
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          mapping={
+            "game.png":"hero-game-cards.webp",
+            "teams.png":"hero-teams.webp",
+            "players.png":"hero-players.webp",
+            "performance.png":"hero-performance.webp",
+          }
+          out=Path("public/assets")
+          out.mkdir(parents=True,exist_ok=True)
+          for src,dst in mapping.items():
+              im=Image.open(Path("/tmp/hockey-heroes")/src).convert("RGB")
+              im=im.resize((1600,900),Image.Resampling.LANCZOS)
+              im.save(out/dst,"WEBP",quality=78,method=6)
+              print(dst,(out/dst).stat().st_size)
+          PY
+      - name: Commit hero assets
+        run: |
+          git config user.name "hockey-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/assets/hero-*.webp
+          if git diff --cached --quiet; then
+            echo "Hero assets already installed."
+          else
+            git commit -m "Install four hockey hero images"
+            git pull --rebase origin main
+            git push
+          fi
