@@ -4,7 +4,7 @@
   const cityPrefix=/^(Anaheim|Boston|Buffalo|Calgary|Carolina|Chicago|Colorado|Columbus|Dallas|Detroit|Edmonton|Florida|Los Angeles|Minnesota|Montreal|Nashville|New Jersey|New York|Ottawa|Philadelphia|Pittsburgh|San Jose|Seattle|St\. Louis|Tampa Bay|Toronto|Utah|Vancouver|Vegas|Washington|Winnipeg)\s+/;
 
   function nick(name,abbr){ return String(name||abbr||'').replace(cityPrefix,'') || abbr || ''; }
-  function pct(v){ return Number.isFinite(v) ? Math.round(v*100)+'%' : '—'; }
+  function pct(v){ return Number.isFinite(v) ? (v*100).toFixed(1)+'%' : '—'; }
   function goals(a,h){ return Number.isFinite(a)&&Number.isFinite(h) ? a.toFixed(2)+' · '+h.toFixed(2) : '—'; }
   function pairPct(a,h){ return Number.isFinite(a)&&Number.isFinite(h) ? Math.round(a*100)+' · '+Math.round(h*100)+'%' : '—'; }
   function price(v){ return Number.isInteger(v) ? (v>0?'+':'')+v : '—'; }
@@ -32,10 +32,12 @@
     const modelLabel=live
       ? 'Model '+esc(pBundle.model.version)
       : (surfaceState==='WITHHELD' ? 'Model withheld' : 'Model pending');
+    const awayProb=live ? pct(p.away.win_probability) : '—';
     const homeProb=live ? pct(p.home.win_probability) : '—';
+    const awayFair=live ? price(p.away.fair_moneyline) : '—';
+    const homeFair=live ? price(p.home.fair_moneyline) : '—';
     const xg=live ? goals(p.away.expected_goals,p.home.expected_goals) : '—';
     const reg=live ? pairPct(p.away.regulation_win_probability,p.home.regulation_win_probability) : '—';
-    const fair=live ? price(p.home.fair_moneyline) : '—';
     const ot=live ? pct(p.overtime_probability) : '—';
     const goalies=live ? context('Goalies',p.goalie_state) : 'Goalies —';
     const rest=live ? context('Rest',p.rest_state) : 'Rest —';
@@ -50,14 +52,13 @@
     return '<article class="gc-card">'+
       '<div class="gc-card-head"><span>'+gameLabel+' · '+modelLabel+'</span><span>'+esc(g.time_et||'TBD')+'</span></div>'+
       '<div class="gc-matchup">'+
-        '<div class="gc-team"><img src="'+logo(g.away_abbr)+'" alt="'+esc(g.away_name||g.away_abbr)+'"><div class="gc-team-name'+awayClass+'">'+esc(away)+'</div><small>'+esc(g.away_abbr)+' · Away</small></div>'+
-        '<div class="gc-prob"><strong>'+homeProb+'</strong><span>Home win</span><b>@</b></div>'+
-        '<div class="gc-team"><img src="'+logo(g.home_abbr)+'" alt="'+esc(g.home_name||g.home_abbr)+'"><div class="gc-team-name'+homeClass+'">'+esc(home)+'</div><small>'+esc(g.home_abbr)+' · Home</small></div>'+
+        '<div class="gc-team"><img src="'+logo(g.away_abbr)+'" alt="'+esc(g.away_name||g.away_abbr)+'"><div class="gc-team-name'+awayClass+'">'+esc(away)+'</div><small>'+esc(g.away_abbr)+' · Away</small><div class="gc-team-projection"><strong>'+awayProb+'</strong><span>Win probability</span><b>'+awayFair+' fair</b></div></div>'+
+        '<div class="gc-vs" aria-hidden="true">@</div>'+
+        '<div class="gc-team"><img src="'+logo(g.home_abbr)+'" alt="'+esc(g.home_name||g.home_abbr)+'"><div class="gc-team-name'+homeClass+'">'+esc(home)+'</div><small>'+esc(g.home_abbr)+' · Home</small><div class="gc-team-projection"><strong>'+homeProb+'</strong><span>Win probability</span><b>'+homeFair+' fair</b></div></div>'+
       '</div>'+
       '<div class="gc-metrics">'+
         '<div class="gc-metric"><strong>'+xg+'</strong><span>Expected goals A · H</span></div>'+
         '<div class="gc-metric"><strong>'+reg+'</strong><span>Reg win A · H</span></div>'+
-        '<div class="gc-metric"><strong>'+fair+'</strong><span>Home fair price</span></div>'+
         '<div class="gc-metric"><strong>'+ot+'</strong><span>OT probability</span></div>'+
       '</div>'+
       '<div class="gc-pills"><span class="gc-pill">'+esc(goalies)+'</span><span class="gc-pill">'+esc(rest)+'</span><span class="gc-pill">'+esc(lineup)+'</span><span class="gc-pill">'+esc(modelPill)+'</span></div>'+
