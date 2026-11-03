@@ -122,6 +122,8 @@ def main() -> None:
             response = _payload(_post(str(game.game_id), api_key))
         except (HTTPError, URLError, TimeoutError, ValueError) as exc:
             audit.append({"game_id": str(game.game_id), "status": "REQUEST_ERROR", "detail": str(exc)})
+            if args.sleep_seconds > 0:
+                time.sleep(args.sleep_seconds)
             continue
         successful_calls += 1
         response_game_id = response.get("game_id") or (response.get("game") or {}).get("id")
