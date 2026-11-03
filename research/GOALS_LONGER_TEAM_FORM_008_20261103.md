@@ -34,6 +34,10 @@ The validation procedure selected diagonal-inflated Poisson for both models in a
 
 Goal-rate calibration slopes remain broadly similar. The home rate mean error improves from −0.0715 to −0.0633 and away from −0.1081 to −0.0999. The pooled improvement is repeatable enough to keep testing, but the point-error gains are small, accuracy is essentially unchanged, and the latest fold regressed.
 
+### Back-to-back context check
+
+Across 1,722 back-to-back games in all five seasons, the 40-game model improves regulation score log loss from 3.85758 to 3.85220 and three-way Brier from 0.61882 to 0.61774. In the latest 2026 fold (358 back-to-back games), both worsen: score log loss 3.80498 to 3.81369 and Brier 0.64720 to 0.65240. The latest-season weakness appears across the back-to-back states, so the pooled improvement is not yet stable enough to treat as a repeatable schedule-context edge.
+
 ## Decision
 
 Keep this version at **CANDIDATE** for continued research. Do not promote or publish it. These are development rolling-origin folds, not an untouched promotion test, and the 2026 fold is a meaningful counter-signal. The independent win-probability champion remains unchanged.
