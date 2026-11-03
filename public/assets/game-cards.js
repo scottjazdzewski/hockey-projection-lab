@@ -25,6 +25,8 @@
     const awayClass=away.length>12?' gc-long':'';
     const homeClass=home.length>12?' gc-long':'';
     const live=usableProjection(pBundle,p,manifestReady);
+    const state=String(g.state||'PRE').toUpperCase();
+    const gameLabel=state==='LIVE'?'Live':(state==='FINAL'||state==='OFF')?'Final':'Tonight';
     const modelLabel=live ? 'Model '+esc(pBundle.model.version) : 'Model pending';
     const homeProb=live ? pct(p.home.win_probability) : '—';
     const xg=live ? goals(p.away.expected_goals,p.home.expected_goals) : '—';
@@ -40,7 +42,7 @@
       : 'Real matchup · model values publish only after a promoted pregame scorer clears validation.';
 
     return '<article class="gc-card">'+
-      '<div class="gc-card-head"><span>Tonight · '+modelLabel+'</span><span>'+esc(g.time_et||'TBD')+'</span></div>'+
+      '<div class="gc-card-head"><span>'+gameLabel+' · '+modelLabel+'</span><span>'+esc(g.time_et||'TBD')+'</span></div>'+
       '<div class="gc-matchup">'+
         '<div class="gc-team"><img src="'+logo(g.away_abbr)+'" alt="'+esc(g.away_name||g.away_abbr)+'"><div class="gc-team-name'+awayClass+'">'+esc(away)+'</div><small>'+esc(g.away_abbr)+' · Away</small></div>'+
         '<div class="gc-prob"><strong>'+homeProb+'</strong><span>Home win</span><b>@</b></div>'+
