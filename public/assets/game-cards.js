@@ -75,10 +75,10 @@
     const dateEl=document.getElementById('gc-date');
     const grid=document.getElementById('gc-grid');
     try{
-      const [schedule,projectionSurface]=await Promise.all([
-        window.HockeyData.json('/data/today-games.json'),
-        window.HockeyData.loadSurface('game_projections','/data/game-projections.json')
-      ]);
+      const schedule=await json('/data/today-games.json');
+      const projectionSurface=window.HockeyData
+        ? await window.HockeyData.loadSurface('game_projections','/data/game-projections.json').catch(()=>({ready:false,surface:null,data:null,stale:false}))
+        : {ready:false,surface:null,data:null,stale:false};
       const projectionResult=projectionSurface.data;
       const games=Array.isArray(schedule.games)?schedule.games:[];
       const projections=projectionResult && Array.isArray(projectionResult.projections) ? projectionResult.projections : [];
