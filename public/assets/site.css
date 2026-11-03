@@ -516,3 +516,215 @@ body.interior-performance{
   body.interior-page{background-attachment:scroll;background-position:center top}
   .interior-page main:before{background:linear-gradient(180deg,rgba(13,8,26,.28),rgba(13,8,26,.62))}
 }
+
+
+/* 2026-11-02 unified transparent header + model-first homepage */
+.site-header,
+.site-header-overlay{
+  background:rgba(11,6,24,.10)!important;
+  border-bottom:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+}
+.site-header-overlay{
+  background:linear-gradient(180deg,rgba(11,6,24,.16),rgba(11,6,24,.06))!important;
+}
+.desktop-nav a,.mobile-nav summary{
+  background:rgba(22,10,43,.22);
+}
+.desktop-nav a:hover{
+  background:rgba(240,198,64,.12);
+}
+
+/* Homepage: simple model statement left, R&R-style feature badges right */
+.home-hero-grid{
+  grid-template-columns:minmax(0,1.02fr) minmax(440px,.98fr);
+  gap:clamp(34px,5vw,74px);
+  min-height:545px;
+  align-items:center;
+}
+.home-hero-copy{
+  max-width:680px;
+}
+.home-hero-copy h1{
+  max-width:690px;
+  font-size:clamp(58px,5.4vw,84px);
+  line-height:.91;
+  margin-bottom:18px;
+}
+.home-hero-copy>p{
+  max-width:620px;
+  font-size:13px;
+  line-height:1.7;
+}
+.home-model-note{
+  margin-top:22px;
+  padding-top:16px;
+  border-top:1px solid rgba(240,198,64,.36);
+  max-width:560px;
+}
+.home-model-note span{
+  display:block;
+  color:var(--gold);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.home-model-note strong{
+  display:block;
+  margin-top:7px;
+  color:#fff5df;
+  font:600 23px/1.05 var(--serif);
+}
+.home-editorial-badges{
+  display:grid;
+  gap:16px;
+}
+.home-editorial-badge{
+  min-height:220px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(240,198,64,.64);
+  border-radius:14px;
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 18px 42px rgba(0,0,0,.30);
+  isolation:isolate;
+}
+.home-editorial-games{
+  background-image:url('/assets/hero-game-cards.webp');
+  background-position:center 44%;
+}
+.home-editorial-teams{
+  background-image:url('/assets/hero-teams.webp');
+  background-position:center 42%;
+}
+.home-badge-shade{
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    linear-gradient(90deg,rgba(8,7,20,.88) 0%,rgba(10,9,22,.60) 48%,rgba(10,9,22,.20) 100%),
+    linear-gradient(180deg,rgba(7,7,16,.08),rgba(7,7,16,.42));
+}
+.home-editorial-badge:after{
+  content:"";
+  position:absolute;
+  inset:7px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  pointer-events:none;
+}
+.home-badge-content{
+  height:100%;
+  min-height:220px;
+  position:relative;
+  z-index:2;
+  padding:24px 28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+}
+.home-badge-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:auto;
+}
+.home-badge-number{
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:rgba(255,255,255,.92);
+  color:#261143;
+  border:2px solid rgba(240,198,64,.78);
+  box-shadow:0 4px 14px rgba(0,0,0,.28);
+  font-size:18px;
+  font-weight:800;
+}
+.home-badge-top .eyebrow{
+  color:#f4cb45;
+}
+.home-editorial-badge strong{
+  display:block;
+  color:#fff8e8;
+  font:600 clamp(35px,3.1vw,48px)/.96 var(--serif);
+  text-shadow:0 3px 14px rgba(0,0,0,.58);
+}
+.home-editorial-badge small{
+  display:block;
+  margin-top:8px;
+  max-width:400px;
+  color:#f3e7dd;
+  font-size:10px;
+  line-height:1.45;
+  font-weight:600;
+  text-shadow:0 2px 9px rgba(0,0,0,.72);
+}
+.home-badge-arrow{
+  position:absolute;
+  right:26px;
+  bottom:27px;
+  color:var(--gold);
+  width:13px;
+  height:13px;
+}
+.home-editorial-badge:hover{
+  transform:translateY(-2px);
+  border-color:rgba(240,198,64,.95);
+}
+.home-editorial-badge{
+  transition:transform .18s ease,border-color .18s ease;
+}
+
+/* Performance page: metrics only, no validation-contract block */
+.interior-performance .content-shell{
+  padding-bottom:38px;
+}
+.interior-performance .metric-grid{
+  margin-bottom:0;
+}
+
+/* Keep the homepage to one clean screen before the footer */
+.home-hero + footer,
+.hero-shell + footer{
+  margin-top:0;
+}
+
+@media(max-width:1000px){
+  .home-hero-grid{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+  .home-editorial-badges{
+    grid-template-columns:1fr 1fr;
+  }
+  .home-editorial-badge,
+  .home-badge-content{
+    min-height:190px;
+  }
+}
+@media(max-width:650px){
+  .home-hero-copy h1{
+    font-size:49px;
+  }
+  .home-model-note strong{
+    font-size:21px;
+  }
+  .home-editorial-badges{
+    grid-template-columns:1fr;
+  }
+  .home-editorial-badge,
+  .home-badge-content{
+    min-height:170px;
+  }
+  .home-badge-content{
+    padding:18px 20px;
+  }
+  .home-editorial-badge strong{
+    font-size:34px;
+  }
+}
