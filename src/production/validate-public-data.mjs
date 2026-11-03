@@ -20,6 +20,7 @@ const teams=readJson('team-ratings.json');
 const players=readJson('player-ratings.json');
 const fantasy=readJson('fantasy-rankings.json');
 const manifest=readJson('production-manifest.json');
+const identities=readJson('team-identities.json');
 
 if(!schedule || !Array.isArray(schedule.games)) fail('today-games.json missing or malformed');
 else ok('schedule readable');
@@ -137,6 +138,20 @@ if(fantasy){
     ok('fantasy rankings readable');
   }
 }
+
+if(identities){
+  if(identities.schema_version!=='1.0') fail('team-identities schema_version must be 1.0');
+  if(!Array.isArray(identities.teams)) fail('team-identities teams must be array');
+  else {
+    const ids=new Set();
+    for(const t of identities.teams){
+      if(!t.abbr || !t.name || !t.logo_url) fail('team identity incomplete');
+      if(ids.has(t.abbr)) fail('duplicate team identity '+t.abbr); else ids.add(t.abbr);
+    }
+    if(ids.size!==32) fail('team-identities must contain exactly 32 teams');
+    ok('team identities readable');
+  }
+}else fail('team-identities.json missing');
 
 if(manifest){
   if(manifest.schema_version!=='1.0') fail('production-manifest schema_version must be 1.0');
