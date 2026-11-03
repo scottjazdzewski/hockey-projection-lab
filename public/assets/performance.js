@@ -6,14 +6,9 @@
   function num(v,d=3){ return Number.isFinite(v) ? v.toFixed(d) : '—'; }
   async function load(){
     try{
-      const [mr,dr]=await Promise.all([
-        fetch('/data/production-manifest.json',{cache:'no-store'}),
-        fetch('/data/model-performance.json',{cache:'no-store'})
-      ]);
-      if(!mr.ok || !dr.ok) return;
-      const manifest=await mr.json();
-      if(manifest?.surfaces?.model_performance?.state!=='READY') return;
-      const d=await dr.json();
+      const result=await window.HockeyData.loadSurface('model_performance','/data/model-performance.json');
+      if(!result.ready) return;
+      const d=result.data;
       const n=d?.sample?.games_scored;
       const m=d?.metrics||{};
       set('games_scored',Number.isInteger(n)&&n>0?String(n):'—');
