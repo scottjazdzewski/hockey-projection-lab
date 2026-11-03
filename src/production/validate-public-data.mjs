@@ -208,11 +208,13 @@ if(fs.existsSync(forwardGamesDir)){
     const frozenMs=Date.parse(rec.frozen_at);
     const generatedMs=Date.parse(rec.forecast?.generated_at);
     const cutoffMs=Date.parse(rec.forecast?.data_cutoff);
+    const contextMs=Date.parse(rec.forecast?.context_generated_at);
     if(!Number.isFinite(startMs) || !Number.isFinite(frozenMs)) fail('forward game '+id+' invalid start/freeze timestamp');
     if(Number.isFinite(startMs) && Number.isFinite(frozenMs) && frozenMs>=startMs) fail('forward game '+id+' frozen at or after puck drop');
     if(!Number.isFinite(generatedMs) || generatedMs>startMs) fail('forward game '+id+' projection generated after puck drop');
     if(!Number.isFinite(cutoffMs) || cutoffMs>startMs) fail('forward game '+id+' data cutoff after puck drop');
     if(Number.isFinite(generatedMs) && Number.isFinite(cutoffMs) && cutoffMs>generatedMs) fail('forward game '+id+' data cutoff later than projection generation');
+    if(!Number.isFinite(contextMs) || contextMs>startMs) fail('forward game '+id+' live context is not pregame');
     const a=rec.forecast?.away?.win_probability;
     const h=rec.forecast?.home?.win_probability;
     if(typeof a!=='number' || typeof h!=='number' || Math.abs((a+h)-1)>0.001) fail('forward game '+id+' invalid frozen win probabilities');
@@ -239,6 +241,12 @@ if(forwardLedger){
   const m=forwardLedger.metrics||{};
   for(const k of ['accuracy','brier','log_loss','avg_probability_assigned_to_winner','xg_mae_per_team','total_goals_mae']){
     if(!finiteOrNull(m[k])) fail('forward-ledger metric '+k+' must be finite or null');
+  }
+  const bySide=forwardLedger.by_pick_side||{};
+  for(const side of ['away','home']){
+    const b=bySide[side]||{};
+    if(!Number.isInteger(b.games) || b.games<0) fail('forward-ledger '+side+' pick count invalid');
+    for(const k of ['accuracy','brier','log_loss']) if(!finiteOrNull(b[k])) fail('forward-ledger '+side+' '+k+' invalid');
   }
   if(!Array.isArray(forwardLedger.games)) fail('forward-ledger games must be array');
   else {
