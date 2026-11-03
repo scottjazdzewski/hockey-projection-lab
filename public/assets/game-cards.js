@@ -13,18 +13,18 @@
     return label+' '+String(state.status).toLowerCase();
   }
 
-  function usableProjection(bundle,p){
-    if(!bundle || bundle.model?.status!=='PROMOTED' || !p || p.publish_state!=='PUBLISHED') return false;
+  function usableProjection(bundle,p,manifestReady){
+    if(!manifestReady || !bundle || bundle.model?.status!=='PROMOTED' || !p || p.publish_state!=='PUBLISHED') return false;
     const a=p.away?.win_probability, h=p.home?.win_probability;
     return Number.isFinite(a)&&Number.isFinite(h)&&Math.abs((a+h)-1)<=0.001;
   }
 
-  function card(g,pBundle,p){
+  function card(g,pBundle,p,manifestReady){
     const away=nick(g.away_name,g.away_abbr);
     const home=nick(g.home_name,g.home_abbr);
     const awayClass=away.length>12?' gc-long':'';
     const homeClass=home.length>12?' gc-long':'';
-    const live=usableProjection(pBundle,p);
+    const live=usableProjection(pBundle,p,manifestReady);
     const modelLabel=live ? 'Model '+esc(pBundle.model.version) : 'Model pending';
     const homeProb=live ? pct(p.home.win_probability) : '—';
     const xg=live ? goals(p.away.expected_goals,p.home.expected_goals) : '—';
@@ -67,16 +67,18 @@
     const dateEl=document.getElementById('gc-date');
     const grid=document.getElementById('gc-grid');
     try{
-      const [schedule,projectionResult]=await Promise.all([
+      const [schedule,projectionResult,manifest]=await Promise.all([
         json('/data/today-games.json'),
-        json('/data/game-projections.json').catch(()=>null)
+        json('/data/game-projections.json').catch(()=>null),
+        json('/data/production-manifest.json').catch(()=>null)
       ]);
+      const manifestReady=manifest?.surfaces?.game_projections?.state==='READY';
       const games=Array.isArray(schedule.games)?schedule.games:[];
       const projections=projectionResult && Array.isArray(projectionResult.projections) ? projectionResult.projections : [];
       const byId=new Map(projections.map(p=>[String(p.game_id),p]));
       if(dateEl) dateEl.textContent=(schedule.display_date||schedule.date||'Today')+' · '+games.length+' game'+(games.length===1?'':'s');
       if(grid) grid.innerHTML=games.length
-        ? games.map(g=>card(g,projectionResult,byId.get(String(g.game_id)))).join('')
+        ? games.map(g=>card(g,projectionResult,byId.get(String(g.game_id)),manifestReady)).join('')
         : '<div class="gc-loading">No NHL games scheduled today.</div>';
     }catch(e){
       if(dateEl) dateEl.textContent='Today’s NHL slate';
