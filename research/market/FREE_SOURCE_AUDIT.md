@@ -38,7 +38,7 @@ starts, with coverage from June 4, 2026. It reports 239 completed games across
 20 books through November 2, 2026. Its no-key free data is only the sample
 week September 15–21, 2026; the wider history is subscription-only. That
 sample overlaps the 2026-27 preseason (which began September 19) and precedes
-the regular-season opener on September 30, so it cannot provide a regular-
+the regular-season opener on September 29, so it cannot provide a regular-
 season historical backfill. No subscription was started.
 
 ## PuckAPI free allowance
