@@ -142,3 +142,15 @@ body{overscroll-behavior-y:none}
   .brand-copy strong{font-size:17px}
   .mobile-nav summary{padding:8px 11px}
 }
+
+/* Mobile menu must always paint above page content */
+@media(max-width:950px){
+  .site-header{position:relative;z-index:1000}
+  .mobile-nav{z-index:1100}
+  .mobile-nav[open]{z-index:1200}
+  .mobile-nav nav{
+    z-index:1300;
+    background:#160b29;
+    opacity:1;
+  }
+}
