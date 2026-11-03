@@ -22,6 +22,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   update:
@@ -50,6 +51,54 @@ jobs:
       - name: Fetch and normalize live context
         if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
         run: python src/live_context/update_live_context.py
+      - name: Detect confirmed-goalie change requiring model rescore
+        if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
+        id: rescore
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          from pathlib import Path
+
+          current=json.loads(Path("public/data/live-context.json").read_text())
+          projection=json.loads(Path("public/data/game-projections.json").read_text())
+          feature_version=str(projection.get("model",{}).get("feature_version","")).lower()
+          uses_goalie="goalie" in feature_version
+
+          try:
+              prior_text=subprocess.check_output(
+                  ["git","show","HEAD:public/data/live-context.json"],text=True
+              )
+              prior=json.loads(prior_text)
+          except Exception:
+              prior={"games":[]}
+
+          def confirmed_map(payload):
+              out={}
+              for g in payload.get("games",[]):
+                  gid=str(g.get("game_id"))
+                  for side in ("away","home"):
+                      goalie=(g.get(side) or {}).get("goalie") or {}
+                      if goalie.get("status")=="CONFIRMED":
+                          out[(gid,side)]=goalie.get("name")
+              return out
+
+          old=confirmed_map(prior)
+          new=confirmed_map(current)
+          changed=any(old.get(k)!=v for k,v in new.items())
+          should=bool(changed and uses_goalie)
+          with open(os.environ["GITHUB_OUTPUT"],"a") as fh:
+              fh.write(f"confirmed_change={'true' if changed else 'false'}\n")
+              fh.write(f"uses_goalie={'true' if uses_goalie else 'false'}\n")
+              fh.write(f"run={'true' if should else 'false'}\n")
+          print(json.dumps({
+              "confirmed_goalie_change":changed,
+              "active_model_uses_goalie":uses_goalie,
+              "trigger_rescore":should,
+              "feature_version":feature_version
+          },indent=2))
+          PY
+
       - name: Validate production files
         if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
         run: |
@@ -68,3 +117,9 @@ jobs:
             git pull --rebase origin main
             git push
           fi
+
+      - name: Trigger goalie-aware pregame rescore
+        if: (github.event_name != 'schedule' || steps.gate.outputs.run == 'true') && steps.rescore.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run score-hockey-lab-game-v1.yml -f reason=confirmed-goalie-change
