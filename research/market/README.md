@@ -15,35 +15,32 @@ request all sportsbook snapshots held for each game; it immediately excludes
 any row without a valid timestamp or timestamped at/after puck drop. The
 benchmark independently repeats the strict timing check.
 
-Published historical coverage, last checked 2026-11-03:
+Published odds coverage, checked 2026-11-03:
 
-| Season | Completed games with odds | Published coverage | Published book coverage |
-| --- | ---: | ---: | --- |
-| 2019-20 | 1,212 | 100% | About 6 books/game |
-| 2020-21 | 952 | 100% | About 16–18 books/game through 2023-24 |
-| 2021-22 | 1,401 | 100% | Same archive period |
-| 2022-23 | 1,400 | 100% | Same archive period |
-| 2023-24 | 1,400 | 100% | Same archive period; ESPN BET begins |
-| 2024-25 | 1,398 | 100% | 8 books/game |
-| 2025-26 | 1,394 | 100% | 8 books/game; 60+ books for about 300 games |
-| 2026-27 | 235 | 100% of completed games | Current partial season |
+- The provider describes odds records from the 2019 playoffs and games from
+  2019-20 through the current season, with 191,000+ moneyline, puck-line and
+  total records. Its coverage status is Partial; availability varies by
+  sportsbook, game and market.
+- It reports about 16–18 books per game from 2020-21 through 2023-24, about
+  eight books per game since, and 60+ books on roughly 300 games in 2025-26
+  when requesting all books. These are provider-wide descriptions, not
+  verified per-game coverage on the canonical Hockey Lab spine.
+- The docs price get_game_detail and get_odds at 10 credits per game returned.
+  Free accounts receive 500 credits monthly, enough for at most 50 game
+  responses. The pricing page lists 13,710 credits for 2025-26 historical
+  odds; therefore do not infer source odds coverage from the season's 1,394
+  completed-game count. Use estimate_only before any season query.
+- Odds rows carry capturedAt. The provider says its hockey closing snapshot is
+  recorded once the game starts, so the closing label alone cannot prove a
+  strictly pre-start timestamp. The collector must retain only actual rows
+  with capturedAt earlier than the canonical scheduled start. This can leave
+  an earlier pregame price or no eligible price; it must not fill from a later
+  line.
 
-The provider also lists 18 games from the 2019 playoffs. Its 2018-19 coverage
-is only 1%, so that season is excluded from the default reliable historical
-window. Those 18 playoff games are also excluded from the default collector
-range until their exact supported IDs are known; querying the entire partial
-season would spend credits on mostly unsupported games. Summing the table rows
-yields 9,392 games, or an indicative 93,920 credits at the documented 10
-credits per game-detail call. This estimate excludes those 18 playoff games;
-the actual canonical input count and source billing must be confirmed by the
-local dry run and provider response before a paid backfill.
-
-The provider says its sportsbook archive includes DraftKings, FanDuel,
-BetMGM, Pinnacle, ESPN BET, Bet365, Caesars and additional books, with
-availability varying by season and game. These are provider-published counts,
-not a successful query or a verified Hockey Lab join. The benchmark report
-will replace these planning figures with observed per-game and per-book
-coverage after an authenticated backfill.
+The main source audit records the free alternatives and why they are not
+eligible for canonical benchmark metrics. No paid endpoint has been queried.
+Exact source coverage and game-ID joins remain unverified until a free key is
+available or a paid backfill is explicitly approved.
 
 The Odds API is the fallback/validation source. Its [historical odds docs](https://the-odds-api.com/historical-odds-data/)
 document NHL historical odds from June 6, 2020, with snapshots every ten
