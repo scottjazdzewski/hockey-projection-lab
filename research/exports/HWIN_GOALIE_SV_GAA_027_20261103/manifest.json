@@ -1,0 +1,74 @@
+{
+  "experiment_id": "EXP-0042",
+  "model_id": "HOCKEY-LAB-HWIN-NAMED-GOALIE-SV-GAA-027-RESEARCH",
+  "status": "RESEARCH; no promotion or public export",
+  "run_date": "2026-11-03",
+  "repository": "scottjazdzewski/hockey-projection-lab",
+  "research_branch": "codex/hockey-goalie-sv-gaa-027",
+  "baseline": "Frozen Hockey Lab Game v1.0.0 Team Strength 004 + B2B out-of-fold probabilities",
+  "target_seasons": [2024, 2025, 2026],
+  "target_games": 3936,
+  "target_goalie_identity": "Postgame actual starter flag/ID; retrospective upper-bound test until timestamped pregame starter availability exists.",
+  "feature_cutoff": "All goalie performance and league reference statistics use game dates strictly before the target date.",
+  "team_goalie_win_record_feature": false,
+  "market_inputs": [],
+  "production_or_site_change": false,
+  "reproducibility": {
+    "independent_second_run_summary_exact_match": true,
+    "independent_second_run_all_3936_prediction_rows_exact_match": true,
+    "summary_sha256": "fb39a4527b94d0a435ce268079a208d88040ba918a45ce9969d85c5e2b44e75e",
+    "prediction_sha256": "cbafe8e82590075587f9f736364fedcfbdb950ef00c81a8e83a2468bbf0d6971"
+  },
+  "inputs": [
+    {
+      "name": "frozen_hwin_champion_oof",
+      "path": "research/exports/HWIN_PREVIOUS_SEASON_BATTERY_011_20261103/results/goalie_battery_011/oof_predictions.parquet",
+      "sha256": "2478f98d7f1e8e64c29253281318f7bb425bb7ddc3fcf4d521d80983aac8fc5f"
+    },
+    {
+      "name": "goalie_game_features",
+      "path": "research/.tmp_goalie_probability_016/goalie/data/goalie_feature_output/goalie_game_features.parquet",
+      "sha256": "9fc54bacceb0c67d451ef8cc97f0f1851794f6a4eab28ff2fa91497d1e8684fa"
+    },
+    {
+      "name": "canonical_game_spine_v3",
+      "path": "research/.tmp_goalie_probability_016/spine/data/spine_v3/games.parquet",
+      "sha256": "e3b6a3cb9784a91ec6e396e1a7e72330451abee055ed0ba54e0408e37f40a0e3"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research/hwin_goalie_sv_gaa_027.py",
+      "sha256": "57062d3dbfffb36026fda2cc9d9e20a2b535960a8b867167740fe58028a7807d",
+      "bytes": 26912
+    },
+    {
+      "path": "research/requirements-hwin-goalie-sv-gaa-027.txt",
+      "sha256": "bf9b81e77bbc25a7a560f6a9facb5369f803ff79c00593dc977eda0036d51daa",
+      "bytes": 57
+    },
+    {
+      "path": "research/HOCKEY_GOALIE_SV_GAA_WIN_PCT_027_20261103.md",
+      "sha256": "60f9764d3691a13cfb15df307283b453cf3d6f9cab986dda380ac32e65e4104b",
+      "bytes": 4797
+    },
+    {
+      "path": "research/exports/HWIN_GOALIE_SV_GAA_027_20261103/summary.json",
+      "sha256": "fb39a4527b94d0a435ce268079a208d88040ba918a45ce9969d85c5e2b44e75e",
+      "bytes": 13187
+    },
+    {
+      "path": "research/exports/HWIN_GOALIE_SV_GAA_027_20261103/oof_goalie_sv_gaa_win_pct.parquet",
+      "sha256": "cbafe8e82590075587f9f736364fedcfbdb950ef00c81a8e83a2468bbf0d6971",
+      "bytes": 461124
+    }
+  ],
+  "decision": "Do not promote: the named-goalie candidate shifts probabilities but pooled Brier and log loss are marginally worse, seasonal results are mixed, and uncertainty intervals include no change. HWIN v1.0.0 and the live site remain unchanged.",
+  "environment": {
+    "python": "3.12",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "pyarrow": "26.0.1"
+  }
+}
