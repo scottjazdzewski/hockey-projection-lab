@@ -120,7 +120,7 @@ def main() -> None:
         attempts += 1
         try:
             response = _payload(_post(str(game.game_id), api_key))
-        except (HTTPError, URLError, TimeoutError, ValueError) as exc:
+        except (HTTPError, URLError, TimeoutError, ValueError, TypeError) as exc:
             audit.append({"game_id": str(game.game_id), "status": "REQUEST_ERROR", "detail": str(exc)})
             if args.sleep_seconds > 0:
                 time.sleep(args.sleep_seconds)
@@ -129,7 +129,15 @@ def main() -> None:
         response_game_id = response.get("game_id") or (response.get("game") or {}).get("id")
         if response_game_id is not None and str(response_game_id) != str(game.game_id):
             audit.append({"game_id": str(game.game_id), "status": "GAME_ID_MISMATCH", "provider_game_id": str(response_game_id)})
+            if args.sleep_seconds > 0:
+                time.sleep(args.sleep_seconds)
             continue
+        provider_home = response.get("home_team")
+        provider_away = response.get("away_team")
+        if isinstance(provider_home, dict):
+            provider_home = provider_home.get("abbrev")
+        if isinstance(provider_away, dict):
+            provider_away = provider_away.get("abbrev")
         odds = response.get("odds") or []
         found = 0
         for line in odds:
@@ -152,12 +160,12 @@ def main() -> None:
                 "odds_timestamp": stamp, "source": "PuckAPI",
                 "provider_event_id": str(response_game_id or game.game_id),
                 "snapshot_type": line.get("snapshotType"),
-                "provider_home_team": response.get("home_team"),
-                "provider_away_team": response.get("away_team"),
+                "provider_home_team": provider_home,
+                "provider_away_team": provider_away,
             })
             found += 1
         if found == 0:
-            audit.append({"game_id": str(game.game_id), "status": "NO_CLOSING_MONEYLINE"})
+            audit.append({"game_id": str(game.game_id), "status": "NO_VALID_PREGAME_MONEYLINE"})
         if args.sleep_seconds > 0:
             time.sleep(args.sleep_seconds)
 
@@ -177,7 +185,7 @@ def main() -> None:
     audit_path.write_text(json.dumps(prior_audit + audit, indent=2, default=str) + "\n", encoding="utf-8")
     print(json.dumps({**estimate, "dry_run": False, "calls_attempted": attempts,
                       "successful_calls": successful_calls,
-                      "book_line_rows_received": len(rows), "games_with_no_close_or_issue": len(audit),
+                      "book_line_rows_received": len(rows), "games_with_no_valid_pregame_line_or_issue": len(audit),
                       "output": str(output), "audit": str(audit_path)}, indent=2))
 
 
