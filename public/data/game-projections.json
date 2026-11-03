@@ -32,15 +32,15 @@
       "overtime_probability": null,
       "goalie_state": {
         "status": "PROJECTED",
-        "away": "Karel Vejmelka",
+        "away": "Sebastian Cossa",
         "home": "Sergei Bobrovsky",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -78,15 +78,15 @@
       "overtime_probability": null,
       "goalie_state": {
         "status": "PROJECTED",
-        "away": "Stuart Skinner",
+        "away": "Nico Daws",
         "home": "Jacob Fowler",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -124,15 +124,15 @@
       "overtime_probability": null,
       "goalie_state": {
         "status": "PROJECTED",
-        "away": "Daniil Tarasov",
+        "away": "John Gibson",
         "home": "Andrei Vasilevskiy",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -172,13 +172,13 @@
         "status": "PROJECTED",
         "away": "Joel Hofer",
         "home": "Dylan Garand",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -217,14 +217,14 @@
       "goalie_state": {
         "status": "PROJECTED",
         "away": "Jesper Wallstedt",
-        "home": "Dan Vladar",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "home": "Joseph Woll",
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -262,15 +262,15 @@
       "overtime_probability": null,
       "goalie_state": {
         "status": "PROJECTED",
-        "away": "Carter Hart",
+        "away": "Adin Hill",
         "home": "Arturs Silovs",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -310,13 +310,13 @@
         "status": "PROJECTED",
         "away": "Jake Oettinger",
         "home": "Logan Thompson",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -356,13 +356,13 @@
         "status": "PROJECTED",
         "away": "Scott Wedgewood",
         "home": "Jet Greaves",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -400,15 +400,15 @@
       "overtime_probability": null,
       "goalie_state": {
         "status": "PROJECTED",
-        "away": "Matt Tomkins",
+        "away": "Tristan Jarry",
         "home": "Connor Hellebuyck",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -448,13 +448,13 @@
         "status": "PROJECTED",
         "away": "Pyotr Kochetkov",
         "home": "Juuse Saros",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -492,15 +492,15 @@
       "overtime_probability": null,
       "goalie_state": {
         "status": "PROJECTED",
-        "away": "Laurent Brossoit",
-        "home": "Leevi Merilainen",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "away": "Lukas Dostal",
+        "home": "Kevin Lankinen",
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-03T06:35:00.544148-05:00"
+        "updated_at": "2026-11-03T07:32:09.247596-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
