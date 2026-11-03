@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 from copy import deepcopy
 from datetime import datetime
 from pathlib import Path
@@ -35,8 +36,21 @@ def write_json(path: Path, payload):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=False)+"\n", encoding="utf-8")
 
+def parse_dt(value):
+    if not value:
+        return None
+    try:
+        dt=datetime.fromisoformat(str(value).replace("Z","+00:00"))
+    except Exception:
+        return None
+    if dt.tzinfo is None:
+        dt=dt.replace(tzinfo=TZ)
+    return dt.astimezone(TZ)
+
 def now_et():
-    return datetime.now(TZ)
+    override=os.environ.get("HOCKEY_LAB_NOW")
+    parsed=parse_dt(override) if override else None
+    return parsed or datetime.now(TZ)
 
 def safe_num(v):
     return v if isinstance(v,(int,float)) and math.isfinite(v) else None
@@ -62,7 +76,7 @@ def side_context(ctx, side):
 def freeze_records(min_before: float, max_before: float):
     schedule=read_json(SCHEDULE_PATH,{}) or {}
     projection_payload, projections=projected_game_map()
-    _, contexts=context_game_map()
+    context_payload, contexts=context_game_map()
     now=now_et()
     created=[]
 
@@ -99,6 +113,19 @@ def freeze_records(min_before: float, max_before: float):
             raise RuntimeError(f"{gid}: projection matchup mismatch")
 
         model=projection_payload.get("model") or {}
+        generated=parse_dt(projection_payload.get("generated_at"))
+        cutoff=parse_dt(projection_payload.get("data_cutoff"))
+        context_generated=parse_dt(context_payload.get("generated_at"))
+        if not generated or generated>start:
+            print(f"SKIP {gid}: projection timestamp is not pregame")
+            continue
+        if not cutoff or cutoff>generated or cutoff>start:
+            print(f"SKIP {gid}: data cutoff is not valid pregame evidence")
+            continue
+        if context_generated and context_generated>start:
+            print(f"SKIP {gid}: live context timestamp is after puck drop")
+            continue
+
         record={
             "schema_version":"1.0",
             "game_id":game.get("game_id"),
@@ -121,6 +148,7 @@ def freeze_records(min_before: float, max_before: float):
                 },
                 "generated_at":projection_payload.get("generated_at"),
                 "data_cutoff":projection_payload.get("data_cutoff"),
+                "context_generated_at":context_payload.get("generated_at"),
                 "away":{
                     "abbr":p.get("away",{}).get("abbr"),
                     "win_probability":safe_num(p.get("away",{}).get("win_probability")),
@@ -289,6 +317,7 @@ def build_summary():
             "frozen_at":r.get("frozen_at"),
             "status":res.get("status"),
             "winner_abbr":res.get("winner_abbr"),
+            "predicted_winner_abbr":ev.get("predicted_winner_abbr"),
             "winner_correct":ev.get("winner_correct"),
             "brier":ev.get("brier"),
             "log_loss":ev.get("log_loss"),
@@ -317,6 +346,20 @@ def build_summary():
             "avg_probability_assigned_to_winner":avg([x.get("probability_assigned_to_winner") for x in ss])
         }
 
+    by_pick_side={}
+    for side in ("away","home"):
+        side_rows=[]
+        for x in settled:
+            side_abbr=x.get(side+"_abbr")
+            if x.get("predicted_winner_abbr")==side_abbr and isinstance(x.get("winner_correct"),bool):
+                side_rows.append(x)
+        by_pick_side[side]={
+            "games":len(side_rows),
+            "accuracy":avg([1 if x["winner_correct"] else 0 for x in side_rows]),
+            "brier":avg([x.get("brier") for x in side_rows]),
+            "log_loss":avg([x.get("log_loss") for x in side_rows])
+        }
+
     summary={
         "schema_version":"1.0",
         "generated_at":now_et().isoformat(),
@@ -336,10 +379,18 @@ def build_summary():
             "total_goals_mae":avg([x.get("total_goals_abs_error") for x in xg])
         },
         "by_model":by_model,
+        "by_pick_side":by_pick_side,
         "games":sorted(rows,key=lambda x:(x.get("game_date") or "",x.get("start_time_et") or "",str(x.get("game_id"))),reverse=True)
     }
-    write_json(SUMMARY_PATH,summary)
-    return summary
+    prior=read_json(SUMMARY_PATH,{}) or {}
+    def material(x):
+        y=deepcopy(x or {})
+        y.pop("generated_at",None)
+        return y
+    if material(prior)!=material(summary):
+        write_json(SUMMARY_PATH,summary)
+        return summary
+    return prior
 
 def main():
     ap=argparse.ArgumentParser()
