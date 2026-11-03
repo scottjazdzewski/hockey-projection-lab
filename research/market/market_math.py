@@ -16,8 +16,7 @@ BOOK_ALIASES = {
     "draftkings sportsbook": "draftkings", "dk": "draftkings",
     "fan duel": "fanduel", "fanduel sportsbook": "fanduel",
     "bet mgm": "betmgm", "betmgm sportsbook": "betmgm",
-    "caesars sportsbook": "caesars", "william hill": "caesars",
-    "williamhill": "caesars", "espn bet": "espnbet",
+    "caesars sportsbook": "caesars", "espn bet": "espnbet",
     "espnbet sportsbook": "espnbet", "bet 365": "bet365",
 }
 
