@@ -266,9 +266,17 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
         gid=str(int(r["_game_id_int"]))
         away_rest=r.get("a_sched_rest_days",np.nan)
         home_rest=r.get("h_sched_rest_days",np.nan)
+        def rest_label(v):
+            if pd.isna(v):
+                return None
+            gap=int(round(float(v)))
+            if gap<=1:
+                return "B2B"
+            days_off=max(0,gap-1)
+            return f"{days_off}d rest"
         restmap[gid]={
-            "away": None if pd.isna(away_rest) else f"{int(round(float(away_rest)))}d",
-            "home": None if pd.isna(home_rest) else f"{int(round(float(home_rest)))}d"
+            "away": rest_label(away_rest),
+            "home": rest_label(home_rest)
         }
 
     now=pd.Timestamp.now(tz="America/New_York")
