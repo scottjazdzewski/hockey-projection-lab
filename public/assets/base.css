@@ -114,3 +114,27 @@ footer{
   .footer-inner{padding-block:14px;min-height:0;flex-wrap:wrap}
   .footer-inner nav{order:3;width:100%}
 }
+
+
+/* Mobile shell contract: breathing room, stable footer, no document overscroll. */
+html{overscroll-behavior-y:none}
+body{overscroll-behavior-y:none}
+@media(max-width:700px){
+  .header-inner{gap:14px}
+  .brand{flex:1 1 auto;min-width:0;gap:10px}
+  .brand img{flex:0 0 48px;width:48px;height:48px}
+  .brand-copy{min-width:0}
+  .brand-copy strong{font-size:clamp(17px,5vw,21px);letter-spacing:.045em}
+  .brand-copy small{font-size:5.5px;letter-spacing:.075em;white-space:nowrap}
+  .mobile-nav{flex:0 0 auto;margin-left:auto}
+  .mobile-nav summary{min-height:38px;padding:9px 13px;gap:9px;font-size:8px}
+  .mobile-nav nav{right:0;top:calc(100% + 9px);max-width:calc(100vw - 30px)}
+  .footer-inner{row-gap:17px;column-gap:12px;align-content:center}
+  .footer-inner nav{gap:12px 18px;line-height:1.8}
+  footer{margin-bottom:0}
+}
+@media(max-width:375px){
+  .brand-copy small{font-size:5px;letter-spacing:0}
+  .brand-copy strong{font-size:17px}
+  .mobile-nav summary{padding:8px 11px}
+}
