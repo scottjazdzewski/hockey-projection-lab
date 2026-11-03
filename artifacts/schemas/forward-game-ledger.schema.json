@@ -14,7 +14,30 @@
     "minutes_before_start": {"type":"number"},
     "forecast": {
       "type":"object",
-      "required":["model","away","home","goalie_context","market_benchmark"]
+      "required":["model","away","home","goalie_context","market_benchmark"],
+      "properties":{
+        "market_benchmark":{
+          "type":"object",
+          "required":["status","source","captured_at","capture_requested_at","minimum_books_required","book_count","total_book_count","books"],
+          "properties":{
+            "status":{"enum":["NOT_CAPTURED","CONSENSUS","LIMITED_CONSENSUS","SINGLE_BOOK","RETRYABLE_UNAVAILABLE"]},
+            "source":{"type":["string","null"]},
+            "captured_at":{"type":["string","null"]},
+            "capture_requested_at":{"type":["string","null"]},
+            "minimum_books_required":{"type":"integer","minimum":3},
+            "book_count":{"type":"integer","minimum":0},
+            "total_book_count":{"type":"integer","minimum":0},
+            "away_implied_probability":{"type":["number","null"],"minimum":0,"maximum":1},
+            "home_implied_probability":{"type":["number","null"],"minimum":0,"maximum":1},
+            "home_probability_min":{"type":["number","null"],"minimum":0,"maximum":1},
+            "home_probability_max":{"type":["number","null"],"minimum":0,"maximum":1},
+            "home_probability_std":{"type":["number","null"],"minimum":0},
+            "earliest_closing_timestamp":{"type":["string","null"]},
+            "latest_closing_timestamp":{"type":["string","null"]},
+            "books":{"type":"array","items":{"type":"object"}}
+          }
+        }
+      }
     },
     "result": {
       "type":"object",
