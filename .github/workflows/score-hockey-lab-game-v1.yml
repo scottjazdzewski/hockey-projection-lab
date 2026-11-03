@@ -42,6 +42,7 @@ jobs:
           gh run download 41537437104 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
           unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/spine_u
 
+      # Production scorer preserves normalized live pregame context.
       - name: Score current slate
         run: |
           rm -rf /tmp/hwin_v1 && mkdir -p /tmp/hwin_v1
