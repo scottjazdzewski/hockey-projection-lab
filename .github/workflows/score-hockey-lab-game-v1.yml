@@ -1,0 +1,76 @@
+name: Score Hockey Lab Game V1
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/production/hockey_lab_game_v1.py'
+      - '.github/workflows/score-hockey-lab-game-v1.yml'
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  score:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow scikit-learn numpy
+
+      - name: Download canonical research inputs
+        run: |
+          mkdir -p /tmp/pbp /tmp/pbp_u /tmp/spine /tmp/spine_u
+          gh run download 41537361054 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/pbp_u
+          gh run download 41537437104 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
+          unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/spine_u
+
+      - name: Score current slate
+        run: |
+          rm -rf /tmp/hwin_v1 && mkdir -p /tmp/hwin_v1
+          python src/production/hockey_lab_game_v1.py             --pbp /tmp/pbp_u/pbp_feature_output/game_team_event_features.parquet             --spine /tmp/spine_u/spine_v3/games.parquet             --schedule public/data/today-games.json             --out /tmp/hwin_v1
+          cat /tmp/hwin_v1/scorer-manifest.json
+          cp /tmp/hwin_v1/game-projections.json public/data/game-projections.json
+          cp /tmp/hwin_v1/model-performance.json public/data/model-performance.json
+
+      - name: Mark production surfaces READY
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path("public/data/production-manifest.json")
+          m=json.loads(p.read_text())
+          for key in ["game_projections","model_performance"]:
+              m["surfaces"][key]["state"]="READY"
+              m["surfaces"][key]["model_id"]="HOCKEY-LAB-GAME"
+              m["surfaces"][key]["model_version"]="1.0.0"
+          from datetime import datetime, timezone
+          m["updated_at"]=datetime.now(timezone.utc).isoformat()
+          p.write_text(json.dumps(m,indent=2)+"\n")
+          PY
+
+      - name: Validate production output
+        run: |
+          node src/production/validate-public-data.mjs
+          node src/production/validate-site-contract.mjs
+
+      - name: Commit current projections
+        run: |
+          git config user.name "hockey-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/data/game-projections.json public/data/model-performance.json public/data/production-manifest.json
+          if git diff --cached --quiet; then
+            echo "No projection changes."
+          else
+            git commit -m "Publish Hockey Lab Game v1 projections"
+            git pull --rebase origin main
+            git push
+          fi
