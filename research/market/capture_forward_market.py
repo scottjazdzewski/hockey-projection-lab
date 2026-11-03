@@ -105,8 +105,8 @@ def normalize(game_id: str, start, response: dict, requested_at: datetime) -> di
         "home_probability_min": min(probs) if probs else None,
         "home_probability_max": max(probs) if probs else None,
         "home_probability_std": (sum((p-sum(probs)/count)**2 for p in probs)/count)**0.5 if count else None,
-        "earliest_closing_timestamp": min((r["odds_timestamp"] for r in eligible_rows), default=None),
-        "latest_closing_timestamp": max((r["odds_timestamp"] for r in eligible_rows), default=None),
+        "earliest_odds_timestamp": min((r["odds_timestamp"] for r in eligible_rows), default=None),
+        "latest_odds_timestamp": max((r["odds_timestamp"] for r in eligible_rows), default=None),
         "books": sorted(rows, key=lambda r: r["sportsbook"]),
         "rejected_at_or_after_start_rows": rejected_after_start,
         "rejected_after_capture_rows": rejected_after_capture,
@@ -131,10 +131,14 @@ def main():
         start = parse_dt(record.get("start_time_et"))
         if not start or start.astimezone(timezone.utc) <= now.astimezone(timezone.utc):
             continue
+        frozen_at = parse_dt(record.get("frozen_at"))
+        forecast = record.get("forecast")
+        if not frozen_at or frozen_at.astimezone(timezone.utc) >= start.astimezone(timezone.utc) or not isinstance(forecast, dict):
+            continue
         minutes = (start.astimezone(timezone.utc)-now.astimezone(timezone.utc)).total_seconds()/60
         if minutes > args.max_minutes_before_start:
             continue
-        market = (record.get("forecast") or {}).get("market_benchmark") or {}
+        market = forecast.get("market_benchmark") or {}
         books = market.get("books") or []
         # Keep collecting until the record reaches a 3-book consensus, while
         # merging snapshots by sportsbook and retaining each book's latest time.
@@ -192,8 +196,8 @@ def main():
             "home_probability_min": min(probabilities) if probabilities else None,
             "home_probability_max": max(probabilities) if probabilities else None,
             "home_probability_std": (sum((p-sum(probabilities)/count)**2 for p in probabilities)/count)**0.5 if count else None,
-            "earliest_closing_timestamp": min((b["odds_timestamp"] for b in market["books"] if b.get("consensus_eligible")), default=None),
-            "latest_closing_timestamp": max((b["odds_timestamp"] for b in market["books"] if b.get("consensus_eligible")), default=None),
+            "earliest_odds_timestamp": min((b["odds_timestamp"] for b in market["books"] if b.get("consensus_eligible")), default=None),
+            "latest_odds_timestamp": max((b["odds_timestamp"] for b in market["books"] if b.get("consensus_eligible")), default=None),
         })
         # A final gate prevents even a source-side timestamp from crossing puck drop.
         start_utc = start.astimezone(timezone.utc)
@@ -210,8 +214,8 @@ def main():
             "home_probability_min": min(probabilities) if probabilities else None,
             "home_probability_max": max(probabilities) if probabilities else None,
             "home_probability_std": (sum((p-sum(probabilities)/count)**2 for p in probabilities)/count)**0.5 if count else None,
-            "earliest_closing_timestamp": min((b["odds_timestamp"] for b in market["books"] if b.get("consensus_eligible")), default=None),
-            "latest_closing_timestamp": max((b["odds_timestamp"] for b in market["books"] if b.get("consensus_eligible")), default=None),
+            "earliest_odds_timestamp": min((b["odds_timestamp"] for b in market["books"] if b.get("consensus_eligible")), default=None),
+            "latest_odds_timestamp": max((b["odds_timestamp"] for b in market["books"] if b.get("consensus_eligible")), default=None),
         })
         record.setdefault("forecast", {})["market_benchmark"] = market
         path.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
