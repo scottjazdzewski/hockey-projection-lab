@@ -195,10 +195,12 @@ def main(pbp_path,spine_path,schedule_json,outdir):
 
     final_train=x[x.source_season.le(2026)&x.home_win.notna()].copy()
     model=fit_pipeline(final_train,features,C)
-    today=x[x.game_id.astype(str).isin({str(g["game_id"]) for g in today_games})].copy()
+    today_ids={int(g["game_id"]) for g in today_games}
+    x["_game_id_int"]=pd.to_numeric(x.game_id,errors="coerce").astype("Int64")
+    today=x[x["_game_id_int"].isin(today_ids)].copy()
     if len(today)!=len(today_games): raise RuntimeError(f"Today's feature rows {len(today)} != schedule games {len(today_games)}")
     probs=model.predict_proba(today[features])[:,1]
-    pmap={str(gid):float(p) for gid,p in zip(today.game_id,probs)}
+    pmap={str(int(gid)):float(p) for gid,p in zip(today["_game_id_int"],probs)}
 
     now=pd.Timestamp.now(tz="America/New_York")
     cutoff_ts=pd.Timestamp(cutoff+" 23:59:59",tz="America/New_York")
