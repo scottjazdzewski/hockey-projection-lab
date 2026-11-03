@@ -1,13 +1,498 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-02T21:45:00-05:00",
-  "data_cutoff": "2026-11-02T21:45:00-05:00",
+  "generated_at": "2026-11-03T06:10:32.924193-05:00",
+  "data_cutoff": "2026-11-01T23:59:59-05:00",
   "model": {
-    "model_id": "UNNAMED_INTERNAL",
-    "version": "none",
-    "status": "RESEARCH",
-    "feature_version": "none",
-    "trained_through": null
+    "model_id": "HOCKEY-LAB-GAME",
+    "version": "1.0.0",
+    "status": "PROMOTED",
+    "feature_version": "team-strength-004+b2b-007",
+    "trained_through": "2025-26"
   },
-  "projections": []
+  "projections": [
+    {
+      "game_id": 2026020236,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "UTA",
+        "win_probability": 0.5829194077946254,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -140
+      },
+      "home": {
+        "abbr": "TOR",
+        "win_probability": 0.4170805922053747,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 140
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020237,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "WPG",
+        "win_probability": 0.3613170451797606,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 177
+      },
+      "home": {
+        "abbr": "MTL",
+        "win_probability": 0.6386829548202394,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -177
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020238,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "DET",
+        "win_probability": 0.3472931669415278,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 188
+      },
+      "home": {
+        "abbr": "TBL",
+        "win_probability": 0.6527068330584722,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -188
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020240,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "STL",
+        "win_probability": 0.500754979065821,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -100
+      },
+      "home": {
+        "abbr": "NYR",
+        "win_probability": 0.49924502093417894,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 100
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020241,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "MIN",
+        "win_probability": 0.5905710583761237,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -144
+      },
+      "home": {
+        "abbr": "PHI",
+        "win_probability": 0.40942894162387633,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 144
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020242,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "VGK",
+        "win_probability": 0.49609340091358045,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 102
+      },
+      "home": {
+        "abbr": "PIT",
+        "win_probability": 0.5039065990864195,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -102
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020243,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "DAL",
+        "win_probability": 0.4930366326712078,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 103
+      },
+      "home": {
+        "abbr": "WSH",
+        "win_probability": 0.5069633673287922,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -103
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020244,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "COL",
+        "win_probability": 0.5021984787663166,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -101
+      },
+      "home": {
+        "abbr": "CBJ",
+        "win_probability": 0.4978015212336834,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 101
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020239,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T19:30:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "EDM",
+        "win_probability": 0.46077603433199044,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 117
+      },
+      "home": {
+        "abbr": "NJD",
+        "win_probability": 0.5392239656680096,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -117
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020245,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T20:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "CAR",
+        "win_probability": 0.7220858147384515,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -260
+      },
+      "home": {
+        "abbr": "NSH",
+        "win_probability": 0.27791418526154854,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 260
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    },
+    {
+      "game_id": 2026020246,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T21:00:00-05:00",
+      "publish_state": "PUBLISHED",
+      "away": {
+        "abbr": "ANA",
+        "win_probability": 0.6307609817171131,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": -171
+      },
+      "home": {
+        "abbr": "VAN",
+        "win_probability": 0.3692390182828869,
+        "expected_goals": null,
+        "regulation_win_probability": null,
+        "fair_moneyline": 171
+      },
+      "overtime_probability": null,
+      "goalie_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "lineup_state": {
+        "status": "UNKNOWN",
+        "away": null,
+        "home": null,
+        "updated_at": null
+      },
+      "rest_state": {
+        "status": "CONFIRMED",
+        "away": null,
+        "home": null,
+        "updated_at": "2026-11-03T06:10:32.924193-05:00"
+      },
+      "flags": [
+        "source_data_through_2026-11-01",
+        "no_goalie_layer",
+        "b2b_context"
+      ]
+    }
+  ]
 }

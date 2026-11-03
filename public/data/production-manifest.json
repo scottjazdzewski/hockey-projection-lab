@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-11-02T22:45:00-05:00",
+  "updated_at": "2026-11-03T11:10:33.228336+00:00",
   "surfaces": {
     "schedule": {
       "file": "public/data/today-games.json",
@@ -14,19 +14,19 @@
     "game_projections": {
       "file": "public/data/game-projections.json",
       "schema": "artifacts/schemas/game-projections.schema.json",
-      "state": "EMPTY",
+      "state": "READY",
       "owner": "game-model",
-      "model_id": null,
-      "model_version": null,
+      "model_id": "HOCKEY-LAB-GAME",
+      "model_version": "1.0.0",
       "max_age_minutes": null
     },
     "model_performance": {
       "file": "public/data/model-performance.json",
       "schema": "artifacts/schemas/model-performance.schema.json",
-      "state": "EMPTY",
+      "state": "READY",
       "owner": "validation",
-      "model_id": null,
-      "model_version": null,
+      "model_id": "HOCKEY-LAB-GAME",
+      "model_version": "1.0.0",
       "max_age_minutes": null
     },
     "team_ratings": {

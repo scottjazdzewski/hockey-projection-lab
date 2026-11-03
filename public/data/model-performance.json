@@ -1,8 +1,22 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-02T21:45:00-05:00",
-  "model": {"model_id":"UNNAMED_INTERNAL","version":"none"},
-  "sample": {"games_scored":0,"start_date":null,"end_date":null},
-  "metrics": {"accuracy":null,"brier":null,"log_loss":null,"calibration":null},
+  "generated_at": "2026-11-03T06:10:32.924193-05:00",
+  "model": {
+    "model_id": "HOCKEY-LAB-GAME",
+    "version": "1.0.0",
+    "internal_engine": "HWIN-SCHEDULE-007-NOGOALIE",
+    "feature_version": "team-strength-004+b2b-007"
+  },
+  "sample": {
+    "games_scored": 6993,
+    "start_date": "2022 rolling-origin fold",
+    "end_date": "2026 rolling-origin fold"
+  },
+  "metrics": {
+    "accuracy": 0.5991705991705991,
+    "brier": 0.23472630331662248,
+    "log_loss": 0.6615400452176158,
+    "calibration": 0.9978947675336999
+  },
   "bands": []
 }
