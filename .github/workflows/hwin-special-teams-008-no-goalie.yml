@@ -94,7 +94,7 @@ jobs:
               ],
               'predictions': int(len(p)),
           }
-          Path('hwin_special_teams_008/manifest.json').write_text(json.dumps(manifest, indent=2) + '\\n')
+          Path('hwin_special_teams_008/manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
           print(json.dumps(manifest, indent=2))
           PY
       - name: Package research results
