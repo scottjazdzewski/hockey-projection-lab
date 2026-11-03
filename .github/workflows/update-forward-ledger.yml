@@ -1,0 +1,98 @@
+name: Update Forward Prediction Ledger
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Offset from the live-context quarter-hour refreshes. This normally
+    # freezes the final forward snapshot about 10 minutes before :00/:30 starts,
+    # after the ~15-minute goalie/lineup refresh and any model rescore.
+    - cron: '5,20,35,50 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'src/production/update_forward_ledger.py'
+      - '.github/workflows/update-forward-ledger.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hockey-lab-forward-ledger
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Gate ledger work
+        id: gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          import json, os
+
+          now=datetime.now(ZoneInfo("America/New_York"))
+          near=False
+          try:
+              slate=json.loads(Path("public/data/today-games.json").read_text())
+              for g in slate.get("games",[]):
+                  if not g.get("start_time_et"): continue
+                  start=datetime.fromisoformat(g["start_time_et"]).astimezone(now.tzinfo)
+                  mins=(start-now).total_seconds()/60
+                  if 2 <= mins <= 22:
+                      near=True
+                      break
+          except Exception as exc:
+              print("schedule gate warning",repr(exc))
+
+          open_records=False
+          for p in Path("artifacts/forward/games").glob("*.json"):
+              try:
+                  r=json.loads(p.read_text())
+                  if r.get("result",{}).get("status")!="FINAL":
+                      open_records=True
+                      break
+              except Exception:
+                  open_records=True
+                  break
+
+          run=(os.environ.get("GITHUB_EVENT_NAME")!="schedule") or near or open_records
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+              f.write(f"run={'true' if run else 'false'}\n")
+          print(json.dumps({"now":now.isoformat(),"near_puck_drop":near,"open_records":open_records,"run":run},indent=2))
+          PY
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run == 'true'
+        with:
+          python-version: '3.12'
+
+      - name: Install ledger dependency
+        if: steps.gate.outputs.run == 'true'
+        run: python -m pip install --quiet requests
+
+      - name: Freeze and settle forward records
+        if: steps.gate.outputs.run == 'true'
+        run: python src/production/update_forward_ledger.py --mode both --min-before 4 --max-before 18
+
+      - name: Commit ledger changes
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          git config user.name "hockey-lab-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add artifacts/forward/games public/data/forward-ledger-summary.json
+          if git diff --cached --quiet; then
+            echo "No forward-ledger change."
+          else
+            git commit -m "Update forward prediction ledger"
+            git pull --rebase origin main
+            git push
+          fi
