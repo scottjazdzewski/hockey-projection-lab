@@ -253,3 +253,13 @@
   .gc-grid{grid-template-columns:1fr}
   .gc-card{height:386px}
 }
+
+
+/* Mobile game cards: clear label, safe bottom edge, no phantom scroll. */
+@media(max-width:700px){
+  .gc-hero-inner{padding-top:100px}
+  .gc-eyebrow{white-space:nowrap;font-size:8px;letter-spacing:.10em}
+  .gc-content{padding-bottom:18px}
+  .gc-page{background-color:#11091f}
+  .gc-page footer{margin-bottom:0}
+}
