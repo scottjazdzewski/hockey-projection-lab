@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-02T21:45:00-05:00",
+  "model": {"model_id":"UNNAMED_INTERNAL","version":"none"},
+  "sample": {"games_scored":0,"start_date":null,"end_date":null},
+  "metrics": {"accuracy":null,"brier":null,"log_loss":null,"calibration":null},
+  "bands": []
+}
