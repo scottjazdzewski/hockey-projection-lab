@@ -12,14 +12,39 @@
     if(!state || !state.status || state.status==='UNKNOWN') return label+' —';
     return label+' '+String(state.status).toLowerCase();
   }
-  function goalieContext(state){
-    if(!state || !state.away || !state.home) return 'Goalies —';
-    const suffix=state.status==='CONFIRMED' ? 'confirmed' : 'projected';
-    return 'Goalies: '+state.away+' / '+state.home+' · '+suffix;
+  function goaliePill(state){
+    if(!state || !state.away || !state.home) return '<span class="gc-pill gc-pill-wide gc-goalie gc-goalie-unknown">Goalies —</span>';
+    const confirmed=state.status==='CONFIRMED';
+    const cls=confirmed?'gc-goalie-confirmed':'gc-goalie-projected';
+    const suffix=confirmed?'Confirmed':'Projected';
+    return '<span class="gc-pill gc-pill-wide gc-goalie '+cls+'">Goalies: '+esc(state.away)+' / '+esc(state.home)+' · '+suffix+'</span>';
   }
-  function restContext(g,state){
-    if(!state || !state.away || !state.home) return 'Rest —';
-    return 'Rest: '+g.away_abbr+' '+state.away+' / '+g.home_abbr+' '+state.home;
+
+  function restSeverityClass(v){
+    const s=String(v||'UNKNOWN').toLowerCase();
+    if(s==='rested') return 'gc-rest-rested';
+    if(s==='short') return 'gc-rest-short';
+    if(s==='b2b') return 'gc-rest-b2b';
+    return 'gc-rest-unknown';
+  }
+
+  function restSide(abbr,label,flags,severity){
+    const tags=Array.isArray(flags)&&flags.length
+      ? '<span class="gc-rest-flags">'+flags.map(x=>'<b>'+esc(x)+'</b>').join('')+'</span>'
+      : '<span class="gc-rest-flags gc-rest-flags-clear"><b>Normal load</b></span>';
+    return '<span class="gc-rest-side '+restSeverityClass(severity)+'">'+
+      '<strong>'+esc(abbr)+'</strong>'+
+      '<span>'+esc(label||'Rest unknown')+'</span>'+
+      tags+
+    '</span>';
+  }
+
+  function restPill(g,state){
+    if(!state || !state.away || !state.home) return '<span class="gc-rest-strip gc-rest-strip-unknown">Rest —</span>';
+    return '<span class="gc-rest-strip">'+
+      restSide(g.away_abbr,state.away,state.away_flags,state.away_severity)+
+      restSide(g.home_abbr,state.home,state.home_flags,state.home_severity)+
+    '</span>';
   }
 
   function usableProjection(bundle,p,manifestReady){
@@ -48,8 +73,8 @@
     const xg=live ? goals(p.away.expected_goals,p.home.expected_goals) : '—';
     const reg=live ? pairPct(p.away.regulation_win_probability,p.home.regulation_win_probability) : '—';
     const ot=live ? pct(p.overtime_probability) : '—';
-    const goalies=live ? goalieContext(p.goalie_state) : 'Goalies —';
-    const rest=live ? restContext(g,p.rest_state) : 'Rest —';
+    const goalies=live ? goaliePill(p.goalie_state) : '<span class="gc-pill gc-pill-wide gc-goalie gc-goalie-unknown">Goalies —</span>';
+    const rest=live ? restPill(g,p.rest_state) : '<span class="gc-rest-strip gc-rest-strip-unknown">Rest —</span>';
     const lineup=live ? context('Lineup',p.lineup_state) : 'Lineup —';
     const modelPill=live ? 'Model live' : (surfaceState==='WITHHELD'?'Model withheld':'Model —');
     const footer=live
@@ -70,7 +95,7 @@
         '<div class="gc-metric"><strong>'+reg+'</strong><span>Reg win A · H</span></div>'+
         '<div class="gc-metric"><strong>'+ot+'</strong><span>OT probability</span></div>'+
       '</div>'+
-      '<div class="gc-pills"><span class="gc-pill gc-pill-wide">'+esc(goalies)+'</span><span class="gc-pill gc-pill-wide">'+esc(rest)+'</span><span class="gc-pill">'+esc(lineup)+'</span><span class="gc-pill">'+esc(modelPill)+'</span></div>'+
+      '<div class="gc-pills">'+goalies+rest+'<span class="gc-pill">'+esc(lineup)+'</span><span class="gc-pill">'+esc(modelPill)+'</span></div>'+
       '<div class="gc-card-foot">'+footer+'</div>'+
     '</article>';
   }
