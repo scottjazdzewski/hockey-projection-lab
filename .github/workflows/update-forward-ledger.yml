@@ -6,7 +6,7 @@ on:
     # Offset from the live-context quarter-hour refreshes. This normally
     # freezes the final forward snapshot about 10 minutes before :00/:30 starts,
     # after the ~15-minute goalie/lineup refresh and any model rescore.
-    - cron: '5,20,35,50 * * * *'
+    - cron: '7,22,37,52 * * * *'
   push:
     branches: [main]
     paths:
@@ -17,7 +17,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: hockey-lab-forward-ledger
+  group: hockey-lab-production-data
   cancel-in-progress: false
 
 jobs:
@@ -81,7 +81,7 @@ jobs:
 
       - name: Freeze and settle forward records
         if: steps.gate.outputs.run == 'true'
-        run: python src/production/update_forward_ledger.py --mode both --min-before 4 --max-before 18
+        run: python src/production/update_forward_ledger.py --mode both --min-before 0 --max-before 20
 
       - name: Commit ledger changes
         if: steps.gate.outputs.run == 'true'
