@@ -76,7 +76,7 @@
     },
     "forward_ledger": {
       "file": "public/data/forward-ledger-summary.json",
-      "schema": "forward-ledger-summary-inline-v1",
+      "schema": "artifacts/schemas/forward-ledger-summary.schema.json",
       "state": "READY",
       "owner": "forward-audit",
       "model_id": null,
