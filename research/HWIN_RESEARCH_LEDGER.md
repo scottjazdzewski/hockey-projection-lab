@@ -1,10 +1,12 @@
 # HWIN Research Ledger
 
-Last updated: 2026-11-03
+Last updated: 2026-11-03 (Score State 009)
 
 ## Status
 
 **No production HWIN model has been promoted yet.**
+
+Current status: Team Strength 004 + B2B remains the benchmark candidate. Score State 009 tied-state xG is **RESEARCH** because the effect is small and its paired interval includes zero.
 
 Current research backbone:
 - dynamic Elo-style team strength
@@ -242,3 +244,23 @@ Features use a 20-game-half-life exponentially weighted mean from earlier dates 
 **Decision: REJECTED as an incremental probability feature.** The candidate adds no production signal now. Do not recalibrate it after the fact. An experiment with official PP opportunity counts would need a free, legally usable source and timestamped pregame availability.
 
 Reproducible outputs: GitHub Actions run 41571326250 on isolated branch `codex/hwin-special-teams-008-no-goalie`; artifact `hwin-special-teams-008-no-goalie-20261103`. Store the artifact bundle and manifest under Drive `04_VALIDATION`. The permanent registry ID is EXP-0014.
+
+
+## Score State Increment 009 — Tied/Close 5v5 xG, No-Goalie
+
+Five nested rolling-origin target seasons (2022–2026), 6,993 games. The comparison baseline is Team Strength 004 + B2B. Each feature uses a rolling share of 5v5 xG for over xG for plus against, from a team's prior 20 games only (minimum 8). No current-game event, goalie, market, or postgame starter input is used.
+
+| Variant | Brier | Log loss | Accuracy | Brier folds better than B2B |
+|---|---:|---:|---:|---:|
+| Team Strength 004 + B2B | 0.234726 | 0.661540 | 59.92% | — |
+| + tied-state xG share | **0.234630** | **0.661329** | **59.96%** | 4/5 |
+| + close-state xG share | 0.234742 | 0.661575 | 59.83% | 2/5 |
+| + tied and close xG shares | 0.234663 | 0.661412 | 59.89% | 4/5 |
+
+The tied-state model's pooled calibration intercept/slope are -0.01786/1.00090, compared with -0.01739/0.99789 for the baseline. Its Brier gain is 0.000097 and log-loss gain is 0.000211. The 2022 Brier was fractionally worse (0.228259 vs 0.228251); 2023–2026 improved. The paired-game bootstrap (5,000 draws, seed 9009) gives mean ΔBrier -0.0000966 and a 95% interval of [-0.0002232, +0.0000291]. This interval crosses zero and is not clustered by repeated team or season, so uncertainty may be understated.
+
+Same-day repeated team-game ordering was checked against canonical start times; rolling features use shift(1); the Team Strength 004 + B2B fold Brier values reproduced; home/away probabilities sum to one. Feature availability in target OOF rows was 99.9% for tied-state share on both sides. Close-only was worse overall, and adding close share to tied share diluted the tied-only gain.
+
+**Decision: RESEARCH.** This small pooled improvement is hypothesis-generating, not promotion evidence. No calibration change or public prediction export is authorized by this result. Next test a predeclared 10/20/40-game tied-state window set and a limited shrinkage option, selected only on each chronological validation season. Preserve the prospective 2026–27 shadow ledger separately.
+
+Reproducible artifacts: `HWIN_SCORE_STATE_009_NO_GOALIE_20261103.zip` and `HWIN_SCORE_STATE_009_MANIFEST_20261103.json` in Drive `04_VALIDATION`. Code is on isolated branch `codex/hwin-score-state-009`; dependencies are pinned in `research/requirements-game-model.txt`. Registry ID: EXP-0015.
