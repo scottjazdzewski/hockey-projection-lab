@@ -57,6 +57,10 @@ for(const [name,s] of Object.entries(manifest.surfaces||{})){
   const file=s.file?.replace(/^public\//,'public/');
   if(file && !fs.existsSync(path.join(root,file))) fail('manifest '+name+' points to missing '+file);
 }
+const gameCardsJs=read('public/assets/game-cards.js');
+if(!gameCardsJs.includes("const schedule=await json('/data/today-games.json')")) fail('game-cards schedule independence missing');
+else pass('game-cards schedule independence checked');
+
 pass('required production site files checked');
 
 if(failed) process.exit(1);
