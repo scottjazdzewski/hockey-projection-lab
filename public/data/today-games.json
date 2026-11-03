@@ -1,49 +1,119 @@
 {
-  "date": "2026-11-02",
+  "date": "2026-11-03",
   "timezone": "America/New_York",
-  "display_date": "Monday, November 2",
-  "updated_at": "2026-11-02T22:12:43.492617-05:00",
+  "display_date": "Tuesday, November 3",
+  "updated_at": "2026-11-03T05:29:56.123388-05:00",
   "source": "NHL live score feed fallback",
   "games": [
     {
-      "game_id": 2026020232,
-      "away_abbr": "VGK",
-      "away_name": "Vegas Golden Knights",
-      "home_abbr": "BOS",
-      "home_name": "Boston Bruins",
+      "game_id": 2026020236,
+      "away_abbr": "UTA",
+      "away_name": "Utah Mammoth",
+      "home_abbr": "TOR",
+      "home_name": "Toronto Maple Leafs",
       "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-02T19:00:00-05:00",
-      "state": "FINAL"
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "state": "FUT"
     },
     {
-      "game_id": 2026020233,
+      "game_id": 2026020237,
+      "away_abbr": "WPG",
+      "away_name": "Winnipeg Jets",
+      "home_abbr": "MTL",
+      "home_name": "Montreal Canadiens",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020238,
       "away_abbr": "DET",
       "away_name": "Detroit Red Wings",
-      "home_abbr": "FLA",
-      "home_name": "Florida Panthers",
+      "home_abbr": "TBL",
+      "home_name": "Tampa Bay Lightning",
       "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-02T19:00:00-05:00",
-      "state": "OFF"
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "state": "FUT"
     },
     {
-      "game_id": 2026020234,
+      "game_id": 2026020240,
+      "away_abbr": "STL",
+      "away_name": "St. Louis Blues",
+      "home_abbr": "NYR",
+      "home_name": "New York Rangers",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020241,
+      "away_abbr": "MIN",
+      "away_name": "Minnesota Wild",
+      "home_abbr": "PHI",
+      "home_name": "Philadelphia Flyers",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020242,
+      "away_abbr": "VGK",
+      "away_name": "Vegas Golden Knights",
+      "home_abbr": "PIT",
+      "home_name": "Pittsburgh Penguins",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020243,
+      "away_abbr": "DAL",
+      "away_name": "Dallas Stars",
+      "home_abbr": "WSH",
+      "home_name": "Washington Capitals",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020244,
       "away_abbr": "COL",
       "away_name": "Colorado Avalanche",
-      "home_abbr": "CHI",
-      "home_name": "Chicago Blackhawks",
-      "time_et": "8:00 PM ET",
-      "start_time_et": "2026-11-02T20:00:00-05:00",
-      "state": "LIVE"
+      "home_abbr": "CBJ",
+      "home_name": "Columbus Blue Jackets",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "state": "FUT"
     },
     {
-      "game_id": 2026020235,
-      "away_abbr": "CGY",
-      "away_name": "Calgary Flames",
-      "home_abbr": "SJS",
-      "home_name": "San Jose Sharks",
+      "game_id": 2026020239,
+      "away_abbr": "EDM",
+      "away_name": "Edmonton Oilers",
+      "home_abbr": "NJD",
+      "home_name": "New Jersey Devils",
+      "time_et": "7:30 PM ET",
+      "start_time_et": "2026-11-03T19:30:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020245,
+      "away_abbr": "CAR",
+      "away_name": "Carolina Hurricanes",
+      "home_abbr": "NSH",
+      "home_name": "Nashville Predators",
+      "time_et": "8:00 PM ET",
+      "start_time_et": "2026-11-03T20:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020246,
+      "away_abbr": "ANA",
+      "away_name": "Anaheim Ducks",
+      "home_abbr": "VAN",
+      "home_name": "Vancouver Canucks",
       "time_et": "9:00 PM ET",
-      "start_time_et": "2026-11-02T21:00:00-05:00",
-      "state": "LIVE"
+      "start_time_et": "2026-11-03T21:00:00-05:00",
+      "state": "FUT"
     }
   ]
 }
