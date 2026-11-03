@@ -2,6 +2,11 @@ name: Score Hockey Lab Game V1
 
 on:
   workflow_dispatch:
+    inputs:
+      reason:
+        description: "Optional production rescore reason"
+        required: false
+        type: string
   push:
     branches: [main]
     paths:
