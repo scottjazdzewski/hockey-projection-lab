@@ -205,8 +205,8 @@
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   align-content:center;
-  gap:7px 8px;
-  padding:9px 12px 10px;
+  gap:8px;
+  padding:9px 12px 8px;
 }
 .gc-pill{
   padding:7px 9px;
@@ -393,7 +393,7 @@
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
-  text-align:left;
+  text-align:center;
   font-size:7px;
   font-weight:900;
 }
@@ -531,6 +531,7 @@
   .gc-goalie-side span{
     width:100%;
     white-space:normal;
+    text-align:center;
     font-size:8.8px;
     line-height:1.1;
   }
