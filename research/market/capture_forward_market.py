@@ -22,7 +22,7 @@ from market_math import PRIMARY_BOOKS, canonical_sportsbook, no_vig_probabilitie
 
 ROOT = Path(__file__).resolve().parents[2]
 LEDGER_DIR = ROOT / "artifacts/forward/games"
-API_URL = "https://mcp.puckapi.com/v1/get_odds"
+API_URL = "https://mcp.puckapi.com/v1/get_game_detail"
 ET = ZoneInfo("America/New_York")
 CREDITS_PER_GAME = 10
 
@@ -49,7 +49,7 @@ def fetch(game_id: str, api_key: str) -> dict:
 
 
 def normalize(game_id: str, start, response: dict, requested_at: datetime) -> dict:
-    response_game_id = response.get("game_id")
+    response_game_id = response.get("game_id") or (response.get("game") or {}).get("id")
     if response_game_id is not None and str(response_game_id) != str(game_id):
         raise ValueError(f"PuckAPI game_id mismatch: requested {game_id}, received {response_game_id}")
     books = {}
