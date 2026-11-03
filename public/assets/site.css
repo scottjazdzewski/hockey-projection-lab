@@ -796,3 +796,12 @@ body.interior-fantasy{
   backdrop-filter:blur(5px)!important;
   -webkit-backdrop-filter:blur(5px)!important;
 }
+
+/* Header must never stack an extra tint over page artwork */
+.site-header,
+.site-header-overlay{
+  background:transparent!important;
+  border-bottom:1px solid rgba(255,255,255,.12)!important;
+  backdrop-filter:blur(5px)!important;
+  -webkit-backdrop-filter:blur(5px)!important;
+}
