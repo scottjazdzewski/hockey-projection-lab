@@ -19,7 +19,7 @@
     return Number.isFinite(a)&&Number.isFinite(h)&&Math.abs((a+h)-1)<=0.001;
   }
 
-  function card(g,pBundle,p,manifestReady){
+  function card(g,pBundle,p,projectionSurface){
     const away=nick(g.away_name,g.away_abbr);
     const home=nick(g.home_name,g.home_abbr);
     const awayClass=away.length>12?' gc-long':'';
@@ -36,10 +36,12 @@
     const goalies=live ? context('Goalies',p.goalie_state) : 'Goalies —';
     const rest=live ? context('Rest',p.rest_state) : 'Rest —';
     const lineup=live ? context('Lineup',p.lineup_state) : 'Lineup —';
-    const modelPill=live ? 'Model live' : 'Model —';
+    const modelPill=live ? 'Model live' : (surfaceState==='WITHHELD'?'Model withheld':'Model —');
     const footer=live
       ? 'Pregame projection · '+esc(pBundle.model.model_id)+' '+esc(pBundle.model.version)+' · cutoff '+esc(pBundle.data_cutoff||'')
-      : 'Real matchup · model values publish only after a promoted pregame scorer clears validation.';
+      : (surfaceState==='WITHHELD'
+          ? 'Real matchup · projection withheld by the production validation gate.'
+          : 'Real matchup · model values publish only after a promoted pregame scorer clears validation.');
 
     return '<article class="gc-card">'+
       '<div class="gc-card-head"><span>'+gameLabel+' · '+modelLabel+'</span><span>'+esc(g.time_et||'TBD')+'</span></div>'+
@@ -74,13 +76,12 @@
         window.HockeyData.loadSurface('game_projections','/data/game-projections.json')
       ]);
       const projectionResult=projectionSurface.data;
-      const manifestReady=projectionSurface.ready;
       const games=Array.isArray(schedule.games)?schedule.games:[];
       const projections=projectionResult && Array.isArray(projectionResult.projections) ? projectionResult.projections : [];
       const byId=new Map(projections.map(p=>[String(p.game_id),p]));
       if(dateEl) dateEl.textContent=(schedule.display_date||schedule.date||'Today')+' · '+games.length+' game'+(games.length===1?'':'s');
       if(grid) grid.innerHTML=games.length
-        ? games.map(g=>card(g,projectionResult,byId.get(String(g.game_id)),manifestReady)).join('')
+        ? games.map(g=>card(g,projectionResult,byId.get(String(g.game_id)),projectionSurface)).join('')
         : '<div class="gc-loading">No NHL games scheduled today.</div>';
     }catch(e){
       if(dateEl) dateEl.textContent='Today’s NHL slate';
