@@ -24,10 +24,14 @@
     const home=nick(g.home_name,g.home_abbr);
     const awayClass=away.length>12?' gc-long':'';
     const homeClass=home.length>12?' gc-long':'';
+    const manifestReady=projectionSurface?.ready===true;
+    const surfaceState=projectionSurface?.surface?.state||'EMPTY';
     const live=usableProjection(pBundle,p,manifestReady);
     const state=String(g.state||'PRE').toUpperCase();
     const gameLabel=state==='LIVE'?'Live':(state==='FINAL'||state==='OFF')?'Final':'Tonight';
-    const modelLabel=live ? 'Model '+esc(pBundle.model.version) : 'Model pending';
+    const modelLabel=live
+      ? 'Model '+esc(pBundle.model.version)
+      : (surfaceState==='WITHHELD' ? 'Model withheld' : 'Model pending');
     const homeProb=live ? pct(p.home.win_probability) : '—';
     const xg=live ? goals(p.away.expected_goals,p.home.expected_goals) : '—';
     const reg=live ? pairPct(p.away.regulation_win_probability,p.home.regulation_win_probability) : '—';
