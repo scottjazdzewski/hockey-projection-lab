@@ -313,3 +313,120 @@ footer{background:#160b29;color:#efe5f0;border-top:1px solid #6e4a9b}.footer-inn
     justify-content:center;
   }
 }
+
+
+/* R&R-style interior heroes + compact above-the-fold game slate */
+.page-hero{
+  position:relative;
+  height:265px;
+  min-height:265px;
+  color:var(--ivory);
+  background-size:cover;
+  background-position:center 38%;
+  overflow:hidden;
+  border-bottom:1px solid rgba(240,198,64,.45);
+}
+.page-hero:before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(15,7,29,.88) 0%,rgba(21,9,42,.67) 38%,rgba(21,9,42,.22) 68%,rgba(15,7,29,.18) 100%);
+  pointer-events:none;
+}
+.page-hero-game{background-image:url('/assets/hero-game-cards.webp'),linear-gradient(135deg,#1b0b34,#4d1887)}
+.page-hero-teams{background-image:url('/assets/hero-teams.webp'),linear-gradient(135deg,#1b0b34,#144852)}
+.page-hero-players{background-image:url('/assets/hero-players.webp'),linear-gradient(135deg,#1b0b34,#163f74)}
+.page-hero-performance{background-image:url('/assets/hero-performance.webp'),linear-gradient(135deg,#1b0b34,#54203a)}
+.site-header-overlay{
+  position:absolute;
+  z-index:5;
+  top:0;left:0;right:0;
+  background:linear-gradient(180deg,rgba(12,6,25,.54),rgba(12,6,25,.18));
+  border-bottom:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+.site-header-overlay .header-inner{height:82px}
+.page-hero-copy{
+  position:relative;
+  z-index:2;
+  height:100%;
+  padding-top:126px;
+}
+.page-hero-copy h1{
+  font:600 clamp(42px,4.6vw,68px)/.92 var(--serif);
+  margin:7px 0 8px;
+  letter-spacing:-.03em;
+  text-shadow:0 4px 18px rgba(0,0,0,.55);
+}
+.page-hero-copy p{
+  max-width:650px;
+  margin:0;
+  font-size:11px;
+  line-height:1.55;
+  color:#f3e9ef;
+  text-shadow:0 2px 9px rgba(0,0,0,.65);
+}
+.page-hero + main .content-shell{
+  padding-top:15px;
+  padding-bottom:56px;
+}
+.slate-heading{
+  margin-bottom:13px;
+  align-items:center;
+}
+.slate-heading .eyebrow{font-size:8px}
+.slate-heading h2{
+  font-size:clamp(29px,2.8vw,42px);
+  line-height:.95;
+  margin-top:4px;
+}
+.slate-heading>p{
+  max-width:390px;
+  font-size:9px;
+  line-height:1.45;
+}
+.home-feature-badges{
+  width:min(100%,500px);
+  gap:11px;
+}
+.home-feature-badges .hero-destination{
+  min-height:110px;
+  background:linear-gradient(145deg,rgba(25,10,49,.82),rgba(74,28,126,.62));
+  border-color:rgba(240,198,64,.58);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+  box-shadow:0 16px 34px rgba(0,0,0,.23);
+}
+.home-feature-badges .hero-destination-primary{
+  background:linear-gradient(145deg,rgba(240,198,64,.95),rgba(205,161,26,.9));
+}
+.home-feature-badges .hero-destination strong{
+  font-size:clamp(28px,2.1vw,35px);
+}
+@media(min-width:1181px){
+  .page-hero-game + main .live-slate-card{
+    grid-template-rows:40px 174px 104px 58px 46px;
+  }
+  .page-hero-game + main .live-slate-card .hwin-top{height:40px}
+  .page-hero-game + main .live-slate-card .hwin-matchup{height:174px;padding:11px 9px 9px}
+  .page-hero-game + main .live-slate-card .hwin-team{grid-template-rows:56px 40px 14px}
+  .page-hero-game + main .live-slate-card .hwin-team img{width:54px;height:54px}
+  .page-hero-game + main .live-slate-card .hwin-team strong{height:40px}
+  .page-hero-game + main .live-slate-card .hwin-team small{height:14px}
+  .page-hero-game + main .live-slate-card .hwin-metrics{height:104px}
+  .page-hero-game + main .live-slate-card .hwin-context{height:58px;padding:8px 6px}
+  .page-hero-game + main .live-slate-card .hwin-footer{height:46px;padding:5px 9px}
+}
+@media(max-width:900px){
+  .page-hero{height:235px;min-height:235px}
+  .page-hero-copy{padding-top:116px}
+}
+@media(max-width:650px){
+  .page-hero{height:215px;min-height:215px}
+  .site-header-overlay .header-inner{height:74px}
+  .page-hero-copy{padding-top:108px}
+  .page-hero-copy h1{font-size:43px}
+  .page-hero-copy p{font-size:9px;max-width:88%}
+  .slate-heading{gap:5px;margin-bottom:10px}
+  .slate-heading h2{font-size:30px}
+}
