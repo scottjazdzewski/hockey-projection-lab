@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 URLS=[
   "https://www.dailyfaceoff.com/starting-goalies",
   "https://www.dailyfaceoff.com/teams",
+  "https://www.dailyfaceoff.com/teams/anaheim-ducks/line-combinations",
 ]
 headers={"User-Agent":"HockeyProjectionLab/0.1 (+private research; contact via repository owner)"}
 for url in URLS:
