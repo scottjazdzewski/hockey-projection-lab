@@ -89,7 +89,7 @@ def normalize(game_id: str, start, response: dict, requested_at: datetime) -> di
     rows = list(books.values())
     eligible_rows = [r for r in rows if r["consensus_eligible"]]
     probs = [r["home_no_vig_probability"] for r in eligible_rows]
-    count = len(rows)
+    count = len(eligible_rows)
     status = "CONSENSUS" if count >= 3 else ("LIMITED_CONSENSUS" if count == 2 else ("SINGLE_BOOK" if count == 1 else "RETRYABLE_UNAVAILABLE"))
     median_home = float(median(probs)) if count else None
     return {
@@ -138,7 +138,7 @@ def main():
         books = market.get("books") or []
         # Keep collecting until the record reaches a 3-book consensus, while
         # merging snapshots by sportsbook and retaining each book's latest time.
-        if market.get("status") == "CONSENSUS" and len(books) >= 3:
+        if market.get("status") == "CONSENSUS" and int(market.get("book_count") or 0) >= 3:
             continue
         candidates.append((path, record, start))
     print(json.dumps({"eligible_games": len(candidates), "estimated_credits_at_10_each": len(candidates)*CREDITS_PER_GAME,
