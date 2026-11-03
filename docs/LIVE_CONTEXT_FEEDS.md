@@ -63,14 +63,19 @@ The feed is marked `PROJECTED`, not `CONFIRMED`. NHL line combinations can chang
 
 ## Update cadence
 
-The production workflow refreshes around:
+The production workflow refreshes at the established daily checkpoints:
 
 - 5:15 AM Eastern (after the 5:00 AM slate build)
 - 10:30 AM Eastern
 - 2:30 PM Eastern
 - 5:30 PM Eastern
 
-The UTC cron is duplicated around DST boundaries and the job gates on America/New_York local hour.
+It also performs **two game-specific pregame pulls for every scheduled start time**:
+
+- approximately **30 minutes before puck drop**
+- approximately **15 minutes before puck drop**
+
+The scheduler runs on a quarter-hour heartbeat and gates against each game's actual `start_time_et` in `public/data/today-games.json`. This means staggered starts receive their own 30-minute and 15-minute checks.
 
 ## Freeze policy
 
@@ -106,4 +111,4 @@ Do not commit API keys. Any licensed provider credential must be stored as a Git
 
 ## Refresh cadence
 
-Production live context uses a quarter-hour scheduler with a gate. Full provider pulls occur at the established daily checkpoints (5:15 AM, 10:30 AM, 2:30 PM, and 5:30 PM America/New_York) and once more for each game when it enters the approximately 15-minute pregame window. The pregame gate reads the actual `start_time_et` values from `public/data/today-games.json`, so staggered start times receive their own final pregame check. The scheduler does not perform a provider pull on quarter-hour ticks that match neither a fixed checkpoint nor a pregame window.
+Production live context uses a quarter-hour scheduler with a gate. Full provider pulls occur at the established daily checkpoints (5:15 AM, 10:30 AM, 2:30 PM, and 5:30 PM America/New_York), plus **two pregame checks for every game: about 30 minutes and 15 minutes before its scheduled start**. The gate reads the actual `start_time_et` values from `public/data/today-games.json`, so staggered start times receive independent checks. The scheduler does not perform a provider pull on quarter-hour ticks that match neither a fixed checkpoint nor one of the pregame windows.
