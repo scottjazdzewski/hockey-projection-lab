@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hockey-lab.local/schemas/forward-ledger-summary.schema.json",
+  "title": "Hockey Lab Forward Ledger Summary",
+  "type": "object",
+  "required": ["schema_version","generated_at","sample","metrics","by_model","by_pick_side","games"],
+  "properties": {
+    "schema_version": {"const":"1.0"},
+    "generated_at": {"type":"string"},
+    "sample": {"type":"object"},
+    "metrics": {"type":"object"},
+    "by_model": {"type":"object"},
+    "by_pick_side": {
+      "type":"object",
+      "required":["away","home"],
+      "properties":{
+        "away":{"$ref":"#/$defs/side"},
+        "home":{"$ref":"#/$defs/side"}
+      }
+    },
+    "games":{"type":"array"}
+  },
+  "$defs":{
+    "side":{
+      "type":"object",
+      "required":["games","accuracy","brier","log_loss"],
+      "properties":{
+        "games":{"type":"integer","minimum":0},
+        "accuracy":{"type":["number","null"]},
+        "brier":{"type":["number","null"]},
+        "log_loss":{"type":["number","null"]}
+      }
+    }
+  }
+}
