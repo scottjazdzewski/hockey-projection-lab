@@ -146,3 +146,18 @@
   .home-badge-content{padding:18px 20px}
   .home-editorial-badge strong{font-size:34px}
 }
+
+
+/* Mobile hero: one-line gold label, clear header/menu spacing. */
+@media(max-width:700px){
+  .home-hero-grid{gap:28px;padding-top:28px}
+  .home-hero-copy .kicker{
+    max-width:none;
+    white-space:nowrap;
+    font-size:clamp(6.1px,1.75vw,8px);
+    letter-spacing:.055em;
+    line-height:1.4;
+  }
+  .home-hero-copy h1{margin-top:14px}
+  .hero-shell{overflow:clip}
+}
