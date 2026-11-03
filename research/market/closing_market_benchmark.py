@@ -36,7 +36,7 @@ TEAM_ALIASES = {
     "BUFFALO SABRES": "BUF", "CALGARY FLAMES": "CGY", "CAROLINA HURRICANES": "CAR",
     "CHICAGO BLACKHAWKS": "CHI", "COLORADO AVALANCHE": "COL", "COLUMBUS BLUE JACKETS": "CBJ",
     "DALLAS STARS": "DAL", "DETROIT RED WINGS": "DET", "EDMONTON OILERS": "EDM",
-        "FLORIDA PANTHERS": "FLA", "LOS ANGELES KINGS": "LAK", "LA KINGS": "LAK", "MINNESOTA WILD": "MIN",
+    "FLORIDA PANTHERS": "FLA", "LOS ANGELES KINGS": "LAK", "LA KINGS": "LAK", "MINNESOTA WILD": "MIN",
     "MONTREAL CANADIENS": "MTL", "NASHVILLE PREDATORS": "NSH", "NEW JERSEY DEVILS": "NJD",
     "NEW YORK ISLANDERS": "NYI", "NEW YORK RANGERS": "NYR", "OTTAWA SENATORS": "OTT",
     "PHILADELPHIA FLYERS": "PHI", "PITTSBURGH PENGUINS": "PIT", "SAN JOSE SHARKS": "SJS",
@@ -226,18 +226,45 @@ def _line_match(lines: pd.DataFrame, games: pd.DataFrame) -> tuple[pd.DataFrame,
     if gid_col:
         x["game_id"] = x[gid_col].astype("string")
         known = set(games["game_id"].dropna().astype(str))
-        for idx, row in x.iterrows():
-            if str(row["game_id"]) not in known:
-                audits.append({"row": int(idx), "reason": "unknown_nhl_game_id", "source_game_id": str(row["game_id"])})
-        x = x[x["game_id"].astype(str).isin(known)].copy()
-        return x, audits
+        direct = x[x["game_id"].astype(str).isin(known)].copy()
+        unknown = x[~x["game_id"].astype(str).isin(known)].copy()
+        if unknown.empty:
+            return direct, audits
+        # Some feeds use a generic event UUID in a column called game_id. If
+        # the source also supplies exact schedule/team identity, use that
+        # conservative join rather than mistaking the UUID for an NHL ID.
+        residual = unknown.drop(columns=["game_id", "nhl_game_id"], errors="ignore")
+        has_exact_identity = (
+            _first_col(residual, ["scheduled_start_utc", "scheduled_start", "commence_time"], required=False)
+            and _first_col(residual, ["home_team", "home_team_name", "home_abbr"], required=False)
+            and _first_col(residual, ["away_team", "away_team_name", "away_abbr"], required=False)
+        )
+        if has_exact_identity:
+            fallback, fallback_audit = _line_match(residual, games)
+            audits.extend(fallback_audit)
+            matched_indexes = set(fallback.index)
+            for idx, row in unknown.iterrows():
+                if idx not in matched_indexes and not any(a.get("row") == int(idx) for a in fallback_audit):
+                    audits.append({"row": int(idx), "reason": "unknown_nhl_game_id", "source_game_id": str(row["game_id"])})
+            return pd.concat([direct, fallback], axis=0).sort_index(), audits
+        for idx, row in unknown.iterrows():
+            audits.append({"row": int(idx), "reason": "unknown_nhl_game_id", "source_game_id": str(row["game_id"])})
+        return direct, audits
 
-    date_col = _first_col(x, ["game_date", "date"])
+    date_col = _first_col(x, ["game_date", "date"], required=False)
     start_col = _first_col(x, ["scheduled_start_utc", "scheduled_start", "commence_time"])
     home_col = _first_col(x, ["home_team", "home_team_name", "home_abbr"])
     away_col = _first_col(x, ["away_team", "away_team_name", "away_abbr"])
-    x["_date"] = pd.to_datetime(x[date_col], errors="coerce").dt.date.astype("string")
     x["_start"] = x[start_col].map(_utc)
+    if date_col:
+        x["_date"] = pd.to_datetime(x[date_col], errors="coerce").dt.date.astype("string")
+        missing_date = x["_date"].isna()
+        local_date = x["_start"].dt.tz_convert("America/New_York").dt.date.astype("string")
+        x.loc[missing_date, "_date"] = local_date.loc[missing_date]
+    else:
+        # Derive the source event date from its UTC scheduled timestamp in
+        # NHL's primary game-date timezone when the provider omits a date field.
+        x["_date"] = x["_start"].dt.tz_convert("America/New_York").dt.date.astype("string")
     x["_home"] = x[home_col].map(_team_key)
     x["_away"] = x[away_col].map(_team_key)
     lookup: dict[tuple, list[str]] = {}
@@ -718,6 +745,7 @@ def build(args) -> dict:
         "road_pick_tendency": _road_tendency(primary),
         "road_pick_tendency_by_season": {},
         "by_hockey_lab_pick_side": _breakdown(primary, "hl_pick_side"),
+        "by_market_pick_side": _breakdown(primary, "market_pick_side"),
         "by_hockey_lab_home_probability_bucket": _breakdown(primary, "hl_home_probability_bucket"),
         "by_market_home_probability_bucket": _breakdown(primary, "market_home_probability_bucket"),
         "by_favorite_probability_bucket": _breakdown(primary, "market_favorite_bucket"),
@@ -728,6 +756,8 @@ def build(args) -> dict:
         "by_feature_version": _breakdown(primary, "feature_version"),
         "by_goalie_confirmation_state": _breakdown(primary, "goalie_state"),
         "by_rest_state": _breakdown(primary, "rest_home_severity"),
+        "by_home_rest_state": _breakdown(primary, "rest_home_severity"),
+        "by_away_rest_state": _breakdown(primary, "rest_away_severity"),
         "by_b2b": _breakdown(primary, "any_b2b"),
         "by_3in4": _breakdown(primary, "any_3in4"),
         "by_4in6": _breakdown(primary, "any_4in6"),
