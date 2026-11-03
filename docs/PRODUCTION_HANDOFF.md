@@ -84,3 +84,32 @@ The browser requires **two independent conditions** before displaying model-deri
 This prevents a research or candidate file from appearing simply because it was copied into `public/data/`.
 
 For a promotion, update the export and its manifest surface together, run the validator, then commit.
+
+
+## Promotion utility
+
+To prepare a validated export for publication without hand-editing manifest metadata:
+
+```bash
+node src/production/promote-surface.mjs game_projections
+```
+
+The default is a **dry run**.
+
+If the dry run is correct:
+
+```bash
+node src/production/promote-surface.mjs game_projections --apply
+node src/production/validate-public-data.mjs
+node src/production/validate-site-contract.mjs
+```
+
+Supported surfaces:
+
+- `game_projections`
+- `model_performance`
+- `team_ratings`
+- `player_ratings`
+- `fantasy_rankings`
+
+The utility refuses to mark a model surface READY unless its export is already promoted and non-empty. Team ratings additionally require all 32 current NHL teams.
