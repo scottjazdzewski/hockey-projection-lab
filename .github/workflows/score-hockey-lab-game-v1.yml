@@ -41,7 +41,7 @@ jobs:
       - name: Score current slate
         run: |
           rm -rf /tmp/hwin_v1 && mkdir -p /tmp/hwin_v1
-          python src/production/hockey_lab_game_v1.py             --pbp /tmp/pbp_u/pbp_feature_output/game_team_event_features.parquet             --spine /tmp/spine_u/spine_v3/games.parquet             --schedule public/data/today-games.json             --out /tmp/hwin_v1
+          python src/production/hockey_lab_game_v1.py             --pbp /tmp/pbp_u/pbp_feature_output/game_team_event_features.parquet             --spine /tmp/spine_u/spine_v3/games.parquet             --schedule public/data/today-games.json             --context public/data/live-context.json             --out /tmp/hwin_v1
           cat /tmp/hwin_v1/scorer-manifest.json
           cp /tmp/hwin_v1/game-projections.json public/data/game-projections.json
           cp /tmp/hwin_v1/model-performance.json public/data/model-performance.json
