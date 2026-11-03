@@ -1,0 +1,120 @@
+{
+  "experiment_id": "EXP-0029",
+  "model_id": "HOCKEY-LAB-GOALS-GOALIE-LAYER-011-RESEARCH",
+  "feature_version": "pregame-goals-process-team60-plus-retrospective-starter-quality-workload-011",
+  "status": "CANDIDATE for timestamped pregame-starter validation only; not production eligible",
+  "run_date": "2026-11-03",
+  "source_version": "sportsdataverse-pbp-features-20261102+canonical-spine-v3-20261102+goalie-features-20261102",
+  "retrieval_date": "2026-11-03",
+  "source_files": {
+    "goal_model_code": {
+      "path": "/workspace/scratch/d35a67cf1915/research/hockey_goals_goalie_layer_011.py",
+      "sha256": "f41f020b42fb95f3ab7baebe9488f98ed47796c483856044f8a1aafebe7b1b40"
+    },
+    "goals_baseline_code": {
+      "path": "/workspace/scratch/d35a67cf1915/research/hockey_goals_nested_window_selection_010.py",
+      "sha256": "c93f3cf29098e52f9b4d74955650f5b858b9c45170abe59d2fd69948f2554c65"
+    },
+    "goalie_feature_builder": {
+      "path": "/workspace/scratch/d35a67cf1915/research/hwin_previous_season_battery_011.py",
+      "sha256": "10c4c9442d977a653b2a906350751dbbc39d2735e9447ab24951470b6523b874"
+    },
+    "requirements": {
+      "path": "/workspace/scratch/d35a67cf1915/research/requirements-goals-goalie-layer-011.txt",
+      "sha256": "8f5c10be449e6422ae3be317049abeb1ee273af522a95bb7247a90c0dfe8bbdd"
+    },
+    "pbp_features": {
+      "path": "/tmp/hockey_events/data/pbp_feature_output/game_team_event_features.parquet",
+      "sha256": "8fc51d8de6db68fca1ea9ab850627c044354d60364b63d6e8531f18110c6f3ef"
+    },
+    "goalie_features": {
+      "path": "/tmp/hockey_goalie/data/goalie_feature_output/goalie_game_features.parquet",
+      "sha256": "9fc54bacceb0c67d451ef8cc97f0f1851794f6a4eab28ff2fa91497d1e8684fa"
+    },
+    "canonical_games": {
+      "path": "/tmp/hockey_spine/data/spine_v3/games.parquet",
+      "sha256": "e3b6a3cb9784a91ec6e396e1a7e72330451abee055ed0ba54e0408e37f40a0e3"
+    },
+    "pbp_manifest": {
+      "path": "/tmp/hockey_events/data/pbp_feature_output/source_manifest.csv",
+      "sha256": "3c4ab0fc8fbc56ec2591c6722e89fa36f721fad2379e4aa9d61460a6cddd5b2c"
+    },
+    "goalie_summary": {
+      "path": "/tmp/hockey_goalie/data/goalie_feature_output/summary.json",
+      "sha256": "26e6b8d17e9a7d40a1930a1972d2c6af0023c0866879ffb4b41243a63db0ce7d"
+    },
+    "spine_manifest": {
+      "path": "/tmp/hockey_spine/data/spine_v3/source_manifest.csv",
+      "sha256": "8b19be878cf291c7969f0cbd67447c977cd5b3929dfa00261ce40a891dd53e66"
+    }
+  },
+  "validation_design": "rolling origin; train<=S-2; tune Poisson alpha and no-goalie score law on S-1; refit through S-1; test S; regular seasons 2022-2026",
+  "target_games": {
+    "2022": 1312,
+    "2023": 1312,
+    "2024": 1312,
+    "2025": 1312,
+    "2026": 1312
+  },
+  "feature_policy": "Fixed 60-date team/opponent features; goalie skill/workload strictly prior game-date; same-game actual starter identity is retrospective from postgame goalie box and has no timestamp",
+  "distribution_policy": "For each fold choose score law/parameter on S-1 using the no-goalie baseline, then hold it fixed across goalie variants to isolate goal-rate inputs.",
+  "goalie_coverage": {
+    "games_with_both_actual_starters": 20820,
+    "game_sides_with_actual_starter": 41640,
+    "game_sides_total": 48028,
+    "pregame_identity_source": "retrospective starter_bool from same-game goalie box",
+    "goalie_performance_cutoff": "strictly earlier game_date; all games on current date excluded",
+    "stats_shrunk": "save percentage toward .900; GSAx per 30 shots toward 0",
+    "target_2022_2026_sides_with_opponent_starter": 13986,
+    "target_2022_2026_sides_missing_opponent_starter": 0,
+    "target_2022_2026_sides_missing_prior_goalie_quality": 0
+  },
+  "best_variant": "opponent_goalie_career_shrunk",
+  "comparison": {
+    "baseline": "fixed60_no_goalie",
+    "baseline_regulation_score_logloss": 3.8318036434961305,
+    "candidate_regulation_score_logloss": 3.830194396888918,
+    "baseline_regulation_brier": 0.6230550192453058,
+    "candidate_regulation_brier": 0.6226755399090016,
+    "candidate_score_logloss_seasons_improved": 5,
+    "target_seasons": 5,
+    "season_block_bootstrap_95pct_delta_score_logloss_candidate_minus_baseline": [
+      -0.0023638542476790685,
+      -0.0007674248451522527
+    ],
+    "bootstrap_limit": "only five season blocks; exploratory and unadjusted for four goalie-variant comparisons"
+  },
+  "score_distribution_export": {
+    "file": "score_distribution_pmf.parquet",
+    "variant": "opponent_goalie_career_shrunk",
+    "rows": 6560,
+    "regulation_cells_per_game": 676,
+    "final_cells_per_game": 729,
+    "probability_dtype": "float32",
+    "compression": "zstd level 9",
+    "max_pmf_sum_error": 2.018e-08,
+    "max_expected_goal_delta_vs_float64_ledger": 1.627e-06
+  },
+  "execution": "PYTHONPATH=/tmp/hockey-pyarrow:research python research/hockey_goals_goalie_layer_011.py --pbp /tmp/hockey_events/data/pbp_feature_output/game_team_event_features.parquet --spine /tmp/hockey_spine/data/spine_v3/games.parquet --goalie /tmp/hockey_goalie/data/goalie_feature_output/goalie_game_features.parquet --out /tmp/hockey_runs/goals_goalie_layer_011_verified",
+  "python_version": "3.12.14",
+  "artifacts": {
+    "fold_metrics.parquet": {
+      "sha256": "e1ce599fa0d4b0b32e7699814c031fe0bb0d1b3a290e3efbfdc7f3645abd571d",
+      "bytes": 12564
+    },
+    "oof_predictions.parquet": {
+      "sha256": "9168eca77aef2827142437a3b6e2d718f9fc04e3f5e0ea09738d9e338ee16e98",
+      "bytes": 6316886
+    },
+    "score_distribution_pmf.parquet": {
+      "sha256": "8b28b7bfa189023a0820b8de3a08debbe4a900d53a7659fac907cfe8b2c6c6fa",
+      "bytes": 35734025
+    },
+    "summary.json": {
+      "sha256": "7896d7f6ddd523e0ce9535b1457c7f8c5132851a567417b786037c0d3505a55b",
+      "bytes": 141594
+    }
+  },
+  "reproducibility": "One full run; output schema, probability sums, and score-PMF reconciliation checked. Exact second full run pending.",
+  "decision": "Keep as CANDIDATE only for a timestamped pregame-starter integration test. No site output. Hockey Lab Game v1.0.0 remains frozen."
+}
