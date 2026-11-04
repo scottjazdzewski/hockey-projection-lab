@@ -190,7 +190,7 @@ def apply_goalie_adjustment(projections,goalie_model_path,goalie_history_path):
     if not model_path.exists() or not history_path.exists():
         return projections,None
     model=json.loads(model_path.read_text())
-    if not ga.is_promoted_model(model):
+    if not ga.is_promoted_model(model, expected_baseline_feature_version=FEATURE_VERSION):
         return projections,None
     goalie_games=pd.read_parquet(history_path)
     records=goalie_games.to_dict(orient="records")
