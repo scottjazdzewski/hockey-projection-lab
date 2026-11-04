@@ -30,6 +30,7 @@ else ok('schedule readable');
 
 if(projections){
   if(projections.schema_version!=='1.0') fail('game projections schema_version must be 1.0');
+  const goalieLayerActive=String(projections.model?.feature_version||'').toLowerCase().includes('goalie-adjustment-');
   if(!projections.model?.model_id || !projections.model?.version || !projections.model?.feature_version) fail('game projections model metadata incomplete');
   if(!Array.isArray(projections.projections)) fail('game projections array missing');
   else {
@@ -56,6 +57,25 @@ if(projections){
         }
       }
       const a=g?.away?.win_probability, h=g?.home?.win_probability;
+      if(goalieLayerActive){
+        if(!['APPLIED','UNAVAILABLE'].includes(g.goalie_adjustment_status)) fail(id+' goalie-aware model missing adjustment status');
+        for(const side of ['away','home']){
+          const base=g?.[side]?.team_only_win_probability;
+          const delta=g?.[side]?.goalie_adjustment_pp;
+          const adjusted=g?.[side]?.win_probability;
+          if(!finiteOrNull(base) || typeof base!=='number' || base<0 || base>1) fail(id+' '+side+' missing team-only baseline');
+          if(g.goalie_adjustment_status==='APPLIED'){
+            if(typeof delta!=='number' || !Number.isFinite(delta)) fail(id+' '+side+' missing applied goalie adjustment');
+            else if(typeof base==='number' && Math.abs(adjusted-(base+delta/100))>0.00001) fail(id+' '+side+' goalie adjustment does not reconcile');
+          }else{
+            if(delta!==null) fail(id+' '+side+' unavailable adjustment must be null');
+            if(typeof base==='number' && typeof adjusted==='number' && Math.abs(base-adjusted)>0.00001) fail(id+' '+side+' unavailable goalie must use team-only baseline');
+          }
+        }
+        if(g.goalie_adjustment_status==='APPLIED' && g.goalie_adjustment?.model_version!==projections.model.version) fail(id+' goalie adjustment model version mismatch');
+      }else if(g.goalie_adjustment_status==='APPLIED'){
+        fail(id+' applied goalie adjustment without goalie-aware feature version');
+      }
       if(g.publish_state==='PUBLISHED'){
         if(projections.model.status!=='PROMOTED') fail(id+' published from non-PROMOTED model');
         if(a===null || h===null) fail(id+' published with missing win probability');
