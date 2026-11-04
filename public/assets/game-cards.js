@@ -79,7 +79,8 @@
   }
 
   // MARKET IS DISPLAY-ONLY: never feed its output to the prediction scorer.
-  function marketBlock(g,m,modelIsValid,p){
+  // Market is a separate display-only reference; never used as a model input.
+  function marketBlock(g,m){
     const safe=m && m.away_abbr===g.away_abbr && m.home_abbr===g.home_abbr &&
       Number.isFinite(m.no_vig_away) && Number.isFinite(m.no_vig_home) &&
       m.no_vig_away>0 && m.no_vig_away<1 &&
@@ -90,34 +91,20 @@
         '<div class="gc-market-pending">Consensus market awaiting verified odds feed</div>'+
         '</section>';
     }
-
     const at=Date.parse(m.captured_at||'');
     const start=Date.parse(g.start_time_et||'');
     const age=Number.isFinite(at)?(Date.now()-at)/60000:Infinity;
     const isClosing=m.status==='CLOSING' && Number.isFinite(start) && Number.isFinite(at) && at<start;
-    const alreadyStarted=Number.isFinite(start) && Date.now()>=start;
     const isOld=!isClosing && age>60;
-    const label=isClosing?'Last pregame snapshot':
-      m.status==='LAST_PREGAME'?'Earlier pregame snapshot':
-      m.status==='SINGLE_BOOK'?'Single-book reference':
-      m.status==='SOURCE_SNAPSHOT'?'Source-reported reference':
-      alreadyStarted?'Last saved pregame quote':
-      isOld?'Earlier market snapshot':'Current market consensus';
     const source=m.status==='SOURCE_SNAPSHOT'?'Single published source'
       : (Number.isInteger(m.book_count)?m.book_count+' sportsbook'+(m.book_count===1?'':'s'):'Source unverified');
     const time=timeET(m.captured_at);
-    const diff=modelIsValid ? (p.away.win_probability-m.no_vig_away)*100 : null;
-    const diffText=Number.isFinite(diff)
-      ? 'Lab − market: '+esc(g.away_abbr)+' '+(diff>=0?'+':'')+diff.toFixed(1)+' pp · '+
-        esc(g.home_abbr)+' '+(-diff>=0?'+':'')+(-diff).toFixed(1)+' pp'
-      : 'Market shown separately · model projection unavailable';
     return '<section class="gc-market'+(isOld?' gc-market-stale':'')+'" aria-label="Independent market benchmark">'+
-      '<div class="gc-market-head"><span>'+esc(label)+'</span><span>'+esc(source)+' · '+esc(time)+'</span></div>'+
+      '<div class="gc-market-head gc-market-head-source"><span>'+esc(source)+' · '+esc(time)+'</span></div>'+
       '<div class="gc-market-values">'+
         '<div><small>'+esc(g.away_abbr)+' market moneyline</small><strong>'+price(m.market_ml_away)+'</strong><b>'+pct(m.no_vig_away)+' no-vig</b></div>'+
         '<div><small>'+esc(g.home_abbr)+' market moneyline</small><strong>'+price(m.market_ml_home)+'</strong><b>'+pct(m.no_vig_home)+' no-vig</b></div>'+
       '</div>'+
-      '<div class="gc-market-diff">'+esc(diffText)+(isOld?' · Not current':'')+'</div>'+
     '</section>';
   }
 
@@ -156,7 +143,7 @@
         '<div class="gc-vs" aria-hidden="true">@</div>'+
         '<div class="gc-team"><img src="'+logo(g.home_abbr)+'" alt="'+esc(g.home_name||g.home_abbr)+'"><div class="gc-team-name'+homeClass+'">'+esc(home)+'</div><small>'+esc(g.home_abbr)+' · Home</small><div class="gc-team-projection"><strong>'+homeProb+'</strong><span>Win probability</span><b>'+homeFair+' fair</b></div></div>'+
       '</div>'+
-      marketBlock(g,market,live,p)+
+      marketBlock(g,market)+
       '<div class="gc-metrics">'+
         '<div class="gc-metric"><strong>'+xg+'</strong><span>Expected goals A · H</span></div>'+
         '<div class="gc-metric"><strong>'+reg+'</strong><span>Reg win A · H</span></div>'+
