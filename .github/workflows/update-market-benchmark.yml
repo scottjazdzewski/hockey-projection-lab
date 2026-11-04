@@ -64,13 +64,7 @@ jobs:
       - name: Refresh multi-book odds (benchmark only)
         env:
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
-        run: |
-          # One authorized initial collection, then all later runs use the six-slot guard.
-          if [[ "$GITHUB_EVENT_NAME" == "push" && "$(git log -1 --pretty=%s)" == "One-time initial NHL market snapshot" ]]; then
-            python src/market/update_market_benchmark.py --force
-          else
-            python src/market/update_market_benchmark.py
-          fi
+        run: python src/market/update_market_benchmark.py
       - name: Commit market data only
         run: |
           git config user.name "hockey-lab-bot"
