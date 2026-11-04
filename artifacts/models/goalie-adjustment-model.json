@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "model_id": "HOCKEY-LAB-GAME-GOALIE",
+  "version": "candidate-0.1.0",
+  "status": "CANDIDATE",
+  "feature_version": "team-strength-004+b2b-007+goalie-adjustment-candidate",
+  "trained_through": null,
+  "calibration": null,
+  "promotion_note": "This file is intentionally non-promoted until age-curve, exposure-shrinkage, and probability calibration pass rolling-origin and prospective validation."
+}
