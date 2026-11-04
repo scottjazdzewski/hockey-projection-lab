@@ -1,0 +1,2 @@
+Hockey Lab market watchdog trigger.
+This file is touched only by the external fallback scheduler when a required fixed market checkpoint is missing.
