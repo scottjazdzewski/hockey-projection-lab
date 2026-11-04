@@ -21,4 +21,4 @@ Follow these requirements:
 
 The active production model is team-only while its feature version is `team-strength-004+b2b-007` and its output carries the `no_goalie_layer` flag. Do not remove that flag, change the feature version, or present production percentages as goalie-adjusted until the goalie model has passed the validation and promotion gate in the source-of-truth document.
 
-When implementing the layer, update the scorer, output schema and validator, live-context rescore trigger, game-card presentation, and forward snapshot ledger as one versioned change. Keep the existing rescore trigger gated on a goalie-aware feature version so live-feed changes cannot silently alter team-only probabilities.
+When implementing the layer, update the scorer, output schema and validator, live-context rescore trigger, game-card presentation, and forward snapshot ledger as one versioned change. Keep the existing rescore trigger gated on the explicit `goalie-adjustment-` feature-version marker so live-feed changes cannot silently alter team-only probabilities.
