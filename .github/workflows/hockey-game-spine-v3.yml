@@ -1,6 +1,7 @@
 name: Hockey Canonical Game Spine V3
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -157,6 +158,6 @@ jobs:
         with:
           name: hockey-canonical-spine-v3-20261102
           path: hockey-canonical-spine-v3-20261102.zip
-          retention-days: 1
+          retention-days: 14
           compression-level: 0
           if-no-files-found: error
