@@ -1,6 +1,6 @@
 # Goalie-Conditional Win Projections
 
-**Status:** Required engineering behavior; research and production integration are not complete.
+**Status:** Calculation and site wiring are implemented behind a promotion gate; goalie calibration and promotion are not complete.
 
 This document is the source of truth for adding named-goalie effects to Hockey Lab Game Cards. A card's projected win percentage is conditional on the goalie currently expected to start. If the pregame feed later identifies a different starter, Hockey Lab must recalculate the projection for that goalie and refresh the card.
 
@@ -73,7 +73,9 @@ A positive goalie-to-goalie scenario calculation alone does not pass this gate. 
 
 ## Current implementation state
 
-The live goalie feed and card already carry goalie names/statuses. The promoted Game v1.0.0 scorer is still team-only and marks outputs with a no-goalie-layer flag. The live-context workflow now compares selected goalie identity and status, including PROJECTED changes, and requests a scorer rerun only when the active feature version includes the explicit `goalie-adjustment-` marker. The current feature version is team-only, so goalie-feed changes update the context display but do not yet change public probabilities. The goalie rating, production scorer integration, export schema, and adjusted card rendering still require research, implementation, and validation before the public win percentage becomes goalie-conditional.
+The goalie calculation path is implemented in `src/production/goalie_adjustment.py` and is called by the production scorer when a promoted calibration file and goalie-history artifact are available. It joins by provider/NHL player ID, falling back only to a unique normalized name; estimates a learned age curve; shrinks prior save performance by starts, shots, and minutes; and converts the home-away goalie rating difference to a logit adjustment using a fitted coefficient. The scorer exports team-only baseline probabilities, adjusted probabilities, percentage-point effects, fair moneylines, goalie provenance, and exposure details. The Game Card renders the baseline and effect, and the forward ledger freezes those fields. The live-context workflow detects selected-goalie identity/status changes and requests a rescore only when the feature version includes the explicit `goalie-adjustment-` marker.
+
+The model file at `artifacts/models/goalie-adjustment-model.json` is still CANDIDATE and contains no fitted calibration. The active `team-strength-004+b2b-007` production model remains team-only and marks outputs with `no_goalie_layer`; goalie feed changes only update the displayed context today. Complete the age/exposure rolling-origin calibration and prospective validation before promoting a model file with the explicit marker.
 
 ## Change-control checklist
 
