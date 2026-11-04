@@ -21,8 +21,8 @@ Follow these requirements:
 
 The calculation hook is in `src/production/goalie_adjustment.py`; the production scorer, projection schema/validator, Game Card, forward ledger, and goalie-history workflow are wired to carry the adjusted result and its audit fields. The model artifact `artifacts/models/goalie-adjustment-model.json` is promoted as `prospective-0.3.0` against `team-strength-004+b2b-007`. Its rolling-origin lift is small and uneven (3 of 5 seasons improved; 2026 worsened), so keep the prospective ledger under review. A promoted artifact must set `baseline_feature_version` to the exact active team-only `FEATURE_VERSION`; the scorer rejects calibrations fitted against another baseline.
 
-## Production promotion guard
+## Production rollout and prospective monitoring
 
-The active production model is team-only while its feature version is `team-strength-004+b2b-007` and its output carries the `no_goalie_layer` flag. Do not remove that flag, change the feature version, or present production percentages as goalie-adjusted until the goalie model has passed the validation and promotion gate in the source-of-truth document.
+Model `prospective-0.3.0` is promoted against the exact active baseline and is eligible for pregame projections. The public projection file may retain the old team-only version until the next pregame scoring run; never rewrite forecasts after puck drop. The scorer now runs daily before the slate, uses the projected starter, and the live-context workflow rescores a changed or newly confirmed starter once the active projection has the `goalie-adjustment-` marker.
 
-When implementing the layer, update the scorer, output schema and validator, live-context rescore trigger, game-card presentation, and forward snapshot ledger as one versioned change. Keep the existing rescore trigger gated on the explicit `goalie-adjustment-` feature-version marker so live-feed changes cannot silently alter team-only probabilities.
+Continue comparing goalie-adjusted probabilities with the frozen team-only baseline in the forward ledger. The rolling lift is small and uneven (3 of 5 seasons improved, while 2026 worsened), so future model changes require prospective results and a fresh versioned review.
