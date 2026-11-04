@@ -185,9 +185,12 @@ def adjust_home_probability(team_only_home_probability, home_rating, away_rating
 
 
 def is_promoted_model(model):
+    metrics = (model or {}).get("performance_metrics") or {}
+    required_metrics = ("accuracy", "brier", "log_loss", "calibration")
     return (
         isinstance(model, dict)
         and str(model.get("status", "")).upper() == "PROMOTED"
         and FEATURE_MARKER in str(model.get("feature_version", "")).lower()
         and isinstance(model.get("calibration"), dict)
+        and all(isinstance(metrics.get(key), (int, float)) and math.isfinite(metrics[key]) for key in required_metrics)
     )
