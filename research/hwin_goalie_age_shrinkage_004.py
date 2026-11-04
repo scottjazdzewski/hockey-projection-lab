@@ -19,8 +19,9 @@ from sklearn.preprocessing import StandardScaler
 
 import sys
 sys.path.insert(0,"research")
-import hwin_goalie_layer_001 as gl
-import hwin_rolling_backtest_001 as rb
+import hwin_team_strength_004 as ts
+sys.path.insert(0,"src/production")
+import hockey_lab_game_v1 as prod
 
 TARGET_SEASONS=[2022,2023,2024,2025,2026]
 C_GRID=[0.05,0.1,0.25,0.5,1.0,2.0]
@@ -150,27 +151,16 @@ def add_goalie_diff(x,ratings):
     return z
 
 
-def fit_base(train,val,test):
-    best=None
-    for C in C_GRID:
-        pipe=Pipeline([("imp",SimpleImputer(strategy="median")),("sc",StandardScaler()),
-                       ("m",LogisticRegression(C=C,max_iter=1800))])
-        pipe.fit(train[TEAM_FEATURES],train.home_win)
-        pv=pipe.predict_proba(val[TEAM_FEATURES])[:,1]
-        ll=log_loss(val.home_win,np.clip(pv,1e-6,1-1e-6),labels=[0,1])
-        if best is None or ll<best[0]:
-            best=(ll,C,pipe,pv)
-    C=best[1]
-    train_only_pipe=Pipeline([("imp",SimpleImputer(strategy="median")),("sc",StandardScaler()),
-                              ("m",LogisticRegression(C=C,max_iter=1800))])
-    train_only_pipe.fit(train[TEAM_FEATURES],train.home_win)
-    val_prob=train_only_pipe.predict_proba(val[TEAM_FEATURES])[:,1]
-    fit=pd.concat([train,val],ignore_index=True)
+def fit_base(train,val,test,features,C):
+    train_pipe=Pipeline([("imp",SimpleImputer(strategy="median")),("sc",StandardScaler()),
+                         ("m",LogisticRegression(C=C,max_iter=2500))])
+    train_pipe.fit(train[features],train.home_win.astype(int))
+    val_prob=train_pipe.predict_proba(val[features])[:,1]
     final_pipe=Pipeline([("imp",SimpleImputer(strategy="median")),("sc",StandardScaler()),
-                         ("m",LogisticRegression(C=C,max_iter=1800))])
-    final_pipe.fit(fit[TEAM_FEATURES],fit.home_win)
-    test_prob=final_pipe.predict_proba(test[TEAM_FEATURES])[:,1]
-    return C,val_prob,test_prob
+                         ("m",LogisticRegression(C=C,max_iter=2500))])
+    final_pipe.fit(pd.concat([train,val],ignore_index=True)[features],
+                   pd.concat([train,val],ignore_index=True).home_win.astype(int))
+    return val_prob,final_pipe.predict_proba(test[features])[:,1]
 
 
 def fit_beta(p,y,diff):
@@ -207,160 +197,125 @@ def apply_beta(p,diff,beta):
 
 def main(pbp_path,spine_path,goalie_path,outdir):
     out=Path(outdir); out.mkdir(parents=True,exist_ok=True)
-    pbp=pd.read_parquet(pbp_path)
-    spine=pd.read_parquet(spine_path)
+    pbp=pd.read_parquet(pbp_path); spine=pd.read_parquet(spine_path)
     goalies=pd.read_parquet(goalie_path)
-    spine=spine[spine.result_available.fillna(False)&spine.game_type.astype("string").isin(["R","P"])].copy()
+    spine=spine[spine.game_type.astype("string").isin(["R","P"])].copy()
     spine["game_date"]=pd.to_datetime(spine.game_date,errors="coerce")
     spine["source_season"]=pd.to_numeric(spine.source_season,errors="coerce")
-    x=gl.build_team_features(pbp)
-
+    spine["home_win"]=pd.to_numeric(spine.home_win,errors="coerce")
+    games=ts.add_flat_and_ewm_features(ts.game_event_table(pbp))
+    x=games.merge(prod.build_schedule_features(spine),on="game_id",how="left")
+    for alpha,retain in ts.OA_GRID:
+        oa,tag=ts.opponent_adjusted_features(games,alpha,retain)
+        x=x.merge(oa,on="game_id",how="left")
     elo={}
-    for k,ha,ret in rb.ELO_GRID:
-        key=f"k{k}_h{ha}_r{ret}"
-        elo[key]=rb.elo_all(spine,k,ha,ret)
+    for k,ha,retain in ts.ELO_GRID:
+        elo[f"k{k}_h{ha}_r{retain}"]=prod.elo_with_future(spine,k,ha,retain)
 
-    rows=[]
-    selected=[]
+    rows=[]; selected=[]
     for target in TARGET_SEASONS:
-        val_season=target-1
-        train=x[x.source_season.le(target-2)].copy()
-        val=x[x.source_season.eq(val_season)].copy()
-        test=x[x.source_season.eq(target)].copy()
-        if min(len(train),len(val),len(test))<100:
-            continue
-
-        elo_choice=None
+        vs=target-1
+        train=x[x.source_season.le(target-2)&x.home_win.notna()].copy()
+        val=x[x.source_season.eq(vs)&x.home_win.notna()].copy()
+        test=x[x.source_season.eq(target)&x.home_win.notna()].copy()
+        if min(len(train),len(val),len(test))<100: continue
+        ec=None
         for key,pred in elo.items():
-            v=val[["game_id","home_win"]].merge(pred[pred.source_season.eq(val_season)][["game_id","p"]],on="game_id")
+            v=val[["game_id","home_win"]].merge(
+                pred[pred.source_season.eq(vs)][["game_id","elo_p"]],on="game_id",how="inner")
             if len(v)<100: continue
-            ll=log_loss(v.home_win,np.clip(v.p,1e-6,1-1e-6),labels=[0,1])
-            if elo_choice is None or ll<elo_choice[0]:
-                elo_choice=(ll,key)
-        key=elo_choice[1]
-        el=elo[key][["game_id","p"]].rename(columns={"p":"elo_p"})
-        z=x.merge(el,on="game_id",how="left")
+            ll=log_loss(v.home_win.astype(int),np.clip(v.elo_p,1e-6,1-1e-6),labels=[0,1])
+            if ec is None or ll<ec[0]: ec=(ll,key)
+        if ec is None: continue
+        z=x.merge(elo[ec[1]][["game_id","elo_p"]],on="game_id",how="left")
         z["elo_logit"]=np.log(np.clip(z.elo_p,1e-6,1-1e-6)/np.clip(1-z.elo_p,1e-6,1-1e-6))
-        train=z[z.source_season.le(target-2)].copy()
-        val=z[z.source_season.eq(val_season)].copy()
-        test=z[z.source_season.eq(target)].copy()
-        base_c,base_val_p,base_test_p=fit_base(train,val,test)
-        base_metrics=metrics(test.home_win,base_test_p)
-
-        age_curve=fit_age_curve(goalies,through_season=target-2)
+        train=z[z.source_season.le(target-2)&z.home_win.notna()].copy()
+        val=z[z.source_season.eq(vs)&z.home_win.notna()].copy()
+        test=z[z.source_season.eq(target)&z.home_win.notna()].copy()
         best=None
+        for alpha,retain in ts.OA_GRID:
+            tag=f"a{alpha:.2f}_r{retain:.2f}".replace(".","p")
+            feats=["elo_logit","d_sog_share_r20","d_xg_share_r20","d_goals_r20","d_rest_days",
+                   f"oa_sog_diff_{tag}",f"oa_xg_diff_{tag}",
+                   "h_sched_b2b","a_sched_b2b","d_sched_b2b"]
+            for C in C_GRID:
+                pipe=Pipeline([("imp",SimpleImputer(strategy="median")),("sc",StandardScaler()),
+                               ("m",LogisticRegression(C=C,max_iter=2500))])
+                pipe.fit(train[feats],train.home_win.astype(int))
+                pv=np.clip(pipe.predict_proba(val[feats])[:,1],1e-6,1-1e-6)
+                ll=log_loss(val.home_win.astype(int),pv,labels=[0,1])
+                if best is None or ll<best["ll"]: best={"ll":ll,"tag":tag,"C":C,"features":feats}
+        feats=best["features"]
+        bpv,bpt=fit_base(train,val,test,feats,best["C"])
+        age_curve=fit_age_curve(goalies,through_season=target-2)
+        chosen_params=None
         for sk in SHOT_K:
             for nk in START_K:
                 for mk in MINUTE_K:
                     ratings=goalie_ratings(goalies,age_curve,sk,nk,mk)
-                    zratings=add_goalie_diff(z,ratings)
-                    train_g=zratings[zratings.source_season.le(target-2)].copy()
-                    val_g=zratings[zratings.source_season.eq(val_season)].copy()
-                    test_g=zratings[zratings.source_season.eq(target)].copy()
-                    diff=val_g["d_goalie_rating"].to_numpy(float)
-                    beta,keep=fit_beta(base_val_p,val_g.home_win.to_numpy(float),diff)
-                    pv=apply_beta(base_val_p,diff,beta)
-                    val_ll=log_loss(val_g.home_win.to_numpy(int)[keep],pv[keep],labels=[0,1])
-                    if best is None or val_ll<best["validation_log_loss"]:
-                        best={"shots_k":sk,"starts_k":nk,"minutes_k":mk,"beta":beta,
-                              "validation_log_loss":float(val_ll),"ratings":ratings}
-        chosen=best
-        rating_frame=add_goalie_diff(z,chosen["ratings"])
-        test_g=rating_frame[rating_frame.source_season.eq(target)].copy()
-        adjusted=apply_beta(base_test_p,test_g["d_goalie_rating"].to_numpy(float),chosen["beta"])
-        adjusted_metrics=metrics(test_g.home_win,adjusted)
-        row={
-            "target_season":target,
-            "validation_season":val_season,
-            "games":adjusted_metrics["n"],
-            "base_c":base_c,
-            "shots_k":chosen["shots_k"],
-            "starts_k":chosen["starts_k"],
-            "minutes_k":chosen["minutes_k"],
-            "probability_beta":chosen["beta"],
-            "validation_log_loss":chosen["validation_log_loss"],
-            "backbone_brier":base_metrics["brier"],
-            "goalie_brier":adjusted_metrics["brier"],
-            "delta_brier":adjusted_metrics["brier"]-base_metrics["brier"],
-            "backbone_log_loss":base_metrics["log_loss"],
-            "goalie_log_loss":adjusted_metrics["log_loss"],
-            "delta_log_loss":adjusted_metrics["log_loss"]-base_metrics["log_loss"],
-            "backbone_accuracy":base_metrics["accuracy"],
-            "goalie_accuracy":adjusted_metrics["accuracy"],
-            "goalie_calibration":adjusted_metrics["calibration"],
-            "age_curve":age_curve
-        }
-        rows.append(row)
-        selected.append(chosen)
+                    zr=add_goalie_diff(z,ratings)
+                    vg=zr[zr.source_season.eq(vs)&zr.home_win.notna()]
+                    vp=val[["game_id","home_win"]].copy(); vp["base_p"]=bpv
+                    vp=vp.merge(vg[["game_id","d_goalie_rating"]],on="game_id",how="inner")
+                    beta,keep=fit_beta(vp.base_p.to_numpy(float),vp.home_win.to_numpy(float),
+                                       vp.d_goalie_rating.to_numpy(float))
+                    adj=apply_beta(vp.base_p.to_numpy(float),vp.d_goalie_rating.to_numpy(float),beta)
+                    vll=log_loss(vp.home_win.to_numpy(int)[keep],adj[keep],labels=[0,1])
+                    if chosen_params is None or vll<chosen_params["validation_log_loss"]:
+                        chosen_params={"shots_k":sk,"starts_k":nk,"minutes_k":mk,"beta":beta,
+                            "validation_log_loss":float(vll),"ratings":ratings}
+        ch=chosen_params
+        tg=add_goalie_diff(z,ch["ratings"])
+        tg=tg[tg.source_season.eq(target)&tg.home_win.notna()]
+        tp=test[["game_id","home_win"]].copy(); tp["base_p"]=bpt
+        tp=tp.merge(tg[["game_id","d_goalie_rating"]],on="game_id",how="inner")
+        adj=apply_beta(tp.base_p.to_numpy(float),tp.d_goalie_rating.to_numpy(float),ch["beta"])
+        am=metrics(tp.home_win.to_numpy(int),adj); bm=metrics(tp.home_win.to_numpy(int),tp.base_p.to_numpy(float))
+        row={"target_season":target,"validation_season":vs,"games":am["n"],"base_c":best["C"],
+             "oa_tag":best["tag"],"shots_k":ch["shots_k"],"starts_k":ch["starts_k"],
+             "minutes_k":ch["minutes_k"],"probability_beta":ch["beta"],
+             "validation_log_loss":ch["validation_log_loss"],
+             "backbone_brier":bm["brier"],"goalie_brier":am["brier"],
+             "delta_brier":am["brier"]-bm["brier"],
+             "backbone_log_loss":bm["log_loss"],"goalie_log_loss":am["log_loss"],
+             "delta_log_loss":am["log_loss"]-bm["log_loss"],
+             "backbone_accuracy":bm["accuracy"],"goalie_accuracy":am["accuracy"],
+             "goalie_calibration":am["calibration"],"age_curve":age_curve}
+        rows.append(row); selected.append(ch)
         print(json.dumps({k:v for k,v in row.items() if k!="age_curve"},flush=True))
-
-    if not rows:
-        raise RuntimeError("No goalie rolling folds produced")
-    result=pd.DataFrame(rows)
-    result.to_csv(out/"rolling_age_exposure_backtest.csv",index=False)
+    if not rows: raise RuntimeError("No production-baseline goalie rolling folds produced")
+    result=pd.DataFrame(rows); result.to_csv(out/"rolling_age_exposure_backtest.csv",index=False)
     n=result.games.to_numpy(float)
-    base_brier=float(np.average(result.backbone_brier,weights=n))
-    goalie_brier=float(np.average(result.goalie_brier,weights=n))
-    base_ll=float(np.average(result.backbone_log_loss,weights=n))
-    goalie_ll=float(np.average(result.goalie_log_loss,weights=n))
-    perf={
-        "games_scored":int(result.games.sum()),
-        "accuracy":float(np.average(result.goalie_accuracy,weights=n)),
-        "brier":goalie_brier,
-        "log_loss":goalie_ll,
-        "calibration":float(np.average(result.goalie_calibration,weights=n))
-    }
-    # Candidate parameters are deliberately not promoted. The production
-    # feature backbone differs from this research baseline and must be refit.
-    curve=fit_age_curve(goalies,through_season=2026)
-    selected_cfg=Counter((x["shots_k"],x["starts_k"],x["minutes_k"]) for x in selected)
-    mode,mode_count=selected_cfg.most_common(1)[0]
-    betas=[float(x["beta"]) for x in selected]
-    candidate={
-        "schema_version":"1.0",
-        "model_id":"HOCKEY-LAB-GAME-GOALIE",
-        "version":"candidate-0.2.0",
-        "status":"CANDIDATE",
-        "feature_version":"hwin-goalie-rolling-003+goalie-adjustment-candidate",
-        "baseline_feature_version":"HWIN-GOALIE-ROLLING-003",
-        "trained_through":"2025-26",
-        "sample":{"games_scored":perf["games_scored"],"start_date":"2022 rolling-origin fold","end_date":"2026 rolling-origin fold"},
-        "performance_metrics":perf,
-        "calibration":{
-            "age_curve":curve,
-            "shrinkage":{"shots_k":mode[0],"starts_k":mode[1],"minutes_k":mode[2]},
-            "probability_beta":float(np.median(betas))
-        },
-        "rolling_origin":{
-            "weighted_backbone_brier":base_brier,
-            "weighted_goalie_brier":goalie_brier,
-            "delta_brier":goalie_brier-base_brier,
-            "weighted_backbone_log_loss":base_ll,
-            "weighted_goalie_log_loss":goalie_ll,
-            "delta_log_loss":goalie_ll-base_ll,
-            "selected_shrinkage_folds":mode_count,
-            "folds":result[[ "target_season","games","shots_k","starts_k","minutes_k","probability_beta","backbone_brier","goalie_brier","delta_brier","backbone_log_loss","goalie_log_loss","delta_log_loss" ]].to_dict(orient="records")
-        },
-        "promotion_note":"RESEARCH ONLY. This candidate uses HWIN-GOALIE-ROLLING-003 as its team baseline, not the current team-strength-004+b2b-007 production backbone. Refit and validate against the production baseline before promotion."
-    }
-    with open(out/"goalie-adjustment-candidate.json","w") as f:
-        json.dump(candidate,f,indent=2)
-    summary={
-        "folds":len(result),
-        "games":int(result.games.sum()),
-        "weighted_backbone_brier":base_brier,
-        "weighted_goalie_brier":goalie_brier,
-        "delta_brier":goalie_brier-base_brier,
-        "weighted_backbone_log_loss":base_ll,
-        "weighted_goalie_log_loss":goalie_ll,
-        "delta_log_loss":goalie_ll-base_ll,
-        "selected_shrinkage":candidate["calibration"]["shrinkage"],
-        "probability_beta_median":candidate["calibration"]["probability_beta"],
-        "age_curve":curve,
-        "promotion_status":"CANDIDATE_ONLY"
-    }
-    with open(out/"summary.json","w") as f: json.dump(summary,f,indent=2)
-    print("FINAL",json.dumps(summary,indent=2))
+    bb=float(np.average(result.backbone_brier,weights=n)); gb=float(np.average(result.goalie_brier,weights=n))
+    bl=float(np.average(result.backbone_log_loss,weights=n)); gl=float(np.average(result.goalie_log_loss,weights=n))
+    perf={"games_scored":int(result.games.sum()),
+          "accuracy":float(np.average(result.goalie_accuracy,weights=n)),
+          "brier":gb,"log_loss":gl,
+          "calibration":float(np.average(result.goalie_calibration,weights=n))}
+    curve=fit_age_curve(goalies,through_season=max(TARGET_SEASONS))
+    mode,count=Counter((v["shots_k"],v["starts_k"],v["minutes_k"]) for v in selected).most_common(1)[0]
+    candidate={"schema_version":"1.0","model_id":"HOCKEY-LAB-GAME-GOALIE",
+      "version":"candidate-production-0.3.0","status":"CANDIDATE",
+      "feature_version":prod.FEATURE_VERSION+"+goalie-adjustment-prospective-001",
+      "baseline_feature_version":prod.FEATURE_VERSION,"trained_through":"2025-26",
+      "sample":{"games_scored":perf["games_scored"],"start_date":"2022 rolling-origin fold","end_date":"2026 rolling-origin fold"},
+      "performance_metrics":perf,
+      "calibration":{"age_curve":curve,"shrinkage":{"shots_k":mode[0],"starts_k":mode[1],"minutes_k":mode[2]},
+                     "probability_beta":float(np.median([v["beta"] for v in selected]))},
+      "rolling_origin":{"weighted_backbone_brier":bb,"weighted_goalie_brier":gb,"delta_brier":gb-bb,
+        "weighted_backbone_log_loss":bl,"weighted_goalie_log_loss":gl,"delta_log_loss":gl-bl,
+        "selected_shrinkage_folds":count,
+        "folds":result.drop(columns=["age_curve"]).to_dict(orient="records")},
+      "promotion_note":"Fitted against the active production baseline. Candidate requires rolling-fold review before prospective activation."}
+    (out/"goalie-adjustment-candidate.json").write_text(json.dumps(candidate,indent=2))
+    summary={"folds":len(result),"games":int(result.games.sum()),
+      "weighted_backbone_brier":bb,"weighted_goalie_brier":gb,"delta_brier":gb-bb,
+      "weighted_backbone_log_loss":bl,"weighted_goalie_log_loss":gl,"delta_log_loss":gl-bl,
+      "selected_shrinkage":candidate["calibration"]["shrinkage"],
+      "probability_beta_median":candidate["calibration"]["probability_beta"],
+      "baseline_feature_version":prod.FEATURE_VERSION,"promotion_status":"CANDIDATE"}
+    (out/"summary.json").write_text(json.dumps(summary,indent=2))
+    print(json.dumps(summary,indent=2))
 
 
 if __name__=="__main__":
