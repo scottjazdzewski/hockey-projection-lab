@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03T19:47:58.119483-05:00",
+  "generated_at": "2026-11-03T20:47:18.808418-05:00",
   "sample": {
-    "games_frozen": 9,
+    "games_frozen": 10,
     "games_settled": 0,
-    "games_open": 9,
+    "games_open": 10,
     "winner_games_scored": 0,
     "xg_games_scored": 0
   },
@@ -32,6 +32,26 @@
     }
   },
   "games": [
+    {
+      "game_id": 2026020246,
+      "game_date": "2026-11-03",
+      "start_time_et": "2026-11-03T21:00:00-05:00",
+      "away_abbr": "ANA",
+      "home_abbr": "VAN",
+      "model_id": "HOCKEY-LAB-GAME",
+      "model_version": "1.0.0",
+      "feature_version": "team-strength-004+b2b-007",
+      "frozen_at": "2026-11-03T20:47:18.747824-05:00",
+      "status": "OPEN",
+      "winner_abbr": null,
+      "predicted_winner_abbr": null,
+      "winner_correct": null,
+      "brier": null,
+      "log_loss": null,
+      "probability_assigned_to_winner": null,
+      "goal_mae_per_team": null,
+      "total_goals_abs_error": null
+    },
     {
       "game_id": 2026020245,
       "game_date": "2026-11-03",
