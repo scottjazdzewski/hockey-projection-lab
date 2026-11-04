@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-04T13:25:56.237631-05:00",
+  "generated_at": "2026-11-04T16:07:05.651647-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -17,20 +17,20 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "OTT",
-        "win_probability": 0.4156016950756142,
+        "win_probability": 0.4156016950756143,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 141,
-        "team_only_win_probability": 0.45393295953292156,
+        "team_only_win_probability": 0.4539329595329217,
         "goalie_adjustment_pp": -3.833126445730739
       },
       "home": {
         "abbr": "BUF",
-        "win_probability": 0.5843983049243858,
+        "win_probability": 0.5843983049243857,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -141,
-        "team_only_win_probability": 0.5460670404670784,
+        "team_only_win_probability": 0.5460670404670783,
         "goalie_adjustment_pp": 3.833126445730739
       },
       "overtime_probability": null,
@@ -62,7 +62,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-04T13:25:56.237631-05:00"
+        "updated_at": "2026-11-04T16:07:05.651647-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -147,7 +147,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-04T13:25:56.237631-05:00"
+        "updated_at": "2026-11-04T16:07:05.651647-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -187,20 +187,20 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "SJS",
-        "win_probability": 0.4016667264266621,
+        "win_probability": 0.401666726426662,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 149,
-        "team_only_win_probability": 0.4368032584844026,
+        "team_only_win_probability": 0.4368032584844025,
         "goalie_adjustment_pp": -3.5136532057740477
       },
       "home": {
         "abbr": "LAK",
-        "win_probability": 0.5983332735733379,
+        "win_probability": 0.598333273573338,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -149,
-        "team_only_win_probability": 0.5631967415155974,
+        "team_only_win_probability": 0.5631967415155975,
         "goalie_adjustment_pp": 3.5136532057740477
       },
       "overtime_probability": null,
@@ -232,7 +232,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-04T13:25:56.237631-05:00"
+        "updated_at": "2026-11-04T16:07:05.651647-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -272,20 +272,20 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "CGY",
-        "win_probability": 0.4843126257575002,
+        "win_probability": 0.48431262575750034,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 106,
-        "team_only_win_probability": 0.48840272153096476,
+        "team_only_win_probability": 0.48840272153096487,
         "goalie_adjustment_pp": -0.40900957734645305
       },
       "home": {
         "abbr": "SEA",
-        "win_probability": 0.5156873742424998,
+        "win_probability": 0.5156873742424997,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -106,
-        "team_only_win_probability": 0.5115972784690352,
+        "team_only_win_probability": 0.5115972784690351,
         "goalie_adjustment_pp": 0.40900957734645305
       },
       "overtime_probability": null,
@@ -320,7 +320,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-04T13:25:56.237631-05:00"
+        "updated_at": "2026-11-04T16:07:05.651647-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
