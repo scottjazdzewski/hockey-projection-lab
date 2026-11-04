@@ -3,14 +3,13 @@ name: Refresh Independent NHL Market Benchmark
 on:
   workflow_dispatch:
   schedule:
-    # Broad UTC window covers both Eastern Standard and Daylight Time.
-    # Python admits only 09:20, 12:20, 15:20 ET and every half-hour
-    # from 17:20 through 22:50 ET; max 15 billed h2h US-region calls/day.
-    # One region, one market = 1 credit/call (465 in a 31-day month).
-    - cron: '20 13-23 * * *'
-    - cron: '20 0-4 * * *'
-    - cron: '50 21-23 * * *'
-    - cron: '50 0-3 * * *'
+    # Six allowed ET slots, with a UTC cron union covering EST and EDT:
+    # noon baseline: 12:20 ET
+    # pregame checks: 18:50, 19:20, 19:50, 20:50, 21:50 ET.
+    # Python skips off-slot cron invocations and days without upcoming games.
+    # One h2h US-region request = one credit; <=186 credits in 31-day month.
+    - cron: '20 0,16,17,23 * * *'
+    - cron: '50 0-2,22-23 * * *'
   push:
     branches: [main]
     paths:
