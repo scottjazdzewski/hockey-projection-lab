@@ -214,31 +214,38 @@ def self_test():
     assert frozen["games"][0]["status"]=="CLOSING"
     assert frozen["games"][0]["captured_at"]==row["captured_at"]
     assert compose(slate,[dict(feed,bookmakers=[bk("new",-500,420)])],frozen,date_time("2026-11-04T00:20:00Z"))["games"][0]["market_ml_away"]==row["market_ml_away"]
-    assert eligible_poll_slot(date_time("2026-11-03T14:20:00Z").astimezone(TZ)) is not None
-    assert eligible_poll_slot(date_time("2026-11-03T15:20:00Z").astimezone(TZ)) is None
-    assert eligible_poll_slot(date_time("2026-11-03T23:50:00Z").astimezone(TZ)) is not None
+    # November 3 is EST (UTC-5), so all six scheduled slots are unambiguous.
+    allowed=["2026-11-03T17:20:00Z","2026-11-03T23:50:00Z",
+             "2026-11-04T00:20:00Z","2026-11-04T00:50:00Z",
+             "2026-11-04T01:50:00Z","2026-11-04T02:50:00Z"]
+    for at in allowed:
+        assert eligible_poll_slot(date_time(at).astimezone(TZ)) is not None, at
+    assert eligible_poll_slot(date_time("2026-11-03T14:20:00Z").astimezone(TZ)) is None
     assert eligible_poll_slot(date_time("2026-11-03T23:15:00Z").astimezone(TZ)) is None
+    assert eligible_poll_slot(date_time("2026-11-04T03:50:00Z").astimezone(TZ)) is None
+    # In daylight time the UTC offset moves but the same local windows apply.
+    assert eligible_poll_slot(date_time("2027-04-03T16:20:00Z").astimezone(TZ)) is not None
     print("Market benchmark self-test PASS (no-vig, matchup, timestamp, freeze, schedule, no leakage)")
 
 def eligible_poll_slot(local):
-    """Rate-limited US/Eastern capture windows: 15 maximum odds requests/day.
+    """Admit at most six regularly scheduled ET odds checks on a game day.
 
-    Morning/afternoon: 09:20, 12:20, 15:20 ET.
-    Pregame/evening: 17:20, 17:50, 18:20, 18:50, 19:20, 19:50,
-                     20:20, 20:50, 21:20, 21:50, 22:20, 22:50 ET.
-    Allow up to 24 minutes GitHub scheduling delay per slot.
-    15 x 31 = 465 calls/month, beneath the free 500-credit quota
-    before any extra API usage.
+    12:20 ET gives one daytime baseline. At 18:50, 19:20, 19:50,
+    20:50 and 21:50 ET we capture approaching 7:00, 7:30, 8:00,
+    9:00 and 10:00 PM puck drops respectively. The no-upcoming-games
+    gate in main() skips game-free days and post-puck requests.
+
+    6 x 31 = 186 credits/month at 1 credit for one region/market.
+    GitHub Actions may run late: permit <24 minutes without counting
+    a missed slot as a newly scheduled one.
     """
-    windows=[(9,20),(12,20),(15,20)]
-    windows += [(h,m) for h in range(17,23) for m in (20,50)]
+    windows=[(12,20),(18,50),(19,20),(19,50),(20,50),(21,50)]
     for hour,minute in windows:
         slot=local.replace(hour=hour,minute=minute,second=0,microsecond=0)
         delay=(local-slot).total_seconds()
         if 0<=delay<24*60:
             return slot.isoformat()
     return None
-
 
 def main():
     ap=argparse.ArgumentParser()
