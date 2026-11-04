@@ -214,37 +214,51 @@ def self_test():
     assert frozen["games"][0]["status"]=="CLOSING"
     assert frozen["games"][0]["captured_at"]==row["captured_at"]
     assert compose(slate,[dict(feed,bookmakers=[bk("new",-500,420)])],frozen,date_time("2026-11-04T00:20:00Z"))["games"][0]["market_ml_away"]==row["market_ml_away"]
-    # November 3 is EST (UTC-5), so all six scheduled slots are unambiguous.
-    allowed=["2026-11-03T17:20:00Z","2026-11-03T23:50:00Z",
-             "2026-11-04T00:20:00Z","2026-11-04T00:50:00Z",
-             "2026-11-04T01:50:00Z","2026-11-04T02:50:00Z"]
-    for at in allowed:
-        assert eligible_poll_slot(date_time(at).astimezone(TZ)) is not None, at
-    assert eligible_poll_slot(date_time("2026-11-03T14:20:00Z").astimezone(TZ)) is None
-    assert eligible_poll_slot(date_time("2026-11-03T23:15:00Z").astimezone(TZ)) is None
-    assert eligible_poll_slot(date_time("2026-11-04T03:50:00Z").astimezone(TZ)) is None
-    # In daylight time the UTC offset moves but the same local windows apply.
-    assert eligible_poll_slot(date_time("2027-04-03T16:20:00Z").astimezone(TZ)) is not None
+    # November 3 is EST (UTC-5): fixed checks are 9 AM, noon, 3 PM, 5 PM, 6 PM ET.
+    fixed_allowed=["2026-11-03T14:00:00Z","2026-11-03T17:00:00Z",
+                   "2026-11-03T20:00:00Z","2026-11-03T22:00:00Z",
+                   "2026-11-03T23:00:00Z"]
+    for at in fixed_allowed:
+        assert eligible_poll_slot(date_time(at).astimezone(TZ),slate,set()) is not None, at
+    # Final close window: one pull in the last 10 minutes before each unique start time.
+    close_slot=eligible_poll_slot(date_time("2026-11-03T23:52:00Z").astimezone(TZ),slate,set())
+    assert close_slot and close_slot.startswith("CLOSE:")
+    assert eligible_poll_slot(date_time("2026-11-03T23:52:00Z").astimezone(TZ),slate,{close_slot}) is None
+    assert eligible_poll_slot(date_time("2026-11-03T19:30:00Z").astimezone(TZ),slate,set()) is None
+    # In daylight time the UTC offset moves but 9 AM ET remains a valid fixed window.
+    summer={"date":"2027-04-03","games":[]}
+    assert eligible_poll_slot(date_time("2027-04-03T13:00:00Z").astimezone(TZ),summer,set()) is not None
     print("Market benchmark self-test PASS (no-vig, matchup, timestamp, freeze, schedule, no leakage)")
 
-def eligible_poll_slot(local):
-    """Admit at most six regularly scheduled ET odds checks on a game day.
+def eligible_poll_slot(local,schedule,captured):
+    """Return one due market collection slot, or None.
 
-    12:20 ET gives one daytime baseline. At 18:50, 19:20, 19:50,
-    20:50 and 21:50 ET we capture approaching 7:00, 7:30, 8:00,
-    9:00 and 10:00 PM puck drops respectively. The no-upcoming-games
-    gate in main() skips game-free days and post-puck requests.
+    Fixed ET checks: 9:00 AM, 12:00 PM, 3:00 PM, 5:00 PM and 6:00 PM.
+    Closing checks: one additional request per unique scheduled puck-drop time
+    when that start is within the final 10 minutes. A single provider request
+    contains the whole remaining slate, so games sharing a start time share
+    one closing credit.
 
-    6 x 31 = 186 credits/month at 1 credit for one region/market.
-    GitHub Actions may run late: permit <24 minutes without counting
-    a missed slot as a newly scheduled one.
+    `captured` makes every slot idempotent even when GitHub retries a job.
     """
-    windows=[(12,20),(18,50),(19,20),(19,50),(20,50),(21,50)]
-    for hour,minute in windows:
-        slot=local.replace(hour=hour,minute=minute,second=0,microsecond=0)
-        delay=(local-slot).total_seconds()
-        if 0<=delay<24*60:
-            return slot.isoformat()
+    fixed=[(9,0),(12,0),(15,0),(17,0),(18,0)]
+    for hour,minute in fixed:
+        target=local.replace(hour=hour,minute=minute,second=0,microsecond=0)
+        delay=(local-target).total_seconds()
+        key="FIXED:"+target.isoformat()
+        if 0<=delay<15*60 and key not in captured:
+            return key
+
+    starts=[]
+    for game in schedule.get("games",[]):
+        start=date_time(game.get("start_time_et"))
+        if start:
+            starts.append(start.astimezone(TZ))
+    for start in sorted(set(starts)):
+        seconds=(start-local).total_seconds()
+        key="CLOSE:"+start.isoformat()
+        if 0<seconds<=10*60 and key not in captured:
+            return key
     return None
 
 def main():
@@ -258,18 +272,19 @@ def main():
         return
     now=now_utc()
     local=now.astimezone(TZ)
-    slot=eligible_poll_slot(local)
-    if not args.force and not slot:
-        print("SKIP outside scheduled ET daytime/pregame collection slots")
-        return
     schedule=load_json(SCHEDULE,{}) or {}
     if schedule.get("date")!=local.date().isoformat():
         print("SKIP stale slate; no market refresh")
         return
+    old=load_json(OUTPUT,{}) or {}
+    captured=set(old.get("captured_poll_slots") or []) if old.get("date")==schedule.get("date") else set()
+    slot=eligible_poll_slot(local,schedule,captured)
+    if not args.force and not slot:
+        print("SKIP outside approved fixed/closing market collection windows")
+        return
     remaining=any((start:=date_time(x.get("start_time_et"))) and start>now for x in schedule.get("games",[]))
     if not remaining:
         # Finalize last saved pregame quotes without spending API credits after the games begin.
-        old=load_json(OUTPUT,{}) or {}
         if old.get("date")==schedule.get("date") and old.get("games"):
             output=compose(schedule,[],old,now)
             if output.get("games")!=old.get("games"):
@@ -280,10 +295,9 @@ def main():
                 print("No new market snapshots to freeze")
         return
 
-    old=load_json(OUTPUT,{}) or {}
-    # Idempotency: never spend twice in the same GitHub scheduled collection window.
-    if not args.force and slot and old.get("date")==schedule.get("date") and old.get("last_poll_slot")==slot:
-        print("SKIP already captured this scheduled market window:",slot)
+    # Idempotency: never spend twice in the same fixed or game-close slot.
+    if not args.force and slot in captured:
+        print("SKIP already captured this market window:",slot)
         return
     if args.fixture:
         events=load_json(Path(args.fixture),[])
@@ -299,7 +313,10 @@ def main():
     if not output["games"]:
         print("No usable odds; preserving existing benchmark file")
         return
-    output["last_poll_slot"]=slot if slot else stamp(now)
+    slot_key=slot if slot else "FORCED:"+stamp(now)
+    captured.add(slot_key)
+    output["last_poll_slot"]=slot_key
+    output["captured_poll_slots"]=sorted(captured)
     save(OUTPUT,output)
     save(ARCHIVE/(output["date"]+".json"),output)
     print("Updated independently sourced NHL market benchmark:",len(output["games"]),"games at",stamp(now))
