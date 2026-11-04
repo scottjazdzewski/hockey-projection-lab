@@ -3,10 +3,10 @@ name: Update Today's NHL Games
 on:
   workflow_dispatch:
   schedule:
-    # Morning target: 5:00 AM America/New_York.
-    # GitHub cron is UTC, so both entries cover EST/EDT automatically.
-    - cron: '0 9 * * *'
-    - cron: '0 10 * * *'
+    # Morning rollover watchdog. GitHub cron delivery can be delayed or skipped,
+    # so retry every 15 minutes across the EST/EDT morning window. The gate
+    # below exits immediately once today's slate has been published.
+    - cron: '*/15 9-12 * * *'
     # Daytime refreshes keep game states/current slate metadata fresh.
     - cron: '0 16 * * *'
     - cron: '0 21 * * *'
@@ -17,6 +17,11 @@ on:
 
 permissions:
   contents: write
+  actions: write
+
+concurrency:
+  group: hockey-lab-slate-rollover
+  cancel-in-progress: false
 
 jobs:
   update-slate:
@@ -24,11 +29,56 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+
+      - name: Gate morning rollover retries
+        id: gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          from datetime import datetime
+          from pathlib import Path
+          from zoneinfo import ZoneInfo
+          import json, os
+
+          now=datetime.now(ZoneInfo("America/New_York"))
+          today=now.date().isoformat()
+          current_date=None
+          try:
+              current_date=json.loads(Path("public/data/today-games.json").read_text()).get("date")
+          except Exception:
+              pass
+
+          event=os.environ.get("GITHUB_EVENT_NAME")
+          # Push/manual runs always execute. Scheduled morning retries execute
+          # only when the published slate is stale. Existing daytime cron
+          # checkpoints still execute to refresh game state metadata.
+          morning=(now.hour==4 and now.minute>=45) or (5 <= now.hour <= 8)
+          daytime=now.hour in {11,12,16,17}
+          run=(event!="schedule") or (morning and current_date!=today) or daytime
+
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+              f.write(f"run={'true' if run else 'false'}\n")
+              f.write(f"stale={'true' if current_date!=today else 'false'}\n")
+          print(json.dumps({
+              "local_time":now.isoformat(),
+              "published_date":current_date,
+              "today":today,
+              "morning_window":morning,
+              "daytime_checkpoint":daytime,
+              "run":run
+          },indent=2))
+          PY
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+
       - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run == 'true'
         with:
           python-version: '3.12'
       - run: python -m pip install --quiet pandas pyarrow requests
+        if: steps.gate.outputs.run == 'true'
       - name: Build today's slate from SportsDataverse
+        if: steps.gate.outputs.run == 'true'
         run: |
           python - <<'PY'
           from datetime import datetime
@@ -138,14 +188,24 @@ jobs:
           print(json.dumps(payload,indent=2))
           PY
       - name: Commit slate when changed
+        if: steps.gate.outputs.run == 'true'
+        id: commit
         run: |
           git config user.name "hockey-lab-bot"
           git config user.email "actions@users.noreply.github.com"
           git add public/data/today-games.json
           if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No slate change."
           else
             git commit -m "Update today's NHL slate"
             git pull --rebase origin main
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Start daily live-context and projection rollover
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update-live-context.yml -f reason=daily-slate-rollover
