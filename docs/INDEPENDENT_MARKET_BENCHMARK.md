@@ -52,3 +52,8 @@ No live API key is required to test calculations or the pregame freeze.
 ### Market scheduler watchdog
 
 The sportsbook collector no longer depends on its own cron firing at the exact checkpoint. The existing five-minute live-context heartbeat calls the collector in `--check-due` mode and dispatches the market workflow whenever a fixed or closing slot is outstanding. Fixed checkpoints remain recoverable until the next fixed checkpoint; 6 PM remains recoverable until the first closing window begins. The dedicated market cron remains as a backup. Slot IDs stored in the market file prevent duplicate paid requests.
+
+
+### GitHub schedule staggering
+
+GitHub documents that scheduled Actions can be delayed or dropped during high-load periods, especially at the start of the hour. The backup market cron therefore wakes at +3, +8 and +13 minutes instead of :00, and the five-minute production heartbeat is offset to :02/:07/:12/... . These are scheduler wake times only; the logical benchmark checkpoints remain 9:00 AM, 12:00 PM, 3:00 PM, 5:00 PM and 6:00 PM ET.
