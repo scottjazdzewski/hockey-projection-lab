@@ -34,11 +34,18 @@ TEAM_FEATURES=["elo_logit","d_fivev5_sog_share_r20","d_fivev5_xg_share_r20",
 def metrics(y,p):
     y=np.asarray(y,dtype=int)
     p=np.clip(np.asarray(p,dtype=float),1e-6,1-1e-6)
+    order=np.argsort(p)
+    bins=np.array_split(order,min(10,len(order))) if len(order) else []
+    calibration_error=sum(
+        len(idx)/len(y)*abs(float(y[idx].mean())-float(p[idx].mean()))
+        for idx in bins if len(idx)
+    ) if len(y) else float("nan")
     return {
         "n":int(len(y)),
         "brier":float(brier_score_loss(y,p)),
         "log_loss":float(log_loss(y,p,labels=[0,1])),
         "accuracy":float(accuracy_score(y,p>=0.5)),
+        "calibration":float(calibration_error),
         "mean_pred":float(p.mean()),
         "actual_rate":float(y.mean())
     }
@@ -271,6 +278,7 @@ def main(pbp_path,spine_path,goalie_path,outdir):
             "delta_log_loss":adjusted_metrics["log_loss"]-base_metrics["log_loss"],
             "backbone_accuracy":base_metrics["accuracy"],
             "goalie_accuracy":adjusted_metrics["accuracy"],
+            "goalie_calibration":adjusted_metrics["calibration"],
             "age_curve":age_curve
         }
         rows.append(row)
@@ -291,7 +299,7 @@ def main(pbp_path,spine_path,goalie_path,outdir):
         "accuracy":float(np.average(result.goalie_accuracy,weights=n)),
         "brier":goalie_brier,
         "log_loss":goalie_ll,
-        "calibration":float(np.average(result.goalie_accuracy,weights=n))
+        "calibration":float(np.average(result.goalie_calibration,weights=n))
     }
     # Candidate parameters are deliberately not promoted. The production
     # feature backbone differs from this research baseline and must be refit.
