@@ -2,7 +2,7 @@
   "date": "2026-11-03",
   "timezone": "America/New_York",
   "display_date": "Tuesday, November 3",
-  "updated_at": "2026-11-03T16:26:58.880242-05:00",
+  "updated_at": "2026-11-03T19:59:12.667402-05:00",
   "source": "NHL live score feed fallback",
   "games": [
     {
@@ -13,7 +13,7 @@
       "home_name": "Toronto Maple Leafs",
       "time_et": "7:00 PM ET",
       "start_time_et": "2026-11-03T19:00:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020237,
@@ -23,7 +23,7 @@
       "home_name": "Montreal Canadiens",
       "time_et": "7:00 PM ET",
       "start_time_et": "2026-11-03T19:00:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020238,
@@ -33,7 +33,7 @@
       "home_name": "Tampa Bay Lightning",
       "time_et": "7:00 PM ET",
       "start_time_et": "2026-11-03T19:00:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020240,
@@ -43,7 +43,7 @@
       "home_name": "New York Rangers",
       "time_et": "7:00 PM ET",
       "start_time_et": "2026-11-03T19:00:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020241,
@@ -53,7 +53,7 @@
       "home_name": "Philadelphia Flyers",
       "time_et": "7:00 PM ET",
       "start_time_et": "2026-11-03T19:00:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020242,
@@ -63,7 +63,7 @@
       "home_name": "Pittsburgh Penguins",
       "time_et": "7:00 PM ET",
       "start_time_et": "2026-11-03T19:00:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020243,
@@ -73,7 +73,7 @@
       "home_name": "Washington Capitals",
       "time_et": "7:00 PM ET",
       "start_time_et": "2026-11-03T19:00:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020244,
@@ -83,7 +83,7 @@
       "home_name": "Columbus Blue Jackets",
       "time_et": "7:00 PM ET",
       "start_time_et": "2026-11-03T19:00:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020239,
@@ -93,7 +93,7 @@
       "home_name": "New Jersey Devils",
       "time_et": "7:30 PM ET",
       "start_time_et": "2026-11-03T19:30:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020245,
@@ -103,7 +103,7 @@
       "home_name": "Nashville Predators",
       "time_et": "8:00 PM ET",
       "start_time_et": "2026-11-03T20:00:00-05:00",
-      "state": "FUT"
+      "state": "PRE"
     },
     {
       "game_id": 2026020246,
