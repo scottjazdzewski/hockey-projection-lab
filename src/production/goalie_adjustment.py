@@ -9,6 +9,7 @@ from __future__ import annotations
 from datetime import date, datetime
 import math
 import re
+import unicodedata
 
 FEATURE_MARKER = "goalie-adjustment-"
 
@@ -21,6 +22,15 @@ def normalize_player_id(value):
         return None
     match = re.fullmatch(r"(\d+)(?:\.0+)?", text)
     return str(int(match.group(1))) if match else text
+
+
+def normalize_name(value):
+    if value is None:
+        return None
+    text = unicodedata.normalize("NFKD", str(value))
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
+    return text or None
 
 
 def _as_date(value):
