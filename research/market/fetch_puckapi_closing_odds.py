@@ -27,7 +27,7 @@ def _schedule(path: Path) -> pd.DataFrame:
     frame = pd.read_parquet(path)
     id_col = "game_id" if "game_id" in frame else "nhl_game_id"
     date_col = "game_date" if "game_date" in frame else "date"
-    start_col = next((c for c in ["scheduled_start_utc", "scheduled_start", "start_time_utc", "game_start_utc"] if c in frame), None)
+    start_col = next((c for c in ["scheduled_start_utc", "scheduled_start", "start_time_utc", "game_start_utc", "game_time"] if c in frame), None)
     if start_col is None:
         raise ValueError("Canonical games file must include scheduled_start_utc")
     home_col = next((c for c in ["home_team_abbr", "home_abbr"] if c in frame), None)
@@ -62,8 +62,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--games", required=True, help="Canonical NHL games parquet")
     parser.add_argument("--out", default=str(ROOT / "artifacts/market/staging/puckapi-closing-lines.parquet"))
-    parser.add_argument("--start-season", type=int, default=2019, help="First NHL season start year to include (for example, 2019 means 2019-20)")
-    parser.add_argument("--end-season", type=int, default=2026, help="Last NHL season start year to include (for example, 2026 means 2026-27)")
+    parser.add_argument("--start-season", type=int, default=2022, help="First source_season code to include (2022 = 2021-22 NHL season)")
+    parser.add_argument("--end-season", type=int, default=2026, help="Last source_season code to include (2026 = 2025-26 NHL season)")
     parser.add_argument("--max-credits", type=int, default=0,
                         help="Maximum credits explicitly approved for this run; omit to remain dry-run")
     parser.add_argument("--sleep-seconds", type=float, default=1.05,
