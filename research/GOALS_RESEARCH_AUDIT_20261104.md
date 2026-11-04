@@ -65,3 +65,16 @@ Once the exact input snapshots and prior OOF artifacts are restored:
 ## Decision
 
 The model remains **RESEARCH**. The fixed 60-date goals-only model is the best recoverable pregame-eligible reference, not a promoted model. Existing evidence points to both rate-level bias and score-law sensitivity, while the detailed cause of the remaining total-goal and OT errors is unresolved. The next valid step is to restore the exact research data and OOF package, reproduce EXP-0027, then run the predeclared decompositions above. No production, win-probability, or Game Card files were changed.
+
+## Data recovery route found
+
+The repository already contains two read-only manual GitHub Actions workflows that rebuild the versioned sources from SportsDataverse:
+
+- `.github/workflows/hockey-pbp-features.yml` builds `game_team_event_features.parquet`, its source manifest, and summary, then uploads `hockey-pbp-features-2010-2027-20261102.zip`.
+- `.github/workflows/hockey-game-spine-v3.yml` builds `games.parquet`, its source manifest, and summary, then uploads `hockey-canonical-spine-v3-20261102.zip`.
+
+Both are configured with `workflow_dispatch`, have read-only repository permissions, and retain artifacts for 14 days. Their pinned source mapping matches the research data authority contract, making these the right recovery route to test against the EXP-0028 checksums before retraining.
+
+I could not start the Actions runs through the available GitHub connector: it can read and edit repository files but does not expose workflow dispatch or run-listing. The browser route requires GitHub sign-in. The selected account reported that password sign-in is unsupported; the secure Google account selection did not complete, and no account was chosen or authenticated. The browser is left at the GitHub sign-in handoff. No Actions workflow was dispatched and no data was modified.
+
+After sign-in, run both workflows, download their artifacts, and compare the resulting Parquet checksums with the EXP-0028 manifest. Only an exact match closes this reproduction blocker. If source releases have changed, preserve the new source manifests and treat the rebuilt set as a new data snapshot rather than an exact reproduction.
