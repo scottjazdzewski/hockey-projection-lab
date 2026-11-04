@@ -38,6 +38,8 @@ jobs:
         run: node src/production/validate-public-data.mjs
       - name: Validate site integration contract
         run: node src/production/validate-site-contract.mjs
+      - name: Check game-card browser script syntax
+        run: node --check public/assets/game-cards.js
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
