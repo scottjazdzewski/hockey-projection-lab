@@ -8,7 +8,7 @@
 
 Both GitHub Actions runs completed successfully on the research branch:
 
-- [HWIN Goalie Uncertainty Audit 006](https://github.com/scottjazdzewski/hockey-projection-lab/actions/runs/41866125088), code commit `789a5c373ba33f08390b599d0daa623fa0d3ae8d03465`
+- [HWIN Goalie Uncertainty Audit 006](https://github.com/scottjazdzewski/hockey-projection-lab/actions/runs/41866125088), code commit `789a5c373ba33f08390b599d0daa623e79cbabd2`
 - [Goals Rate Tail Audit 007](https://github.com/scottjazdzewski/hockey-projection-lab/actions/runs/41867507889), code commit `f3cdc7a2614f1764b38764fbdd757d0b17888091`
 
 The goalie comparison used 6,993 matched games from target seasons 2022–2026; source runs were PBP `41766609805`, schedule spine `41766612176`, and goalie history `41850348678`. The active HWIN comparison reference was `team-strength-004+b2b-007`. Goalie performance features were prior-only, but each game's goalie identity came from its postgame box score. Treat this as a retrospective upper-bound diagnostic, not a pregame starter validation.
