@@ -8,7 +8,9 @@ on:
         required: false
         type: string
   schedule:
-    # Fixed benchmark checkpoints: 9 AM, noon, 3 PM, 5 PM, 6 PM ET.
+    # Backup cron for fixed benchmark checkpoints: 9 AM, noon, 3 PM, 5 PM, 6 PM ET.
+    # The 5-minute live-context heartbeat is the primary watchdog and dispatches
+    # this workflow whenever the collector reports a fixed or closing slot due.
     # EST/EDT UTC unions are intentional. Each target gets 0/5/10-minute
     # retry wakes; the collector admits only the correct local-time slot and
     # records it so retries cannot spend a second credit.
