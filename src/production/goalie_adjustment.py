@@ -65,10 +65,13 @@ def age_curve_save_pct(age_years, calibration):
     coefficients = curve["coefficients"]
     if scale <= 0 or len(coefficients) != 3:
         raise ValueError("age_curve requires center, positive scale, and 3 coefficients")
-    z = (float(age_years) - center) / scale
+    age = float(age_years)
+    if "age_min" in curve and "age_max" in curve:
+        age = min(max(age, float(curve["age_min"])), float(curve["age_max"]))
+    z = (age - center) / scale
     value = float(coefficients[0]) + float(coefficients[1]) * z + float(coefficients[2]) * z * z
     if not 0 < value < 1:
-        raise ValueError("fitted age curve returned an invalid save percentage")
+        return None
     return value
 
 
