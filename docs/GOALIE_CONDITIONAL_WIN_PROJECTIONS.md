@@ -67,7 +67,7 @@ The goalie layer remains RESEARCH or CANDIDATE until it passes all of the follow
 4. Age-curve and sample-shrinkage selection performed only within the training/validation window.
 5. A prospective ledger using timestamped pregame goalie identities and immutable probability snapshots.
 6. Validation that a goalie change updates the projected percentage and fair line on the card without changing the team-only baseline.
-7. Explicit promotion and model-version change before public probabilities use the layer.
+7. Explicit promotion and model-version change before public probabilities use the layer. The promoted artifact must record `baseline_feature_version` equal to the exact active team-only scorer feature version; the production gate rejects mismatched baselines.
 
 A positive goalie-to-goalie scenario calculation alone does not pass this gate. It shows how the candidate model maps a goalie difference into probability, not that the effect is calibrated or predictive.
 
