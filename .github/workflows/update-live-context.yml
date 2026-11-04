@@ -135,7 +135,7 @@ jobs:
       - name: Fetch and normalize live context
         if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
         run: python src/live_context/update_live_context.py
-      - name: Detect confirmed-goalie change requiring model rescore
+      - name: Detect selected-goalie change requiring model rescore
         if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
         id: rescore
         shell: bash
@@ -157,26 +157,34 @@ jobs:
           except Exception:
               prior={"games":[]}
 
-          def confirmed_map(payload):
+          def selected_map(payload):
               out={}
               for g in payload.get("games",[]):
                   gid=str(g.get("game_id"))
                   for side in ("away","home"):
                       goalie=(g.get(side) or {}).get("goalie") or {}
-                      if goalie.get("status")=="CONFIRMED":
-                          out[(gid,side)]=goalie.get("name")
+                      status=str(goalie.get("status") or "UNKNOWN").upper()
+                      if status not in {"PROJECTED","CONFIRMED"}:
+                          status="UNKNOWN"
+                      name=goalie.get("name") if status!="UNKNOWN" else None
+                      player_id=goalie.get("player_id") if status!="UNKNOWN" else None
+                      out[(gid,side)]={
+                          "status":status,
+                          "name":str(name).strip().casefold() if name else None,
+                          "player_id":str(player_id) if player_id is not None else None
+                      }
               return out
 
-          old=confirmed_map(prior)
-          new=confirmed_map(current)
-          changed=any(old.get(k)!=v for k,v in new.items())
+          old=selected_map(prior)
+          new=selected_map(current)
+          changed=old!=new
           should=bool(changed and uses_goalie)
           with open(os.environ["GITHUB_OUTPUT"],"a") as fh:
-              fh.write(f"confirmed_change={'true' if changed else 'false'}\n")
+              fh.write(f"goalie_change={'true' if changed else 'false'}\n")
               fh.write(f"uses_goalie={'true' if uses_goalie else 'false'}\n")
               fh.write(f"run={'true' if should else 'false'}\n")
           print(json.dumps({
-              "confirmed_goalie_change":changed,
+              "selected_goalie_change":changed,
               "active_model_uses_goalie":uses_goalie,
               "trigger_rescore":should,
               "feature_version":feature_version
