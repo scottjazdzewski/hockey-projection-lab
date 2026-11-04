@@ -10,6 +10,8 @@ on:
       - 'src/production/validate-site-contract.mjs'
       - 'public/assets/production-data.js'
       - 'public/assets/game-cards.js'
+      - 'public/assets/game-cards.css'
+      - 'src/market/**'
       - 'public/assets/team-ratings.js'
       - 'public/assets/team-profile.js'
       - 'public/assets/performance.js'
@@ -36,3 +38,8 @@ jobs:
         run: node src/production/validate-public-data.mjs
       - name: Validate site integration contract
         run: node src/production/validate-site-contract.mjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify benchmark arithmetic and pregame freeze
+        run: python src/market/update_market_benchmark.py --self-test
