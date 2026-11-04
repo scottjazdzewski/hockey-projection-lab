@@ -55,7 +55,7 @@ Extend the game-projection export and its JSON schema with enough information to
 - signed goalie adjustment in percentage points;
 - fair moneyline derived from the adjusted probability.
 
-The game record must preserve the away and home goalie IDs/names, PROJECTED or CONFIRMED status, provider timestamp, Hockey Lab observation timestamp, and goalie-adjustment model version. The top-level model feature version must identify the goalie layer. A projection must not claim goalie adjustment when either rating is missing; use the documented baseline fallback and show the adjustment as unavailable.
+The game record must preserve the away and home goalie IDs/names, PROJECTED or CONFIRMED status, provider timestamp, Hockey Lab observation timestamp, and goalie-adjustment model version. The top-level model feature version must include the explicit `goalie-adjustment-` marker to identify a promoted goalie layer and activate the live rescore trigger. A projection must not claim goalie adjustment when either rating is missing; use the documented baseline fallback and show the adjustment as unavailable.
 
 ## Calibration and promotion gate
 
