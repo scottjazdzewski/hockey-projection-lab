@@ -557,3 +557,106 @@
     font-size:7.4px;
   }
 }
+
+
+/* Independent betting-market reference: an extra row, never crowded into model probabilities. */
+.gc-card{
+  grid-template-rows:40px 216px 110px 66px 122px 38px;
+  height:592px;
+}
+.gc-market{
+  display:grid;
+  grid-template-rows:25px 60px 25px;
+  min-width:0;
+  border-top:1px solid #d4c4b4;
+  background:#f2ede7;
+  color:#36244d;
+}
+.gc-market-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  min-width:0;
+  gap:7px;
+  padding:0 11px;
+  border-bottom:1px solid #d4c4b4;
+  background:#e6dce9;
+  font-size:7.1px;
+  line-height:1.2;
+  font-weight:800;
+  letter-spacing:.025em;
+  text-transform:uppercase;
+}
+.gc-market-head span{min-width:0}
+.gc-market-head span:last-child{text-align:right;font-weight:600}
+.gc-market-values{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.gc-market-values>div{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:17px 30px;
+  align-content:center;
+  align-items:center;
+  column-gap:4px;
+  padding:3px 10px;
+}
+.gc-market-values>div:first-child{border-right:1px solid #d4c4b4}
+.gc-market-values small{
+  grid-column:1/-1;
+  color:#796d7a;
+  font-size:7px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+}
+.gc-market-values strong{
+  font-size:17px;
+  line-height:1;
+  font-weight:900;
+  color:#422365;
+}
+.gc-market-values b{
+  justify-self:end;
+  color:#62516c;
+  font-size:8.3px;
+  white-space:nowrap;
+}
+.gc-market-diff{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 8px;
+  border-top:1px solid #d4c4b4;
+  color:#65466f;
+  font-size:7.3px;
+  font-weight:800;
+  text-align:center;
+}
+.gc-market-empty .gc-market-pending{
+  grid-row:2/4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px;
+  text-align:center;
+  color:#786e7c;
+  font-size:9px;
+  font-weight:700;
+}
+.gc-market-stale{opacity:.74}
+@media(max-width:1120px){
+  .gc-card{grid-template-rows:40px 220px 110px 72px 122px 40px;height:604px}
+}
+@media(max-width:700px){
+  .gc-card{grid-template-rows:46px 312px 124px 86px 160px 42px;height:770px}
+  .gc-market{grid-template-rows:30px 67px 27px}
+  .gc-market-head{padding:0 11px;font-size:8.1px}
+  .gc-market-values>div{grid-template-rows:19px 32px;padding:4px 10px}
+  .gc-market-values small{font-size:8.2px}
+  .gc-market-values strong{font-size:21px}
+  .gc-market-values b{font-size:10px}
+  .gc-market-diff{font-size:8.6px}
+  .gc-market-empty .gc-market-pending{font-size:10px}
+}
