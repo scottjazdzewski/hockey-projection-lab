@@ -214,7 +214,31 @@ def self_test():
     assert frozen["games"][0]["status"]=="CLOSING"
     assert frozen["games"][0]["captured_at"]==row["captured_at"]
     assert compose(slate,[dict(feed,bookmakers=[bk("new",-500,420)])],frozen,date_time("2026-11-04T00:20:00Z"))["games"][0]["market_ml_away"]==row["market_ml_away"]
-    print("Market benchmark self-test PASS (no-vig, matchup, timestamp, freeze, no leakage)")
+    assert eligible_poll_slot(date_time("2026-11-03T14:20:00Z").astimezone(TZ)) is not None
+    assert eligible_poll_slot(date_time("2026-11-03T15:20:00Z").astimezone(TZ)) is None
+    assert eligible_poll_slot(date_time("2026-11-03T23:50:00Z").astimezone(TZ)) is not None
+    assert eligible_poll_slot(date_time("2026-11-03T23:05:00Z").astimezone(TZ)) is None
+    print("Market benchmark self-test PASS (no-vig, matchup, timestamp, freeze, schedule, no leakage)")
+
+def eligible_poll_slot(local):
+    """Rate-limited US/Eastern capture windows: 15 maximum odds requests/day.
+
+    Morning/afternoon: 09:20, 12:20, 15:20 ET.
+    Pregame/evening: 17:20, 17:50, 18:20, 18:50, 19:20, 19:50,
+                     20:20, 20:50, 21:20, 21:50, 22:20, 22:50 ET.
+    Allow up to 24 minutes GitHub scheduling delay per slot.
+    15 x 31 = 465 calls/month, beneath the free 500-credit quota
+    before any extra API usage.
+    """
+    windows=[(9,20),(12,20),(15,20)]
+    windows += [(h,m) for h in range(17,23) for m in (20,50)]
+    for hour,minute in windows:
+        slot=local.replace(hour=hour,minute=minute,second=0,microsecond=0)
+        delay=(local-slot).total_seconds()
+        if 0<=delay<24*60:
+            return slot.isoformat()
+    return None
+
 
 def main():
     ap=argparse.ArgumentParser()
@@ -227,8 +251,9 @@ def main():
         return
     now=now_utc()
     local=now.astimezone(TZ)
-    if not args.force and not (16<=local.hour<=23 or local.hour==0):
-        print("SKIP outside ET afternoon/evening collection window")
+    slot=eligible_poll_slot(local)
+    if not args.force and not slot:
+        print("SKIP outside scheduled ET daytime/pregame collection slots")
         return
     schedule=load_json(SCHEDULE,{}) or {}
     if schedule.get("date")!=local.date().isoformat():
@@ -247,8 +272,11 @@ def main():
             else:
                 print("No new market snapshots to freeze")
         return
-    if not args.force and local.hour==0:
-        print("SKIP new odds collection after midnight ET")
+
+    old=load_json(OUTPUT,{}) or {}
+    # Idempotency: never spend twice in the same GitHub scheduled collection window.
+    if not args.force and slot and old.get("date")==schedule.get("date") and old.get("last_poll_slot")==slot:
+        print("SKIP already captured this scheduled market window:",slot)
         return
     if args.fixture:
         events=load_json(Path(args.fixture),[])
@@ -260,11 +288,11 @@ def main():
         events=fetch_feed(key)
     if not isinstance(events,list):
         raise ValueError("Odds provider did not return an event list")
-    old=load_json(OUTPUT,{}) or {}
     output=compose(schedule,events,old,now)
     if not output["games"]:
         print("No usable odds; preserving existing benchmark file")
         return
+    output["last_poll_slot"]=slot if slot else stamp(now)
     save(OUTPUT,output)
     save(ARCHIVE/(output["date"]+".json"),output)
     print("Updated independently sourced NHL market benchmark:",len(output["games"]),"games at",stamp(now))
