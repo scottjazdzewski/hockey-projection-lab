@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-11-03T19:02:49.560895+00:00",
+  "updated_at": "2026-11-04T12:00:22.884684+00:00",
   "surfaces": {
     "schedule": {
       "file": "public/data/today-games.json",
@@ -17,7 +17,7 @@
       "state": "READY",
       "owner": "game-model",
       "model_id": "HOCKEY-LAB-GAME",
-      "model_version": "1.0.0",
+      "model_version": "prospective-0.3.0",
       "max_age_minutes": null
     },
     "model_performance": {
@@ -26,7 +26,7 @@
       "state": "READY",
       "owner": "validation",
       "model_id": "HOCKEY-LAB-GAME",
-      "model_version": "1.0.0",
+      "model_version": "prospective-0.3.0",
       "max_age_minutes": null
     },
     "team_ratings": {

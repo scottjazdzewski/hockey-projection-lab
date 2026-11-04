@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-03T14:02:49.211589-05:00",
+  "generated_at": "2026-11-04T07:00:21.504461-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
-    "version": "1.0.0",
-    "internal_engine": "HWIN-SCHEDULE-007-NOGOALIE",
-    "feature_version": "team-strength-004+b2b-007"
+    "version": "prospective-0.3.0",
+    "internal_engine": "HWIN-SCHEDULE-007",
+    "feature_version": "team-strength-004+b2b-007+goalie-adjustment-prospective-001"
   },
   "sample": {
     "games_scored": 6993,
@@ -13,10 +13,10 @@
     "end_date": "2026 rolling-origin fold"
   },
   "metrics": {
-    "accuracy": 0.5991705991705991,
-    "brier": 0.23472630331662248,
-    "log_loss": 0.6615400452176158,
-    "calibration": 0.9978947675336999
+    "accuracy": 0.6004576004576004,
+    "brier": 0.23465102592975393,
+    "log_loss": 0.6614142682583062,
+    "calibration": 0.03764319809461731
   },
   "bands": []
 }
