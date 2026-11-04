@@ -426,11 +426,17 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None,goalie_model
         payload["model"]["trained_through"]=active_goalie_model.get("trained_through",payload["model"]["trained_through"])
     Path(out/"game-projections.json").write_text(json.dumps(payload,indent=2)+"\n")
 
+    performance_metrics=(active_goalie_model or {}).get("performance_metrics") or PERFORMANCE
+    performance_sample=(active_goalie_model or {}).get("sample") or {
+      "games_scored":PERFORMANCE["games_scored"],
+      "start_date":"2022 rolling-origin fold",
+      "end_date":"2026 rolling-origin fold"
+    }
     performance={
       "schema_version":"1.0","generated_at":now.isoformat(),
-      "model":{"model_id":MODEL_ID,"version":MODEL_VERSION,"internal_engine":"HWIN-SCHEDULE-007-NOGOALIE","feature_version":FEATURE_VERSION},
-      "sample":{"games_scored":PERFORMANCE["games_scored"],"start_date":"2022 rolling-origin fold","end_date":"2026 rolling-origin fold"},
-      "metrics":{"accuracy":PERFORMANCE["accuracy"],"brier":PERFORMANCE["brier"],"log_loss":PERFORMANCE["log_loss"],"calibration":PERFORMANCE["calibration"]},
+      "model":{"model_id":MODEL_ID,"version":payload["model"]["version"],"internal_engine":"HWIN-SCHEDULE-007","feature_version":payload["model"]["feature_version"]},
+      "sample":{"games_scored":performance_sample["games_scored"],"start_date":performance_sample["start_date"],"end_date":performance_sample["end_date"]},
+      "metrics":{"accuracy":performance_metrics["accuracy"],"brier":performance_metrics["brier"],"log_loss":performance_metrics["log_loss"],"calibration":performance_metrics["calibration"]},
       "bands":[]
     }
     Path(out/"model-performance.json").write_text(json.dumps(performance,indent=2)+"\n")
