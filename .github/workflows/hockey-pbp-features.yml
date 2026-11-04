@@ -1,6 +1,7 @@
 name: Hockey Full PBP Feature ETL
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
     paths:
@@ -335,5 +336,5 @@ jobs:
           name: hockey-pbp-features-2010-2027-20261102
           path: hockey-pbp-features-2010-2027-20261102.zip
           if-no-files-found: error
-          retention-days: 1
+          retention-days: 14
           compression-level: 0
