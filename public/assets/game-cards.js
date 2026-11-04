@@ -71,7 +71,52 @@
     return Number.isFinite(a)&&Number.isFinite(h)&&Math.abs((a+h)-1)<=0.001;
   }
 
-  function card(g,pBundle,p,projectionSurface){
+
+  function timeET(stamp){
+    const t=Date.parse(stamp||'');
+    if(!Number.isFinite(t)) return 'time unknown';
+    return new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'}).format(new Date(t))+' ET';
+  }
+
+  // MARKET IS DISPLAY-ONLY: never feed its output to the prediction scorer.
+  function marketBlock(g,m,modelIsValid,p){
+    const safe=m && m.away_abbr===g.away_abbr && m.home_abbr===g.home_abbr &&
+      Number.isFinite(m.no_vig_away) && Number.isFinite(m.no_vig_home) &&
+      m.no_vig_away>0 && m.no_vig_away<1 &&
+      Math.abs(m.no_vig_away+m.no_vig_home-1)<0.002;
+    if(!safe){
+      return '<section class="gc-market gc-market-empty" aria-label="Market benchmark unavailable">'+
+        '<div class="gc-market-head"><span>Market benchmark · independent</span></div>'+
+        '<div class="gc-market-pending">Consensus market awaiting verified odds feed</div>'+
+        '</section>';
+    }
+
+    const at=Date.parse(m.captured_at||'');
+    const start=Date.parse(g.start_time_et||'');
+    const age=Number.isFinite(at)?(Date.now()-at)/60000:Infinity;
+    const isMulti=m.status==='CLOSING'||m.status==='CURRENT'||m.status==='LAST_PREGAME';
+    const isClosing=m.status==='CLOSING' && Number.isFinite(start) && Number.isFinite(at) && at<start;
+    const isOld=!isClosing && age>60;
+    const label=isClosing?'Last pregame snapshot':isMulti?(isOld?'Earlier market snapshot':'Current market consensus'):'Source-reported reference';
+    const source=m.status==='SOURCE_SNAPSHOT'?'Single published source'
+      : (Number.isInteger(m.book_count)?m.book_count+' sportsbook'+(m.book_count===1?'':'s'):'Source unverified');
+    const time=timeET(m.captured_at);
+    const diff=modelIsValid ? (p.away.win_probability-m.no_vig_away)*100 : null;
+    const diffText=Number.isFinite(diff)
+      ? 'Lab − market: '+esc(g.away_abbr)+' '+(diff>=0?'+':'')+diff.toFixed(1)+' pp · '+
+        esc(g.home_abbr)+' '+(-diff>=0?'+':'')+(-diff).toFixed(1)+' pp'
+      : 'Market shown separately · model projection unavailable';
+    return '<section class="gc-market'+(isOld?' gc-market-stale':'')+'" aria-label="Independent market benchmark">'+
+      '<div class="gc-market-head"><span>'+esc(label)+'</span><span>'+esc(source)+' · '+esc(time)+'</span></div>'+
+      '<div class="gc-market-values">'+
+        '<div><small>'+esc(g.away_abbr)+' market moneyline</small><strong>'+price(m.market_ml_away)+'</strong><b>'+pct(m.no_vig_away)+' no-vig</b></div>'+
+        '<div><small>'+esc(g.home_abbr)+' market moneyline</small><strong>'+price(m.market_ml_home)+'</strong><b>'+pct(m.no_vig_home)+' no-vig</b></div>'+
+      '</div>'+
+      '<div class="gc-market-diff">'+esc(diffText)+(isOld?' · Not current':'')+'</div>'+
+    '</section>';
+  }
+
+  function card(g,pBundle,p,projectionSurface,market){
     const away=nick(g.away_name,g.away_abbr);
     const home=nick(g.home_name,g.home_abbr);
     const awayClass=away.length>12?' gc-long':'';
@@ -106,6 +151,7 @@
         '<div class="gc-vs" aria-hidden="true">@</div>'+
         '<div class="gc-team"><img src="'+logo(g.home_abbr)+'" alt="'+esc(g.home_name||g.home_abbr)+'"><div class="gc-team-name'+homeClass+'">'+esc(home)+'</div><small>'+esc(g.home_abbr)+' · Home</small><div class="gc-team-projection"><strong>'+homeProb+'</strong><span>Win probability</span><b>'+homeFair+' fair</b></div></div>'+
       '</div>'+
+      marketBlock(g,market,live,p)+
       '<div class="gc-metrics">'+
         '<div class="gc-metric"><strong>'+xg+'</strong><span>Expected goals A · H</span></div>'+
         '<div class="gc-metric"><strong>'+reg+'</strong><span>Reg win A · H</span></div>'+
@@ -131,12 +177,15 @@
         ? await window.HockeyData.loadSurface('game_projections','/data/game-projections.json').catch(()=>({ready:false,surface:null,data:null,stale:false}))
         : {ready:false,surface:null,data:null,stale:false};
       const projectionResult=projectionSurface.data;
+      const marketFeed=await json('/data/market-benchmark.json').catch(()=>null);
       const games=Array.isArray(schedule.games)?schedule.games:[];
       const projections=projectionResult && Array.isArray(projectionResult.projections) ? projectionResult.projections : [];
       const byId=new Map(projections.map(p=>[String(p.game_id),p]));
+      const markets=marketFeed?.date===schedule.date && Array.isArray(marketFeed.games)?marketFeed.games:[];
+      const marketById=new Map(markets.map(m=>[String(m.game_id),m]));
       if(dateEl) dateEl.textContent=(schedule.display_date||schedule.date||'Today')+' · '+games.length+' game'+(games.length===1?'':'s');
       if(grid) grid.innerHTML=games.length
-        ? games.map(g=>card(g,projectionResult,byId.get(String(g.game_id)),projectionSurface)).join('')
+        ? games.map(g=>card(g,projectionResult,byId.get(String(g.game_id)),projectionSurface,marketById.get(String(g.game_id)))).join('')
         : '<div class="gc-loading">No NHL games scheduled today.</div>';
     }catch(e){
       if(dateEl) dateEl.textContent='Today’s NHL slate';
