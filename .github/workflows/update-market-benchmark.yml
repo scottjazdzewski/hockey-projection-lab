@@ -11,10 +11,10 @@ on:
     # Backup cron for fixed benchmark checkpoints: 9 AM, noon, 3 PM, 5 PM, 6 PM ET.
     # The 5-minute live-context heartbeat is the primary watchdog and dispatches
     # this workflow whenever the collector reports a fixed or closing slot due.
-    # EST/EDT UTC unions are intentional. Each target gets 0/5/10-minute
-    # retry wakes; the collector admits only the correct local-time slot and
+    # EST/EDT UTC unions are intentional. Each target gets +3/+8/+13-minute
+    # retry wakes, deliberately avoiding the high-load top of the hour. The collector admits only the correct local-time slot and
     # records it so retries cannot spend a second credit.
-    - cron: '0,5,10 13,14,16,17,19,20,21,22,23 * * *'
+    - cron: '3,8,13 13,14,16,17,19,20,21,22,23 * * *'
   push:
     branches: [main]
     paths:
