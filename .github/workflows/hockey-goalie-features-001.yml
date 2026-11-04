@@ -9,6 +9,8 @@ on:
     paths:
       - 'research/build_goalie_game_features.py'
       - 'research/hwin_goalie_age_shrinkage_004.py'
+      - '.github/workflows/hockey-pbp-features.yml'
+      - '.github/workflows/hockey-game-spine-v3.yml'
       - '.github/workflows/hockey-goalie-features-001.yml'
 
 permissions:
