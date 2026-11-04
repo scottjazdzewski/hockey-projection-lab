@@ -34,6 +34,29 @@
           "home":{"$ref":"#/$defs/teamProjection"},
           "overtime_probability":{"type":["number","null"],"minimum":0,"maximum":1},
           "goalie_state":{"$ref":"#/$defs/contextState"},
+          "goalie_adjustment_status":{"enum":["APPLIED","UNAVAILABLE","NOT_APPLIED"]},
+          "goalie_adjustment":{"type":["object","null"],"properties":{
+            "status":{"enum":["APPLIED","UNAVAILABLE","NOT_APPLIED"]},
+            "model_version":{"type":["string","null"]},
+            "away_rating":{"type":["number","null"]},
+            "home_rating":{"type":["number","null"]},
+            "away_age_years":{"type":["number","null"]},
+            "home_age_years":{"type":["number","null"]},
+            "away_prior_starts":{"type":["integer","null"],"minimum":0},
+            "home_prior_starts":{"type":["integer","null"],"minimum":0},
+            "away_prior_shots":{"type":["number","null"],"minimum":0},
+            "home_prior_shots":{"type":["number","null"],"minimum":0},
+            "away_prior_minutes":{"type":["number","null"],"minimum":0},
+            "home_prior_minutes":{"type":["number","null"],"minimum":0},
+            "away_reliability":{"type":["number","null"],"minimum":0,"maximum":1},
+            "home_reliability":{"type":["number","null"],"minimum":0,"maximum":1},
+            "away_status":{"type":["string","null"]},
+            "home_status":{"type":["string","null"]},
+            "away_source_timestamp":{"type":["string","null"]},
+            "home_source_timestamp":{"type":["string","null"]},
+            "away_observed_at":{"type":["string","null"]},
+            "home_observed_at":{"type":["string","null"]}
+          },"additionalProperties":true},
           "lineup_state":{"$ref":"#/$defs/contextState"},
           "rest_state":{"$ref":"#/$defs/contextState"},
           "flags":{"type":"array","items":{"type":"string"}}
@@ -51,7 +74,9 @@
         "win_probability":{"type":["number","null"],"minimum":0,"maximum":1},
         "expected_goals":{"type":["number","null"],"minimum":0},
         "regulation_win_probability":{"type":["number","null"],"minimum":0,"maximum":1},
-        "fair_moneyline":{"type":["integer","null"]}
+        "fair_moneyline":{"type":["integer","null"]},
+        "team_only_win_probability":{"type":["number","null"],"minimum":0,"maximum":1},
+        "goalie_adjustment_pp":{"type":["number","null"]}
       },
       "additionalProperties":false
     },
