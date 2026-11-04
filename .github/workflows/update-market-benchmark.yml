@@ -1,4 +1,5 @@
 name: Refresh Independent NHL Market Benchmark
+# ops-recovery: 2026-11-04 6pm checkpoint
 
 on:
   workflow_dispatch:
