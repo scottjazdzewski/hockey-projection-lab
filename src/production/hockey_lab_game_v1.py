@@ -195,21 +195,35 @@ def apply_goalie_adjustment(projections,goalie_model_path,goalie_history_path):
     goalie_games=pd.read_parquet(history_path)
     records=goalie_games.to_dict(orient="records")
     birth_dates={}
+    known_ids=set()
+    ids_by_name={}
     for r in records:
         pid=ga.normalize_player_id(r.get("goalie_id_key"))
         birth=r.get("birth_date")
-        if pid and birth is not None and pd.notna(birth):
-            birth_dates.setdefault(pid,str(birth)[:10])
+        if pid:
+            known_ids.add(pid)
+            if birth is not None and pd.notna(birth):
+                birth_dates.setdefault(pid,str(birth)[:10])
+            name=ga.normalize_name(r.get("player_name"))
+            if name:
+                ids_by_name.setdefault(name,set()).add(pid)
+
+    def resolve_id(raw_id,name):
+        pid=ga.normalize_player_id(raw_id)
+        if pid in known_ids:
+            return pid
+        matches=ids_by_name.get(ga.normalize_name(name),set())
+        return next(iter(matches)) if len(matches)==1 else pid
 
     for p in projections:
         state=p.get("goalie_state") or {}
-        away_id=state.get("away_id")
-        home_id=state.get("home_id")
+        away_id=resolve_id(state.get("away_id"),state.get("away"))
+        home_id=resolve_id(state.get("home_id"),state.get("home"))
         as_of=p.get("game_date")
-        away_age=ga.goalie_age(birth_dates.get(ga.normalize_player_id(away_id)),as_of)
-        home_age=ga.goalie_age(birth_dates.get(ga.normalize_player_id(home_id)),as_of)
-        away=ga.rate_goalie(records,away_id,birth_dates.get(ga.normalize_player_id(away_id)),as_of,model["calibration"])
-        home=ga.rate_goalie(records,home_id,birth_dates.get(ga.normalize_player_id(home_id)),as_of,model["calibration"])
+        away_age=ga.goalie_age(birth_dates.get(away_id),as_of)
+        home_age=ga.goalie_age(birth_dates.get(home_id),as_of)
+        away=ga.rate_goalie(records,away_id,birth_dates.get(away_id),as_of,model["calibration"])
+        home=ga.rate_goalie(records,home_id,birth_dates.get(home_id),as_of,model["calibration"])
         team_home=float(p["home"]["win_probability"])
         team_away=float(p["away"]["win_probability"])
         p["home"]["team_only_win_probability"]=team_home
