@@ -1,10 +1,54 @@
 {
   "schema_version": "1.0",
   "model_id": "HOCKEY-LAB-GAME-GOALIE",
-  "version": "candidate-0.1.0",
-  "status": "CANDIDATE",
-  "feature_version": "team-strength-004+b2b-007+goalie-adjustment-candidate",
-  "trained_through": null,
-  "calibration": null,
-  "promotion_note": "This file is intentionally non-promoted until age-curve, exposure-shrinkage, and probability calibration pass rolling-origin and prospective validation."
+  "version": "prospective-0.3.0",
+  "status": "PROMOTED",
+  "feature_version": "team-strength-004+b2b-007+goalie-adjustment-prospective-001",
+  "baseline_feature_version": "team-strength-004+b2b-007",
+  "trained_through": "2025-26",
+  "sample": {
+    "games_scored": 6993,
+    "start_date": "2022 rolling-origin fold",
+    "end_date": "2026 rolling-origin fold"
+  },
+  "performance_metrics": {
+    "games_scored": 6993,
+    "accuracy": 0.6004576004576004,
+    "brier": 0.23465102592975393,
+    "log_loss": 0.6614142682583062,
+    "calibration": 0.03764319809461731
+  },
+  "calibration": {
+    "age_curve": {
+      "center": 29.33966304832615,
+      "scale": 4.144061545646119,
+      "age_min": 19.474732540709255,
+      "age_max": 42.48684093444766,
+      "coefficients": [
+        0.9099383460149153,
+        -0.0005284474347755993,
+        -0.0005752015045528634
+      ]
+    },
+    "shrinkage": {
+      "shots_k": 400,
+      "starts_k": 15,
+      "minutes_k": 1800
+    },
+    "probability_beta": 8.943414306827686
+  },
+  "rolling_origin": {
+    "weighted_backbone_brier": 0.2347084518264556,
+    "weighted_goalie_brier": 0.23465102592975393,
+    "delta_brier": -0.000057425896701684964,
+    "weighted_backbone_log_loss": 0.6614982923959186,
+    "weighted_goalie_log_loss": 0.6614142682583062,
+    "delta_log_loss": -0.00008402413743732731,
+    "improved_seasons": 3,
+    "tested_seasons": 5,
+    "latest_season_delta_brier": 0.0007314332684328351,
+    "latest_season_delta_log_loss": 0.0017485640875718467,
+    "prospective_monitoring": true
+  },
+  "promotion_note": "Promoted for prospective evaluation at user direction. Rolling-origin results across 6,993 games show small overall improvements in Brier and log loss and improvement in 3 of 5 seasons; the 2026 fold worsened. Preserve team-only baselines, track prospective performance, and review this model version against the forward ledger."
 }
