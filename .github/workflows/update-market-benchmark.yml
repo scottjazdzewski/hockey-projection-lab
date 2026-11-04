@@ -33,6 +33,34 @@ jobs:
           python-version: '3.12'
       - name: Check market math and the pregame freeze contract
         run: python src/market/update_market_benchmark.py --self-test
+      - name: Verify The Odds API key with a zero-credit request
+        env:
+          THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+
+          key = os.environ.get("THE_ODDS_API_KEY", "").strip()
+          if not key:
+              raise SystemExit("ERROR: GitHub secret THE_ODDS_API_KEY is missing or empty")
+          url = "https://api.the-odds-api.com/v4/sports/?" + urlencode({"apiKey": key})
+          try:
+              with urlopen(Request(url, headers={"User-Agent": "HockeyLab-KeyCheck/1.0"}), timeout=25) as response:
+                  payload = json.load(response)
+                  remaining = response.headers.get("x-requests-remaining", "not reported")
+                  used = response.headers.get("x-requests-used", "not reported")
+          except HTTPError as error:
+              raise SystemExit(f"ERROR: The Odds API rejected the key (HTTP {error.code})") from None
+          except (URLError, TimeoutError):
+              raise SystemExit("ERROR: The Odds API connection was unavailable") from None
+          if not isinstance(payload, list):
+              raise SystemExit("ERROR: Unexpected sports-list response from The Odds API")
+          print(f"PASS: API key authenticated on a zero-credit endpoint. Monthly used: {used}; remaining: {remaining}.")
+          PY
       - name: Refresh multi-book odds (benchmark only)
         env:
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
