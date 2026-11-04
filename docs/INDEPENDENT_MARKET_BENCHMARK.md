@@ -22,13 +22,16 @@ The independently scheduled workflow .github/workflows/update-market-benchmark.y
 
 Per sportsbook, require a complete 2-way full-game (including OT/SO) head-to-head moneyline, timestamped pre-start, current within 90 minutes of collection, and matched to both teams and the scheduled game time.
 
-For each book, American -A implies A/(A+100); +A implies 100/(A+100). Calculate bookmaker away no-vig as P(away)/(P(away)+P(home)); home=1-away. Combine the per-book away no-vig probabilities with an equal-book median. The card presents this consensus in percentages, next to the MEDIAN RAW BOOK MONEYLINE for each side. Median book moneylines retain overround and are not converted from fair probability. One book is a reference, NOT consensus.
+For each book, American -A implies A/(A+100); +A implies 100/(A+100). Calculate bookmaker away no-vig as P(away)/(P(away)+P(home)); home=1-away. Combine the per-book away no-vig probabilities with an equal-book median. The consensus is retained internally as de-vigged percentages for benchmarking; Game Cards now show only the MEDIAN RAW BOOK MONEYLINE for each side. Median book moneylines retain overround and are not converted from fair probability. One book is a reference, NOT consensus.
 
-Card disagreement is Hockey Lab win probability minus market no-vig win probability, in percentage points. This is purely analytical.
+Research-only disagreement remains Hockey Lab win probability minus market no-vig win probability, in percentage points. This calculation is not displayed on Game Cards or used by the model.
 
 ## Capture, freshness and freeze
 
-- Capture on a roughly half-hour schedule, at :20/:50 during the ET evening, normally 10 minutes before :00/:30 puck drops.
+- Capture throughout the ET day at 9:20 AM, 12:20 PM, and 3:20 PM, then every 30 minutes from 5:20 PM through 10:50 PM ET. These are approximately scheduled GitHub Actions starts, not guaranteed second-accurate executions.
+- The collector admits at most 15 scheduled slots per calendar day, which is at most 465 one-market/one-region credit requests in a 31-day month (before any additional usage of the same provider key). Delayed jobs outside the 24-minute grace period skip rather than using extra credits.
+- An already-captured scheduled slot is skipped to reduce duplicate requests. The bookmaker feed can move more often than the collection schedule; the website shows the latest saved snapshot, not every intra-interval tick.
+- Open Game Cards re-fetch the independent market JSON every five minutes and when the browser window regains focus, updating only their market strips without rerendering the promoted Hockey Lab probabilities.
 - Every saved row includes when the request was captured, the participating books, and each book's source quote timestamp.
 - Prices captured after scheduled start are NEVER substituted into existing pregame records.
 - When the start passes, a snapshot saved at most 25 minutes before start is labeled CLOSING (meaning last locally captured pregame snapshot, not an exchange-certified final tick); older rows are LAST_PREGAME.
