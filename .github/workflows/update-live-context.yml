@@ -16,6 +16,7 @@ on:
     branches: [main]
     paths:
       - 'src/live_context/update_live_context.py'
+      - 'src/market/update_market_benchmark.py'
       - '.github/workflows/update-live-context.yml'
 
 permissions:
@@ -131,52 +132,18 @@ jobs:
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
 
-      - name: Trigger near-close market snapshot
+      - name: Trigger due sportsbook market snapshot
         if: github.event_name == 'schedule'
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          python - <<'PY' > /tmp/market_close_due
-          from datetime import datetime
-          from pathlib import Path
-          from zoneinfo import ZoneInfo
-          import json
-
-          tz=ZoneInfo("America/New_York")
-          now=datetime.now(tz)
-          try:
-              slate=json.loads(Path("public/data/today-games.json").read_text())
-          except Exception:
-              slate={}
-          try:
-              market=json.loads(Path("public/data/market-benchmark.json").read_text())
-          except Exception:
-              market={}
-
-          captured=set(market.get("captured_poll_slots") or [])
-          due=[]
-          if slate.get("date")==now.date().isoformat():
-              starts=set()
-              for game in slate.get("games",[]):
-                  raw=game.get("start_time_et")
-                  if raw:
-                      starts.add(datetime.fromisoformat(raw).astimezone(tz))
-              for start in sorted(starts):
-                  seconds=(start-now).total_seconds()
-                  key="CLOSE:"+start.isoformat()
-                  if 0 < seconds <= 10*60 and key not in captured:
-                      due.append({"start":start.isoformat(),"slot":key,"minutes":round(seconds/60,1)})
-          print("true" if due else "false")
-          if due:
-              print(json.dumps(due))
-          PY
-          if [ "$(head -n1 /tmp/market_close_due)" = "true" ]; then
-            echo "Near-close market snapshot due:"
-            tail -n +2 /tmp/market_close_due || true
-            gh workflow run update-market-benchmark.yml -f reason=closing
+          slot="$(python src/market/update_market_benchmark.py --check-due | tail -n1)"
+          if [ -n "$slot" ] && [ "$slot" != "NONE" ]; then
+            echo "Market snapshot due: $slot"
+            gh workflow run update-market-benchmark.yml -f reason=watchdog
           else
-            echo "No near-close market snapshot due."
+            echo "No sportsbook market snapshot due."
           fi
 
       - uses: actions/setup-python@v5
