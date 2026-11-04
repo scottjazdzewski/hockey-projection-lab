@@ -47,3 +47,8 @@ Run: python src/market/update_market_benchmark.py --self-test
 Run: node src/production/validate-public-data.mjs
 
 No live API key is required to test calculations or the pregame freeze.
+
+
+### Market scheduler watchdog
+
+The sportsbook collector no longer depends on its own cron firing at the exact checkpoint. The existing five-minute live-context heartbeat calls the collector in `--check-due` mode and dispatches the market workflow whenever a fixed or closing slot is outstanding. Fixed checkpoints remain recoverable until the next fixed checkpoint; 6 PM remains recoverable until the first closing window begins. The dedicated market cron remains as a backup. Slot IDs stored in the market file prevent duplicate paid requests.
