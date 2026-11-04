@@ -197,6 +197,14 @@ def apply_goalie_adjustment(projections,goalie_model_path,goalie_history_path):
     birth_dates={}
     known_ids=set()
     ids_by_name={}
+
+    def abbreviated_name_key(value):
+        normalized=ga.normalize_name(value)
+        parts=normalized.split() if normalized else []
+        if len(parts)<2:
+            return None
+        return f"{parts[0][0]} {parts[-1]}"
+
     for r in records:
         pid=ga.normalize_player_id(r.get("goalie_id_key"))
         birth=r.get("birth_date")
@@ -207,13 +215,20 @@ def apply_goalie_adjustment(projections,goalie_model_path,goalie_history_path):
             name=ga.normalize_name(r.get("player_name"))
             if name:
                 ids_by_name.setdefault(name,set()).add(pid)
+                short_key=abbreviated_name_key(name)
+                if short_key:
+                    ids_by_name.setdefault(short_key,set()).add(pid)
 
     def resolve_id(raw_id,name):
         pid=ga.normalize_player_id(raw_id)
         if pid in known_ids:
             return pid
-        matches=ids_by_name.get(ga.normalize_name(name),set())
-        return next(iter(matches)) if len(matches)==1 else pid
+        keys=[ga.normalize_name(name),abbreviated_name_key(name)]
+        for key in keys:
+            matches=ids_by_name.get(key,set()) if key else set()
+            if len(matches)==1:
+                return next(iter(matches))
+        return pid
 
     for p in projections:
         state=p.get("goalie_state") or {}
@@ -235,7 +250,9 @@ def apply_goalie_adjustment(projections,goalie_model_path,goalie_history_path):
                 "away_rating":None,"home_rating":None,
                 "away_age_years":away_age,"home_age_years":home_age,
                 "away_prior_starts":away.get("prior_starts"),"home_prior_starts":home.get("prior_starts"),
-                "away_prior_shots":away.get("prior_shots"),"home_prior_shots":home.get("prior_shots")
+                "away_prior_shots":away.get("prior_shots"),"home_prior_shots":home.get("prior_shots"),
+                "away_reason":away.get("reason"),"home_reason":home.get("reason"),
+                "away_resolved_id":away_id,"home_resolved_id":home_id
             }
             p["home"]["goalie_adjustment_pp"]=None
             p["away"]["goalie_adjustment_pp"]=None
