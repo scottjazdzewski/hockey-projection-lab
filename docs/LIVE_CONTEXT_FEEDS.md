@@ -93,7 +93,7 @@ It must **not** directly change:
 - model generation timestamp
 - model data cutoff
 
-The workflow compares the selected goalie identity/status with each new live-context snapshot. It requests a scorer rerun only when the active feature version includes the explicit `goalie-adjustment-` marker; the current team-only feature version keeps this trigger dormant. Changes that require a fresh pregame score include:
+The workflow compares the selected goalie identity/status with each new live-context snapshot. It requests a scorer rerun only when the active feature version includes the explicit `goalie-adjustment-` marker; the promoted `prospective-0.3.0` feature version enables this trigger. Changes that require a fresh pregame score include:
 
 - a PROJECTED goalie name/ID changing;
 - a PROJECTED goalie becoming CONFIRMED, including confirmation of the same goalie; and
@@ -101,7 +101,7 @@ The workflow compares the selected goalie identity/status with each new live-con
 
 The workflow then invokes the production scorer with the newest live-context snapshot. The scorer recalculates both teams' probabilities and fair moneylines from the fixed team baseline plus the selected goalies' calibrated ratings. The browser renders the newest validated export; it never calculates the goalie effect. If a goalie is UNKNOWN or cannot be matched to a validated rating, use the documented team-only fallback and label the goalie adjustment unavailable.
 
-Every re-score must preserve the goalie name/ID, PROJECTED or CONFIRMED status, source timestamp, Hockey Lab observation timestamp, and scorer/model version. Capture a new immutable forward-ledger snapshot before puck drop. Never rewrite a published projection after puck drop.
+Every re-score must preserve the goalie name/ID, PROJECTED or CONFIRMED status, source timestamp, Hockey Lab observation timestamp, and scorer/model version. A score near puck drop can be frozen immediately; the scheduled forward-ledger workflow freezes the final eligible pregame snapshot. Never rewrite a published projection after puck drop.
 
 **Current implementation state:** the promoted prospective model `prospective-0.3.0` is active against the exact team-only baseline. Live context supplies full goalie names, while historical feature rows use first-initial plus surname; the scorer resolves that format only when it maps to one goalie ID. If the ID remains unresolved or ambiguous, it preserves the team-only probability and records the unavailable reason. Describe a card as goalie-adjusted only when its exported `goalie_adjustment_status` is `APPLIED`. Review goalie-adjusted and baseline forecasts prospectively in the immutable forward ledger.
 
