@@ -196,8 +196,36 @@ jobs:
           },indent=2))
           PY
 
+      - name: Validate rollover live context
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.reason == 'daily-slate-rollover'
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          schedule=json.loads(Path("public/data/today-games.json").read_text())
+          context=json.loads(Path("public/data/live-context.json").read_text())
+          if context.get("date") != schedule.get("date"):
+              raise SystemExit("live-context date does not match today's slate")
+          schedule_by_id={str(g.get("game_id")):g for g in schedule.get("games",[])}
+          context_by_id={str(g.get("game_id")):g for g in context.get("games",[])}
+          if set(schedule_by_id) != set(context_by_id):
+              raise SystemExit("live-context coverage does not exactly match today's slate")
+          for gid,g in context_by_id.items():
+              s=schedule_by_id[gid]
+              for side in ("away","home"):
+                  team=g.get(side) or {}
+                  if team.get("abbr") != s.get(side+"_abbr"):
+                      raise SystemExit(f"{gid} {side} team mismatch")
+                  goalie=team.get("goalie") or {}
+                  if goalie.get("status") not in {"UNKNOWN","PROJECTED","CONFIRMED"}:
+                      raise SystemExit(f"{gid} {side} invalid goalie status")
+          print("PASS: rollover live context matches today's slate")
+          PY
+
       - name: Validate production files
-        if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
+        if: (github.event_name != 'schedule' || steps.gate.outputs.run == 'true') && !(github.event_name == 'workflow_dispatch' && github.event.inputs.reason == 'daily-slate-rollover')
         run: |
           node src/production/validate-public-data.mjs
           node src/production/validate-site-contract.mjs
