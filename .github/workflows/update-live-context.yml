@@ -2,6 +2,11 @@ name: Update Live NHL Context
 
 on:
   workflow_dispatch:
+    inputs:
+      reason:
+        description: "Optional live-context refresh reason"
+        required: false
+        type: string
   schedule:
     # Quarter-hour heartbeat. The gate below performs a provider pull only at
     # fixed daily checkpoints or when a scheduled game is entering its
@@ -211,13 +216,19 @@ jobs:
           fi
 
       - name: Trigger forward snapshot after final pregame context pass
-        if: (github.event_name != 'schedule' || steps.gate.outputs.pregame_15 == 'true') && steps.rescore.outputs.run != 'true'
+        if: ((github.event_name != 'schedule' && github.event.inputs.reason != 'daily-slate-rollover') || steps.gate.outputs.pregame_15 == 'true') && steps.rescore.outputs.run != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run update-forward-ledger.yml
 
-      - name: Trigger goalie-aware pregame rescore
-        if: (github.event_name != 'schedule' || steps.gate.outputs.run == 'true') && steps.rescore.outputs.run == 'true'
+      - name: Trigger production rescore
+        if: (steps.rescore.outputs.run == 'true') || (github.event_name == 'workflow_dispatch' && github.event.inputs.reason == 'daily-slate-rollover')
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run score-hockey-lab-game-v1.yml -f reason=goalie-change
+        shell: bash
+        run: |
+          reason="goalie-change"
+          if [ "${{ github.event.inputs.reason }}" = "daily-slate-rollover" ]; then
+            reason="daily-slate-rollover"
+          fi
+          gh workflow run score-hockey-lab-game-v1.yml -f reason="$reason"
