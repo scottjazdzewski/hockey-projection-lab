@@ -2,6 +2,11 @@ name: HWIN Goalie Age and Exposure Calibration 004
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'research/hwin_goalie_age_shrinkage_004.py'
+      - '.github/workflows/hwin-goalie-age-shrinkage-004.yml'
   workflow_run:
     workflows: ["Hockey Goalie Feature ETL 001"]
     types: [completed]
@@ -12,7 +17,7 @@ permissions:
 
 jobs:
   goalie-age-shrinkage:
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
