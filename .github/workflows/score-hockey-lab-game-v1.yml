@@ -111,6 +111,6 @@ jobs:
             git push
           fi
 
-      - name: Trigger final forward snapshot after goalie-aware rescore
-        if: github.event_name == 'workflow_dispatch' && inputs.reason == 'goalie-change'
-        run: gh workflow run update-forward-ledger.yml
+      - name: Capture immutable forward snapshot after scoring
+        if: success()
+        run: gh workflow run update-forward-ledger.yml --ref main
