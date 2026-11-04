@@ -1,9 +1,8 @@
 """Age-curve and exposure calibration for a goalie-only logit adjustment.
 
-This is a research candidate. It uses nested chronological seasons and an
-independent team-only baseline. It cannot directly promote a production model:
-the baseline feature version is HWIN-GOALIE-ROLLING-003, so a candidate export
-must be recalibrated against the active production backbone before activation.
+This research workflow uses nested chronological seasons and the active
+production team-only baseline. It produces a candidate export; activation
+remains an explicit, versioned promotion decision.
 """
 import json
 from collections import Counter
