@@ -18,7 +18,7 @@ The active HWIN comparison baseline is `team-strength-004+b2b-007`. Goalie versi
 | Current goalie adjustment | Weighted Brier lift 0.000057 and log-loss lift 0.000084; improved in 3/5 folds, latest fold worsened | Keep under prospective review |
 | Goalie metric audit | Shrunk SV%: ΔBrier −0.000141, Δlog loss −0.000280; age-adjusted GAA alone had a tiny uneven lift; SOG-GSAx and combinations with SV% worsened aggregate scores | Keep SV% as the only active goalie input |
 | B2B interaction screen | The three tested interaction variants slightly worsened pooled Brier and had uncertainty intervals crossing zero | Do not add these interactions |
-| Score-distribution audit | Final totals were underpredicted by 0.158 goals/game; over 5.5 was forecast at 53.70% vs 57.16% observed, and over 6.5 at 43.25% vs 46.17% observed | Highest-value scoring-model diagnostic |
+| Nested goal-window selection (010) | On 6,560 OOF games, final totals were underpredicted by 0.158 goals/game; over 5.5 was 53.70% vs 57.16% observed, and over 6.5 was 43.25% vs 46.17% | Prioritize rate and upper-tail calibration |
 
 The first forward goalie snapshots are the decisive evidence still being collected. Historical goalie results above do not establish the live starter-change effect.
 
