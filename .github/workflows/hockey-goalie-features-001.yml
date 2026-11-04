@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - 'research/build_goalie_game_features.py'
+      - 'research/hwin_goalie_age_shrinkage_004.py'
       - '.github/workflows/hockey-goalie-features-001.yml'
 
 permissions:
