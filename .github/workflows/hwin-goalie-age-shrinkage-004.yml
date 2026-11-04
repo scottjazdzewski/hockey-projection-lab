@@ -46,7 +46,7 @@ jobs:
             exit 1
           fi
           echo "Using goalie-history run $goalie_run_id"
-          gh run download "$goalie_run_id" -n goalie-game-features-001-20261102 -D /tmp/goalie
+          gh run download "$goalie_run_id" --repo "$GITHUB_REPOSITORY" -n goalie-game-features-001-20261102 -D /tmp/goalie
           unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u
       - name: Run nested rolling age and exposure calibration
         run: |
