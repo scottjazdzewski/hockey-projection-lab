@@ -51,6 +51,14 @@ Validation:
 
 GitHub also runs `.github/workflows/validate-production-data.yml` whenever production data changes.
 
+## Goalie-conditional projection contract
+
+For the required behavior and implementation checklist, read:
+
+`docs/GOALIE_CONDITIONAL_WIN_PROJECTIONS.md`
+
+That document defines how the expected goalie affects the team's displayed win percentage, how a changed/confirmed starter triggers a new pregame score, the age-and-exposure calibration requirements, and the promotion gate. Future engineering work must follow it.
+
 ## Identity layer
 
 Current NHL team identity crosswalk:
