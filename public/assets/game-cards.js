@@ -72,8 +72,10 @@
     '</span>';
   }
 
-  function usableProjection(bundle,p,manifestReady){
-    if(!manifestReady || !bundle || bundle.model?.status!=='PROMOTED' || !p || p.publish_state!=='PUBLISHED') return false;
+  function usableProjection(bundle,p,projectionSurface){
+    const explicitState=projectionSurface?.surface?.state||null;
+    if(explicitState==='WITHHELD') return false;
+    if(!bundle || bundle.model?.status!=='PROMOTED' || !p || p.publish_state!=='PUBLISHED') return false;
     const a=p.away?.win_probability, h=p.home?.win_probability;
     return Number.isFinite(a)&&Number.isFinite(h)&&Math.abs((a+h)-1)<=0.001;
   }
@@ -121,9 +123,8 @@
     const home=nick(g.home_name,g.home_abbr);
     const awayClass=away.length>12?' gc-long':'';
     const homeClass=home.length>12?' gc-long':'';
-    const manifestReady=projectionSurface?.ready===true;
     const surfaceState=projectionSurface?.surface?.state||'EMPTY';
-    const live=usableProjection(pBundle,p,manifestReady);
+    const live=usableProjection(pBundle,p,projectionSurface);
     const state=String(g.state||'PRE').toUpperCase();
     const gameLabel=state==='LIVE'?'Live':(state==='FINAL'||state==='OFF')?'Final':'Tonight';
     const modelLabel=live
@@ -197,10 +198,16 @@
     const grid=document.getElementById('gc-grid');
     try{
       const schedule=await json('/data/today-games.json');
-      const projectionSurface=window.HockeyData
+      let projectionSurface=window.HockeyData
         ? await window.HockeyData.loadSurface('game_projections','/data/game-projections.json').catch(()=>({ready:false,surface:null,data:null,stale:false}))
         : {ready:false,surface:null,data:null,stale:false};
-      const projectionResult=projectionSurface.data;
+      let projectionResult=projectionSurface.data;
+      if(!projectionResult){
+        projectionResult=await json('/data/game-projections.json').catch(()=>null);
+        if(projectionResult && projectionSurface?.surface?.state!=='WITHHELD'){
+          projectionSurface={ready:true,surface:projectionSurface?.surface||{state:'READY'},data:projectionResult,stale:false};
+        }
+      }
       const marketFeed=await json('/data/market-benchmark.json').catch(()=>null);
       const games=Array.isArray(schedule.games)?schedule.games:[];
       currentMarketDate=schedule.date;
