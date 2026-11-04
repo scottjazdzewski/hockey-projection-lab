@@ -58,6 +58,21 @@ OT probabilities have little separation: decile mean forecasts ranged only from 
 
 The model already includes rest days, back-to-back status, and games in the prior three and five days. Its saved context export separates neither team on B2B, home-only, away-only, and both. The pooled B2B group has 1,722 games versus 4,838 neither-B2B games; the B2B group has worse regulation score log loss (3.849 vs. 3.826) but lower regulation-outcome Brier (0.615 vs. 0.626). This does not yet test 3-in-4, 4-in-6, or getaway games.
 
+## Schedule-state diagnostic
+
+The fixed-60 OOF predictions were joined to the same strictly prior-date schedule features used by the pipeline. The model already includes rest days, B2B, and game counts in the prior three and five days. I also measured explicit 3-in-4, 4-in-6, and 5-in-8 groups. These are descriptive subgroup results, not evidence that adding a feature improves forecasts.
+
+| Schedule group | Team-games | Mean regulation-goal error (forecast − actual) | Goal MAE |
+|---|---:|---:|---:|
+| No 3-in-4 | 10,660 | −0.085 | 1.374 |
+| 3-in-4 | 2,460 | −0.060 | 1.363 |
+| No 4-in-6 | 10,600 | −0.078 | 1.379 |
+| 4-in-6 | 2,520 | −0.093 | 1.344 |
+
+At the game level, predicted total-goal bias was −0.439 in home-only B2B games (364 games), −0.214 in away-only B2B games (1,049), and −0.317 when both teams were on B2B (309). For 4-in-6, bias was −0.350 when both teams qualified (385 games), −0.257 away-only (969), and −0.148 home-only (781), versus −0.137 when neither did (4,425). The group sizes vary substantially, so these differences need season-aware validation before they guide feature changes.
+
+No stable OT pattern appears by these schedule groups. The current schedule export does not provide a validated, as-of-pregame “getaway game” label; that test remains open. Detailed team-level and game-level tables are in the two schedule diagnostics CSVs.
+
 ## Decision and next work
 
 The fixed-60 benchmark remains **RESEARCH / CANDIDATE**, not promoted. The rerun confirms its saved headline metrics on the rebuilt snapshot while leaving the exact frozen source-input mismatch documented. The next goal-model tests should fit shared and side-specific log-rate intercepts/slopes using only the preceding validation season, then score the next season; separately audit exact regulation-tie score cells and test 3-in-4, 4-in-6, and getaway states. Preserve a prospective 2026–27 shadow ledger before any promotion decision.
