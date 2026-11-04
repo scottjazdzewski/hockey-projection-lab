@@ -140,6 +140,34 @@ jobs:
       - name: Fetch and normalize live context
         if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
         run: python src/live_context/update_live_context.py
+
+      - name: Detect daily slate rollover
+        if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
+        id: rollover
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          schedule=json.loads(Path("public/data/today-games.json").read_text())
+          projection=json.loads(Path("public/data/game-projections.json").read_text())
+          scheduled={str(g.get("game_id")) for g in schedule.get("games",[])}
+          projected={str(g.get("game_id")) for g in projection.get("projections",[])}
+          schedule_date=schedule.get("date")
+          projection_dates={g.get("game_date") for g in projection.get("projections",[]) if g.get("game_date")}
+          mismatch=scheduled!=projected or (projection_dates and projection_dates!={schedule_date})
+          with open(os.environ["GITHUB_OUTPUT"],"a") as f:
+              f.write(f"run={'true' if mismatch else 'false'}\n")
+          print(json.dumps({
+              "schedule_date":schedule_date,
+              "projection_dates":sorted(projection_dates),
+              "scheduled_games":sorted(scheduled),
+              "projected_games":sorted(projected),
+              "daily_rollover_needed":mismatch
+          },indent=2))
+          PY
+
       - name: Detect selected-goalie change requiring model rescore
         if: github.event_name != 'schedule' || steps.gate.outputs.run == 'true'
         id: rescore
@@ -197,7 +225,7 @@ jobs:
           PY
 
       - name: Validate rollover live context
-        if: github.event_name == 'workflow_dispatch' && github.event.inputs.reason == 'daily-slate-rollover'
+        if: (github.event_name == 'workflow_dispatch' && github.event.inputs.reason == 'daily-slate-rollover') || steps.rollover.outputs.run == 'true'
         shell: bash
         run: |
           python - <<'PY'
@@ -225,7 +253,7 @@ jobs:
           PY
 
       - name: Validate production files
-        if: (github.event_name != 'schedule' || steps.gate.outputs.run == 'true') && !(github.event_name == 'workflow_dispatch' && github.event.inputs.reason == 'daily-slate-rollover')
+        if: (github.event_name != 'schedule' || steps.gate.outputs.run == 'true') && !((github.event_name == 'workflow_dispatch' && github.event.inputs.reason == 'daily-slate-rollover') || steps.rollover.outputs.run == 'true')
         run: |
           node src/production/validate-public-data.mjs
           node src/production/validate-site-contract.mjs
@@ -244,19 +272,19 @@ jobs:
           fi
 
       - name: Trigger forward snapshot after final pregame context pass
-        if: ((github.event_name != 'schedule' && github.event.inputs.reason != 'daily-slate-rollover') || steps.gate.outputs.pregame_15 == 'true') && steps.rescore.outputs.run != 'true'
+        if: ((github.event_name != 'schedule' && github.event.inputs.reason != 'daily-slate-rollover' && steps.rollover.outputs.run != 'true') || steps.gate.outputs.pregame_15 == 'true') && steps.rescore.outputs.run != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run update-forward-ledger.yml
 
       - name: Trigger production rescore
-        if: (steps.rescore.outputs.run == 'true') || (github.event_name == 'workflow_dispatch' && github.event.inputs.reason == 'daily-slate-rollover')
+        if: (steps.rescore.outputs.run == 'true') || (steps.rollover.outputs.run == 'true') || (github.event_name == 'workflow_dispatch' && github.event.inputs.reason == 'daily-slate-rollover')
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           reason="goalie-change"
-          if [ "${{ github.event.inputs.reason }}" = "daily-slate-rollover" ]; then
+          if [ "${{ github.event.inputs.reason }}" = "daily-slate-rollover" ] || [ "${{ steps.rollover.outputs.run }}" = "true" ]; then
             reason="daily-slate-rollover"
           fi
           gh workflow run score-hockey-lab-game-v1.yml -f reason="$reason"
