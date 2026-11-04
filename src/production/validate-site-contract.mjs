@@ -12,6 +12,7 @@ const required=[
   'public/data/production-manifest.json',
   'public/data/team-identities.json',
   'public/data/live-context.json',
+  'public/data/market-benchmark.json',
   'public/assets/production-data.js',
   'public/assets/game-cards.js',
   'public/assets/team-ratings.js',
@@ -61,6 +62,9 @@ for(const [name,s] of Object.entries(manifest.surfaces||{})){
 const gameCardsJs=read('public/assets/game-cards.js');
 if(!gameCardsJs.includes("const schedule=await json('/data/today-games.json')")) fail('game-cards schedule independence missing');
 else pass('game-cards schedule independence checked');
+
+if(!gameCardsJs.includes("json('/data/market-benchmark.json')")) fail('game cards must load market benchmark independently');
+else pass('market benchmark displayed independently');
 
 pass('required production site files checked');
 
