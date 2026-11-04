@@ -217,7 +217,7 @@ def self_test():
     assert eligible_poll_slot(date_time("2026-11-03T14:20:00Z").astimezone(TZ)) is not None
     assert eligible_poll_slot(date_time("2026-11-03T15:20:00Z").astimezone(TZ)) is None
     assert eligible_poll_slot(date_time("2026-11-03T23:50:00Z").astimezone(TZ)) is not None
-    assert eligible_poll_slot(date_time("2026-11-03T23:05:00Z").astimezone(TZ)) is None
+    assert eligible_poll_slot(date_time("2026-11-03T23:15:00Z").astimezone(TZ)) is None
     print("Market benchmark self-test PASS (no-vig, matchup, timestamp, freeze, schedule, no leakage)")
 
 def eligible_poll_slot(local):
