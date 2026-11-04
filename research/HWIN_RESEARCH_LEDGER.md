@@ -247,3 +247,12 @@ Interpretation:
 - The active model remains based on age-adjusted, exposure-shrunk SV%. Do not add GAA or GSAx to production from this audit.
 - The scorer's historical identity join was also corrected to resolve unique first-initial/surname aliases from goalie history; ambiguous names still fall back to the team-only forecast.
 - Repeat the comparison with `research/hwin_goalie_metric_audit_005.py` when the method or source data changes. The CI workflow `.github/workflows/hwin-goalie-metric-audit-005.yml` packages the fold-level results.
+
+## Model Accuracy Battery Run 001 — 2026-11-04
+
+Completed the paired goalie uncertainty/exposure audit and score-distribution tail diagnostic. Full methods, paired intervals, season results, exposure slices, run IDs, and decisions are recorded in [the execution report](MODEL_ACCURACY_TEST_BATTERY_RUN_001_20261104.md).
+
+Key decisions:
+- SV% remained the strongest tested goalie signal, but game-paired and team-season 95% intervals included zero; the less-experienced starter's 0–4 start slice worsened. Keep prospective goalie tracking and do not retune from retrospective starter identities.
+- The global goal-rate offset reduced total underprediction and improved score/total and over-threshold metrics. Total MAE was flat/slightly worse, win-probability scores did not improve, and the highest expected-total decile shifted into overprediction. Keep it research-only; test a validation-fitted environment-conditioned offset next.
+- Production HWIN `team-strength-004+b2b-007 + prospective-0.3.0` and public cards remain unchanged.
