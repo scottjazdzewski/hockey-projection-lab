@@ -153,15 +153,20 @@ def rate_goalie(goalie_games, player_id, birth_date, as_of, calibration):
     shot_k = float(shrink["shots_k"])
     start_k = float(shrink["starts_k"])
     minute_k = float(shrink["minutes_k"])
-    if min(shot_k, start_k, minute_k) <= 0:
-        raise ValueError("all calibrated goalie exposure shrinkage values must be positive")
+    if min(shot_k, start_k, minute_k) < 0:
+        raise ValueError("goalie exposure shrinkage values cannot be negative")
+
+    def exposure_reliability(exposure, k):
+        if exposure <= 0:
+            return 0.0
+        return 1.0 if k == 0 else exposure / (exposure + k)
 
     # Each reliability component is learned on historical folds. Their mean
     # avoids multiplying three correlated exposure measures into near-zero.
     reliability = sum((
-        prior_shots / (prior_shots + shot_k) if prior_shots else 0.0,
-        prior_starts / (prior_starts + start_k) if prior_starts else 0.0,
-        prior_minutes / (prior_minutes + minute_k) if prior_minutes else 0.0,
+        exposure_reliability(prior_shots, shot_k),
+        exposure_reliability(prior_starts, start_k),
+        exposure_reliability(prior_minutes, minute_k),
     )) / 3.0
     rating = current_prior + reliability * residual_per_shot
 
@@ -195,7 +200,8 @@ def adjust_home_probability(team_only_home_probability, home_rating, away_rating
 
 
 def is_promoted_model(model, expected_baseline_feature_version=None):
-    metrics = (model or {}).get("performance_metrics") or {}
+    model = model if isinstance(model, dict) else {}
+    metrics = model.get("performance_metrics") or {}
     required_metrics = ("accuracy", "brier", "log_loss", "calibration")
     baseline_matches = (
         expected_baseline_feature_version is None
