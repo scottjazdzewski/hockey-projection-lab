@@ -73,7 +73,7 @@ A positive goalie-to-goalie scenario calculation alone does not pass this gate. 
 
 ## Current implementation state
 
-The live goalie feed and card already carry goalie names/statuses. The promoted Game v1.0.0 scorer is still team-only and marks outputs with a no-goalie-layer flag. The live-context workflow has a confirmed-goalie rescore hook gated on a goalie-aware model version; it must be extended to handle PROJECTED identity changes as well. Until the rating, scorer, workflow, export schema, and card rendering are all connected and validated, the public win percentage remains the team-only projection.
+The live goalie feed and card already carry goalie names/statuses. The promoted Game v1.0.0 scorer is still team-only and marks outputs with a no-goalie-layer flag. The live-context workflow now compares selected goalie identity and status, including PROJECTED changes, and requests a scorer rerun only when the active feature version identifies a goalie-aware model. The current feature version is team-only, so goalie-feed changes update the context display but do not yet change public probabilities. The goalie rating, production scorer integration, export schema, and adjusted card rendering still require research, implementation, and validation before the public win percentage becomes goalie-conditional.
 
 ## Change-control checklist
 
