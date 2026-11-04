@@ -1,0 +1,86 @@
+name: HWIN Goalie Uncertainty Audit 006
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/model-accuracy-test-battery-016]
+    paths:
+      - 'research/hwin_goalie_uncertainty_audit_006.py'
+      - '.github/workflows/hwin-goalie-uncertainty-audit-006.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  goalie-uncertainty-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas==2.2.3 numpy==1.26.4 pyarrow==17.0.0 scikit-learn==1.5.2
+
+      - name: Locate canonical input runs
+        id: inputs
+        shell: bash
+        run: |
+          pbp_run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/hockey-pbp-features.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          spine_run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/hockey-game-spine-v3.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          goalie_run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/hockey-goalie-features-001.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          if [ -z "$pbp_run_id" ] || [ -z "$spine_run_id" ] || [ -z "$goalie_run_id" ]; then
+            echo "Missing a successful PBP, spine, or goalie-history feature run."
+            exit 1
+          fi
+          echo "pbp_run_id=$pbp_run_id" >> "$GITHUB_OUTPUT"
+          echo "spine_run_id=$spine_run_id" >> "$GITHUB_OUTPUT"
+          echo "goalie_run_id=$goalie_run_id" >> "$GITHUB_OUTPUT"
+          echo "Using PBP run $pbp_run_id, spine run $spine_run_id, goalie run $goalie_run_id"
+
+      - name: Download canonical rolling inputs
+        env:
+          PBP_RUN_ID: ${{ steps.inputs.outputs.pbp_run_id }}
+          SPINE_RUN_ID: ${{ steps.inputs.outputs.spine_run_id }}
+          GOALIE_RUN_ID: ${{ steps.inputs.outputs.goalie_run_id }}
+        shell: bash
+        run: |
+          mkdir -p /tmp/pbp /tmp/pbp_u /tmp/spine /tmp/spine_u /tmp/goalie /tmp/goalie_u
+          gh run download "$PBP_RUN_ID" --repo "$GITHUB_REPOSITORY" -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/pbp_u
+          gh run download "$SPINE_RUN_ID" --repo "$GITHUB_REPOSITORY" -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
+          unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/spine_u
+          gh run download "$GOALIE_RUN_ID" --repo "$GITHUB_REPOSITORY" -n goalie-game-features-001-20261102 -D /tmp/goalie
+          unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u
+
+      - name: Run matched rolling goalie audit
+        env:
+          PBP_RUN_ID: ${{ steps.inputs.outputs.pbp_run_id }}
+          SPINE_RUN_ID: ${{ steps.inputs.outputs.spine_run_id }}
+          GOALIE_RUN_ID: ${{ steps.inputs.outputs.goalie_run_id }}
+        run: |
+          python research/hwin_goalie_uncertainty_audit_006.py \
+            --pbp /tmp/pbp_u/pbp_feature_output/game_team_event_features.parquet \
+            --spine /tmp/spine_u/spine_v3/games.parquet \
+            --goalie /tmp/goalie_u/goalie_feature_output/goalie_game_features.parquet \
+            --out hwin_goalie_uncertainty_audit_006
+
+      - name: Show diagnostics
+        run: |
+          cat hwin_goalie_uncertainty_audit_006/summary.json
+          cat hwin_goalie_uncertainty_audit_006/paired_uncertainty.csv
+          cat hwin_goalie_uncertainty_audit_006/exposure_strata.csv
+
+      - name: Package research output
+        run: zip -r -9 hwin-goalie-uncertainty-audit-006.zip hwin_goalie_uncertainty_audit_006 >/dev/null
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hwin-goalie-uncertainty-audit-006
+          path: hwin-goalie-uncertainty-audit-006.zip
+          retention-days: 30
+          compression-level: 0
+          if-no-files-found: error
