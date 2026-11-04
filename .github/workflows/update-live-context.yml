@@ -220,4 +220,4 @@ jobs:
         if: (github.event_name != 'schedule' || steps.gate.outputs.run == 'true') && steps.rescore.outputs.run == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run score-hockey-lab-game-v1.yml -f reason=confirmed-goalie-change
+        run: gh workflow run score-hockey-lab-game-v1.yml -f reason=goalie-change
