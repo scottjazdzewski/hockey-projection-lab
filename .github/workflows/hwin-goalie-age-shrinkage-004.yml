@@ -39,8 +39,13 @@ jobs:
           if [ "$GITHUB_EVENT_NAME" = "workflow_run" ]; then
             goalie_run_id="${{ github.event.workflow_run.id }}"
           else
-            goalie_run_id="$(gh run list --workflow hockey-goalie-features-001.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
+            goalie_run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/hockey-goalie-features-001.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           fi
+          if [ -z "$goalie_run_id" ] || [ "$goalie_run_id" = "null" ]; then
+            echo "No successful goalie-history ETL run found."
+            exit 1
+          fi
+          echo "Using goalie-history run $goalie_run_id"
           gh run download "$goalie_run_id" -n goalie-game-features-001-20261102 -D /tmp/goalie
           unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u
       - name: Run nested rolling age and exposure calibration
