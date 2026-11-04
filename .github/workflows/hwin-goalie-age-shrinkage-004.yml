@@ -32,9 +32,16 @@ jobs:
         shell: bash
         run: |
           mkdir -p /tmp/pbp /tmp/pbp_u /tmp/spine /tmp/spine_u /tmp/goalie /tmp/goalie_u
-          gh run download 41537361054 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          pbp_run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/hockey-pbp-features.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          spine_run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/hockey-game-spine-v3.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          if [ -z "$pbp_run_id" ] || [ -z "$spine_run_id" ]; then
+            echo "Missing successful full-PBP or canonical-spine feature run."
+            exit 1
+          fi
+          echo "Using PBP run $pbp_run_id and spine run $spine_run_id"
+          gh run download "$pbp_run_id" --repo "$GITHUB_REPOSITORY" -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
           unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/pbp_u
-          gh run download 41537437104 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
+          gh run download "$spine_run_id" --repo "$GITHUB_REPOSITORY" -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
           unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/spine_u
           if [ "$GITHUB_EVENT_NAME" = "workflow_run" ]; then
             goalie_run_id="${{ github.event.workflow_run.id }}"
