@@ -46,7 +46,17 @@ jobs:
             exit 1
           fi
           echo "Using goalie-history run $goalie_run_id"
-          gh run download "$goalie_run_id" --repo "$GITHUB_REPOSITORY" -n goalie-game-features-001-20261102 -D /tmp/goalie
+          artifact_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${goalie_run_id}/artifacts" --jq '.artifacts[] | select(.name == "goalie-game-features-001-20261102") | .id' | head -n 1)"
+          if [ -z "$artifact_id" ]; then
+            echo "Goalie-history artifact missing from run $goalie_run_id."
+            exit 1
+          fi
+          curl --fail --location --silent --show-error \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}/zip" \
+            -o /tmp/goalie/artifact.zip
+          unzip -q /tmp/goalie/artifact.zip -d /tmp/goalie
           unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u
       - name: Run nested rolling age and exposure calibration
         run: |
