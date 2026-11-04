@@ -28,9 +28,10 @@ Research-only disagreement remains Hockey Lab win probability minus market no-vi
 
 ## Capture, freshness and freeze
 
-- On NHL game days, capture at **12:20 PM ET**, then **6:50, 7:20, 7:50, 8:50, and 9:50 PM ET**. These six scheduled checks include a daytime reference and near-puck checks for typical 7:00, 7:30, 8:00, 9:00, and 10:00 PM games. Actual GitHub Actions start times can be delayed and cannot guarantee an exact final closing tick.
-- At most **6 automatic requests per game day**, or **180 credits in a 30-day month / 186 credits in a 31-day month**, assuming the provider charges one credit for the single US-region h2h market request. Days without any upcoming NHL games, late scheduled runs outside the 24-minute grace window, and finished slates skip paid API calls. Manual dispatch and other uses of the same API key could add credits, so monitor the provider dashboard.
-- An already-captured scheduled slot is skipped to reduce duplicate requests. The bookmaker feed can move more often than the collection schedule; the website shows the latest saved snapshot, not every intra-interval tick.
+- On NHL game days, capture fixed daytime snapshots at **9:00 AM, 12:00 PM, 3:00 PM, 5:00 PM, and 6:00 PM ET**.
+- In addition, make **one closing pull in the final 10 minutes before each unique scheduled puck-drop time**. Games sharing the same start time share one provider request. This produces a near-close local benchmark while preserving the hard rule that no post-puck quote may replace a pregame snapshot.
+- Fixed checks use at most **5 requests per NHL game day**. Closing checks add **one request per unique game start time**, not per game. Because one Odds API request returns the whole remaining NHL slate, clustered starts remain efficient. Duplicate workflow wake-ups are idempotent and do not consume additional credits.
+- Every fixed or closing slot receives a persistent slot key. An already-captured slot is skipped, preventing duplicate paid requests even if GitHub retries or delays a workflow. The bookmaker feed can move more often than the collection schedule; the website shows the latest saved snapshot, not every intra-interval tick.
 - Open Game Cards re-fetch the independent market JSON every five minutes and when the browser window regains focus, updating only their market strips without rerendering the promoted Hockey Lab probabilities.
 - Every saved row includes when the request was captured, the participating books, and each book's source quote timestamp.
 - Prices captured after scheduled start are NEVER substituted into existing pregame records.
