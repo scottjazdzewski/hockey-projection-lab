@@ -213,4 +213,7 @@
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',load); else load();
   window.setInterval(refreshMarkets,5*60*1000);
   window.addEventListener('focus',refreshMarkets);
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden) refreshMarkets();
+  });
 })();
