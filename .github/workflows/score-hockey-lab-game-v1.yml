@@ -46,8 +46,11 @@ jobs:
           # leaves current team-only production unchanged until calibration passes.
           goalie_run_id="$(gh run list --workflow hockey-goalie-features-001.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
           if [ -n "$goalie_run_id" ] && [ "$goalie_run_id" != "null" ]; then
-            gh run download "$goalie_run_id" -n goalie-game-features-001-20261102 -D /tmp/goalie
-            unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u
+            if gh run download "$goalie_run_id" -n goalie-game-features-001-20261102 -D /tmp/goalie && unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u; then
+              echo "Loaded goalie history for the gated scorer."
+            else
+              echo "Goalie-history artifact unavailable; score team-only."
+            fi
           else
             echo "No successful goalie-history artifact; score team-only."
           fi
