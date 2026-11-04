@@ -213,6 +213,26 @@ Outputs:
 - `unmatched-audit.json` and `line-rejections.json` — visible join/timing
   failures; no silent substitutions.
 
+## 2026-27 forward start
+
+The forward benchmark scope is the 2026-27 NHL season, beginning only after
+market capture is activated. Games that have already started or finished before
+activation are not backfilled from later prices; tonight's live games, for
+example, are not eligible for a pregame snapshot. The first eligible records
+are future games that already have a frozen Hockey Lab forecast and fall within
+the capture window.
+
+The capture step is wired into the forward-ledger workflow but remains disabled
+until the change is merged and these repository settings are present:
+`PUCKAPI_API_KEY` as an Actions secret,
+`HOCKEY_LAB_MARKET_CAPTURE_ENABLED=true`, and
+`HOCKEY_LAB_MARKET_CREDIT_CAP` as a positive per-run limit. PuckAPI's free
+allowance is 500 credits per month, with a 10-credit game-detail request; this
+supports about 50 game requests monthly, not complete coverage of every game
+for the full season. The configured credit cap applies per run, not across the
+month. Do not enable repeated capture with an account that has paid wallet
+credits unless a separate monthly budget guard is in place.
+
 ## Forward snapshot
 
 `capture_forward_market.py` is separate from the scorer. It updates only the
