@@ -94,10 +94,15 @@
     const at=Date.parse(m.captured_at||'');
     const start=Date.parse(g.start_time_et||'');
     const age=Number.isFinite(at)?(Date.now()-at)/60000:Infinity;
-    const isMulti=m.status==='CLOSING'||m.status==='CURRENT'||m.status==='LAST_PREGAME';
     const isClosing=m.status==='CLOSING' && Number.isFinite(start) && Number.isFinite(at) && at<start;
+    const alreadyStarted=Number.isFinite(start) && Date.now()>=start;
     const isOld=!isClosing && age>60;
-    const label=isClosing?'Last pregame snapshot':isMulti?(isOld?'Earlier market snapshot':'Current market consensus'):'Source-reported reference';
+    const label=isClosing?'Last pregame snapshot':
+      m.status==='LAST_PREGAME'?'Earlier pregame snapshot':
+      m.status==='SINGLE_BOOK'?'Single-book reference':
+      m.status==='SOURCE_SNAPSHOT'?'Source-reported reference':
+      alreadyStarted?'Last saved pregame quote':
+      isOld?'Earlier market snapshot':'Current market consensus';
     const source=m.status==='SOURCE_SNAPSHOT'?'Single published source'
       : (Number.isInteger(m.book_count)?m.book_count+' sportsbook'+(m.book_count===1?'':'s'):'Source unverified');
     const time=timeET(m.captured_at);
