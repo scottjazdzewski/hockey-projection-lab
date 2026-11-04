@@ -8,10 +8,10 @@ on:
         required: false
         type: string
   schedule:
-    # Quarter-hour heartbeat. The gate below performs a provider pull only at
+    # Five-minute heartbeat offset from the top of the hour. The gate below performs a provider pull only at
     # fixed daily checkpoints or when a scheduled game is entering its
     # ~30-minute or ~15-minute pregame window.
-    - cron: '*/5 * * * *'
+    - cron: '2-57/5 * * * *'
   push:
     branches: [main]
     paths:
