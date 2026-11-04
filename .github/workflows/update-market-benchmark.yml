@@ -3,13 +3,20 @@ name: Refresh Independent NHL Market Benchmark
 on:
   workflow_dispatch:
   schedule:
-    # Six allowed ET slots, with a UTC cron union covering EST and EDT:
-    # noon baseline: 12:20 ET
-    # pregame checks: 18:50, 19:20, 19:50, 20:50, 21:50 ET.
-    # Python skips off-slot cron invocations and days without upcoming games.
-    # One h2h US-region request = one credit; <=186 credits in 31-day month.
-    - cron: '20 0,16,17,23 * * *'
-    - cron: '50 0-2,22-23 * * *'
+    # Redundant wake-ups around the six approved ET collection slots.
+    # The Python collector is the authority: it admits only 12:20, 18:50,
+    # 19:20, 19:50, 20:50 and 21:50 ET (with a <24-minute grace window)
+    # and refuses to spend twice in the same slot. These extra cron wakes
+    # protect against GitHub skipping/delaying a single scheduled invocation.
+    #
+    # 12:20 ET (EST/EDT): retry every 5 min through the allowed grace window.
+    - cron: '20-40/5 16,17 * * *'
+    # :20 evening slot (19:20 ET), covering EST/EDT UTC hours.
+    - cron: '20-40/5 23,0 * * *'
+    # :50 evening slots (18:50, 19:50, 20:50, 21:50 ET), plus early-next-hour
+    # retry minutes. Collector idempotency prevents duplicate paid requests.
+    - cron: '50,55 22,23,0,1,2 * * *'
+    - cron: '0,5,10 23,0,1,2,3 * * *'
   push:
     branches: [main]
     paths:
