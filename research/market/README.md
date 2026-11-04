@@ -4,6 +4,27 @@ This is a research-only lane. Sportsbook lines are external comparison data and
 must never be passed into Hockey Lab scoring, training, tuning, or probability
 calibration. No market field is added to `public/data/game-projections.json`.
 
+## Hockey Lab evaluation window
+
+The model-performance export reports 6,993 rolling-origin games for source-season
+codes 2022–2026. In the canonical spine these correspond to NHL seasons
+2021-22 through 2025-26. The historical benchmark window is therefore those
+five seasons; odds from earlier seasons are outside the Hockey Lab evaluation
+sample. Source-season code 2027 is 2026-27 and is handled only through the
+forward snapshot.
+
+The forward ledger's first retained production forecasts are dated November 3,
+2026. Earlier per-game probabilities are not archived, but the model's aggregate
+performance export covers those five rolling-origin folds. The new
+`export_chronological_oos_forecasts.py` replays the production model-selection
+and fitting policy with prior-season training/validation and emits explicitly
+labeled `CHRONOLOGICAL_OOS` rows. These are historical research replays, not
+forecasts actually frozen before those games. The replay covers 6,993 games;
+its accuracy/Brier/log-loss are 0.599600/0.234708/0.661498, compared with the
+stored model-performance export's 0.599171/0.234726/0.661540. Keep that small
+replay-to-export difference visible in provenance and do not describe the
+reconstructed rows as the original frozen forecasts.
+
 ## Source decision
 
 PuckAPI is the leading documented candidate for a historical pull,
@@ -28,9 +49,11 @@ Published odds coverage, checked 2026-11-03:
   verified per-game coverage on the canonical Hockey Lab spine.
 - The docs price get_game_detail and get_odds at 10 credits per game returned.
   Free accounts receive 500 credits monthly, enough for at most 50 game
-  responses. The pricing page lists 13,710 credits for 2025-26 historical
-  odds; therefore do not infer source odds coverage from the season's 1,394
-  completed-game count. Use estimate_only before any season query.
+  responses. A local dry-run against the canonical spine finds 6,993 completed
+  games in the model's 2021-22 through 2025-26 OOS window: 69,930 credits at
+  the documented price. This is an estimate only; no paid request was made.
+  The pricing page lists 13,710 credits for 2025-26 historical odds, so use
+  estimate_only and verify actual provider coverage before any pull.
 - Odds rows carry capturedAt. The provider says its hockey closing snapshot is
   recorded once the game starts, so the closing label alone cannot prove a
   strictly pre-start timestamp. The collector must retain only actual rows
@@ -70,10 +93,11 @@ dataset/feed/export. Keep these artifacts private and outside `public/data/`.
 The canonical research spine uses NHL game IDs. PuckAPI documents the same
 league-assigned key, so that source joins by `game_id` without a team-name
 crosswalk. This is a structurally exact join, but the actual number of matched
-source rows is not known until the archive is queried. The source's documented
-2019-20 start provides seven completed season labels through 2025-26, plus the
-current 2026-27 season as it accumulates. It cannot benchmark earlier
-canonical games.
+source rows is not known until the archive is queried. The source's 2019-20 archive extends earlier than Hockey Lab's useful
+historical window. The fetcher is scoped to source-season codes 2022–2026
+(2021-22 through 2025-26), matching the 6,993-game rolling-origin sample.
+Do not request earlier seasons just because the provider has them. Source-season
+2027 is the current 2026-27 season and belongs only to the forward snapshot.
 
 For providers without NHL IDs, `closing_market_benchmark.py` only accepts an
 exact match on normalized game date, UTC scheduled start, home team and away
@@ -124,10 +148,11 @@ The comparison accepts only:
 
 Forecast timestamps at/after puck drop, invalid probabilities, and probability
 pairs that do not sum to one are excluded. No forecasts are recreated from a
-model trained on future games. The repository currently has a forward-ledger
-path but no retained historical pregame forecast file; therefore the historical
-market-vs-model evaluation cannot be populated from the checked-in history
-alone. Do not label retrospective full-sample scores as pregame forecasts.
+model trained on future games. The checked-in performance file has aggregate
+metrics only; `export_chronological_oos_forecasts.py` creates row-level
+historical replay forecasts with training cutoffs recorded and no market input.
+The forward ledger supplies actual frozen production forecasts beginning
+November 3, 2026. Keep the replay and frozen-forward rows distinguishable.
 
 The current canonical historic result spine covers 22,139 verified NHL
 regular-season/playoff games, while the odds archive begins in 2019-20. Only
@@ -140,12 +165,22 @@ starts are not substituted.
 
 Install `pandas`, `numpy`, and `pyarrow` in the research environment.
 
+First create the historical model-only forecast replay. It uses the production
+model code and has no market input:
+
+```bash
+python research/market/export_chronological_oos_forecasts.py \
+  --pbp /path/to/game_team_event_features.parquet \
+  --games /path/to/spine_v3/games.parquet \
+  --out artifacts/market/staging/chronological-oos-forecasts.parquet
+```
+
 Dry-run a historical PuckAPI request estimate (no network call):
 
 ```bash
 python research/market/fetch_puckapi_closing_odds.py \
   --games /path/to/spine_v3/games.parquet \
-  --start-season 2019 --end-season 2026
+  --start-season 2022 --end-season 2026
 ```
 
 After data-use approval and with `PUCKAPI_API_KEY` set, pass a reviewed credit
@@ -156,7 +191,7 @@ final canonical artifacts.
 ```bash
 python research/market/fetch_puckapi_closing_odds.py \
   --games /path/to/spine_v3/games.parquet \
-  --start-season 2019 --end-season 2026 \
+  --start-season 2022 --end-season 2026 \
   --max-credits <approved-credit-cap>
 
 python research/market/closing_market_benchmark.py \
