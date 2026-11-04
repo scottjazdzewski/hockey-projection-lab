@@ -73,13 +73,22 @@ def fit_age_curve(goalies, through_season):
     design=np.column_stack([np.ones(len(z)),z,z*z])
     sw=np.sqrt(shots)
     coef=np.linalg.lstsq(design*sw[:,None],sv*sw,rcond=None)[0]
-    return {"center":center,"scale":scale,"coefficients":[float(v) for v in coef]}
+    return {
+        "center":center,
+        "scale":scale,
+        "age_min":float(age.min()),
+        "age_max":float(age.max()),
+        "coefficients":[float(v) for v in coef]
+    }
 
 
 def curve_value(age,curve):
     if not np.isfinite(age):
         return np.nan
-    z=(float(age)-curve["center"])/curve["scale"]
+    age=float(age)
+    if "age_min" in curve and "age_max" in curve:
+        age=float(np.clip(age,curve["age_min"],curve["age_max"]))
+    z=(age-curve["center"])/curve["scale"]
     b0,b1,b2=curve["coefficients"]
     value=b0+b1*z+b2*z*z
     return float(value) if 0<value<1 else np.nan
