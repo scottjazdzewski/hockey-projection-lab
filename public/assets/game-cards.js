@@ -86,7 +86,7 @@
       m.no_vig_away>0 && m.no_vig_away<1 &&
       Math.abs(m.no_vig_away+m.no_vig_home-1)<0.002;
     if(!safe){
-      return '<section class="gc-market gc-market-empty" aria-label="Market benchmark unavailable">'+
+      return '<section class="gc-market gc-market-empty" id="gc-market-'+esc(g.game_id)+'" aria-label="Market benchmark unavailable">'+
         '<div class="gc-market-head"><span>Market benchmark · independent</span></div>'+
         '<div class="gc-market-pending">Consensus market awaiting verified odds feed</div>'+
         '</section>';
@@ -99,7 +99,7 @@
     const source=m.status==='SOURCE_SNAPSHOT'?'Single published source'
       : (Number.isInteger(m.book_count)?m.book_count+' sportsbook'+(m.book_count===1?'':'s'):'Source unverified');
     const time=timeET(m.captured_at);
-    return '<section class="gc-market'+(isOld?' gc-market-stale':'')+'" aria-label="Independent market benchmark">'+
+    return '<section class="gc-market'+(isOld?' gc-market-stale':'')+'" id="gc-market-'+esc(g.game_id)+'" aria-label="Independent market benchmark">'+
       '<div class="gc-market-head gc-market-head-source"><span>'+esc(source)+' · '+esc(time)+'</span></div>'+
       '<div class="gc-market-values">'+
         '<div><small>'+esc(g.away_abbr)+' market moneyline</small><strong>'+price(m.market_ml_away)+'</strong></div>'+
@@ -160,6 +160,30 @@
     return r.json();
   }
 
+  let currentMarketDate=null;
+  let currentMarketGames=[];
+
+  // Refresh only the independent market strip. Never rerun or rewrite model projections.
+  async function refreshMarkets(){
+    if(!currentMarketDate || !currentMarketGames.length || document.hidden) return;
+    try{
+      const feed=await json('/data/market-benchmark.json?refresh='+Date.now());
+      const marketRows=feed?.date===currentMarketDate && Array.isArray(feed.games)?feed.games:[];
+      const latest=new Map(marketRows.map(m=>[String(m.game_id),m]));
+      for(const game of currentMarketGames){
+        const existing=document.getElementById('gc-market-'+String(game.game_id));
+        if(!existing) continue;
+        const replacement=document.createElement('template');
+        replacement.innerHTML=marketBlock(game,latest.get(String(game.game_id)));
+        if(replacement.content.firstElementChild){
+          existing.replaceWith(replacement.content.firstElementChild);
+        }
+      }
+    }catch(e){
+      // Keep last captured prices if the benchmark-only file is temporarily unavailable.
+    }
+  }
+
   async function load(){
     const dateEl=document.getElementById('gc-date');
     const grid=document.getElementById('gc-grid');
@@ -171,6 +195,8 @@
       const projectionResult=projectionSurface.data;
       const marketFeed=await json('/data/market-benchmark.json').catch(()=>null);
       const games=Array.isArray(schedule.games)?schedule.games:[];
+      currentMarketDate=schedule.date;
+      currentMarketGames=games;
       const projections=projectionResult && Array.isArray(projectionResult.projections) ? projectionResult.projections : [];
       const byId=new Map(projections.map(p=>[String(p.game_id),p]));
       const markets=marketFeed?.date===schedule.date && Array.isArray(marketFeed.games)?marketFeed.games:[];
@@ -185,4 +211,6 @@
     }
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',load); else load();
+  window.setInterval(refreshMarkets,5*60*1000);
+  window.addEventListener('focus',refreshMarkets);
 })();
