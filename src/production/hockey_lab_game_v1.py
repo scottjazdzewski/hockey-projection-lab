@@ -12,6 +12,7 @@ from sklearn.preprocessing import StandardScaler
 import sys
 sys.path.insert(0,"research")
 import hwin_team_strength_004 as ts
+import goalie_adjustment as ga
 
 MODEL_ID="HOCKEY-LAB-GAME"
 MODEL_VERSION="1.0.0"
@@ -149,8 +150,14 @@ def apply_live_context(projections,context_path):
             "status":goalie_status,
             "away":ag.get("name"),
             "home":hg.get("name"),
+            "away_id":ag.get("player_id"),
+            "home_id":hg.get("player_id"),
             "away_status":ag.get("status") or "UNKNOWN",
             "home_status":hg.get("status") or "UNKNOWN",
+            "away_source_timestamp":ag.get("source_timestamp"),
+            "home_source_timestamp":hg.get("source_timestamp"),
+            "away_observed_at":ag.get("observed_at"),
+            "home_observed_at":hg.get("observed_at"),
             "updated_at":latest(
                 ag.get("source_timestamp"),hg.get("source_timestamp"),
                 ag.get("observed_at"),hg.get("observed_at")
@@ -175,7 +182,81 @@ def apply_live_context(projections,context_path):
         p["flags"]=flags
     return projections
 
-def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
+def apply_goalie_adjustment(projections,goalie_model_path,goalie_history_path):
+    if not goalie_model_path or not goalie_history_path:
+        return projections,None
+    model_path=Path(goalie_model_path)
+    history_path=Path(goalie_history_path)
+    if not model_path.exists() or not history_path.exists():
+        return projections,None
+    model=json.loads(model_path.read_text())
+    if not ga.is_promoted_model(model):
+        return projections,None
+    goalie_games=pd.read_parquet(history_path)
+    records=goalie_games.to_dict(orient="records")
+    birth_dates={}
+    for r in records:
+        pid=ga.normalize_player_id(r.get("goalie_id_key"))
+        birth=r.get("birth_date")
+        if pid and birth is not None and pd.notna(birth):
+            birth_dates.setdefault(pid,str(birth)[:10])
+
+    for p in projections:
+        state=p.get("goalie_state") or {}
+        away_id=state.get("away_id")
+        home_id=state.get("home_id")
+        as_of=p.get("game_date")
+        away_age=ga.goalie_age(birth_dates.get(ga.normalize_player_id(away_id)),as_of)
+        home_age=ga.goalie_age(birth_dates.get(ga.normalize_player_id(home_id)),as_of)
+        away=ga.rate_goalie(records,away_id,birth_dates.get(ga.normalize_player_id(away_id)),as_of,model["calibration"])
+        home=ga.rate_goalie(records,home_id,birth_dates.get(ga.normalize_player_id(home_id)),as_of,model["calibration"])
+        team_home=float(p["home"]["win_probability"])
+        team_away=float(p["away"]["win_probability"])
+        p["home"]["team_only_win_probability"]=team_home
+        p["away"]["team_only_win_probability"]=team_away
+        if not away.get("available") or not home.get("available"):
+            p["goalie_adjustment_status"]="UNAVAILABLE"
+            p["goalie_adjustment"]={
+                "status":"UNAVAILABLE","model_version":model.get("version"),
+                "away_rating":None,"home_rating":None,
+                "away_age_years":away_age,"home_age_years":home_age,
+                "away_prior_starts":away.get("prior_starts"),"home_prior_starts":home.get("prior_starts"),
+                "away_prior_shots":away.get("prior_shots"),"home_prior_shots":home.get("prior_shots")
+            }
+            p["home"]["goalie_adjustment_pp"]=None
+            p["away"]["goalie_adjustment_pp"]=None
+            continue
+
+        adjusted_home=ga.adjust_home_probability(team_home,home["rating"],away["rating"],model["calibration"])
+        adjusted_away=1.0-adjusted_home
+        p["home"]["win_probability"]=adjusted_home
+        p["away"]["win_probability"]=adjusted_away
+        p["home"]["goalie_adjustment_pp"]=(adjusted_home-team_home)*100.0
+        p["away"]["goalie_adjustment_pp"]=(adjusted_away-team_away)*100.0
+        p["home"]["fair_moneyline"]=fair_ml(adjusted_home)
+        p["away"]["fair_moneyline"]=fair_ml(adjusted_away)
+        p["goalie_adjustment_status"]="APPLIED"
+        p["goalie_adjustment"]={
+            "status":"APPLIED","model_version":model.get("version"),
+            "away_rating":away["rating"],"home_rating":home["rating"],
+            "away_age_years":away["age_years"],"home_age_years":home["age_years"],
+            "away_prior_starts":away["prior_starts"],"home_prior_starts":home["prior_starts"],
+            "away_prior_shots":away["prior_shots"],"home_prior_shots":home["prior_shots"],
+            "away_prior_minutes":away["prior_minutes"],"home_prior_minutes":home["prior_minutes"],
+            "away_reliability":away["reliability"],"home_reliability":home["reliability"],
+            "away_status":state.get("away_status"),"home_status":state.get("home_status"),
+            "away_source_timestamp":state.get("away_source_timestamp"),
+            "home_source_timestamp":state.get("home_source_timestamp"),
+            "away_observed_at":state.get("away_observed_at"),
+            "home_observed_at":state.get("home_observed_at")
+        }
+        p["flags"]=[f for f in p.get("flags",[]) if f!="no_goalie_layer"]
+        if "goalie_adjustment_age_exposure" not in p["flags"]:
+            p["flags"].append("goalie_adjustment_age_exposure")
+    return projections,model
+
+
+def main(pbp_path,spine_path,schedule_json,outdir,context_path=None,goalie_model_path=None,goalie_history_path=None):
     out=Path(outdir); out.mkdir(parents=True,exist_ok=True)
     pbp=pd.read_parquet(pbp_path)
     spine=pd.read_parquet(spine_path)
@@ -330,12 +411,19 @@ def main(pbp_path,spine_path,schedule_json,outdir,context_path=None):
         })
 
     projections=apply_live_context(projections,context_path)
+    projections,active_goalie_model=apply_goalie_adjustment(
+        projections,goalie_model_path,goalie_history_path
+    )
 
     payload={
       "schema_version":"1.0","generated_at":now.isoformat(),"data_cutoff":cutoff_ts.isoformat(),
       "model":{"model_id":MODEL_ID,"version":MODEL_VERSION,"status":"PROMOTED","feature_version":FEATURE_VERSION,"trained_through":"2025-26"},
       "projections":projections
     }
+    if active_goalie_model:
+        payload["model"]["version"]=str(active_goalie_model.get("version") or payload["model"]["version"])
+        payload["model"]["feature_version"]=str(active_goalie_model.get("feature_version"))
+        payload["model"]["trained_through"]=active_goalie_model.get("trained_through",payload["model"]["trained_through"])
     Path(out/"game-projections.json").write_text(json.dumps(payload,indent=2)+"\n")
 
     performance={
@@ -356,4 +444,6 @@ if __name__=="__main__":
     a=argparse.ArgumentParser()
     a.add_argument("--pbp",required=True); a.add_argument("--spine",required=True); a.add_argument("--schedule",required=True); a.add_argument("--out",required=True)
     a.add_argument("--context",required=False,default=None)
-    z=a.parse_args(); main(z.pbp,z.spine,z.schedule,z.out,z.context)
+    a.add_argument("--goalie-model",required=False,default=None)
+    a.add_argument("--goalie-history",required=False,default=None)
+    z=a.parse_args(); main(z.pbp,z.spine,z.schedule,z.out,z.context,z.goalie_model,z.goalie_history)
