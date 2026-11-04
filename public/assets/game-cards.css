@@ -123,7 +123,7 @@
 .gc-team{
   min-width:0;
   display:grid;
-  grid-template-rows:68px 42px 18px 58px;
+  grid-template-rows:68px 42px 24px 64px;
   align-items:center;
   justify-items:center;
   text-align:center;
@@ -148,6 +148,15 @@
   letter-spacing:.055em;
   text-transform:uppercase;
 }
+.gc-team-meta{
+  width:100%;
+  min-height:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  padding:2px 0 4px;
+}
 .gc-vs{
   color:#8f828b;
   font:700 11px/1 var(--sans);
@@ -171,13 +180,6 @@
   font-weight:800;
   letter-spacing:.06em;
   text-transform:uppercase;
-}
-.gc-team-projection .gc-goalie-impact{
-  color:#70646f;
-  font-size:8px;
-  font-weight:700;
-  line-height:1.1;
-  text-align:center;
 }
 .gc-team-projection b{
   color:#3f1777;
@@ -595,8 +597,8 @@
   text-transform:uppercase;
 }
 .gc-market-head span{min-width:0}
-.gc-market-head-source{justify-content:flex-end}
-.gc-market-head-source span{text-align:right;font-weight:600}
+.gc-market-head-source{justify-content:center}
+.gc-market-head-source span{text-align:center;font-weight:600}
 .gc-market-values{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
