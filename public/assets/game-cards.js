@@ -102,8 +102,8 @@
     return '<section class="gc-market'+(isOld?' gc-market-stale':'')+'" aria-label="Independent market benchmark">'+
       '<div class="gc-market-head gc-market-head-source"><span>'+esc(source)+' · '+esc(time)+'</span></div>'+
       '<div class="gc-market-values">'+
-        '<div><small>'+esc(g.away_abbr)+' market moneyline</small><strong>'+price(m.market_ml_away)+'</strong><b>'+pct(m.no_vig_away)+' no-vig</b></div>'+
-        '<div><small>'+esc(g.home_abbr)+' market moneyline</small><strong>'+price(m.market_ml_home)+'</strong><b>'+pct(m.no_vig_home)+' no-vig</b></div>'+
+        '<div><small>'+esc(g.away_abbr)+' market moneyline</small><strong>'+price(m.market_ml_away)+'</strong></div>'+
+        '<div><small>'+esc(g.home_abbr)+' market moneyline</small><strong>'+price(m.market_ml_home)+'</strong></div>'+
       '</div>'+
     '</section>';
   }
