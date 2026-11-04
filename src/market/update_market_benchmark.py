@@ -227,15 +227,28 @@ def main():
         return
     now=now_utc()
     local=now.astimezone(TZ)
-    if not args.force and not 16<=local.hour<=23:
+    if not args.force and not (16<=local.hour<=23 or local.hour==0):
         print("SKIP outside ET afternoon/evening collection window")
         return
     schedule=load_json(SCHEDULE,{}) or {}
     if schedule.get("date")!=local.date().isoformat():
         print("SKIP stale slate; no market refresh")
         return
-    if not any((start:=date_time(x.get("start_time_et"))) and start>now for x in schedule.get("games",[])):
-        print("SKIP no games awaiting puck drop")
+    remaining=any((start:=date_time(x.get("start_time_et"))) and start>now for x in schedule.get("games",[]))
+    if not remaining:
+        # Finalize last saved pregame quotes without spending API credits after the games begin.
+        old=load_json(OUTPUT,{}) or {}
+        if old.get("date")==schedule.get("date") and old.get("games"):
+            output=compose(schedule,[],old,now)
+            if output.get("games")!=old.get("games"):
+                save(OUTPUT,output)
+                save(ARCHIVE/(output["date"]+".json"),output)
+                print("FROZEN all final pregame market snapshots")
+            else:
+                print("No new market snapshots to freeze")
+        return
+    if not args.force and local.hour==0:
+        print("SKIP new odds collection after midnight ET")
         return
     if args.fixture:
         events=load_json(Path(args.fixture),[])
