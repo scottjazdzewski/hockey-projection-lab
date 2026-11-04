@@ -139,9 +139,7 @@ def export(pbp_path: Path, games_path: Path, out_path: Path,
         game_meta["scheduled_start_utc"] = pd.to_datetime(
             game_meta.scheduled_start_utc, utc=True, errors="coerce"
         )
-        last_train_date = prior_data.game_date.max()
-        cutoff = (pd.Timestamp(last_train_date).tz_localize("UTC")
-                  + pd.Timedelta(days=1) - pd.Timedelta(seconds=1))
+        cutoff_game_date = pd.Timestamp(prior_data.game_date.max()).date().isoformat()
         scored = test[[
             "game_id", "source_season", "h_sched_rest_days", "a_sched_rest_days",
             "h_sched_b2b", "a_sched_b2b", "h_sched_3in4", "a_sched_3in4",
@@ -154,7 +152,7 @@ def export(pbp_path: Path, games_path: Path, out_path: Path,
         scored["feature_version"] = production.FEATURE_VERSION
         scored["forecast_origin"] = "CHRONOLOGICAL_OOS"
         scored["training_max_source_season"] = val_season
-        scored["training_cutoff_utc"] = cutoff.isoformat()
+        scored["training_cutoff_game_date"] = cutoff_game_date
         scored["validation_source_season"] = val_season
         scored["selected_elo_candidate"] = selected_elo
         scored["selected_opponent_adjustment"] = selected_oa
