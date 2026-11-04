@@ -93,7 +93,7 @@ It must **not** directly change:
 - model generation timestamp
 - model data cutoff
 
-The workflow compares the selected goalie identity/status with each new live-context snapshot. It requests a scorer rerun only when the active feature version identifies a goalie-aware model; the current team-only feature version keeps this trigger dormant. Changes that require a fresh pregame score include:
+The workflow compares the selected goalie identity/status with each new live-context snapshot. It requests a scorer rerun only when the active feature version includes the explicit `goalie-adjustment-` marker; the current team-only feature version keeps this trigger dormant. Changes that require a fresh pregame score include:
 
 - a PROJECTED goalie name/ID changing;
 - a PROJECTED goalie becoming CONFIRMED, including confirmation of the same goalie; and
