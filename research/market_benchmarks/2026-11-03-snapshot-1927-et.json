@@ -13,7 +13,7 @@
   "calculation": "raw_p=moneyline<0?(-moneyline)/(-moneyline+100):100/(moneyline+100); no_vig_away=raw_away/(raw_away+raw_home)",
   "warnings": [
     "Source page labels all prices consensus closing, including games not yet underway. Those later prices are preliminary until verified after puck drop.",
-    "Seven and seven-thirty PM games accessed at about 7:27 PM ET; this is not a locally captured last-pregame line, so the source's closing designation is not independently verified.",
+    "The 7:00 PM games were accessed after puck drop at about 7:27 PM ET; their site-reported closing prices are not independently timestamp-verified. The 7:30, 8:00, and 9:00 PM games were captured before scheduled start but are not confirmed final closing prices.",
     "Source does not disclose per-book paired quotes or timestamps; do not claim this is a validated multi-book consensus benchmark.",
     "Model comparison uses published pregame projections; existing frozen forecast blocks must not be rewritten."
   ],
