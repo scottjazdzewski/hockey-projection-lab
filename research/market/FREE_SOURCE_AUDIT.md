@@ -59,6 +59,29 @@ not cover the model's first 2021-22 fold. This is a useful lead for a separately
 labeled single-book reference, but it cannot satisfy the required timestamp,
 coverage, or multi-book consensus rules. No odds were copied from that project.
 
+## Additional public/provider leads reviewed 2026-11-04
+
+[Bet Better's Mendeley data release](https://data.mendeley.com/datasets/5mygfmbjsj/1)
+includes an open NHL CSV for 2026-27 (133 games in the published release), under
+CC BY 4.0. It contains one game-level home no-vig closing probability and book
+count, not the individual sportsbook prices or capture timestamps. It also
+covers 2026-27 rather than Hockey Lab's 2021-22 through 2025-26 historical
+evaluation window. It is not eligible for the canonical benchmark or the
+historical model comparison.
+
+[Owls Insight's closing-odds dataset](https://owlsinsight.com/historical-data/datasets)
+does publish per-game/per-book moneylines and a source label, but its coverage
+table lists NHL only from September through October 2026 (two monthly files,
+under 0.1 MB); the broader 2012 archive range is for other sports, principally
+soccer. That is outside the five-season model window. The site offers free
+samples, but the sample download could not be inspected in the research
+environment. The full historical download is paid (the site advertises prices
+from $5 to $100), and its license limits the files to personal use and bars
+redistribution or publication. No purchase or API request was made. Even if
+the period later becomes useful, its last_update field and source provenance
+would need row-level review to establish the strict pre-start rule; a close
+label alone is not sufficient.
+
 ## Timestamped line-level archive
 
 [The Odds Gap historical data page](https://theoddsgap.com/data) documents
@@ -101,13 +124,14 @@ price. Historical requests remain too large for the free monthly allowance.
 
 No free public dataset located in this audit supplies the 2021-22 through
 2025-26 model sample with both (a) individual sportsbook moneylines and
-(b) auditable last-before-start timestamps. The one-season public consensus
-file matches the 2025-26 game spine but fails the timestamp and per-book
-requirements. The Odds Gap no-key sample is preseason-only, and its public
-API policy excludes use as a data source for another product. The ESPN close-
-only archive lead lacks observed timestamps and misses the first target
-season. PuckAPI remains the best documented source for a strict backfill, but
-its 500-credit free allowance covers at most 50 of the required 6,993 game
-responses. Until an approved historical data source is available, report
-historical market coverage as unavailable rather than substituting weaker
-prices.
+(b) auditable last-before-start timestamps. The public 2025-26 consensus file
+matches the game spine but lacks per-book prices and timestamps; the CC BY
+Mendeley NHL file is only 2026-27 and is aggregate-only; and the listed NHL
+coverage in Owls Insight is only September-October 2026. The Odds Gap no-key
+sample is preseason-only, and its public API policy excludes use as a data
+source for another product. The ESPN close-only archive lead lacks observed
+timestamps and misses the first target season. PuckAPI remains the best
+documented candidate for a strict backfill, but its 500-credit free allowance
+covers at most 50 of the required 6,993 game responses. Until an eligible
+historical source is available, report historical market coverage as
+unavailable rather than substituting weaker prices.
