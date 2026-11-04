@@ -39,7 +39,10 @@ jobs:
         run: |
           git config user.name "hockey-lab-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add public/data/market-benchmark.json research/market_benchmarks/live/
+          git add public/data/market-benchmark.json
+          if [ -d research/market_benchmarks/live ]; then
+            git add research/market_benchmarks/live/
+          fi
           if git diff --cached --quiet; then
             echo "No market data change."
           else
