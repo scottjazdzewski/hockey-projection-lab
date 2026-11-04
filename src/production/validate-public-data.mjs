@@ -23,6 +23,7 @@ const manifest=readJson('production-manifest.json');
 const identities=readJson('team-identities.json');
 const liveContext=readJson('live-context.json');
 const forwardLedger=readJson('forward-ledger-summary.json');
+const marketBenchmark=readJson('market-benchmark.json');
 
 if(!schedule || !Array.isArray(schedule.games)) fail('today-games.json missing or malformed');
 else ok('schedule readable');
@@ -264,6 +265,25 @@ if(forwardLedger){
   }
   ok('forward prediction ledger summary readable');
 }else fail('forward-ledger-summary.json missing');
+
+if(marketBenchmark){
+  if(marketBenchmark.schema_version!=='1.0') fail('market benchmark schema_version must be 1.0');
+  if(typeof marketBenchmark.benchmark_only!=='boolean' || !marketBenchmark.benchmark_only) fail('market data must be strictly benchmark-only');
+  if(!Array.isArray(marketBenchmark.games)) fail('market benchmark games must be array');
+  else {
+    const seen=new Set();
+    for(const g of marketBenchmark.games){
+      const id=String(g.game_id);
+      if(seen.has(id)) fail('duplicate market game ID '+id); else seen.add(id);
+      const a=g.no_vig_away,h=g.no_vig_home;
+      if(!(typeof a==='number' && Number.isFinite(a) && a>0 && a<1 &&
+        typeof h==='number' && Number.isFinite(h) && h>0 && h<1 && Math.abs(a+h-1)<0.002)) fail('invalid market no-vig pair '+id);
+      if(g.status==='CURRENT' && !(g.book_count>=2)) fail('CURRENT consensus requires two or more bookmakers '+id);
+      if(!g.away_abbr || !g.home_abbr || !g.captured_at) fail('market missing team or capture data '+id);
+    }
+    ok('independent market data integrity checked');
+  }
+}else fail('market-benchmark.json missing');
 
 if(manifest){
   if(manifest.schema_version!=='1.0') fail('production-manifest schema_version must be 1.0');
