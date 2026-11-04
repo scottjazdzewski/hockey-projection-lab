@@ -147,7 +147,7 @@ jobs:
           current=json.loads(Path("public/data/live-context.json").read_text())
           projection=json.loads(Path("public/data/game-projections.json").read_text())
           feature_version=str(projection.get("model",{}).get("feature_version","")).lower()
-          uses_goalie="goalie" in feature_version
+          uses_goalie="goalie-adjustment-" in feature_version
 
           try:
               prior_text=subprocess.check_output(
