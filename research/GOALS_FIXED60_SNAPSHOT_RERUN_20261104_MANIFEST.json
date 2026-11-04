@@ -216,11 +216,36 @@
     "diagonal_tie_scores.csv": {
       "bytes": 532,
       "sha256": "fcf2d635e966f402f575b228c44e41ad320bc45637beedf3f33adfcc4fd416f4"
+    },
+    "schedule_team_rate_diagnostics.csv": {
+      "bytes": 2522,
+      "sha256": "2ab1cfd67715f860a190e90ccb43a014a3e572f4e03fb117625a10c102ec22b1"
+    },
+    "schedule_game_state_diagnostics.csv": {
+      "bytes": 2590,
+      "sha256": "74881606501d6f083de93e13113ef4a6a76fc23f53a8bcdce608512e9e3ee42a"
+    },
+    "schedule_features.parquet": {
+      "bytes": 243660,
+      "sha256": "ce7ca9933025aaf8cd2affa713b1b77c5322aec6dec5d7f97fe69f263329f4c5"
     }
   },
   "production_changes": false,
   "market_inputs": false,
   "hwin_inputs": false,
   "goalie_identity_inputs": false,
-  "decision": "RESEARCH / CANDIDATE; do not promote"
+  "decision": "RESEARCH / CANDIDATE; do not promote",
+  "schedule_state_diagnostics": {
+    "schedule_builder": "research/hwin_schedule_007.py build_schedule_features; prior-date feature state, same-day results excluded",
+    "states_tested": [
+      "rest-day bins",
+      "back-to-back",
+      "3-in-4",
+      "4-in-6",
+      "5-in-8",
+      "prior 3-day and 5-day game counts"
+    ],
+    "getaway_games": "not separately tested; no validated pregame getaway label is present in this schedule export",
+    "interpretation": "descriptive subgroup diagnostics only; no incremental predictive-value claim"
+  }
 }
