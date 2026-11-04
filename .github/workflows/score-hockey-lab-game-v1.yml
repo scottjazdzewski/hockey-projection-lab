@@ -77,10 +77,12 @@ jobs:
           from pathlib import Path
           p=Path("public/data/production-manifest.json")
           m=json.loads(p.read_text())
+          projections=json.loads(Path("public/data/game-projections.json").read_text())
+          model=projections.get("model",{})
           for key in ["game_projections","model_performance"]:
               m["surfaces"][key]["state"]="READY"
-              m["surfaces"][key]["model_id"]="HOCKEY-LAB-GAME"
-              m["surfaces"][key]["model_version"]="1.0.0"
+              m["surfaces"][key]["model_id"]=model.get("model_id")
+              m["surfaces"][key]["model_version"]=model.get("version")
           from datetime import datetime, timezone
           m["updated_at"]=datetime.now(timezone.utc).isoformat()
           p.write_text(json.dumps(m,indent=2)+"\n")
