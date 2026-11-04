@@ -1,4 +1,4 @@
-import json, hashlib
+import json, hashlib, time
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -14,6 +14,39 @@ SOURCE_PAIRS=[
 
 def norm_id(s):
     return pd.to_numeric(s,errors="coerce").astype("Int64").astype("string")
+
+def fetch_birth_dates(session, player_ids):
+    """Fetch NHL birth dates once per unique goalie ID; keep misses explicit."""
+    rows=[]
+    ids=sorted({str(x) for x in player_ids if pd.notna(x) and str(x).strip()})
+    for i,pid in enumerate(ids,1):
+        url="https://api-web.nhle.com/v1/player/"+pid+"/landing"
+        birth_date=None
+        status="unavailable"
+        for attempt in range(3):
+            try:
+                response=session.get(url,timeout=25)
+                if response.status_code==404:
+                    status="not_found"
+                    break
+                response.raise_for_status()
+                birth_date=(response.json() or {}).get("birthDate")
+                status="ok" if birth_date else "missing_birth_date"
+                break
+            except Exception as exc:
+                status="error:"+type(exc).__name__
+                if attempt<2:
+                    time.sleep(0.5*(attempt+1))
+        rows.append({
+            "goalie_id_key":pid,
+            "birth_date":birth_date,
+            "profile_status":status,
+            "profile_url":url
+        })
+        time.sleep(0.08)
+        if i%100==0:
+            print("PLAYER_BIO",i,"/",len(ids),flush=True)
+    return pd.DataFrame(rows)
 
 def toi_seconds(v):
     if pd.isna(v): return np.nan
@@ -172,6 +205,19 @@ def main(outdir):
     allg=pd.concat(frames,ignore_index=True,sort=False)
     allg["goalie_id_key"]=allg["goalie_id_key"].astype("string")
     allg=allg.sort_values(["game_date","game_id","home_away","goalie_id_key"]).reset_index(drop=True)
+
+    bios=fetch_birth_dates(session,allg["goalie_id_key"].dropna().unique())
+    bios.to_csv(out/"goalie_birth_date_lookup.csv",index=False)
+    allg=allg.merge(bios[["goalie_id_key","birth_date"]],on="goalie_id_key",how="left")
+    allg["birth_date"]=pd.to_datetime(allg["birth_date"],errors="coerce")
+    allg["game_date"]=pd.to_datetime(allg["game_date"],errors="coerce")
+    allg["age_years"]=(allg["game_date"]-allg["birth_date"]).dt.days/365.2425
+    allg.loc[~allg["age_years"].between(18,50),"age_years"]=np.nan
+
+    starter_rows=allg[allg["starter_bool"].fillna(False)]
+    age_coverage_by_season=starter_rows.groupby("source_season")["age_years"].apply(lambda s:float(s.notna().mean()))
+    for audit in audits:
+        audit["starter_age_coverage"]=age_coverage_by_season.get(audit["season"])
     dup=int(allg.duplicated(["game_id","goalie_id_key"]).sum())
     if dup:
         raise RuntimeError(f"duplicate goalie-game keys={dup}")
@@ -184,6 +230,10 @@ def main(outdir):
         "starter_rows":int(allg["starter_bool"].sum()),
         "starter_games":int(allg.loc[allg["starter_bool"],"game_id"].nunique()),
         "starter_pbp_shot_coverage":float((allg.loc[allg["starter_bool"],"shots_against_pbp"]>0).mean()),
+        "starter_age_coverage":float(allg.loc[allg["starter_bool"],"age_years"].notna().mean()),
+        "starter_rows_missing_age":int((allg["starter_bool"] & allg["age_years"].isna()).sum()),
+        "goalies_with_bio_lookup":int(bios["profile_status"].eq("ok").sum()),
+        "goalies_attempted_bio_lookup":int(len(bios)),
         "duplicate_goalie_game_keys":dup,
         "seasons":sorted(int(x) for x in allg["source_season"].unique()),
         "note":"Same-game goalie metrics are descriptive. HWIN research must shift/roll them before the game being predicted. sog_gsax uses only shots-on-goal/goals and is the cross-era comparable xG-based goalie metric; full unblocked xG attribution has better modern coverage."
