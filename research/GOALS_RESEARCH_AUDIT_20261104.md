@@ -78,3 +78,8 @@ Both are configured with `workflow_dispatch`, have read-only repository permissi
 I could not start the Actions runs through the available GitHub connector: it can read and edit repository files but does not expose workflow dispatch or run-listing. The browser route requires GitHub sign-in. The selected account reported that password sign-in is unsupported; the secure Google account selection did not complete, and no account was chosen or authenticated. The browser is left at the GitHub sign-in handoff. No Actions workflow was dispatched and no data was modified.
 
 After sign-in, run both workflows, download their artifacts, and compare the resulting Parquet checksums with the EXP-0028 manifest. Only an exact match closes this reproduction blocker. If source releases have changed, preserve the new source manifests and treat the rebuilt set as a new data snapshot rather than an exact reproduction.
+
+
+## 2026-11-04 recovery update
+
+The linked GitHub integration found two already-successful Actions runs (PBP run 41766609805; spine run 41766612176) and downloaded their unexpired artifacts without another browser sign-in or workflow dispatch. Their source and Parquet hashes do not match the frozen EXP-0027/0028 snapshot, so they were labeled a separate 2026-11-04 snapshot. The fixed-60 EXP-0027 benchmark was rerun on that snapshot: target labels passed and the stored fold-metrics, context-metrics, and reliability-bin files matched the original EXP-0027 artifacts byte-for-byte. Exact input/OOF-byte reproduction remains unclaimed. Full details and diagnostics are in `GOALS_FIXED60_SNAPSHOT_RERUN_20261104.md` and its manifest on this branch.
