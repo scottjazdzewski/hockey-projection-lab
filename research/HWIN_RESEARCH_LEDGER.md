@@ -1,10 +1,10 @@
 # HWIN Research Ledger
 
-Last updated: 2026-11-02
+Last updated: 2026-11-04
 
 ## Status
 
-**No production HWIN model has been promoted yet.**
+**Current production:** the exact team-only baseline `team-strength-004+b2b-007` plus goalie model `prospective-0.3.0`, promoted for prospective evaluation. The scorer keeps the team-only probabilities and falls back to them when a goalie identity or rating is unavailable.
 
 Current research backbone:
 - dynamic Elo-style team strength
@@ -140,7 +140,7 @@ Goalie Signal Audit 002:
 - effects are small and require rolling-origin confirmation before inclusion
 - short/medium/long goalie features were highly correlated and unstable when bundled
 
-Rolling-origin goalie test is required before any goalie feature is promoted.
+Rolling-origin and prospective-ledger review are required before promoting a new goalie feature or version. Version `prospective-0.3.0` is already promoted for prospective evaluation.
 
 ## Promotion rules
 
@@ -155,7 +155,7 @@ A candidate layer must:
 Market odds remain comparison data, not an input to the independent HWIN baseline.
 
 
-## Goalie Rolling Backtest 003
+## Goalie Rolling Backtest 003 (historical)
 
 Five nested rolling-origin target seasons (2022-2026), 6,993 games.
 
@@ -183,7 +183,7 @@ Interpretation:
 - broad goalie bundles overfit and are rejected
 - goalie skill adds only a **small** incremental signal after team strength/territorial play
 - heavily shrunk long-run starter quality is more stable than stacking several recent goalie metrics
-- shrunk prior save percentage remains a research candidate, not a production weight
+- at that stage, shrunk prior save percentage remained a research candidate; it was later recalibrated against the active production baseline and promoted as `prospective-0.3.0` for monitored evaluation
 - current 2026-27 shadow results are not used for feature selection
 
 
@@ -227,3 +227,23 @@ Interpretation:
 - the simpler aggregate opponent-adjusted SOG/xG signal is preferred over four separate offense/defense component terms
 - **new research backbone candidate = Elo + flat-20 5v5 form + opponent-adjusted 5v5 SOG/xG + recent scoring + rest**
 - still research-only; not production HWIN
+
+
+## Goalie Metric Audit 005 — 2026-11-04
+
+Compared prior-only, age-adjusted goalie metrics against the active `team-strength-004+b2b-007` backbone on five rolling-origin target seasons (2022–2026), 6,993 games. The current promoted exposure calibration was held fixed at 400 shots, 15 starts, and 1,800 minutes; candidate weights were fit on each validation season. Market odds were not used.
+
+| Candidate | Delta Brier | Delta log loss | Folds improved (Brier / log loss) |
+|---|---:|---:|---:|
+| Save percentage | -0.000141 | -0.000280 | 3/5, 3/5 |
+| Age-adjusted GAA alone | -0.000037 | -0.000060 | 3/5, 2/5 |
+| SOG-based GSAx alone | +0.000075 | +0.000137 | 2/5, 2/5 |
+| Save percentage + GAA | +0.000129 | +0.000320 | 3/5, 3/5 |
+| Save percentage + SOG-GSAx | +0.000152 | +0.000322 | 2/5, 2/5 |
+
+Interpretation:
+- GAA by itself has only a tiny, uneven lift and is not additive to the current SV% signal in this comparison.
+- The cross-era SOG-based GSAx rate did not improve the current goalie adjustment. Keep it in research until its shot-quality calibration or metric construction improves.
+- The active model remains based on age-adjusted, exposure-shrunk SV%. Do not add GAA or GSAx to production from this audit.
+- The scorer's historical identity join was also corrected to resolve unique first-initial/surname aliases from goalie history; ambiguous names still fall back to the team-only forecast.
+- Repeat the comparison with `research/hwin_goalie_metric_audit_005.py` when the method or source data changes. The CI workflow `.github/workflows/hwin-goalie-metric-audit-005.yml` packages the fold-level results.
