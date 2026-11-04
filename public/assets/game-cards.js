@@ -7,13 +7,6 @@
   function pct(v){ return Number.isFinite(v) ? (v*100).toFixed(1)+'%' : '—'; }
   function goals(a,h){ return Number.isFinite(a)&&Number.isFinite(h) ? a.toFixed(2)+' · '+h.toFixed(2) : '—'; }
   function pairPct(a,h){ return Number.isFinite(a)&&Number.isFinite(h) ? Math.round(a*100)+' · '+Math.round(h*100)+'%' : '—'; }
-  function goalieImpact(p){
-    const baseline=p?.team_only_win_probability;
-    const delta=p?.goalie_adjustment_pp;
-    if(!Number.isFinite(baseline)||!Number.isFinite(delta)) return '';
-    const sign=delta>0?'+':'';
-    return '<small class="gc-goalie-impact">Team-only '+pct(baseline)+' · goalie '+sign+delta.toFixed(1)+' pp</small>';
-  }
   function price(v){ return Number.isInteger(v) ? (v>0?'+':'')+v : '—'; }
   function context(label,state){
     if(!state || !state.status || state.status==='UNKNOWN') return label+' —';
@@ -105,12 +98,9 @@
     const age=Number.isFinite(at)?(Date.now()-at)/60000:Infinity;
     const isClosing=m.status==='CLOSING' && Number.isFinite(start) && Number.isFinite(at) && at<start;
     const isOld=!isClosing && age>60;
-    const source=m.status==='SOURCE_SNAPSHOT'?''
-      : (Number.isInteger(m.book_count)?m.book_count+' sportsbook'+(m.book_count===1?'':'s'):'Source unverified');
     const time=timeET(m.captured_at);
-    const marketMeta=source ? source+' · '+time : time;
     return '<section class="gc-market'+(isOld?' gc-market-stale':'')+'" id="gc-market-'+esc(g.game_id)+'" aria-label="Independent market benchmark">'+
-      '<div class="gc-market-head gc-market-head-source"><span>'+esc(marketMeta)+'</span></div>'+
+      '<div class="gc-market-head gc-market-head-source"><span>'+esc(time)+'</span></div>'+
       '<div class="gc-market-values">'+
         '<div><small>'+esc(g.away_abbr)+' market moneyline</small><strong>'+price(m.market_ml_away)+'</strong></div>'+
         '<div><small>'+esc(g.home_abbr)+' market moneyline</small><strong>'+price(m.market_ml_home)+'</strong></div>'+
@@ -148,9 +138,9 @@
     return '<article class="gc-card">'+
       '<div class="gc-card-head"><span>'+gameLabel+' · '+modelLabel+'</span><span>'+esc(g.time_et||'TBD')+'</span></div>'+
       '<div class="gc-matchup">'+
-        '<div class="gc-team"><img src="'+logo(g.away_abbr)+'" alt="'+esc(g.away_name||g.away_abbr)+'"><div class="gc-team-name'+awayClass+'">'+esc(away)+'</div><small>'+esc(g.away_abbr)+' · Away</small><div class="gc-team-projection"><strong>'+awayProb+'</strong><span>Win probability</span>'+ (live?goalieImpact(p.away):'') +'<b>'+awayFair+' fair</b></div></div>'+
+        '<div class="gc-team"><img src="'+logo(g.away_abbr)+'" alt="'+esc(g.away_name||g.away_abbr)+'"><div class="gc-team-name'+awayClass+'">'+esc(away)+'</div><small class="gc-team-meta">'+esc(g.away_abbr)+' · Away</small><div class="gc-team-projection"><strong>'+awayProb+'</strong><span>Win probability</span><b>'+awayFair+' fair</b></div></div>'+
         '<div class="gc-vs" aria-hidden="true">@</div>'+
-        '<div class="gc-team"><img src="'+logo(g.home_abbr)+'" alt="'+esc(g.home_name||g.home_abbr)+'"><div class="gc-team-name'+homeClass+'">'+esc(home)+'</div><small>'+esc(g.home_abbr)+' · Home</small><div class="gc-team-projection"><strong>'+homeProb+'</strong><span>Win probability</span>'+ (live?goalieImpact(p.home):'') +'<b>'+homeFair+' fair</b></div></div>'+
+        '<div class="gc-team"><img src="'+logo(g.home_abbr)+'" alt="'+esc(g.home_name||g.home_abbr)+'"><div class="gc-team-name'+homeClass+'">'+esc(home)+'</div><small class="gc-team-meta">'+esc(g.home_abbr)+' · Home</small><div class="gc-team-projection"><strong>'+homeProb+'</strong><span>Win probability</span><b>'+homeFair+' fair</b></div></div>'+
       '</div>'+
       marketBlock(g,market)+
       '<div class="gc-metrics">'+
