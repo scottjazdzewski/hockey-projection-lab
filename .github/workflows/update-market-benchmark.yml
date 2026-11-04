@@ -3,11 +3,14 @@ name: Refresh Independent NHL Market Benchmark
 on:
   workflow_dispatch:
   schedule:
-    # Half-hourly at :20/:50 UTC across the evening (covers :00/:30 ET puck drops
-    # at about T-10); Python limits collection to 4PM-midnight America/New_York.
-    # One h2h US-region request per run, usually <=16/day and <=500/month.
-    - cron: '20,50 20-23 * * *'
-    - cron: '20,50 0-5 * * *'
+    # Broad UTC window covers both Eastern Standard and Daylight Time.
+    # Python admits only 09:20, 12:20, 15:20 ET and every half-hour
+    # from 17:20 through 22:50 ET; max 15 billed h2h US-region calls/day.
+    # One region, one market = 1 credit/call (465 in a 31-day month).
+    - cron: '20 13-23 * * *'
+    - cron: '20 0-4 * * *'
+    - cron: '50 21-23 * * *'
+    - cron: '50 0-3 * * *'
   push:
     branches: [main]
     paths:
