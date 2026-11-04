@@ -11,6 +11,7 @@ on:
     branches: [main]
     paths:
       - 'src/production/hockey_lab_game_v1.py'
+      - 'artifacts/models/goalie-adjustment-model.json'
       - '.github/workflows/score-hockey-lab-game-v1.yml'
 
 permissions:
