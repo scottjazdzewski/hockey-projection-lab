@@ -107,9 +107,17 @@ Each battery run should package:
 3. Fold, season, reliability, and subgroup metrics with counts.
 4. Paired uncertainty intervals and a concise decision report.
 
-## Next execution order
+## Execution status and next order — 2026-11-04
 
-1. Add paired uncertainty and goalie-exposure slices to the existing SV%/GAA/GSAx comparison.
-2. Re-run the score-distribution screen focused on total-goal bias and 5.5/6.5 tails.
-3. Continue the timestamped projected-to-confirmed goalie forward ledger; do not tune against its outcomes until the predeclared sample is complete.
-4. Revisit tied-state xG windows only after these runs, because its prior pooled lift was small and its paired interval crossed zero.
+The first two planned runs are complete and summarized in [Model Accuracy Battery Run 001](MODEL_ACCURACY_TEST_BATTERY_RUN_001_20261104.md):
+
+1. Paired uncertainty and goalie-exposure slices were added to the five-season SV%/GAA/GSAx comparison. All pooled and team-season 95% intervals include zero; the low-exposure subgroup is unstable. Do not retune from this retrospective starter analysis.
+2. The score-distribution test confirms that a global rate offset reduces underprediction and improves total/upper-tail scores, but slightly worsens total MAE, does not improve win-probability scores, and overcorrects the highest expected-total decile.
+
+Next:
+
+1. Test a small, predeclared scoring-environment-conditioned rate correction, fitted only on the prior validation season, with reduced or zero correction in the highest-total range where the baseline is already calibrated.
+2. Continue the timestamped projected-to-confirmed goalie forward ledger; wait for the predeclared sample before tuning on prospective outcomes.
+3. Revisit tied-state xG windows after the scoring-environment test, because the prior pooled lift was small and its paired interval crossed zero.
+
+Keep the production model and public projections unchanged unless a candidate passes the leakage, rolling-origin, calibration, and prospective gates above.
