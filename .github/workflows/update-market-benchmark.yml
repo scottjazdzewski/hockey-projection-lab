@@ -2,21 +2,17 @@ name: Refresh Independent NHL Market Benchmark
 
 on:
   workflow_dispatch:
+    inputs:
+      reason:
+        description: "Optional market refresh reason"
+        required: false
+        type: string
   schedule:
-    # Redundant wake-ups around the six approved ET collection slots.
-    # The Python collector is the authority: it admits only 12:20, 18:50,
-    # 19:20, 19:50, 20:50 and 21:50 ET (with a <24-minute grace window)
-    # and refuses to spend twice in the same slot. These extra cron wakes
-    # protect against GitHub skipping/delaying a single scheduled invocation.
-    #
-    # 12:20 ET (EST/EDT): retry every 5 min through the allowed grace window.
-    - cron: '20-40/5 16,17 * * *'
-    # :20 evening slot (19:20 ET), covering EST/EDT UTC hours.
-    - cron: '20-40/5 23,0 * * *'
-    # :50 evening slots (18:50, 19:50, 20:50, 21:50 ET), plus early-next-hour
-    # retry minutes. Collector idempotency prevents duplicate paid requests.
-    - cron: '50,55 22,23,0,1,2 * * *'
-    - cron: '0,5,10 23,0,1,2,3 * * *'
+    # Fixed benchmark checkpoints: 9 AM, noon, 3 PM, 5 PM, 6 PM ET.
+    # EST/EDT UTC unions are intentional. Each target gets 0/5/10-minute
+    # retry wakes; the collector admits only the correct local-time slot and
+    # records it so retries cannot spend a second credit.
+    - cron: '0,5,10 13,14,16,17,19,20,21,22,23 * * *'
   push:
     branches: [main]
     paths:
@@ -71,15 +67,7 @@ jobs:
       - name: Refresh multi-book odds (benchmark only)
         env:
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
-          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-        shell: bash
-        run: |
-          extra=""
-          if [[ "${{ github.event_name }}" == "push" && "$COMMIT_MESSAGE" == *"[force-market]"* ]]; then
-            extra="--force"
-            echo "One-time forced market refresh requested by tagged maintenance commit."
-          fi
-          python src/market/update_market_benchmark.py $extra
+        run: python src/market/update_market_benchmark.py
       - name: Commit market data only
         run: |
           git config user.name "hockey-lab-bot"
