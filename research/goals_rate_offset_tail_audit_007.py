@@ -141,7 +141,7 @@ def add_paired_losses(p):
         p[f"final_score_loss_{model}"] = -p[f"logp_final_score_{model}"].astype(float)
         p[f"final_total_loss_{model}"] = -p[f"logp_final_total_{model}"].astype(float)
         for threshold in ("5_5","6_5"):
-            y=p[f"y_over_{threshold[0]}.{threshold[-1]}"].to_numpy(float)
+            y=p[f"y_over_{threshold}"].to_numpy(float)
             prob=clip(p[f"p_final_over_{threshold}_{model}"])
             p[f"over_{threshold}_brier_{model}"]=(prob-y)**2
             p[f"over_{threshold}_logloss_{model}"]=binary_log_loss(y,prob)
@@ -172,7 +172,7 @@ def reliability_deciles(pairs):
     for name in ("base","offset"):
         for threshold in ("5_5","6_5"):
             prob_col=f"p_final_over_{threshold}_{name}"
-            y_col=f"y_over_{threshold[0]}.{threshold[-1]}"
+            y_col=f"y_over_{threshold}"
             z=pairs[[prob_col,y_col,"source_season"]].copy()
             z["bin"]=pd.qcut(z[prob_col],q=10,labels=False,duplicates="drop")
             for b,g in z.groupby("bin",dropna=True):
