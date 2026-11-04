@@ -561,15 +561,27 @@
     }
   },
   "result": {
-    "status": "OPEN",
-    "away_score": null,
-    "home_score": null,
-    "winner_abbr": null,
-    "last_period_type": null,
-    "went_ot": null,
-    "went_shootout": null,
-    "source": null,
-    "settled_at": null
+    "status": "FINAL",
+    "away_score": 1,
+    "home_score": 4,
+    "winner_abbr": "NSH",
+    "last_period_type": "REG",
+    "went_ot": false,
+    "went_shootout": false,
+    "source": "https://api-web.nhle.com/v1/score/2026-11-03",
+    "settled_at": "2026-11-04T01:01:57.026565-05:00"
   },
-  "evaluation": null
+  "evaluation": {
+    "predicted_winner_abbr": "CAR",
+    "winner_correct": false,
+    "probability_assigned_to_winner": 0.27791418526154854,
+    "brier": 0.5214079238464933,
+    "log_loss": 1.2804428990544017,
+    "overtime_brier": null,
+    "away_goal_abs_error": null,
+    "home_goal_abs_error": null,
+    "goal_mae_per_team": null,
+    "total_goals_abs_error": null,
+    "goal_diff_abs_error": null
+  }
 }

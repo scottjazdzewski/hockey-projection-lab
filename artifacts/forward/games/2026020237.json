@@ -582,15 +582,27 @@
     }
   },
   "result": {
-    "status": "OPEN",
-    "away_score": null,
-    "home_score": null,
-    "winner_abbr": null,
-    "last_period_type": null,
-    "went_ot": null,
-    "went_shootout": null,
-    "source": null,
-    "settled_at": null
+    "status": "FINAL",
+    "away_score": 5,
+    "home_score": 4,
+    "winner_abbr": "WPG",
+    "last_period_type": "OT",
+    "went_ot": true,
+    "went_shootout": false,
+    "source": "https://api-web.nhle.com/v1/score/2026-11-03",
+    "settled_at": "2026-11-04T01:01:57.023783-05:00"
   },
-  "evaluation": null
+  "evaluation": {
+    "predicted_winner_abbr": "MTL",
+    "winner_correct": false,
+    "probability_assigned_to_winner": 0.3613170451797606,
+    "brier": 0.40791591677791195,
+    "log_loss": 1.0179994645824868,
+    "overtime_brier": null,
+    "away_goal_abs_error": null,
+    "home_goal_abs_error": null,
+    "goal_mae_per_team": null,
+    "total_goals_abs_error": null,
+    "goal_diff_abs_error": null
+  }
 }
