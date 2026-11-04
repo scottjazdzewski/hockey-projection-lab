@@ -19,7 +19,7 @@ Follow these requirements:
 
 ## Current goalie calculation state
 
-The calculation hook is in `src/production/goalie_adjustment.py`; the production scorer, projection schema/validator, Game Card, forward ledger, and goalie-history workflow are wired to carry the adjusted result and its audit fields. The model artifact `artifacts/models/goalie-adjustment-model.json` is still CANDIDATE with no fitted parameters. Do not activate or publish goalie effects until the age curve, starts/shots/minutes shrinkage, and probability coefficient have passed rolling-origin and prospective validation.
+The calculation hook is in `src/production/goalie_adjustment.py`; the production scorer, projection schema/validator, Game Card, forward ledger, and goalie-history workflow are wired to carry the adjusted result and its audit fields. The model artifact `artifacts/models/goalie-adjustment-model.json` is still CANDIDATE with no fitted parameters. Do not activate or publish goalie effects until the age curve, starts/shots/minutes shrinkage, and probability coefficient have passed rolling-origin and prospective validation. A promoted artifact must set `baseline_feature_version` to the exact active team-only `FEATURE_VERSION`; the scorer rejects goalie calibrations fitted against any other baseline.
 
 ## Production promotion guard
 
