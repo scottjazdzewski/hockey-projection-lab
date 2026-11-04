@@ -77,7 +77,7 @@ It also performs **two game-specific pregame pulls for every scheduled start tim
 
 The scheduler runs on a five-minute heartbeat and gates against each game's actual `start_time_et` in `public/data/today-games.json`. This means staggered starts receive their own 30-minute and 15-minute checks.
 
-## Freeze policy
+## Freeze policy and goalie-score handoff
 
 The live-context updater may update:
 
@@ -85,7 +85,7 @@ The live-context updater may update:
 - `lineup_state`
 - context source flags
 
-It must **not** change:
+It must **not** directly change:
 
 - win probabilities
 - fair prices
@@ -93,7 +93,17 @@ It must **not** change:
 - model generation timestamp
 - model data cutoff
 
-If future research promotes a goalie or lineup feature, the daily scorer may generate a new pregame model snapshot before puck drop under a new/final snapshot policy. Historical published snapshots must remain archived.
+When a goalie-aware model is explicitly promoted, the workflow must compare the currently selected goalie identity/status with the new live-context snapshot. Changes that require a fresh pregame score include:
+
+- a PROJECTED goalie name/ID changing;
+- a PROJECTED goalie becoming CONFIRMED, including confirmation of the same goalie; and
+- a CONFIRMED starter being replaced by a different confirmed goalie.
+
+The workflow then invokes the production scorer with the newest live-context snapshot. The scorer recalculates both teams' probabilities and fair moneylines from the fixed team baseline plus the selected goalies' calibrated ratings. The browser renders the newest validated export; it never calculates the goalie effect. If a goalie is UNKNOWN or cannot be matched to a validated rating, use the documented team-only fallback and label the goalie adjustment unavailable.
+
+Every re-score must preserve the goalie name/ID, PROJECTED or CONFIRMED status, source timestamp, Hockey Lab observation timestamp, and scorer/model version. Capture a new immutable forward-ledger snapshot before puck drop. Never rewrite a published projection after puck drop.
+
+**Current implementation state:** the live feed and card display goalie status, but the active model feature version is team-only and its projections carry a `no_goalie_layer` flag. A goalie update therefore changes context display only today. Do not describe current percentages as goalie-adjusted. The future layer's engineering contract and calibration gate are in `docs/GOALIE_CONDITIONAL_WIN_PROJECTIONS.md`.
 
 ## Licensed-provider upgrade path
 
