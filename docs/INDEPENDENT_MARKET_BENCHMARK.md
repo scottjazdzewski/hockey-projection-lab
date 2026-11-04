@@ -28,8 +28,8 @@ Research-only disagreement remains Hockey Lab win probability minus market no-vi
 
 ## Capture, freshness and freeze
 
-- Capture throughout the ET day at 9:20 AM, 12:20 PM, and 3:20 PM, then every 30 minutes from 5:20 PM through 10:50 PM ET. These are approximately scheduled GitHub Actions starts, not guaranteed second-accurate executions.
-- The collector admits at most 15 scheduled slots per calendar day, which is at most 465 one-market/one-region credit requests in a 31-day month (before any additional usage of the same provider key). Delayed jobs outside the 24-minute grace period skip rather than using extra credits.
+- On NHL game days, capture at **12:20 PM ET**, then **6:50, 7:20, 7:50, 8:50, and 9:50 PM ET**. These six scheduled checks include a daytime reference and near-puck checks for typical 7:00, 7:30, 8:00, 9:00, and 10:00 PM games. Actual GitHub Actions start times can be delayed and cannot guarantee an exact final closing tick.
+- At most **6 automatic requests per game day**, or **180 credits in a 30-day month / 186 credits in a 31-day month**, assuming the provider charges one credit for the single US-region h2h market request. Days without any upcoming NHL games, late scheduled runs outside the 24-minute grace window, and finished slates skip paid API calls. Manual dispatch and other uses of the same API key could add credits, so monitor the provider dashboard.
 - An already-captured scheduled slot is skipped to reduce duplicate requests. The bookmaker feed can move more often than the collection schedule; the website shows the latest saved snapshot, not every intra-interval tick.
 - Open Game Cards re-fetch the independent market JSON every five minutes and when the browser window regains focus, updating only their market strips without rerendering the promoted Hockey Lab probabilities.
 - Every saved row includes when the request was captured, the participating books, and each book's source quote timestamp.
