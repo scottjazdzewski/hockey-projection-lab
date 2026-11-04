@@ -287,8 +287,19 @@ def main(pbp_path,spine_path,goalie_path,outdir):
                         "delta_log_loss":model_ll-baseline_ll,
                         "improved_folds_brier":int((group.delta_brier<0).sum()),
                         "improved_folds_log_loss":int((group.delta_log_loss<0).sum())})
-    (out/"summary.json").write_text(json.dumps(summary,indent=2)+"\n")
-    print(json.dumps(summary,indent=2))
+    output={
+        "schema_version":"1.0",
+        "baseline_feature_version":prod.FEATURE_VERSION,
+        "target_seasons":TARGET_SEASONS,
+        "games_per_variant":int(result[result.variant.eq("sv%")].games.sum()),
+        "exposure_shrinkage_fixed_for_comparison":{
+            "shots_k":400,"starts_k":15,"minutes_k":1800
+        },
+        "weight_fit":"validation season within each rolling-origin fold",
+        "variants":summary
+    }
+    (out/"summary.json").write_text(json.dumps(output,indent=2)+"\n")
+    print(json.dumps(output,indent=2))
 
 
 if __name__=="__main__":
