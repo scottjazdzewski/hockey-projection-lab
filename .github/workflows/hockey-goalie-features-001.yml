@@ -1,6 +1,9 @@
 name: Hockey Goalie Feature ETL 001
 
 on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * *'
   push:
     branches: [main]
     paths:
@@ -13,7 +16,7 @@ permissions:
 jobs:
   goalie-features:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -33,6 +36,6 @@ jobs:
         with:
           name: goalie-game-features-001-20261102
           path: goalie-game-features-001-20261102.zip
-          retention-days: 1
+          retention-days: 30
           compression-level: 0
           if-no-files-found: error
