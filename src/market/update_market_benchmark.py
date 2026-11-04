@@ -224,47 +224,71 @@ def self_test():
     close_slot=eligible_poll_slot(date_time("2026-11-03T23:52:00Z").astimezone(TZ),slate,set())
     assert close_slot and close_slot.startswith("CLOSE:")
     assert eligible_poll_slot(date_time("2026-11-03T23:52:00Z").astimezone(TZ),slate,{close_slot}) is None
-    assert eligible_poll_slot(date_time("2026-11-03T19:30:00Z").astimezone(TZ),slate,set()) is None
+    # A missed fixed check remains due until the next checkpoint.
+    assert eligible_poll_slot(date_time("2026-11-03T20:24:00Z").astimezone(TZ),slate,set()).startswith("FIXED:")
+    # After that fixed checkpoint is captured, it does not spend again.
+    three=eligible_poll_slot(date_time("2026-11-03T20:24:00Z").astimezone(TZ),slate,set())
+    assert eligible_poll_slot(date_time("2026-11-03T20:25:00Z").astimezone(TZ),slate,{three}) is None
     # In daylight time the UTC offset moves but 9 AM ET remains a valid fixed window.
     summer={"date":"2027-04-03","games":[]}
     assert eligible_poll_slot(date_time("2027-04-03T13:00:00Z").astimezone(TZ),summer,set()) is not None
     print("Market benchmark self-test PASS (no-vig, matchup, timestamp, freeze, schedule, no leakage)")
 
 def eligible_poll_slot(local,schedule,captured):
-    """Return one due market collection slot, or None.
+    """Return the single market slot that should be captured now, or None.
 
-    Fixed ET checks: 9:00 AM, 12:00 PM, 3:00 PM, 5:00 PM and 6:00 PM.
-    Closing checks: one additional request per unique scheduled puck-drop time
-    when that start is within the final 10 minutes. A single provider request
-    contains the whole remaining slate, so games sharing a start time share
-    one closing credit.
+    Fixed checkpoints are 9 AM, noon, 3 PM, 5 PM and 6 PM ET. A fixed
+    checkpoint remains recoverable until the next fixed checkpoint. The final
+    6 PM checkpoint remains recoverable until the first game's closing window.
 
-    `captured` makes every slot idempotent even when GitHub retries a job.
+    Closing checks take priority and occur once per unique puck-drop time in
+    the final 10 minutes. Persisted slot keys make retries idempotent.
     """
-    fixed=[(9,0),(12,0),(15,0),(17,0),(18,0)]
-    for hour,minute in fixed:
-        target=local.replace(hour=hour,minute=minute,second=0,microsecond=0)
-        delay=(local-target).total_seconds()
-        key="FIXED:"+target.isoformat()
-        if 0<=delay<15*60 and key not in captured:
-            return key
-
+    # Closing window has priority over a late fixed checkpoint.
     starts=[]
     for game in schedule.get("games",[]):
         start=date_time(game.get("start_time_et"))
         if start:
             starts.append(start.astimezone(TZ))
-    for start in sorted(set(starts)):
+    unique_starts=sorted(set(starts))
+    for start in unique_starts:
         seconds=(start-local).total_seconds()
         key="CLOSE:"+start.isoformat()
-        if 0<seconds<=10*60 and key not in captured:
+        if 0 < seconds <= 10*60 and key not in captured:
             return key
+
+    fixed_times=[(9,0),(12,0),(15,0),(17,0),(18,0)]
+    fixed_targets=[
+        local.replace(hour=h,minute=m,second=0,microsecond=0)
+        for h,m in fixed_times
+    ]
+    for idx in range(len(fixed_targets)-1,-1,-1):
+        target=fixed_targets[idx]
+        if local < target:
+            continue
+        key="FIXED:"+target.isoformat()
+        if key in captured:
+            return None
+
+        # The checkpoint expires when the next fixed checkpoint begins.
+        if idx+1 < len(fixed_targets):
+            expiry=fixed_targets[idx+1]
+        else:
+            # After 6 PM, stop trying to backfill the 6 PM checkpoint once
+            # the earliest game's closing window begins.
+            future_starts=[s for s in unique_starts if s>target]
+            expiry=(min(future_starts)-timedelta(minutes=10)) if future_starts else target+timedelta(hours=2)
+
+        if local < expiry:
+            return key
+        return None
     return None
 
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("--self-test",action="store_true")
     ap.add_argument("--force",action="store_true",help="Allow manually triggered collection outside daytime.")
+    ap.add_argument("--check-due",action="store_true",help="Print the currently due slot without calling the odds provider.")
     ap.add_argument("--fixture",help="Offline feed JSON for testing")
     args=ap.parse_args()
     if args.self_test:
@@ -279,6 +303,9 @@ def main():
     old=load_json(OUTPUT,{}) or {}
     captured=set(old.get("captured_poll_slots") or []) if old.get("date")==schedule.get("date") else set()
     slot=eligible_poll_slot(local,schedule,captured)
+    if args.check_due:
+        print(slot or "NONE")
+        return
     if not args.force and not slot:
         print("SKIP outside approved fixed/closing market collection windows")
         return
