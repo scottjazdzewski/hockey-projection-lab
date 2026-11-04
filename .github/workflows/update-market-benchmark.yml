@@ -71,7 +71,15 @@ jobs:
       - name: Refresh multi-book odds (benchmark only)
         env:
           THE_ODDS_API_KEY: ${{ secrets.THE_ODDS_API_KEY }}
-        run: python src/market/update_market_benchmark.py
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        shell: bash
+        run: |
+          extra=""
+          if [[ "${{ github.event_name }}" == "push" && "$COMMIT_MESSAGE" == *"[force-market]"* ]]; then
+            extra="--force"
+            echo "One-time forced market refresh requested by tagged maintenance commit."
+          fi
+          python src/market/update_market_benchmark.py $extra
       - name: Commit market data only
         run: |
           git config user.name "hockey-lab-bot"
