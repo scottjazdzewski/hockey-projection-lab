@@ -194,13 +194,18 @@ def adjust_home_probability(team_only_home_probability, home_rating, away_rating
     return exp_value / (1.0 + exp_value)
 
 
-def is_promoted_model(model):
+def is_promoted_model(model, expected_baseline_feature_version=None):
     metrics = (model or {}).get("performance_metrics") or {}
     required_metrics = ("accuracy", "brier", "log_loss", "calibration")
+    baseline_matches = (
+        expected_baseline_feature_version is None
+        or model.get("baseline_feature_version") == expected_baseline_feature_version
+    )
     return (
         isinstance(model, dict)
         and str(model.get("status", "")).upper() == "PROMOTED"
         and FEATURE_MARKER in str(model.get("feature_version", "")).lower()
+        and baseline_matches
         and isinstance(model.get("calibration"), dict)
         and all(isinstance(metrics.get(key), (int, float)) and math.isfinite(metrics[key]) for key in required_metrics)
     )
