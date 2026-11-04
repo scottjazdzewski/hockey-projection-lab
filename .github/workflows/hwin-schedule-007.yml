@@ -23,11 +23,11 @@ jobs:
       - name: Download canonical pregame inputs
         run: |
           mkdir -p /tmp/pbp /tmp/pbp_u /tmp/spine /tmp/spine_u /tmp/goalie /tmp/goalie_u
-          gh run download 41537361054 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          gh run download 41766609805 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
           unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/pbp_u
-          gh run download 41537437104 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
+          gh run download 41766612176 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
           unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/spine_u
-          gh run download 41539429864 -n goalie-game-features-001-20261102 -D /tmp/goalie
+          gh run download 41871777019 -n goalie-game-features-001-20261102 -D /tmp/goalie
           unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u
       - name: Run isolated schedule ablations
         run: |
