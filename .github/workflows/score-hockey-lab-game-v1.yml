@@ -38,16 +38,18 @@ jobs:
       - name: Download canonical research inputs
         run: |
           mkdir -p /tmp/pbp /tmp/pbp_u /tmp/spine /tmp/spine_u /tmp/goalie /tmp/goalie_u
-          gh run download 41537361054 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          pbp_run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/hockey-pbp-features.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          spine_run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/hockey-game-spine-v3.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
+          gh run download "$pbp_run_id" --repo "$GITHUB_REPOSITORY" -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
           unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/pbp_u
-          gh run download 41537437104 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
+          gh run download "$spine_run_id" --repo "$GITHUB_REPOSITORY" -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
           unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/spine_u
 
-          # The goalie ETL is refreshed daily; its promoted-model gate below
-          # leaves current team-only production unchanged until calibration passes.
-          goalie_run_id="$(gh run list --workflow hockey-goalie-features-001.yml --branch main --status success --limit 1 --json databaseId --jq '.[0].databaseId')"
+          # The goalie layer uses the promoted prospective calibration and is
+          # refreshed from the latest successful prior-only history build.
+          goalie_run_id="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/hockey-goalie-features-001.yml/runs?branch=main&status=success&per_page=1" --jq '.workflow_runs[0].id // empty')"
           if [ -n "$goalie_run_id" ] && [ "$goalie_run_id" != "null" ]; then
-            if gh run download "$goalie_run_id" -n goalie-game-features-001-20261102 -D /tmp/goalie && unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u; then
+            if gh run download "$goalie_run_id" --repo "$GITHUB_REPOSITORY" -n goalie-game-features-001-20261102 -D /tmp/goalie && unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u; then
               echo "Loaded goalie history for the gated scorer."
             else
               echo "Goalie-history artifact unavailable; score team-only."
