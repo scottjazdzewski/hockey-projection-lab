@@ -46,7 +46,7 @@ The Game Card win percentage must be conditional on the current expected starter
 
 The goalie rating must be built from strictly prior goalie performance and use empirically calibrated age and exposure adjustment. Exposure includes prior starts, shots faced, and minutes; it is not a raw start-count cutoff. Goalie wins/losses are not an individual-skill feature. SV% and GAA are baseline measures; GAA must be tested for team-defense confounding, and GSAx may be added when its data coverage and calibration are validated.
 
-Do not change the promoted feature version to include goalie until rolling-origin and prospective validation pass. Before that promotion, the active projection remains team-only and the live feed may update goalie labels/status only.
+Model `prospective-0.3.0` is promoted against the exact `team-strength-004+b2b-007` team-only baseline for prospective evaluation. Its pregame score uses the current projected goalie; a changed or newly confirmed starter triggers a rescore before puck drop. Future goalie model changes still require rolling-origin and prospective evidence. If goalie identity or rating is unavailable, use and label the team-only fallback.
 
 ## Work-tab handoff
 
