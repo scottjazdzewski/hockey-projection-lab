@@ -87,7 +87,7 @@ def rate_goalie(goalie_games, player_id, birth_date, as_of, calibration):
     for record in goalie_games:
         if normalize_player_id(record.get("goalie_id_key")) != player_id:
             continue
-        if record.get("starter_bool") is False:
+        if not bool(record.get("starter_bool", False)):
             continue
         game_date = _as_date(record.get("game_date"))
         if game_date is None or game_date >= target:
@@ -105,6 +105,7 @@ def rate_goalie(goalie_games, player_id, birth_date, as_of, calibration):
     prior_starts = len(rows)
 
     expected_saves = 0.0
+    valid_saves = 0.0
     valid_shots = 0.0
     for _, record in rows:
         shots = record.get("shots_against_pbp")
@@ -122,11 +123,19 @@ def rate_goalie(goalie_games, player_id, birth_date, as_of, calibration):
         if prior_age is None or not math.isfinite(prior_age):
             continue
         baseline = age_curve_save_pct(prior_age, calibration)
+        saves = record.get("saves_pbp")
+        try:
+            saves = float(saves)
+        except (TypeError, ValueError):
+            continue
+        if not math.isfinite(saves):
+            continue
         expected_saves += shots * baseline
+        valid_saves += saves
         valid_shots += shots
 
     if valid_shots > 0:
-        residual_per_shot = (prior_saves - expected_saves) / valid_shots
+        residual_per_shot = (valid_saves - expected_saves) / valid_shots
     else:
         residual_per_shot = 0.0
 
