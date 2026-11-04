@@ -282,7 +282,7 @@ def main(pbp_path,spine_path,goalie_path,outdir):
              "backbone_accuracy":bm["accuracy"],"goalie_accuracy":am["accuracy"],
              "goalie_calibration":am["calibration"],"age_curve":age_curve}
         rows.append(row); selected.append(ch)
-        print(json.dumps({k:v for k,v in row.items() if k!="age_curve"},flush=True))
+        print(json.dumps({k:v for k,v in row.items() if k!="age_curve"}),flush=True)
     if not rows: raise RuntimeError("No production-baseline goalie rolling folds produced")
     result=pd.DataFrame(rows); result.to_csv(out/"rolling_age_exposure_backtest.csv",index=False)
     n=result.games.to_numpy(float)
