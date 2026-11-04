@@ -36,6 +36,18 @@ A game projection may be published only when all are true:
 
 If any check fails, the site must show **Model pending** or **Withheld**. It must never invent a value.
 
+## Goalie-conditional win projection
+
+The required goalie-layer behavior, data contract, calibration rules, and promotion checklist are defined in:
+
+`docs/GOALIE_CONDITIONAL_WIN_PROJECTIONS.md`
+
+The Game Card win percentage must be conditional on the current expected starter when a goalie-aware model is promoted. A later PROJECTED or CONFIRMED goalie identity change must run the scorer again before puck drop, update both win percentages and fair moneylines, and preserve the new goalie identity/status/timestamps with that score. The frontend only renders the scorer's export.
+
+The goalie rating must be built from strictly prior goalie performance and use empirically calibrated age and exposure adjustment. Exposure includes prior starts, shots faced, and minutes; it is not a raw start-count cutoff. Goalie wins/losses are not an individual-skill feature. SV% and GAA are baseline measures; GAA must be tested for team-defense confounding, and GSAx may be added when its data coverage and calibration are validated.
+
+Do not change the promoted feature version to include goalie until rolling-origin and prospective validation pass. Before that promotion, the active projection remains team-only and the live feed may update goalie labels/status only.
+
 ## Work-tab handoff
 
 When the engineering Work tab promotes a model:
