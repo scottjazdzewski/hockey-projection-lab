@@ -26,3 +26,7 @@ The calculation hook is in `src/production/goalie_adjustment.py`; the production
 Model `prospective-0.3.0` is promoted against the exact active baseline for prospective evaluation. The scorer runs daily before the slate, uses the projected starter, and the live-context workflow rescores a changed or newly confirmed starter once the active projection has the `goalie-adjustment-` marker. Every successful score can trigger the forward-ledger workflow; the ledger freezes a game near puck drop and keeps that pregame snapshot immutable afterward.
 
 Compare goalie-adjusted probabilities with the frozen team-only baseline in the forward ledger. The historical lift is small and uneven (3 of 5 seasons improved, while the latest fold worsened), so future model changes require rolling-origin evidence, prospective results, and a fresh versioned review.
+
+## Model accuracy test protocol
+
+Before adding or changing a win-probability or score-distribution feature, read `research/MODEL_ACCURACY_TEST_BATTERY_001_20261104.md`. Use matched game rows and nested chronological validation; report Brier, log loss, calibration, and season-level results; preserve game-level predictions and input cutoffs. Keep market odds and postgame starter identity out of pregame features. A goalie scenario calculation is not validation by itself. Keep research candidates out of production until leakage checks and the prospective evidence support the change.
