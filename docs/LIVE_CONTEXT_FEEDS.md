@@ -103,7 +103,7 @@ The workflow then invokes the production scorer with the newest live-context sna
 
 Every re-score must preserve the goalie name/ID, PROJECTED or CONFIRMED status, source timestamp, Hockey Lab observation timestamp, and scorer/model version. Capture a new immutable forward-ledger snapshot before puck drop. Never rewrite a published projection after puck drop.
 
-**Current implementation state:** the live feed and card display goalie status, but the active model feature version is team-only and its projections carry a `no_goalie_layer` flag. A goalie update therefore changes context display only today. Do not describe current percentages as goalie-adjusted. The future layer's engineering contract and calibration gate are in `docs/GOALIE_CONDITIONAL_WIN_PROJECTIONS.md`.
+**Current implementation state:** the promoted prospective model `prospective-0.3.0` is active against the exact team-only baseline. Live context supplies full goalie names, while historical feature rows use first-initial plus surname; the scorer resolves that format only when it maps to one goalie ID. If the ID remains unresolved or ambiguous, it preserves the team-only probability and records the unavailable reason. Describe a card as goalie-adjusted only when its exported `goalie_adjustment_status` is `APPLIED`. Review goalie-adjusted and baseline forecasts prospectively in the immutable forward ledger.
 
 ## Licensed-provider upgrade path
 
