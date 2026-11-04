@@ -103,11 +103,12 @@
     const age=Number.isFinite(at)?(Date.now()-at)/60000:Infinity;
     const isClosing=m.status==='CLOSING' && Number.isFinite(start) && Number.isFinite(at) && at<start;
     const isOld=!isClosing && age>60;
-    const source=m.status==='SOURCE_SNAPSHOT'?'Single published source'
+    const source=m.status==='SOURCE_SNAPSHOT'?''
       : (Number.isInteger(m.book_count)?m.book_count+' sportsbook'+(m.book_count===1?'':'s'):'Source unverified');
     const time=timeET(m.captured_at);
+    const marketMeta=source ? source+' · '+time : time;
     return '<section class="gc-market'+(isOld?' gc-market-stale':'')+'" id="gc-market-'+esc(g.game_id)+'" aria-label="Independent market benchmark">'+
-      '<div class="gc-market-head gc-market-head-source"><span>'+esc(source)+' · '+esc(time)+'</span></div>'+
+      '<div class="gc-market-head gc-market-head-source"><span>'+esc(marketMeta)+'</span></div>'+
       '<div class="gc-market-values">'+
         '<div><small>'+esc(g.away_abbr)+' market moneyline</small><strong>'+price(m.market_ml_away)+'</strong></div>'+
         '<div><small>'+esc(g.home_abbr)+' market moneyline</small><strong>'+price(m.market_ml_home)+'</strong></div>'+
