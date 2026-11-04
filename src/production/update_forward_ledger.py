@@ -152,6 +152,8 @@ def freeze_records(min_before: float, max_before: float):
                 "away":{
                     "abbr":p.get("away",{}).get("abbr"),
                     "win_probability":safe_num(p.get("away",{}).get("win_probability")),
+                    "team_only_win_probability":safe_num(p.get("away",{}).get("team_only_win_probability")),
+                    "goalie_adjustment_pp":safe_num(p.get("away",{}).get("goalie_adjustment_pp")),
                     "fair_moneyline":p.get("away",{}).get("fair_moneyline"),
                     "expected_goals":safe_num(p.get("away",{}).get("expected_goals")),
                     "regulation_win_probability":safe_num(p.get("away",{}).get("regulation_win_probability"))
@@ -159,11 +161,15 @@ def freeze_records(min_before: float, max_before: float):
                 "home":{
                     "abbr":p.get("home",{}).get("abbr"),
                     "win_probability":safe_num(p.get("home",{}).get("win_probability")),
+                    "team_only_win_probability":safe_num(p.get("home",{}).get("team_only_win_probability")),
+                    "goalie_adjustment_pp":safe_num(p.get("home",{}).get("goalie_adjustment_pp")),
                     "fair_moneyline":p.get("home",{}).get("fair_moneyline"),
                     "expected_goals":safe_num(p.get("home",{}).get("expected_goals")),
                     "regulation_win_probability":safe_num(p.get("home",{}).get("regulation_win_probability"))
                 },
                 "overtime_probability":safe_num(p.get("overtime_probability")),
+                "goalie_adjustment_status":p.get("goalie_adjustment_status"),
+                "goalie_adjustment":deepcopy(p.get("goalie_adjustment")),
                 "rest_state":deepcopy(p.get("rest_state")),
                 "goalie_context":{
                     "away":side_context(ctx,"away"),
