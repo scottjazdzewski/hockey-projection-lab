@@ -1,0 +1,264 @@
+{
+  "schema_version": "1.0",
+  "game_date": "2026-11-03",
+  "snapshot_observed_at_et_approx": "2026-11-03T19:27:00-05:00",
+  "purpose": "RESEARCH_AND_EVALUATION_ONLY_NEVER_MODEL_INPUT",
+  "model_source": "public/data/game-projections.json",
+  "odds_source": {
+    "name": "StatMuse",
+    "url": "https://www.statmuse.com/nhl/ask/odds-for-nhl-games-tonight",
+    "page_label": "Consensus closing odds",
+    "method_and_book_count": "NOT_DISCLOSED"
+  },
+  "calculation": "raw_p=moneyline<0?(-moneyline)/(-moneyline+100):100/(moneyline+100); no_vig_away=raw_away/(raw_away+raw_home)",
+  "warnings": [
+    "Source page labels all prices consensus closing, including games not yet underway. Those later prices are preliminary until verified after puck drop.",
+    "Seven and seven-thirty PM games accessed at about 7:27 PM ET; this is not a locally captured last-pregame line, so the source's closing designation is not independently verified.",
+    "Source does not disclose per-book paired quotes or timestamps; do not claim this is a validated multi-book consensus benchmark.",
+    "Model comparison uses published pregame projections; existing frozen forecast blocks must not be rewritten."
+  ],
+  "games": [
+    {
+      "nhl_game_id": 2026020236,
+      "away": "UTA",
+      "home": "TOR",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "source_moneyline": {
+        "away": -149,
+        "home": 122
+      },
+      "market_no_vig": {
+        "away": 0.570527,
+        "home": 0.429473
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.582919,
+        "home": 0.417081
+      },
+      "lab_minus_market_away_pp": 1.24,
+      "status": "SOURCE_LABELLED_CLOSING_RETRIEVED_AFTER_PUCK_DROP",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020237,
+      "away": "WPG",
+      "home": "MTL",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "source_moneyline": {
+        "away": 142,
+        "home": -171
+      },
+      "market_no_vig": {
+        "away": 0.395724,
+        "home": 0.604276
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.361317,
+        "home": 0.638683
+      },
+      "lab_minus_market_away_pp": -3.44,
+      "status": "SOURCE_LABELLED_CLOSING_RETRIEVED_AFTER_PUCK_DROP",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020238,
+      "away": "DET",
+      "home": "TBL",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "source_moneyline": {
+        "away": 237,
+        "home": -295
+      },
+      "market_no_vig": {
+        "away": 0.284347,
+        "home": 0.715653
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.347293,
+        "home": 0.652707
+      },
+      "lab_minus_market_away_pp": 6.29,
+      "status": "SOURCE_LABELLED_CLOSING_RETRIEVED_AFTER_PUCK_DROP",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020240,
+      "away": "STL",
+      "home": "NYR",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "source_moneyline": {
+        "away": -101,
+        "home": -119
+      },
+      "market_no_vig": {
+        "away": 0.480451,
+        "home": 0.519549
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.500755,
+        "home": 0.499245
+      },
+      "lab_minus_market_away_pp": 2.03,
+      "status": "SOURCE_LABELLED_CLOSING_RETRIEVED_AFTER_PUCK_DROP",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020241,
+      "away": "MIN",
+      "home": "PHI",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "source_moneyline": {
+        "away": -183,
+        "home": 153
+      },
+      "market_no_vig": {
+        "away": 0.620638,
+        "home": 0.379362
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.590571,
+        "home": 0.409429
+      },
+      "lab_minus_market_away_pp": -3.01,
+      "status": "SOURCE_LABELLED_CLOSING_RETRIEVED_AFTER_PUCK_DROP",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020242,
+      "away": "VGK",
+      "home": "PIT",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "source_moneyline": {
+        "away": -102,
+        "home": -118
+      },
+      "market_no_vig": {
+        "away": 0.482636,
+        "home": 0.517364
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.496093,
+        "home": 0.503907
+      },
+      "lab_minus_market_away_pp": 1.35,
+      "status": "SOURCE_LABELLED_CLOSING_RETRIEVED_AFTER_PUCK_DROP",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020243,
+      "away": "DAL",
+      "home": "WSH",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "source_moneyline": {
+        "away": -104,
+        "home": -116
+      },
+      "market_no_vig": {
+        "away": 0.486993,
+        "home": 0.513007
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.493037,
+        "home": 0.506963
+      },
+      "lab_minus_market_away_pp": 0.6,
+      "status": "SOURCE_LABELLED_CLOSING_RETRIEVED_AFTER_PUCK_DROP",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020244,
+      "away": "COL",
+      "home": "CBJ",
+      "start_time_et": "2026-11-03T19:00:00-05:00",
+      "source_moneyline": {
+        "away": -124,
+        "home": 104
+      },
+      "market_no_vig": {
+        "away": 0.530359,
+        "home": 0.469641
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.502198,
+        "home": 0.497802
+      },
+      "lab_minus_market_away_pp": -2.82,
+      "status": "SOURCE_LABELLED_CLOSING_RETRIEVED_AFTER_PUCK_DROP",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020239,
+      "away": "EDM",
+      "home": "NJD",
+      "start_time_et": "2026-11-03T19:30:00-05:00",
+      "source_moneyline": {
+        "away": 136,
+        "home": -162
+      },
+      "market_no_vig": {
+        "away": 0.40663,
+        "home": 0.59337
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.460776,
+        "home": 0.539224
+      },
+      "lab_minus_market_away_pp": 5.41,
+      "status": "PREGAME_SNAPSHOT_NOT_CLOSING",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020245,
+      "away": "CAR",
+      "home": "NSH",
+      "start_time_et": "2026-11-03T20:00:00-05:00",
+      "source_moneyline": {
+        "away": -200,
+        "home": 165
+      },
+      "market_no_vig": {
+        "away": 0.638554,
+        "home": 0.361446
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.722086,
+        "home": 0.277914
+      },
+      "lab_minus_market_away_pp": 8.35,
+      "status": "PREGAME_SNAPSHOT_NOT_CLOSING",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    },
+    {
+      "nhl_game_id": 2026020246,
+      "away": "ANA",
+      "home": "VAN",
+      "start_time_et": "2026-11-03T21:00:00-05:00",
+      "source_moneyline": {
+        "away": -191,
+        "home": 158
+      },
+      "market_no_vig": {
+        "away": 0.628722,
+        "home": 0.371278
+      },
+      "hockey_lab_frozen_comparator": {
+        "away": 0.630761,
+        "home": 0.369239
+      },
+      "lab_minus_market_away_pp": 0.2,
+      "status": "PREGAME_SNAPSHOT_NOT_CLOSING",
+      "source_book_count": "NOT_DISCLOSED",
+      "verified_pre_puck_drop_source_timestamp": false
+    }
+  ]
+}
