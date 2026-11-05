@@ -209,6 +209,89 @@ def paired_bootstrap(preds, candidate, condition=None, draws=2000, seed=20261105
     return rows
 
 
+def cluster_paired_bootstrap(preds, candidate, cluster, condition=None,
+                             draws=2000, seed=20261106):
+    keep = [
+        "source_season", "game_id", "home_win", "game_date",
+        "home_team_abbr", "away_team_abbr", "p_home",
+    ]
+    if condition:
+        keep.append(condition)
+    base = preds[preds.model.eq("baseline_b2b")][keep].copy()
+    cand = preds[preds.model.eq(candidate)][
+        ["source_season", "game_id", "p_home"]
+    ].copy()
+    wide = base.merge(
+        cand, on=["source_season", "game_id"], suffixes=("_base", "_candidate")
+    )
+    if condition:
+        wide = wide[wide[condition].astype(bool)]
+    if wide.empty:
+        return []
+
+    y = wide.home_win.to_numpy(dtype=int)
+    p0 = np.clip(wide.p_home_base.to_numpy(dtype=float), 1e-6, 1 - 1e-6)
+    p1 = np.clip(wide.p_home_candidate.to_numpy(dtype=float), 1e-6, 1 - 1e-6)
+    delta_by_metric = {
+        "brier": (y - p1) ** 2 - (y - p0) ** 2,
+        "log_loss": (
+            -(y * np.log(p1) + (1 - y) * np.log(1 - p1))
+            + y * np.log(p0) + (1 - y) * np.log(1 - p0)
+        ),
+    }
+
+    rng = np.random.default_rng(seed)
+    total = len(wide)
+    boot_values = {name: np.zeros(draws, dtype=float) for name in delta_by_metric}
+    for season in np.sort(wide.source_season.unique()):
+        sub = wide[wide.source_season.eq(season)].reset_index(drop=True)
+        n = len(sub)
+        if cluster == "date":
+            labels = pd.to_datetime(sub.game_date, errors="coerce").dt.strftime("%Y-%m-%d")
+            cluster_ids, game_cluster = np.unique(labels.fillna("unknown"), return_inverse=True)
+            count = len(cluster_ids)
+            sampled = rng.multinomial(count, np.full(count, 1 / count), size=draws)
+            weights = sampled[:, game_cluster]
+        elif cluster == "team":
+            teams = sorted(set(sub.home_team_abbr) | set(sub.away_team_abbr))
+            team_index = {team: i for i, team in enumerate(teams)}
+            home_index = sub.home_team_abbr.map(team_index).to_numpy()
+            away_index = sub.away_team_abbr.map(team_index).to_numpy()
+            count = len(teams)
+            sampled = rng.multinomial(count, np.full(count, 1 / count), size=draws)
+            # Pigeonhole node bootstrap: each matchup receives the product
+            # of its two teams' resampling multiplicities.
+            weights = sampled[:, home_index] * sampled[:, away_index]
+        else:
+            raise ValueError(f"Unsupported cluster: {cluster}")
+
+        denom = weights.sum(axis=1)
+        valid = denom > 0
+        for name, all_delta in delta_by_metric.items():
+            d = all_delta[wide.source_season.eq(season)]
+            means = np.zeros(draws, dtype=float)
+            means[valid] = (weights[valid] @ d) / denom[valid]
+            boot_values[name] += means * (n / total)
+
+    rows = []
+    for name, all_delta in delta_by_metric.items():
+        boot = boot_values[name]
+        rows.append({
+            "candidate": candidate,
+            "condition": condition or "all_test_games",
+            "cluster": cluster,
+            "metric": name,
+            "n_games": total,
+            "delta_candidate_minus_baseline": float(all_delta.mean()),
+            "ci95_low": float(np.quantile(boot, 0.025)),
+            "ci95_high": float(np.quantile(boot, 0.975)),
+            "bootstrap_share_improved": float(np.mean(boot < 0)),
+            "draws": draws,
+            "method": "paired cluster bootstrap, stratified by target season",
+        })
+    return rows
+
+
 def main(pbp_path, spine_path, goalie_path, outdir):
     out = Path(outdir)
     out.mkdir(parents=True, exist_ok=True)
@@ -305,7 +388,12 @@ def main(pbp_path, spine_path, goalie_path, outdir):
                 "log_loss": m["log_loss"], "accuracy": m["accuracy"],
                 "C": c, "elo_choice": ec[1], "oa_choice": oa_tag,
             })
-            pred_frame = test[["game_id", "source_season", "home_win"]].copy()
+            meta = spine[[
+                "game_id", "game_date", "home_team_abbr", "away_team_abbr"
+            ]].drop_duplicates("game_id")
+            pred_frame = test[[
+                "game_id", "source_season", "home_win"
+            ]].merge(meta, on="game_id", how="left")
             pred_frame["model"] = name
             pred_frame["p_home"] = p
             for condition, mask in conditions.items():
@@ -332,6 +420,16 @@ def main(pbp_path, spine_path, goalie_path, outdir):
         condition="away_road_trip_finale_proxy",
     ))
     bootstrap = pd.DataFrame(bootstrap_rows)
+    cluster_rows = []
+    for cluster in ["team", "date"]:
+        cluster_rows.extend(cluster_paired_bootstrap(
+            preds, "plus_road_trip_finale_proxy", cluster
+        ))
+        cluster_rows.extend(cluster_paired_bootstrap(
+            preds, "plus_road_trip_finale_proxy", cluster,
+            condition="away_road_trip_finale_proxy",
+        ))
+    cluster_bootstrap = pd.DataFrame(cluster_rows)
     summary = {}
     for model, z in folds.groupby("model"):
         summary[model] = {
@@ -360,6 +458,7 @@ def main(pbp_path, spine_path, goalie_path, outdir):
     folds.to_csv(out / "rolling_schedule_007.csv", index=False)
     groups.to_csv(out / "schedule_007_condition_metrics.csv", index=False)
     bootstrap.to_csv(out / "paired_schedule_007_bootstrap.csv", index=False)
+    cluster_bootstrap.to_csv(out / "cluster_schedule_007_bootstrap.csv", index=False)
     preds.to_parquet(out / "schedule_007_test_predictions.parquet", index=False)
     with open(out / "summary.json", "w") as f:
         json.dump(summary, f, indent=2)
@@ -370,6 +469,8 @@ def main(pbp_path, spine_path, goalie_path, outdir):
     print(groups.to_string(index=False))
     print("\nPAIRED BOOTSTRAP")
     print(bootstrap.to_string(index=False))
+    print("\\nTEAM AND DATE CLUSTER BOOTSTRAP")
+    print(cluster_bootstrap.to_string(index=False))
 
 
 if __name__ == "__main__":
