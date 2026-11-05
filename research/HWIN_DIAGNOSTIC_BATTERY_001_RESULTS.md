@@ -42,3 +42,29 @@ Home-team slices are noisy when pooled over changing roster eras. On a complete 
 **No production change.** The diagnostics do not show a stable rest-state or getaway-game correction. The next useful modeling test is a preregistered forward-validation comparison for season/context drift and team-era strength, with block-aware uncertainty and correction for searching across teams and probability bins. Only a candidate that improves held-out Brier and log loss and persists in later seasons should advance.
 
 Market odds remain benchmark-only and are not used as model inputs.
+
+
+## One-percentage-point calibration: does “60%” win 60%?
+
+I ran a separate pointwise audit on the same frozen holdout, converting each game into both teams’ predicted win probabilities and outcomes. That gives **13,986 team forecasts across 6,993 games**. Probabilities are assigned to the nearest whole-percent bucket; for example, the **60%** bucket contains forecasts from **59.5% through 60.5%**. The full 0–100 table is [HWIN_POINTWISE_CALIBRATION_001.csv](HWIN_POINTWISE_CALIBRATION_001.csv), with the reproducible script at [hwin_pointwise_calibration_001.py](hwin_pointwise_calibration_001.py).
+
+| Rounded forecast | Games | Mean forecast | Actual win rate | Actual minus forecast | 95% date/team block interval for gap |
+|---:|---:|---:|---:|---:|---:|
+| 54% | 425 | 53.98% | 55.06% | +1.08 pp | −10.20 to +13.07 pp |
+| 55% | 390 | 54.99% | 51.79% | −3.20 pp | −15.76 to +9.00 pp |
+| 56% | 397 | 56.01% | 56.42% | +0.41 pp | −11.62 to +12.53 pp |
+| 57% | 393 | 57.02% | 54.20% | −2.82 pp | −15.13 to +8.91 pp |
+| 58% | 361 | 58.00% | 57.34% | −0.65 pp | −13.78 to +11.94 pp |
+| 59% | 308 | 58.99% | 60.39% | +1.40 pp | −12.57 to +14.28 pp |
+| **60%** | **317** | **59.98%** | **59.31%** | **−0.67 pp** | **−15.85 to +14.15 pp** |
+| 61% | 289 | 61.01% | 62.28% | +1.27 pp | −12.27 to +14.05 pp |
+| 62% | 316 | 62.03% | 61.71% | −0.32 pp | −15.13 to +13.38 pp |
+| 63% | 249 | 63.00% | 55.42% | −7.58 pp | −24.51 to +8.16 pp |
+| 64% | 248 | 63.99% | 61.29% | −2.70 pp | −17.81 to +12.76 pp |
+| 65% | 211 | 65.00% | 66.82% | +1.82 pp | −17.51 to +18.96 pp |
+
+So the exact rounded **60%** group won **59.3%** of the time in this sample, only **0.7 points below** its forecast. The earlier **60–65% favorite band** is a different, wider bucket: it averaged **62.36% forecast** and **60.01% observed**, a **2.35-point overprediction**. Both findings are true; the wider bucket should not be read as the exact 60% result.
+
+The per-point results jump around, as expected with narrow bins. The largest absolute gap among bins with at least 100 games was the 63% bucket (mirrored by the 37% bucket): **63.00% forecast vs 55.42% observed**, but its block-bootstrap interval includes zero. **None of the pointwise intervals excludes zero.** This means the data does not establish that any individual percentage point is miscalibrated; it does not prove exact calibration either. The intervals are intentionally block-aware and broad, and are pointwise rather than simultaneous across all bins.
+
+The 50% row is marked structural: a game contributes both teams at 50%, guaranteeing a 50/50 observed rate. Do not count that row as evidence that the model is calibrated at 50%. Empty extreme bins are shown in the CSV, and bins with fewer than 100 games are flagged.
