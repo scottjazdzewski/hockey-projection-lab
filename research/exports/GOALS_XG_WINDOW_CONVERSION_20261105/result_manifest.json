@@ -1,0 +1,32 @@
+{
+  "run_id": "GOALS-XG-WINDOW-CONVERSION-ROLLING-20261105",
+  "target_seasons": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "games": 6560,
+  "design": "Nested rolling origin; all candidates refit each fold; alpha and score law selected on S-1; score S.",
+  "xg_windows": [
+    20,
+    60,
+    100
+  ],
+  "conversion_residual_windows": [
+    20,
+    60,
+    100
+  ],
+  "control": "Current 60-game full process feature set; non-xG rolling inputs, schedule, opponent-adjusted ratings, and shot form held fixed for xG-window variants.",
+  "headline": "20-game rolling xG reduced aggregate expected-goal underprediction and improved final-score log loss, but did not improve team-goal MAE; conversion residuals showed no stable added gain.",
+  "source_snapshot": "2026-11-04 rebuilt data; frozen EXP-0027/0028 input hashes differ.",
+  "no_production_change": true,
+  "outputs": [
+    "fold_metrics.csv",
+    "xg_conversion_metrics_by_season.csv",
+    "xg_conversion_metrics_pooled.csv",
+    "xg_conversion_paired_deltas.csv"
+  ]
+}
