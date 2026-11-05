@@ -1,0 +1,21 @@
+{
+  "run_id": "GOALS-XG-ATTACK-DEFENSE-WINDOWS-ROLLING-20261105",
+  "target_seasons": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "games": 6560,
+  "design": "Nested rolling origin; 5v5 own attack xG and own xG-against windows changed separately and together; other inputs remain 60-game; tuning on S-1, score S; paired bootstrap stratified by season, 10000 draws.",
+  "headline": "No tested faster/slower 5v5 xG window improved team-goal MAE over the 60-game reference. Short windows reduced average bias but worsened or did not improve game-level MAE. 100-game windows were worse.",
+  "source_snapshot": "2026-11-04 rebuilt data; frozen source hashes differ.",
+  "no_production_change": true,
+  "outputs": [
+    "fold_metrics.csv",
+    "window_metrics_by_season.csv",
+    "window_metrics_pooled.csv",
+    "window_paired_deltas.csv"
+  ]
+}
