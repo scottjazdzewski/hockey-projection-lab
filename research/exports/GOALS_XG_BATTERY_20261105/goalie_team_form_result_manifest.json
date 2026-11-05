@@ -1,0 +1,20 @@
+{
+  "run_id": "GOALS-OPPONENT-GOALIE-FORM-TEAM-LEVEL-20261105",
+  "snapshot": "rebuilt 2026-11-04 dataset; source hashes differ from frozen EXP-0027/0028 inputs",
+  "target_seasons": [2022, 2023, 2024, 2025, 2026],
+  "games": 6560,
+  "goalie_feature": "strictly prior team goalie game save percentage, shrunk toward strictly prior league save percentage; opponent team proxy, not expected/confirmed same-game starter",
+  "primary_result": {
+    "reference_team_goal_mae": 1.3724573,
+    "w20_k300_team_goal_mae": 1.3726733,
+    "w60_k300_team_goal_mae": 1.3722598,
+    "w60_k300_team_goal_mae_delta": -0.0001975,
+    "w60_k300_team_goal_mae_95_ci": [-0.0003738, -0.0000193],
+    "w60_k300_team_count_logloss_delta": -0.0000261,
+    "w60_k300_team_count_logloss_95_ci": [-0.0001296, 0.0000789],
+    "w60_k300_final_score_logloss_delta": 0.0000173,
+    "w60_k300_final_score_logloss_95_ci": [-0.0001903, 0.0002262],
+    "w60_k300_seasons_team_goal_mae_better": 4
+  },
+  "decision": "Do not promote. The 60-game proxy's MAE gain is tiny and does not carry to count/score log loss; 20-game proxy worsens team-goal MAE. Test actual historical projected/confirmed starter only if timestamped pregame goalie identity snapshots are available."
+}
