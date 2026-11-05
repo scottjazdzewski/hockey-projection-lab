@@ -1,0 +1,2 @@
+Hockey Lab daily slate rollover watchdog trigger.
+This file is touched only when today's official NHL-source slate has not been published.
