@@ -18,6 +18,7 @@ on:
       - 'src/live_context/update_live_context.py'
       - 'src/market/update_market_benchmark.py'
       - '.github/workflows/update-live-context.yml'
+      - '.github/live-context-watchdog-trigger.txt'
 
 permissions:
   contents: write
