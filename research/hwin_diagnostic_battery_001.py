@@ -32,6 +32,83 @@ def summarize_groups(df, column, label):
     return rows
 
 
+def clustered_gap_bootstrap(df, conditions, date_col, away_team_col, reps=1000, seed=20261105):
+    """Pigeonhole bootstrap calibration-residual gaps over date and both team roles."""
+    if date_col is None or away_team_col is None:
+        return pd.DataFrame(), {
+            "status": "skipped",
+            "reason": "Missing identifiable game-date or away-team column",
+            "date_column": date_col,
+            "away_team_column": away_team_col,
+        }
+
+    work = df.copy()
+    work["_residual"] = work.home_win - work.p_home
+    work["_date_block"] = work.source_season.astype(str) + ":" + work[date_col].astype(str)
+    dates = work._date_block.drop_duplicates().to_numpy()
+    teams = pd.unique(pd.concat([
+        work.home_team_abbr.astype(str), work[away_team_col].astype(str)
+    ], ignore_index=True))
+    team_values = pd.concat([
+        work.home_team_abbr.astype(str), work[away_team_col].astype(str)
+    ], ignore_index=True)
+    team_counts = team_values.value_counts().to_dict()
+    date_counts = work._date_block.value_counts().to_dict()
+    date_index = work._date_block.to_numpy()
+    home_index = work.home_team_abbr.astype(str).to_numpy()
+    away_index = work[away_team_col].astype(str).to_numpy()
+    rng = np.random.default_rng(seed)
+    rows = []
+
+    for name, flag in conditions.items():
+        mask = np.asarray(flag, dtype=bool)
+        residual = work._residual.to_numpy(dtype=float)
+        point = float(residual[mask].mean() - residual[~mask].mean())
+        draws = []
+        for _ in range(reps):
+            sampled_dates = rng.choice(dates, size=len(dates), replace=True)
+            sampled_teams_home = rng.choice(teams, size=len(teams), replace=True)
+            sampled_teams_away = rng.choice(teams, size=len(teams), replace=True)
+            dcount = pd.Series(sampled_dates).value_counts().to_dict()
+            hcount = pd.Series(sampled_teams_home).value_counts().to_dict()
+            acount = pd.Series(sampled_teams_away).value_counts().to_dict()
+            weights = np.fromiter(
+                (dcount.get(d, 0) * hcount.get(h, 0) * acount.get(a, 0)
+                 for d, h, a in zip(date_index, home_index, away_index)),
+                dtype=float,
+                count=len(work),
+            )
+            w_flag = weights[mask].sum()
+            w_other = weights[~mask].sum()
+            if w_flag > 0 and w_other > 0:
+                gap = (
+                    np.dot(weights[mask], residual[mask]) / w_flag
+                    - np.dot(weights[~mask], residual[~mask]) / w_other
+                )
+                draws.append(float(gap))
+        if len(draws) >= reps * 0.8:
+            low, high = np.quantile(draws, [0.025, 0.975])
+            rows.append({
+                "slice": name,
+                "flagged_vs_unflagged_residual_gap": point,
+                "ci_2_5": float(low),
+                "ci_97_5": float(high),
+                "bootstrap_reps_used": int(len(draws)),
+                "n_flagged": int(mask.sum()),
+                "n_unflagged": int((~mask).sum()),
+                "interval_excludes_zero": bool(low > 0 or high < 0),
+            })
+    return pd.DataFrame(rows), {
+        "status": "complete",
+        "method": "season-date stratified pigeonhole resampling of date, home-team, away-team clusters",
+        "date_column": date_col,
+        "away_team_column": away_team_col,
+        "requested_reps": reps,
+        "seed": seed,
+        "caution": "Exploratory multiway cluster approximation; interval is not a causal estimate.",
+    }
+
+
 def main(input_path, output_dir):
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -92,6 +169,16 @@ def main(input_path, output_dir):
     metrics = pd.DataFrame(rows)
     metrics.to_csv(out / "diagnostic_slices.csv", index=False)
 
+    date_candidates = ["game_date", "date", "game_date_local", "game_date_utc",
+                       "game_datetime", "start_time", "game_start"]
+    date_col = next((c for c in date_candidates if c in d.columns), None)
+    away_candidates = ["away_team_abbr", "away_team"]
+    away_team_col = next((c for c in away_candidates if c in d.columns), None)
+    bootstrap, bootstrap_meta = clustered_gap_bootstrap(
+        d, conditions, date_col, away_team_col
+    )
+    bootstrap.to_csv(out / "schedule_cluster_bootstrap.csv", index=False)
+
     y = d.home_win.to_numpy(dtype=int)
     p = np.clip(d.p_home.to_numpy(dtype=float), 1e-6, 1 - 1e-6)
     logits = np.log(p / (1 - p)).reshape(-1, 1)
@@ -105,6 +192,8 @@ def main(input_path, output_dir):
         "exploratory_only": True,
         "minimum_team_slice_n": 100,
         "probability_band_edges": edges,
+        "available_columns": list(all_predictions.columns),
+        "schedule_cluster_bootstrap": bootstrap_meta,
         "conditions": {
             key: {
                 "flagged": score(d[flag.astype(bool)]),
@@ -128,6 +217,8 @@ def main(input_path, output_dir):
     print(json.dumps(global_summary, indent=2))
     print("\nDIAGNOSTIC SLICES")
     print(metrics.to_string(index=False))
+    print("\nSCHEDULE CLUSTER BOOTSTRAP")
+    print(bootstrap.to_string(index=False))
     print("\nLARGEST SLICES (n>=100)")
     print(focus.head(20).to_string(index=False))
 
