@@ -1,2 +1,2 @@
 Hockey Lab market watchdog trigger.
-This file is touched only by the external fallback scheduler when a required fixed market checkpoint is missing.
+Recovery requested at 2026-11-05T09:05:26-05:00 for missing FIXED:2026-11-05T09:00:00-05:00.
