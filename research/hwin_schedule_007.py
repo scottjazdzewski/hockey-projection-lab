@@ -154,6 +154,61 @@ def choose_base(train, val, x):
     return best[1], best[2]
 
 
+def paired_bootstrap(preds, candidate, condition=None, draws=2000, seed=20261105):
+    models = ["baseline_b2b", candidate]
+    z = preds[preds.model.isin(models)].copy()
+    if condition:
+        z = z[z[condition].astype(bool)]
+    wide = z.pivot_table(
+        index=["source_season", "game_id", "home_win"],
+        columns="model",
+        values="p_home",
+        aggfunc="first",
+    ).dropna(subset=models)
+    if wide.empty:
+        return [{"candidate": candidate, "condition": condition or "all_test_games",
+                 "n": 0, "metric": None, "delta_candidate_minus_baseline": None,
+                 "ci95_low": None, "ci95_high": None,
+                 "bootstrap_share_improved": None, "draws": draws}]
+
+    y = wide.index.get_level_values("home_win").to_numpy(dtype=int)
+    p_base = np.clip(wide["baseline_b2b"].to_numpy(dtype=float), 1e-6, 1 - 1e-6)
+    p_candidate = np.clip(wide[candidate].to_numpy(dtype=float), 1e-6, 1 - 1e-6)
+    season_values = wide.index.get_level_values("source_season").to_numpy()
+    losses = {
+        "brier": (y - p_candidate) ** 2 - (y - p_base) ** 2,
+        "log_loss": (
+            -(y * np.log(p_candidate) + (1 - y) * np.log(1 - p_candidate))
+            + y * np.log(p_base) + (1 - y) * np.log(1 - p_base)
+        ),
+    }
+    total = len(wide)
+    rng = np.random.default_rng(seed)
+    rows = []
+    for metric, delta in losses.items():
+        boot = np.zeros(draws, dtype=float)
+        for season in np.sort(np.unique(season_values)):
+            values = delta[season_values == season]
+            n = len(values)
+            if n == 0:
+                continue
+            ix = rng.integers(0, n, size=(draws, n))
+            boot += values[ix].mean(axis=1) * (n / total)
+        rows.append({
+            "candidate": candidate,
+            "condition": condition or "all_test_games",
+            "metric": metric,
+            "n": total,
+            "delta_candidate_minus_baseline": float(delta.mean()),
+            "ci95_low": float(np.quantile(boot, 0.025)),
+            "ci95_high": float(np.quantile(boot, 0.975)),
+            "bootstrap_share_improved": float(np.mean(boot < 0)),
+            "draws": draws,
+            "method": "paired game bootstrap, resampled within each target season",
+        })
+    return rows
+
+
 def main(pbp_path, spine_path, goalie_path, outdir):
     out = Path(outdir)
     out.mkdir(parents=True, exist_ok=True)
@@ -265,6 +320,18 @@ def main(pbp_path, spine_path, goalie_path, outdir):
     folds = pd.DataFrame(fold_rows)
     preds = pd.concat(prediction_rows, ignore_index=True)
     groups = pd.DataFrame(group_rows)
+    bootstrap_rows = []
+    for candidate in [
+        "plus_3in4", "plus_4in6", "plus_3in4_4in6",
+        "plus_5in8", "plus_road_trip_finale_proxy",
+        "plus_all_schedule_context",
+    ]:
+        bootstrap_rows.extend(paired_bootstrap(preds, candidate))
+    bootstrap_rows.extend(paired_bootstrap(
+        preds, "plus_road_trip_finale_proxy",
+        condition="away_road_trip_finale_proxy",
+    ))
+    bootstrap = pd.DataFrame(bootstrap_rows)
     summary = {}
     for model, z in folds.groupby("model"):
         summary[model] = {
@@ -292,6 +359,7 @@ def main(pbp_path, spine_path, goalie_path, outdir):
 
     folds.to_csv(out / "rolling_schedule_007.csv", index=False)
     groups.to_csv(out / "schedule_007_condition_metrics.csv", index=False)
+    bootstrap.to_csv(out / "paired_schedule_007_bootstrap.csv", index=False)
     preds.to_parquet(out / "schedule_007_test_predictions.parquet", index=False)
     with open(out / "summary.json", "w") as f:
         json.dump(summary, f, indent=2)
@@ -300,6 +368,8 @@ def main(pbp_path, spine_path, goalie_path, outdir):
     print(json.dumps(summary, indent=2))
     print("\nCONDITION METRICS")
     print(groups.to_string(index=False))
+    print("\nPAIRED BOOTSTRAP")
+    print(bootstrap.to_string(index=False))
 
 
 if __name__ == "__main__":
