@@ -15,7 +15,7 @@ This is **a promising research candidate, not “done” or ready to call reliab
 | 0 | Input, labels, timestamp and leakage audit | Are every feature and label valid as of puck drop? | Partly passed for the rebuilt snapshot; frozen EXP-0027 source-hash mismatch remains documented. Recheck every new feature. |
 | 1 | Paired rolling-origin feature ablation | Does a feature group improve next-season predictions, not just validation fit? | **Started:** existing OOF feature variants rescored over 2022–2026, with paired season-stratified bootstrap intervals. |
 | 2 | Process-component ablation | Which of 5v5 xG for/against, shots, power-play xG/goals, penalties, recent goals, and schedule inputs adds unique value? | **Completed first pass:** removed one coherent family at a time and retrained across all five rolling folds. Component-specific xG evidence is mixed; shots, recent goals, opponent adjustments, and schedule inputs show stronger support. |
-| 3 | xG calibration and conversion persistence | Do recent xG levels predict goals, and does goals-minus-xG finishing persist enough to help future rates? | **Component isolation complete:** team 5v5 attack xG and team 5v5 xG-against help expected-goal MAE modestly; opponent-side 5v5 xG-against, power-play xG, and opponent-adjusted xG add little unique value. Next test separate time windows for attack and defense xG. |
+| 3 | xG calibration and conversion persistence | Do recent xG levels predict goals, and does goals-minus-xG finishing persist enough to help future rates? | **First passes complete:** 5v5 team attack and team xG-against help MAE modestly at 60 games. 20-game versions reduce bias but do not improve MAE; 100-game versions are worse. Conversion residuals add little. Continue to goalie/team-defense residuals using strictly prior games. |
 | 4 | Form-window and decay sensitivity | Is 60 games too slow or noisy? | **First pass complete:** 20/40/60/100-game windows retrained in identical rolling folds; 60 games leads. Exponential decay and xG-only windows remain open. |
 | 5 | Matchup nonlinearity and interactions | Do attack-versus-defense, home/away, pace, special teams, or schedule-state interactions help? | Open after component ablation; test predeclared interactions with shrinkage to limit overfit. |
 | 6 | Residual map | Where and when is error concentrated? | Partial diagnostics exist. Extend by expected-goal decile, team strength, home/away, rest, 3-in-4, 4-in-6, and strictly pregame getaway label; report sample sizes and season stability. |
@@ -103,6 +103,23 @@ Removed one xG input family at a time while keeping the other xG signals, shots,
 | All rolling xG | +0.00125 (+0.00016, +0.00237) | +0.00268 (+0.00097, +0.00435) | −0.00234 (−0.00359, −0.00106) | Rolling xG helps goal-rate MAE but hurts exact score log loss. |
 
 Values are ablation minus the full 60-game reference, with paired 95% intervals from 10,000 game-resamples stratified by target season. These are small effects and many related candidates were examined, so treat them as leads for another holdout, not final proof. The useful distinction is that **5v5 team process inputs improve the expected-goal mean**, while probability-of-exact-score calibration remains a separate issue. The next test changes the 5v5 attack and defense xG windows independently.
+
+
+## Sixth test result: separate 5v5 attack and defense xG windows
+
+Tested 20- and 100-game windows for the team's own 5v5 attack xG and own 5v5 xG-against independently, and together. All other features stayed at the 60-game reference; each candidate was refit in all five rolling folds.
+
+| Candidate | Team-goal MAE | Change vs 60-game reference | Mean home/away goal bias |
+|---|---:|---:|---:|
+| Current 60-game attack + xGA | **1.37246** | — | −0.036 / −0.089 |
+| Attack xG at 20 games | 1.37257 | +0.00011 (interval −0.00010 to +0.00033) | −0.033 / −0.085 |
+| xG-against at 20 games | 1.37310 | +0.00064 (+0.00015 to +0.00113) | −0.018 / −0.075 |
+| Attack + xG-against at 20 games | 1.37303 | +0.00058 (−0.00017 to +0.00133) | −0.023 / −0.069 |
+| Attack + xG-against at 100 games | 1.37313 | +0.00067 (+0.00020 to +0.00114) | −0.023 / −0.079 |
+
+The short windows pull the mean forecasts closer to actual scoring, but they do **not** improve expected-goal MAE. The 20-game defense xGA and 100-game combined versions significantly worsen team-goal MAE; the 20-game combined version also worsens home-goal MAE by 0.00103, though its pooled exact-score log loss improves slightly. Current 60-game windows remain the best choice for expected-goal accuracy among these tests. This is another example where lower average bias does not mean better forecasts game by game.
+
+The next high-value feature test is a team-level, strictly lagged goalie performance signal, built only from prior goalie starts. It may separate save performance from the broader xG-against/team-defense residual already tested. It must not use the same-game actual starter as a predictor; a projected/confirmed goalie layer needs its own pregame-availability validation.
 
 ## Limits and reproducibility
 
