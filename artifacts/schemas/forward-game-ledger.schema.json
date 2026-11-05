@@ -16,6 +16,23 @@
       "type":"object",
       "required":["model","away","home","goalie_context","market_benchmark"],
       "properties":{
+        "probability_components":{
+          "type":"object",
+          "required":["team_only","goalie_adjustment_status","goalie_adjustment"],
+          "properties":{
+            "team_only":{
+              "type":"object",
+              "required":["away_win_probability","home_win_probability"],
+              "properties":{
+                "away_win_probability":{"type":["number","null"],"minimum":0,"maximum":1},
+                "home_win_probability":{"type":["number","null"],"minimum":0,"maximum":1}
+              }
+            },
+            "goalie_adjustment_status":{"type":["string","null"]},
+            "goalie_adjustment":{"type":["object","null"],"additionalProperties":true}
+          }
+        },
+        "model_flags":{"type":"array","items":{"type":"string"}},
         "market_benchmark":{
           "type":"object",
           "required":["status","source","captured_at","capture_requested_at","minimum_books_required","book_count","total_book_count","books"],
