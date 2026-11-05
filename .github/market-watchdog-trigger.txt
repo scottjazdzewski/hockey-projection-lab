@@ -1,2 +1,3 @@
 Hockey Lab market watchdog trigger.
 Recovery requested at 2026-11-05T09:05:26-05:00 for missing FIXED:2026-11-05T09:00:00-05:00.
+Recovery requested for FIXED:2026-11-05T12:00:00-05:00 at 2026-11-05T12:02:52-05:00
