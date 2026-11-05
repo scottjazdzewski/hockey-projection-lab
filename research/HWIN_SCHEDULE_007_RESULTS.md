@@ -26,8 +26,14 @@ Research baseline: Brier 0.234560; log loss 0.661189; accuracy 60.00%.
 
 The road-trip-finale proxy produced the largest isolated gain, but it is still very small. In the 1,856 held-out finale-proxy games, conditional Brier was 0.235358 versus 0.235438 for the baseline. The 3-in-4 and 4-in-6 lifts are also tiny; combining the indicators did not help.
 
+## Paired uncertainty check
+
+A paired game bootstrap resampled predictions within each target season (2,000 draws). The 95% intervals for every overall candidate included zero. For the road-trip-finale proxy, the overall Brier change was -0.0000241 (95% interval -0.000076 to +0.000030) and log-loss change was -0.0000446 (95% interval -0.000154 to +0.000067). Inside the 1,856 proxy games, Brier change was -0.000080 (95% interval -0.000252 to +0.000096) and log-loss change was -0.000142 (95% interval -0.000499 to +0.000213).
+
+The bootstrap is paired at the game level and stratified by target season. It does not cluster games by team or date, so it is a first uncertainty check rather than a final dependence-aware test.
+
 ## Decision
 
-No production change. Keep the road-trip-finale proxy as a research candidate only. Do not promote 3-in-4, 4-in-6, 5-in-8, or the combined schedule bundle from this result. A follow-up should test stability with paired per-game uncertainty and a prospective shadow ledger before considering promotion.
+No production change. The slight road-trip-finale advantage is not distinguishable from zero in this paired bootstrap. Keep the proxy as research-only; do not promote 3-in-4, 4-in-6, 5-in-8, the combined schedule bundle, or the road-trip-finale proxy. The next evidence step is dependence-aware uncertainty analysis plus prospective shadow tracking if the proxy remains worth investigating.
 
-The comparison baseline and metrics are for this research experiment and should not be read as a direct rerating of the live production probabilities.
+The comparison baseline and metrics are for this research experiment and should not be read as a direct rerating of the live production probabilities. The workflow artifact `hwin-schedule-007` contains the fold ledger, subgroup scores, per-game predictions, and bootstrap output; run 41938801031 retains it through 2027-02-03.
