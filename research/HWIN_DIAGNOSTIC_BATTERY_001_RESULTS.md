@@ -87,3 +87,25 @@ Positive changes mean worse scores. None of these candidates improved the raw mo
 The most actionable lead is a changing favorite-band error: for favorites in the **60–65%** range, the actual-minus-predicted gap was **+4.34 pp** in 2022 (underprediction), **+1.02** in 2023, then **−3.58** in 2024, **−6.26** in 2025, and **−7.12** in 2026 (overprediction). Sample sizes were 254–293 games per later season. This sign change points to season/context drift; it is not a stable correction factor.
 
 **Next calibration work:** trace the 2024–2026 drift to inputs and data freshness (team-strength updates, home-ice treatment, goalie estimate versus confirmation, and schedule context), then retest only a predeclared candidate on forward seasons. Keep the one-point table as a monitor, but do not fit a separate adjustment to each integer percentage. The forward-fold scoring table and repeatable script are [HWIN_ROLLING_CALIBRATION_001_FOLDS.csv](HWIN_ROLLING_CALIBRATION_001_FOLDS.csv) and [hwin_rolling_calibration_001.py](hwin_rolling_calibration_001.py).
+
+## Follow-up: paired schedule-variant forward audit
+
+The frozen Schedule Context 007 predictions contain seven matched forecast series for the same **6,993 games**: the B2B baseline and six schedule-context candidates. I rescored them as paired forecasts and used a **1,000-replicate date-block bootstrap stratified by season** for pooled score differences. The repeatable analysis is `research/hwin_schedule_variant_forward_audit_001.py`; its season and pooled results are in [HWIN_SCHEDULE_VARIANT_FORWARD_AUDIT_001.csv](HWIN_SCHEDULE_VARIANT_FORWARD_AUDIT_001.csv).
+
+| Schedule variant vs B2B baseline | Brier change | 95% date-block interval | Log-loss change | 95% date-block interval |
+|---|---:|---:|---:|---:|
+| Add 3-in-4 | −0.000004 | −0.000129 to +0.000106 | −0.000009 | −0.000269 to +0.000233 |
+| Add 4-in-6 | −0.000012 | −0.000069 to +0.000044 | −0.000022 | −0.000142 to +0.000096 |
+| Add 5-in-8 | +0.000013 | −0.000132 to +0.000169 | +0.000020 | −0.000285 to +0.000354 |
+| All schedule context | +0.000061 | −0.000159 to +0.000278 | +0.000120 | −0.000343 to +0.000586 |
+| Road-trip finale proxy | −0.000024 | −0.000079 to +0.000027 | −0.000045 | −0.000159 to +0.000062 |
+
+Every pooled interval crosses zero. Effects are very small and switch sign across held-out seasons. The one notable slice is 5-in-8 in 2026, where Brier improved by 0.000194 and log loss by 0.000453; it had worse scores in 2022 and 2025. Treat that single-season gain as a hypothesis for a predeclared repeat, not evidence for a production change. **No schedule feature is promoted.**
+
+## Root-cause trace: evidence boundary
+
+The frozen 007 artifact has game/date, team abbreviations, result, final home probability, and schedule flags. It does **not** retain the home/away team-strength feature vector, expected goalie identity or status, goalie ratings/exposure, model component scores, or timestamped source provenance for each prediction. The repository’s current goalie layer is evaluated as a separate layer against the active team-only baseline; those results cannot be attributed to the 007 probabilities without a same-game, same-fold counterfactual using archived goalie snapshots.
+
+So the current evidence establishes a season/context stability problem and rules out a dependable simple schedule correction. It does not identify whether 2024–26 drift came from team-strength inputs, home-ice behavior, or goalie identity/confirmation. The next diagnostic needs a paired historical forecast ledger with, per game: raw team-only probability; expected goalie IDs/status and prior-only ratings; goalie-adjusted probability; team-strength component inputs; schedule features; data cutoff/source timestamps; and realized result. With that ledger, score team-only versus goalie-adjusted probabilities by season and favorite band, then split expected versus confirmed goalie states. Preserve the pregame snapshot and never overwrite it after puck drop.
+
+The production model and website remain unchanged; market odds remain benchmark-only.
