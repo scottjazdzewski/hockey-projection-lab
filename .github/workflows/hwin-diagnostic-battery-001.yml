@@ -1,5 +1,6 @@
 name: HWIN Probability Diagnostic Battery 001
 on:
+  workflow_dispatch:
   push:
     branches: [research/win-diagnostics-001]
     paths:
