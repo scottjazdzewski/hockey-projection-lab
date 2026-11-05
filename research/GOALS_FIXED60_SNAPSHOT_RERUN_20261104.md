@@ -58,23 +58,22 @@ OT probabilities have little separation: decile mean forecasts ranged only from 
 
 The model already includes rest days, back-to-back status, and games in the prior three and five days. Its saved context export separates neither team on B2B, home-only, away-only, and both. The pooled B2B group has 1,722 games versus 4,838 neither-B2B games; the B2B group has worse regulation score log loss (3.849 vs. 3.826) but lower regulation-outcome Brier (0.615 vs. 0.626). This does not yet test 3-in-4, 4-in-6, or getaway games.
 
-## Schedule-state diagnostic
+## Rolling prior-season rate-calibration test (2026-11-05)
 
-The fixed-60 OOF predictions were joined to the same strictly prior-date schedule features used by the pipeline. The model already includes rest days, B2B, and game counts in the prior three and five days. I also measured explicit 3-in-4, 4-in-6, and 5-in-8 groups. These are descriptive subgroup results, not evidence that adding a feature improves forecasts.
+Tested four candidate rate calibrators using only the preceding season's OOF predictions, then scored the following season (2023–2026; 1,312 games per target season). The control is the unmodified fixed-60 forecast. This is development-only rolling validation; no target-season scores were used to fit or select parameters.
 
-| Schedule group | Team-games | Mean regulation-goal error (forecast − actual) | Goal MAE |
-|---|---:|---:|---:|
-| No 3-in-4 | 10,660 | −0.085 | 1.374 |
-| 3-in-4 | 2,460 | −0.060 | 1.363 |
-| No 4-in-6 | 10,600 | −0.078 | 1.379 |
-| 4-in-6 | 2,520 | −0.093 | 1.344 |
+| Method | Final-total bias | Final-total MAE | Final-total log loss | Final-score log loss |
+|---|---:|---:|---:|---:|
+| No correction | −0.148 | **1.8498** | 2.1762 | 3.7059 |
+| Shared intercept | −0.036 | 1.8512 | 2.1751 | 3.7042 |
+| Side intercepts | −0.036 | 1.8512 | 2.1751 | 3.7048 |
+| Shared affine log-rate | **−0.032** | 1.8510 | **2.1749** | **3.7038** |
+| Side affine log-rate | −0.034 | 1.8528 | 2.1761 | 3.7054 |
 
-At the game level, predicted total-goal bias was −0.439 in home-only B2B games (364 games), −0.214 in away-only B2B games (1,049), and −0.317 when both teams were on B2B (309). For 4-in-6, bias was −0.350 when both teams qualified (385 games), −0.257 away-only (969), and −0.148 home-only (781), versus −0.137 when neither did (4,425). The group sizes vary substantially, so these differences need season-aware validation before they guide feature changes.
-
-No stable OT pattern appears by these schedule groups. The current schedule export does not provide a validated, as-of-pregame “getaway game” label; that test remains open. Detailed team-level and game-level tables are in the two schedule diagnostics CSVs.
+The shared affine calibrator reduced pooled total bias by about 0.116 goals/game and made small improvements to total and score log loss, but worsened total MAE by 0.0012. No candidate improved all metrics, and the apparent pooled gain is not season-stable: the 2023 target changed from −0.047 goals/game bias to about +0.17 to +0.19, while later seasons improved bias more consistently. This is not enough evidence to change or promote the fixed-60 rates. Exact outputs and reproducible code are saved in `research/exports/GOALS_RATE_CALIBRATION_ROLLING_20261105/` and `research/goals_rate_calibration_rolling_20261105.py`.
 
 ## Decision and next work
 
-The fixed-60 benchmark remains **RESEARCH / CANDIDATE**, not promoted. The rerun confirms its saved headline metrics on the rebuilt snapshot while leaving the exact frozen source-input mismatch documented. The next goal-model tests should fit shared and side-specific log-rate intercepts/slopes using only the preceding validation season, then score the next season; separately audit exact regulation-tie score cells and test 3-in-4, 4-in-6, and getaway states. Preserve a prospective 2026–27 shadow ledger before any promotion decision.
+The fixed-60 benchmark remains **RESEARCH / CANDIDATE**, not promoted. The rate-calibration test is diagnostic only; retain the original forecast as the reference. The next test is whether schedule-state features add real out-of-sample value: define getaway games strictly from the pregame schedule, then compare the current model against nested rolling-origin candidates for 3-in-4, 4-in-6, B2B interactions, and getaway status. Keep season-level results and calibration scores visible; no production changes without stable gains across seasons. Preserve a prospective 2026–27 shadow ledger before any promotion decision.
 
 No production files, HWIN model logic, public exports, or Game Cards were changed.
