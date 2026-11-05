@@ -142,3 +142,12 @@ A linear actual-on-predicted calibration slope also varies sharply by target sea
 
 **Next diagnostic:** test whether team-specific residuals persist from one season into the next, then evaluate a shrunk team residual signal in rolling-origin folds. If that has no out-of-season signal, move to a pregame goalie-specific test only when timestamped expected/confirmed starter histories can be recovered. Keep 60-game xG windows as the current baseline; do not apply manual offsets.
 
+
+
+## Ninth test result: do team goal residuals persist?
+
+I tested a simple learnable team-strength hypothesis: after each season, compute each team's average actual-minus-expected regulation goals and carry a shrunk version into the following season. This uses only the immediately prior season, and evaluation covers the four target seasons with a prior fold available (2023–2026; 5,248 games). It is a diagnostic for persistent omitted team signal, not a proposed manual production offset.
+
+Team residual persistence is weak: adjacent-season Pearson correlations were −0.21 (2022→2023), −0.00 (2023→2024), +0.06 (2024→2025), and +0.10 (2025→2026). The 10% carry-forward changed team-goal MAE by +0.00026 (paired 95% interval −0.00012 to +0.00064); larger weights worsened it more. At 35% carry-forward, MAE worsened by +0.00184 (+0.00050 to +0.00320). Team-goal Poisson log loss also did not improve meaningfully. **Reject this feature family for now:** last season's unexplained team scoring residual mostly does not transfer to the next season, so adding a team-specific residual risks chasing noise.
+
+This strengthens the working diagnosis: the gap is not being closed by simple offsets, short xG windows, coarse goalie form, or persistent team residual corrections. Retain the current 60-game xG baseline. The promising route remains improving the underlying pregame inputs and their within-fold weights, especially timestamped expected-goalie identity/quality and potentially richer shot-quality/process detail. Any goalie-specific claim requires historical pregame goalie snapshots, not the actual starter reconstructed after the game.
