@@ -1,0 +1,4 @@
+measure,model,baseline,interpretation
+full_game_home_win_brier,0.23515064786844364,0.24861652290303388,OOF brier; constant held-out prevalence baseline is descriptive
+full_game_home_win_brier,0.23515064786844364,0.25,OOF brier versus 50/50 baseline
+home_win_rate,0.5417261745699277,0.5371951219512195,mean predicted probability versus observed frequency
