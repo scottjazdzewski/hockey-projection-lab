@@ -1,0 +1,24 @@
+{
+  "run_id": "GOALS-RATE-CALIBRATION-ROLLING-20261105",
+  "scope": "fixed-60 goals-only research; OOF calibration fit on S-1 and scored on S",
+  "target_seasons": [
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "excluded_target_2022_reason": "No 2021 OOF forecast row is present in the recovered EXP-0027 export.",
+  "calibration_methods": [
+    "no_correction",
+    "shared_intercept",
+    "side_intercepts",
+    "shared_affine_log_rate",
+    "side_affine_log_rate"
+  ],
+  "calibration_candidates": "shared/side-specific log-rate intercepts and shared/side-specific affine maps on log rate",
+  "selection_policy": "No target-season metrics used to fit or select parameters; development-only, no promotion",
+  "predictor_policy": "No markets, HWIN, same-game goalie identity, or lineup inputs",
+  "source_snapshot": "2026-11-04 rebuilt artifacts; frozen EXP-0027 input hashes differ",
+  "oof_input_sha256": "7223c13ca4b1ceda4f86dafc0fe0f1b987b8eae093be0d3c95a19172b1bd5891",
+  "results": "metrics_by_season.csv and metrics_pooled.csv"
+}
