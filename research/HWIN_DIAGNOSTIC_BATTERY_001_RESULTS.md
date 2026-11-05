@@ -68,3 +68,22 @@ So the exact rounded **60%** group won **59.3%** of the time in this sample, onl
 The per-point results jump around, as expected with narrow bins. The largest absolute gap among bins with at least 100 games was the 63% bucket (mirrored by the 37% bucket): **63.00% forecast vs 55.42% observed**, but its block-bootstrap interval includes zero. **None of the pointwise intervals excludes zero.** This means the data does not establish that any individual percentage point is miscalibrated; it does not prove exact calibration either. The intervals are intentionally block-aware and broad, and are pointwise rather than simultaneous across all bins.
 
 The 50% row is marked structural: a game contributes both teams at 50%, guaranteeing a 50/50 observed rate. Do not count that row as evidence that the model is calibrated at 50%. Empty extreme bins are shown in the CSV, and bins with fewer than 100 games are flagged.
+
+
+## Calibration method test: can a learned layer improve this?
+
+I tested three probability maps with expanding chronological folds. For each test season (2023–2026), each map used only earlier seasons to fit. All mapped both teams symmetrically so each matchup still sums to 100%.
+
+| Method | Out-of-fold Brier | Change vs raw | Out-of-fold log loss | Change vs raw |
+|---|---:|---:|---:|---:|
+| Raw probabilities | 0.236200 | — | 0.664460 | — |
+| Symmetric logit-slope scaling | 0.236400 | +0.000199 | 0.664872 | +0.000412 |
+| Symmetric isotonic curve | 0.237408 | +0.001208 | 0.666959 | +0.002499 |
+| Shrunken 5-point favorite bands, all prior seasons | 0.236757 | +0.000556 | 0.665612 | +0.001151 |
+| Shrunken 5-point favorite bands, last two seasons | 0.236605 | +0.000405 | 0.665281 | +0.000821 |
+
+Positive changes mean worse scores. None of these candidates improved the raw model on either proper score across the four forward folds. The differences are small and this was exploratory, so it does not prove all recalibration will fail. It does mean **we should not add any of these calibration layers now**.
+
+The most actionable lead is a changing favorite-band error: for favorites in the **60–65%** range, the actual-minus-predicted gap was **+4.34 pp** in 2022 (underprediction), **+1.02** in 2023, then **−3.58** in 2024, **−6.26** in 2025, and **−7.12** in 2026 (overprediction). Sample sizes were 254–293 games per later season. This sign change points to season/context drift; it is not a stable correction factor.
+
+**Next calibration work:** trace the 2024–2026 drift to inputs and data freshness (team-strength updates, home-ice treatment, goalie estimate versus confirmation, and schedule context), then retest only a predeclared candidate on forward seasons. Keep the one-point table as a monitor, but do not fit a separate adjustment to each integer percentage. The forward-fold scoring table and repeatable script are [HWIN_ROLLING_CALIBRATION_001_FOLDS.csv](HWIN_ROLLING_CALIBRATION_001_FOLDS.csv) and [hwin_rolling_calibration_001.py](hwin_rolling_calibration_001.py).
