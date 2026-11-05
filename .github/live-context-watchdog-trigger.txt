@@ -1,0 +1,2 @@
+Hockey Lab live-context/projection recovery trigger.
+Touched only when today's slate exists but live context or projections have not completed the daily rollover.
