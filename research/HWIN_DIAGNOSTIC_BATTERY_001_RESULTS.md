@@ -19,12 +19,14 @@
 
 ## Validation note
 
-A first workflow run succeeded and produced the results above. While reviewing the run, I found a bug in the favorite-confidence calculation and fixed it on the research branch. That run predates the correction, so its favorite-confidence results are excluded here. I also added team-by-season slices and made the workflow manually rerunnable. Those corrected outputs still need to finish before those cuts are treated as findings.
+A first workflow run succeeded and produced the results above. While reviewing the run, I found a bug in the favorite-confidence calculation and fixed it on the research branch. That run predates the correction, so its favorite-confidence results are excluded here. I also added team-by-season slices.
+
+I have now added a season-stratified date/team-cluster bootstrap for the schedule-state residual gaps. The interval calculation detects the available date and away-team columns and records a clear skip reason if those fields are missing. The updated code is committed to the research branch, but its new workflow output has not yet been independently verified. Treat the first-pass values above as descriptive; do not use them as evidence for promotion until the corrected run and intervals are available.
 
 ## Next tests
 
-1. Re-run the battery with the corrected favorite calibration and team-by-season cuts.
-2. Add paired team/date-block uncertainty intervals to season, probability-band, rest, road-trip-finale, and team residuals. Require persistence across seasons rather than selecting the largest pooled gap.
+1. Verify the rerun of corrected favorite calibration, team-by-season cuts, and clustered uncertainty intervals.
+2. Require schedule and probability-band residuals to persist across seasons rather than selecting the largest pooled gap.
 3. For any persistent schedule signal, test incremental value against the frozen baseline with a small, predeclared feature family (rest-day difference, travel/rest interaction, trip game number, and 3-in-4 / 4-in-6 state). Use rolling/forward validation and compare Brier and log loss with paired uncertainty intervals.
 4. Only propose a production change if it improves held-out proper scores, is calibrated, survives season-block checks, and does not depend on market data. Otherwise retain the baseline.
 
