@@ -13,6 +13,7 @@ import os
 import re
 import statistics
 import sys
+import unicodedata
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlencode
@@ -62,7 +63,11 @@ def stamp(t):
     return t.isoformat().replace("+00:00","Z")
 
 def team(name):
-    n = re.sub(r"[^a-z0-9 ]","",str(name).lower())
+    # Transliterate accented Latin letters before stripping punctuation so
+    # provider labels such as "Montréal Canadiens" still match our crosswalk.
+    raw = unicodedata.normalize("NFKD", str(name).lower())
+    raw = "".join(ch for ch in raw if not unicodedata.combining(ch))
+    n = re.sub(r"[^a-z0-9 ]","",raw)
     n = " ".join(n.split())
     return NAMES.get(n)
 
@@ -157,10 +162,13 @@ def compose(schedule,events,previous,now):
         raise ValueError("Schedule date is not today; refusing mismatched market snapshot")
     old={str(x.get("game_id")):x for x in previous.get("games",[])} if previous.get("date")==day else {}
     by_match={}
+    unmapped_events=[]
     for e in events:
         key=event_key(e)
         if all(key):
             by_match.setdefault(key,[]).append(e)
+        else:
+            unmapped_events.append((e.get("away_team"),e.get("home_team")))
     rows=[]
     for game in schedule.get("games",[]):
         start=date_time(game.get("start_time_et"))
@@ -177,12 +185,19 @@ def compose(schedule,events,previous,now):
                     existing["status"]="CLOSING" if minutes<=25 and existing.get("book_count",0)>=2 else "LAST_PREGAME"
                 rows.append(existing)
             continue
-        candidates=by_match.get((game.get("away_abbr"),game.get("home_abbr")),[])
+        expected=(game.get("away_abbr"),game.get("home_abbr"))
+        candidates=by_match.get(expected,[])
         built=[x for e in candidates if (x:=build_row(game,e,now))]
         if built:
             rows.append(max(built,key=lambda x:(x["book_count"],x["last_quote_at"])))
         elif existing:
             rows.append(existing)
+        elif candidates:
+            print(f"NO MARKET ROW {gid}: provider event matched; no fresh eligible two-sided h2h quote")
+        else:
+            print(f"NO MARKET ROW {gid}: no provider event matched {expected[0]} @ {expected[1]}")
+    if unmapped_events:
+        print("UNMAPPED PROVIDER TEAM LABELS:", json.dumps(unmapped_events, ensure_ascii=False))
     return {
         "schema_version":"1.0","date":day,"generated_at":stamp(now),
         "source":"The Odds API","source_url":"https://the-odds-api.com/",
