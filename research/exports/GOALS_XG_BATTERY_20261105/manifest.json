@@ -1,0 +1,30 @@
+{
+  "run_id": "GOALS-XG-IMPROVEMENT-BATTERY-20261105",
+  "scope": "fixed-60 goals/xG research only; no production change",
+  "source_snapshot": "2026-11-04 recovered snapshot; frozen EXP-0027/0028 source input hashes differ",
+  "target_seasons": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "games": 6560,
+  "evaluation": "existing rolling-origin OOF feature-set variants; paired game bootstrap stratified by target season, 10000 draws",
+  "metrics": [
+    "team goal MAE",
+    "team count log loss",
+    "final total MAE",
+    "regulation score log loss",
+    "final score log loss",
+    "full home-win Brier"
+  ],
+  "primary_result": "full process bundle beats recent goal form on held-out team count log loss and home-win Brier; narrow recent-xG addition is mixed; 5v5 xG pace-only worse",
+  "next_test": "nested rolling-origin ablation of 5v5 xG, shots, power-play process, goals, schedule inputs, then form-window/decay sensitivity",
+  "files": [
+    "feature_set_metrics_by_season.csv",
+    "feature_set_metrics_pooled.csv",
+    "paired_feature_deltas.csv",
+    "win_probability_reference.csv"
+  ]
+}
