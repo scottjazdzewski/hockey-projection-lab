@@ -58,7 +58,15 @@ def main(input_path, output_dir):
     rows.extend(summarize_groups(d, "source_season", "target_season"))
     rows.extend(summarize_groups(d, "home_probability_band", "home_probability_band"))
     rows.extend(summarize_groups(d, "home_favorite", "favorite_side_home"))
-    rows.extend(summarize_groups(d, "favorite_confidence_band", "favorite_confidence"))
+    for band, group in d.groupby("favorite_confidence_band", observed=False):
+        favorite = group.copy()
+        favorite["home_win"] = favorite.favorite_won.astype(int)
+        favorite["p_home"] = favorite.favorite_probability.astype(float)
+        rows.append({
+            "slice": "favorite_confidence",
+            "group": str(band),
+            **score(favorite),
+        })
 
     conditions = {
         "either_team_3in4": d.either_team_3in4,
@@ -74,6 +82,13 @@ def main(input_path, output_dir):
     for team, group in d.groupby("home_team_abbr"):
         if len(group) >= 100:
             rows.append({"slice": "home_team", "group": team, **score(group)})
+    for (season, team), group in d.groupby(["source_season", "home_team_abbr"]):
+        if len(group) >= 50:
+            rows.append({
+                "slice": "home_team_by_season",
+                "group": f"{season}:{team}",
+                **score(group),
+            })
     metrics = pd.DataFrame(rows)
     metrics.to_csv(out / "diagnostic_slices.csv", index=False)
 
