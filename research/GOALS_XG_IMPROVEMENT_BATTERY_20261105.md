@@ -15,7 +15,7 @@ This is **a promising research candidate, not “done” or ready to call reliab
 | 0 | Input, labels, timestamp and leakage audit | Are every feature and label valid as of puck drop? | Partly passed for the rebuilt snapshot; frozen EXP-0027 source-hash mismatch remains documented. Recheck every new feature. |
 | 1 | Paired rolling-origin feature ablation | Does a feature group improve next-season predictions, not just validation fit? | **Started:** existing OOF feature variants rescored over 2022–2026, with paired season-stratified bootstrap intervals. |
 | 2 | Process-component ablation | Which of 5v5 xG for/against, shots, power-play xG/goals, penalties, recent goals, and schedule inputs adds unique value? | **Completed first pass:** removed one coherent family at a time and retrained across all five rolling folds. Component-specific xG evidence is mixed; shots, recent goals, opponent adjustments, and schedule inputs show stronger support. |
-| 3 | xG calibration and conversion persistence | Do recent xG levels predict goals, and does goals-minus-xG finishing persist enough to help future rates? | **First pass complete:** xG-only 20/60/100 windows and 20/60/100 conversion-residual features retrained in rolling folds. A 20-game xG variant narrows mean underprediction and improves score log loss, but does not improve team-goal MAE; conversion residuals add little. Next isolate attack and opponent defense residuals. |
+| 3 | xG calibration and conversion persistence | Do recent xG levels predict goals, and does goals-minus-xG finishing persist enough to help future rates? | **Component isolation complete:** team 5v5 attack xG and team 5v5 xG-against help expected-goal MAE modestly; opponent-side 5v5 xG-against, power-play xG, and opponent-adjusted xG add little unique value. Next test separate time windows for attack and defense xG. |
 | 4 | Form-window and decay sensitivity | Is 60 games too slow or noisy? | **First pass complete:** 20/40/60/100-game windows retrained in identical rolling folds; 60 games leads. Exponential decay and xG-only windows remain open. |
 | 5 | Matchup nonlinearity and interactions | Do attack-versus-defense, home/away, pace, special teams, or schedule-state interactions help? | Open after component ablation; test predeclared interactions with shrinkage to limit overfit. |
 | 6 | Residual map | Where and when is error concentrated? | Partial diagnostics exist. Extend by expected-goal decile, team strength, home/away, rest, 3-in-4, 4-in-6, and strictly pregame getaway label; report sample sizes and season stability. |
@@ -87,6 +87,22 @@ The 20-game rolling xG variant is the best lead so far for the **average goal-ra
 The 100-game xG variant was neutral to slightly worse. Adding rolling goals-minus-xG conversion residuals did not reliably improve the 20-game xG candidate. Added to the 60-game reference, conversion features barely moved team-goal MAE or score log loss; they reduced home MAE slightly but did not yield a dependable overall gain. Do not add a global scoring offset or promote these features yet.
 
 The practical next step is to split the promising 20-game xG signal into its components: 5v5 attack xG, 5v5 xG allowed, power-play xG, and the opponent's defensive/goaltending residual. Keep goal MAE and count log loss as primary measures of expected-goal accuracy, while retaining score log loss as a secondary check. Inspect each season before selecting any candidate, because the pooled improvements are small.
+
+
+## Fifth test result: xG input isolation
+
+Removed one xG input family at a time while keeping the other xG signals, shots, recent goals, schedule, and opponent features fixed. Each version was retrained in all five rolling folds; negative ablation-minus-full values mean removing the feature improved the metric.
+
+| Removed input | Team-goal MAE change | Home-goal MAE change | Final-score log-loss change | Interpretation |
+|---|---:|---:|---:|---|
+| Team 5v5 attack xG | +0.00027 (+0.00004, +0.00049) | +0.00058 (+0.00023, +0.00091) | −0.00032 (−0.00058, −0.00006) | Helps expected-goal error modestly; score-law fit slightly prefers removal. |
+| Team 5v5 xG against | +0.00058 (+0.00009, +0.00109) | +0.00136 (+0.00055, +0.00215) | −0.00096 (−0.00152, −0.00039) | Helps expected-goal MAE, especially home; score-law fit again trades the other way. |
+| Opponent 5v5 xG allowed | −0.00006 (−0.00015, +0.00002) | −0.00005 (−0.00017, +0.00008) | −0.00002 (−0.00012, +0.00009) | No detectable unique benefit at current window. |
+| Power-play xG for/against | −0.00015 (−0.00063, +0.00032) | +0.00001 (−0.00068, +0.00069) | −0.00036 (−0.00088, +0.00016) | No detectable unique benefit in this feature form. |
+| Opponent-adjusted xG | −0.00019 (−0.00074, +0.00033) | −0.00009 (−0.00086, +0.00067) | −0.00027 (−0.00088, +0.00035) | No detectable unique benefit after the other rolling inputs. |
+| All rolling xG | +0.00125 (+0.00016, +0.00237) | +0.00268 (+0.00097, +0.00435) | −0.00234 (−0.00359, −0.00106) | Rolling xG helps goal-rate MAE but hurts exact score log loss. |
+
+Values are ablation minus the full 60-game reference, with paired 95% intervals from 10,000 game-resamples stratified by target season. These are small effects and many related candidates were examined, so treat them as leads for another holdout, not final proof. The useful distinction is that **5v5 team process inputs improve the expected-goal mean**, while probability-of-exact-score calibration remains a separate issue. The next test changes the 5v5 attack and defense xG windows independently.
 
 ## Limits and reproducibility
 
