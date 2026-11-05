@@ -83,6 +83,19 @@ jobs:
         if: steps.gate.outputs.run == 'true'
         run: python src/production/update_forward_ledger.py --mode both --min-before 0 --max-before 20
 
+      - name: Capture benchmark-only pregame market
+        if: steps.gate.outputs.run == 'true' && vars.HOCKEY_LAB_MARKET_CAPTURE_ENABLED == 'true' && vars.HOCKEY_LAB_MARKET_CREDIT_CAP != ''
+        continue-on-error: true
+        env:
+          PUCKAPI_API_KEY: ${{ secrets.PUCKAPI_API_KEY }}
+          MARKET_MAX_CREDITS: ${{ vars.HOCKEY_LAB_MARKET_CREDIT_CAP }}
+        run: |
+          if [ -z "${PUCKAPI_API_KEY:-}" ]; then
+            echo "Market capture enabled but PUCKAPI_API_KEY is missing." >&2
+            exit 1
+          fi
+          python research/market/capture_forward_market.py --max-credits "$MARKET_MAX_CREDITS" --max-minutes-before-start 25
+
       - name: Commit ledger changes
         if: steps.gate.outputs.run == 'true'
         run: |
