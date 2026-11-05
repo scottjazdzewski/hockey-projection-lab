@@ -45,7 +45,10 @@ def clustered_gap_bootstrap(df, conditions, date_col, away_team_col, reps=1000, 
     work = df.copy()
     work["_residual"] = work.home_win - work.p_home
     work["_date_block"] = work.source_season.astype(str) + ":" + work[date_col].astype(str)
-    dates = work._date_block.drop_duplicates().to_numpy()
+    dates_by_season = {
+        str(season): group._date_block.drop_duplicates().to_numpy()
+        for season, group in work.groupby("source_season", sort=False)
+    }
     teams = pd.unique(pd.concat([
         work.home_team_abbr.astype(str), work[away_team_col].astype(str)
     ], ignore_index=True))
@@ -53,7 +56,6 @@ def clustered_gap_bootstrap(df, conditions, date_col, away_team_col, reps=1000, 
         work.home_team_abbr.astype(str), work[away_team_col].astype(str)
     ], ignore_index=True)
     team_counts = team_values.value_counts().to_dict()
-    date_counts = work._date_block.value_counts().to_dict()
     date_index = work._date_block.to_numpy()
     home_index = work.home_team_abbr.astype(str).to_numpy()
     away_index = work[away_team_col].astype(str).to_numpy()
@@ -66,7 +68,10 @@ def clustered_gap_bootstrap(df, conditions, date_col, away_team_col, reps=1000, 
         point = float(residual[mask].mean() - residual[~mask].mean())
         draws = []
         for _ in range(reps):
-            sampled_dates = rng.choice(dates, size=len(dates), replace=True)
+            sampled_dates = np.concatenate([
+                rng.choice(season_dates, size=len(season_dates), replace=True)
+                for season_dates in dates_by_season.values()
+            ])
             sampled_teams_home = rng.choice(teams, size=len(teams), replace=True)
             sampled_teams_away = rng.choice(teams, size=len(teams), replace=True)
             dcount = pd.Series(sampled_dates).value_counts().to_dict()
