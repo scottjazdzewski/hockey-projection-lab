@@ -126,3 +126,19 @@ The next high-value feature test is a team-level, strictly lagged goalie perform
 The OOF predictions are from the recovered 2026-11-04 dataset rebuild. Its Parquet hashes differ from the frozen EXP-0027/0028 inputs, so results are snapshot reruns rather than exact source-input reproductions. The confidence intervals are paired, game-resampled intervals stratified by five target seasons; they do not include uncertainty from choosing among many feature groups. The ablation re-scores the existing OOF variants; the next component test must retrain and retune inside each rolling fold to avoid optimistic feature selection.
 
 Code and metric outputs are stored beside this report under `research/` and `research/exports/GOALS_XG_BATTERY_20261105/`.
+
+
+## Seventh test result: lagged goalie team-form proxy
+
+Tested a strictly prior opponent-team goalie save-percentage feature using 20- and 60-game windows, shrunk toward prior league save percentage at two prior-shot strengths. It uses only goalie games dated before the target game. Because historical projected/confirmed starter snapshots are unavailable in this dataset, this is a team-level proxy, not the same-game starting goalie.
+
+The 20-game proxy worsens team-goal MAE by **0.00022** (paired 95% interval +0.00002 to +0.00042). The 60-game, 300-shot-shrinkage version improves team-goal MAE by just **0.00020** (−0.00037 to −0.00002), with gains in 4/5 seasons. However, team count log loss changes by only −0.00003 (interval −0.00013 to +0.00008), and final-score log loss changes by +0.00002 (−0.00019 to +0.00023). The 800-shot version is similar. **This is too small and too narrow to promote.** It does not establish that a real expected-starter adjustment would fail; it says this coarse proxy adds little.
+
+## Eighth test result: expected-goal residual map
+
+Using the same 6,560 rolling-origin games, I split team forecasts into equal-count expected-goal deciles and measured observed regulation goals, signed error, and absolute error. The model underpredicts by 0.063 goals per team-game overall. The first nine pooled deciles underpredict by roughly 0.02–0.12 goals; only the highest decile is slightly high (−0.044 actual-minus-predicted). The error is not a simple constant offset: home and away deciles differ, and the largest home forecasts are high by 0.128 while away forecasts remain low by 0.029 in the top decile.
+
+A linear actual-on-predicted calibration slope also varies sharply by target season: 1.071 (2022), 0.970 (2023), 0.927 (2024), 0.886 (2025), and 0.823 (2026). These are retrospective diagnostics, not corrections. They show temporal calibration drift and argue against fitting one global post-hoc multiplier. We still need to learn whether the drift comes from training-window weights, league scoring context, or the rebuilt data snapshot. Any change must be trained only on prior seasons and judged on the next untouched season.
+
+**Next diagnostic:** test whether team-specific residuals persist from one season into the next, then evaluate a shrunk team residual signal in rolling-origin folds. If that has no out-of-season signal, move to a pregame goalie-specific test only when timestamped expected/confirmed starter histories can be recovered. Keep 60-game xG windows as the current baseline; do not apply manual offsets.
+
