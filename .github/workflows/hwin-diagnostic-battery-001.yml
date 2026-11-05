@@ -1,0 +1,45 @@
+name: HWIN Probability Diagnostic Battery 001
+on:
+  push:
+    branches: [research/win-diagnostics-001]
+    paths:
+      - 'research/hwin_diagnostic_battery_001.py'
+      - '.github/workflows/hwin-diagnostic-battery-001.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: \${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow numpy scikit-learn
+      - name: Download frozen held-out predictions
+        run: |
+          mkdir -p /tmp/input /tmp/input_outer /tmp/input_inner
+          gh run download 42042884528 -n hwin-schedule-007 -D /tmp/input
+          unzip -q /tmp/input/hwin-schedule-007.zip -d /tmp/input_outer
+          unzip -q /tmp/input_outer/hwin_schedule_007.zip -d /tmp/input_inner
+      - name: Run granular diagnostics
+        run: |
+          python research/hwin_diagnostic_battery_001.py \
+            --input /tmp/input_inner/hwin_schedule_007/schedule_007_test_predictions.parquet \
+            --out hwin_diagnostic_battery_001
+      - name: Print diagnostic outputs
+        run: |
+          cat hwin_diagnostic_battery_001/summary.json
+          cat hwin_diagnostic_battery_001/largest_stable_calibration_slices.csv
+      - name: Package diagnostic evidence
+        run: zip -r -9 hwin-diagnostic-battery-001.zip hwin_diagnostic_battery_001 >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hwin-diagnostic-battery-001
+          path: hwin-diagnostic-battery-001.zip
+          retention-days: 90
+          if-no-files-found: error
