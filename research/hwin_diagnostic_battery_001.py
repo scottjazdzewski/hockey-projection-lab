@@ -72,13 +72,11 @@ def clustered_gap_bootstrap(df, conditions, date_col, away_team_col, reps=1000, 
                 rng.choice(season_dates, size=len(season_dates), replace=True)
                 for season_dates in dates_by_season.values()
             ])
-            sampled_teams_home = rng.choice(teams, size=len(teams), replace=True)
-            sampled_teams_away = rng.choice(teams, size=len(teams), replace=True)
+            sampled_teams = rng.choice(teams, size=len(teams), replace=True)
             dcount = pd.Series(sampled_dates).value_counts().to_dict()
-            hcount = pd.Series(sampled_teams_home).value_counts().to_dict()
-            acount = pd.Series(sampled_teams_away).value_counts().to_dict()
+            tcount = pd.Series(sampled_teams).value_counts().to_dict()
             weights = np.fromiter(
-                (dcount.get(d, 0) * hcount.get(h, 0) * acount.get(a, 0)
+                (dcount.get(d, 0) * tcount.get(h, 0) * tcount.get(a, 0)
                  for d, h, a in zip(date_index, home_index, away_index)),
                 dtype=float,
                 count=len(work),
