@@ -14,7 +14,7 @@ This is **a promising research candidate, not “done” or ready to call reliab
 |---:|---|---|---|
 | 0 | Input, labels, timestamp and leakage audit | Are every feature and label valid as of puck drop? | Partly passed for the rebuilt snapshot; frozen EXP-0027 source-hash mismatch remains documented. Recheck every new feature. |
 | 1 | Paired rolling-origin feature ablation | Does a feature group improve next-season predictions, not just validation fit? | **Started:** existing OOF feature variants rescored over 2022–2026, with paired season-stratified bootstrap intervals. |
-| 2 | Process-component ablation | Which of 5v5 xG for/against, shots, power-play xG/goals, penalties, recent goals, and schedule inputs adds unique value? | **Next:** remove/add one coherent component at a time; choose regularization only on S−1; test S; assess log loss, MAE, score probabilities and win Brier. Require stable gains across seasons. |
+| 2 | Process-component ablation | Which of 5v5 xG for/against, shots, power-play xG/goals, penalties, recent goals, and schedule inputs adds unique value? | **Completed first pass:** removed one coherent family at a time and retrained across all five rolling folds. Component-specific xG evidence is mixed; shots, recent goals, opponent adjustments, and schedule inputs show stronger support. |
 | 3 | xG calibration and conversion persistence | Do recent xG levels predict goals, and does goals-minus-xG finishing persist enough to help future rates? | Open. Test team attack and opponent defense separately, partial pooling, and no same-game data. |
 | 4 | Form-window and decay sensitivity | Is 60 games too slow or noisy? | Open: 20/40/60/100 games, season-to-date, and exponentially weighted forms in identical rolling folds. Tune only on the prior season. |
 | 5 | Matchup nonlinearity and interactions | Do attack-versus-defense, home/away, pace, special teams, or schedule-state interactions help? | Open after component ablation; test predeclared interactions with shrinkage to limit overfit. |
@@ -41,6 +41,25 @@ Adding recent xG to goal form lowers team-goal MAE by 0.0051 (paired 95% interva
 The full hockey-process bundle improves over goal form by 0.00366 team-goal log loss (95% interval −0.00565 to −0.00162), 0.0109 team-goal MAE (−0.0142 to −0.0075), 0.00505 final-score log loss (−0.00902 to −0.00096), and 0.00302 home-win Brier (−0.00420 to −0.00183). The bundle is better on count log loss in 4/5 seasons and on home-win Brier in 5/5. Because it combines xG, shots, special teams, goals, and schedule features, this result **does not identify xG as the source of the gain**. That is the reason to run the component ablation next.
 
 The extra league-scoring feature adds almost nothing to the full bundle (team count log-loss delta −0.00005; interval −0.00020 to +0.00010). Keep it only if later tests show it helps in more targeted scoring-regime checks.
+
+
+## Second test result: retrained process-component ablation
+
+Retrained each variant in all five rolling folds. Every target season had 1,312 games. The full process reference was compared against models with one feature family removed; negative ablation-minus-full values mean the removed-feature model did better.
+
+| Removed feature family | Team-goal log-loss delta | Team-goal MAE delta | Final-score log-loss delta | Home-win Brier delta | Read |
+|---|---:|---:|---:|---:|---|
+| All xG | −0.00073 (−0.00148, +0.00001) | +0.00117 (−0.00013, +0.00250) | −0.00252 (−0.00400, −0.00103) | +0.00004 (−0.00033, +0.00041) | Mixed, small; removal improves exact score log loss, while goal MAE slightly worsens but is uncertain. |
+| 5v5 xG only | −0.00040 (−0.00094, +0.00013) | +0.00133 (+0.00041, +0.00228) | −0.00175 (−0.00281, −0.00069) | +0.00003 (−0.00017, +0.00023) | Helps goal MAE a little; not a stable overall scoring-probability gain. |
+| Power-play process | −0.00021 (−0.00050, +0.00009) | −0.00028 (−0.00081, +0.00026) | −0.00034 (−0.00093, +0.00025) | −0.00012 (−0.00028, +0.00004) | No measurable unique gain yet; intervals include zero. |
+| Shot volume | +0.00273 (+0.00144, +0.00404) | +0.00392 (+0.00168, +0.00619) | +0.00569 (+0.00311, +0.00831) | +0.00168 (+0.00078, +0.00257) | Strong, stable contribution. |
+| Recent goal form | +0.00815 (+0.00621, +0.01005) | +0.00501 (+0.00174, +0.00814) | +0.01868 (+0.01485, +0.02247) | +0.00217 (+0.00127, +0.00304) | Strongest tested contribution. |
+| Schedule inputs | +0.00076 (+0.00016, +0.00136) | +0.00206 (+0.00099, +0.00312) | +0.00178 (+0.00057, +0.00296) | +0.00079 (+0.00053, +0.00104) | Small but consistent held-out contribution. |
+| Opponent adjustments | +0.00200 (+0.00092, +0.00308) | +0.00352 (+0.00166, +0.00537) | +0.00400 (+0.00187, +0.00613) | +0.00108 (+0.00035, +0.00178) | Strong, stable contribution. |
+
+Parentheses show paired 95% intervals from 10,000 game-resamples stratified by target season. The direct message is that **recent goals, opponent adjustments, shots, and schedule carry clearer incremental value than current xG inputs**. That does not mean xG should be deleted: 5v5 xG improves team-goal MAE slightly, but it has not earned a reliable improvement in the full score or win-probability distribution. Power-play inputs also need narrower feature tests before we conclude they are useless.
+
+This is a family-level ablation; correlated features can substitute for one another, so it cannot identify a single coefficient as causal. The next useful xG test is to compare its calibrated conversion and persistence over different windows, then test 5v5 and power-play xG separately against goals/shot inputs in nested folds. The schedule family should be tested next for 3-in-4, 4-in-6, B2B interaction, and a strictly pregame getaway definition.
 
 ## Limits and reproducibility
 
