@@ -37,22 +37,14 @@
       "goalie_state": {
         "status": "PROJECTED",
         "away": "Sebastian Cossa",
-        "home": "Jacob Fowler",
-        "away_id": 34654,
-        "home_id": 38444,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "home": "Jakub Dobes",
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -123,21 +115,13 @@
         "status": "PROJECTED",
         "away": "Carter Hart",
         "home": "Daniil Tarasov",
-        "away_id": 3874,
-        "home_id": 28133,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -214,21 +198,13 @@
         "status": "PROJECTED",
         "away": "Arvid Soderblom",
         "home": "Andrei Vasilevskiy",
-        "away_id": 34603,
-        "home_id": 2413,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -302,22 +278,14 @@
       "goalie_state": {
         "status": "PROJECTED",
         "away": "Joel Hofer",
-        "home": "Jake Allen",
-        "away_id": 28910,
-        "home_id": 1305,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "home": "Connor Hellebuyck",
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -387,22 +355,14 @@
       "goalie_state": {
         "status": "PROJECTED",
         "away": "Brandon Bussi",
-        "home": "Ilya Sorokin",
-        "away_id": 30153,
-        "home_id": 25264,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "home": "Semyon Varlamov",
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -470,24 +430,16 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
+        "status": "CONFIRMED",
         "away": "Joseph Woll",
         "home": "Dylan Garand",
-        "away_id": 27288,
-        "home_id": 32794,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -558,21 +510,13 @@
         "status": "PROJECTED",
         "away": "Jeremy Swayman",
         "home": "Arturs Silovs",
-        "away_id": 28098,
-        "home_id": 31270,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -643,21 +587,13 @@
         "status": "PROJECTED",
         "away": "Jake Oettinger",
         "home": "Cam Talbot",
-        "away_id": 2813,
-        "home_id": 1059,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -728,21 +664,13 @@
         "status": "PROJECTED",
         "away": "Leevi Merilainen",
         "home": "Stuart Skinner",
-        "away_id": 34600,
-        "home_id": 4741,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -815,21 +743,13 @@
         "status": "PROJECTED",
         "away": "Lukas Dostal",
         "home": "Tristan Jarry",
-        "away_id": 29143,
-        "home_id": 2626,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -902,21 +822,13 @@
         "status": "PROJECTED",
         "away": "Juuse Saros",
         "home": "Mackenzie Blackwood",
-        "away_id": 2557,
-        "home_id": 3792,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "home_observed_at": "2026-11-05T07:35:21.425091-05:00",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-05T07:35:21.425091-05:00"
+        "updated_at": "2026-11-05T12:04:46.483784-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
