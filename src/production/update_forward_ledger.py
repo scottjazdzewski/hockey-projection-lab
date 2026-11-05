@@ -165,6 +165,19 @@ def freeze_records(min_before: float, max_before: float):
                 },
                 "overtime_probability":safe_num(p.get("overtime_probability")),
                 "rest_state":deepcopy(p.get("rest_state")),
+                # Preserve the component probabilities and forecast-time goalie
+                # adjustment inputs so future calibration audits can compare
+                # team-only and goalie-adjusted predictions without rebuilding
+                # them from postgame data.
+                "probability_components":{
+                    "team_only":{
+                        "away_win_probability":safe_num(p.get("away",{}).get("team_only_win_probability")),
+                        "home_win_probability":safe_num(p.get("home",{}).get("team_only_win_probability"))
+                    },
+                    "goalie_adjustment_status":p.get("goalie_adjustment_status"),
+                    "goalie_adjustment":deepcopy(p.get("goalie_adjustment"))
+                },
+                "model_flags":deepcopy(p.get("flags") or []),
                 "goalie_context":{
                     "away":side_context(ctx,"away"),
                     "home":side_context(ctx,"home")
