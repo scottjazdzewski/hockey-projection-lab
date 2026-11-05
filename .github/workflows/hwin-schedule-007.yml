@@ -1,0 +1,54 @@
+name: HWIN Schedule Context 007
+on:
+  push:
+    branches: [research/rest-context-007]
+    paths:
+      - 'research/hwin_schedule_007.py'
+      - '.github/workflows/hwin-schedule-007.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  schedule-context:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pandas pyarrow scikit-learn numpy
+      - name: Download canonical pregame inputs
+        run: |
+          mkdir -p /tmp/pbp /tmp/pbp_u /tmp/spine /tmp/spine_u /tmp/goalie /tmp/goalie_u
+          gh run download 41766609805 -n hockey-pbp-features-2010-2027-20261102 -D /tmp/pbp
+          unzip -q /tmp/pbp/hockey-pbp-features-2010-2027-20261102.zip -d /tmp/pbp_u
+          gh run download 41766612176 -n hockey-canonical-spine-v3-20261102 -D /tmp/spine
+          unzip -q /tmp/spine/hockey-canonical-spine-v3-20261102.zip -d /tmp/spine_u
+          gh run download 41871777019 -n goalie-game-features-001-20261102 -D /tmp/goalie
+          unzip -q /tmp/goalie/goalie-game-features-001-20261102.zip -d /tmp/goalie_u
+      - name: Run isolated schedule ablations
+        run: |
+          python research/hwin_schedule_007.py \
+            --pbp /tmp/pbp_u/pbp_feature_output/game_team_event_features.parquet \
+            --spine /tmp/spine_u/spine_v3/games.parquet \
+            --goalie /tmp/goalie_u/goalie_feature_output/goalie_game_features.parquet \
+            --out hwin_schedule_007
+      - name: Print audit outputs
+        run: |
+          cat hwin_schedule_007/summary.json
+          cat hwin_schedule_007/rolling_schedule_007.csv
+          cat hwin_schedule_007/schedule_007_condition_metrics.csv
+          cat hwin_schedule_007/paired_schedule_007_bootstrap.csv
+          cat hwin_schedule_007/cluster_schedule_007_bootstrap.csv
+      - name: Package evaluation evidence
+        run: zip -r -9 hwin-schedule-007.zip hwin_schedule_007 >/dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hwin-schedule-007
+          path: hwin-schedule-007.zip
+          retention-days: 90
+          compression-level: 0
+          if-no-files-found: error
