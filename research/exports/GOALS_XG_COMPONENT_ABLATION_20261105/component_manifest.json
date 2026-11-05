@@ -1,0 +1,35 @@
+{
+  "run_id": "GOALS-XG-COMPONENT-ABLATION-ROLLING-20261105",
+  "source_snapshot": "2026-11-04 recovered data rebuild; frozen EXP-0027/0028 input hashes differ",
+  "target_seasons": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "games": 6560,
+  "design": "Leakage-safe rolling origin. For each target S, train through S-2, tune regularization on S-1, refit through S-1, score S. Retrained full process reference and each one-family ablation.",
+  "uncertainty": "Paired per-game bootstrap stratified by target season; 10000 draws; intervals do not account for trying multiple ablations.",
+  "features_ablated": [
+    "all xG",
+    "5v5 xG",
+    "power-play process",
+    "shot volume",
+    "recent goal form",
+    "schedule inputs",
+    "opponent adjustments"
+  ],
+  "headline": "Recent goal form, opponent adjustments, shots, and schedule inputs show consistent held-out value. Removing all xG has near-zero count-logloss change, reduces final-score logloss modestly, and slightly worsens team-goal MAE with interval including zero. 5v5 xG improves team-goal MAE but worsens final-score logloss when included.",
+  "no_production_change": true,
+  "outputs": [
+    "fold_metrics.csv",
+    "component_metrics_by_season.csv",
+    "component_metrics_pooled.csv",
+    "component_paired_deltas.csv"
+  ],
+  "scripts": [
+    "research/xg_component_ablation_rolling_20261105.py",
+    "research/analyze_xg_component_ablation_20261105.py"
+  ]
+}
