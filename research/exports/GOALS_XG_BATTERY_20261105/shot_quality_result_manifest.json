@@ -1,0 +1,20 @@
+{
+  "run_id": "GOALS-XG-SHOT-QUALITY-NESTED-20261105",
+  "snapshot": "rebuilt 2026-11-04 dataset; frozen EXP-0027/0028 hashes differ",
+  "target_seasons": [2022, 2023, 2024, 2025, 2026],
+  "games": 6560,
+  "method": "Nested rolling-origin retraining and prior-season alpha selection. Added strictly prior-date rolling 60-game 5v5 team xG per shot, opponent xG allowed per shot-against, and both. Compared to same 60-game reference.",
+  "primary_result": {
+    "reference_team_goal_mae": 1.3724573,
+    "attack_quality_team_goal_mae": 1.3726001,
+    "attack_quality_team_goal_mae_delta": 0.000143,
+    "attack_quality_team_goal_mae_95_ci": [-0.000086, 0.000375],
+    "attack_quality_team_count_logloss_delta": -0.000099,
+    "attack_quality_team_count_logloss_95_ci": [-0.000233, 0.000032],
+    "attack_quality_final_score_logloss_delta": -0.000308,
+    "attack_quality_final_score_logloss_95_ci": [-0.000574, -0.000049],
+    "both_quality_team_goal_mae_delta": 0.000051,
+    "both_quality_team_goal_mae_95_ci": [-0.000437, 0.000554]
+  },
+  "decision": "Do not promote as an expected-goal accuracy improvement: team-goal MAE is unchanged or slightly worse; the attack-ratio candidate modestly improves exact-score log loss but worsens home-goal MAE. Keep 60-game baseline and track the distinct score-law tradeoff."
+}
