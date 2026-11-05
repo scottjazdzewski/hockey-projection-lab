@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      GH_TOKEN: \${{ github.token }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,14 +22,13 @@ jobs:
       - run: python -m pip install --quiet pandas pyarrow numpy scikit-learn
       - name: Download frozen held-out predictions
         run: |
-          mkdir -p /tmp/input /tmp/input_outer /tmp/input_inner
+          mkdir -p /tmp/input /tmp/input_outer
           gh run download 42042884528 -n hwin-schedule-007 -D /tmp/input
           unzip -q /tmp/input/hwin-schedule-007.zip -d /tmp/input_outer
-          unzip -q /tmp/input_outer/hwin_schedule_007.zip -d /tmp/input_inner
       - name: Run granular diagnostics
         run: |
           python research/hwin_diagnostic_battery_001.py \
-            --input /tmp/input_inner/hwin_schedule_007/schedule_007_test_predictions.parquet \
+            --input /tmp/input_outer/hwin_schedule_007/schedule_007_test_predictions.parquet \
             --out hwin_diagnostic_battery_001
       - name: Print diagnostic outputs
         run: |
