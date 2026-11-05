@@ -15,8 +15,8 @@ This is **a promising research candidate, not “done” or ready to call reliab
 | 0 | Input, labels, timestamp and leakage audit | Are every feature and label valid as of puck drop? | Partly passed for the rebuilt snapshot; frozen EXP-0027 source-hash mismatch remains documented. Recheck every new feature. |
 | 1 | Paired rolling-origin feature ablation | Does a feature group improve next-season predictions, not just validation fit? | **Started:** existing OOF feature variants rescored over 2022–2026, with paired season-stratified bootstrap intervals. |
 | 2 | Process-component ablation | Which of 5v5 xG for/against, shots, power-play xG/goals, penalties, recent goals, and schedule inputs adds unique value? | **Completed first pass:** removed one coherent family at a time and retrained across all five rolling folds. Component-specific xG evidence is mixed; shots, recent goals, opponent adjustments, and schedule inputs show stronger support. |
-| 3 | xG calibration and conversion persistence | Do recent xG levels predict goals, and does goals-minus-xG finishing persist enough to help future rates? | Open. Test team attack and opponent defense separately, partial pooling, and no same-game data. |
-| 4 | Form-window and decay sensitivity | Is 60 games too slow or noisy? | Open: 20/40/60/100 games, season-to-date, and exponentially weighted forms in identical rolling folds. Tune only on the prior season. |
+| 3 | xG calibration and conversion persistence | Do recent xG levels predict goals, and does goals-minus-xG finishing persist enough to help future rates? | **Next:** isolate xG-only windows and test whether prior conversion residuals predict future scoring, with team and opponent effects separated and no same-game data. |
+| 4 | Form-window and decay sensitivity | Is 60 games too slow or noisy? | **First pass complete:** 20/40/60/100-game windows retrained in identical rolling folds; 60 games leads. Exponential decay and xG-only windows remain open. |
 | 5 | Matchup nonlinearity and interactions | Do attack-versus-defense, home/away, pace, special teams, or schedule-state interactions help? | Open after component ablation; test predeclared interactions with shrinkage to limit overfit. |
 | 6 | Residual map | Where and when is error concentrated? | Partial diagnostics exist. Extend by expected-goal decile, team strength, home/away, rest, 3-in-4, 4-in-6, and strictly pregame getaway label; report sample sizes and season stability. |
 | 7 | Score-law and tie-cell calibration | Are marginal goal rates right but joint score/tie probabilities wrong? | Candidate score families were screened on prior validation seasons; exact 0–0/1–1/2–2 diagonal probability calibration remains open. |
@@ -60,6 +60,22 @@ Retrained each variant in all five rolling folds. Every target season had 1,312 
 Parentheses show paired 95% intervals from 10,000 game-resamples stratified by target season. The direct message is that **recent goals, opponent adjustments, shots, and schedule carry clearer incremental value than current xG inputs**. That does not mean xG should be deleted: 5v5 xG improves team-goal MAE slightly, but it has not earned a reliable improvement in the full score or win-probability distribution. Power-play inputs also need narrower feature tests before we conclude they are useless.
 
 This is a family-level ablation; correlated features can substitute for one another, so it cannot identify a single coefficient as causal. The next useful xG test is to compare its calibrated conversion and persistence over different windows, then test 5v5 and power-play xG separately against goals/shot inputs in nested folds. The schedule family should be tested next for 3-in-4, 4-in-6, B2B interaction, and a strictly pregame getaway definition.
+
+
+## Third test result: rolling-window sensitivity
+
+Retrained the full process feature set with 20-, 40-, 60-, and 100-game windows. For every window and target season, regularization and score-family choice were made using only the previous season. These are paired comparisons over the same 6,560 held-out games. This changes the rolling window for **all** team-form features together; xG-specific window behavior is still to be isolated.
+
+| Window | Team-goal log loss | Team-goal MAE | Final-total MAE | Final-score log loss | Home-win Brier |
+|---:|---:|---:|---:|---:|---:|
+| 20 | 1.92422 | 1.37473 | 1.85432 | 3.71356 | 0.23670 |
+| 40 | 1.92262 | 1.37376 | 1.85326 | 3.71007 | 0.23590 |
+| **60** | **1.92155** | **1.37246** | **1.85170** | **3.70791** | **0.23536** |
+| 100 | 1.92312 | 1.37435 | 1.85556 | 3.71228 | 0.23550 |
+
+Compared with 60, the 20-game window worsens team-goal log loss by 0.00266 (paired 95% interval +0.00123 to +0.00409), final-score log loss by 0.00565 (+0.00276 to +0.00853), and home-win Brier by 0.00135 (+0.00064 to +0.00205). The 40-game window is also worse on those three measures, though by less. The 100-game window worsens team-goal log loss by 0.00157 (+0.00051 to +0.00263) and final-score log loss by 0.00436 (+0.00225 to +0.00645). The 60-game window has the best pooled results; season-level winners vary (60 wins 4/5 seasons on team-goal log loss and 3/5 on final-score log loss and home-win Brier). **Keep 60 as the current overall-form benchmark**, while retaining that season variation in the record.
+
+This does not prove 60 is optimal for xG itself; correlated goal, shot, special-team, and xG features all changed windows together. Continue with an xG-specific window/conversion test before changing the feature pipeline.
 
 ## Limits and reproducibility
 
