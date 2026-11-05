@@ -1,0 +1,32 @@
+{
+  "run_id": "GOALS-XG-COMPONENT-ISOLATION-ROLLING-20261105",
+  "target_seasons": [
+    2022,
+    2023,
+    2024,
+    2025,
+    2026
+  ],
+  "games": 6560,
+  "design": "Nested rolling origin; each component ablation retrained; hyperparameters selected only on S-1; scored on S. Paired 10000-resample bootstrap stratified by target season.",
+  "findings": {
+    "team_5v5_attack_xg": "removal worsens team-goal MAE by 0.00027 (95% interval +0.00004 to +0.00049), home-goal MAE by 0.00058",
+    "team_5v5_xg_against": "removal worsens team-goal MAE by 0.00058 (95% interval +0.00009 to +0.00109), home-goal MAE by 0.00136",
+    "opponent_5v5_xga": "no detectable unique gain",
+    "power_play_xg": "no detectable unique gain",
+    "opponent_adjusted_xg": "no detectable unique gain",
+    "all_rolling_xg": "removal worsens team-goal MAE by 0.00125 but improves final-score logloss by 0.00234"
+  },
+  "caveats": [
+    "Small effects",
+    "Multiple related comparisons; bootstrap intervals are exploratory",
+    "Rebuilt 2026-11-04 source hashes differ from frozen EXP-0027/0028 inputs"
+  ],
+  "no_production_change": true,
+  "outputs": [
+    "fold_metrics.csv",
+    "metrics_by_season.csv",
+    "metrics_pooled.csv",
+    "paired_deltas.csv"
+  ]
+}
