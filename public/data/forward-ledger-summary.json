@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-04T01:01:57.028267-05:00",
+  "generated_at": "2026-11-05T20:18:32.611400-05:00",
   "sample": {
     "games_frozen": 10,
     "games_settled": 10,
@@ -13,6 +13,10 @@
     "brier": 0.2541754693235428,
     "log_loss": 0.7052644479785862,
     "avg_probability_assigned_to_winner": 0.5082366087140294,
+    "team_only_brier": null,
+    "team_only_log_loss": null,
+    "goalie_layer_delta_brier": null,
+    "goalie_layer_delta_log_loss": null,
     "xg_mae_per_team": null,
     "total_goals_mae": null
   },
@@ -23,6 +27,26 @@
       "brier": 0.2541754693235428,
       "log_loss": 0.7052644479785862,
       "avg_probability_assigned_to_winner": 0.5082366087140294
+    }
+  },
+  "by_goalie_state": {
+    "CONFIRMED_BOTH": {
+      "games": 9,
+      "team_only_brier": null,
+      "final_brier": 0.2672685822903242,
+      "goalie_layer_delta_brier": null,
+      "team_only_log_loss": null,
+      "final_log_loss": 0.7324240220826073,
+      "goalie_layer_delta_log_loss": null
+    },
+    "MIXED": {
+      "games": 1,
+      "team_only_brier": null,
+      "final_brier": 0.1363374526225101,
+      "goalie_layer_delta_brier": null,
+      "team_only_log_loss": null,
+      "final_log_loss": 0.46082828104239637,
+      "goalie_layer_delta_log_loss": null
     }
   },
   "by_pick_side": {
@@ -57,6 +81,12 @@
       "brier": 0.1363374526225101,
       "log_loss": 0.46082828104239637,
       "probability_assigned_to_winner": 0.6307609817171131,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "MIXED",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
@@ -77,6 +107,12 @@
       "brier": 0.5214079238464933,
       "log_loss": 1.2804428990544017,
       "probability_assigned_to_winner": 0.27791418526154854,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "CONFIRMED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
@@ -97,6 +133,12 @@
       "brier": 0.2522033120752026,
       "log_loss": 0.697553833139929,
       "probability_assigned_to_winner": 0.4978015212336834,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "CONFIRMED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
@@ -117,6 +159,12 @@
       "brier": 0.2570118558133479,
       "log_loss": 0.7071718020788618,
       "probability_assigned_to_winner": 0.4930366326712078,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "CONFIRMED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
@@ -137,6 +185,12 @@
       "brier": 0.25392186060284155,
       "log_loss": 0.7009910616914818,
       "probability_assigned_to_winner": 0.49609340091358045,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "CONFIRMED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
@@ -157,6 +211,12 @@
       "brier": 0.16763205823924754,
       "log_loss": 0.5266653146384911,
       "probability_assigned_to_winner": 0.5905710583761237,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "CONFIRMED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
@@ -177,6 +237,12 @@
       "brier": 0.2507555490592108,
       "log_loss": 0.6946582798272231,
       "probability_assigned_to_winner": 0.49924502093417894,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "CONFIRMED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
@@ -197,6 +263,12 @@
       "brier": 0.12061254380427588,
       "log_loss": 0.4266272044843618,
       "probability_assigned_to_winner": 0.6527068330584722,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "CONFIRMED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
@@ -217,6 +289,12 @@
       "brier": 0.40791591677791195,
       "log_loss": 1.0179994645824868,
       "probability_assigned_to_winner": 0.3613170451797606,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "CONFIRMED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
@@ -237,6 +315,12 @@
       "brier": 0.17395622039438605,
       "log_loss": 0.5397063392462291,
       "probability_assigned_to_winner": 0.5829194077946254,
+      "goalie_adjustment_status": null,
+      "goalie_state_group": "CONFIRMED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     }
