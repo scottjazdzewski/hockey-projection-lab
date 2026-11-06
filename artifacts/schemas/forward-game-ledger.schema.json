@@ -14,13 +14,37 @@
     "minutes_before_start": {"type":"number"},
     "forecast": {
       "type":"object",
-      "required":["model","away","home","goalie_context","market_benchmark"]
+      "required":["model","away","home","goalie_context","market_benchmark"],
+      "properties":{
+        "probability_components":{
+          "type":"object",
+          "required":["team_only"],
+          "properties":{
+            "team_only":{
+              "type":"object",
+              "required":["away_win_probability","home_win_probability"],
+              "properties":{
+                "away_win_probability":{"type":["number","null"],"minimum":0,"maximum":1},
+                "home_win_probability":{"type":["number","null"],"minimum":0,"maximum":1}
+              }
+            }
+          }
+        }
+      }
     },
     "result": {
       "type":"object",
       "required":["status"],
       "properties":{"status":{"enum":["OPEN","FINAL"]}}
     },
-    "evaluation": {"type":["object","null"]}
+    "evaluation": {
+      "type":["object","null"],
+      "properties":{
+        "team_only_brier":{"type":["number","null"],"minimum":0},
+        "team_only_log_loss":{"type":["number","null"],"minimum":0},
+        "goalie_layer_delta_brier":{"type":["number","null"]},
+        "goalie_layer_delta_log_loss":{"type":["number","null"]}
+      }
+    }
   }
 }
