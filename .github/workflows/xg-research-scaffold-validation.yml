@@ -52,11 +52,11 @@ jobs:
               errors=list(validator.iter_errors(row))
               assert not errors, errors
           fixture=Path("/tmp/goalie-ledger.jsonl")
-          fixture.write_text("\\n".join(json.dumps(r) for r in rows)+"\\n")
+          fixture.write_text("\n".join(json.dumps(r) for r in rows)+"\n")
           assert validate(fixture)==2
           invalid={**base,"actual_starter":"Example Goalie"}
           assert list(validator.iter_errors(invalid)), "schema must reject unknown outcome fields"
-          fixture.write_text(json.dumps(invalid)+"\\n")
+          fixture.write_text(json.dumps(invalid)+"\n")
           try:
               validate(fixture)
           except ValueError:
