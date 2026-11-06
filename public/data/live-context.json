@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "date": "2026-11-06",
-  "generated_at": "2026-11-06T11:34:57.173374-05:00",
+  "generated_at": "2026-11-06T16:14:16.956223-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -16,16 +16,16 @@
         "abbr": "CBJ",
         "goalie": {
           "name": "Jet Greaves",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
+          "source_timestamp": "2026-11-06T17:04:20.337Z",
+          "source_name": "Mark Scheig",
+          "source_url": "https://x.com/mark_scheig/status/2118751085267460402?a=Yg-H0qDYij8_gZr3njk&s=20",
           "player_id": 29751
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
           "updated_at": "2026-11-06T14:52:00.274Z",
           "source_name": "Last Game (2026-11-05)",
           "source_url": "https://www.nhl.com/gamecenter/dal-vs-cbj/2026/11/05/2026020258",
@@ -259,16 +259,16 @@
         "abbr": "BUF",
         "goalie": {
           "name": "Ukko-Pekka Luukkonen",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
           "source_timestamp": "2026-11-06T15:33:53.515Z",
           "source_name": "Mike Harrington",
-          "source_url": "https://x.com/bymharrington/status/2118727932877365438?a=1D5xmtQTpH7dAOHOw64&s=46",
+          "source_url": "https://x.com/ByMHarrington/status/2118727932877365438?a=pERcy6pyByuVjo4ymWs&s=20",
           "player_id": 4783
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
           "updated_at": "2026-11-06T16:14:17.945Z",
           "source_name": "Rachel Lenzi",
           "source_url": "https://x.com/rachelmlenzi/status/2118729479530909875?s=20",
@@ -529,19 +529,19 @@
         "abbr": "SJS",
         "goalie": {
           "name": "Yaroslav Askarov",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
+          "source_timestamp": "2026-11-06T18:07:42.336Z",
+          "source_name": "Sheng Peng",
+          "source_url": "https://x.com/Sheng_Peng/status/2118766801584865596?a=HQijgK40TbHLrEtt-v4&s=20",
           "player_id": 33018
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
-          "updated_at": "2026-11-05T15:08:54.719Z",
-          "source_name": "Last Game (2026-11-04)",
-          "source_url": "https://www.nhl.com/gamecenter/sjs-vs-lak/2026/11/04/2026020249",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
+          "updated_at": "2026-11-06T20:12:10.365Z",
+          "source_name": "Sheng Peng",
+          "source_url": "https://sanjosehockeynow.com/san-jose-sharks-misa-dellandrea-bystedt-minnesota-wild-preview-lines-18/",
           "groups": {
             "f1": [
               {
@@ -584,9 +584,9 @@
                 "player_id": 38939
               },
               {
-                "name": "Filip Bystedt",
+                "name": "Ty Dellandrea",
                 "position": "c",
-                "player_id": 36370
+                "player_id": 4813
               },
               {
                 "name": "Tyler Toffoli",
@@ -606,9 +606,9 @@
                 "player_id": 34545
               },
               {
-                "name": "Ty Dellandrea",
+                "name": "Adam Gaudette",
                 "position": "rw",
-                "player_id": 4813
+                "player_id": 4646
               }
             ],
             "d1": [
@@ -778,16 +778,16 @@
         "abbr": "MIN",
         "goalie": {
           "name": "Jesper Wallstedt",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
+          "source_timestamp": "2026-11-06T16:40:24.434Z",
+          "source_name": "Joe O'Donnell",
+          "source_url": "https://x.com/WildJoeRadio/status/2118743595977163244?a=lDpo7B3FvB7jKM5Xmro&s=20",
           "player_id": 31763
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
           "updated_at": "2026-11-05T17:39:49.417Z",
           "source_name": "Joe Smith",
           "source_url": "https://x.com/JoeSmithNHL/status/2118392493255340137",
@@ -1055,7 +1055,7 @@
         "goalie": {
           "name": "Lukas Dostal",
           "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -1063,7 +1063,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
           "updated_at": "2026-11-06T14:56:05.997Z",
           "source_name": "Last Game (2026-11-05)",
           "source_url": "https://www.nhl.com/gamecenter/ana-vs-edm/2026/11/05/2026020260",
@@ -1316,7 +1316,7 @@
         "goalie": {
           "name": "Dustin Wolf",
           "status": "CONFIRMED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
           "source_timestamp": "2026-11-06T16:18:31.853Z",
           "source_name": "Pat Steinberg",
           "source_url": "https://x.com/SteinbergYYC/status/2118738959094427870?a=txKQB2MtLLH0Kc311RI&s=20",
@@ -1324,10 +1324,10 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-06T11:34:57.173374-05:00",
-          "updated_at": "2026-11-05T15:10:38.470Z",
-          "source_name": "Last Game (2026-11-04)",
-          "source_url": "https://www.nhl.com/gamecenter/cgy-vs-sea/2026/11/04/2026020250",
+          "observed_at": "2026-11-06T16:14:16.956223-05:00",
+          "updated_at": "2026-11-06T17:41:57.951Z",
+          "source_name": "Pat Steinberg",
+          "source_url": "https://x.com/SteinbergYYC/status/2118750777850396757",
           "groups": {
             "f1": [
               {
@@ -1440,9 +1440,9 @@
                 "player_id": 29507
               },
               {
-                "name": "Arsenii Sergeev",
+                "name": "Devin Cooley",
                 "position": "g2",
-                "player_id": 32102
+                "player_id": 32944
               }
             ],
             "pp1": [
@@ -1562,12 +1562,6 @@
               "injury_status": "dtd",
               "game_time_decision": false,
               "player_id": 30831
-            },
-            {
-              "name": "Devin Cooley",
-              "injury_status": "dtd",
-              "game_time_decision": false,
-              "player_id": 32944
             }
           ]
         }
