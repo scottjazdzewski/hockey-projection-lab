@@ -171,6 +171,12 @@ def freeze_records(min_before: float, max_before: float):
                 "goalie_adjustment_status":p.get("goalie_adjustment_status"),
                 "goalie_adjustment":deepcopy(p.get("goalie_adjustment")),
                 "rest_state":deepcopy(p.get("rest_state")),
+                "probability_components":{
+                    "team_only":{
+                        "away_win_probability":safe_num(p.get("away",{}).get("team_only_win_probability")),
+                        "home_win_probability":safe_num(p.get("home",{}).get("team_only_win_probability"))
+                    }
+                },
                 "goalie_context":{
                     "away":side_context(ctx,"away"),
                     "home":side_context(ctx,"home")
@@ -239,6 +245,16 @@ def evaluate(record):
     if otp is not None and r.get("went_ot") is not None:
         ev["overtime_brier"]=(otp-(1 if r["went_ot"] else 0))**2
 
+    components=f.get("probability_components") or {}
+    team_only=components.get("team_only") or {}
+    team_only_ap=safe_num(team_only.get("away_win_probability"))
+    team_only_hp=safe_num(team_only.get("home_win_probability"))
+    team_only_actual=team_only_ap if away_win else team_only_hp
+    ev["team_only_brier"]=None if team_only_hp is None else (team_only_hp-home_win)**2
+    ev["team_only_log_loss"]=None if team_only_actual is None else -math.log(min(1-eps,max(eps,team_only_actual)))
+    ev["goalie_layer_delta_brier"]=None if ev["brier"] is None or ev["team_only_brier"] is None else ev["brier"]-ev["team_only_brier"]
+    ev["goalie_layer_delta_log_loss"]=None if ev["log_loss"] is None or ev["team_only_log_loss"] is None else ev["log_loss"]-ev["team_only_log_loss"]
+
     ax=safe_num(f.get("away",{}).get("expected_goals"))
     hx=safe_num(f.get("home",{}).get("expected_goals"))
     if ax is not None and hx is not None:
@@ -304,6 +320,22 @@ def avg(vals):
     vals=[v for v in vals if isinstance(v,(int,float)) and math.isfinite(v)]
     return None if not vals else sum(vals)/len(vals)
 
+def goalie_state_group(forecast):
+    context=forecast.get("goalie_context") or {}
+    statuses=[]
+    for side in ("away","home"):
+        goalie=(context.get(side) or {}).get("goalie") or {}
+        statuses.append(str(goalie.get("status") or "UNKNOWN").upper())
+    known={"CONFIRMED","PROJECTED"}
+    if statuses==["CONFIRMED","CONFIRMED"]:
+        return "CONFIRMED_BOTH"
+    if statuses==["PROJECTED","PROJECTED"]:
+        return "PROJECTED_BOTH"
+    if all(s in known for s in statuses):
+        return "MIXED"
+    return "UNKNOWN"
+
+
 def build_summary():
     rows=[]
     for path in sorted(GAMES_DIR.glob("*.json")):
@@ -328,6 +360,12 @@ def build_summary():
             "brier":ev.get("brier"),
             "log_loss":ev.get("log_loss"),
             "probability_assigned_to_winner":ev.get("probability_assigned_to_winner"),
+            "goalie_adjustment_status":f.get("goalie_adjustment_status"),
+            "goalie_state_group":goalie_state_group(f),
+            "team_only_brier":ev.get("team_only_brier"),
+            "team_only_log_loss":ev.get("team_only_log_loss"),
+            "goalie_layer_delta_brier":ev.get("goalie_layer_delta_brier"),
+            "goalie_layer_delta_log_loss":ev.get("goalie_layer_delta_log_loss"),
             "goal_mae_per_team":ev.get("goal_mae_per_team"),
             "total_goals_abs_error":ev.get("total_goals_abs_error")
         })
@@ -350,6 +388,19 @@ def build_summary():
             "brier":avg([x.get("brier") for x in ss]),
             "log_loss":avg([x.get("log_loss") for x in ss]),
             "avg_probability_assigned_to_winner":avg([x.get("probability_assigned_to_winner") for x in ss])
+        }
+
+    by_goalie_state={}
+    for group in sorted({x["goalie_state_group"] for x in settled}):
+        xs=[x for x in settled if x["goalie_state_group"]==group]
+        by_goalie_state[group]={
+            "games":len(xs),
+            "team_only_brier":avg([x.get("team_only_brier") for x in xs]),
+            "final_brier":avg([x.get("brier") for x in xs]),
+            "goalie_layer_delta_brier":avg([x.get("goalie_layer_delta_brier") for x in xs]),
+            "team_only_log_loss":avg([x.get("team_only_log_loss") for x in xs]),
+            "final_log_loss":avg([x.get("log_loss") for x in xs]),
+            "goalie_layer_delta_log_loss":avg([x.get("goalie_layer_delta_log_loss") for x in xs])
         }
 
     by_pick_side={}
@@ -381,10 +432,15 @@ def build_summary():
             "brier":avg([x.get("brier") for x in scored]),
             "log_loss":avg([x.get("log_loss") for x in scored]),
             "avg_probability_assigned_to_winner":avg([x.get("probability_assigned_to_winner") for x in scored]),
+            "team_only_brier":avg([x.get("team_only_brier") for x in scored]),
+            "team_only_log_loss":avg([x.get("team_only_log_loss") for x in scored]),
+            "goalie_layer_delta_brier":avg([x.get("goalie_layer_delta_brier") for x in scored]),
+            "goalie_layer_delta_log_loss":avg([x.get("goalie_layer_delta_log_loss") for x in scored]),
             "xg_mae_per_team":avg([x.get("goal_mae_per_team") for x in xg]),
             "total_goals_mae":avg([x.get("total_goals_abs_error") for x in xg])
         },
         "by_model":by_model,
+        "by_goalie_state":by_goalie_state,
         "by_pick_side":by_pick_side,
         "games":sorted(rows,key=lambda x:(x.get("game_date") or "",x.get("start_time_et") or "",str(x.get("game_id"))),reverse=True)
     }
