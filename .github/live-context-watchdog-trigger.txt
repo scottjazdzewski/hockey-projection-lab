@@ -1,2 +1,3 @@
-Hockey Lab live-context/projection recovery trigger.
-Touched only when today's slate exists but live context or projections have not completed the daily rollover.
+Hockey Lab live-context and projection recovery trigger
+Recovery requested: 2026-11-06T05:07:00-05:00
+Reason: slate and context now current for 2026-11-06 (3 games), but game-projections.json still dated 2026-11-05.
