@@ -1,118 +1,38 @@
 {
-  "date": "2026-11-05",
+  "date": "2026-11-06",
   "timezone": "America/New_York",
-  "display_date": "Thursday, November 5",
-  "updated_at": "2026-11-05T16:44:38.720230-05:00",
+  "display_date": "Friday, November 6",
+  "updated_at": "2026-11-06T05:03:49.984470-05:00",
   "source": "Official NHL live score feed",
   "games": [
     {
-      "game_id": 2026020251,
-      "away_abbr": "UTA",
-      "away_name": "Utah Mammoth",
-      "home_abbr": "MTL",
-      "home_name": "Montreal Canadiens",
+      "game_id": 2026020262,
+      "away_abbr": "CBJ",
+      "away_name": "Columbus Blue Jackets",
+      "home_abbr": "BUF",
+      "home_name": "Buffalo Sabres",
       "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-05T19:00:00-05:00",
+      "start_time_et": "2026-11-06T19:00:00-05:00",
       "state": "FUT"
     },
     {
-      "game_id": 2026020252,
-      "away_abbr": "VGK",
-      "away_name": "Vegas Golden Knights",
-      "home_abbr": "DET",
-      "home_name": "Detroit Red Wings",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-05T19:00:00-05:00",
+      "game_id": 2026020263,
+      "away_abbr": "SJS",
+      "away_name": "San Jose Sharks",
+      "home_abbr": "MIN",
+      "home_name": "Minnesota Wild",
+      "time_et": "8:00 PM ET",
+      "start_time_et": "2026-11-06T20:00:00-05:00",
       "state": "FUT"
     },
     {
-      "game_id": 2026020253,
-      "away_abbr": "CHI",
-      "away_name": "Chicago Blackhawks",
-      "home_abbr": "TBL",
-      "home_name": "Tampa Bay Lightning",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-05T19:00:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020254,
-      "away_abbr": "STL",
-      "away_name": "St. Louis Blues",
-      "home_abbr": "NJD",
-      "home_name": "New Jersey Devils",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-05T19:00:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020255,
-      "away_abbr": "CAR",
-      "away_name": "Carolina Hurricanes",
-      "home_abbr": "NYI",
-      "home_name": "New York Islanders",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-05T19:00:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020256,
-      "away_abbr": "PHI",
-      "away_name": "Philadelphia Flyers",
-      "home_abbr": "NYR",
-      "home_name": "New York Rangers",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-05T19:00:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020257,
-      "away_abbr": "BOS",
-      "away_name": "Boston Bruins",
-      "home_abbr": "PIT",
-      "home_name": "Pittsburgh Penguins",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-05T19:00:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020258,
-      "away_abbr": "DAL",
-      "away_name": "Dallas Stars",
-      "home_abbr": "CBJ",
-      "home_name": "Columbus Blue Jackets",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-05T19:00:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020259,
-      "away_abbr": "VAN",
-      "away_name": "Vancouver Canucks",
-      "home_abbr": "WPG",
-      "home_name": "Winnipeg Jets",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-05T19:00:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020260,
+      "game_id": 2026020264,
       "away_abbr": "ANA",
       "away_name": "Anaheim Ducks",
-      "home_abbr": "EDM",
-      "home_name": "Edmonton Oilers",
+      "home_abbr": "CGY",
+      "home_name": "Calgary Flames",
       "time_et": "8:00 PM ET",
-      "start_time_et": "2026-11-05T20:00:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020261,
-      "away_abbr": "NSH",
-      "away_name": "Nashville Predators",
-      "home_abbr": "COL",
-      "home_name": "Colorado Avalanche",
-      "time_et": "9:30 PM ET",
-      "start_time_et": "2026-11-05T21:30:00-05:00",
+      "start_time_et": "2026-11-06T20:00:00-05:00",
       "state": "FUT"
     }
   ]
