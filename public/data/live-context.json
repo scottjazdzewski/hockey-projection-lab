@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "date": "2026-11-05",
-  "generated_at": "2026-11-05T16:44:51.298175-05:00",
+  "date": "2026-11-06",
+  "generated_at": "2026-11-06T05:04:02.760826-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -11,3828 +11,24 @@
   },
   "games": [
     {
-      "game_id": 2026020251,
+      "game_id": 2026020262,
       "away": {
-        "abbr": "UTA",
-        "goalie": {
-          "name": "Sebastian Cossa",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T17:22:41.077Z",
-          "source_name": "Renaud Lavoie",
-          "source_url": "https://x.com/renlavoietva/status/2118390298627674246",
-          "player_id": 34654
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-04T15:00:09.108Z",
-          "source_name": "Last Game (2026-11-03)",
-          "source_url": "https://www.nhl.com/gamecenter/uta-vs-tor/2026/11/03/2026020236",
-          "groups": {
-            "f1": [
-              {
-                "name": "Clayton Keller",
-                "position": "lw",
-                "player_id": 2642
-              },
-              {
-                "name": "Barrett Hayton",
-                "position": "c",
-                "player_id": 4796
-              },
-              {
-                "name": "Anders Lee",
-                "position": "rw",
-                "player_id": 2071
-              }
-            ],
-            "f2": [
-              {
-                "name": "Logan Cooley",
-                "position": "lw",
-                "player_id": 33387
-              },
-              {
-                "name": "Vincent Trocheck",
-                "position": "c",
-                "player_id": 2006
-              },
-              {
-                "name": "Lawson Crouse",
-                "position": "rw",
-                "player_id": 2476
-              }
-            ],
-            "f3": [
-              {
-                "name": "Nick Schmaltz",
-                "position": "lw",
-                "player_id": 2678
-              },
-              {
-                "name": "Jack McBain",
-                "position": "c",
-                "player_id": 28796
-              },
-              {
-                "name": "Dylan Guenther",
-                "position": "rw",
-                "player_id": 34613
-              }
-            ],
-            "f4": [
-              {
-                "name": "Michael Carcone",
-                "position": "lw",
-                "player_id": 3864
-              },
-              {
-                "name": "Kevin Stenlund",
-                "position": "c",
-                "player_id": 4556
-              },
-              {
-                "name": "Liam O'Brien",
-                "position": "rw",
-                "player_id": 2377
-              }
-            ],
-            "d1": [
-              {
-                "name": "Mikhail Sergachev",
-                "position": "ld",
-                "player_id": 2639
-              },
-              {
-                "name": "MacKenzie Weegar",
-                "position": "rd",
-                "player_id": 2777
-              }
-            ],
-            "d2": [
-              {
-                "name": "Nate Schmidt",
-                "position": "ld",
-                "player_id": 2093
-              },
-              {
-                "name": "Andrew Peeke",
-                "position": "rd",
-                "player_id": 27242
-              }
-            ],
-            "d3": [
-              {
-                "name": "Dmitri Simashev",
-                "position": "ld",
-                "player_id": 38458
-              },
-              {
-                "name": "Nick DeSimone",
-                "position": "rd",
-                "player_id": 2886
-              }
-            ],
-            "g": [
-              {
-                "name": "Sebastian Cossa",
-                "position": "g1",
-                "player_id": 34654
-              },
-              {
-                "name": "Karel Vejmelka",
-                "position": "g2",
-                "player_id": 26614
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Nick Schmaltz",
-                "position": "sk1",
-                "player_id": 2678
-              },
-              {
-                "name": "Logan Cooley",
-                "position": "sk2",
-                "player_id": 33387
-              },
-              {
-                "name": "Clayton Keller",
-                "position": "sk3",
-                "player_id": 2642
-              },
-              {
-                "name": "Dylan Guenther",
-                "position": "sk4",
-                "player_id": 34613
-              },
-              {
-                "name": "Mikhail Sergachev",
-                "position": "sk5",
-                "player_id": 2639
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Anders Lee",
-                "position": "sk1",
-                "player_id": 2071
-              },
-              {
-                "name": "Vincent Trocheck",
-                "position": "sk2",
-                "player_id": 2006
-              },
-              {
-                "name": "Michael Carcone",
-                "position": "sk3",
-                "player_id": 3864
-              },
-              {
-                "name": "Barrett Hayton",
-                "position": "sk4",
-                "player_id": 4796
-              },
-              {
-                "name": "MacKenzie Weegar",
-                "position": "sk5",
-                "player_id": 2777
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Nick Schmaltz",
-                "position": "sk1",
-                "player_id": 2678
-              },
-              {
-                "name": "Lawson Crouse",
-                "position": "sk2",
-                "player_id": 2476
-              },
-              {
-                "name": "Mikhail Sergachev",
-                "position": "sk3",
-                "player_id": 2639
-              },
-              {
-                "name": "MacKenzie Weegar",
-                "position": "sk4",
-                "player_id": 2777
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Kevin Stenlund",
-                "position": "sk1",
-                "player_id": 4556
-              },
-              {
-                "name": "Jack McBain",
-                "position": "sk2",
-                "player_id": 28796
-              },
-              {
-                "name": "Nate Schmidt",
-                "position": "sk3",
-                "player_id": 2093
-              },
-              {
-                "name": "Andrew Peeke",
-                "position": "sk4",
-                "player_id": 27242
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "John Marino",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 25570
-            },
-            {
-              "name": "Kailer Yamamoto",
-              "injury_status": "dtd",
-              "game_time_decision": false,
-              "player_id": 2796
-            }
-          ]
-        }
-      },
-      "home": {
-        "abbr": "MTL",
-        "goalie": {
-          "name": "Jakub Dobes",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T16:09:56.651Z",
-          "source_name": "Montreal Canadiens",
-          "source_url": "https://x.com/CanadiensMTL/status/2118374807125577932",
-          "player_id": 31895
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T16:25:02.147Z",
-          "source_name": "Projected",
-          "source_url": " ",
-          "groups": {
-            "f1": [
-              {
-                "name": "Cole Caufield",
-                "position": "lw",
-                "player_id": 30424
-              },
-              {
-                "name": "Nick Suzuki",
-                "position": "c",
-                "player_id": 2789
-              },
-              {
-                "name": "Juraj Slafkovsky",
-                "position": "rw",
-                "player_id": 35721
-              }
-            ],
-            "f2": [
-              {
-                "name": "Chris Kreider",
-                "position": "lw",
-                "player_id": 1926
-              },
-              {
-                "name": "Jake Evans",
-                "position": "c",
-                "player_id": 4708
-              },
-              {
-                "name": "Josh Anderson",
-                "position": "rw",
-                "player_id": 21932
-              }
-            ],
-            "f3": [
-              {
-                "name": "Zack Bolduc",
-                "position": "lw",
-                "player_id": 31240
-              },
-              {
-                "name": "Phillip Danault",
-                "position": "c",
-                "player_id": 1846
-              },
-              {
-                "name": "Alexandre Texier",
-                "position": "rw",
-                "player_id": 4759
-              }
-            ],
-            "f4": [
-              {
-                "name": "Alex Newhook",
-                "position": "lw",
-                "player_id": 30425
-              },
-              {
-                "name": "Oliver Kapanen",
-                "position": "c",
-                "player_id": 34678
-              },
-              {
-                "name": "Kirby Dach",
-                "position": "rw",
-                "player_id": 29585
-              }
-            ],
-            "d1": [
-              {
-                "name": "Lane Hutson",
-                "position": "ld",
-                "player_id": 33307
-              },
-              {
-                "name": "Noah Dobson",
-                "position": "rd",
-                "player_id": 4789
-              }
-            ],
-            "d2": [
-              {
-                "name": "Kaiden Guhle",
-                "position": "ld",
-                "player_id": 32947
-              },
-              {
-                "name": "Alexandre Carrier",
-                "position": "rd",
-                "player_id": 2732
-              }
-            ],
-            "d3": [
-              {
-                "name": "Arber Xhekaj",
-                "position": "ld",
-                "player_id": 29784
-              },
-              {
-                "name": "Adam Engstrom",
-                "position": "rd",
-                "player_id": 36434
-              }
-            ],
-            "g": [
-              {
-                "name": "Jakub Dobes",
-                "position": "g1",
-                "player_id": 31895
-              },
-              {
-                "name": "Jacob Fowler",
-                "position": "g2",
-                "player_id": 38444
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Juraj Slafkovsky",
-                "position": "sk1",
-                "player_id": 35721
-              },
-              {
-                "name": "Nick Suzuki",
-                "position": "sk2",
-                "player_id": 2789
-              },
-              {
-                "name": "Zack Bolduc",
-                "position": "sk3",
-                "player_id": 31240
-              },
-              {
-                "name": "Cole Caufield",
-                "position": "sk4",
-                "player_id": 30424
-              },
-              {
-                "name": "Lane Hutson",
-                "position": "sk5",
-                "player_id": 33307
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Chris Kreider",
-                "position": "sk1",
-                "player_id": 1926
-              },
-              {
-                "name": "Oliver Kapanen",
-                "position": "sk2",
-                "player_id": 34678
-              },
-              {
-                "name": "Alexandre Texier",
-                "position": "sk3",
-                "player_id": 4759
-              },
-              {
-                "name": "Noah Dobson",
-                "position": "sk4",
-                "player_id": 4789
-              },
-              {
-                "name": "Alex Newhook",
-                "position": "sk5",
-                "player_id": 30425
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Phillip Danault",
-                "position": "sk1",
-                "player_id": 1846
-              },
-              {
-                "name": "Jake Evans",
-                "position": "sk2",
-                "player_id": 4708
-              },
-              {
-                "name": "Kaiden Guhle",
-                "position": "sk3",
-                "player_id": 32947
-              },
-              {
-                "name": "Alexandre Carrier",
-                "position": "sk4",
-                "player_id": 2732
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Nick Suzuki",
-                "position": "sk1",
-                "player_id": 2789
-              },
-              {
-                "name": "Josh Anderson",
-                "position": "sk2",
-                "player_id": 21932
-              },
-              {
-                "name": "Arber Xhekaj",
-                "position": "sk3",
-                "player_id": 29784
-              },
-              {
-                "name": "Noah Dobson",
-                "position": "sk4",
-                "player_id": 4789
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Ivan Demidov",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 38445
-            },
-            {
-              "name": "Sam Montembeault",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 4479
-            },
-            {
-              "name": "Mike Matheson",
-              "injury_status": "out",
-              "game_time_decision": false,
-              "player_id": 2583
-            }
-          ]
-        }
-      }
-    },
-    {
-      "game_id": 2026020252,
-      "away": {
-        "abbr": "VGK",
-        "goalie": {
-          "name": "Carter Hart",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
-          "player_id": 3874
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T19:14:58.304Z",
-          "source_name": "Projected",
-          "source_url": "https://x.com/DannyWebster21/status/2118420643251446074",
-          "groups": {
-            "f1": [
-              {
-                "name": "Brett Howden",
-                "position": "lw",
-                "player_id": 2660
-              },
-              {
-                "name": "Jack Eichel",
-                "position": "c",
-                "player_id": 2472
-              },
-              {
-                "name": "Mark Stone",
-                "position": "rw",
-                "player_id": 1779
-              }
-            ],
-            "f2": [
-              {
-                "name": "Ivan Barbashev",
-                "position": "lw",
-                "player_id": 2737
-              },
-              {
-                "name": "William Karlsson",
-                "position": "c",
-                "player_id": 2387
-              },
-              {
-                "name": "Mitch Marner",
-                "position": "rw",
-                "player_id": 2475
-              }
-            ],
-            "f3": [
-              {
-                "name": "Trevor Connelly",
-                "position": "lw",
-                "player_id": 36773
-              },
-              {
-                "name": "Tomas Hertl",
-                "position": "c",
-                "player_id": 2125
-              },
-              {
-                "name": "Victor Olofsson",
-                "position": "rw",
-                "player_id": 4718
-              }
-            ],
-            "f4": [
-              {
-                "name": "Braeden Bowman",
-                "position": "lw",
-                "player_id": 30925
-              },
-              {
-                "name": "Nic Dowd",
-                "position": "c",
-                "player_id": 2607
-              },
-              {
-                "name": "Marc Gatcomb",
-                "position": "rw",
-                "player_id": 37866
-              }
-            ],
-            "d1": [
-              {
-                "name": "Brayden McNabb",
-                "position": "ld",
-                "player_id": 1681
-              },
-              {
-                "name": "Shea Theodore",
-                "position": "rd",
-                "player_id": 2157
-              }
-            ],
-            "d2": [
-              {
-                "name": "Jeremy Lauzon",
-                "position": "ld",
-                "player_id": 3787
-              },
-              {
-                "name": "Rasmus Andersson",
-                "position": "rd",
-                "player_id": 2762
-              }
-            ],
-            "d3": [
-              {
-                "name": "Noah Hanifin",
-                "position": "ld",
-                "player_id": 2473
-              },
-              {
-                "name": "Dylan Coghlan",
-                "position": "rd",
-                "player_id": 4601
-              }
-            ],
-            "g": [
-              {
-                "name": "Carter Hart",
-                "position": "g1",
-                "player_id": 3874
-              },
-              {
-                "name": "Adin Hill",
-                "position": "g2",
-                "player_id": 2906
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Mark Stone",
-                "position": "sk1",
-                "player_id": 1779
-              },
-              {
-                "name": "Tomas Hertl",
-                "position": "sk2",
-                "player_id": 2125
-              },
-              {
-                "name": "Victor Olofsson",
-                "position": "sk3",
-                "player_id": 4718
-              },
-              {
-                "name": "Jack Eichel",
-                "position": "sk4",
-                "player_id": 2472
-              },
-              {
-                "name": "Mitch Marner",
-                "position": "sk5",
-                "player_id": 2475
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Ivan Barbashev",
-                "position": "sk1",
-                "player_id": 2737
-              },
-              {
-                "name": "William Karlsson",
-                "position": "sk2",
-                "player_id": 2387
-              },
-              {
-                "name": "Trevor Connelly",
-                "position": "sk3",
-                "player_id": 36773
-              },
-              {
-                "name": "Rasmus Andersson",
-                "position": "sk4",
-                "player_id": 2762
-              },
-              {
-                "name": "Shea Theodore",
-                "position": "sk5",
-                "player_id": 2157
-              }
-            ],
-            "pk1": [
-              {
-                "name": "William Karlsson",
-                "position": "sk1",
-                "player_id": 2387
-              },
-              {
-                "name": "Mitch Marner",
-                "position": "sk2",
-                "player_id": 2475
-              },
-              {
-                "name": "Brayden McNabb",
-                "position": "sk3",
-                "player_id": 1681
-              },
-              {
-                "name": "Shea Theodore",
-                "position": "sk4",
-                "player_id": 2157
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Jack Eichel",
-                "position": "sk1",
-                "player_id": 2472
-              },
-              {
-                "name": "Mark Stone",
-                "position": "sk2",
-                "player_id": 1779
-              },
-              {
-                "name": "Jeremy Lauzon",
-                "position": "sk3",
-                "player_id": 3787
-              },
-              {
-                "name": "Noah Hanifin",
-                "position": "sk4",
-                "player_id": 2473
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Parker Wotherspoon",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 3836
-            }
-          ]
-        }
-      },
-      "home": {
-        "abbr": "DET",
-        "goalie": {
-          "name": "Daniil Tarasov",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T15:28:04.226Z",
-          "source_name": "Ansar Khan",
-          "source_url": "https://x.com/AnsarKhanMLive/status/2118364235701108780?a=OV_Oe37lEKSy-89eAMc&s=20",
-          "player_id": 28133
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T15:47:20.204Z",
-          "source_name": "Ansar Khan",
-          "source_url": "https://x.com/AnsarKhanMLive/status/2118367395924336956",
-          "groups": {
-            "f1": [
-              {
-                "name": "Alex DeBrincat",
-                "position": "lw",
-                "player_id": 2699
-              },
-              {
-                "name": "Emmitt Finnie",
-                "position": "c",
-                "player_id": 33612
-              },
-              {
-                "name": "Viktor Arvidsson",
-                "position": "rw",
-                "player_id": 2453
-              }
-            ],
-            "f2": [
-              {
-                "name": "Michael Brandsegg-Nyg\u00e5rd",
-                "position": "lw",
-                "player_id": 38141
-              },
-              {
-                "name": "Andrew Copp",
-                "position": "c",
-                "player_id": 2457
-              },
-              {
-                "name": "Lucas Raymond",
-                "position": "rw",
-                "player_id": 31783
-              }
-            ],
-            "f3": [
-              {
-                "name": "Michael Rasmussen",
-                "position": "lw",
-                "player_id": 2784
-              },
-              {
-                "name": "J.T. Compher",
-                "position": "c",
-                "player_id": 2751
-              },
-              {
-                "name": "Nate Danielson",
-                "position": "rw",
-                "player_id": 31508
-              }
-            ],
-            "f4": [
-              {
-                "name": "Carter Mazur",
-                "position": "lw",
-                "player_id": 34532
-              },
-              {
-                "name": "Sheldon Dries",
-                "position": "c",
-                "player_id": 4826
-              },
-              {
-                "name": "Keegan Kolesar",
-                "position": "rw",
-                "player_id": 3790
-              }
-            ],
-            "d1": [
-              {
-                "name": "Ben Chiarot",
-                "position": "ld",
-                "player_id": 1587
-              },
-              {
-                "name": "Moritz Seider",
-                "position": "rd",
-                "player_id": 30610
-              }
-            ],
-            "d2": [
-              {
-                "name": "William Wallinder",
-                "position": "ld",
-                "player_id": 33029
-              },
-              {
-                "name": "Justin Faulk",
-                "position": "rd",
-                "player_id": 1651
-              }
-            ],
-            "d3": [
-              {
-                "name": "Andreas Englund",
-                "position": "ld",
-                "player_id": 2716
-              },
-              {
-                "name": "Anton Johansson",
-                "position": "rd",
-                "player_id": 36465
-              }
-            ],
-            "g": [
-              {
-                "name": "Daniil Tarasov",
-                "position": "g1",
-                "player_id": 28133
-              },
-              {
-                "name": "Michal Postava",
-                "position": "g2",
-                "player_id": 38462
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Viktor Arvidsson",
-                "position": "sk1",
-                "player_id": 2453
-              },
-              {
-                "name": "Emmitt Finnie",
-                "position": "sk2",
-                "player_id": 33612
-              },
-              {
-                "name": "Lucas Raymond",
-                "position": "sk3",
-                "player_id": 31783
-              },
-              {
-                "name": "Alex DeBrincat",
-                "position": "sk4",
-                "player_id": 2699
-              },
-              {
-                "name": "Moritz Seider",
-                "position": "sk5",
-                "player_id": 30610
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Michael Rasmussen",
-                "position": "sk1",
-                "player_id": 2784
-              },
-              {
-                "name": "J.T. Compher",
-                "position": "sk2",
-                "player_id": 2751
-              },
-              {
-                "name": "Andrew Copp",
-                "position": "sk3",
-                "player_id": 2457
-              },
-              {
-                "name": "Michael Brandsegg-Nyg\u00e5rd",
-                "position": "sk4",
-                "player_id": 38141
-              },
-              {
-                "name": "Justin Faulk",
-                "position": "sk5",
-                "player_id": 1651
-              }
-            ],
-            "pk1": [
-              {
-                "name": "J.T. Compher",
-                "position": "sk1",
-                "player_id": 2751
-              },
-              {
-                "name": "Sheldon Dries",
-                "position": "sk2",
-                "player_id": 4826
-              },
-              {
-                "name": "Ben Chiarot",
-                "position": "sk3",
-                "player_id": 1587
-              },
-              {
-                "name": "Moritz Seider",
-                "position": "sk4",
-                "player_id": 30610
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Michael Rasmussen",
-                "position": "sk1",
-                "player_id": 2784
-              },
-              {
-                "name": "Keegan Kolesar",
-                "position": "sk2",
-                "player_id": 3790
-              },
-              {
-                "name": "Andreas Englund",
-                "position": "sk3",
-                "player_id": 2716
-              },
-              {
-                "name": "Justin Faulk",
-                "position": "sk4",
-                "player_id": 1651
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Albert Johansson",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 30661
-            },
-            {
-              "name": "Marco Kasper",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 36364
-            },
-            {
-              "name": "Mason Appleton",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 4582
-            },
-            {
-              "name": "Simon Edvinsson",
-              "injury_status": "out",
-              "game_time_decision": false,
-              "player_id": 34667
-            },
-            {
-              "name": "Dylan Larkin",
-              "injury_status": "out",
-              "game_time_decision": false,
-              "player_id": 2522
-            },
-            {
-              "name": "John Gibson",
-              "injury_status": "dtd",
-              "game_time_decision": false,
-              "player_id": 1870
-            }
-          ]
-        }
-      }
-    },
-    {
-      "game_id": 2026020253,
-      "away": {
-        "abbr": "CHI",
-        "goalie": {
-          "name": "Arvid Soderblom",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T19:55:09.815Z",
-          "source_name": "Vinnie Parise",
-          "source_url": "https://x.com/VinnieParise/status/2118428010189656330?a=Cx5p7vJaTibgZFcY0Ew&s=20",
-          "player_id": 34603
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T15:06:23.340Z",
-          "source_name": "Last Game (2026-11-04)",
-          "source_url": "https://www.nhl.com/gamecenter/chi-vs-fla/2026/11/04/2026020248",
-          "groups": {
-            "f1": [
-              {
-                "name": "Roman Kantserov",
-                "position": "lw",
-                "player_id": 38906
-              },
-              {
-                "name": "Connor Bedard",
-                "position": "c",
-                "player_id": 33531
-              },
-              {
-                "name": "Tyler Bertuzzi",
-                "position": "rw",
-                "player_id": 2392
-              }
-            ],
-            "f2": [
-              {
-                "name": "Oliver Moore",
-                "position": "lw",
-                "player_id": 33143
-              },
-              {
-                "name": "Frank Nazar",
-                "position": "c",
-                "player_id": 33280
-              },
-              {
-                "name": "Ryan Donato",
-                "position": "rw",
-                "player_id": 4635
-              }
-            ],
-            "f3": [
-              {
-                "name": "Cole Smith",
-                "position": "lw",
-                "player_id": 32926
-              },
-              {
-                "name": "Anton Frondell",
-                "position": "c",
-                "player_id": 38471
-              },
-              {
-                "name": "Teuvo Teravainen",
-                "position": "rw",
-                "player_id": 2128
-              }
-            ],
-            "f4": [
-              {
-                "name": "Dillon Boucher",
-                "position": "lw",
-                "player_id": 23668
-              },
-              {
-                "name": "Ryan Greene",
-                "position": "c",
-                "player_id": 31310
-              },
-              {
-                "name": "Jordan Greenway",
-                "position": "rw",
-                "player_id": 4644
-              }
-            ],
-            "d1": [
-              {
-                "name": "Wyatt Kaiser",
-                "position": "ld",
-                "player_id": 37913
-              },
-              {
-                "name": "Artyom Levshunov",
-                "position": "rd",
-                "player_id": 38138
-              }
-            ],
-            "d2": [
-              {
-                "name": "Alex Vlasic",
-                "position": "ld",
-                "player_id": 30427
-              },
-              {
-                "name": "Ian Cole",
-                "position": "rd",
-                "player_id": 1313
-              }
-            ],
-            "d3": [
-              {
-                "name": "Ethan Del Mastro",
-                "position": "ld",
-                "player_id": 30841
-              },
-              {
-                "name": "Sam Rinzel",
-                "position": "rd",
-                "player_id": 34789
-              }
-            ],
-            "g": [
-              {
-                "name": "Arvid Soderblom",
-                "position": "g1",
-                "player_id": 34603
-              },
-              {
-                "name": "Spencer Knight",
-                "position": "g2",
-                "player_id": 30475
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Frank Nazar",
-                "position": "sk1",
-                "player_id": 33280
-              },
-              {
-                "name": "Roman Kantserov",
-                "position": "sk2",
-                "player_id": 38906
-              },
-              {
-                "name": "Anton Frondell",
-                "position": "sk3",
-                "player_id": 38471
-              },
-              {
-                "name": "Connor Bedard",
-                "position": "sk4",
-                "player_id": 33531
-              },
-              {
-                "name": "Artyom Levshunov",
-                "position": "sk5",
-                "player_id": 38138
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Tyler Bertuzzi",
-                "position": "sk1",
-                "player_id": 2392
-              },
-              {
-                "name": "Ryan Donato",
-                "position": "sk2",
-                "player_id": 4635
-              },
-              {
-                "name": "Oliver Moore",
-                "position": "sk3",
-                "player_id": 33143
-              },
-              {
-                "name": "Teuvo Teravainen",
-                "position": "sk4",
-                "player_id": 2128
-              },
-              {
-                "name": "Sam Rinzel",
-                "position": "sk5",
-                "player_id": 34789
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Anton Frondell",
-                "position": "sk1",
-                "player_id": 38471
-              },
-              {
-                "name": "Cole Smith",
-                "position": "sk2",
-                "player_id": 32926
-              },
-              {
-                "name": "Alex Vlasic",
-                "position": "sk3",
-                "player_id": 30427
-              },
-              {
-                "name": "Ian Cole",
-                "position": "sk4",
-                "player_id": 1313
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Jordan Greenway",
-                "position": "sk1",
-                "player_id": 4644
-              },
-              {
-                "name": "Frank Nazar",
-                "position": "sk2",
-                "player_id": 33280
-              },
-              {
-                "name": "Wyatt Kaiser",
-                "position": "sk3",
-                "player_id": 37913
-              },
-              {
-                "name": "Artyom Levshunov",
-                "position": "sk4",
-                "player_id": 38138
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Patrick Kane",
-              "injury_status": "out",
-              "game_time_decision": false,
-              "player_id": 305
-            },
-            {
-              "name": "Bowen Byram",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 28523
-            }
-          ]
-        }
-      },
-      "home": {
-        "abbr": "TBL",
-        "goalie": {
-          "name": "Andrei Vasilevskiy",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T17:24:47.237Z",
-          "source_name": "Benjamin Pierce",
-          "source_url": "https://x.com/DFOFantasy/status/2118393834778296574",
-          "player_id": 2413
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-04T15:05:22.560Z",
-          "source_name": "Last Game (2026-11-03)",
-          "source_url": "https://www.nhl.com/gamecenter/det-vs-tbl/2026/11/03/2026020238",
-          "groups": {
-            "f1": [
-              {
-                "name": "Jake Guentzel",
-                "position": "lw",
-                "player_id": 2707
-              },
-              {
-                "name": "Brayden Point",
-                "position": "c",
-                "player_id": 2456
-              },
-              {
-                "name": "Nikita Kucherov",
-                "position": "rw",
-                "player_id": 2031
-              }
-            ],
-            "f2": [
-              {
-                "name": "Brandon Hagel",
-                "position": "lw",
-                "player_id": 27046
-              },
-              {
-                "name": "Anthony Cirelli",
-                "position": "c",
-                "player_id": 3842
-              }
-            ],
-            "f3": [
-              {
-                "name": "Ilya Mikheyev",
-                "position": "lw",
-                "player_id": 30651
-              },
-              {
-                "name": "Dominic James",
-                "position": "c",
-                "player_id": 32816
-              },
-              {
-                "name": "Pontus Holmberg",
-                "position": "rw",
-                "player_id": 29640
-              }
-            ],
-            "f4": [
-              {
-                "name": "Jeffrey Viel",
-                "position": "lw",
-                "player_id": 24312
-              },
-              {
-                "name": "Conor Geekie",
-                "position": "c",
-                "player_id": 31505
-              },
-              {
-                "name": "Gage Goncalves",
-                "position": "rw",
-                "player_id": 32521
-              }
-            ],
-            "d1": [
-              {
-                "name": "J.J. Moser",
-                "position": "ld",
-                "player_id": 34680
-              },
-              {
-                "name": "Maxwell Crozier",
-                "position": "rd",
-                "player_id": 28863
-              }
-            ],
-            "d2": [
-              {
-                "name": "Ryan McDonagh",
-                "position": "ld",
-                "player_id": 1048
-              },
-              {
-                "name": "Erik Cernak",
-                "position": "rd",
-                "player_id": 2749
-              }
-            ],
-            "d3": [
-              {
-                "name": "Victor Hedman",
-                "position": "ld",
-                "player_id": 1369
-              },
-              {
-                "name": "John Carlson",
-                "position": "rd",
-                "player_id": 1507
-              }
-            ],
-            "g": [
-              {
-                "name": "Andrei Vasilevskiy",
-                "position": "g1",
-                "player_id": 2413
-              },
-              {
-                "name": "Dennis Hildeby",
-                "position": "g2",
-                "player_id": 36477
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Jake Guentzel",
-                "position": "sk1",
-                "player_id": 2707
-              },
-              {
-                "name": "Brayden Point",
-                "position": "sk2",
-                "player_id": 2456
-              },
-              {
-                "name": "Nikita Kucherov",
-                "position": "sk3",
-                "player_id": 2031
-              },
-              {
-                "name": "Anthony Cirelli",
-                "position": "sk4",
-                "player_id": 3842
-              },
-              {
-                "name": "Charle-Edouard D'Astous",
-                "position": "sk5",
-                "player_id": 26500
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Pontus Holmberg",
-                "position": "sk1",
-                "player_id": 29640
-              },
-              {
-                "name": "Conor Geekie",
-                "position": "sk2",
-                "player_id": 31505
-              },
-              {
-                "name": "Gage Goncalves",
-                "position": "sk3",
-                "player_id": 32521
-              },
-              {
-                "name": "Brandon Hagel",
-                "position": "sk4",
-                "player_id": 27046
-              },
-              {
-                "name": "John Carlson",
-                "position": "sk5",
-                "player_id": 1507
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Anthony Cirelli",
-                "position": "sk1",
-                "player_id": 3842
-              },
-              {
-                "name": "Brandon Hagel",
-                "position": "sk2",
-                "player_id": 27046
-              },
-              {
-                "name": "Ryan McDonagh",
-                "position": "sk3",
-                "player_id": 1048
-              },
-              {
-                "name": "Maxwell Crozier",
-                "position": "sk4",
-                "player_id": 28863
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Dominic James",
-                "position": "sk1",
-                "player_id": 32816
-              },
-              {
-                "name": "Ilya Mikheyev",
-                "position": "sk2",
-                "player_id": 30651
-              },
-              {
-                "name": "Victor Hedman",
-                "position": "sk3",
-                "player_id": 1369
-              },
-              {
-                "name": "J.J. Moser",
-                "position": "sk4",
-                "player_id": 34680
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Yanni Gourde",
-              "injury_status": "out",
-              "game_time_decision": false,
-              "player_id": 2566
-            },
-            {
-              "name": "Zemgus Girgensons",
-              "injury_status": "out",
-              "game_time_decision": false,
-              "player_id": 1953
-            }
-          ]
-        }
-      }
-    },
-    {
-      "game_id": 2026020254,
-      "away": {
-        "abbr": "STL",
-        "goalie": {
-          "name": "Jordan Binnington",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T17:18:22.674Z",
-          "source_name": "Jeremy Rutherford",
-          "source_url": "https://x.com/jprutherford/status/2118391910721073633?a=T-HEyRKS3ncF_uxYlvs&s=20",
-          "player_id": 1984
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T18:25:37.043Z",
-          "source_name": "Lou Korac",
-          "source_url": "https://thehockeynews.com/nhl/st-louis-blues/game-day/11-5-26-blues-devils-gameday-lineup",
-          "groups": {
-            "f1": [
-              {
-                "name": "Dylan Holloway",
-                "position": "lw",
-                "player_id": 32948
-              },
-              {
-                "name": "Robert Thomas",
-                "position": "c",
-                "player_id": 2810
-              },
-              {
-                "name": "Jimmy Snuggerud",
-                "position": "rw",
-                "player_id": 31706
-              }
-            ],
-            "f2": [
-              {
-                "name": "Connor McMichael",
-                "position": "lw",
-                "player_id": 29203
-              },
-              {
-                "name": "Mason McTavish",
-                "position": "c",
-                "player_id": 30834
-              },
-              {
-                "name": "Aleksanteri Kaskimaki",
-                "position": "rw",
-                "player_id": 36379
-              }
-            ],
-            "f3": [
-              {
-                "name": "Jake Neighbours",
-                "position": "lw",
-                "player_id": 29498
-              },
-              {
-                "name": "Dalibor Dvorsky",
-                "position": "c",
-                "player_id": 35010
-              },
-              {
-                "name": "Pavel Buchnevich",
-                "position": "rw",
-                "player_id": 2673
-              }
-            ],
-            "f4": [
-              {
-                "name": "Alexey Toropchenko",
-                "position": "lw",
-                "player_id": 28113
-              },
-              {
-                "name": "Pius Suter",
-                "position": "c",
-                "player_id": 32940
-              },
-              {
-                "name": "Ross Johnston",
-                "position": "rw",
-                "player_id": 3759
-              }
-            ],
-            "d1": [
-              {
-                "name": "Philip Broberg",
-                "position": "ld",
-                "player_id": 30607
-              },
-              {
-                "name": "Brandon Carlo",
-                "position": "rd",
-                "player_id": 2692
-              }
-            ],
-            "d2": [
-              {
-                "name": "Justin Barron",
-                "position": "ld",
-                "player_id": 29338
-              },
-              {
-                "name": "Colton Parayko",
-                "position": "rd",
-                "player_id": 2531
-              }
-            ],
-            "d3": [
-              {
-                "name": "Cam Fowler",
-                "position": "ld",
-                "player_id": 16
-              },
-              {
-                "name": "Adam Ji\u0159\u00ed\u010dek",
-                "position": "rd",
-                "player_id": 38135
-              }
-            ],
-            "g": [
-              {
-                "name": "Jordan Binnington",
-                "position": "g1",
-                "player_id": 1984
-              },
-              {
-                "name": "Joel Hofer",
-                "position": "g2",
-                "player_id": 28910
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Jimmy Snuggerud",
-                "position": "sk1",
-                "player_id": 31706
-              },
-              {
-                "name": "Mason McTavish",
-                "position": "sk2",
-                "player_id": 30834
-              },
-              {
-                "name": "Jake Neighbours",
-                "position": "sk3",
-                "player_id": 29498
-              },
-              {
-                "name": "Robert Thomas",
-                "position": "sk4",
-                "player_id": 2810
-              },
-              {
-                "name": "Philip Broberg",
-                "position": "sk5",
-                "player_id": 30607
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Dylan Holloway",
-                "position": "sk1",
-                "player_id": 32948
-              },
-              {
-                "name": "Pavel Buchnevich",
-                "position": "sk2",
-                "player_id": 2673
-              },
-              {
-                "name": "Connor McMichael",
-                "position": "sk3",
-                "player_id": 29203
-              },
-              {
-                "name": "Cam Fowler",
-                "position": "sk4",
-                "player_id": 16
-              },
-              {
-                "name": "Dalibor Dvorsky",
-                "position": "sk5",
-                "player_id": 35010
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Pius Suter",
-                "position": "sk1",
-                "player_id": 32940
-              },
-              {
-                "name": "Jake Neighbours",
-                "position": "sk2",
-                "player_id": 29498
-              },
-              {
-                "name": "Philip Broberg",
-                "position": "sk3",
-                "player_id": 30607
-              },
-              {
-                "name": "Colton Parayko",
-                "position": "sk4",
-                "player_id": 2531
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Robert Thomas",
-                "position": "sk1",
-                "player_id": 2810
-              },
-              {
-                "name": "Alexey Toropchenko",
-                "position": "sk2",
-                "player_id": 28113
-              },
-              {
-                "name": "Cam Fowler",
-                "position": "sk3",
-                "player_id": 16
-              },
-              {
-                "name": "Brandon Carlo",
-                "position": "sk4",
-                "player_id": 2692
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Tyler Tucker",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 27631
-            },
-            {
-              "name": "Dillon Dube",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 3907
-            }
-          ]
-        }
-      },
-      "home": {
-        "abbr": "NJD",
-        "goalie": {
-          "name": "Connor Hellebuyck",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T16:09:24.503Z",
-          "source_name": "Mike Morreale",
-          "source_url": "https://x.com/mikemorrealeNHL/status/2118374362420035643",
-          "player_id": 2465
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T15:50:19.500Z",
-          "source_name": "Mike Morreale",
-          "source_url": "https://x.com/mikemorrealeNHL/status/2118368643410960791",
-          "groups": {
-            "f1": [
-              {
-                "name": "Timo Meier",
-                "position": "lw",
-                "player_id": 2480
-              },
-              {
-                "name": "Nico Hischier",
-                "position": "c",
-                "player_id": 2781
-              },
-              {
-                "name": "Luke Evangelista",
-                "position": "rw",
-                "player_id": 29787
-              }
-            ],
-            "f2": [
-              {
-                "name": "Arseny Gritsyuk",
-                "position": "lw",
-                "player_id": 30695
-              },
-              {
-                "name": "Jack Hughes",
-                "position": "c",
-                "player_id": 30419
-              },
-              {
-                "name": "Jesper Bratt",
-                "position": "rw",
-                "player_id": 2845
-              }
-            ],
-            "f3": [
-              {
-                "name": "Anthony Mantha",
-                "position": "lw",
-                "player_id": 2151
-              },
-              {
-                "name": "Evan Rodrigues",
-                "position": "c",
-                "player_id": 2620
-              },
-              {
-                "name": "Jesper Boqvist",
-                "position": "rw",
-                "player_id": 28107
-              }
-            ],
-            "f4": [
-              {
-                "name": "Amadeus Lombardi",
-                "position": "lw",
-                "player_id": 31074
-              },
-              {
-                "name": "Cody Glass",
-                "position": "c",
-                "player_id": 2785
-              },
-              {
-                "name": "Connor Brown",
-                "position": "rw",
-                "player_id": 2181
-              }
-            ],
-            "d1": [
-              {
-                "name": "Luke Hughes",
-                "position": "ld",
-                "player_id": 31110
-              },
-              {
-                "name": "Brett Pesce",
-                "position": "rd",
-                "player_id": 2541
-              }
-            ],
-            "d2": [
-              {
-                "name": "Jonas Siegenthaler",
-                "position": "ld",
-                "player_id": 3782
-              },
-              {
-                "name": "Dougie Hamilton",
-                "position": "rd",
-                "player_id": 1821
-              }
-            ],
-            "d3": [
-              {
-                "name": "Declan Chisholm",
-                "position": "ld",
-                "player_id": 28803
-              },
-              {
-                "name": "Johnathan Kovacevic",
-                "position": "rd",
-                "player_id": 28131
-              }
-            ],
-            "g": [
-              {
-                "name": "Connor Hellebuyck",
-                "position": "g1",
-                "player_id": 2465
-              },
-              {
-                "name": "Jake Allen",
-                "position": "g2",
-                "player_id": 1305
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Jesper Bratt",
-                "position": "sk1",
-                "player_id": 2845
-              },
-              {
-                "name": "Nico Hischier",
-                "position": "sk2",
-                "player_id": 2781
-              },
-              {
-                "name": "Connor Brown",
-                "position": "sk3",
-                "player_id": 2181
-              },
-              {
-                "name": "Jack Hughes",
-                "position": "sk4",
-                "player_id": 30419
-              },
-              {
-                "name": "Luke Hughes",
-                "position": "sk5",
-                "player_id": 31110
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Timo Meier",
-                "position": "sk1",
-                "player_id": 2480
-              },
-              {
-                "name": "Luke Evangelista",
-                "position": "sk2",
-                "player_id": 29787
-              },
-              {
-                "name": "Anthony Mantha",
-                "position": "sk3",
-                "player_id": 2151
-              },
-              {
-                "name": "Arseny Gritsyuk",
-                "position": "sk4",
-                "player_id": 30695
-              },
-              {
-                "name": "Dougie Hamilton",
-                "position": "sk5",
-                "player_id": 1821
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Nico Hischier",
-                "position": "sk1",
-                "player_id": 2781
-              },
-              {
-                "name": "Evan Rodrigues",
-                "position": "sk2",
-                "player_id": 2620
-              },
-              {
-                "name": "Jonas Siegenthaler",
-                "position": "sk3",
-                "player_id": 3782
-              },
-              {
-                "name": "Dougie Hamilton",
-                "position": "sk4",
-                "player_id": 1821
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Timo Meier",
-                "position": "sk1",
-                "player_id": 2480
-              },
-              {
-                "name": "Arseny Gritsyuk",
-                "position": "sk2",
-                "player_id": 30695
-              },
-              {
-                "name": "Brett Pesce",
-                "position": "sk3",
-                "player_id": 2541
-              },
-              {
-                "name": "Johnathan Kovacevic",
-                "position": "sk4",
-                "player_id": 28131
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Seamus Casey",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 33266
-            }
-          ]
-        }
-      }
-    },
-    {
-      "game_id": 2026020255,
-      "away": {
-        "abbr": "CAR",
-        "goalie": {
-          "name": "Brandon Bussi",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
-          "player_id": 30153
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-04T15:20:23.939Z",
-          "source_name": "Last Game (2026-11-03)",
-          "source_url": "https://www.nhl.com/gamecenter/car-vs-nsh/2026/11/03/2026020245",
-          "groups": {
-            "f1": [
-              {
-                "name": "William Carrier",
-                "position": "lw",
-                "player_id": 2704
-              },
-              {
-                "name": "Sebastian Aho",
-                "position": "c",
-                "player_id": 2677
-              },
-              {
-                "name": "Andrei Svechnikov",
-                "position": "rw",
-                "player_id": 4787
-              }
-            ],
-            "f2": [
-              {
-                "name": "Nikolaj Ehlers",
-                "position": "lw",
-                "player_id": 2370
-              },
-              {
-                "name": "Logan Stankoven",
-                "position": "c",
-                "player_id": 34617
-              },
-              {
-                "name": "Jackson Blake",
-                "position": "rw",
-                "player_id": 31812
-              }
-            ],
-            "f3": [
-              {
-                "name": "Jordan Martinook",
-                "position": "lw",
-                "player_id": 2049
-              },
-              {
-                "name": "Mark Jankowski",
-                "position": "c",
-                "player_id": 2711
-              },
-              {
-                "name": "Seth Jarvis",
-                "position": "rw",
-                "player_id": 29549
-              }
-            ],
-            "f4": [
-              {
-                "name": "Eric Robinson",
-                "position": "lw",
-                "player_id": 4650
-              },
-              {
-                "name": "Jesperi Kotkaniemi",
-                "position": "c",
-                "player_id": 4788
-              },
-              {
-                "name": "Nicolas Deslauriers",
-                "position": "rw",
-                "player_id": 1699
-              }
-            ],
-            "d1": [
-              {
-                "name": "Jaccob Slavin",
-                "position": "ld",
-                "player_id": 2516
-              },
-              {
-                "name": "Jalen Chatfield",
-                "position": "rd",
-                "player_id": 3900
-              }
-            ],
-            "d2": [
-              {
-                "name": "K'Andre Miller",
-                "position": "ld",
-                "player_id": 4812
-              },
-              {
-                "name": "Sean Walker",
-                "position": "rd",
-                "player_id": 4829
-              }
-            ],
-            "d3": [
-              {
-                "name": "Shayne Gostisbehere",
-                "position": "ld",
-                "player_id": 2398
-              },
-              {
-                "name": "Juuso Valimaki",
-                "position": "rd",
-                "player_id": 2790
-              }
-            ],
-            "g": [
-              {
-                "name": "Brandon Bussi",
-                "position": "g1",
-                "player_id": 30153
-              },
-              {
-                "name": "Pyotr Kochetkov",
-                "position": "g2",
-                "player_id": 30486
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Andrei Svechnikov",
-                "position": "sk1",
-                "player_id": 4787
-              },
-              {
-                "name": "Sebastian Aho",
-                "position": "sk2",
-                "player_id": 2677
-              },
-              {
-                "name": "Jackson Blake",
-                "position": "sk3",
-                "player_id": 31812
-              },
-              {
-                "name": "Nikolaj Ehlers",
-                "position": "sk4",
-                "player_id": 2370
-              },
-              {
-                "name": "Shayne Gostisbehere",
-                "position": "sk5",
-                "player_id": 2398
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Jesperi Kotkaniemi",
-                "position": "sk1",
-                "player_id": 4788
-              },
-              {
-                "name": "Mark Jankowski",
-                "position": "sk2",
-                "player_id": 2711
-              },
-              {
-                "name": "Seth Jarvis",
-                "position": "sk3",
-                "player_id": 29549
-              },
-              {
-                "name": "Logan Stankoven",
-                "position": "sk4",
-                "player_id": 34617
-              },
-              {
-                "name": "Juuso Valimaki",
-                "position": "sk5",
-                "player_id": 2790
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Sebastian Aho",
-                "position": "sk1",
-                "player_id": 2677
-              },
-              {
-                "name": "Eric Robinson",
-                "position": "sk2",
-                "player_id": 4650
-              },
-              {
-                "name": "Jaccob Slavin",
-                "position": "sk3",
-                "player_id": 2516
-              },
-              {
-                "name": "Jalen Chatfield",
-                "position": "sk4",
-                "player_id": 3900
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Logan Stankoven",
-                "position": "sk1",
-                "player_id": 34617
-              },
-              {
-                "name": "Jordan Martinook",
-                "position": "sk2",
-                "player_id": 2049
-              },
-              {
-                "name": "K'Andre Miller",
-                "position": "sk3",
-                "player_id": 4812
-              },
-              {
-                "name": "Sean Walker",
-                "position": "sk4",
-                "player_id": 4829
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Jordan Staal",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 1246
-            },
-            {
-              "name": "Taylor Hall",
-              "injury_status": "dtd",
-              "game_time_decision": false,
-              "player_id": 537
-            }
-          ]
-        }
-      },
-      "home": {
-        "abbr": "NYI",
-        "goalie": {
-          "name": "Semyon Varlamov",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T15:59:54.903Z",
-          "source_name": "Stefen Rosner",
-          "source_url": "https://x.com/stefen_rosner/status/2118372348189454767?a=5xdCMJXNHdp3HO6MSTM&s=20",
-          "player_id": 1545
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-04T13:16:46.254Z",
-          "source_name": "Stefen Rosner",
-          "source_url": "https://x.com/stefen_rosner/status/2117645666046312713",
-          "groups": {
-            "f1": [
-              {
-                "name": "Simon Holmstrom",
-                "position": "lw",
-                "player_id": 30654
-              },
-              {
-                "name": "Bo Horvat",
-                "position": "c",
-                "player_id": 2141
-              },
-              {
-                "name": "Kyle Palmieri",
-                "position": "rw",
-                "player_id": 34
-              }
-            ],
-            "f2": [
-              {
-                "name": "Emil Heineman",
-                "position": "lw",
-                "player_id": 33094
-              },
-              {
-                "name": "Brayden Schenn",
-                "position": "c",
-                "player_id": 773
-              },
-              {
-                "name": "Victor Eklund",
-                "position": "rw",
-                "player_id": 38469
-              }
-            ],
-            "f3": [
-              {
-                "name": "Ondrej Palat",
-                "position": "lw",
-                "player_id": 1830
-              },
-              {
-                "name": "Jean-Gabriel Pageau",
-                "position": "c",
-                "player_id": 2057
-              },
-              {
-                "name": "Anthony Duclair",
-                "position": "rw",
-                "player_id": 2380
-              }
-            ],
-            "f4": [
-              {
-                "name": "Kyle MacLean",
-                "position": "lw",
-                "player_id": 27755
-              },
-              {
-                "name": "Casey Cizikas",
-                "position": "c",
-                "player_id": 1807
-              },
-              {
-                "name": "Mitchell Chaffee",
-                "position": "rw",
-                "player_id": 32923
-              }
-            ],
-            "d1": [
-              {
-                "name": "Logan Stanley",
-                "position": "ld",
-                "player_id": 2652
-              },
-              {
-                "name": "Matthew Schaefer",
-                "position": "rd",
-                "player_id": 38474
-              }
-            ],
-            "d2": [
-              {
-                "name": "Adam Pelech",
-                "position": "ld",
-                "player_id": 2449
-              },
-              {
-                "name": "Tony DeAngelo",
-                "position": "rd",
-                "player_id": 2664
-              }
-            ],
-            "d3": [
-              {
-                "name": "Matthew Kessel",
-                "position": "ld",
-                "player_id": 30737
-              },
-              {
-                "name": "Scott Mayfield",
-                "position": "rd",
-                "player_id": 2350
-              }
-            ],
-            "g": [
-              {
-                "name": "Ilya Sorokin",
-                "position": "g1",
-                "player_id": 25264
-              },
-              {
-                "name": "Semyon Varlamov",
-                "position": "g2",
-                "player_id": 1545
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Kyle Palmieri",
-                "position": "sk1",
-                "player_id": 34
-              },
-              {
-                "name": "Bo Horvat",
-                "position": "sk2",
-                "player_id": 2141
-              },
-              {
-                "name": "Brayden Schenn",
-                "position": "sk3",
-                "player_id": 773
-              },
-              {
-                "name": "Simon Holmstrom",
-                "position": "sk4",
-                "player_id": 30654
-              },
-              {
-                "name": "Matthew Schaefer",
-                "position": "sk5",
-                "player_id": 38474
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Ondrej Palat",
-                "position": "sk1",
-                "player_id": 1830
-              },
-              {
-                "name": "Jean-Gabriel Pageau",
-                "position": "sk2",
-                "player_id": 2057
-              },
-              {
-                "name": "Anthony Duclair",
-                "position": "sk3",
-                "player_id": 2380
-              },
-              {
-                "name": "Victor Eklund",
-                "position": "sk4",
-                "player_id": 38469
-              },
-              {
-                "name": "Tony DeAngelo",
-                "position": "sk5",
-                "player_id": 2664
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Ondrej Palat",
-                "position": "sk1",
-                "player_id": 1830
-              },
-              {
-                "name": "Casey Cizikas",
-                "position": "sk2",
-                "player_id": 1807
-              },
-              {
-                "name": "Adam Pelech",
-                "position": "sk3",
-                "player_id": 2449
-              },
-              {
-                "name": "Matthew Kessel",
-                "position": "sk4",
-                "player_id": 30737
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Jean-Gabriel Pageau",
-                "position": "sk1",
-                "player_id": 2057
-              },
-              {
-                "name": "Simon Holmstrom",
-                "position": "sk2",
-                "player_id": 30654
-              },
-              {
-                "name": "Logan Stanley",
-                "position": "sk3",
-                "player_id": 2652
-              },
-              {
-                "name": "Scott Mayfield",
-                "position": "sk4",
-                "player_id": 2350
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Mathew Barzal",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2482
-            },
-            {
-              "name": "Alexander Romanov",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 29623
-            },
-            {
-              "name": "Matias Maccelli",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 30063
-            },
-            {
-              "name": "Calum Ritchie",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 35084
-            },
-            {
-              "name": "Ryan Pulock",
-              "injury_status": "dtd",
-              "game_time_decision": false,
-              "player_id": 2146
-            }
-          ]
-        }
-      }
-    },
-    {
-      "game_id": 2026020256,
-      "away": {
-        "abbr": "PHI",
-        "goalie": {
-          "name": "Joseph Woll",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T16:52:20.107Z",
-          "source_name": "Jordan Hall",
-          "source_url": "https://x.com/JHallNBCS/status/2118385352809263265?a=ATSEsH2mhbdwBxnYk6o&s=20",
-          "player_id": 27288
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T16:28:39.047Z",
-          "source_name": "Siobhan Nolan",
-          "source_url": "https://x.com/SGNolan/status/2118375487038738802",
-          "groups": {
-            "f1": [
-              {
-                "name": "Trevor Zegras",
-                "position": "lw",
-                "player_id": 30202
-              },
-              {
-                "name": "Christian Dvorak",
-                "position": "c",
-                "player_id": 2682
-              },
-              {
-                "name": "Travis Konecny",
-                "position": "rw",
-                "player_id": 2498
-              }
-            ],
-            "f2": [
-              {
-                "name": "Porter Martone",
-                "position": "lw",
-                "player_id": 37366
-              },
-              {
-                "name": "Cole Knuble",
-                "position": "c",
-                "player_id": 33787
-              },
-              {
-                "name": "Owen Tippett",
-                "position": "rw",
-                "player_id": 2786
-              }
-            ],
-            "f3": [
-              {
-                "name": "Tyson Foerster",
-                "position": "lw",
-                "player_id": 29750
-              },
-              {
-                "name": "Noah Cates",
-                "position": "c",
-                "player_id": 28087
-              },
-              {
-                "name": "Matvei Michkov",
-                "position": "rw",
-                "player_id": 33997
-              }
-            ],
-            "f4": [
-              {
-                "name": "Denver Barkey",
-                "position": "lw",
-                "player_id": 35098
-              },
-              {
-                "name": "Sean Couturier",
-                "position": "c",
-                "player_id": 1777
-              },
-              {
-                "name": "Noel Acciari",
-                "position": "rw",
-                "player_id": 2589
-              }
-            ],
-            "d1": [
-              {
-                "name": "Travis Sanheim",
-                "position": "ld",
-                "player_id": 2827
-              },
-              {
-                "name": "Jamie Drysdale",
-                "position": "rd",
-                "player_id": 29756
-              }
-            ],
-            "d2": [
-              {
-                "name": "Cam York",
-                "position": "ld",
-                "player_id": 30422
-              },
-              {
-                "name": "Oliver Bonk",
-                "position": "rd",
-                "player_id": 35107
-              }
-            ],
-            "d3": [
-              {
-                "name": "Nick Seeler",
-                "position": "ld",
-                "player_id": 4630
-              },
-              {
-                "name": "Simon Benoit",
-                "position": "rd",
-                "player_id": 26550
-              }
-            ],
-            "g": [
-              {
-                "name": "Joseph Woll",
-                "position": "g1",
-                "player_id": 27288
-              },
-              {
-                "name": "Dan Vladar",
-                "position": "g2",
-                "player_id": 3831
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Porter Martone",
-                "position": "sk1",
-                "player_id": 37366
-              },
-              {
-                "name": "Denver Barkey",
-                "position": "sk2",
-                "player_id": 35098
-              },
-              {
-                "name": "Matvei Michkov",
-                "position": "sk3",
-                "player_id": 33997
-              },
-              {
-                "name": "Trevor Zegras",
-                "position": "sk4",
-                "player_id": 30202
-              },
-              {
-                "name": "Jamie Drysdale",
-                "position": "sk5",
-                "player_id": 29756
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Travis Konecny",
-                "position": "sk1",
-                "player_id": 2498
-              },
-              {
-                "name": "Christian Dvorak",
-                "position": "sk2",
-                "player_id": 2682
-              },
-              {
-                "name": "Tyson Foerster",
-                "position": "sk3",
-                "player_id": 29750
-              },
-              {
-                "name": "Owen Tippett",
-                "position": "sk4",
-                "player_id": 2786
-              },
-              {
-                "name": "Oliver Bonk",
-                "position": "sk5",
-                "player_id": 35107
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Sean Couturier",
-                "position": "sk1",
-                "player_id": 1777
-              },
-              {
-                "name": "Christian Dvorak",
-                "position": "sk2",
-                "player_id": 2682
-              },
-              {
-                "name": "Cam York",
-                "position": "sk3",
-                "player_id": 30422
-              },
-              {
-                "name": "Travis Sanheim",
-                "position": "sk4",
-                "player_id": 2827
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Noah Cates",
-                "position": "sk1",
-                "player_id": 28087
-              },
-              {
-                "name": "Tyson Foerster",
-                "position": "sk2",
-                "player_id": 29750
-              },
-              {
-                "name": "Jamie Drysdale",
-                "position": "sk3",
-                "player_id": 29756
-              },
-              {
-                "name": "Nick Seeler",
-                "position": "sk4",
-                "player_id": 4630
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Nikita Grebenkin",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 34689
-            },
-            {
-              "name": "Rasmus Ristolainen",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2140
-            }
-          ]
-        }
-      },
-      "home": {
-        "abbr": "NYR",
-        "goalie": {
-          "name": "Dylan Garand",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T15:50:16.821Z",
-          "source_name": "Vince Mercogliano",
-          "source_url": "https://x.com/vzmercogliano/status/2118369921281519777?a=L0ndYtlWM3gBk5KYaqQ&s=20",
-          "player_id": 32794
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T15:55:42.022Z",
-          "source_name": "Remy Mastey",
-          "source_url": "https://x.com/MasteyRemy/status/2118366262271320438",
-          "groups": {
-            "f1": [
-              {
-                "name": "Pavel Dorofeyev",
-                "position": "lw",
-                "player_id": 30622
-              },
-              {
-                "name": "Mika Zibanejad",
-                "position": "c",
-                "player_id": 1751
-              },
-              {
-                "name": "Alexis Lafreni\u00e8re",
-                "position": "rw",
-                "player_id": 28771
-              }
-            ],
-            "f2": [
-              {
-                "name": "Tye Kartye",
-                "position": "lw",
-                "player_id": 29846
-              },
-              {
-                "name": "J.T. Miller",
-                "position": "c",
-                "player_id": 1762
-              },
-              {
-                "name": "Gabriel Perreault",
-                "position": "rw",
-                "player_id": 35165
-              }
-            ],
-            "f3": [
-              {
-                "name": "Eeli Tolvanen",
-                "position": "lw",
-                "player_id": 2787
-              },
-              {
-                "name": "Will Cuylle",
-                "position": "c",
-                "player_id": 29725
-              },
-              {
-                "name": "Oliver Bjorkstrand",
-                "position": "rw",
-                "player_id": 2603
-              }
-            ],
-            "f4": [
-              {
-                "name": "Jaroslav Chmelar",
-                "position": "lw",
-                "player_id": 34742
-              },
-              {
-                "name": "Noah Laba",
-                "position": "c",
-                "player_id": 34399
-              },
-              {
-                "name": "Matt Rempe",
-                "position": "rw",
-                "player_id": 32523
-              }
-            ],
-            "d1": [
-              {
-                "name": "Vladislav Gavrikov",
-                "position": "ld",
-                "player_id": 25250
-              },
-              {
-                "name": "Adam Fox",
-                "position": "rd",
-                "player_id": 27251
-              }
-            ],
-            "d2": [
-              {
-                "name": "Marcus Pettersson",
-                "position": "ld",
-                "player_id": 4631
-              },
-              {
-                "name": "Braden Schneider",
-                "position": "rd",
-                "player_id": 29483
-              }
-            ],
-            "d3": [
-              {
-                "name": "Alberts Smits",
-                "position": "ld",
-                "player_id": 38784
-              },
-              {
-                "name": "Scott Morrow",
-                "position": "rd",
-                "player_id": 34620
-              }
-            ],
-            "g": [
-              {
-                "name": "Dylan Garand",
-                "position": "g1",
-                "player_id": 32794
-              },
-              {
-                "name": "James Reimer",
-                "position": "g2",
-                "player_id": 1438
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Alexis Lafreni\u00e8re",
-                "position": "sk1",
-                "player_id": 28771
-              },
-              {
-                "name": "Gabriel Perreault",
-                "position": "sk2",
-                "player_id": 35165
-              },
-              {
-                "name": "Pavel Dorofeyev",
-                "position": "sk3",
-                "player_id": 30622
-              },
-              {
-                "name": "Mika Zibanejad",
-                "position": "sk4",
-                "player_id": 1751
-              },
-              {
-                "name": "Adam Fox",
-                "position": "sk5",
-                "player_id": 27251
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Tye Kartye",
-                "position": "sk1",
-                "player_id": 29846
-              },
-              {
-                "name": "J.T. Miller",
-                "position": "sk2",
-                "player_id": 1762
-              },
-              {
-                "name": "Will Cuylle",
-                "position": "sk3",
-                "player_id": 29725
-              },
-              {
-                "name": "Oliver Bjorkstrand",
-                "position": "sk4",
-                "player_id": 2603
-              },
-              {
-                "name": "Vladislav Gavrikov",
-                "position": "sk5",
-                "player_id": 25250
-              }
-            ],
-            "pk1": [
-              {
-                "name": "J.T. Miller",
-                "position": "sk1",
-                "player_id": 1762
-              },
-              {
-                "name": "Tye Kartye",
-                "position": "sk2",
-                "player_id": 29846
-              },
-              {
-                "name": "Vladislav Gavrikov",
-                "position": "sk3",
-                "player_id": 25250
-              },
-              {
-                "name": "Adam Fox",
-                "position": "sk4",
-                "player_id": 27251
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Noah Laba",
-                "position": "sk1",
-                "player_id": 34399
-              },
-              {
-                "name": "Will Cuylle",
-                "position": "sk2",
-                "player_id": 29725
-              },
-              {
-                "name": "Marcus Pettersson",
-                "position": "sk3",
-                "player_id": 4631
-              },
-              {
-                "name": "Braden Schneider",
-                "position": "sk4",
-                "player_id": 29483
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Igor Shesterkin",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 25267
-            },
-            {
-              "name": "Joe Veleno",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 26350
-            },
-            {
-              "name": "Adam Sykora",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 36392
-            },
-            {
-              "name": "Sean Durzi",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 27104
-            }
-          ]
-        }
-      }
-    },
-    {
-      "game_id": 2026020257,
-      "away": {
-        "abbr": "BOS",
-        "goalie": {
-          "name": "Jeremy Swayman",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
-          "player_id": 28098
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-04T16:12:22.533Z",
-          "source_name": "Jack Studley",
-          "source_url": "https://x.com/jackstudley13/status/2118010985529122897?s=20",
-          "groups": {
-            "f1": [
-              {
-                "name": "JJ Peterka",
-                "position": "lw",
-                "player_id": 31777
-              },
-              {
-                "name": "Pavel Zacha",
-                "position": "c",
-                "player_id": 2481
-              },
-              {
-                "name": "David Pastrnak",
-                "position": "rw",
-                "player_id": 2376
-              }
-            ],
-            "f2": [
-              {
-                "name": "Marat Khusnutdinov",
-                "position": "lw",
-                "player_id": 31738
-              },
-              {
-                "name": "Fraser Minten",
-                "position": "c",
-                "player_id": 31575
-              },
-              {
-                "name": "Morgan Geekie",
-                "position": "rw",
-                "player_id": 28001
-              }
-            ],
-            "f3": [
-              {
-                "name": "Casey Mittelstadt",
-                "position": "lw",
-                "player_id": 2782
-              },
-              {
-                "name": "Elias Lindholm",
-                "position": "c",
-                "player_id": 2133
-              },
-              {
-                "name": "James Hagens",
-                "position": "rw",
-                "player_id": 37375
-              }
-            ],
-            "f4": [
-              {
-                "name": "Tanner Jeannot",
-                "position": "lw",
-                "player_id": 4695
-              },
-              {
-                "name": "Sean Kuraly",
-                "position": "c",
-                "player_id": 2585
-              },
-              {
-                "name": "Mark Kastelic",
-                "position": "rw",
-                "player_id": 2904
-              }
-            ],
-            "d1": [
-              {
-                "name": "Hampus Lindholm",
-                "position": "ld",
-                "player_id": 1947
-              },
-              {
-                "name": "Charlie McAvoy",
-                "position": "rd",
-                "player_id": 2645
-              }
-            ],
-            "d2": [
-              {
-                "name": "Nikita Zadorov",
-                "position": "ld",
-                "player_id": 2147
-              },
-              {
-                "name": "Will Borgen",
-                "position": "rd",
-                "player_id": 4680
-              }
-            ],
-            "d3": [
-              {
-                "name": "Frederic Brunet",
-                "position": "ld",
-                "player_id": 31316
-              },
-              {
-                "name": "Mason Lohrei",
-                "position": "rd",
-                "player_id": 37934
-              }
-            ],
-            "g": [
-              {
-                "name": "Jeremy Swayman",
-                "position": "g1",
-                "player_id": 28098
-              },
-              {
-                "name": "Michael DiPietro",
-                "position": "g2",
-                "player_id": 4771
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Morgan Geekie",
-                "position": "sk1",
-                "player_id": 28001
-              },
-              {
-                "name": "Elias Lindholm",
-                "position": "sk2",
-                "player_id": 2133
-              },
-              {
-                "name": "Pavel Zacha",
-                "position": "sk3",
-                "player_id": 2481
-              },
-              {
-                "name": "David Pastrnak",
-                "position": "sk4",
-                "player_id": 2376
-              },
-              {
-                "name": "Charlie McAvoy",
-                "position": "sk5",
-                "player_id": 2645
-              }
-            ],
-            "pp2": [
-              {
-                "name": "James Hagens",
-                "position": "sk1",
-                "player_id": 37375
-              },
-              {
-                "name": "Fraser Minten",
-                "position": "sk2",
-                "player_id": 31575
-              },
-              {
-                "name": "Casey Mittelstadt",
-                "position": "sk3",
-                "player_id": 2782
-              },
-              {
-                "name": "Mason Lohrei",
-                "position": "sk4",
-                "player_id": 37934
-              },
-              {
-                "name": "JJ Peterka",
-                "position": "sk5",
-                "player_id": 31777
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Fraser Minten",
-                "position": "sk1",
-                "player_id": 31575
-              },
-              {
-                "name": "Marat Khusnutdinov",
-                "position": "sk2",
-                "player_id": 31738
-              },
-              {
-                "name": "Nikita Zadorov",
-                "position": "sk3",
-                "player_id": 2147
-              },
-              {
-                "name": "Will Borgen",
-                "position": "sk4",
-                "player_id": 4680
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Pavel Zacha",
-                "position": "sk1",
-                "player_id": 2481
-              },
-              {
-                "name": "Mark Kastelic",
-                "position": "sk2",
-                "player_id": 2904
-              },
-              {
-                "name": "Hampus Lindholm",
-                "position": "sk3",
-                "player_id": 1947
-              },
-              {
-                "name": "Charlie McAvoy",
-                "position": "sk4",
-                "player_id": 2645
-              }
-            ]
-          },
-          "injuries": []
-        }
-      },
-      "home": {
-        "abbr": "PIT",
-        "goalie": {
-          "name": "Arturs Silovs",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T16:08:05.652Z",
-          "source_name": "Josh Getzoff",
-          "source_url": "https://x.com/JG_PxP/status/2118374043007033540",
-          "player_id": 31270
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T17:15:35.147Z",
-          "source_name": "@PensInsideScoop",
-          "source_url": "https://x.com/PensInsideScoop/status/2118027352374432064",
-          "groups": {
-            "f1": [
-              {
-                "name": "Tommy Novak",
-                "position": "lw",
-                "player_id": 26595
-              },
-              {
-                "name": "Sidney Crosby",
-                "position": "c",
-                "player_id": 1216
-              },
-              {
-                "name": "Rickard Rakell",
-                "position": "rw",
-                "player_id": 1682
-              }
-            ],
-            "f2": [
-              {
-                "name": "Egor Chinakhov",
-                "position": "lw",
-                "player_id": 30655
-              },
-              {
-                "name": "Ben Kindel",
-                "position": "c",
-                "player_id": 37573
-              },
-              {
-                "name": "Evgeni Malkin",
-                "position": "rw",
-                "player_id": 1236
-              }
-            ],
-            "f3": [
-              {
-                "name": "Ville Koivunen",
-                "position": "lw",
-                "player_id": 34677
-              },
-              {
-                "name": "Hendrix Lapierre",
-                "position": "c",
-                "player_id": 29894
-              },
-              {
-                "name": "Justin Brazeau",
-                "position": "rw",
-                "player_id": 28622
-              }
-            ],
-            "f4": [
-              {
-                "name": "Connor Dewar",
-                "position": "lw",
-                "player_id": 25396
-              },
-              {
-                "name": "Blake Lizotte",
-                "position": "c",
-                "player_id": 27482
-              },
-              {
-                "name": "Nicholas Robertson",
-                "position": "rw",
-                "player_id": 29254
-              }
-            ],
-            "d1": [
-              {
-                "name": "Samuel Girard",
-                "position": "ld",
-                "player_id": 2773
-              },
-              {
-                "name": "Erik Karlsson",
-                "position": "rd",
-                "player_id": 1087
-              }
-            ],
-            "d2": [
-              {
-                "name": "Spencer Stastney",
-                "position": "ld",
-                "player_id": 28862
-              },
-              {
-                "name": "Kaedan Korczak",
-                "position": "rd",
-                "player_id": 28524
-              }
-            ],
-            "d3": [
-              {
-                "name": "Declan Carlile",
-                "position": "ld",
-                "player_id": 30124
-              },
-              {
-                "name": "Kris Letang",
-                "position": "rd",
-                "player_id": 1233
-              }
-            ],
-            "g": [
-              {
-                "name": "Arturs Silovs",
-                "position": "g1",
-                "player_id": 31270
-              },
-              {
-                "name": "Sergei Murashov",
-                "position": "g2",
-                "player_id": 36361
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Ville Koivunen",
-                "position": "sk1",
-                "player_id": 34677
-              },
-              {
-                "name": "Tommy Novak",
-                "position": "sk2",
-                "player_id": 26595
-              },
-              {
-                "name": "Rickard Rakell",
-                "position": "sk3",
-                "player_id": 1682
-              },
-              {
-                "name": "Erik Karlsson",
-                "position": "sk4",
-                "player_id": 1087
-              },
-              {
-                "name": "Sidney Crosby",
-                "position": "sk5",
-                "player_id": 1216
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Hendrix Lapierre",
-                "position": "sk1",
-                "player_id": 29894
-              },
-              {
-                "name": "Ben Kindel",
-                "position": "sk2",
-                "player_id": 37573
-              },
-              {
-                "name": "Egor Chinakhov",
-                "position": "sk3",
-                "player_id": 30655
-              },
-              {
-                "name": "Kris Letang",
-                "position": "sk4",
-                "player_id": 1233
-              },
-              {
-                "name": "Evgeni Malkin",
-                "position": "sk5",
-                "player_id": 1236
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Blake Lizotte",
-                "position": "sk1",
-                "player_id": 27482
-              },
-              {
-                "name": "Connor Dewar",
-                "position": "sk2",
-                "player_id": 25396
-              },
-              {
-                "name": "Declan Carlile",
-                "position": "sk3",
-                "player_id": 30124
-              },
-              {
-                "name": "Kaedan Korczak",
-                "position": "sk4",
-                "player_id": 28524
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Rickard Rakell",
-                "position": "sk1",
-                "player_id": 1682
-              },
-              {
-                "name": "Nicholas Robertson",
-                "position": "sk2",
-                "player_id": 29254
-              },
-              {
-                "name": "Spencer Stastney",
-                "position": "sk3",
-                "player_id": 28862
-              },
-              {
-                "name": "Erik Karlsson",
-                "position": "sk4",
-                "player_id": 1087
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Trevor van Riemsdyk",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2383
-            },
-            {
-              "name": "Ryan Graves",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 3689
-            },
-            {
-              "name": "Bryan Rust",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2407
-            }
-          ]
-        }
-      }
-    },
-    {
-      "game_id": 2026020258,
-      "away": {
-        "abbr": "DAL",
-        "goalie": {
-          "name": "Casey DeSmith",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T17:25:51.453Z",
-          "source_name": "Mike Heika",
-          "source_url": "https://x.com/MikeHeika/status/2118394104585547996?a=KYUjdH3XcXua2fK5HuU&s=20",
-          "player_id": 2572
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T21:04:47.002Z",
-          "source_name": "Owen Newkirk",
-          "source_url": "https://x.com/OwenNewkirk/status/2118395694197113029",
-          "groups": {
-            "f1": [
-              {
-                "name": "Jamie Benn",
-                "position": "lw",
-                "player_id": 425
-              },
-              {
-                "name": "Wyatt Johnston",
-                "position": "c",
-                "player_id": 30835
-              },
-              {
-                "name": "Mikko Rantanen",
-                "position": "rw",
-                "player_id": 2477
-              }
-            ],
-            "f2": [
-              {
-                "name": "Jason Robertson",
-                "position": "lw",
-                "player_id": 2793
-              },
-              {
-                "name": "Roope Hintz",
-                "position": "c",
-                "player_id": 2863
-              },
-              {
-                "name": "Arttu Hyry",
-                "position": "rw",
-                "player_id": 38114
-              }
-            ],
-            "f3": [
-              {
-                "name": "Joel Kiviranta",
-                "position": "lw",
-                "player_id": 31187
-              },
-              {
-                "name": "Justin Hryckowian",
-                "position": "c",
-                "player_id": 31798
-              },
-              {
-                "name": "Tyler Seguin",
-                "position": "rw",
-                "player_id": 139
-              }
-            ],
-            "f4": [
-              {
-                "name": "David Perron",
-                "position": "lw",
-                "player_id": 1338
-              },
-              {
-                "name": "Radek Faksa",
-                "position": "c",
-                "player_id": 1989
-              },
-              {
-                "name": "Colin Blackwell",
-                "position": "rw",
-                "player_id": 4822
-              }
-            ],
-            "d1": [
-              {
-                "name": "Thomas Harley",
-                "position": "ld",
-                "player_id": 29213
-              },
-              {
-                "name": "Esa Lindell",
-                "position": "rd",
-                "player_id": 2517
-              }
-            ],
-            "d2": [
-              {
-                "name": "Lian Bichsel",
-                "position": "ld",
-                "player_id": 36369
-              },
-              {
-                "name": "Nils Lundkvist",
-                "position": "rd",
-                "player_id": 4821
-              }
-            ],
-            "d3": [
-              {
-                "name": "Trey Taylor",
-                "position": "ld",
-                "player_id": 31852
-              },
-              {
-                "name": "Tyler Myers",
-                "position": "rd",
-                "player_id": 176
-              }
-            ],
-            "g": [
-              {
-                "name": "Casey DeSmith",
-                "position": "g1",
-                "player_id": 2572
-              },
-              {
-                "name": "Jake Oettinger",
-                "position": "g2",
-                "player_id": 2813
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Wyatt Johnston",
-                "position": "sk1",
-                "player_id": 30835
-              },
-              {
-                "name": "Roope Hintz",
-                "position": "sk2",
-                "player_id": 2863
-              },
-              {
-                "name": "Mikko Rantanen",
-                "position": "sk3",
-                "player_id": 2477
-              },
-              {
-                "name": "Thomas Harley",
-                "position": "sk4",
-                "player_id": 29213
-              },
-              {
-                "name": "Jason Robertson",
-                "position": "sk5",
-                "player_id": 2793
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Justin Hryckowian",
-                "position": "sk1",
-                "player_id": 31798
-              },
-              {
-                "name": "Tyler Seguin",
-                "position": "sk2",
-                "player_id": 139
-              },
-              {
-                "name": "Jamie Benn",
-                "position": "sk3",
-                "player_id": 425
-              },
-              {
-                "name": "Nils Lundkvist",
-                "position": "sk4",
-                "player_id": 4821
-              },
-              {
-                "name": "Mikko Rantanen",
-                "position": "sk5",
-                "player_id": 2477
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Arttu Hyry",
-                "position": "sk1",
-                "player_id": 38114
-              },
-              {
-                "name": "Joel Kiviranta",
-                "position": "sk2",
-                "player_id": 31187
-              },
-              {
-                "name": "Esa Lindell",
-                "position": "sk3",
-                "player_id": 2517
-              },
-              {
-                "name": "Thomas Harley",
-                "position": "sk4",
-                "player_id": 29213
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Radek Faksa",
-                "position": "sk1",
-                "player_id": 1989
-              },
-              {
-                "name": "Justin Hryckowian",
-                "position": "sk2",
-                "player_id": 31798
-              },
-              {
-                "name": "Nils Lundkvist",
-                "position": "sk3",
-                "player_id": 4821
-              },
-              {
-                "name": "Tyler Myers",
-                "position": "sk4",
-                "player_id": 176
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Matt Duchene",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 341
-            },
-            {
-              "name": "Oskar Back",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 29109
-            },
-            {
-              "name": "Kyle Capobianco",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2921
-            },
-            {
-              "name": "Miro Heiskanen",
-              "injury_status": "dtd",
-              "game_time_decision": false,
-              "player_id": 2803
-            }
-          ]
-        }
-      },
-      "home": {
         "abbr": "CBJ",
         "goalie": {
           "name": "Cam Talbot",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T16:17:28.629Z",
-          "source_name": "Aaron Portzline",
-          "source_url": "https://x.com/Aportzline/status/2118376823834751087?a=HrGZEsBk7L0-zQNuTeM&s=20",
+          "status": "PROJECTED",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "source_timestamp": null,
+          "source_name": null,
+          "source_url": null,
           "player_id": 1059
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-04T15:19:35.032Z",
-          "source_name": "Last Game (2026-11-03)",
-          "source_url": "https://www.nhl.com/gamecenter/col-vs-cbj/2026/11/03/2026020244",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "updated_at": "2026-11-05T23:49:47.169Z",
+          "source_name": "Aaron Portzline",
+          "source_url": "https://x.com/Aportzline/status/2118488696425206139",
           "groups": {
             "f1": [
               {
@@ -3897,9 +93,9 @@
                 "player_id": 30880
               },
               {
-                "name": "Danton Heinen",
+                "name": "Dmitri Voronkov",
                 "position": "rw",
-                "player_id": 2691
+                "player_id": 31266
               }
             ],
             "d1": [
@@ -4058,531 +254,816 @@
             }
           ]
         }
-      }
-    },
-    {
-      "game_id": 2026020259,
-      "away": {
-        "abbr": "VAN",
+      },
+      "home": {
+        "abbr": "BUF",
         "goalie": {
-          "name": "Leevi Merilainen",
+          "name": "Colten Ellis",
           "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T18:30:39.981Z",
-          "source_name": "Ken Wiebe",
-          "source_url": "https://x.com/WiebesWorld/status/2118389520563601551",
-          "player_id": 34600
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "source_timestamp": null,
+          "source_name": null,
+          "source_url": null,
+          "player_id": 28686
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-04T15:22:37.871Z",
-          "source_name": "Last Game (2026-11-03)",
-          "source_url": "https://www.nhl.com/gamecenter/ana-vs-van/2026/11/03/2026020246",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "updated_at": "2026-11-05T15:05:24.188Z",
+          "source_name": "Last Game (2026-11-04)",
+          "source_url": "https://www.nhl.com/gamecenter/ott-vs-buf/2026/11/04/2026020247",
           "groups": {
             "f1": [
               {
-                "name": "Jake DeBrusk",
+                "name": "Zach Benson",
                 "position": "lw",
-                "player_id": 2490
+                "player_id": 33544
               },
               {
-                "name": "Elias Pettersson",
+                "name": "Peyton Krebs",
                 "position": "c",
-                "player_id": 2801
+                "player_id": 28684
               },
               {
-                "name": "Brock Boeser",
+                "name": "Tage Thompson",
                 "position": "rw",
-                "player_id": 2497
+                "player_id": 2659
               }
             ],
             "f2": [
               {
-                "name": "Liam Ohgren",
+                "name": "Josh Doan",
                 "position": "lw",
-                "player_id": 36367
+                "player_id": 32990
               },
               {
-                "name": "Marco Rossi",
+                "name": "Noah Ostlund",
                 "position": "c",
-                "player_id": 29821
+                "player_id": 36383
               },
               {
-                "name": "Jonathan Lekkerimaki",
+                "name": "Jack Quinn",
                 "position": "rw",
-                "player_id": 36365
+                "player_id": 29241
               }
             ],
             "f3": [
               {
-                "name": "Drew O'Connor",
+                "name": "Jason Zucker",
                 "position": "lw",
-                "player_id": 32925
+                "player_id": 1898
               },
               {
-                "name": "Jacob Quillan",
+                "name": "Josh Norris",
                 "position": "c",
-                "player_id": 32458
+                "player_id": 28056
               },
               {
-                "name": "Linus Karlsson",
+                "name": "Ryan McLeod",
                 "position": "rw",
-                "player_id": 29135
+                "player_id": 4810
               }
             ],
             "f4": [
               {
-                "name": "Paul Cotter",
+                "name": "Beck Malenstyn",
                 "position": "lw",
-                "player_id": 27620
+                "player_id": 3914
               },
               {
-                "name": "Max Sasson",
+                "name": "Tyson Kozak",
                 "position": "c",
-                "player_id": 30007
+                "player_id": 32822
               },
               {
-                "name": "Brendan Gallagher",
+                "name": "Sam Carrick",
                 "position": "rw",
-                "player_id": 1791
+                "player_id": 1914
               }
             ],
             "d1": [
               {
-                "name": "Elias Nils Pettersson",
+                "name": "Mattias Samuelsson",
                 "position": "ld",
-                "player_id": 36406
+                "player_id": 28792
               },
               {
-                "name": "Filip Hronek",
+                "name": "Rasmus Dahlin",
                 "position": "rd",
-                "player_id": 3862
+                "player_id": 4786
               }
             ],
             "d2": [
               {
-                "name": "Jamie Oleksiak",
+                "name": "Olen Zellweger",
                 "position": "ld",
-                "player_id": 1790
+                "player_id": 34623
               },
               {
-                "name": "Zeev Buium",
+                "name": "Owen Power",
                 "position": "rd",
-                "player_id": 33153
+                "player_id": 30051
               }
             ],
             "d3": [
               {
-                "name": "Guillaume Brisebois",
+                "name": "Zach Metsa",
                 "position": "ld",
-                "player_id": 3789
+                "player_id": 28387
               },
               {
-                "name": "Victor Mancini",
+                "name": "Louis Crevier",
                 "position": "rd",
-                "player_id": 33084
+                "player_id": 29897
               }
             ],
             "g": [
               {
-                "name": "Leevi Merilainen",
+                "name": "Colten Ellis",
                 "position": "g1",
-                "player_id": 34600
+                "player_id": 28686
               },
               {
-                "name": "Kevin Lankinen",
+                "name": "Ukko-Pekka Luukkonen",
                 "position": "g2",
-                "player_id": 4757
+                "player_id": 4783
               }
             ],
             "pp1": [
               {
-                "name": "Jake DeBrusk",
+                "name": "Zach Benson",
                 "position": "sk1",
-                "player_id": 2490
+                "player_id": 33544
               },
               {
-                "name": "Elias Pettersson",
+                "name": "Noah Ostlund",
                 "position": "sk2",
-                "player_id": 2801
+                "player_id": 36383
               },
               {
-                "name": "Brock Boeser",
+                "name": "Jack Quinn",
                 "position": "sk3",
-                "player_id": 2497
+                "player_id": 29241
               },
               {
-                "name": "Jonathan Lekkerimaki",
+                "name": "Tage Thompson",
                 "position": "sk4",
-                "player_id": 36365
+                "player_id": 2659
               },
               {
-                "name": "Filip Hronek",
+                "name": "Rasmus Dahlin",
                 "position": "sk5",
-                "player_id": 3862
+                "player_id": 4786
               }
             ],
             "pp2": [
               {
-                "name": "Liam Ohgren",
+                "name": "Jason Zucker",
                 "position": "sk1",
-                "player_id": 36367
+                "player_id": 1898
               },
               {
-                "name": "Marco Rossi",
+                "name": "Ryan McLeod",
                 "position": "sk2",
-                "player_id": 29821
+                "player_id": 4810
               },
               {
-                "name": "Paul Cotter",
+                "name": "Josh Doan",
                 "position": "sk3",
-                "player_id": 27620
+                "player_id": 32990
               },
               {
-                "name": "Linus Karlsson",
+                "name": "Owen Power",
                 "position": "sk4",
-                "player_id": 29135
+                "player_id": 30051
               },
               {
-                "name": "Zeev Buium",
+                "name": "Josh Norris",
                 "position": "sk5",
-                "player_id": 33153
+                "player_id": 28056
               }
             ],
             "pk1": [
               {
-                "name": "Elias Pettersson",
+                "name": "Ryan McLeod",
                 "position": "sk1",
-                "player_id": 2801
+                "player_id": 4810
               },
               {
-                "name": "Drew O'Connor",
+                "name": "Zach Benson",
                 "position": "sk2",
-                "player_id": 32925
+                "player_id": 33544
               },
               {
-                "name": "Elias Nils Pettersson",
+                "name": "Mattias Samuelsson",
                 "position": "sk3",
-                "player_id": 36406
+                "player_id": 28792
               },
               {
-                "name": "Filip Hronek",
+                "name": "Owen Power",
                 "position": "sk4",
-                "player_id": 3862
+                "player_id": 30051
               }
             ],
             "pk2": [
               {
-                "name": "Max Sasson",
+                "name": "Tyson Kozak",
                 "position": "sk1",
-                "player_id": 30007
+                "player_id": 32822
               },
               {
-                "name": "Brock Boeser",
+                "name": "Beck Malenstyn",
                 "position": "sk2",
-                "player_id": 2497
+                "player_id": 3914
               },
               {
-                "name": "Jamie Oleksiak",
+                "name": "Zach Metsa",
                 "position": "sk3",
-                "player_id": 1790
+                "player_id": 28387
               },
               {
-                "name": "Victor Mancini",
+                "name": "Olen Zellweger",
                 "position": "sk4",
-                "player_id": 33084
+                "player_id": 34623
               }
             ]
           },
           "injuries": [
             {
-              "name": "Thatcher Demko",
+              "name": "Matt Grzelcyk",
               "injury_status": "ir",
               "game_time_decision": false,
-              "player_id": 2722
+              "player_id": 2723
             },
             {
-              "name": "Filip Chytil",
+              "name": "Conor Timmins",
               "injury_status": "ir",
               "game_time_decision": false,
-              "player_id": 2811
+              "player_id": 2797
+            },
+            {
+              "name": "Alex Lyon",
+              "injury_status": "ir",
+              "game_time_decision": false,
+              "player_id": 2873
+            },
+            {
+              "name": "Jiri Kulich",
+              "injury_status": "dtd",
+              "game_time_decision": false,
+              "player_id": 36381
+            },
+            {
+              "name": "Konsta Helenius",
+              "injury_status": "dtd",
+              "game_time_decision": false,
+              "player_id": 38139
+            }
+          ]
+        }
+      }
+    },
+    {
+      "game_id": 2026020263,
+      "away": {
+        "abbr": "SJS",
+        "goalie": {
+          "name": "Yaroslav Askarov",
+          "status": "PROJECTED",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "source_timestamp": null,
+          "source_name": null,
+          "source_url": null,
+          "player_id": 33018
+        },
+        "lineup": {
+          "status": "PROJECTED",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "updated_at": "2026-11-05T15:08:54.719Z",
+          "source_name": "Last Game (2026-11-04)",
+          "source_url": "https://www.nhl.com/gamecenter/sjs-vs-lak/2026/11/04/2026020249",
+          "groups": {
+            "f1": [
+              {
+                "name": "Michael Misa",
+                "position": "lw",
+                "player_id": 37508
+              },
+              {
+                "name": "Macklin Celebrini",
+                "position": "c",
+                "player_id": 37106
+              },
+              {
+                "name": "Will Smith",
+                "position": "rw",
+                "player_id": 38126
+              }
+            ],
+            "f2": [
+              {
+                "name": "Mason Marchment",
+                "position": "lw",
+                "player_id": 2855
+              },
+              {
+                "name": "Collin Graf",
+                "position": "c",
+                "player_id": 38105
+              },
+              {
+                "name": "Kiefer Sherwood",
+                "position": "rw",
+                "player_id": 4675
+              }
+            ],
+            "f3": [
+              {
+                "name": "Ivar Stenberg",
+                "position": "lw",
+                "player_id": 38939
+              },
+              {
+                "name": "Filip Bystedt",
+                "position": "c",
+                "player_id": 36370
+              },
+              {
+                "name": "Tyler Toffoli",
+                "position": "rw",
+                "player_id": 1656
+              }
+            ],
+            "f4": [
+              {
+                "name": "Barclay Goodrow",
+                "position": "lw",
+                "player_id": 2395
+              },
+              {
+                "name": "Zack Ostapchuk",
+                "position": "c",
+                "player_id": 34545
+              },
+              {
+                "name": "Ty Dellandrea",
+                "position": "rw",
+                "player_id": 4813
+              }
+            ],
+            "d1": [
+              {
+                "name": "Sam Dickinson",
+                "position": "ld",
+                "player_id": 37090
+              },
+              {
+                "name": "Jacob Trouba",
+                "position": "rd",
+                "player_id": 2099
+              }
+            ],
+            "d2": [
+              {
+                "name": "Darnell Nurse",
+                "position": "ld",
+                "player_id": 2139
+              },
+              {
+                "name": "Michael Kesselring",
+                "position": "rd",
+                "player_id": 29644
+              }
+            ],
+            "d3": [
+              {
+                "name": "Dmitry Orlov",
+                "position": "ld",
+                "player_id": 1572
+              },
+              {
+                "name": "Eric Pohlkamp",
+                "position": "rd",
+                "player_id": 33798
+              }
+            ],
+            "g": [
+              {
+                "name": "Yaroslav Askarov",
+                "position": "g1",
+                "player_id": 33018
+              },
+              {
+                "name": "Alex Nedeljkovic",
+                "position": "g2",
+                "player_id": 2727
+              }
+            ],
+            "pp1": [
+              {
+                "name": "Mason Marchment",
+                "position": "sk1",
+                "player_id": 2855
+              },
+              {
+                "name": "Ivar Stenberg",
+                "position": "sk2",
+                "player_id": 38939
+              },
+              {
+                "name": "Tyler Toffoli",
+                "position": "sk3",
+                "player_id": 1656
+              },
+              {
+                "name": "Macklin Celebrini",
+                "position": "sk4",
+                "player_id": 37106
+              },
+              {
+                "name": "Will Smith",
+                "position": "sk5",
+                "player_id": 38126
+              }
+            ],
+            "pp2": [
+              {
+                "name": "Kiefer Sherwood",
+                "position": "sk1",
+                "player_id": 4675
+              },
+              {
+                "name": "Michael Misa",
+                "position": "sk2",
+                "player_id": 37508
+              },
+              {
+                "name": "Collin Graf",
+                "position": "sk3",
+                "player_id": 38105
+              },
+              {
+                "name": "Dmitry Orlov",
+                "position": "sk4",
+                "player_id": 1572
+              },
+              {
+                "name": "Eric Pohlkamp",
+                "position": "sk5",
+                "player_id": 33798
+              }
+            ],
+            "pk1": [
+              {
+                "name": "Zack Ostapchuk",
+                "position": "sk1",
+                "player_id": 34545
+              },
+              {
+                "name": "Collin Graf",
+                "position": "sk2",
+                "player_id": 38105
+              },
+              {
+                "name": "Darnell Nurse",
+                "position": "sk3",
+                "player_id": 2139
+              },
+              {
+                "name": "Jacob Trouba",
+                "position": "sk4",
+                "player_id": 2099
+              }
+            ],
+            "pk2": [
+              {
+                "name": "Barclay Goodrow",
+                "position": "sk1",
+                "player_id": 2395
+              },
+              {
+                "name": "Ty Dellandrea",
+                "position": "sk2",
+                "player_id": 4813
+              },
+              {
+                "name": "Sam Dickinson",
+                "position": "sk3",
+                "player_id": 37090
+              },
+              {
+                "name": "Michael Kesselring",
+                "position": "sk4",
+                "player_id": 29644
+              }
+            ]
+          },
+          "injuries": [
+            {
+              "name": "Alexander Wennberg",
+              "injury_status": "ir",
+              "game_time_decision": false,
+              "player_id": 2145
+            },
+            {
+              "name": "Igor Chernyshov",
+              "injury_status": "ir",
+              "game_time_decision": false,
+              "player_id": 38146
             }
           ]
         }
       },
       "home": {
-        "abbr": "WPG",
+        "abbr": "MIN",
         "goalie": {
-          "name": "Stuart Skinner",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T15:46:25.611Z",
-          "source_name": "Ken Wiebe",
-          "source_url": "https://x.com/WiebesWorld/status/2118369724337967229",
-          "player_id": 4741
+          "name": "Jesper Wallstedt",
+          "status": "PROJECTED",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "source_timestamp": null,
+          "source_name": null,
+          "source_url": null,
+          "player_id": 31763
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T15:48:36.833Z",
-          "source_name": "Connor Hrabchak",
-          "source_url": "https://x.com/ConnorHrabchak1/status/2118368467279843666",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "updated_at": "2026-11-05T17:39:49.417Z",
+          "source_name": "Joe Smith",
+          "source_url": "https://x.com/JoeSmithNHL/status/2118392493255340137",
           "groups": {
             "f1": [
               {
-                "name": "Kyle Connor",
+                "name": "Kirill Kaprizov",
                 "position": "lw",
-                "player_id": 2483
+                "player_id": 26611
               },
               {
-                "name": "Mark Scheifele",
+                "name": "Joel Eriksson Ek",
                 "position": "c",
-                "player_id": 1784
+                "player_id": 2494
               },
               {
-                "name": "Gabriel Vilardi",
+                "name": "Matt Boldy",
                 "position": "rw",
-                "player_id": 2783
+                "player_id": 30421
               }
             ],
             "f2": [
               {
-                "name": "Cole Perfetti",
+                "name": "Blake Coleman",
                 "position": "lw",
-                "player_id": 29837
+                "player_id": 2728
               },
               {
-                "name": "Brayden Yager",
+                "name": "Michael McCarron",
                 "position": "c",
-                "player_id": 33533
+                "player_id": 2156
               },
               {
-                "name": "Dawson Mercer",
+                "name": "Bobby Brink",
                 "position": "rw",
-                "player_id": 29327
+                "player_id": 30223
               }
             ],
             "f3": [
               {
-                "name": "Alex Iafallo",
+                "name": "Maxim Shabanov",
                 "position": "lw",
-                "player_id": 2888
+                "player_id": 38466
               },
               {
-                "name": "Adam Lowry",
+                "name": "Danila Yurov",
                 "position": "c",
-                "player_id": 2118
+                "player_id": 36363
               },
               {
-                "name": "Viggo Bj\u00f6rck",
+                "name": "Yakov Trenin",
                 "position": "rw",
-                "player_id": 38960
+                "player_id": 3775
               }
             ],
             "f4": [
               {
-                "name": "Cole Koepke",
+                "name": "Nico Sturm",
                 "position": "lw",
-                "player_id": 29652
+                "player_id": 27037
               },
               {
-                "name": "Morgan Barron",
+                "name": "Ryan Hartman",
                 "position": "c",
-                "player_id": 26531
+                "player_id": 2161
               },
               {
-                "name": "Tyrel Bauer",
+                "name": "Tyler Pitlick",
                 "position": "rw",
-                "player_id": 29948
+                "player_id": 1649
               }
             ],
             "d1": [
               {
-                "name": "Dylan Samberg",
+                "name": "Quinn Hughes",
                 "position": "ld",
-                "player_id": 28066
+                "player_id": 4794
               },
               {
-                "name": "Neal Pionk",
+                "name": "Jonas Brodin",
                 "position": "rd",
-                "player_id": 4545
+                "player_id": 1740
               }
             ],
             "d2": [
               {
-                "name": "Mario Ferraro",
+                "name": "Olli Maatta",
                 "position": "ld",
-                "player_id": 27666
+                "player_id": 1792
               },
               {
-                "name": "Elias Salomonsson",
+                "name": "Zach Bogosian",
                 "position": "rd",
-                "player_id": 36380
+                "player_id": 53
               }
             ],
             "d3": [
               {
-                "name": "Haydn Fleury",
+                "name": "Matt Kiersted",
                 "position": "ld",
-                "player_id": 2369
+                "player_id": 34534
               },
               {
-                "name": "Dylan DeMelo",
+                "name": "David Spacek",
                 "position": "rd",
-                "player_id": 2033
+                "player_id": 34724
               }
             ],
             "g": [
               {
-                "name": "Stuart Skinner",
+                "name": "Jesper Wallstedt",
                 "position": "g1",
-                "player_id": 4741
+                "player_id": 31763
               },
               {
-                "name": "Clay Stevenson",
+                "name": "Calvin Pickard",
                 "position": "g2",
-                "player_id": 36270
+                "player_id": 1607
               }
             ],
             "pp1": [
               {
-                "name": "Gabriel Vilardi",
+                "name": "Maxim Shabanov",
                 "position": "sk1",
-                "player_id": 2783
+                "player_id": 38466
               },
               {
-                "name": "Mark Scheifele",
+                "name": "Joel Eriksson Ek",
                 "position": "sk2",
-                "player_id": 1784
+                "player_id": 2494
               },
               {
-                "name": "Cole Perfetti",
+                "name": "Kirill Kaprizov",
                 "position": "sk3",
-                "player_id": 29837
+                "player_id": 26611
               },
               {
-                "name": "Neal Pionk",
+                "name": "Quinn Hughes",
                 "position": "sk4",
-                "player_id": 4545
+                "player_id": 4794
               },
               {
-                "name": "Kyle Connor",
+                "name": "Matt Boldy",
                 "position": "sk5",
-                "player_id": 2483
+                "player_id": 30421
               }
             ],
             "pp2": [
               {
-                "name": "Alex Iafallo",
+                "name": "Blake Coleman",
                 "position": "sk1",
-                "player_id": 2888
+                "player_id": 2728
               },
               {
-                "name": "Brayden Yager",
+                "name": "Ryan Hartman",
                 "position": "sk2",
-                "player_id": 33533
+                "player_id": 2161
               },
               {
-                "name": "Viggo Bj\u00f6rck",
+                "name": "Danila Yurov",
                 "position": "sk3",
-                "player_id": 38960
+                "player_id": 36363
               },
               {
-                "name": "Elias Salomonsson",
+                "name": "Bobby Brink",
                 "position": "sk4",
-                "player_id": 36380
+                "player_id": 30223
               },
               {
-                "name": "Dawson Mercer",
+                "name": "David Spacek",
                 "position": "sk5",
-                "player_id": 29327
+                "player_id": 34724
               }
             ],
             "pk1": [
               {
-                "name": "Adam Lowry",
+                "name": "Michael McCarron",
                 "position": "sk1",
-                "player_id": 2118
+                "player_id": 2156
               },
               {
-                "name": "Dawson Mercer",
+                "name": "Blake Coleman",
                 "position": "sk2",
-                "player_id": 29327
+                "player_id": 2728
               },
               {
-                "name": "Dylan Samberg",
+                "name": "Olli Maatta",
                 "position": "sk3",
-                "player_id": 28066
+                "player_id": 1792
               },
               {
-                "name": "Neal Pionk",
+                "name": "Jonas Brodin",
                 "position": "sk4",
-                "player_id": 4545
+                "player_id": 1740
               }
             ],
             "pk2": [
               {
-                "name": "Morgan Barron",
+                "name": "Yakov Trenin",
                 "position": "sk1",
-                "player_id": 26531
+                "player_id": 3775
               },
               {
-                "name": "Cole Koepke",
+                "name": "Nico Sturm",
                 "position": "sk2",
-                "player_id": 29652
+                "player_id": 27037
               },
               {
-                "name": "Mario Ferraro",
+                "name": "David Spacek",
                 "position": "sk3",
-                "player_id": 27666
+                "player_id": 34724
               },
               {
-                "name": "Elias Salomonsson",
+                "name": "Zach Bogosian",
                 "position": "sk4",
-                "player_id": 36380
+                "player_id": 53
               }
             ]
           },
           "injuries": [
             {
-              "name": "Nick Bjugstad",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2107
+              "name": "Joel Eriksson Ek",
+              "injury_status": null,
+              "game_time_decision": true,
+              "player_id": 2494
             },
             {
-              "name": "Vladislav Namestnikov",
+              "name": "Brock Faber",
               "injury_status": "ir",
               "game_time_decision": false,
-              "player_id": 1865
+              "player_id": 30792
             },
             {
-              "name": "Josh Morrissey",
-              "injury_status": "ir",
+              "name": "Filip Gustavsson",
+              "injury_status": "out",
               "game_time_decision": false,
-              "player_id": 2144
+              "player_id": 4565
+            },
+            {
+              "name": "Nick Foligno",
+              "injury_status": "out",
+              "game_time_decision": false,
+              "player_id": 1081
+            },
+            {
+              "name": "Marcus Foligno",
+              "injury_status": "out",
+              "game_time_decision": false,
+              "player_id": 1689
+            },
+            {
+              "name": "Jared Spurgeon",
+              "injury_status": "out",
+              "game_time_decision": false,
+              "player_id": 1557
             }
           ]
         }
       }
     },
     {
-      "game_id": 2026020260,
+      "game_id": 2026020264,
       "away": {
         "abbr": "ANA",
         "goalie": {
-          "name": "Laurent Brossoit",
+          "name": "Lukas Dostal",
           "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T19:26:23.220Z",
-          "source_name": "Zach Cavanagh",
-          "source_url": "https://x.com/ZachCav/status/2118424067653128297?a=qt8bC-NAnuRq96BvwYo&s=20",
-          "player_id": 2101
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "source_timestamp": null,
+          "source_name": null,
+          "source_url": null,
+          "player_id": 29143
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
           "updated_at": "2026-11-04T15:21:43.406Z",
           "source_name": "Last Game (2026-11-03)",
           "source_url": "https://www.nhl.com/gamecenter/ana-vs-van/2026/11/03/2026020246",
@@ -4831,781 +1312,262 @@
         }
       },
       "home": {
-        "abbr": "EDM",
+        "abbr": "CGY",
         "goalie": {
-          "name": "Matt Tomkins",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T20:15:03.281Z",
-          "source_name": "Edmonton Oilers",
-          "source_url": "https://x.com/EdmontonOilers/status/2118434222474219564",
-          "player_id": 22713
-        },
-        "lineup": {
+          "name": "Dustin Wolf",
           "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T17:14:37.123Z",
-          "source_name": "Bob Stauffer",
-          "source_url": "https://x.com/Bob_Stauffer/status/2118380553091350537",
-          "groups": {
-            "f1": [
-              {
-                "name": "Vasily Podkolzin",
-                "position": "lw",
-                "player_id": 30606
-              },
-              {
-                "name": "Connor McDavid",
-                "position": "c",
-                "player_id": 2471
-              },
-              {
-                "name": "Leon Draisaitl",
-                "position": "rw",
-                "player_id": 2365
-              }
-            ],
-            "f2": [
-              {
-                "name": "Colton Dach",
-                "position": "lw",
-                "player_id": 32903
-              },
-              {
-                "name": "Ryan Nugent-Hopkins",
-                "position": "c",
-                "player_id": 1733
-              },
-              {
-                "name": "Kasperi Kapanen",
-                "position": "rw",
-                "player_id": 2385
-              }
-            ],
-            "f3": [
-              {
-                "name": "Alex Formenton",
-                "position": "lw",
-                "player_id": 2897
-              },
-              {
-                "name": "Jason Dickinson",
-                "position": "c",
-                "player_id": 2160
-              },
-              {
-                "name": "Mathieu Joseph",
-                "position": "rw",
-                "player_id": 3891
-              }
-            ],
-            "f4": [
-              {
-                "name": "Max Jones",
-                "position": "lw",
-                "player_id": 2657
-              },
-              {
-                "name": "Owen Michaels",
-                "position": "c",
-                "player_id": 32239
-              },
-              {
-                "name": "Filip Hallander",
-                "position": "rw",
-                "player_id": 29096
-              }
-            ],
-            "d1": [
-              {
-                "name": "Mattias Ekholm",
-                "position": "ld",
-                "player_id": 1675
-              },
-              {
-                "name": "Evan Bouchard",
-                "position": "rd",
-                "player_id": 4792
-              }
-            ],
-            "d2": [
-              {
-                "name": "Ryan Shea",
-                "position": "ld",
-                "player_id": 26606
-              },
-              {
-                "name": "Connor Murphy",
-                "position": "rd",
-                "player_id": 1772
-              }
-            ],
-            "d3": [
-              {
-                "name": "Shakir Mukhamadullin",
-                "position": "ld",
-                "player_id": 33038
-              },
-              {
-                "name": "Jake Walman",
-                "position": "rd",
-                "player_id": 2859
-              }
-            ],
-            "g": [
-              {
-                "name": "Matt Tomkins",
-                "position": "g1",
-                "player_id": 22713
-              },
-              {
-                "name": "Tristan Jarry",
-                "position": "g2",
-                "player_id": 2626
-              }
-            ],
-            "pp1": [
-              {
-                "name": "Kasperi Kapanen",
-                "position": "sk1",
-                "player_id": 2385
-              },
-              {
-                "name": "Ryan Nugent-Hopkins",
-                "position": "sk2",
-                "player_id": 1733
-              },
-              {
-                "name": "Leon Draisaitl",
-                "position": "sk3",
-                "player_id": 2365
-              },
-              {
-                "name": "Connor McDavid",
-                "position": "sk4",
-                "player_id": 2471
-              },
-              {
-                "name": "Evan Bouchard",
-                "position": "sk5",
-                "player_id": 4792
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Vasily Podkolzin",
-                "position": "sk1",
-                "player_id": 30606
-              },
-              {
-                "name": "Colton Dach",
-                "position": "sk2",
-                "player_id": 32903
-              },
-              {
-                "name": "Filip Hallander",
-                "position": "sk3",
-                "player_id": 29096
-              },
-              {
-                "name": "Ryan Shea",
-                "position": "sk4",
-                "player_id": 26606
-              },
-              {
-                "name": "Mattias Ekholm",
-                "position": "sk5",
-                "player_id": 1675
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Connor McDavid",
-                "position": "sk1",
-                "player_id": 2471
-              },
-              {
-                "name": "Owen Michaels",
-                "position": "sk2",
-                "player_id": 32239
-              },
-              {
-                "name": "Ryan Shea",
-                "position": "sk3",
-                "player_id": 26606
-              },
-              {
-                "name": "Connor Murphy",
-                "position": "sk4",
-                "player_id": 1772
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Kasperi Kapanen",
-                "position": "sk1",
-                "player_id": 2385
-              },
-              {
-                "name": "Mathieu Joseph",
-                "position": "sk2",
-                "player_id": 3891
-              },
-              {
-                "name": "Mattias Ekholm",
-                "position": "sk3",
-                "player_id": 1675
-              },
-              {
-                "name": "Shakir Mukhamadullin",
-                "position": "sk4",
-                "player_id": 33038
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Alec Regula",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 28804
-            },
-            {
-              "name": "Frederik Andersen",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 1942
-            },
-            {
-              "name": "Mattias Janmark",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2447
-            },
-            {
-              "name": "Matthew Savoie",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 31504
-            },
-            {
-              "name": "Zach Hyman",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2468
-            },
-            {
-              "name": "Devon Levi",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 33010
-            },
-            {
-              "name": "Isaac Howard",
-              "injury_status": "dtd",
-              "game_time_decision": false,
-              "player_id": 33270
-            }
-          ]
-        }
-      }
-    },
-    {
-      "game_id": 2026020261,
-      "away": {
-        "abbr": "NSH",
-        "goalie": {
-          "name": "Juuse Saros",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
-          "player_id": 2557
+          "player_id": 29507
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-04T19:48:39.008Z",
-          "source_name": "Nick Kieser",
-          "source_url": "https://x.com/KieserNick/status/2118024635908506023",
+          "observed_at": "2026-11-06T05:04:02.760826-05:00",
+          "updated_at": "2026-11-05T15:10:38.470Z",
+          "source_name": "Last Game (2026-11-04)",
+          "source_url": "https://www.nhl.com/gamecenter/cgy-vs-sea/2026/11/04/2026020250",
           "groups": {
             "f1": [
               {
-                "name": "Steven Stamkos",
+                "name": "Joel Farabee",
                 "position": "lw",
-                "player_id": 1392
+                "player_id": 4799
               },
               {
-                "name": "Ryan O'Reilly",
+                "name": "Mikael Backlund",
                 "position": "c",
-                "player_id": 362
+                "player_id": 193
               },
               {
-                "name": "Mavrik Bourque",
+                "name": "Matt Coronato",
                 "position": "rw",
-                "player_id": 29958
+                "player_id": 32801
               }
             ],
             "f2": [
               {
-                "name": "Filip Forsberg",
+                "name": "Matvei Gridin",
                 "position": "lw",
-                "player_id": 2064
+                "player_id": 36778
               },
               {
-                "name": "Shane Wright",
+                "name": "Martin Pospisil",
                 "position": "c",
-                "player_id": 30830
+                "player_id": 28414
               },
               {
-                "name": "Nils Hoglander",
+                "name": "Ryan Strome",
                 "position": "rw",
-                "player_id": 30614
+                "player_id": 1825
               }
             ],
             "f3": [
               {
-                "name": "Ross Colton",
+                "name": "Yegor Sharangovich",
                 "position": "lw",
-                "player_id": 27086
+                "player_id": 29637
               },
               {
-                "name": "Jack Drury",
+                "name": "Morgan Frost",
                 "position": "c",
-                "player_id": 27584
+                "player_id": 2814
               },
               {
-                "name": "Adam Edstrom",
+                "name": "Aydar Suniev",
                 "position": "rw",
-                "player_id": 30691
+                "player_id": 34016
               }
             ],
             "f4": [
               {
-                "name": "Reid Schaefer",
+                "name": "William Stromgren",
                 "position": "lw",
-                "player_id": 32867
+                "player_id": 38696
               },
               {
-                "name": "Alex Kerfoot",
+                "name": "Jonathan Castagna",
                 "position": "c",
-                "player_id": 2833
+                "player_id": 35221
               },
               {
-                "name": "Vitali Pinchuk",
+                "name": "Adam Klapka",
                 "position": "rw",
-                "player_id": 31775
+                "player_id": 34398
               }
             ],
             "d1": [
               {
-                "name": "Roman Josi",
+                "name": "Kevin Bahl",
                 "position": "ld",
-                "player_id": 897
+                "player_id": 27807
               },
               {
-                "name": "Adam Wilsby",
+                "name": "Simon Nemec",
                 "position": "rd",
-                "player_id": 36308
+                "player_id": 35669
               }
             ],
             "d2": [
               {
-                "name": "Brady Skjei",
+                "name": "Jacob Middleton",
                 "position": "ld",
-                "player_id": 2425
+                "player_id": 22822
               },
               {
-                "name": "Nick Perbix",
+                "name": "Zach Whitecloud",
                 "position": "rd",
-                "player_id": 28161
+                "player_id": 4658
               }
             ],
             "d3": [
               {
-                "name": "Daemon Hunt",
+                "name": "Yan Kuznetsov",
                 "position": "ld",
-                "player_id": 29543
+                "player_id": 30745
               },
               {
-                "name": "Jayden Struble",
+                "name": "Zayne Parekh",
                 "position": "rd",
-                "player_id": 30435
+                "player_id": 36725
               }
             ],
             "g": [
               {
-                "name": "Juuse Saros",
+                "name": "Dustin Wolf",
                 "position": "g1",
-                "player_id": 2557
+                "player_id": 29507
               },
               {
-                "name": "Justus Annunen",
+                "name": "Arsenii Sergeev",
                 "position": "g2",
-                "player_id": 29146
+                "player_id": 32102
               }
             ],
             "pp1": [
               {
-                "name": "Filip Forsberg",
+                "name": "Joel Farabee",
                 "position": "sk1",
-                "player_id": 2064
+                "player_id": 4799
               },
               {
-                "name": "Ryan O'Reilly",
+                "name": "Morgan Frost",
                 "position": "sk2",
-                "player_id": 362
+                "player_id": 2814
               },
               {
-                "name": "Mavrik Bourque",
+                "name": "Matt Coronato",
                 "position": "sk3",
-                "player_id": 29958
+                "player_id": 32801
               },
               {
-                "name": "Steven Stamkos",
+                "name": "Matvei Gridin",
                 "position": "sk4",
-                "player_id": 1392
+                "player_id": 36778
               },
               {
-                "name": "Roman Josi",
+                "name": "Zayne Parekh",
                 "position": "sk5",
-                "player_id": 897
+                "player_id": 36725
               }
             ],
             "pp2": [
               {
-                "name": "Ross Colton",
+                "name": "Adam Klapka",
                 "position": "sk1",
-                "player_id": 27086
+                "player_id": 34398
               },
               {
-                "name": "Shane Wright",
+                "name": "Ryan Strome",
                 "position": "sk2",
-                "player_id": 30830
+                "player_id": 1825
               },
               {
-                "name": "Alex Kerfoot",
+                "name": "Aydar Suniev",
                 "position": "sk3",
-                "player_id": 2833
+                "player_id": 34016
               },
               {
-                "name": "Vitali Pinchuk",
+                "name": "Simon Nemec",
                 "position": "sk4",
-                "player_id": 31775
+                "player_id": 35669
               },
               {
-                "name": "Brady Skjei",
+                "name": "Yegor Sharangovich",
                 "position": "sk5",
-                "player_id": 2425
+                "player_id": 29637
               }
             ],
             "pk1": [
               {
-                "name": "Jack Drury",
+                "name": "Mikael Backlund",
                 "position": "sk1",
-                "player_id": 27584
+                "player_id": 193
               },
               {
-                "name": "Alex Kerfoot",
+                "name": "Yegor Sharangovich",
                 "position": "sk2",
-                "player_id": 2833
+                "player_id": 29637
               },
               {
-                "name": "Brady Skjei",
+                "name": "Jacob Middleton",
                 "position": "sk3",
-                "player_id": 2425
+                "player_id": 22822
               },
               {
-                "name": "Nick Perbix",
+                "name": "Zach Whitecloud",
                 "position": "sk4",
-                "player_id": 28161
+                "player_id": 4658
               }
             ],
             "pk2": [
               {
-                "name": "Ryan O'Reilly",
+                "name": "Joel Farabee",
                 "position": "sk1",
-                "player_id": 362
+                "player_id": 4799
               },
               {
-                "name": "Adam Edstrom",
+                "name": "Jonathan Castagna",
                 "position": "sk2",
-                "player_id": 30691
+                "player_id": 35221
               },
               {
-                "name": "Daemon Hunt",
+                "name": "Yan Kuznetsov",
                 "position": "sk3",
-                "player_id": 29543
+                "player_id": 30745
               },
               {
-                "name": "Adam Wilsby",
+                "name": "Kevin Bahl",
                 "position": "sk4",
-                "player_id": 36308
+                "player_id": 27807
               }
             ]
           },
           "injuries": [
             {
-              "name": "William Trudeau",
+              "name": "Jonathan Huberdeau",
               "injury_status": "ir",
               "game_time_decision": false,
-              "player_id": 32461
+              "player_id": 1798
             },
             {
-              "name": "Jonathan Marchessault",
-              "injury_status": "dtd",
-              "game_time_decision": false,
-              "player_id": 2399
-            }
-          ]
-        }
-      },
-      "home": {
-        "abbr": "COL",
-        "goalie": {
-          "name": "Mackenzie Blackwood",
-          "status": "CONFIRMED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "source_timestamp": "2026-11-05T17:41:50.300Z",
-          "source_name": "Evan Rawal",
-          "source_url": "https://x.com/evanrawal/status/2118398149882786297",
-          "player_id": 3792
-        },
-        "lineup": {
-          "status": "PROJECTED",
-          "observed_at": "2026-11-05T16:44:51.298175-05:00",
-          "updated_at": "2026-11-05T18:51:32.366Z",
-          "source_name": "Aarif Deen",
-          "source_url": "https://coloradohockeynow.com/avalanche-game-17-vs-nashville-predators-c-mac-returns-lines-notes-how-to-watch/",
-          "groups": {
-            "f1": [
-              {
-                "name": "Artturi Lehkonen",
-                "position": "lw",
-                "player_id": 2679
-              },
-              {
-                "name": "Nathan MacKinnon",
-                "position": "c",
-                "player_id": 2130
-              },
-              {
-                "name": "Martin Necas",
-                "position": "rw",
-                "player_id": 2804
-              }
-            ],
-            "f2": [
-              {
-                "name": "Gabriel Landeskog",
-                "position": "lw",
-                "player_id": 1763
-              },
-              {
-                "name": "Nazem Kadri",
-                "position": "c",
-                "player_id": 1425
-              },
-              {
-                "name": "Nicolas Roy",
-                "position": "rw",
-                "player_id": 3818
-              }
-            ],
-            "f3": [
-              {
-                "name": "Jaden Schwartz",
-                "position": "lw",
-                "player_id": 1864
-              },
-              {
-                "name": "Brock Nelson",
-                "position": "c",
-                "player_id": 1921
-              },
-              {
-                "name": "T.J. Hughes",
-                "position": "rw",
-                "player_id": 38896
-              }
-            ],
-            "f4": [
-              {
-                "name": "Parker Kelly",
-                "position": "lw",
-                "player_id": 4600
-              },
-              {
-                "name": "Fedor Svechkov",
-                "position": "c",
-                "player_id": 34353
-              },
-              {
-                "name": "Logan O'Connor",
-                "position": "rw",
-                "player_id": 24994
-              }
-            ],
-            "d1": [
-              {
-                "name": "Devon Toews",
-                "position": "ld",
-                "player_id": 2874
-              },
-              {
-                "name": "Cale Makar",
-                "position": "rd",
-                "player_id": 2788
-              }
-            ],
-            "d2": [
-              {
-                "name": "Sam Malinski",
-                "position": "ld",
-                "player_id": 37993
-              },
-              {
-                "name": "Brent Burns",
-                "position": "rd",
-                "player_id": 792
-              }
-            ],
-            "d3": [
-              {
-                "name": "Brett Kulak",
-                "position": "ld",
-                "player_id": 2466
-              },
-              {
-                "name": "Noah Juulsen",
-                "position": "rd",
-                "player_id": 2500
-              }
-            ],
-            "g": [
-              {
-                "name": "Mackenzie Blackwood",
-                "position": "g1",
-                "player_id": 3792
-              },
-              {
-                "name": "Scott Wedgewood",
-                "position": "g2",
-                "player_id": 1873
-              }
-            ],
-            "pp1": [
-              {
-                "name": "T.J. Hughes",
-                "position": "sk1",
-                "player_id": 38896
-              },
-              {
-                "name": "Nazem Kadri",
-                "position": "sk2",
-                "player_id": 1425
-              },
-              {
-                "name": "Martin Necas",
-                "position": "sk3",
-                "player_id": 2804
-              },
-              {
-                "name": "Nathan MacKinnon",
-                "position": "sk4",
-                "player_id": 2130
-              },
-              {
-                "name": "Cale Makar",
-                "position": "sk5",
-                "player_id": 2788
-              }
-            ],
-            "pp2": [
-              {
-                "name": "Artturi Lehkonen",
-                "position": "sk1",
-                "player_id": 2679
-              },
-              {
-                "name": "Gabriel Landeskog",
-                "position": "sk2",
-                "player_id": 1763
-              },
-              {
-                "name": "Jaden Schwartz",
-                "position": "sk3",
-                "player_id": 1864
-              },
-              {
-                "name": "Devon Toews",
-                "position": "sk4",
-                "player_id": 2874
-              },
-              {
-                "name": "Brock Nelson",
-                "position": "sk5",
-                "player_id": 1921
-              }
-            ],
-            "pk1": [
-              {
-                "name": "Parker Kelly",
-                "position": "sk1",
-                "player_id": 4600
-              },
-              {
-                "name": "Logan O'Connor",
-                "position": "sk2",
-                "player_id": 24994
-              },
-              {
-                "name": "Devon Toews",
-                "position": "sk3",
-                "player_id": 2874
-              },
-              {
-                "name": "Cale Makar",
-                "position": "sk4",
-                "player_id": 2788
-              }
-            ],
-            "pk2": [
-              {
-                "name": "Nicolas Roy",
-                "position": "sk1",
-                "player_id": 3818
-              },
-              {
-                "name": "Artturi Lehkonen",
-                "position": "sk2",
-                "player_id": 2679
-              },
-              {
-                "name": "Brett Kulak",
-                "position": "sk3",
-                "player_id": 2466
-              },
-              {
-                "name": "Brent Burns",
-                "position": "sk4",
-                "player_id": 792
-              }
-            ]
-          },
-          "injuries": [
-            {
-              "name": "Josh Manson",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2400
-            },
-            {
-              "name": "Zachary L'Heureux",
+              "name": "Samuel Honzek",
               "injury_status": "out",
               "game_time_decision": false,
-              "player_id": 31229
+              "player_id": 37733
+            },
+            {
+              "name": "Brennan Othmann",
+              "injury_status": "dtd",
+              "game_time_decision": false,
+              "player_id": 30831
+            },
+            {
+              "name": "Devin Cooley",
+              "injury_status": "dtd",
+              "game_time_decision": false,
+              "player_id": 32944
             }
           ]
         }
