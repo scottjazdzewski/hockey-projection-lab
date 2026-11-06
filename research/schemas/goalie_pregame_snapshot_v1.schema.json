@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hockey-projection-lab.example/schemas/goalie-pregame-snapshot-v1.schema.json",
+  "title": "Hockey Lab Pregame Goalie Snapshot v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "game_id",
+    "team_abbr",
+    "scheduled_start_utc",
+    "captured_at_utc",
+    "assignment_state",
+    "goalie",
+    "source",
+    "source_observed_at_utc",
+    "capture_run_id",
+    "forecast_version"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "game_id": { "type": "integer", "minimum": 2000000000 },
+    "team_abbr": { "type": "string", "minLength": 2, "maxLength": 4 },
+    "scheduled_start_utc": { "type": "string", "format": "date-time" },
+    "captured_at_utc": { "type": "string", "format": "date-time" },
+    "assignment_state": {
+      "type": "string",
+      "enum": ["projected", "confirmed", "unassigned", "unavailable"]
+    },
+    "goalie": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["player_id", "name"],
+          "properties": {
+            "player_id": { "type": ["string", "integer"], "minLength": 1 },
+            "name": { "type": "string", "minLength": 1 }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "source": { "type": "string", "minLength": 1 },
+    "source_observed_at_utc": { "type": ["string", "null"], "format": "date-time" },
+    "capture_run_id": { "type": "string", "minLength": 1 },
+    "forecast_version": { "type": "string", "minLength": 1 },
+    "source_confidence": {
+      "type": "string",
+      "enum": ["high", "medium", "low", "unavailable"]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "assignment_state": { "enum": ["projected", "confirmed"] } },
+        "required": ["assignment_state"]
+      },
+      "then": {
+        "properties": { "goalie": { "type": "object" } }
+      }
+    },
+    {
+      "if": {
+        "properties": { "assignment_state": { "enum": ["unassigned", "unavailable"] } },
+        "required": ["assignment_state"]
+      },
+      "then": {
+        "properties": { "goalie": { "type": "null" } }
+      }
+    }
+  ]
+}
