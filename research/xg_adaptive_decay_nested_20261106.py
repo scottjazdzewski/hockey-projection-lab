@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / 'research'))
 import hockey_goals_team_form_60_009 as model
 
 SPANS = (20, 40, 60, 100)
