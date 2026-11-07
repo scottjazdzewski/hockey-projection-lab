@@ -1,38 +1,128 @@
 {
-  "date": "2026-11-06",
+  "date": "2026-11-07",
   "timezone": "America/New_York",
-  "display_date": "Friday, November 6",
-  "updated_at": "2026-11-06T16:14:02.168665-05:00",
+  "display_date": "Saturday, November 7",
+  "updated_at": "2026-11-07T05:05:58.374077-05:00",
   "source": "Official NHL live score feed",
   "games": [
     {
-      "game_id": 2026020262,
-      "away_abbr": "CBJ",
-      "away_name": "Columbus Blue Jackets",
-      "home_abbr": "BUF",
-      "home_name": "Buffalo Sabres",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-06T19:00:00-05:00",
+      "game_id": 2026020265,
+      "away_abbr": "FLA",
+      "away_name": "Florida Panthers",
+      "home_abbr": "WSH",
+      "home_name": "Washington Capitals",
+      "time_et": "12:30 PM ET",
+      "start_time_et": "2026-11-07T12:30:00-05:00",
       "state": "FUT"
     },
     {
-      "game_id": 2026020263,
+      "game_id": 2026020266,
+      "away_abbr": "STL",
+      "away_name": "St. Louis Blues",
+      "home_abbr": "NSH",
+      "home_name": "Nashville Predators",
+      "time_et": "1:00 PM ET",
+      "start_time_et": "2026-11-07T13:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020267,
+      "away_abbr": "NYR",
+      "away_name": "New York Rangers",
+      "home_abbr": "SEA",
+      "home_name": "Seattle Kraken",
+      "time_et": "5:00 PM ET",
+      "start_time_et": "2026-11-07T17:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020268,
+      "away_abbr": "MTL",
+      "away_name": "Montreal Canadiens",
+      "home_abbr": "TOR",
+      "home_name": "Toronto Maple Leafs",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-07T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020269,
+      "away_abbr": "UTA",
+      "away_name": "Utah Mammoth",
+      "home_abbr": "OTT",
+      "home_name": "Ottawa Senators",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-07T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020270,
+      "away_abbr": "NJD",
+      "away_name": "New Jersey Devils",
+      "home_abbr": "NYI",
+      "home_name": "New York Islanders",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-07T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020271,
+      "away_abbr": "CHI",
+      "away_name": "Chicago Blackhawks",
+      "home_abbr": "CAR",
+      "home_name": "Carolina Hurricanes",
+      "time_et": "8:00 PM ET",
+      "start_time_et": "2026-11-07T20:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020272,
       "away_abbr": "SJS",
       "away_name": "San Jose Sharks",
+      "home_abbr": "DAL",
+      "home_name": "Dallas Stars",
+      "time_et": "8:00 PM ET",
+      "start_time_et": "2026-11-07T20:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020273,
+      "away_abbr": "TBL",
+      "away_name": "Tampa Bay Lightning",
       "home_abbr": "MIN",
       "home_name": "Minnesota Wild",
       "time_et": "8:00 PM ET",
-      "start_time_et": "2026-11-06T20:00:00-05:00",
+      "start_time_et": "2026-11-07T20:00:00-05:00",
       "state": "FUT"
     },
     {
-      "game_id": 2026020264,
-      "away_abbr": "ANA",
-      "away_name": "Anaheim Ducks",
-      "home_abbr": "CGY",
-      "home_name": "Calgary Flames",
-      "time_et": "8:00 PM ET",
-      "start_time_et": "2026-11-06T20:00:00-05:00",
+      "game_id": 2026020274,
+      "away_abbr": "DET",
+      "away_name": "Detroit Red Wings",
+      "home_abbr": "COL",
+      "home_name": "Colorado Avalanche",
+      "time_et": "9:00 PM ET",
+      "start_time_et": "2026-11-07T21:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020275,
+      "away_abbr": "PIT",
+      "away_name": "Pittsburgh Penguins",
+      "home_abbr": "LAK",
+      "home_name": "Los Angeles Kings",
+      "time_et": "9:00 PM ET",
+      "start_time_et": "2026-11-07T21:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020276,
+      "away_abbr": "VAN",
+      "away_name": "Vancouver Canucks",
+      "home_abbr": "EDM",
+      "home_name": "Edmonton Oilers",
+      "time_et": "10:00 PM ET",
+      "start_time_et": "2026-11-07T22:00:00-05:00",
       "state": "FUT"
     }
   ]
