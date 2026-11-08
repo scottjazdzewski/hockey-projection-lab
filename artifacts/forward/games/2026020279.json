@@ -1,0 +1,617 @@
+{
+  "schema_version": "1.0",
+  "game_id": 2026020279,
+  "game_date": "2026-11-08",
+  "start_time_et": "2026-11-08T19:00:00-05:00",
+  "matchup": {
+    "away_abbr": "NJD",
+    "away_name": "New Jersey Devils",
+    "home_abbr": "TOR",
+    "home_name": "Toronto Maple Leafs"
+  },
+  "frozen_at": "2026-11-08T18:57:52.767353-05:00",
+  "minutes_before_start": 2.12,
+  "forecast": {
+    "model": {
+      "model_id": "HOCKEY-LAB-GAME",
+      "version": "prospective-0.3.0",
+      "feature_version": "team-strength-004+b2b-007+goalie-adjustment-prospective-001",
+      "status": "PROMOTED"
+    },
+    "generated_at": "2026-11-08T05:11:26.848005-05:00",
+    "data_cutoff": "2026-11-02T23:59:59-05:00",
+    "context_generated_at": "2026-11-08T05:10:31.236436-05:00",
+    "away": {
+      "abbr": "NJD",
+      "win_probability": 0.570187226877477,
+      "team_only_win_probability": 0.576139495688724,
+      "goalie_adjustment_pp": -0.5952268811246997,
+      "fair_moneyline": -133,
+      "expected_goals": null,
+      "regulation_win_probability": null
+    },
+    "home": {
+      "abbr": "TOR",
+      "win_probability": 0.42981277312252303,
+      "team_only_win_probability": 0.423860504311276,
+      "goalie_adjustment_pp": 0.5952268811247052,
+      "fair_moneyline": 133,
+      "expected_goals": null,
+      "regulation_win_probability": null
+    },
+    "overtime_probability": null,
+    "goalie_adjustment_status": "APPLIED",
+    "goalie_adjustment": {
+      "status": "APPLIED",
+      "model_version": "prospective-0.3.0",
+      "away_rating": 0.9055505499044291,
+      "home_rating": 0.9082710251218659,
+      "away_age_years": 36.255364586541816,
+      "home_age_years": 38.13356879333593,
+      "away_prior_starts": 465,
+      "home_prior_starts": 864,
+      "away_prior_shots": 13436.0,
+      "home_prior_shots": 24852.0,
+      "away_prior_minutes": 26927.8,
+      "home_prior_minutes": 50608.816666666666,
+      "away_reliability": 0.959060944188531,
+      "home_reliability": 0.9775831526382627,
+      "away_status": "PROJECTED",
+      "home_status": "PROJECTED",
+      "away_source_timestamp": null,
+      "home_source_timestamp": null,
+      "away_observed_at": "2026-11-08T05:10:31.236436-05:00",
+      "home_observed_at": "2026-11-08T05:10:31.236436-05:00"
+    },
+    "rest_state": {
+      "status": "CONFIRMED",
+      "away": "B2B",
+      "home": "B2B",
+      "away_flags": [
+        "3-in-4",
+        "4-in-6"
+      ],
+      "home_flags": [],
+      "away_severity": "B2B",
+      "home_severity": "B2B",
+      "updated_at": "2026-11-08T05:11:26.848005-05:00"
+    },
+    "probability_components": {
+      "team_only": {
+        "away_win_probability": 0.576139495688724,
+        "home_win_probability": 0.423860504311276
+      }
+    },
+    "goalie_context": {
+      "away": {
+        "abbr": "NJD",
+        "goalie": {
+          "name": "Jake Allen",
+          "status": "PROJECTED",
+          "observed_at": "2026-11-08T05:10:31.236436-05:00",
+          "source_timestamp": null,
+          "source_name": null,
+          "source_url": null,
+          "player_id": 1305
+        },
+        "lineup": {
+          "status": "PROJECTED",
+          "observed_at": "2026-11-08T05:10:31.236436-05:00",
+          "updated_at": "2026-11-07T23:44:37.842Z",
+          "source_name": "Amanda Stein",
+          "source_url": "https://x.com/NJDevils/status/2119214082213765594?a=3GkT-T4H1_KlOLIzHQA&s=20",
+          "groups": {
+            "f1": [
+              {
+                "name": "Timo Meier",
+                "position": "lw",
+                "player_id": 2480
+              },
+              {
+                "name": "Nico Hischier",
+                "position": "c",
+                "player_id": 2781
+              },
+              {
+                "name": "Luke Evangelista",
+                "position": "rw",
+                "player_id": 29787
+              }
+            ],
+            "f2": [
+              {
+                "name": "Arseny Gritsyuk",
+                "position": "lw",
+                "player_id": 30695
+              },
+              {
+                "name": "Jack Hughes",
+                "position": "c",
+                "player_id": 30419
+              },
+              {
+                "name": "Jesper Bratt",
+                "position": "rw",
+                "player_id": 2845
+              }
+            ],
+            "f3": [
+              {
+                "name": "Anthony Mantha",
+                "position": "lw",
+                "player_id": 2151
+              },
+              {
+                "name": "Evan Rodrigues",
+                "position": "c",
+                "player_id": 2620
+              },
+              {
+                "name": "Jesper Boqvist",
+                "position": "rw",
+                "player_id": 28107
+              }
+            ],
+            "f4": [
+              {
+                "name": "Amadeus Lombardi",
+                "position": "lw",
+                "player_id": 31074
+              },
+              {
+                "name": "Cody Glass",
+                "position": "c",
+                "player_id": 2785
+              },
+              {
+                "name": "Connor Brown",
+                "position": "rw",
+                "player_id": 2181
+              }
+            ],
+            "d1": [
+              {
+                "name": "Luke Hughes",
+                "position": "ld",
+                "player_id": 31110
+              },
+              {
+                "name": "Brett Pesce",
+                "position": "rd",
+                "player_id": 2541
+              }
+            ],
+            "d2": [
+              {
+                "name": "Jonas Siegenthaler",
+                "position": "ld",
+                "player_id": 3782
+              },
+              {
+                "name": "Dougie Hamilton",
+                "position": "rd",
+                "player_id": 1821
+              }
+            ],
+            "d3": [
+              {
+                "name": "Declan Chisholm",
+                "position": "ld",
+                "player_id": 28803
+              },
+              {
+                "name": "Johnathan Kovacevic",
+                "position": "rd",
+                "player_id": 28131
+              }
+            ],
+            "g": [
+              {
+                "name": "Jake Allen",
+                "position": "g1",
+                "player_id": 1305
+              },
+              {
+                "name": "Connor Hellebuyck",
+                "position": "g2",
+                "player_id": 2465
+              }
+            ],
+            "pp1": [
+              {
+                "name": "Jesper Bratt",
+                "position": "sk1",
+                "player_id": 2845
+              },
+              {
+                "name": "Nico Hischier",
+                "position": "sk2",
+                "player_id": 2781
+              },
+              {
+                "name": "Connor Brown",
+                "position": "sk3",
+                "player_id": 2181
+              },
+              {
+                "name": "Jack Hughes",
+                "position": "sk4",
+                "player_id": 30419
+              },
+              {
+                "name": "Luke Hughes",
+                "position": "sk5",
+                "player_id": 31110
+              }
+            ],
+            "pp2": [
+              {
+                "name": "Timo Meier",
+                "position": "sk1",
+                "player_id": 2480
+              },
+              {
+                "name": "Luke Evangelista",
+                "position": "sk2",
+                "player_id": 29787
+              },
+              {
+                "name": "Anthony Mantha",
+                "position": "sk3",
+                "player_id": 2151
+              },
+              {
+                "name": "Arseny Gritsyuk",
+                "position": "sk4",
+                "player_id": 30695
+              },
+              {
+                "name": "Dougie Hamilton",
+                "position": "sk5",
+                "player_id": 1821
+              }
+            ],
+            "pk1": [
+              {
+                "name": "Nico Hischier",
+                "position": "sk1",
+                "player_id": 2781
+              },
+              {
+                "name": "Evan Rodrigues",
+                "position": "sk2",
+                "player_id": 2620
+              },
+              {
+                "name": "Jonas Siegenthaler",
+                "position": "sk3",
+                "player_id": 3782
+              },
+              {
+                "name": "Dougie Hamilton",
+                "position": "sk4",
+                "player_id": 1821
+              }
+            ],
+            "pk2": [
+              {
+                "name": "Timo Meier",
+                "position": "sk1",
+                "player_id": 2480
+              },
+              {
+                "name": "Arseny Gritsyuk",
+                "position": "sk2",
+                "player_id": 30695
+              },
+              {
+                "name": "Brett Pesce",
+                "position": "sk3",
+                "player_id": 2541
+              },
+              {
+                "name": "Johnathan Kovacevic",
+                "position": "sk4",
+                "player_id": 28131
+              }
+            ]
+          },
+          "injuries": [
+            {
+              "name": "Seamus Casey",
+              "injury_status": "ir",
+              "game_time_decision": false,
+              "player_id": 33266
+            }
+          ]
+        }
+      },
+      "home": {
+        "abbr": "TOR",
+        "goalie": {
+          "name": "Sergei Bobrovsky",
+          "status": "PROJECTED",
+          "observed_at": "2026-11-08T05:10:31.236436-05:00",
+          "source_timestamp": null,
+          "source_name": null,
+          "source_url": null,
+          "player_id": 1117
+        },
+        "lineup": {
+          "status": "PROJECTED",
+          "observed_at": "2026-11-08T05:10:31.236436-05:00",
+          "updated_at": "2026-11-07T23:46:36.306Z",
+          "source_name": "David Alter",
+          "source_url": "https://x.com/davidalter/status/2119214478462198262?a=8Lezm2T1N8gYH2fN4Kw&s=20",
+          "groups": {
+            "f1": [
+              {
+                "name": "Easton Cowan",
+                "position": "lw",
+                "player_id": 35106
+              },
+              {
+                "name": "Auston Matthews",
+                "position": "c",
+                "player_id": 2433
+              },
+              {
+                "name": "Jack Roslovic",
+                "position": "rw",
+                "player_id": 2499
+              }
+            ],
+            "f2": [
+              {
+                "name": "John Tavares",
+                "position": "lw",
+                "player_id": 1016
+              },
+              {
+                "name": "Nick Paul",
+                "position": "c",
+                "player_id": 2357
+              },
+              {
+                "name": "William Nylander",
+                "position": "rw",
+                "player_id": 2375
+              }
+            ],
+            "f3": [
+              {
+                "name": "Dakota Joshua",
+                "position": "lw",
+                "player_id": 25020
+              },
+              {
+                "name": "Colton Sissons",
+                "position": "c",
+                "player_id": 2030
+              },
+              {
+                "name": "Gavin McKenna",
+                "position": "rw",
+                "player_id": 37717
+              }
+            ],
+            "f4": [
+              {
+                "name": "Brandon Duhaime",
+                "position": "lw",
+                "player_id": 26984
+              },
+              {
+                "name": "Teddy Blueger",
+                "position": "c",
+                "player_id": 3798
+              },
+              {
+                "name": "Zack MacEwen",
+                "position": "rw",
+                "player_id": 4489
+              }
+            ],
+            "d1": [
+              {
+                "name": "Jake McCabe",
+                "position": "ld",
+                "player_id": 2349
+              },
+              {
+                "name": "Darren Raddysh",
+                "position": "rd",
+                "player_id": 4756
+              }
+            ],
+            "d2": [
+              {
+                "name": "Morgan Rielly",
+                "position": "ld",
+                "player_id": 1935
+              },
+              {
+                "name": "Chris Tanev",
+                "position": "rd",
+                "player_id": 1494
+              }
+            ],
+            "d3": [
+              {
+                "name": "Oliver Ekman-Larsson",
+                "position": "ld",
+                "player_id": 1172
+              },
+              {
+                "name": "Troy Stecher",
+                "position": "rd",
+                "player_id": 2702
+              }
+            ],
+            "g": [
+              {
+                "name": "Sergei Bobrovsky",
+                "position": "g1",
+                "player_id": 1117
+              },
+              {
+                "name": "Anthony Stolarz",
+                "position": "g2",
+                "player_id": 2432
+              }
+            ],
+            "pp1": [
+              {
+                "name": "John Tavares",
+                "position": "sk1",
+                "player_id": 1016
+              },
+              {
+                "name": "William Nylander",
+                "position": "sk2",
+                "player_id": 2375
+              },
+              {
+                "name": "Jack Roslovic",
+                "position": "sk3",
+                "player_id": 2499
+              },
+              {
+                "name": "Darren Raddysh",
+                "position": "sk4",
+                "player_id": 4756
+              },
+              {
+                "name": "Auston Matthews",
+                "position": "sk5",
+                "player_id": 2433
+              }
+            ],
+            "pp2": [
+              {
+                "name": "Easton Cowan",
+                "position": "sk1",
+                "player_id": 35106
+              },
+              {
+                "name": "Nick Paul",
+                "position": "sk2",
+                "player_id": 2357
+              },
+              {
+                "name": "Gavin McKenna",
+                "position": "sk3",
+                "player_id": 37717
+              },
+              {
+                "name": "Oliver Ekman-Larsson",
+                "position": "sk4",
+                "player_id": 1172
+              },
+              {
+                "name": "Morgan Rielly",
+                "position": "sk5",
+                "player_id": 1935
+              }
+            ],
+            "pk1": [
+              {
+                "name": "Teddy Blueger",
+                "position": "sk1",
+                "player_id": 3798
+              },
+              {
+                "name": "Colton Sissons",
+                "position": "sk2",
+                "player_id": 2030
+              },
+              {
+                "name": "Jake McCabe",
+                "position": "sk3",
+                "player_id": 2349
+              },
+              {
+                "name": "Chris Tanev",
+                "position": "sk4",
+                "player_id": 1494
+              }
+            ],
+            "pk2": [
+              {
+                "name": "William Nylander",
+                "position": "sk1",
+                "player_id": 2375
+              },
+              {
+                "name": "Easton Cowan",
+                "position": "sk2",
+                "player_id": 35106
+              },
+              {
+                "name": "Oliver Ekman-Larsson",
+                "position": "sk3",
+                "player_id": 1172
+              },
+              {
+                "name": "Troy Stecher",
+                "position": "sk4",
+                "player_id": 2702
+              }
+            ]
+          },
+          "injuries": [
+            {
+              "name": "Elvis Merzlikins",
+              "injury_status": "ir",
+              "game_time_decision": false,
+              "player_id": 25263
+            },
+            {
+              "name": "Max Domi",
+              "injury_status": "ir",
+              "game_time_decision": false,
+              "player_id": 2131
+            },
+            {
+              "name": "Kirill Marchenko",
+              "injury_status": "ir",
+              "game_time_decision": false,
+              "player_id": 29119
+            },
+            {
+              "name": "Marshall Rifai",
+              "injury_status": "out",
+              "game_time_decision": false,
+              "player_id": 25666
+            }
+          ]
+        }
+      }
+    },
+    "lineup_state": {
+      "status": "PROJECTED",
+      "away": "Projected lines",
+      "home": "Projected lines",
+      "updated_at": "2026-11-08T05:10:31.236436-05:00"
+    },
+    "market_benchmark": {
+      "status": "NOT_CAPTURED",
+      "away_implied_probability": null,
+      "home_implied_probability": null,
+      "source": null,
+      "captured_at": null
+    }
+  },
+  "result": {
+    "status": "OPEN",
+    "away_score": null,
+    "home_score": null,
+    "winner_abbr": null,
+    "last_period_type": null,
+    "went_ot": null,
+    "went_shootout": null,
+    "source": null,
+    "settled_at": null
+  },
+  "evaluation": null
+}

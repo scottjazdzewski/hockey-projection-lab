@@ -1,22 +1,22 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-08T15:23:24.251290-05:00",
+  "generated_at": "2026-11-08T18:57:52.867738-05:00",
   "sample": {
-    "games_frozen": 13,
-    "games_settled": 12,
-    "games_open": 1,
-    "winner_games_scored": 12,
+    "games_frozen": 15,
+    "games_settled": 13,
+    "games_open": 2,
+    "winner_games_scored": 13,
     "xg_games_scored": 0
   },
   "metrics": {
-    "accuracy": 0.4166666666666667,
-    "brier": 0.24644635809561044,
-    "log_loss": 0.6885911813506969,
-    "avg_probability_assigned_to_winner": 0.5158885083969362,
-    "team_only_brier": 0.19194016878377457,
-    "team_only_log_loss": 0.5742397757828183,
-    "goalie_layer_delta_brier": 0.015860633172174343,
-    "goalie_layer_delta_log_loss": 0.03098507242843121,
+    "accuracy": 0.38461538461538464,
+    "brier": 0.2481338088004794,
+    "log_loss": 0.6917710715259394,
+    "avg_probability_assigned_to_winner": 0.5132773034154036,
+    "team_only_brier": 0.21846407402372622,
+    "team_only_log_loss": 0.6282254178267975,
+    "goalie_layer_delta_brier": 0.00953086636654201,
+    "goalie_layer_delta_log_loss": 0.018567732190319357,
     "xg_mae_per_team": null,
     "total_goals_mae": null
   },
@@ -29,11 +29,11 @@
       "avg_probability_assigned_to_winner": 0.5082366087140294
     },
     "HOCKEY-LAB-GAME:prospective-0.3.0:team-strength-004+b2b-007+goalie-adjustment-prospective-001": {
-      "games_settled": 2,
-      "accuracy": 0.5,
-      "brier": 0.2078008019559489,
-      "log_loss": 0.6052248482112494,
-      "avg_probability_assigned_to_winner": 0.5541480068114705
+      "games_settled": 3,
+      "accuracy": 0.3333333333333333,
+      "brier": 0.22799494039026824,
+      "log_loss": 0.6467931500171168,
+      "avg_probability_assigned_to_winner": 0.5300796190866505
     }
   },
   "by_goalie_state": {
@@ -56,13 +56,13 @@
       "goalie_layer_delta_log_loss": null
     },
     "PROJECTED_BOTH": {
-      "games": 2,
-      "team_only_brier": 0.19194016878377457,
-      "final_brier": 0.2078008019559489,
-      "goalie_layer_delta_brier": 0.015860633172174343,
-      "team_only_log_loss": 0.5742397757828183,
-      "final_log_loss": 0.6052248482112494,
-      "goalie_layer_delta_log_loss": 0.03098507242843121
+      "games": 3,
+      "team_only_brier": 0.21846407402372622,
+      "final_brier": 0.22799494039026824,
+      "goalie_layer_delta_brier": 0.00953086636654201,
+      "team_only_log_loss": 0.6282254178267975,
+      "final_log_loss": 0.6467931500171168,
+      "goalie_layer_delta_log_loss": 0.018567732190319357
     }
   },
   "by_pick_side": {
@@ -73,23 +73,23 @@
       "log_loss": 0.6999758244914451
     },
     "home": {
-      "games": 6,
-      "accuracy": 0.3333333333333333,
-      "brier": 0.2425106301517125,
-      "log_loss": 0.6772065382099486
+      "games": 7,
+      "accuracy": 0.2857142857142857,
+      "brier": 0.24620671402416885,
+      "log_loss": 0.6847384261269347
     }
   },
   "games": [
     {
-      "game_id": 2026020278,
+      "game_id": 2026020281,
       "game_date": "2026-11-08",
-      "start_time_et": "2026-11-08T15:30:00-05:00",
-      "away_abbr": "VGK",
-      "home_abbr": "BUF",
+      "start_time_et": "2026-11-08T19:00:00-05:00",
+      "away_abbr": "PHI",
+      "home_abbr": "CGY",
       "model_id": "HOCKEY-LAB-GAME",
       "model_version": "prospective-0.3.0",
       "feature_version": "team-strength-004+b2b-007+goalie-adjustment-prospective-001",
-      "frozen_at": "2026-11-08T15:23:24.161233-05:00",
+      "frozen_at": "2026-11-08T18:57:52.767353-05:00",
       "status": "OPEN",
       "winner_abbr": null,
       "predicted_winner_abbr": null,
@@ -103,6 +103,58 @@
       "team_only_log_loss": null,
       "goalie_layer_delta_brier": null,
       "goalie_layer_delta_log_loss": null,
+      "goal_mae_per_team": null,
+      "total_goals_abs_error": null
+    },
+    {
+      "game_id": 2026020279,
+      "game_date": "2026-11-08",
+      "start_time_et": "2026-11-08T19:00:00-05:00",
+      "away_abbr": "NJD",
+      "home_abbr": "TOR",
+      "model_id": "HOCKEY-LAB-GAME",
+      "model_version": "prospective-0.3.0",
+      "feature_version": "team-strength-004+b2b-007+goalie-adjustment-prospective-001",
+      "frozen_at": "2026-11-08T18:57:52.767353-05:00",
+      "status": "OPEN",
+      "winner_abbr": null,
+      "predicted_winner_abbr": null,
+      "winner_correct": null,
+      "brier": null,
+      "log_loss": null,
+      "probability_assigned_to_winner": null,
+      "goalie_adjustment_status": "APPLIED",
+      "goalie_state_group": "PROJECTED_BOTH",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
+      "goal_mae_per_team": null,
+      "total_goals_abs_error": null
+    },
+    {
+      "game_id": 2026020278,
+      "game_date": "2026-11-08",
+      "start_time_et": "2026-11-08T15:30:00-05:00",
+      "away_abbr": "VGK",
+      "home_abbr": "BUF",
+      "model_id": "HOCKEY-LAB-GAME",
+      "model_version": "prospective-0.3.0",
+      "feature_version": "team-strength-004+b2b-007+goalie-adjustment-prospective-001",
+      "frozen_at": "2026-11-08T15:23:24.161233-05:00",
+      "status": "FINAL",
+      "winner_abbr": "VGK",
+      "predicted_winner_abbr": "BUF",
+      "winner_correct": false,
+      "brier": 0.2683832172589069,
+      "log_loss": 0.7299297536288516,
+      "probability_assigned_to_winner": 0.48194284363701057,
+      "goalie_adjustment_status": "APPLIED",
+      "goalie_state_group": "PROJECTED_BOTH",
+      "team_only_brier": 0.27151188450362956,
+      "team_only_log_loss": 0.736196701914756,
+      "goalie_layer_delta_brier": -0.0031286672447226604,
+      "goalie_layer_delta_log_loss": -0.00626694828590435,
       "goal_mae_per_team": null,
       "total_goals_abs_error": null
     },
