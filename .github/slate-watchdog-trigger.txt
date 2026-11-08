@@ -1,3 +1,3 @@
 Hockey Lab official NHL slate recovery trigger
-Recovery requested: 2026-11-07T05:05:25-05:00
-Reason: 2026-11-07 Eastern slate stale (2026-11-06)
+Recovery requested: 2026-11-08T05:09:52-05:00
+Reason: 2026-11-08 Eastern slate stale (2026-11-07)
