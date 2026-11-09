@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-09T05:12:07.480231-05:00",
+  "generated_at": "2026-11-09T18:44:29.582933-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -17,20 +17,20 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "NYR",
-        "win_probability": 0.40701336597916715,
+        "win_probability": 0.40701336597916704,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 146,
-        "team_only_win_probability": 0.37656657034145624,
+        "team_only_win_probability": 0.37656657034145613,
         "goalie_adjustment_pp": 3.044679563771091
       },
       "home": {
         "abbr": "EDM",
-        "win_probability": 0.5929866340208328,
+        "win_probability": 0.592986634020833,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -146,
-        "team_only_win_probability": 0.6234334296585438,
+        "team_only_win_probability": 0.6234334296585439,
         "goalie_adjustment_pp": -3.044679563771091
       },
       "overtime_probability": null,
@@ -62,7 +62,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-09T05:12:07.480231-05:00"
+        "updated_at": "2026-11-09T18:44:29.582933-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -102,21 +102,21 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "PHI",
-        "win_probability": 0.5421873463304894,
+        "win_probability": 0.5415698677294714,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": -118,
         "team_only_win_probability": 0.5304267047303717,
-        "goalie_adjustment_pp": 1.1760641600117694
+        "goalie_adjustment_pp": 1.1143162999099676
       },
       "home": {
         "abbr": "VAN",
-        "win_probability": 0.4578126536695106,
+        "win_probability": 0.4584301322705286,
         "expected_goals": null,
         "regulation_win_probability": null,
         "fair_moneyline": 118,
-        "team_only_win_probability": 0.4695732952696283,
-        "goalie_adjustment_pp": -1.1760641600117694
+        "team_only_win_probability": 0.46957329526962827,
+        "goalie_adjustment_pp": -1.1143162999099676
       },
       "overtime_probability": null,
       "goalie_state": {
@@ -147,7 +147,7 @@
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-09T05:12:07.480231-05:00"
+        "updated_at": "2026-11-09T18:44:29.582933-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -160,17 +160,17 @@
       "goalie_adjustment": {
         "status": "APPLIED",
         "model_version": "prospective-0.3.0",
-        "away_rating": 0.9004987306130424,
+        "away_rating": 0.9002206081669666,
         "home_rating": 0.8952105750768189,
         "away_age_years": 29.22168148558834,
         "home_age_years": 31.53521290649363,
-        "away_prior_starts": 165,
+        "away_prior_starts": 166,
         "home_prior_starts": 201,
-        "away_prior_shots": 4522.0,
+        "away_prior_shots": 4548.0,
         "home_prior_shots": 5985.0,
-        "away_prior_minutes": 9802.116666666667,
+        "away_prior_minutes": 9866.25,
         "home_prior_minutes": 11781.15,
-        "away_reliability": 0.8934182616293906,
+        "away_reliability": 0.8939983678005886,
         "home_reliability": 0.9117906953974705,
         "away_status": "PROJECTED",
         "home_status": "PROJECTED",
@@ -236,7 +236,7 @@
         ],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-09T05:12:07.480231-05:00"
+        "updated_at": "2026-11-09T18:44:29.582933-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
