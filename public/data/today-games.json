@@ -1,38 +1,78 @@
 {
-  "date": "2026-11-09",
+  "date": "2026-11-10",
   "timezone": "America/New_York",
-  "display_date": "Monday, November 9",
-  "updated_at": "2026-11-09T05:10:36.213873-05:00",
+  "display_date": "Tuesday, November 10",
+  "updated_at": "2026-11-10T05:10:09.561944-05:00",
   "source": "Official NHL live score feed",
   "games": [
     {
-      "game_id": 2026020283,
-      "away_abbr": "NYR",
-      "away_name": "New York Rangers",
-      "home_abbr": "EDM",
-      "home_name": "Edmonton Oilers",
+      "game_id": 2026020286,
+      "away_abbr": "COL",
+      "away_name": "Colorado Avalanche",
+      "home_abbr": "TOR",
+      "home_name": "Toronto Maple Leafs",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-10T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020287,
+      "away_abbr": "MIN",
+      "away_name": "Minnesota Wild",
+      "home_abbr": "MTL",
+      "home_name": "Montreal Canadiens",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-10T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020288,
+      "away_abbr": "WSH",
+      "away_name": "Washington Capitals",
+      "home_abbr": "OTT",
+      "home_name": "Ottawa Senators",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-10T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020291,
+      "away_abbr": "NJD",
+      "away_name": "New Jersey Devils",
+      "home_abbr": "WPG",
+      "home_name": "Winnipeg Jets",
+      "time_et": "7:00 PM ET",
+      "start_time_et": "2026-11-10T19:00:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020289,
+      "away_abbr": "FLA",
+      "away_name": "Florida Panthers",
+      "home_abbr": "CBJ",
+      "home_name": "Columbus Blue Jackets",
+      "time_et": "7:30 PM ET",
+      "start_time_et": "2026-11-10T19:30:00-05:00",
+      "state": "FUT"
+    },
+    {
+      "game_id": 2026020290,
+      "away_abbr": "DET",
+      "away_name": "Detroit Red Wings",
+      "home_abbr": "STL",
+      "home_name": "St. Louis Blues",
       "time_et": "8:00 PM ET",
-      "start_time_et": "2026-11-09T20:00:00-05:00",
+      "start_time_et": "2026-11-10T20:00:00-05:00",
       "state": "FUT"
     },
     {
-      "game_id": 2026020284,
-      "away_abbr": "PHI",
-      "away_name": "Philadelphia Flyers",
-      "home_abbr": "VAN",
-      "home_name": "Vancouver Canucks",
-      "time_et": "9:30 PM ET",
-      "start_time_et": "2026-11-09T21:30:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020285,
-      "away_abbr": "NYI",
-      "away_name": "New York Islanders",
-      "home_abbr": "SJS",
-      "home_name": "San Jose Sharks",
+      "game_id": 2026020292,
+      "away_abbr": "NSH",
+      "away_name": "Nashville Predators",
+      "home_abbr": "LAK",
+      "home_name": "Los Angeles Kings",
       "time_et": "10:00 PM ET",
-      "start_time_et": "2026-11-09T22:00:00-05:00",
+      "start_time_et": "2026-11-10T22:00:00-05:00",
       "state": "FUT"
     }
   ]
