@@ -1,2 +1,2 @@
-Market watchdog recovery requested: 2026-11-09T23:08:29Z
-Expected checkpoint: FIXED:2026-11-09T18:00:00-05:00
+Market watchdog recovery requested: 2026-11-10T14:04:15Z
+Expected checkpoint: FIXED:2026-11-10T09:00:00-05:00
