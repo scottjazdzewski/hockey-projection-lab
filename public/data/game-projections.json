@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-10T05:11:44.482820-05:00",
+  "generated_at": "2026-11-10T11:47:35.507984-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -38,6 +38,14 @@
         "status": "PROJECTED",
         "away": "Mackenzie Blackwood",
         "home": "Sergei Bobrovsky",
+        "away_id": 3792,
+        "home_id": 1117,
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": null,
+        "home_source_timestamp": "2026-11-10T15:33:58.027Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00",
         "updated_at": "2026-11-10T11:46:04.609222-05:00"
       },
       "lineup_state": {
@@ -56,7 +64,7 @@
         ],
         "away_severity": "RESTED",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-10T05:11:44.482820-05:00"
+        "updated_at": "2026-11-10T11:47:35.507984-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -82,11 +90,11 @@
         "away_reliability": 0.9377017695447117,
         "home_reliability": 0.9776080334491452,
         "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-10T05:10:23.270863-05:00",
-        "home_observed_at": "2026-11-10T05:10:23.270863-05:00"
+        "home_source_timestamp": "2026-11-10T15:33:58.027Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00"
       }
     },
     {
@@ -117,6 +125,14 @@
         "status": "PROJECTED",
         "away": "Jesper Wallstedt",
         "home": "Jacob Fowler",
+        "away_id": 31763,
+        "home_id": 38444,
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": null,
+        "home_source_timestamp": "2026-11-10T16:11:07.785Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00",
         "updated_at": "2026-11-10T11:46:04.609222-05:00"
       },
       "lineup_state": {
@@ -133,7 +149,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-10T05:11:44.482820-05:00"
+        "updated_at": "2026-11-10T11:47:35.507984-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -159,11 +175,11 @@
         "away_reliability": 0.773395959103695,
         "home_reliability": 0.5891327875816527,
         "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-10T05:10:23.270863-05:00",
-        "home_observed_at": "2026-11-10T05:10:23.270863-05:00"
+        "home_source_timestamp": "2026-11-10T16:11:07.785Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00"
       }
     },
     {
@@ -173,27 +189,35 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "WSH",
-        "win_probability": 0.4502209610763608,
+        "win_probability": 0.5041977900828664,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": 122,
+        "fair_moneyline": -102,
         "team_only_win_probability": 0.4529580384870311,
-        "goalie_adjustment_pp": -0.2737077410670308
+        "goalie_adjustment_pp": 5.123975159583527
       },
       "home": {
         "abbr": "OTT",
-        "win_probability": 0.5497790389236392,
+        "win_probability": 0.49580220991713364,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": -122,
+        "fair_moneyline": 102,
         "team_only_win_probability": 0.5470419615129689,
-        "goalie_adjustment_pp": 0.2737077410670308
+        "goalie_adjustment_pp": -5.123975159583527
       },
       "overtime_probability": null,
       "goalie_state": {
         "status": "PROJECTED",
         "away": "Logan Thompson",
         "home": "Samuel Ersson",
+        "away_id": 28990,
+        "home_id": 29149,
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": null,
+        "home_source_timestamp": "2026-11-10T16:23:59.426Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00",
         "updated_at": "2026-11-10T11:46:04.609222-05:00"
       },
       "lineup_state": {
@@ -210,7 +234,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-10T05:11:44.482820-05:00"
+        "updated_at": "2026-11-10T11:47:35.507984-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -224,23 +248,23 @@
         "status": "APPLIED",
         "model_version": "prospective-0.3.0",
         "away_rating": 0.9114756396937906,
-        "home_rating": 0.9127114029269541,
+        "home_rating": 0.8884958728555257,
         "away_age_years": 29.70629102582531,
-        "home_age_years": 33.27925966994531,
+        "home_age_years": 27.05873495006742,
         "away_prior_starts": 220,
-        "home_prior_starts": 357,
+        "home_prior_starts": 139,
         "away_prior_shots": 6344.0,
-        "home_prior_shots": 10386.0,
+        "home_prior_shots": 3490.0,
         "away_prior_minutes": 13068.416666666666,
-        "home_prior_minutes": 21005.5,
+        "home_prior_minutes": 7947.216666666666,
         "away_reliability": 0.9185987497105458,
-        "home_reliability": 0.9478879934446652,
+        "home_reliability": 0.8717005124223532,
         "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-10T05:10:23.270863-05:00",
-        "home_observed_at": "2026-11-10T05:10:23.270863-05:00"
+        "home_source_timestamp": "2026-11-10T16:23:59.426Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00"
       }
     },
     {
@@ -250,27 +274,35 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "NJD",
-        "win_probability": 0.5957610689638557,
+        "win_probability": 0.5969052916644862,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": -147,
+        "fair_moneyline": -148,
         "team_only_win_probability": 0.5843472836860817,
-        "goalie_adjustment_pp": 1.1413785277774036
+        "goalie_adjustment_pp": 1.2558007978404562
       },
       "home": {
         "abbr": "WPG",
-        "win_probability": 0.4042389310361443,
+        "win_probability": 0.40309470833551375,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": 147,
+        "fair_moneyline": 148,
         "team_only_win_probability": 0.41565271631391837,
-        "goalie_adjustment_pp": -1.1413785277774091
+        "goalie_adjustment_pp": -1.2558007978404617
       },
       "overtime_probability": null,
       "goalie_state": {
         "status": "PROJECTED",
         "away": "Jake Allen",
         "home": "Nico Daws",
+        "away_id": 1305,
+        "home_id": 29186,
+        "away_status": "CONFIRMED",
+        "home_status": "PROJECTED",
+        "away_source_timestamp": "2026-11-09T17:05:13.531Z",
+        "home_source_timestamp": "2026-11-10T15:26:27.753Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00",
         "updated_at": "2026-11-10T11:46:04.609222-05:00"
       },
       "lineup_state": {
@@ -291,7 +323,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-10T05:11:44.482820-05:00"
+        "updated_at": "2026-11-10T11:47:35.507984-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -305,23 +337,23 @@
         "status": "APPLIED",
         "model_version": "prospective-0.3.0",
         "away_rating": 0.90541703494252,
-        "home_rating": 0.9001407274172298,
+        "home_rating": 0.8996092370358562,
         "away_age_years": 36.26084040055579,
-        "home_age_years": 28.025216123534364,
+        "home_age_years": 25.88417284406935,
         "away_prior_starts": 466,
-        "home_prior_starts": 284,
+        "home_prior_starts": 55,
         "away_prior_shots": 13459.0,
-        "home_prior_shots": 7705.0,
+        "home_prior_shots": 1478.0,
         "away_prior_minutes": 26988.95,
-        "home_prior_minutes": 16534.25,
+        "home_prior_minutes": 3070.1833333333334,
         "away_reliability": 0.9591429561042011,
-        "home_reliability": 0.9341012049622992,
+        "home_reliability": 0.734375265931832,
         "away_status": "CONFIRMED",
         "home_status": "PROJECTED",
         "away_source_timestamp": "2026-11-09T17:05:13.531Z",
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-10T05:10:23.270863-05:00",
-        "home_observed_at": "2026-11-10T05:10:23.270863-05:00"
+        "home_source_timestamp": "2026-11-10T15:26:27.753Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00"
       }
     },
     {
@@ -352,6 +384,14 @@
         "status": "PROJECTED",
         "away": "Jacob Markstrom",
         "home": "Cam Talbot",
+        "away_id": 594,
+        "home_id": 1059,
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": null,
+        "home_source_timestamp": "2026-11-10T16:27:12.165Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00",
         "updated_at": "2026-11-10T11:46:04.609222-05:00"
       },
       "lineup_state": {
@@ -370,7 +410,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-10T05:11:44.482820-05:00"
+        "updated_at": "2026-11-10T11:47:35.507984-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -396,11 +436,11 @@
         "away_reliability": 0.9680994657788707,
         "home_reliability": 0.9648868995485577,
         "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-10T05:10:23.270863-05:00",
-        "home_observed_at": "2026-11-10T05:10:23.270863-05:00"
+        "home_source_timestamp": "2026-11-10T16:27:12.165Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00"
       }
     },
     {
@@ -431,6 +471,14 @@
         "status": "PROJECTED",
         "away": "John Gibson",
         "home": "Joel Hofer",
+        "away_id": 1870,
+        "home_id": 28910,
+        "away_status": "PROJECTED",
+        "home_status": "PROJECTED",
+        "away_source_timestamp": null,
+        "home_source_timestamp": "2026-11-10T16:30:31.376Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00",
         "updated_at": "2026-11-10T11:46:04.609222-05:00"
       },
       "lineup_state": {
@@ -447,7 +495,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-10T05:11:44.482820-05:00"
+        "updated_at": "2026-11-10T11:47:35.507984-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -475,9 +523,9 @@
         "away_status": "PROJECTED",
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-10T05:10:23.270863-05:00",
-        "home_observed_at": "2026-11-10T05:10:23.270863-05:00"
+        "home_source_timestamp": "2026-11-10T16:30:31.376Z",
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00"
       }
     },
     {
@@ -508,6 +556,14 @@
         "status": "PROJECTED",
         "away": "Juuse Saros",
         "home": "Darcy Kuemper",
+        "away_id": 2557,
+        "home_id": 1692,
+        "away_status": "PROJECTED",
+        "home_status": "PROJECTED",
+        "away_source_timestamp": null,
+        "home_source_timestamp": null,
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00",
         "updated_at": "2026-11-10T11:46:04.609222-05:00"
       },
       "lineup_state": {
@@ -524,7 +580,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-10T05:11:44.482820-05:00"
+        "updated_at": "2026-11-10T11:47:35.507984-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -553,8 +609,8 @@
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-10T05:10:23.270863-05:00",
-        "home_observed_at": "2026-11-10T05:10:23.270863-05:00"
+        "away_observed_at": "2026-11-10T11:46:04.609222-05:00",
+        "home_observed_at": "2026-11-10T11:46:04.609222-05:00"
       }
     }
   ]
