@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-11T17:27:45.217510-05:00",
+  "generated_at": "2026-11-11T18:39:37.268070-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -38,6 +38,14 @@
         "status": "CONFIRMED",
         "away": "Andrei Vasilevskiy",
         "home": "Ukko-Pekka Luukkonen",
+        "away_id": 2413,
+        "home_id": 4783,
+        "away_status": "CONFIRMED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-11T23:34:07.282Z",
+        "home_source_timestamp": "2026-11-11T23:33:33.139Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00",
         "updated_at": "2026-11-11T18:38:24.857442-05:00"
       },
       "lineup_state": {
@@ -54,7 +62,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-11T17:27:45.217510-05:00"
+        "updated_at": "2026-11-11T18:39:37.268070-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -79,12 +87,12 @@
         "home_prior_minutes": 11631.8,
         "away_reliability": 0.9733528826504417,
         "home_reliability": 0.9101298132423367,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": "2026-11-11T15:32:04.119Z",
-        "away_observed_at": "2026-11-11T11:52:12.056558-05:00",
-        "home_observed_at": "2026-11-11T11:52:12.056558-05:00"
+        "away_status": "CONFIRMED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-11T23:34:07.282Z",
+        "home_source_timestamp": "2026-11-11T23:33:33.139Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00"
       }
     },
     {
@@ -115,6 +123,14 @@
         "status": "PROJECTED",
         "away": "Joonas Korpisalo",
         "home": "Devin Cooley",
+        "away_id": 2556,
+        "home_id": 32944,
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-11T16:58:15.500Z",
+        "home_source_timestamp": "2026-11-11T16:34:52.512Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00",
         "updated_at": "2026-11-11T18:38:24.857442-05:00"
       },
       "lineup_state": {
@@ -131,7 +147,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-11T17:27:45.217510-05:00"
+        "updated_at": "2026-11-11T18:39:37.268070-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -158,10 +174,10 @@
         "home_reliability": 0.6769443428188553,
         "away_status": "PROJECTED",
         "home_status": "CONFIRMED",
-        "away_source_timestamp": null,
+        "away_source_timestamp": "2026-11-11T16:58:15.500Z",
         "home_source_timestamp": "2026-11-11T16:34:52.512Z",
-        "away_observed_at": "2026-11-11T11:52:12.056558-05:00",
-        "home_observed_at": "2026-11-11T11:52:12.056558-05:00"
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00"
       }
     },
     {
@@ -192,6 +208,14 @@
         "status": "PROJECTED",
         "away": "Dan Vladar",
         "home": "Tristan Jarry",
+        "away_id": 3831,
+        "home_id": 2626,
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-11T17:38:16.301Z",
+        "home_source_timestamp": "2026-11-11T19:02:21.954Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00",
         "updated_at": "2026-11-11T18:38:24.857442-05:00"
       },
       "lineup_state": {
@@ -210,7 +234,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-11T17:27:45.217510-05:00"
+        "updated_at": "2026-11-11T18:39:37.268070-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -236,11 +260,11 @@
         "away_reliability": 0.8939983678005886,
         "home_reliability": 0.9427915009876537,
         "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-11T11:52:12.056558-05:00",
-        "home_observed_at": "2026-11-11T11:52:12.056558-05:00"
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-11T17:38:16.301Z",
+        "home_source_timestamp": "2026-11-11T19:02:21.954Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00"
       }
     },
     {
@@ -271,6 +295,14 @@
         "status": "PROJECTED",
         "away": "Sebastian Cossa",
         "home": "Carter Hart",
+        "away_id": 34654,
+        "home_id": 3874,
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-11T19:34:59.614Z",
+        "home_source_timestamp": "2026-11-11T19:06:05.719Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00",
         "updated_at": "2026-11-11T18:38:24.857442-05:00"
       },
       "lineup_state": {
@@ -287,7 +319,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-11T17:27:45.217510-05:00"
+        "updated_at": "2026-11-11T18:39:37.268070-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -313,11 +345,11 @@
         "away_reliability": 0.23371218484090864,
         "home_reliability": 0.9346948583076043,
         "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-11T11:52:12.056558-05:00",
-        "home_observed_at": "2026-11-11T11:52:12.056558-05:00"
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-11T19:34:59.614Z",
+        "home_source_timestamp": "2026-11-11T19:06:05.719Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00"
       }
     },
     {
@@ -348,6 +380,14 @@
         "status": "PROJECTED",
         "away": "Justus Annunen",
         "home": "Laurent Brossoit",
+        "away_id": 29146,
+        "home_id": 2101,
+        "away_status": "PROJECTED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": null,
+        "home_source_timestamp": "2026-11-11T18:44:16.800Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00",
         "updated_at": "2026-11-11T18:38:24.857442-05:00"
       },
       "lineup_state": {
@@ -364,7 +404,7 @@
         "home_flags": [],
         "away_severity": "B2B",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-11T17:27:45.217510-05:00"
+        "updated_at": "2026-11-11T18:39:37.268070-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -390,11 +430,11 @@
         "away_reliability": 0.7855221561523257,
         "home_reliability": 0.8704282724258516,
         "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
+        "home_status": "CONFIRMED",
         "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-11T11:52:12.056558-05:00",
-        "home_observed_at": "2026-11-11T11:52:12.056558-05:00"
+        "home_source_timestamp": "2026-11-11T18:44:16.800Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00"
       }
     },
     {
@@ -425,6 +465,14 @@
         "status": "CONFIRMED",
         "away": "Sergei Murashov",
         "home": "Yaroslav Askarov",
+        "away_id": 36361,
+        "home_id": 33018,
+        "away_status": "CONFIRMED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-11T20:02:22.745Z",
+        "home_source_timestamp": "2026-11-11T18:37:35.795Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00",
         "updated_at": "2026-11-11T18:38:24.857442-05:00"
       },
       "lineup_state": {
@@ -444,7 +492,7 @@
         ],
         "away_severity": "RESTED",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-11T17:27:45.217510-05:00"
+        "updated_at": "2026-11-11T18:39:37.268070-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -469,12 +517,12 @@
         "home_prior_minutes": 4180.716666666666,
         "away_reliability": 0.35393545674477783,
         "home_reliability": 0.7907134237669218,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-11T11:52:12.056558-05:00",
-        "home_observed_at": "2026-11-11T11:52:12.056558-05:00"
+        "away_status": "CONFIRMED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-11T20:02:22.745Z",
+        "home_source_timestamp": "2026-11-11T18:37:35.795Z",
+        "away_observed_at": "2026-11-11T18:38:24.857442-05:00",
+        "home_observed_at": "2026-11-11T18:38:24.857442-05:00"
       }
     }
   ]
