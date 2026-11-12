@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "date": "2026-11-12",
-  "generated_at": "2026-11-12T05:01:29.820390-05:00",
+  "generated_at": "2026-11-12T12:19:34.599539-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -15,20 +15,20 @@
       "away": {
         "abbr": "CAR",
         "goalie": {
-          "name": "Pyotr Kochetkov",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
-          "player_id": 30486
+          "name": "Brandon Bussi",
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:33:52.171Z",
+          "source_name": "Tom Gulitti",
+          "source_url": "https://x.com/TomGulittiNHL/status/2120917802781728967?a=6A6QYCTyBjYi1CttA9k&s=20",
+          "player_id": 30153
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-08T15:39:22.838Z",
-          "source_name": "Last Game (2026-11-07)",
-          "source_url": "https://www.nhl.com/gamecenter/chi-vs-car/2026/11/07/2026020271",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T16:50:34.638Z",
+          "source_name": "Walt Ruff",
+          "source_url": "https://x.com/WaltRuff/status/2120920541162840120",
           "groups": {
             "f1": [
               {
@@ -129,21 +129,21 @@
                 "player_id": 2398
               },
               {
-                "name": "Alexander Nikishin",
+                "name": "Juuso Valimaki",
                 "position": "rd",
-                "player_id": 32897
+                "player_id": 2790
               }
             ],
             "g": [
               {
-                "name": "Pyotr Kochetkov",
+                "name": "Brandon Bussi",
                 "position": "g1",
-                "player_id": 30486
+                "player_id": 30153
               },
               {
-                "name": "Brandon Bussi",
+                "name": "Pyotr Kochetkov",
                 "position": "g2",
-                "player_id": 30153
+                "player_id": 30486
               }
             ],
             "pp1": [
@@ -195,9 +195,9 @@
                 "player_id": 34617
               },
               {
-                "name": "Alexander Nikishin",
+                "name": "K'Andre Miller",
                 "position": "sk5",
-                "player_id": 32897
+                "player_id": 4812
               }
             ],
             "pk1": [
@@ -259,19 +259,19 @@
         "abbr": "SEA",
         "goalie": {
           "name": "Philipp Grubauer",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:32:51.503Z",
+          "source_name": "Sound of Hockey",
+          "source_url": "https://x.com/sound_hockey/status/2120917297522987247?a=j2UKlTGIessMhFQiKQo&s=20",
           "player_id": 2065
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-12T01:55:18.159Z",
-          "source_name": "Tom Gulitti",
-          "source_url": "https://x.com/TomGulittiNHL/status/2120467401711943949",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T16:52:31.226Z",
+          "source_name": "Seattle Kraken",
+          "source_url": "https://x.com/SeattleKraken/status/2120922005574922594",
           "groups": {
             "f1": [
               {
@@ -292,23 +292,6 @@
             ],
             "f2": [
               {
-                "name": "Jani Nyman",
-                "position": "lw",
-                "player_id": 36373
-              },
-              {
-                "name": "Chandler Stephenson",
-                "position": "c",
-                "player_id": 2538
-              },
-              {
-                "name": "Mackie Samoskevich",
-                "position": "rw",
-                "player_id": 31226
-              }
-            ],
-            "f3": [
-              {
                 "name": "Kaapo Kakko",
                 "position": "lw",
                 "player_id": 30605
@@ -322,6 +305,23 @@
                 "name": "Matthew Wood",
                 "position": "rw",
                 "player_id": 33571
+              }
+            ],
+            "f3": [
+              {
+                "name": "Jani Nyman",
+                "position": "lw",
+                "player_id": 36373
+              },
+              {
+                "name": "Chandler Stephenson",
+                "position": "c",
+                "player_id": 2538
+              },
+              {
+                "name": "Mackie Samoskevich",
+                "position": "rw",
+                "player_id": 31226
               }
             ],
             "f4": [
@@ -518,7 +518,7 @@
         "goalie": {
           "name": "Jacob Fowler",
           "status": "CONFIRMED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": "2026-11-11T17:40:10.235Z",
           "source_name": "Stu Cowan",
           "source_url": "https://x.com/StuCowan1/status/2120571742905315526?a=vb5KDXimVspLHLTELsQ&s=20",
@@ -526,7 +526,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-11T13:54:53.032Z",
           "source_name": "Last Game (2026-11-10)",
           "source_url": "https://www.nhl.com/gamecenter/min-vs-mtl/2026/11/10/2026020287",
@@ -772,19 +772,19 @@
         "abbr": "BOS",
         "goalie": {
           "name": "Jeremy Swayman",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:15:59.063Z",
+          "source_name": "Jack Studley",
+          "source_url": "https://x.com/jackstudley13/status/2120913189378650322?a=Q1jxu0AHFUu51RQaE5o&s=20",
           "player_id": 28098
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-11T16:43:33.671Z",
-          "source_name": "Jim McBride",
-          "source_url": "https://x.com/globejimmcbride/status/2120530227092685203?s=46",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T15:42:54.607Z",
+          "source_name": "Scott McLaughlin",
+          "source_url": "https://x.com/smclaughlin9/status/2120901718401523989",
           "groups": {
             "f1": [
               {
@@ -1018,16 +1018,16 @@
         "abbr": "MIN",
         "goalie": {
           "name": "Jesper Wallstedt",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:52:44.686Z",
+          "source_name": "Michael Russo",
+          "source_url": "https://x.com/RussoHockey/status/2120922414356033768?a=TschF2QuOs6XsgWnvUc&s=20",
           "player_id": 31763
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-11T13:53:34.020Z",
           "source_name": "Last Game (2026-11-10)",
           "source_url": "https://www.nhl.com/gamecenter/min-vs-mtl/2026/11/10/2026020287",
@@ -1266,17 +1266,17 @@
       "home": {
         "abbr": "TOR",
         "goalie": {
-          "name": "Sergei Bobrovsky",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
-          "player_id": 1117
+          "name": "Anthony Stolarz",
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:31:29.655Z",
+          "source_name": "Michael Russo",
+          "source_url": "https://x.com/RussoHockey/status/2120916857922498579?a=hPVqwyEu8GKakDtCuwc&s=20",
+          "player_id": 2432
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-11T17:28:09.180Z",
           "source_name": "Mark Masters",
           "source_url": "https://x.com/markhmasters/status/2120563053670408215",
@@ -1382,14 +1382,14 @@
             ],
             "g": [
               {
-                "name": "Sergei Bobrovsky",
+                "name": "Anthony Stolarz",
                 "position": "g1",
-                "player_id": 1117
+                "player_id": 2432
               },
               {
-                "name": "Anthony Stolarz",
+                "name": "Sergei Bobrovsky",
                 "position": "g2",
-                "player_id": 2432
+                "player_id": 1117
               }
             ],
             "pp1": [
@@ -1537,17 +1537,17 @@
       "away": {
         "abbr": "COL",
         "goalie": {
-          "name": "Mackenzie Blackwood",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
-          "player_id": 3792
+          "name": "Scott Wedgewood",
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:54:19.609Z",
+          "source_name": "Corey Masisak",
+          "source_url": "https://x.com/cmasisak22/status/2120922872075993266?a=3qX__0e7dbJJKPfVuxs&s=20",
+          "player_id": 1873
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-11T13:50:33.680Z",
           "source_name": "Last Game (2026-11-10)",
           "source_url": "https://www.nhl.com/gamecenter/col-vs-tor/2026/11/10/2026020286",
@@ -1658,14 +1658,14 @@
             ],
             "g": [
               {
-                "name": "Mackenzie Blackwood",
+                "name": "Scott Wedgewood",
                 "position": "g1",
-                "player_id": 3792
+                "player_id": 1873
               },
               {
-                "name": "Scott Wedgewood",
+                "name": "Mackenzie Blackwood",
                 "position": "g2",
-                "player_id": 1873
+                "player_id": 3792
               }
             ],
             "pp1": [
@@ -1786,20 +1786,20 @@
       "home": {
         "abbr": "OTT",
         "goalie": {
-          "name": "Samuel Ersson",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
-          "player_id": 29149
+          "name": "Linus Ullmark",
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:20:54.108Z",
+          "source_name": "Bruce Garrioch",
+          "source_url": "https://x.com/sungarrioch/status/2120914385539395894",
+          "player_id": 2534
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-11T13:56:19.930Z",
-          "source_name": "Last Game (2026-11-10)",
-          "source_url": "https://www.nhl.com/gamecenter/wsh-vs-ott/2026/11/10/2026020288",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T17:01:12.670Z",
+          "source_name": "Bruce Garrioch",
+          "source_url": "https://x.com/SunGarrioch/status/2120902500022628616",
           "groups": {
             "f1": [
               {
@@ -1820,9 +1820,9 @@
             ],
             "f2": [
               {
-                "name": "Nick Cousins",
+                "name": "Philip Tomasino",
                 "position": "lw",
-                "player_id": 1893
+                "player_id": 29220
               },
               {
                 "name": "Shane Pinto",
@@ -1837,9 +1837,9 @@
             ],
             "f3": [
               {
-                "name": "Michael Amadio",
+                "name": "Claude Giroux",
                 "position": "lw",
-                "player_id": 2910
+                "player_id": 1126
               },
               {
                 "name": "Ridly Greig",
@@ -1847,16 +1847,16 @@
                 "player_id": 30383
               },
               {
-                "name": "Claude Giroux",
+                "name": "Michael Amadio",
                 "position": "rw",
-                "player_id": 1126
+                "player_id": 2910
               }
             ],
             "f4": [
               {
-                "name": "Philip Tomasino",
+                "name": "Sammy Blais",
                 "position": "lw",
-                "player_id": 29220
+                "player_id": 2848
               },
               {
                 "name": "Stephen Halliday",
@@ -1907,14 +1907,14 @@
             ],
             "g": [
               {
-                "name": "Samuel Ersson",
+                "name": "Linus Ullmark",
                 "position": "g1",
-                "player_id": 29149
+                "player_id": 2534
               },
               {
-                "name": "Jackson Parsons",
+                "name": "Samuel Ersson",
                 "position": "g2",
-                "player_id": 33236
+                "player_id": 29149
               }
             ],
             "pp1": [
@@ -2036,10 +2036,10 @@
               "player_id": 2154
             },
             {
-              "name": "Linus Ullmark",
+              "name": "Nick Cousins",
               "injury_status": "dtd",
               "game_time_decision": false,
-              "player_id": 2534
+              "player_id": 1893
             }
           ]
         }
@@ -2052,7 +2052,7 @@
         "goalie": {
           "name": "Logan Thompson",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -2060,7 +2060,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-11T13:55:38.261Z",
           "source_name": "Last Game (2026-11-10)",
           "source_url": "https://www.nhl.com/gamecenter/wsh-vs-ott/2026/11/10/2026020288",
@@ -2299,39 +2299,22 @@
       "home": {
         "abbr": "NJD",
         "goalie": {
-          "name": "Jake Allen",
+          "name": "Connor Hellebuyck",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
-          "player_id": 1305
+          "player_id": 2465
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-11T14:01:38.356Z",
-          "source_name": "Last Game (2026-11-10)",
-          "source_url": "https://www.nhl.com/gamecenter/njd-vs-wpg/2026/11/10/2026020291",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T15:46:50.414Z",
+          "source_name": "Amanda Stein",
+          "source_url": "https://x.com/amandacstein/status/2120904081581425111",
           "groups": {
             "f1": [
-              {
-                "name": "Timo Meier",
-                "position": "lw",
-                "player_id": 2480
-              },
-              {
-                "name": "Nico Hischier",
-                "position": "c",
-                "player_id": 2781
-              },
-              {
-                "name": "Luke Evangelista",
-                "position": "rw",
-                "player_id": 29787
-              }
-            ],
-            "f2": [
               {
                 "name": "Arseny Gritsyuk",
                 "position": "lw",
@@ -2348,16 +2331,33 @@
                 "player_id": 2845
               }
             ],
-            "f3": [
+            "f2": [
               {
-                "name": "Evan Rodrigues",
+                "name": "Timo Meier",
                 "position": "lw",
-                "player_id": 2620
+                "player_id": 2480
               },
               {
-                "name": "Cody Glass",
+                "name": "Nico Hischier",
                 "position": "c",
-                "player_id": 2785
+                "player_id": 2781
+              },
+              {
+                "name": "Luke Evangelista",
+                "position": "rw",
+                "player_id": 29787
+              }
+            ],
+            "f3": [
+              {
+                "name": "Stefan Noesen",
+                "position": "lw",
+                "player_id": 1842
+              },
+              {
+                "name": "Evan Rodrigues",
+                "position": "c",
+                "player_id": 2620
               },
               {
                 "name": "Connor Brown",
@@ -2367,33 +2367,38 @@
             ],
             "f4": [
               {
-                "name": "Amadeus Lombardi",
+                "name": "Jesper Boqvist",
                 "position": "lw",
-                "player_id": 31074
+                "player_id": 28107
               },
               {
-                "name": "Jesper Boqvist",
+                "name": "Cody Glass",
+                "position": "c",
+                "player_id": 2785
+              },
+              {
+                "name": "Lenni Hameenaho",
                 "position": "rw",
-                "player_id": 28107
+                "player_id": 38454
               }
             ],
             "d1": [
               {
-                "name": "Luke Hughes",
+                "name": "Jonas Siegenthaler",
                 "position": "ld",
-                "player_id": 31110
+                "player_id": 3782
               },
               {
-                "name": "Brett Pesce",
+                "name": "Luke Hughes",
                 "position": "rd",
-                "player_id": 2541
+                "player_id": 31110
               }
             ],
             "d2": [
               {
-                "name": "Jonas Siegenthaler",
+                "name": "Declan Chisholm",
                 "position": "ld",
-                "player_id": 3782
+                "player_id": 28803
               },
               {
                 "name": "Dougie Hamilton",
@@ -2403,26 +2408,26 @@
             ],
             "d3": [
               {
-                "name": "Declan Chisholm",
+                "name": "Brenden Dillon",
                 "position": "ld",
-                "player_id": 28803
+                "player_id": 1575
               },
               {
-                "name": "Brenden Dillon",
+                "name": "Vladislav Kolyachonok",
                 "position": "rd",
-                "player_id": 1575
+                "player_id": 29791
               }
             ],
             "g": [
               {
-                "name": "Jake Allen",
+                "name": "Connor Hellebuyck",
                 "position": "g1",
-                "player_id": 1305
+                "player_id": 2465
               },
               {
-                "name": "Connor Hellebuyck",
+                "name": "Jake Allen",
                 "position": "g2",
-                "player_id": 2465
+                "player_id": 1305
               }
             ],
             "pp1": [
@@ -2513,24 +2518,18 @@
                 "player_id": 30695
               },
               {
-                "name": "Brett Pesce",
+                "name": "Brenden Dillon",
                 "position": "sk3",
-                "player_id": 2541
+                "player_id": 1575
               },
               {
-                "name": "Johnathan Kovacevic",
+                "name": "Declan Chisholm",
                 "position": "sk4",
-                "player_id": 28131
+                "player_id": 28803
               }
             ]
           },
           "injuries": [
-            {
-              "name": "Johnathan Kovacevic",
-              "injury_status": null,
-              "game_time_decision": true,
-              "player_id": 28131
-            },
             {
               "name": "Seamus Casey",
               "injury_status": "ir",
@@ -2542,6 +2541,18 @@
               "injury_status": "out",
               "game_time_decision": false,
               "player_id": 2151
+            },
+            {
+              "name": "Johnathan Kovacevic",
+              "injury_status": "out",
+              "game_time_decision": false,
+              "player_id": 28131
+            },
+            {
+              "name": "Brett Pesce",
+              "injury_status": "dtd",
+              "game_time_decision": false,
+              "player_id": 2541
             }
           ]
         }
@@ -2552,20 +2563,20 @@
       "away": {
         "abbr": "TBL",
         "goalie": {
-          "name": "Andrei Vasilevskiy",
+          "name": "Dennis Hildeby",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
-          "player_id": 2413
+          "player_id": 36477
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-11T23:37:18.704Z",
-          "source_name": "Gabby Shirley",
-          "source_url": "https://x.com/Gabby_Shirley_/status/2120661773355307346",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T14:32:23.389Z",
+          "source_name": "Last Game (2026-11-11)",
+          "source_url": "https://www.nhl.com/gamecenter/tbl-vs-buf/2026/11/11/2026020293",
           "groups": {
             "f1": [
               {
@@ -2673,14 +2684,14 @@
             ],
             "g": [
               {
-                "name": "Andrei Vasilevskiy",
+                "name": "Dennis Hildeby",
                 "position": "g1",
-                "player_id": 2413
+                "player_id": 36477
               },
               {
-                "name": "Dennis Hildeby",
+                "name": "Andrei Vasilevskiy",
                 "position": "g2",
-                "player_id": 36477
+                "player_id": 2413
               }
             ],
             "pp1": [
@@ -2795,20 +2806,20 @@
       "home": {
         "abbr": "CBJ",
         "goalie": {
-          "name": "Cam Talbot",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
-          "player_id": 1059
+          "name": "Jet Greaves",
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:20:00.080Z",
+          "source_name": "Aaron Portzline",
+          "source_url": "https://x.com/Aportzline/status/2120914157566623947?a=ulRAIWvIXb1CIBRWlZg&s=20",
+          "player_id": 29751
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-11T13:58:07.635Z",
-          "source_name": "Last Game (2026-11-10)",
-          "source_url": "https://www.nhl.com/gamecenter/fla-vs-cbj/2026/11/10/2026020289",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T15:44:05.486Z",
+          "source_name": "Mark Scheig",
+          "source_url": "https://x.com/mark_scheig/status/2120903155101642948",
           "groups": {
             "f1": [
               {
@@ -2817,9 +2828,9 @@
                 "player_id": 34619
               },
               {
-                "name": "Sean Monahan",
+                "name": "Adam Fantilli",
                 "position": "c",
-                "player_id": 2138
+                "player_id": 33179
               },
               {
                 "name": "Kent Johnson",
@@ -2834,9 +2845,9 @@
                 "player_id": 31266
               },
               {
-                "name": "Adam Fantilli",
+                "name": "Sean Monahan",
                 "position": "c",
-                "player_id": 33179
+                "player_id": 2138
               },
               {
                 "name": "Valeri Nichushkin",
@@ -2897,21 +2908,21 @@
                 "player_id": 2478
               },
               {
-                "name": "Denton Mateychuk",
+                "name": "Dante Fabbro",
                 "position": "rd",
-                "player_id": 31514
+                "player_id": 2651
               }
             ],
             "d3": [
               {
-                "name": "Dante Fabbro",
+                "name": "Jake Christiansen",
                 "position": "ld",
-                "player_id": 2651
+                "player_id": 25394
               },
               {
-                "name": "Erik Gudbranson",
+                "name": "Denton Mateychuk",
                 "position": "rd",
-                "player_id": 1710
+                "player_id": 31514
               }
             ],
             "g": [
@@ -2992,14 +3003,14 @@
                 "player_id": 2142
               },
               {
-                "name": "Denton Mateychuk",
+                "name": "Ivan Provorov",
                 "position": "sk3",
-                "player_id": 31514
+                "player_id": 2478
               },
               {
-                "name": "Ivan Provorov",
+                "name": "Damon Severson",
                 "position": "sk4",
-                "player_id": 2478
+                "player_id": 2038
               }
             ],
             "pk2": [
@@ -3014,14 +3025,14 @@
                 "player_id": 23595
               },
               {
-                "name": "Zach Werenski",
+                "name": "Dante Fabbro",
                 "position": "sk3",
-                "player_id": 2479
+                "player_id": 2651
               },
               {
-                "name": "Damon Severson",
+                "name": "Denton Mateychuk",
                 "position": "sk4",
-                "player_id": 2038
+                "player_id": 31514
               }
             ]
           },
@@ -3041,20 +3052,20 @@
       "away": {
         "abbr": "DET",
         "goalie": {
-          "name": "John Gibson",
+          "name": "Daniil Tarasov",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
-          "player_id": 1870
+          "player_id": 28133
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-11T13:59:06.516Z",
-          "source_name": "Last Game (2026-11-10)",
-          "source_url": "https://www.nhl.com/gamecenter/det-vs-stl/2026/11/10/2026020290",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T17:11:33.603Z",
+          "source_name": "Projected",
+          "source_url": "https://x.com/tkulfan/status/2120926466041106436?a=dWt2l7HNddkd1lVYfCY&s=20",
           "groups": {
             "f1": [
               {
@@ -3092,9 +3103,9 @@
             ],
             "f3": [
               {
-                "name": "Michael Rasmussen",
+                "name": "Carter Mazur",
                 "position": "lw",
-                "player_id": 2784
+                "player_id": 34532
               },
               {
                 "name": "Marco Kasper",
@@ -3162,14 +3173,14 @@
             ],
             "g": [
               {
-                "name": "John Gibson",
+                "name": "Daniil Tarasov",
                 "position": "g1",
-                "player_id": 1870
+                "player_id": 28133
               },
               {
-                "name": "Daniil Tarasov",
+                "name": "John Gibson",
                 "position": "g2",
-                "player_id": 28133
+                "player_id": 1870
               }
             ],
             "pp1": [
@@ -3201,9 +3212,9 @@
             ],
             "pp2": [
               {
-                "name": "Michael Rasmussen",
+                "name": "Andrew Copp",
                 "position": "sk1",
-                "player_id": 2784
+                "player_id": 2457
               },
               {
                 "name": "J.T. Compher",
@@ -3250,9 +3261,9 @@
             ],
             "pk2": [
               {
-                "name": "Michael Rasmussen",
+                "name": "Andrew Copp",
                 "position": "sk1",
-                "player_id": 2784
+                "player_id": 2457
               },
               {
                 "name": "Keegan Kolesar",
@@ -3296,20 +3307,20 @@
       "home": {
         "abbr": "FLA",
         "goalie": {
-          "name": "Jacob Markstrom",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
-          "player_id": 594
+          "name": "Akira Schmid",
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:02:46.580Z",
+          "source_name": "George Richards",
+          "source_url": "https://x.com/GeorgeRichards/status/2120909524487852058?a=8ZjIRgTdS-ZhsRHMAFo&s=20",
+          "player_id": 29148
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-11T13:57:06.058Z",
-          "source_name": "Last Game (2026-11-10)",
-          "source_url": "https://www.nhl.com/gamecenter/fla-vs-cbj/2026/11/10/2026020289",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T17:00:23.279Z",
+          "source_name": "Jameson Olive",
+          "source_url": "https://x.com/JamesonCoop/status/2120915475412484466",
           "groups": {
             "f1": [
               {
@@ -3357,9 +3368,9 @@
                 "player_id": 33026
               },
               {
-                "name": "Jack Devine",
+                "name": "Sandis Vilmanis",
                 "position": "rw",
-                "player_id": 30941
+                "player_id": 36428
               }
             ],
             "f4": [
@@ -3417,14 +3428,14 @@
             ],
             "g": [
               {
-                "name": "Jacob Markstrom",
+                "name": "Akira Schmid",
                 "position": "g1",
-                "player_id": 594
+                "player_id": 29148
               },
               {
-                "name": "Akira Schmid",
+                "name": "Jacob Markstrom",
                 "position": "g2",
-                "player_id": 29148
+                "player_id": 594
               }
             ],
             "pp1": [
@@ -3544,12 +3555,6 @@
               "injury_status": "ir",
               "game_time_decision": false,
               "player_id": 124
-            },
-            {
-              "name": "Sandis Vilmanis",
-              "injury_status": "out",
-              "game_time_decision": false,
-              "player_id": 36428
             }
           ]
         }
@@ -3560,20 +3565,20 @@
       "away": {
         "abbr": "BUF",
         "goalie": {
-          "name": "Ukko-Pekka Luukkonen",
+          "name": "Alex Lyon",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
-          "player_id": 4783
+          "player_id": 2873
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-11T23:38:07.937Z",
-          "source_name": "Heather Engel",
-          "source_url": "https://x.com/engelheather/status/2120662035595727218",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T16:36:38.719Z",
+          "source_name": "Last Game (2026-11-11)",
+          "source_url": "https://www.nhl.com/gamecenter/tbl-vs-buf/2026/11/11/2026020293",
           "groups": {
             "f1": [
               {
@@ -3681,9 +3686,9 @@
             ],
             "g": [
               {
-                "name": "Ukko-Pekka Luukkonen",
+                "name": "Alex Lyon",
                 "position": "g1",
-                "player_id": 4783
+                "player_id": 2873
               },
               {
                 "name": "Colten Ellis",
@@ -3792,16 +3797,16 @@
           },
           "injuries": [
             {
+              "name": "Alex Lyon",
+              "injury_status": null,
+              "game_time_decision": true,
+              "player_id": 2873
+            },
+            {
               "name": "Matt Grzelcyk",
               "injury_status": "ir",
               "game_time_decision": false,
               "player_id": 2723
-            },
-            {
-              "name": "Alex Lyon",
-              "injury_status": "ir",
-              "game_time_decision": false,
-              "player_id": 2873
             },
             {
               "name": "Konsta Helenius",
@@ -3817,7 +3822,7 @@
         "goalie": {
           "name": "Spencer Knight",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -3825,7 +3830,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-11T17:28:43.895Z",
           "source_name": "Kalen Lumpkins",
           "source_url": "https://x.com/kalenalumpkins/status/2120565546366234990",
@@ -4069,7 +4074,7 @@
         "goalie": {
           "name": "Stuart Skinner",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -4077,7 +4082,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-11T14:03:22.718Z",
           "source_name": "Last Game (2026-11-10)",
           "source_url": "https://www.nhl.com/gamecenter/njd-vs-wpg/2026/11/10/2026020291",
@@ -4323,16 +4328,16 @@
         "abbr": "DAL",
         "goalie": {
           "name": "Jake Oettinger",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "source_timestamp": "2026-11-12T16:34:34.582Z",
+          "source_name": "Bruce LeVine",
+          "source_url": "https://x.com/BruceLeVinePuck/status/2120917887255032087",
           "player_id": 2813
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-12T01:55:46.857Z",
           "source_name": "Robert Tiffin",
           "source_url": "https://x.com/RobertTiffin/status/2120565697843548205?s=20",
@@ -4588,7 +4593,7 @@
         "goalie": {
           "name": "Joel Hofer",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -4596,7 +4601,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-12T01:56:16.603Z",
           "source_name": "Lou Korac",
           "source_url": "https://x.com/lkorac10/status/2120579342346469393?s=20",
@@ -4835,20 +4840,20 @@
       "home": {
         "abbr": "UTA",
         "goalie": {
-          "name": "Sebastian Cossa",
+          "name": "Karel Vejmelka",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
-          "player_id": 34654
+          "player_id": 26614
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
-          "updated_at": "2026-11-12T02:18:07.414Z",
-          "source_name": "Utah Mammoth",
-          "source_url": "https://x.com/utahmammoth/status/2120701914623164615",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
+          "updated_at": "2026-11-12T14:39:17.654Z",
+          "source_name": "Last Game (2026-11-11)",
+          "source_url": "https://www.nhl.com/gamecenter/uta-vs-vgk/2026/11/11/2026020296",
           "groups": {
             "f1": [
               {
@@ -4956,21 +4961,21 @@
             ],
             "g": [
               {
-                "name": "Sebastian Cossa",
+                "name": "Karel Vejmelka",
                 "position": "g1",
-                "player_id": 34654
+                "player_id": 26614
               },
               {
-                "name": "Karel Vejmelka",
+                "name": "Sebastian Cossa",
                 "position": "g2",
-                "player_id": 26614
+                "player_id": 34654
               }
             ],
             "pp1": [
               {
-                "name": "Anders Lee",
+                "name": "Barrett Hayton",
                 "position": "sk1",
-                "player_id": 2071
+                "player_id": 4796
               },
               {
                 "name": "Vincent Trocheck",
@@ -5000,14 +5005,14 @@
                 "player_id": 2796
               },
               {
-                "name": "Barrett Hayton",
+                "name": "Michael Carcone",
                 "position": "sk2",
-                "player_id": 4796
+                "player_id": 3864
               },
               {
-                "name": "Michael Carcone",
+                "name": "Anders Lee",
                 "position": "sk3",
-                "player_id": 3864
+                "player_id": 2071
               },
               {
                 "name": "Daniil But",
@@ -5101,7 +5106,7 @@
         "goalie": {
           "name": "Ilya Sorokin",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -5109,7 +5114,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-11T16:02:27.780Z",
           "source_name": "Andrew Gross",
           "source_url": "https://x.com/AGrossNewsday/status/2120255158932406342",
@@ -5366,17 +5371,17 @@
       "home": {
         "abbr": "LAK",
         "goalie": {
-          "name": "Darcy Kuemper",
+          "name": "Anton Forsberg",
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
-          "player_id": 1692
+          "player_id": 2394
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-12T05:01:29.820390-05:00",
+          "observed_at": "2026-11-12T12:19:34.599539-05:00",
           "updated_at": "2026-11-12T01:35:38.009Z",
           "source_name": "Zach Dooley",
           "source_url": "https://lakingsinsider.com/2026/11/11/11-11-practice-notes-forward-line-combinations-zuccarello-talks-return-to-lineup-doughty-gustafsson-dont-practice/",
@@ -5487,14 +5492,14 @@
             ],
             "g": [
               {
-                "name": "Darcy Kuemper",
+                "name": "Anton Forsberg",
                 "position": "g1",
-                "player_id": 1692
+                "player_id": 2394
               },
               {
-                "name": "Anton Forsberg",
+                "name": "Darcy Kuemper",
                 "position": "g2",
-                "player_id": 2394
+                "player_id": 1692
               }
             ],
             "pp1": [
