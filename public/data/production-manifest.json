@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-11-11T23:39:40.210246+00:00",
+  "updated_at": "2026-11-12T10:03:05.782800+00:00",
   "surfaces": {
     "schedule": {
       "file": "public/data/today-games.json",
