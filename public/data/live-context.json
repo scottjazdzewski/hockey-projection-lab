@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "date": "2026-11-13",
-  "generated_at": "2026-11-13T11:56:02.556262-05:00",
+  "generated_at": "2026-11-13T16:46:44.895594-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -16,16 +16,16 @@
         "abbr": "NYR",
         "goalie": {
           "name": "Dylan Garand",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-13T11:56:02.556262-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-13T16:46:44.895594-05:00",
+          "source_timestamp": "2026-11-13T18:31:14.112Z",
+          "source_name": "Vince Mercogliano",
+          "source_url": "https://x.com/vzmercogliano/status/2121309661412380837",
           "player_id": 32794
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T11:56:02.556262-05:00",
+          "observed_at": "2026-11-13T16:46:44.895594-05:00",
           "updated_at": "2026-11-13T03:30:12.935Z",
           "source_name": "Vince Mercogliano",
           "source_url": "https://x.com/vzmercogliano/status/2120972587752964403?s=20",
@@ -284,15 +284,15 @@
         "goalie": {
           "name": "Leevi Merilainen",
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T11:56:02.556262-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "observed_at": "2026-11-13T16:46:44.895594-05:00",
+          "source_timestamp": "2026-11-13T17:27:31.538Z",
+          "source_name": "Jeff Paterson",
+          "source_url": "https://x.com/patersonjeff/status/2121293185590927363?a=lM_q1sEobENlaGXzrtM&s=46",
           "player_id": 34600
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T11:56:02.556262-05:00",
+          "observed_at": "2026-11-13T16:46:44.895594-05:00",
           "updated_at": "2026-11-12T18:19:33.681Z",
           "source_name": "Thomas Drance",
           "source_url": "https://x.com/ThomasDrance/status/2120941539438539150",
@@ -535,16 +535,16 @@
         "abbr": "NSH",
         "goalie": {
           "name": "Juuse Saros",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-13T11:56:02.556262-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-13T16:46:44.895594-05:00",
+          "source_timestamp": "2026-11-13T19:28:56.993Z",
+          "source_name": "Max Herz",
+          "source_url": "https://x.com/MaxHerzTalks/status/2121324144650522732?a=lRSn6eKfvEESe3zmqfc&s=20",
           "player_id": 2557
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T11:56:02.556262-05:00",
+          "observed_at": "2026-11-13T16:46:44.895594-05:00",
           "updated_at": "2026-11-12T14:40:59.242Z",
           "source_name": "Last Game (2026-11-11)",
           "source_url": "https://www.nhl.com/gamecenter/nsh-vs-ana/2026/11/11/2026020297",
@@ -784,19 +784,19 @@
         "abbr": "VGK",
         "goalie": {
           "name": "Adin Hill",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-13T11:56:02.556262-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-13T16:46:44.895594-05:00",
+          "source_timestamp": "2026-11-13T19:29:17.025Z",
+          "source_name": "Jesse Granger",
+          "source_url": "https://x.com/JesseGranger_/status/2121324216989708531",
           "player_id": 2906
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T11:56:02.556262-05:00",
-          "updated_at": "2026-11-12T14:39:48.412Z",
-          "source_name": "Last Game (2026-11-11)",
-          "source_url": "https://www.nhl.com/gamecenter/uta-vs-vgk/2026/11/11/2026020296",
+          "observed_at": "2026-11-13T16:46:44.895594-05:00",
+          "updated_at": "2026-11-13T19:25:59.636Z",
+          "source_name": "Jesse Granger",
+          "source_url": "https://x.com/JesseGranger_/status/2121317544070132059?s=20",
           "groups": {
             "f1": [
               {

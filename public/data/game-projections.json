@@ -38,21 +38,13 @@
         "status": "PROJECTED",
         "away": "Dylan Garand",
         "home": "Leevi Merilainen",
-        "away_id": 32794,
-        "home_id": 34600,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-13T11:56:02.556262-05:00",
-        "home_observed_at": "2026-11-13T11:56:02.556262-05:00",
-        "updated_at": "2026-11-13T11:56:02.556262-05:00"
+        "updated_at": "2026-11-13T16:46:44.895594-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-13T11:56:02.556262-05:00"
+        "updated_at": "2026-11-13T16:46:44.895594-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -120,24 +112,16 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
+        "status": "CONFIRMED",
         "away": "Juuse Saros",
         "home": "Adin Hill",
-        "away_id": 2557,
-        "home_id": 2906,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-13T11:56:02.556262-05:00",
-        "home_observed_at": "2026-11-13T11:56:02.556262-05:00",
-        "updated_at": "2026-11-13T11:56:02.556262-05:00"
+        "updated_at": "2026-11-13T16:46:44.895594-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-13T11:56:02.556262-05:00"
+        "updated_at": "2026-11-13T16:46:44.895594-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
