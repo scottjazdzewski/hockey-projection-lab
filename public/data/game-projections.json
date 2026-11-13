@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-13T05:04:20.407610-05:00",
+  "generated_at": "2026-11-13T11:57:04.835415-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -38,6 +38,14 @@
         "status": "PROJECTED",
         "away": "Dylan Garand",
         "home": "Leevi Merilainen",
+        "away_id": 32794,
+        "home_id": 34600,
+        "away_status": "PROJECTED",
+        "home_status": "PROJECTED",
+        "away_source_timestamp": null,
+        "home_source_timestamp": null,
+        "away_observed_at": "2026-11-13T11:56:02.556262-05:00",
+        "home_observed_at": "2026-11-13T11:56:02.556262-05:00",
         "updated_at": "2026-11-13T11:56:02.556262-05:00"
       },
       "lineup_state": {
@@ -54,7 +62,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-13T05:04:20.407610-05:00"
+        "updated_at": "2026-11-13T11:57:04.835415-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -83,8 +91,8 @@
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-13T05:02:58.359169-05:00",
-        "home_observed_at": "2026-11-13T05:02:58.359169-05:00"
+        "away_observed_at": "2026-11-13T11:56:02.556262-05:00",
+        "home_observed_at": "2026-11-13T11:56:02.556262-05:00"
       }
     },
     {
@@ -94,27 +102,35 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "NSH",
-        "win_probability": 0.3408155694119325,
+        "win_probability": 0.34320684753970165,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": 193,
-        "team_only_win_probability": 0.331183564568052,
-        "goalie_adjustment_pp": 0.9632004843880493
+        "fair_moneyline": 191,
+        "team_only_win_probability": 0.33118356456805187,
+        "goalie_adjustment_pp": 1.2023282971649785
       },
       "home": {
         "abbr": "VGK",
-        "win_probability": 0.6591844305880675,
+        "win_probability": 0.6567931524602983,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": -193,
-        "team_only_win_probability": 0.668816435431948,
-        "goalie_adjustment_pp": -0.9632004843880493
+        "fair_moneyline": -191,
+        "team_only_win_probability": 0.6688164354319481,
+        "goalie_adjustment_pp": -1.2023282971649785
       },
       "overtime_probability": null,
       "goalie_state": {
         "status": "PROJECTED",
         "away": "Juuse Saros",
         "home": "Adin Hill",
+        "away_id": 2557,
+        "home_id": 2906,
+        "away_status": "PROJECTED",
+        "home_status": "PROJECTED",
+        "away_source_timestamp": null,
+        "home_source_timestamp": null,
+        "away_observed_at": "2026-11-13T11:56:02.556262-05:00",
+        "home_observed_at": "2026-11-13T11:56:02.556262-05:00",
         "updated_at": "2026-11-13T11:56:02.556262-05:00"
       },
       "lineup_state": {
@@ -133,7 +149,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-13T05:04:20.407610-05:00"
+        "updated_at": "2026-11-13T11:57:04.835415-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -147,23 +163,23 @@
         "status": "APPLIED",
         "model_version": "prospective-0.3.0",
         "away_rating": 0.9115173918068716,
-        "home_rating": 0.9066898219054954,
+        "home_rating": 0.9055016774812914,
         "away_age_years": 31.570805697584483,
-        "home_age_years": 28.25246240511441,
+        "home_age_years": 30.50849777887294,
         "away_prior_starts": 479,
-        "home_prior_starts": 281,
+        "home_prior_starts": 237,
         "away_prior_shots": 14537.0,
-        "home_prior_shots": 8210.0,
+        "home_prior_shots": 6484.0,
         "away_prior_minutes": 28160.666666666668,
-        "home_prior_minutes": 16289.133333333333,
+        "home_prior_minutes": 13775.0,
         "away_reliability": 0.9609259061789569,
-        "home_reliability": 0.9344531540250468,
+        "home_reliability": 0.9222668715239014,
         "away_status": "PROJECTED",
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-13T05:02:58.359169-05:00",
-        "home_observed_at": "2026-11-13T05:02:58.359169-05:00"
+        "away_observed_at": "2026-11-13T11:56:02.556262-05:00",
+        "home_observed_at": "2026-11-13T11:56:02.556262-05:00"
       }
     }
   ]
