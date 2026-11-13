@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-13T16:14:54.758942-05:00",
+  "generated_at": "2026-11-13T16:47:54.766740-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -38,6 +38,14 @@
         "status": "PROJECTED",
         "away": "Dylan Garand",
         "home": "Leevi Merilainen",
+        "away_id": 32794,
+        "home_id": 34600,
+        "away_status": "CONFIRMED",
+        "home_status": "PROJECTED",
+        "away_source_timestamp": "2026-11-13T18:31:14.112Z",
+        "home_source_timestamp": "2026-11-13T17:27:31.538Z",
+        "away_observed_at": "2026-11-13T16:46:44.895594-05:00",
+        "home_observed_at": "2026-11-13T16:46:44.895594-05:00",
         "updated_at": "2026-11-13T16:46:44.895594-05:00"
       },
       "lineup_state": {
@@ -54,7 +62,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-13T16:14:54.758942-05:00"
+        "updated_at": "2026-11-13T16:47:54.766740-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -79,12 +87,12 @@
         "home_prior_minutes": 2481.7,
         "away_reliability": 0.4408193015479603,
         "home_reliability": 0.6879200161106165,
-        "away_status": "PROJECTED",
+        "away_status": "CONFIRMED",
         "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-13T11:56:02.556262-05:00",
-        "home_observed_at": "2026-11-13T11:56:02.556262-05:00"
+        "away_source_timestamp": "2026-11-13T18:31:14.112Z",
+        "home_source_timestamp": "2026-11-13T17:27:31.538Z",
+        "away_observed_at": "2026-11-13T16:46:44.895594-05:00",
+        "home_observed_at": "2026-11-13T16:46:44.895594-05:00"
       }
     },
     {
@@ -115,6 +123,14 @@
         "status": "CONFIRMED",
         "away": "Juuse Saros",
         "home": "Adin Hill",
+        "away_id": 2557,
+        "home_id": 2906,
+        "away_status": "CONFIRMED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-13T19:28:56.993Z",
+        "home_source_timestamp": "2026-11-13T19:29:17.025Z",
+        "away_observed_at": "2026-11-13T16:46:44.895594-05:00",
+        "home_observed_at": "2026-11-13T16:46:44.895594-05:00",
         "updated_at": "2026-11-13T16:46:44.895594-05:00"
       },
       "lineup_state": {
@@ -133,7 +149,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-13T16:14:54.758942-05:00"
+        "updated_at": "2026-11-13T16:47:54.766740-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -158,12 +174,12 @@
         "home_prior_minutes": 13775.0,
         "away_reliability": 0.9598557846379454,
         "home_reliability": 0.9209250901424477,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-13T11:56:02.556262-05:00",
-        "home_observed_at": "2026-11-13T11:56:02.556262-05:00"
+        "away_status": "CONFIRMED",
+        "home_status": "CONFIRMED",
+        "away_source_timestamp": "2026-11-13T19:28:56.993Z",
+        "home_source_timestamp": "2026-11-13T19:29:17.025Z",
+        "away_observed_at": "2026-11-13T16:46:44.895594-05:00",
+        "home_observed_at": "2026-11-13T16:46:44.895594-05:00"
       }
     }
   ]
