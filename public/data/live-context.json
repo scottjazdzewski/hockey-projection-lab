@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "date": "2026-11-13",
-  "generated_at": "2026-11-13T05:02:58.359169-05:00",
+  "generated_at": "2026-11-13T11:56:02.556262-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -17,7 +17,7 @@
         "goalie": {
           "name": "Dylan Garand",
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T05:02:58.359169-05:00",
+          "observed_at": "2026-11-13T11:56:02.556262-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -25,7 +25,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T05:02:58.359169-05:00",
+          "observed_at": "2026-11-13T11:56:02.556262-05:00",
           "updated_at": "2026-11-13T03:30:12.935Z",
           "source_name": "Vince Mercogliano",
           "source_url": "https://x.com/vzmercogliano/status/2120972587752964403?s=20",
@@ -284,7 +284,7 @@
         "goalie": {
           "name": "Leevi Merilainen",
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T05:02:58.359169-05:00",
+          "observed_at": "2026-11-13T11:56:02.556262-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -292,7 +292,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T05:02:58.359169-05:00",
+          "observed_at": "2026-11-13T11:56:02.556262-05:00",
           "updated_at": "2026-11-12T18:19:33.681Z",
           "source_name": "Thomas Drance",
           "source_url": "https://x.com/ThomasDrance/status/2120941539438539150",
@@ -536,7 +536,7 @@
         "goalie": {
           "name": "Juuse Saros",
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T05:02:58.359169-05:00",
+          "observed_at": "2026-11-13T11:56:02.556262-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -544,7 +544,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T05:02:58.359169-05:00",
+          "observed_at": "2026-11-13T11:56:02.556262-05:00",
           "updated_at": "2026-11-12T14:40:59.242Z",
           "source_name": "Last Game (2026-11-11)",
           "source_url": "https://www.nhl.com/gamecenter/nsh-vs-ana/2026/11/11/2026020297",
@@ -783,17 +783,17 @@
       "home": {
         "abbr": "VGK",
         "goalie": {
-          "name": "Carter Hart",
+          "name": "Adin Hill",
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T05:02:58.359169-05:00",
+          "observed_at": "2026-11-13T11:56:02.556262-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
-          "player_id": 3874
+          "player_id": 2906
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-13T05:02:58.359169-05:00",
+          "observed_at": "2026-11-13T11:56:02.556262-05:00",
           "updated_at": "2026-11-12T14:39:48.412Z",
           "source_name": "Last Game (2026-11-11)",
           "source_url": "https://www.nhl.com/gamecenter/uta-vs-vgk/2026/11/11/2026020296",
@@ -904,14 +904,14 @@
             ],
             "g": [
               {
-                "name": "Carter Hart",
+                "name": "Adin Hill",
                 "position": "g1",
-                "player_id": 3874
+                "player_id": 2906
               },
               {
-                "name": "Adin Hill",
+                "name": "Carter Hart",
                 "position": "g2",
-                "player_id": 2906
+                "player_id": 3874
               }
             ],
             "pp1": [
