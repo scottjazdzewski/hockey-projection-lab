@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-13T11:57:04.835415-05:00",
+  "generated_at": "2026-11-13T16:14:54.758942-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -62,7 +62,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-13T11:57:04.835415-05:00"
+        "updated_at": "2026-11-13T16:14:54.758942-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -102,21 +102,21 @@
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "NSH",
-        "win_probability": 0.34320684753970165,
+        "win_probability": 0.34058435611611193,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": 191,
+        "fair_moneyline": 194,
         "team_only_win_probability": 0.33118356456805187,
-        "goalie_adjustment_pp": 1.2023282971649785
+        "goalie_adjustment_pp": 0.9400791548060061
       },
       "home": {
         "abbr": "VGK",
-        "win_probability": 0.6567931524602983,
+        "win_probability": 0.6594156438838881,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": -191,
+        "fair_moneyline": -194,
         "team_only_win_probability": 0.6688164354319481,
-        "goalie_adjustment_pp": -1.2023282971649785
+        "goalie_adjustment_pp": -0.9400791548060061
       },
       "overtime_probability": null,
       "goalie_state": {
@@ -149,7 +149,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-13T11:57:04.835415-05:00"
+        "updated_at": "2026-11-13T16:14:54.758942-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -162,18 +162,18 @@
       "goalie_adjustment": {
         "status": "APPLIED",
         "model_version": "prospective-0.3.0",
-        "away_rating": 0.9115173918068716,
-        "home_rating": 0.9055016774812914,
+        "away_rating": 0.9107445389601124,
+        "home_rating": 0.9060320634818491,
         "away_age_years": 31.570805697584483,
         "home_age_years": 30.50849777887294,
         "away_prior_starts": 479,
         "home_prior_starts": 237,
-        "away_prior_shots": 14537.0,
-        "home_prior_shots": 6484.0,
+        "away_prior_shots": 12938.0,
+        "home_prior_shots": 6038.0,
         "away_prior_minutes": 28160.666666666668,
         "home_prior_minutes": 13775.0,
-        "away_reliability": 0.9609259061789569,
-        "home_reliability": 0.9222668715239014,
+        "away_reliability": 0.9598557846379454,
+        "home_reliability": 0.9209250901424477,
         "away_status": "PROJECTED",
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
