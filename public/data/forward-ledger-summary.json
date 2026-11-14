@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-09T01:02:15.627921-05:00",
+  "generated_at": "2026-11-13T20:42:11.963319-05:00",
   "sample": {
-    "games_frozen": 15,
+    "games_frozen": 16,
     "games_settled": 15,
-    "games_open": 0,
+    "games_open": 1,
     "winner_games_scored": 15,
     "xg_games_scored": 0
   },
@@ -80,6 +80,32 @@
     }
   },
   "games": [
+    {
+      "game_id": 2026020310,
+      "game_date": "2026-11-13",
+      "start_time_et": "2026-11-13T21:00:00-05:00",
+      "away_abbr": "NYR",
+      "home_abbr": "VAN",
+      "model_id": "HOCKEY-LAB-GAME",
+      "model_version": "prospective-0.3.0",
+      "feature_version": "team-strength-004+b2b-007+goalie-adjustment-prospective-001",
+      "frozen_at": "2026-11-13T20:42:11.831849-05:00",
+      "status": "OPEN",
+      "winner_abbr": null,
+      "predicted_winner_abbr": null,
+      "winner_correct": null,
+      "brier": null,
+      "log_loss": null,
+      "probability_assigned_to_winner": null,
+      "goalie_adjustment_status": "APPLIED",
+      "goalie_state_group": "MIXED",
+      "team_only_brier": null,
+      "team_only_log_loss": null,
+      "goalie_layer_delta_brier": null,
+      "goalie_layer_delta_log_loss": null,
+      "goal_mae_per_team": null,
+      "total_goals_abs_error": null
+    },
     {
       "game_id": 2026020281,
       "game_date": "2026-11-08",
