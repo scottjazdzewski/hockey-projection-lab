@@ -1,3 +1,2 @@
-Recovery requested: 2026-11-14T23:08:12Z
-Expected checkpoint: FIXED:2026-11-14T18:00:00-05:00
-Reason: missing fixed sportsbook benchmark poll slot
+Market watchdog recovery requested at 2026-11-15T09:03:08-05:00
+Expected checkpoint: FIXED:2026-11-15T09:00:00-05:00
