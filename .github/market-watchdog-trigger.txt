@@ -1,2 +1,3 @@
-Market watchdog recovery requested at 2026-11-15T15:02:42-05:00
-Expected checkpoint: FIXED:2026-11-15T15:00:00-05:00
+Market watchdog recovery trigger
+checkpoint=FIXED:2026-11-15T17:00:00-05:00
+recovery_timestamp_utc=2026-11-15T22:02:51.609Z
