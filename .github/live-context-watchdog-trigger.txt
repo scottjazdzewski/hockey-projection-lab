@@ -1,3 +1,2 @@
-Hockey Lab live-context and projection recovery trigger
-Recovery requested: 2026-11-06T05:07:00-05:00
-Reason: slate and context now current for 2026-11-06 (3 games), but game-projections.json still dated 2026-11-05.
+Recovery requested: 2026-11-16T07:06:30-05:00
+Reason: November 16 slate and live context current; projections still November 15.
