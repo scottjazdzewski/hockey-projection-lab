@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-15T15:13:41.928941-05:00",
+  "generated_at": "2026-11-16T07:07:26.795950-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -11,212 +11,58 @@
   },
   "projections": [
     {
-      "game_id": 2026020326,
-      "game_date": "2026-11-15",
-      "start_time_et": "2026-11-15T19:30:00-05:00",
+      "game_id": 2026020331,
+      "game_date": "2026-11-16",
+      "start_time_et": "2026-11-16T19:30:00-05:00",
       "publish_state": "PUBLISHED",
       "away": {
-        "abbr": "EDM",
-        "win_probability": 0.5787555695976973,
+        "abbr": "MTL",
+        "win_probability": 0.5726761110147567,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": -137,
-        "team_only_win_probability": 0.5649290128706802,
-        "goalie_adjustment_pp": 1.3826556727017048
+        "fair_moneyline": -134,
+        "team_only_win_probability": 0.5402109939679487,
+        "goalie_adjustment_pp": 3.246511704680799
       },
       "home": {
-        "abbr": "PHI",
-        "win_probability": 0.42124443040230275,
+        "abbr": "NYR",
+        "win_probability": 0.42732388898524337,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": 137,
-        "team_only_win_probability": 0.4350709871293198,
-        "goalie_adjustment_pp": -1.3826556727017048
+        "fair_moneyline": 134,
+        "team_only_win_probability": 0.45978900603205125,
+        "goalie_adjustment_pp": -3.246511704680788
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "CONFIRMED",
-        "away": "Tristan Jarry",
-        "home": "Dan Vladar",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
-      },
-      "lineup_state": {
         "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
-      },
-      "rest_state": {
-        "status": "CONFIRMED",
-        "away": "B2B",
-        "home": "B2B",
-        "away_flags": [],
-        "home_flags": [
-          "5-in-8"
-        ],
-        "away_severity": "B2B",
-        "home_severity": "B2B",
-        "updated_at": "2026-11-15T15:13:41.928941-05:00"
-      },
-      "flags": [
-        "source_data_through_2026-11-02",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff",
-        "goalie_adjustment_age_exposure"
-      ],
-      "goalie_adjustment_status": "APPLIED",
-      "goalie_adjustment": {
-        "status": "APPLIED",
-        "model_version": "prospective-0.3.0",
-        "away_rating": 0.90641447977153,
-        "home_rating": 0.9000996551205607,
-        "away_age_years": 31.548902441528572,
-        "home_age_years": 29.23810892763027,
-        "away_prior_starts": 328,
-        "home_prior_starts": 167,
-        "away_prior_shots": 8754.0,
-        "home_prior_shots": 4572.0,
-        "away_prior_minutes": 18920.083333333332,
-        "home_prior_minutes": 9927.033333333333,
-        "away_reliability": 0.9418997464996196,
-        "home_reliability": 0.8945467964239557,
-        "away_status": "PROJECTED",
-        "home_status": "CONFIRMED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": "2026-11-14T20:59:16.378Z",
-        "away_observed_at": "2026-11-15T11:02:56.700093-05:00",
-        "home_observed_at": "2026-11-15T11:02:56.700093-05:00"
-      }
-    },
-    {
-      "game_id": 2026020327,
-      "game_date": "2026-11-15",
-      "start_time_et": "2026-11-15T20:00:00-05:00",
-      "publish_state": "PUBLISHED",
-      "away": {
-        "abbr": "FLA",
-        "win_probability": 0.3940676395794478,
-        "expected_goals": null,
-        "regulation_win_probability": null,
-        "fair_moneyline": 154,
-        "team_only_win_probability": 0.41491913778937617,
-        "goalie_adjustment_pp": -2.0851498209928376
-      },
-      "home": {
-        "abbr": "DAL",
-        "win_probability": 0.6059323604205522,
-        "expected_goals": null,
-        "regulation_win_probability": null,
-        "fair_moneyline": -154,
-        "team_only_win_probability": 0.5850808622106238,
-        "goalie_adjustment_pp": 2.0851498209928376
-      },
-      "overtime_probability": null,
-      "goalie_state": {
-        "status": "CONFIRMED",
-        "away": "Akira Schmid",
-        "home": "Casey DeSmith",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
-      },
-      "lineup_state": {
-        "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
-      },
-      "rest_state": {
-        "status": "CONFIRMED",
-        "away": "B2B",
-        "home": "B2B",
-        "away_flags": [
-          "3-in-4",
-          "4-in-6",
-          "5-in-8"
-        ],
-        "home_flags": [
-          "3-in-4"
-        ],
-        "away_severity": "B2B",
-        "home_severity": "B2B",
-        "updated_at": "2026-11-15T15:13:41.928941-05:00"
-      },
-      "flags": [
-        "source_data_through_2026-11-02",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff",
-        "goalie_adjustment_age_exposure"
-      ],
-      "goalie_adjustment_status": "APPLIED",
-      "goalie_adjustment": {
-        "status": "APPLIED",
-        "model_version": "prospective-0.3.0",
-        "away_rating": 0.896009780197354,
-        "home_rating": 0.905690577781236,
-        "away_age_years": 26.511153548669718,
-        "home_age_years": 35.258766435998,
-        "away_prior_starts": 82,
-        "home_prior_starts": 201,
-        "away_prior_shots": 2087.0,
-        "home_prior_shots": 4726.0,
-        "away_prior_minutes": 4698.233333333334,
-        "home_prior_minutes": 11884.4,
-        "away_reliability": 0.8025087040231921,
-        "home_reliability": 0.9069951202884158,
+        "away": "Jacob Fowler",
+        "home": "Joonas Korpisalo",
+        "away_id": 38444,
+        "home_id": 2556,
         "away_status": "PROJECTED",
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-15T11:02:56.700093-05:00",
-        "home_observed_at": "2026-11-15T11:02:56.700093-05:00"
-      }
-    },
-    {
-      "game_id": 2026020328,
-      "game_date": "2026-11-15",
-      "start_time_et": "2026-11-15T20:00:00-05:00",
-      "publish_state": "PUBLISHED",
-      "away": {
-        "abbr": "CGY",
-        "win_probability": 0.43680444574194044,
-        "expected_goals": null,
-        "regulation_win_probability": null,
-        "fair_moneyline": 129,
-        "team_only_win_probability": 0.42101855713669356,
-        "goalie_adjustment_pp": 1.5785888605246878
-      },
-      "home": {
-        "abbr": "ANA",
-        "win_probability": 0.5631955542580596,
-        "expected_goals": null,
-        "regulation_win_probability": null,
-        "fair_moneyline": -129,
-        "team_only_win_probability": 0.5789814428633064,
-        "goalie_adjustment_pp": -1.5785888605246878
-      },
-      "overtime_probability": null,
-      "goalie_state": {
-        "status": "CONFIRMED",
-        "away": "Devin Cooley",
-        "home": "Ville Husso",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
+        "away_observed_at": "2026-11-16T07:05:56.573938-05:00",
+        "home_observed_at": "2026-11-16T07:05:56.573938-05:00",
+        "updated_at": "2026-11-16T07:05:56.573938-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
+        "updated_at": "2026-11-16T07:05:56.573938-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "B2B",
-        "home": "B2B",
+        "away": "1 day rest",
+        "home": "2 days rest",
         "away_flags": [],
         "home_flags": [],
-        "away_severity": "B2B",
-        "home_severity": "B2B",
-        "updated_at": "2026-11-15T15:13:41.928941-05:00"
+        "away_severity": "SHORT",
+        "home_severity": "RESTED",
+        "updated_at": "2026-11-16T07:07:26.795950-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -229,150 +75,83 @@
       "goalie_adjustment": {
         "status": "APPLIED",
         "model_version": "prospective-0.3.0",
-        "away_rating": 0.9065120042671143,
-        "home_rating": 0.8993053375098685,
-        "away_age_years": 29.476306837238273,
-        "home_age_years": 31.77341081610163,
-        "away_prior_starts": 41,
-        "home_prior_starts": 167,
-        "away_prior_shots": 1200.0,
-        "home_prior_shots": 4924.0,
-        "away_prior_minutes": 2323.45,
-        "home_prior_minutes": 9652.666666666666,
-        "away_reliability": 0.6818717307340304,
-        "home_reliability": 0.8950941004555859,
+        "away_rating": 0.9135276017591004,
+        "home_rating": 0.8988144327057436,
+        "away_age_years": 21.97717954509675,
+        "home_age_years": 32.55371431309336,
+        "away_prior_starts": 29,
+        "home_prior_starts": 319,
+        "away_prior_shots": 800.0,
+        "home_prior_shots": 7077.0,
+        "away_prior_minutes": 1743.4,
+        "home_prior_minutes": 18668.533333333333,
+        "away_reliability": 0.6059236320990568,
+        "home_reliability": 0.9378841887315778,
         "away_status": "PROJECTED",
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-15T11:02:56.700093-05:00",
-        "home_observed_at": "2026-11-15T11:02:56.700093-05:00"
+        "away_observed_at": "2026-11-16T07:05:56.573938-05:00",
+        "home_observed_at": "2026-11-16T07:05:56.573938-05:00"
       }
     },
     {
-      "game_id": 2026020329,
-      "game_date": "2026-11-15",
-      "start_time_et": "2026-11-15T21:00:00-05:00",
+      "game_id": 2026020332,
+      "game_date": "2026-11-16",
+      "start_time_et": "2026-11-16T21:30:00-05:00",
       "publish_state": "PUBLISHED",
       "away": {
         "abbr": "VAN",
-        "win_probability": 0.22967433645187885,
+        "win_probability": 0.19942771846490492,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": 335,
-        "team_only_win_probability": 0.24579480352370042,
-        "goalie_adjustment_pp": -1.6120467071821576
+        "fair_moneyline": 401,
+        "team_only_win_probability": 0.20481295775011732,
+        "goalie_adjustment_pp": -0.5385239285212395
       },
       "home": {
-        "abbr": "VGK",
-        "win_probability": 0.7703256635481212,
+        "abbr": "UTA",
+        "win_probability": 0.8005722815350951,
         "expected_goals": null,
         "regulation_win_probability": null,
-        "fair_moneyline": -335,
-        "team_only_win_probability": 0.7542051964762996,
-        "goalie_adjustment_pp": 1.6120467071821576
+        "fair_moneyline": -401,
+        "team_only_win_probability": 0.7951870422498827,
+        "goalie_adjustment_pp": 0.5385239285212395
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "CONFIRMED",
-        "away": "Leevi Merilainen",
-        "home": "Carter Hart",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
-      },
-      "lineup_state": {
         "status": "PROJECTED",
-        "away": "Projected lines",
-        "home": "Projected lines",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
-      },
-      "rest_state": {
-        "status": "CONFIRMED",
-        "away": "1 day rest",
-        "home": "1 day rest",
-        "away_flags": [],
-        "home_flags": [],
-        "away_severity": "SHORT",
-        "home_severity": "SHORT",
-        "updated_at": "2026-11-15T15:13:41.928941-05:00"
-      },
-      "flags": [
-        "source_data_through_2026-11-02",
-        "b2b_context",
-        "goalie_context_dailyfaceoff",
-        "lineup_context_dailyfaceoff",
-        "goalie_adjustment_age_exposure"
-      ],
-      "goalie_adjustment_status": "APPLIED",
-      "goalie_adjustment": {
-        "status": "APPLIED",
-        "model_version": "prospective-0.3.0",
-        "away_rating": 0.8952060551462219,
-        "home_rating": 0.9051556746043815,
-        "away_age_years": 31.55164034853556,
-        "home_age_years": 28.257938219128388,
-        "away_prior_starts": 201,
-        "home_prior_starts": 281,
-        "away_prior_shots": 5985.0,
-        "home_prior_shots": 7264.0,
-        "away_prior_minutes": 11781.15,
-        "home_prior_minutes": 16289.133333333333,
-        "away_reliability": 0.9117906953974705,
-        "home_reliability": 0.932541667567504,
+        "away": "Nikita Tolopilo",
+        "home": "Sebastian Cossa",
+        "away_id": 38115,
+        "home_id": 34654,
         "away_status": "PROJECTED",
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-15T11:02:56.700093-05:00",
-        "home_observed_at": "2026-11-15T11:02:56.700093-05:00"
-      }
-    },
-    {
-      "game_id": 2026020330,
-      "game_date": "2026-11-15",
-      "start_time_et": "2026-11-15T21:00:00-05:00",
-      "publish_state": "PUBLISHED",
-      "away": {
-        "abbr": "NSH",
-        "win_probability": 0.543836395812581,
-        "expected_goals": null,
-        "regulation_win_probability": null,
-        "fair_moneyline": -119,
-        "team_only_win_probability": 0.5295662003866544,
-        "goalie_adjustment_pp": 1.4270195425926668
-      },
-      "home": {
-        "abbr": "SJS",
-        "win_probability": 0.45616360418741897,
-        "expected_goals": null,
-        "regulation_win_probability": null,
-        "fair_moneyline": 119,
-        "team_only_win_probability": 0.47043379961334564,
-        "goalie_adjustment_pp": -1.4270195425926668
-      },
-      "overtime_probability": null,
-      "goalie_state": {
-        "status": "CONFIRMED",
-        "away": "Juuse Saros",
-        "home": "Alex Nedeljkovic",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
+        "away_observed_at": "2026-11-16T07:05:56.573938-05:00",
+        "home_observed_at": "2026-11-16T07:05:56.573938-05:00",
+        "updated_at": "2026-11-16T07:05:56.573938-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-15T20:38:25.703305-05:00"
+        "updated_at": "2026-11-16T07:05:56.573938-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
-        "away": "1 day rest",
-        "home": "B2B",
+        "away": "B2B",
+        "home": "1 day rest",
         "away_flags": [
+          "3-in-4"
+        ],
+        "home_flags": [
           "4-in-6"
         ],
-        "home_flags": [],
-        "away_severity": "SHORT",
-        "home_severity": "B2B",
-        "updated_at": "2026-11-15T15:13:41.928941-05:00"
+        "away_severity": "B2B",
+        "home_severity": "SHORT",
+        "updated_at": "2026-11-16T07:07:26.795950-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -385,24 +164,24 @@
       "goalie_adjustment": {
         "status": "APPLIED",
         "model_version": "prospective-0.3.0",
-        "away_rating": 0.9102708611265274,
-        "home_rating": 0.9038534017825736,
-        "away_age_years": 31.57628151159846,
-        "home_age_years": 30.85621196876048,
-        "away_prior_starts": 480,
-        "home_prior_starts": 210,
-        "away_prior_shots": 12380.0,
-        "home_prior_shots": 6276.0,
-        "away_prior_minutes": 28225.666666666668,
-        "home_prior_minutes": 12443.016666666666,
-        "away_reliability": 0.9594831182036619,
-        "home_reliability": 0.9156798313165981,
+        "away_rating": 0.8944721864979478,
+        "home_rating": 0.8982061930703111,
+        "away_age_years": 26.612456107928292,
+        "home_age_years": 23.986803288226316,
+        "away_prior_starts": 19,
+        "home_prior_starts": 7,
+        "away_prior_shots": 555.0,
+        "home_prior_shots": 172.0,
+        "away_prior_minutes": 1109.5166666666667,
+        "home_prior_minutes": 377.81666666666666,
+        "away_reliability": 0.5071053017539068,
+        "home_reliability": 0.2641217552826274,
         "away_status": "PROJECTED",
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-15T11:02:56.700093-05:00",
-        "home_observed_at": "2026-11-15T11:02:56.700093-05:00"
+        "away_observed_at": "2026-11-16T07:05:56.573938-05:00",
+        "home_observed_at": "2026-11-16T07:05:56.573938-05:00"
       }
     }
   ]
