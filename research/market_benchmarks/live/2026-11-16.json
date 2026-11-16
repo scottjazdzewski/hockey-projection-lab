@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-16",
+  "generated_at": "2026-11-16T14:13:20.273256Z",
+  "source": "The Odds API",
+  "source_url": "https://the-odds-api.com/",
+  "source_tier": "MULTIBOOK_WHEN_AT_LEAST_2_BOOKS",
+  "benchmark_only": true,
+  "method": "Median of per-sportsbook two-way, de-vigged away win probabilities; displayed market moneyline is median across book prices.",
+  "games": [
+    {
+      "game_id": 2026020331,
+      "away_abbr": "MTL",
+      "home_abbr": "NYR",
+      "start_time_et": "2026-11-16T19:30:00-05:00",
+      "market_ml_away": -115,
+      "market_ml_home": -105,
+      "no_vig_away": 0.5108342,
+      "no_vig_home": 0.4891658,
+      "captured_at": "2026-11-16T14:13:20.273256Z",
+      "last_quote_at": "2026-11-16T14:12:57Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": -115,
+          "home_ml": -105,
+          "away_no_vig": 0.5108342,
+          "home_no_vig": 0.4891658,
+          "quote_updated_at": "2026-11-16T14:11:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": -116,
+          "home_ml": 102,
+          "away_no_vig": 0.5203411,
+          "home_no_vig": 0.4796589,
+          "quote_updated_at": "2026-11-16T14:12:28Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": -109,
+          "home_ml": -109,
+          "away_no_vig": 0.5,
+          "home_no_vig": 0.5,
+          "quote_updated_at": "2026-11-16T14:12:42Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": -115,
+          "home_ml": -105,
+          "away_no_vig": 0.5108342,
+          "home_no_vig": 0.4891658,
+          "quote_updated_at": "2026-11-16T14:12:42Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": -117,
+          "home_ml": -103,
+          "away_no_vig": 0.5151837,
+          "home_no_vig": 0.4848163,
+          "quote_updated_at": "2026-11-16T14:11:25Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": -115,
+          "home_ml": -105,
+          "away_no_vig": 0.5108342,
+          "home_no_vig": 0.4891658,
+          "quote_updated_at": "2026-11-16T14:12:28Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": -114,
+          "home_ml": -105,
+          "away_no_vig": 0.5098168,
+          "home_no_vig": 0.4901832,
+          "quote_updated_at": "2026-11-16T14:12:29Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": -116,
+          "home_ml": 102,
+          "away_no_vig": 0.5203411,
+          "home_no_vig": 0.4796589,
+          "quote_updated_at": "2026-11-16T14:12:14Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": -113,
+          "home_ml": -108,
+          "away_no_vig": 0.5053754,
+          "home_no_vig": 0.4946246,
+          "quote_updated_at": "2026-11-16T14:12:57Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020332,
+      "away_abbr": "VAN",
+      "home_abbr": "UTA",
+      "start_time_et": "2026-11-16T21:30:00-05:00",
+      "market_ml_away": 270,
+      "market_ml_home": -345,
+      "no_vig_away": 0.2584955,
+      "no_vig_home": 0.7415045,
+      "captured_at": "2026-11-16T14:13:20.273256Z",
+      "last_quote_at": "2026-11-16T14:12:57Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": 275,
+          "home_ml": -350,
+          "away_no_vig": 0.2553191,
+          "home_no_vig": 0.7446809,
+          "quote_updated_at": "2026-11-16T14:11:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": 295,
+          "home_ml": -350,
+          "away_no_vig": 0.2455662,
+          "home_no_vig": 0.7544338,
+          "quote_updated_at": "2026-11-16T14:12:28Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": 270,
+          "home_ml": -335,
+          "away_no_vig": 0.259779,
+          "home_no_vig": 0.740221,
+          "quote_updated_at": "2026-11-16T14:12:42Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": 280,
+          "home_ml": -350,
+          "away_no_vig": 0.252809,
+          "home_no_vig": 0.747191,
+          "quote_updated_at": "2026-11-16T14:12:42Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": 270,
+          "home_ml": -340,
+          "away_no_vig": 0.2591284,
+          "home_no_vig": 0.7408716,
+          "quote_updated_at": "2026-11-16T14:11:25Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": 270,
+          "home_ml": -340,
+          "away_no_vig": 0.2591284,
+          "home_no_vig": 0.7408716,
+          "quote_updated_at": "2026-11-16T14:12:28Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": 270,
+          "home_ml": -345,
+          "away_no_vig": 0.2584955,
+          "home_no_vig": 0.7415045,
+          "quote_updated_at": "2026-11-16T14:12:29Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": 295,
+          "home_ml": -350,
+          "away_no_vig": 0.2455662,
+          "home_no_vig": 0.7544338,
+          "quote_updated_at": "2026-11-16T14:12:14Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": 260,
+          "home_ml": -340,
+          "away_no_vig": 0.2644231,
+          "home_no_vig": 0.7355769,
+          "quote_updated_at": "2026-11-16T14:12:57Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    }
+  ],
+  "last_poll_slot": "FIXED:2026-11-16T09:00:00-05:00",
+  "captured_poll_slots": [
+    "FIXED:2026-11-16T09:00:00-05:00"
+  ]
+}
