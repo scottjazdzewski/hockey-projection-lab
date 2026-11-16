@@ -77,3 +77,8 @@ The drop coincides with increasing source-feature lag. Coincidence is not causal
 - Address stale source data and build a separate independently promoted xG forecast layer and its scoring ledger.
 
 **Audit creation does not alter any model weights, goalie model, result, production predictions, or frozen forward records.** This is a post-hoc *evaluation* of independently archived pregame predictions.
+
+
+## Paired morning vs near-puck comparison on the **same 18** games
+The immutable near-puck forward ledger represents a biased subset of 18 of the 95 audited games. On those **same 18 games**, the archived morning snapshots picked **8/18 (44.44%)** with Brier **0.259382**, log loss **0.718741**. The immutable near-puck forecasts also picked **8/18 (44.44%)**, with Brier **0.257360**, log loss **0.714190**. There were **zero pick-side flips**. The other 77 morning-only games were **47/77 (61.0%)**. The near-puck subset therefore must not be compared directly against all 95 as though its outcomes came from a random sample. A small Brier improvement is not strong enough to establish a goalie or late-context effect.
+
