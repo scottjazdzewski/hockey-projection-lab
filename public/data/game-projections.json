@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-16T07:07:26.795950-05:00",
+  "generated_at": "2026-11-16T07:09:31.491019-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -44,15 +44,15 @@
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-16T07:05:56.573938-05:00",
-        "home_observed_at": "2026-11-16T07:05:56.573938-05:00",
-        "updated_at": "2026-11-16T07:05:56.573938-05:00"
+        "away_observed_at": "2026-11-16T07:08:17.692723-05:00",
+        "home_observed_at": "2026-11-16T07:08:17.692723-05:00",
+        "updated_at": "2026-11-16T07:08:17.692723-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-16T07:05:56.573938-05:00"
+        "updated_at": "2026-11-16T07:08:17.692723-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -62,7 +62,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-16T07:07:26.795950-05:00"
+        "updated_at": "2026-11-16T07:09:31.491019-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -91,8 +91,8 @@
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-16T07:05:56.573938-05:00",
-        "home_observed_at": "2026-11-16T07:05:56.573938-05:00"
+        "away_observed_at": "2026-11-16T07:08:17.692723-05:00",
+        "home_observed_at": "2026-11-16T07:08:17.692723-05:00"
       }
     },
     {
@@ -129,15 +129,15 @@
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-16T07:05:56.573938-05:00",
-        "home_observed_at": "2026-11-16T07:05:56.573938-05:00",
-        "updated_at": "2026-11-16T07:05:56.573938-05:00"
+        "away_observed_at": "2026-11-16T07:08:17.692723-05:00",
+        "home_observed_at": "2026-11-16T07:08:17.692723-05:00",
+        "updated_at": "2026-11-16T07:08:17.692723-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-16T07:05:56.573938-05:00"
+        "updated_at": "2026-11-16T07:08:17.692723-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -151,7 +151,7 @@
         ],
         "away_severity": "B2B",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-16T07:07:26.795950-05:00"
+        "updated_at": "2026-11-16T07:09:31.491019-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -180,8 +180,8 @@
         "home_status": "PROJECTED",
         "away_source_timestamp": null,
         "home_source_timestamp": null,
-        "away_observed_at": "2026-11-16T07:05:56.573938-05:00",
-        "home_observed_at": "2026-11-16T07:05:56.573938-05:00"
+        "away_observed_at": "2026-11-16T07:08:17.692723-05:00",
+        "home_observed_at": "2026-11-16T07:08:17.692723-05:00"
       }
     }
   ]
