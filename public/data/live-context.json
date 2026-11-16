@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "date": "2026-11-16",
-  "generated_at": "2026-11-16T07:05:56.573938-05:00",
+  "generated_at": "2026-11-16T07:08:17.692723-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -17,7 +17,7 @@
         "goalie": {
           "name": "Jacob Fowler",
           "status": "PROJECTED",
-          "observed_at": "2026-11-16T07:05:56.573938-05:00",
+          "observed_at": "2026-11-16T07:08:17.692723-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -25,7 +25,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-16T07:05:56.573938-05:00",
+          "observed_at": "2026-11-16T07:08:17.692723-05:00",
           "updated_at": "2026-11-15T13:54:28.416Z",
           "source_name": "Last Game (2026-11-14)",
           "source_url": "https://www.nhl.com/gamecenter/2026020315",
@@ -284,7 +284,7 @@
         "goalie": {
           "name": "Joonas Korpisalo",
           "status": "PROJECTED",
-          "observed_at": "2026-11-16T07:05:56.573938-05:00",
+          "observed_at": "2026-11-16T07:08:17.692723-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -292,7 +292,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-16T07:05:56.573938-05:00",
+          "observed_at": "2026-11-16T07:08:17.692723-05:00",
           "updated_at": "2026-11-15T17:40:33.127Z",
           "source_name": "Peter Baugh",
           "source_url": "https://x.com/Peter_Baugh/status/2122017033202053183?a=4HE_0bmGC3LluJPTTvE&s=20",
@@ -554,7 +554,7 @@
         "goalie": {
           "name": "Nikita Tolopilo",
           "status": "PROJECTED",
-          "observed_at": "2026-11-16T07:05:56.573938-05:00",
+          "observed_at": "2026-11-16T07:08:17.692723-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -562,7 +562,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-16T07:05:56.573938-05:00",
+          "observed_at": "2026-11-16T07:08:17.692723-05:00",
           "updated_at": "2026-11-16T01:41:44.808Z",
           "source_name": "Brendan Batchelor",
           "source_url": "https://x.com/BatchHockey/status/2122142520297877898?a=hlPYbDNz5cebfMNWrC0&s=20",
@@ -797,7 +797,7 @@
         "goalie": {
           "name": "Sebastian Cossa",
           "status": "PROJECTED",
-          "observed_at": "2026-11-16T07:05:56.573938-05:00",
+          "observed_at": "2026-11-16T07:08:17.692723-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -805,7 +805,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-16T07:05:56.573938-05:00",
+          "observed_at": "2026-11-16T07:08:17.692723-05:00",
           "updated_at": "2026-11-15T14:10:11.060Z",
           "source_name": "Last Game (2026-11-14)",
           "source_url": "https://www.nhl.com/gamecenter/2026020323",
