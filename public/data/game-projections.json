@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-17T05:04:53.245582-05:00",
+  "generated_at": "2026-11-17T17:49:10.761923-05:00",
   "data_cutoff": "2026-11-02T23:59:59-05:00",
   "model": {
     "model_id": "HOCKEY-LAB-GAME",
@@ -62,7 +62,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -153,7 +153,7 @@
         ],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -238,7 +238,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -325,7 +325,7 @@
         ],
         "away_severity": "RESTED",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -410,7 +410,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -495,7 +495,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -580,7 +580,7 @@
         "home_flags": [],
         "away_severity": "RESTED",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -667,7 +667,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -754,7 +754,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "RESTED",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -842,7 +842,7 @@
         "home_flags": [],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
@@ -931,7 +931,7 @@
         ],
         "away_severity": "SHORT",
         "home_severity": "SHORT",
-        "updated_at": "2026-11-17T05:04:53.245582-05:00"
+        "updated_at": "2026-11-17T17:49:10.761923-05:00"
       },
       "flags": [
         "source_data_through_2026-11-02",
