@@ -35,24 +35,16 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
+        "status": "CONFIRMED",
         "away": "Jacob Fowler",
         "home": "Joonas Korpisalo",
-        "away_id": 38444,
-        "home_id": 2556,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-16T07:08:17.692723-05:00",
-        "home_observed_at": "2026-11-16T07:08:17.692723-05:00",
-        "updated_at": "2026-11-16T07:08:17.692723-05:00"
+        "updated_at": "2026-11-16T21:09:19.399354-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-16T07:08:17.692723-05:00"
+        "updated_at": "2026-11-16T21:09:19.399354-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
@@ -120,24 +112,16 @@
       },
       "overtime_probability": null,
       "goalie_state": {
-        "status": "PROJECTED",
+        "status": "CONFIRMED",
         "away": "Nikita Tolopilo",
-        "home": "Sebastian Cossa",
-        "away_id": 38115,
-        "home_id": 34654,
-        "away_status": "PROJECTED",
-        "home_status": "PROJECTED",
-        "away_source_timestamp": null,
-        "home_source_timestamp": null,
-        "away_observed_at": "2026-11-16T07:08:17.692723-05:00",
-        "home_observed_at": "2026-11-16T07:08:17.692723-05:00",
-        "updated_at": "2026-11-16T07:08:17.692723-05:00"
+        "home": "Karel Vejmelka",
+        "updated_at": "2026-11-16T21:09:19.399354-05:00"
       },
       "lineup_state": {
         "status": "PROJECTED",
         "away": "Projected lines",
         "home": "Projected lines",
-        "updated_at": "2026-11-16T07:08:17.692723-05:00"
+        "updated_at": "2026-11-16T21:09:19.399354-05:00"
       },
       "rest_state": {
         "status": "CONFIRMED",
