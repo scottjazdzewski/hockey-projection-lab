@@ -1,0 +1,1006 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-17",
+  "generated_at": "2026-11-17T14:10:32.204677Z",
+  "source": "The Odds API",
+  "source_url": "https://the-odds-api.com/",
+  "source_tier": "MULTIBOOK_WHEN_AT_LEAST_2_BOOKS",
+  "benchmark_only": true,
+  "method": "Median of per-sportsbook two-way, de-vigged away win probabilities; displayed market moneyline is median across book prices.",
+  "games": [
+    {
+      "game_id": 2026020333,
+      "away_abbr": "LAK",
+      "home_abbr": "BOS",
+      "start_time_et": "2026-11-17T19:00:00-05:00",
+      "market_ml_away": 136,
+      "market_ml_home": -162,
+      "no_vig_away": 0.4066302,
+      "no_vig_home": 0.5933698,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": 135,
+          "home_ml": -160,
+          "away_no_vig": 0.408805,
+          "home_no_vig": 0.591195,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": 146,
+          "home_ml": -166,
+          "away_no_vig": 0.3944481,
+          "home_no_vig": 0.6055519,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": 135,
+          "home_ml": -162,
+          "away_no_vig": 0.4076552,
+          "home_no_vig": 0.5923448,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": 138,
+          "home_ml": -160,
+          "away_no_vig": 0.4057428,
+          "home_no_vig": 0.5942572,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": 137,
+          "home_ml": -163,
+          "away_no_vig": 0.4050454,
+          "home_no_vig": 0.5949546,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": 136,
+          "home_ml": -162,
+          "away_no_vig": 0.4066302,
+          "home_no_vig": 0.5933698,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": 130,
+          "home_ml": -156,
+          "away_no_vig": 0.4163956,
+          "home_no_vig": 0.5836044,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": 146,
+          "home_ml": -166,
+          "away_no_vig": 0.3944481,
+          "home_no_vig": 0.6055519,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": 132,
+          "home_ml": -162,
+          "away_no_vig": 0.4107613,
+          "home_no_vig": 0.5892387,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020335,
+      "away_abbr": "EDM",
+      "home_abbr": "FLA",
+      "start_time_et": "2026-11-17T19:00:00-05:00",
+      "market_ml_away": 102,
+      "market_ml_home": -122,
+      "no_vig_away": 0.4733328,
+      "no_vig_home": 0.5266672,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": 105,
+          "home_ml": -125,
+          "away_no_vig": 0.4675325,
+          "home_no_vig": 0.5324675,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": 108,
+          "home_ml": -122,
+          "away_no_vig": 0.4666218,
+          "home_no_vig": 0.5333782,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": 102,
+          "home_ml": -120,
+          "away_no_vig": 0.4757785,
+          "home_no_vig": 0.5242215,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": 100,
+          "home_ml": -120,
+          "away_no_vig": 0.4782609,
+          "home_no_vig": 0.5217391,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": 105,
+          "home_ml": -125,
+          "away_no_vig": 0.4675325,
+          "home_no_vig": 0.5324675,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": 100,
+          "home_ml": -120,
+          "away_no_vig": 0.4782609,
+          "home_no_vig": 0.5217391,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": 102,
+          "home_ml": -122,
+          "away_no_vig": 0.4739134,
+          "home_no_vig": 0.5260866,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": 108,
+          "home_ml": -122,
+          "away_no_vig": 0.4666218,
+          "home_no_vig": 0.5333782,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": 101,
+          "home_ml": -124,
+          "away_no_vig": 0.4733328,
+          "home_no_vig": 0.5266672,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020336,
+      "away_abbr": "CBJ",
+      "home_abbr": "NYI",
+      "start_time_et": "2026-11-17T19:00:00-05:00",
+      "market_ml_away": 120,
+      "market_ml_home": -140,
+      "no_vig_away": 0.4366423,
+      "no_vig_home": 0.5633577,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": 118,
+          "home_ml": -145,
+          "away_no_vig": 0.4366423,
+          "home_no_vig": 0.5633577,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": 123,
+          "home_ml": -140,
+          "away_no_vig": 0.4346251,
+          "home_no_vig": 0.5653749,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": 120,
+          "home_ml": -143,
+          "away_no_vig": 0.4357963,
+          "home_no_vig": 0.5642037,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": 120,
+          "home_ml": -140,
+          "away_no_vig": 0.4379562,
+          "home_no_vig": 0.5620438,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": 117,
+          "home_ml": -137,
+          "away_no_vig": 0.4435793,
+          "home_no_vig": 0.5564207,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": 120,
+          "home_ml": -142,
+          "away_no_vig": 0.4365079,
+          "home_no_vig": 0.5634921,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": 116,
+          "home_ml": -140,
+          "away_no_vig": 0.4424779,
+          "home_no_vig": 0.5575221,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": 123,
+          "home_ml": -140,
+          "away_no_vig": 0.4346251,
+          "home_no_vig": 0.5653749,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": 118,
+          "home_ml": -145,
+          "away_no_vig": 0.4366423,
+          "home_no_vig": 0.5633577,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020337,
+      "away_abbr": "BUF",
+      "home_abbr": "PHI",
+      "start_time_et": "2026-11-17T19:00:00-05:00",
+      "market_ml_away": -125,
+      "market_ml_home": 105,
+      "no_vig_away": 0.5336788,
+      "no_vig_home": 0.4663212,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": -130,
+          "home_ml": 105,
+          "away_no_vig": 0.5367573,
+          "home_no_vig": 0.4632427,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": -123,
+          "home_ml": 109,
+          "away_no_vig": 0.5354844,
+          "home_no_vig": 0.4645156,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": -125,
+          "home_ml": 106,
+          "away_no_vig": 0.5336788,
+          "home_no_vig": 0.4663212,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": -125,
+          "home_ml": 105,
+          "away_no_vig": 0.5324675,
+          "home_no_vig": 0.4675325,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": -128,
+          "home_ml": 107,
+          "away_no_vig": 0.5374878,
+          "home_no_vig": 0.4625122,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": -125,
+          "home_ml": 105,
+          "away_no_vig": 0.5324675,
+          "home_no_vig": 0.4675325,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": -125,
+          "home_ml": 104,
+          "away_no_vig": 0.53125,
+          "home_no_vig": 0.46875,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": -123,
+          "home_ml": 109,
+          "away_no_vig": 0.5354844,
+          "home_no_vig": 0.4645156,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": -126,
+          "home_ml": 103,
+          "away_no_vig": 0.5309062,
+          "home_no_vig": 0.4690938,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020341,
+      "away_abbr": "OTT",
+      "home_abbr": "WPG",
+      "start_time_et": "2026-11-17T19:00:00-05:00",
+      "market_ml_away": -130,
+      "market_ml_home": 110,
+      "no_vig_away": 0.5467334,
+      "no_vig_home": 0.4532666,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": -135,
+          "home_ml": 110,
+          "away_no_vig": 0.5467695,
+          "home_no_vig": 0.4532305,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": -130,
+          "home_ml": 115,
+          "away_no_vig": 0.548577,
+          "home_no_vig": 0.451423,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": -132,
+          "home_ml": 112,
+          "away_no_vig": 0.5467334,
+          "home_no_vig": 0.4532666,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": -130,
+          "home_ml": 110,
+          "away_no_vig": 0.5427435,
+          "home_no_vig": 0.4572565,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": -135,
+          "home_ml": 115,
+          "away_no_vig": 0.552594,
+          "home_no_vig": 0.447406,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": -130,
+          "home_ml": 110,
+          "away_no_vig": 0.5427435,
+          "home_no_vig": 0.4572565,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": -130,
+          "home_ml": 108,
+          "away_no_vig": 0.5403677,
+          "home_no_vig": 0.4596323,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": -130,
+          "home_ml": 115,
+          "away_no_vig": 0.548577,
+          "home_no_vig": 0.451423,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": -131,
+          "home_ml": 107,
+          "away_no_vig": 0.5399964,
+          "home_no_vig": 0.4600036,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020334,
+      "away_abbr": "WSH",
+      "home_abbr": "TBL",
+      "start_time_et": "2026-11-17T19:30:00-05:00",
+      "market_ml_away": 135,
+      "market_ml_home": -160,
+      "no_vig_away": 0.408805,
+      "no_vig_home": 0.591195,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": 135,
+          "home_ml": -160,
+          "away_no_vig": 0.408805,
+          "home_no_vig": 0.591195,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": 141,
+          "home_ml": -160,
+          "away_no_vig": 0.4027261,
+          "home_no_vig": 0.5972739,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": 133,
+          "home_ml": -159,
+          "away_no_vig": 0.4114573,
+          "home_no_vig": 0.5885427,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": 138,
+          "home_ml": -160,
+          "away_no_vig": 0.4057428,
+          "home_no_vig": 0.5942572,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": 135,
+          "home_ml": -160,
+          "away_no_vig": 0.408805,
+          "home_no_vig": 0.591195,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": 136,
+          "home_ml": -162,
+          "away_no_vig": 0.4066302,
+          "home_no_vig": 0.5933698,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": 130,
+          "home_ml": -156,
+          "away_no_vig": 0.4163956,
+          "home_no_vig": 0.5836044,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": 141,
+          "home_ml": -160,
+          "away_no_vig": 0.4027261,
+          "home_no_vig": 0.5972739,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": 131,
+          "home_ml": -161,
+          "away_no_vig": 0.4123809,
+          "home_no_vig": 0.5876191,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020338,
+      "away_abbr": "TOR",
+      "home_abbr": "CHI",
+      "start_time_et": "2026-11-17T19:30:00-05:00",
+      "market_ml_away": -154,
+      "market_ml_home": 130,
+      "no_vig_away": 0.5802485,
+      "no_vig_home": 0.4197515,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": -150,
+          "home_ml": 125,
+          "away_no_vig": 0.5744681,
+          "home_no_vig": 0.4255319,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": -155,
+          "home_ml": 136,
+          "away_no_vig": 0.5892397,
+          "home_no_vig": 0.4107603,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": -159,
+          "home_ml": 133,
+          "away_no_vig": 0.5885427,
+          "home_no_vig": 0.4114573,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": -150,
+          "home_ml": 129,
+          "away_no_vig": 0.57877,
+          "home_no_vig": 0.42123,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": -150,
+          "home_ml": 130,
+          "away_no_vig": 0.5798319,
+          "home_no_vig": 0.4201681,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": -155,
+          "home_ml": 130,
+          "away_no_vig": 0.5829926,
+          "home_no_vig": 0.4170074,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": -154,
+          "home_ml": 128,
+          "away_no_vig": 0.5802485,
+          "home_no_vig": 0.4197515,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": -155,
+          "home_ml": 136,
+          "away_no_vig": 0.5892397,
+          "home_no_vig": 0.4107603,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": -153,
+          "home_ml": 124,
+          "away_no_vig": 0.5753038,
+          "home_no_vig": 0.4246962,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020339,
+      "away_abbr": "ANA",
+      "home_abbr": "STL",
+      "start_time_et": "2026-11-17T20:00:00-05:00",
+      "market_ml_away": 120,
+      "market_ml_home": -141,
+      "no_vig_away": 0.4379562,
+      "no_vig_home": 0.5620438,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": 118,
+          "home_ml": -145,
+          "away_no_vig": 0.4366423,
+          "home_no_vig": 0.5633577,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": 120,
+          "home_ml": -136,
+          "away_no_vig": 0.4409567,
+          "home_no_vig": 0.5590433,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": 117,
+          "home_ml": -137,
+          "away_no_vig": 0.4435793,
+          "home_no_vig": 0.5564207,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": 120,
+          "home_ml": -140,
+          "away_no_vig": 0.4379562,
+          "home_no_vig": 0.5620438,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": 122,
+          "home_ml": -142,
+          "away_no_vig": 0.4342833,
+          "home_no_vig": 0.5657167,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": 120,
+          "home_ml": -142,
+          "away_no_vig": 0.4365079,
+          "home_no_vig": 0.5634921,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": 120,
+          "home_ml": -144,
+          "away_no_vig": 0.4350927,
+          "home_no_vig": 0.5649073,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": 120,
+          "home_ml": -136,
+          "away_no_vig": 0.4409567,
+          "home_no_vig": 0.5590433,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": 115,
+          "home_ml": -141,
+          "away_no_vig": 0.4428926,
+          "home_no_vig": 0.5571074,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020340,
+      "away_abbr": "NSH",
+      "home_abbr": "MIN",
+      "start_time_et": "2026-11-17T20:00:00-05:00",
+      "market_ml_away": 170,
+      "market_ml_home": -205,
+      "no_vig_away": 0.3552708,
+      "no_vig_home": 0.6447292,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": 170,
+          "home_ml": -210,
+          "away_no_vig": 0.3534778,
+          "home_no_vig": 0.6465222,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": 167,
+          "home_ml": -191,
+          "away_no_vig": 0.3633095,
+          "home_no_vig": 0.6366905,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": 175,
+          "home_ml": -215,
+          "away_no_vig": 0.3475862,
+          "home_no_vig": 0.6524138,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": 170,
+          "home_ml": -200,
+          "away_no_vig": 0.3571429,
+          "home_no_vig": 0.6428571,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": 173,
+          "home_ml": -205,
+          "away_no_vig": 0.3527439,
+          "home_no_vig": 0.6472561,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": 170,
+          "home_ml": -205,
+          "away_no_vig": 0.3552708,
+          "home_no_vig": 0.6447292,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": 172,
+          "home_ml": -210,
+          "away_no_vig": 0.351793,
+          "home_no_vig": 0.648207,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": 167,
+          "home_ml": -191,
+          "away_no_vig": 0.3633095,
+          "home_no_vig": 0.6366905,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": 160,
+          "home_ml": -200,
+          "away_no_vig": 0.3658537,
+          "home_no_vig": 0.6341463,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020342,
+      "away_abbr": "DAL",
+      "home_abbr": "VGK",
+      "start_time_et": "2026-11-17T22:00:00-05:00",
+      "market_ml_away": 114,
+      "market_ml_home": -135,
+      "no_vig_away": 0.451423,
+      "no_vig_home": 0.548577,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": 110,
+          "home_ml": -135,
+          "away_no_vig": 0.4532305,
+          "home_no_vig": 0.5467695,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": 115,
+          "home_ml": -130,
+          "away_no_vig": 0.451423,
+          "home_no_vig": 0.548577,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": 118,
+          "home_ml": -139,
+          "away_no_vig": 0.4409431,
+          "home_no_vig": 0.5590569,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": 110,
+          "home_ml": -130,
+          "away_no_vig": 0.4572565,
+          "home_no_vig": 0.5427435,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": 115,
+          "home_ml": -135,
+          "away_no_vig": 0.447406,
+          "home_no_vig": 0.552594,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": 114,
+          "home_ml": -135,
+          "away_no_vig": 0.4485589,
+          "home_no_vig": 0.5514411,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": 112,
+          "home_ml": -134,
+          "away_no_vig": 0.4516677,
+          "home_no_vig": 0.5483323,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": 115,
+          "home_ml": -130,
+          "away_no_vig": 0.451423,
+          "home_no_vig": 0.548577,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": 111,
+          "home_ml": -135,
+          "away_no_vig": 0.4520535,
+          "home_no_vig": 0.5479465,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    },
+    {
+      "game_id": 2026020343,
+      "away_abbr": "CGY",
+      "home_abbr": "SJS",
+      "start_time_et": "2026-11-17T22:00:00-05:00",
+      "market_ml_away": 110,
+      "market_ml_home": -132,
+      "no_vig_away": 0.4572565,
+      "no_vig_home": 0.5427435,
+      "captured_at": "2026-11-17T14:10:32.204677Z",
+      "last_quote_at": "2026-11-17T14:10:24Z",
+      "book_count": 9,
+      "books": [
+        {
+          "bookmaker": "betmgm",
+          "away_ml": 110,
+          "home_ml": -135,
+          "away_no_vig": 0.4532305,
+          "home_no_vig": 0.5467695,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betonlineag",
+          "away_ml": 116,
+          "home_ml": -132,
+          "away_no_vig": 0.4486386,
+          "home_no_vig": 0.5513614,
+          "quote_updated_at": "2026-11-17T14:10:18Z"
+        },
+        {
+          "bookmaker": "betrivers",
+          "away_ml": 108,
+          "home_ml": -130,
+          "away_no_vig": 0.4596323,
+          "home_no_vig": 0.5403677,
+          "quote_updated_at": "2026-11-17T14:10:21Z"
+        },
+        {
+          "bookmaker": "betus",
+          "away_ml": 110,
+          "home_ml": -130,
+          "away_no_vig": 0.4572565,
+          "home_no_vig": 0.5427435,
+          "quote_updated_at": "2026-11-17T14:10:20Z"
+        },
+        {
+          "bookmaker": "bovada",
+          "away_ml": 112,
+          "home_ml": -133,
+          "away_no_vig": 0.4524623,
+          "home_no_vig": 0.5475377,
+          "quote_updated_at": "2026-11-17T14:09:39Z"
+        },
+        {
+          "bookmaker": "draftkings",
+          "away_ml": 110,
+          "home_ml": -130,
+          "away_no_vig": 0.4572565,
+          "home_no_vig": 0.5427435,
+          "quote_updated_at": "2026-11-17T14:10:24Z"
+        },
+        {
+          "bookmaker": "fanduel",
+          "away_ml": 105,
+          "home_ml": -126,
+          "away_no_vig": 0.4666529,
+          "home_no_vig": 0.5333471,
+          "quote_updated_at": "2026-11-17T14:10:02Z"
+        },
+        {
+          "bookmaker": "lowvig",
+          "away_ml": 116,
+          "home_ml": -132,
+          "away_no_vig": 0.4486386,
+          "home_no_vig": 0.5513614,
+          "quote_updated_at": "2026-11-17T14:09:21Z"
+        },
+        {
+          "bookmaker": "mybookieag",
+          "away_ml": 107,
+          "home_ml": -132,
+          "away_no_vig": 0.4591877,
+          "home_no_vig": 0.5408123,
+          "quote_updated_at": "2026-11-17T14:09:06Z"
+        }
+      ],
+      "status": "CURRENT",
+      "source": "The Odds API",
+      "source_url": "https://the-odds-api.com/"
+    }
+  ],
+  "last_poll_slot": "FIXED:2026-11-17T09:00:00-05:00",
+  "captured_poll_slots": [
+    "FIXED:2026-11-17T09:00:00-05:00"
+  ]
+}
