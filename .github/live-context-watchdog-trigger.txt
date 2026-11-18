@@ -1,2 +1,2 @@
-Recovery requested: 2026-11-16T07:06:30-05:00
-Reason: November 16 slate and live context current; projections still November 15.
+Recovery requested: 2026-11-18T06:07:02-05:00
+Reason: November 18 official slate and live context current (3 games); projections remain November 17. Request live-context recovery and production rescore.
