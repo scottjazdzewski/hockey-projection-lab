@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "date": "2026-11-18",
-  "generated_at": "2026-11-18T05:10:27.753545-05:00",
+  "generated_at": "2026-11-18T06:07:40.748967-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -17,7 +17,7 @@
         "goalie": {
           "name": "Jeremy Swayman",
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -25,7 +25,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "updated_at": "2026-11-16T16:47:13.743Z",
           "source_name": "Belle Fraser",
           "source_url": "https://x.com/bellefraser1/status/2122360961550164460?s=20",
@@ -260,7 +260,7 @@
         "goalie": {
           "name": "Daniil Tarasov",
           "status": "CONFIRMED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "source_timestamp": "2026-11-17T17:25:37.564Z",
           "source_name": "Helene St. James",
           "source_url": "https://x.com/HeleneStJames/status/2122742493397553324?a=kaECZ1GheGZP4UzcIwY&s=20",
@@ -268,7 +268,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "updated_at": "2026-11-17T16:48:53.542Z",
           "source_name": "Ansar Khan",
           "source_url": "https://x.com/AnsarKhanMLive/status/2122721888954646890",
@@ -518,7 +518,7 @@
         "goalie": {
           "name": "Jacob Fowler",
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -526,7 +526,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "updated_at": "2026-11-17T00:10:50.579Z",
           "source_name": "Patrick Friolet",
           "source_url": "https://x.com/PFrioletRDS/status/2122481485093675199",
@@ -785,7 +785,7 @@
         "goalie": {
           "name": "Connor Hellebuyck",
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -793,7 +793,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "updated_at": "2026-11-17T17:43:53.464Z",
           "source_name": "Amanda Stein",
           "source_url": "https://x.com/amandacstein/status/2122732471435575648?s=20",
@@ -1043,7 +1043,7 @@
         "goalie": {
           "name": "Mackenzie Blackwood",
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -1051,7 +1051,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "updated_at": "2026-11-17T18:49:19.677Z",
           "source_name": "@HockeyMtnHighCO",
           "source_url": "https://x.com/HockeyMtnHighCO/status/2122750227446735172",
@@ -1304,7 +1304,7 @@
         "goalie": {
           "name": "Karel Vejmelka",
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -1312,7 +1312,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T05:10:27.753545-05:00",
+          "observed_at": "2026-11-18T06:07:40.748967-05:00",
           "updated_at": "2026-11-17T02:17:49.082Z",
           "source_name": "Utah Mammoth",
           "source_url": "https://x.com/utahmammoth/status/2122510802871857567",
