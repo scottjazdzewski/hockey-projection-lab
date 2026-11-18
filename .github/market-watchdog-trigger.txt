@@ -1,3 +1,3 @@
 Market watchdog recovery trigger
-checkpoint=FIXED:2026-11-18T09:00:00-05:00
-recovery_requested_at=2026-11-18T09:07:41-05:00
+checkpoint=FIXED:2026-11-18T12:00:00-05:00
+recovery_requested_at=2026-11-18T12:08:40-05:00
