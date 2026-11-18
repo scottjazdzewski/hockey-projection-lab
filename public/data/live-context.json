@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "date": "2026-11-18",
-  "generated_at": "2026-11-18T06:07:40.748967-05:00",
+  "generated_at": "2026-11-18T12:46:05.210344-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -17,7 +17,7 @@
         "goalie": {
           "name": "Jeremy Swayman",
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -25,10 +25,10 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
-          "updated_at": "2026-11-16T16:47:13.743Z",
-          "source_name": "Belle Fraser",
-          "source_url": "https://x.com/bellefraser1/status/2122360961550164460?s=20",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
+          "updated_at": "2026-11-18T11:51:24.206Z",
+          "source_name": "Last Game (2026-11-17)",
+          "source_url": "https://www.nhl.com/gamecenter/2026020333",
           "groups": {
             "f1": [
               {
@@ -202,19 +202,19 @@
             ],
             "pk1": [
               {
-                "name": "Fraser Minten",
+                "name": "Elias Lindholm",
                 "position": "sk1",
-                "player_id": 31575
+                "player_id": 2133
               },
               {
-                "name": "Marat Khusnutdinov",
+                "name": "Mark Kastelic",
                 "position": "sk2",
-                "player_id": 31738
+                "player_id": 2904
               },
               {
-                "name": "Nikita Zadorov",
+                "name": "Connor Clifton",
                 "position": "sk3",
-                "player_id": 2147
+                "player_id": 4833
               },
               {
                 "name": "Will Borgen",
@@ -224,14 +224,14 @@
             ],
             "pk2": [
               {
-                "name": "Pavel Zacha",
+                "name": "Fraser Minten",
                 "position": "sk1",
-                "player_id": 2481
+                "player_id": 31575
               },
               {
-                "name": "Mark Kastelic",
+                "name": "Marat Khusnutdinov",
                 "position": "sk2",
-                "player_id": 2904
+                "player_id": 31738
               },
               {
                 "name": "Hampus Lindholm",
@@ -260,7 +260,7 @@
         "goalie": {
           "name": "Daniil Tarasov",
           "status": "CONFIRMED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
           "source_timestamp": "2026-11-17T17:25:37.564Z",
           "source_name": "Helene St. James",
           "source_url": "https://x.com/HeleneStJames/status/2122742493397553324?a=kaECZ1GheGZP4UzcIwY&s=20",
@@ -268,7 +268,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
           "updated_at": "2026-11-17T16:48:53.542Z",
           "source_name": "Ansar Khan",
           "source_url": "https://x.com/AnsarKhanMLive/status/2122721888954646890",
@@ -496,16 +496,22 @@
               "player_id": 30661
             },
             {
+              "name": "Dylan Larkin",
+              "injury_status": "out",
+              "game_time_decision": false,
+              "player_id": 2522
+            },
+            {
               "name": "Simon Edvinsson",
               "injury_status": "out",
               "game_time_decision": false,
               "player_id": 34667
             },
             {
-              "name": "Dylan Larkin",
-              "injury_status": "out",
+              "name": "William Wallinder",
+              "injury_status": "dtd",
               "game_time_decision": false,
-              "player_id": 2522
+              "player_id": 33029
             }
           ]
         }
@@ -517,17 +523,17 @@
         "abbr": "MTL",
         "goalie": {
           "name": "Jacob Fowler",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
+          "source_timestamp": "2026-11-18T16:59:29.200Z",
+          "source_name": "Eric Engels",
+          "source_url": "https://x.com/EricEngels/status/2123097526303883296?a=cnbCEKINErXav5Os7hg&s=20",
           "player_id": 38444
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
-          "updated_at": "2026-11-17T00:10:50.579Z",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
+          "updated_at": "2026-11-18T12:16:41.673Z",
           "source_name": "Patrick Friolet",
           "source_url": "https://x.com/PFrioletRDS/status/2122481485093675199",
           "groups": {
@@ -748,6 +754,12 @@
           },
           "injuries": [
             {
+              "name": "Alexandre Texier",
+              "injury_status": null,
+              "game_time_decision": true,
+              "player_id": 4759
+            },
+            {
               "name": "Ivan Demidov",
               "injury_status": "ir",
               "game_time_decision": false,
@@ -766,16 +778,16 @@
               "player_id": 21932
             },
             {
-              "name": "Mike Matheson",
-              "injury_status": "dtd",
-              "game_time_decision": false,
-              "player_id": 2583
-            },
-            {
               "name": "Chris Kreider",
-              "injury_status": "out",
+              "injury_status": "ir",
               "game_time_decision": false,
               "player_id": 1926
+            },
+            {
+              "name": "Mike Matheson",
+              "injury_status": "out",
+              "game_time_decision": false,
+              "player_id": 2583
             }
           ]
         }
@@ -784,19 +796,19 @@
         "abbr": "NJD",
         "goalie": {
           "name": "Connor Hellebuyck",
-          "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
-          "source_timestamp": null,
-          "source_name": null,
-          "source_url": null,
+          "status": "CONFIRMED",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
+          "source_timestamp": "2026-11-18T16:03:53.467Z",
+          "source_name": "Amanda Stein",
+          "source_url": "https://x.com/amandacstein/status/2123083757959700697?a=sbuqF1fpijw_GbLohkI&s=20",
           "player_id": 2465
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
-          "updated_at": "2026-11-17T17:43:53.464Z",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
+          "updated_at": "2026-11-18T17:37:55.145Z",
           "source_name": "Amanda Stein",
-          "source_url": "https://x.com/amandacstein/status/2122732471435575648?s=20",
+          "source_url": "https://x.com/amandacstein/status/2123083757959700697/photo/1",
           "groups": {
             "f1": [
               {
@@ -1022,13 +1034,13 @@
             },
             {
               "name": "Anthony Mantha",
-              "injury_status": "out",
+              "injury_status": "ir",
               "game_time_decision": false,
               "player_id": 2151
             },
             {
               "name": "Johnathan Kovacevic",
-              "injury_status": "out",
+              "injury_status": "ir",
               "game_time_decision": false,
               "player_id": 28131
             }
@@ -1043,7 +1055,7 @@
         "goalie": {
           "name": "Mackenzie Blackwood",
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -1051,8 +1063,8 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
-          "updated_at": "2026-11-17T18:49:19.677Z",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
+          "updated_at": "2026-11-18T12:10:42.916Z",
           "source_name": "@HockeyMtnHighCO",
           "source_url": "https://x.com/HockeyMtnHighCO/status/2122750227446735172",
           "groups": {
@@ -1273,6 +1285,12 @@
           },
           "injuries": [
             {
+              "name": "Scott Wedgewood",
+              "injury_status": null,
+              "game_time_decision": true,
+              "player_id": 1873
+            },
+            {
               "name": "Josh Manson",
               "injury_status": "ir",
               "game_time_decision": false,
@@ -1280,7 +1298,7 @@
             },
             {
               "name": "Zachary L'Heureux",
-              "injury_status": "out",
+              "injury_status": "ir",
               "game_time_decision": false,
               "player_id": 31229
             },
@@ -1304,7 +1322,7 @@
         "goalie": {
           "name": "Karel Vejmelka",
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -1312,7 +1330,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-18T06:07:40.748967-05:00",
+          "observed_at": "2026-11-18T12:46:05.210344-05:00",
           "updated_at": "2026-11-17T02:17:49.082Z",
           "source_name": "Utah Mammoth",
           "source_url": "https://x.com/utahmammoth/status/2122510802871857567",
