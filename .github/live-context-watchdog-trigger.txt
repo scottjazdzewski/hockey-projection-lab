@@ -1,2 +1,2 @@
-recovery_requested_at=2026-11-20T06:05:46-05:00
-reason=morning-rollover-stale-live-context-and-projections
+Recovery requested: 2026-11-20T07:00:39-05:00
+Reason: live context and game projections stale for 2026-11-20 Eastern slate.
