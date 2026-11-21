@@ -1,2 +1,2 @@
-Recovery requested: 2026-11-20T07:00:39-05:00
-Reason: live context and game projections stale for 2026-11-20 Eastern slate.
+Recovery requested: 2026-11-21T06:08:46-05:00
+Reason: 2026-11-21 projections stale; live context and slate current (14 games).
