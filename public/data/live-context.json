@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "date": "2026-11-21",
-  "generated_at": "2026-11-21T06:09:06.892312-05:00",
+  "generated_at": "2026-11-21T07:04:37.589190-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -17,7 +17,7 @@
         "goalie": {
           "name": "Tristan Jarry",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -25,7 +25,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-21T04:05:56.868Z",
           "source_name": "Bob Stauffer",
           "source_url": "https://x.com/bob_stauffer/status/2123849414636937565?s=46",
@@ -284,7 +284,7 @@
         "goalie": {
           "name": "Pyotr Kochetkov",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -292,7 +292,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:09:07.598Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020352",
@@ -523,7 +523,7 @@
         "goalie": {
           "name": "Spencer Knight",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -531,7 +531,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:12:39.531Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020353",
@@ -772,7 +772,7 @@
         "goalie": {
           "name": "Dustin Wolf",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": "2026-11-20T19:04:20.303Z",
           "source_name": "Pat Steinberg",
           "source_url": "https://x.com/SteinbergYYC/status/2123853055917744337?a=VbWWYMuH5_KQ2cfaC1Y&s=20",
@@ -780,7 +780,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:16:28.606Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020355",
@@ -1024,7 +1024,7 @@
         "goalie": {
           "name": "Ukko-Pekka Luukkonen",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -1032,7 +1032,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:04:03.137Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020351",
@@ -1279,7 +1279,7 @@
         "goalie": {
           "name": "Jacob Markstrom",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -1287,7 +1287,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-19T17:53:03.756Z",
           "source_name": "Jameson Olive",
           "source_url": "https://x.com/JamesonCoop/status/2123450762999013829?s=20",
@@ -1537,7 +1537,7 @@
         "goalie": {
           "name": "Arturs Silovs",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -1545,7 +1545,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-21T04:02:00.675Z",
           "source_name": "Pens Inside Scoop",
           "source_url": "https://x.com/pensinsidescoop/status/2123826788996390983?s=46",
@@ -1804,7 +1804,7 @@
         "goalie": {
           "name": "Juuse Saros",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -1812,7 +1812,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-19T18:09:25.509Z",
           "source_name": "Alex Daugherty",
           "source_url": "https://x.com/AlexDaugherty1/status/2123468911672783270?s=20",
@@ -2050,7 +2050,7 @@
         "goalie": {
           "name": "Logan Thompson",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -2058,7 +2058,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-21T04:06:52.599Z",
           "source_name": "Sammi Silber",
           "source_url": "https://x.com/sammisilber/status/2123814074588795182?s=20",
@@ -2305,7 +2305,7 @@
         "goalie": {
           "name": "Jeremy Swayman",
           "status": "CONFIRMED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": "2026-11-20T17:40:46.796Z",
           "source_name": "Conor Ryan",
           "source_url": "https://x.com/ConorRyan_93/status/2123832106291986742?a=A6qNL8gSgYeTYeBcEnI&s=20",
@@ -2313,7 +2313,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-21T04:07:18.900Z",
           "source_name": "Belle Fraser",
           "source_url": "https://x.com/bellefraser1/status/2123814244357636572?s=20",
@@ -2551,7 +2551,7 @@
         "goalie": {
           "name": "Cam Talbot",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -2559,7 +2559,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:11:13.145Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020353",
@@ -2800,7 +2800,7 @@
         "goalie": {
           "name": "Anthony Stolarz",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -2808,7 +2808,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T16:58:24.744Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020347",
@@ -3082,7 +3082,7 @@
         "goalie": {
           "name": "Dan Vladar",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -3090,7 +3090,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T16:59:11.614Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020348",
@@ -3325,7 +3325,7 @@
         "goalie": {
           "name": "Jakub Dobes",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -3333,7 +3333,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:08:34.716Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020352",
@@ -3601,7 +3601,7 @@
         "goalie": {
           "name": "Darcy Kuemper",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -3609,7 +3609,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T16:57:46.799Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020347",
@@ -3850,7 +3850,7 @@
         "goalie": {
           "name": "Samuel Ersson",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -3858,7 +3858,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T16:59:45.897Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020348",
@@ -4120,7 +4120,7 @@
         "goalie": {
           "name": "Ilya Sorokin",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -4128,7 +4128,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:14:29.820Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020354",
@@ -4369,7 +4369,7 @@
         "goalie": {
           "name": "John Gibson",
           "status": "CONFIRMED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": "2026-11-20T17:13:21.062Z",
           "source_name": "Helene St. James",
           "source_url": "https://x.com/HeleneStJames/status/2123826558943010928?a=SqoZe1byJPj04bZA01c&s=20",
@@ -4377,7 +4377,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-21T04:04:50.229Z",
           "source_name": "Ansar Khan",
           "source_url": "https://x.com/ansarkhanmlive/status/2123812488135291020?s=46",
@@ -4627,7 +4627,7 @@
         "goalie": {
           "name": "Connor Hellebuyck",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -4635,7 +4635,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-21T04:08:07.187Z",
           "source_name": "Amanda Stein",
           "source_url": "https://x.com/amandacstein/status/2123811894427328948/photo/1",
@@ -4882,7 +4882,7 @@
         "goalie": {
           "name": "Joel Hofer",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -4890,7 +4890,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T18:26:10.085Z",
           "source_name": "DFO Projections",
           "source_url": "https://www.dailyfaceoff.com/teams/st-louis-blues/line-combinations",
@@ -5146,7 +5146,7 @@
         "goalie": {
           "name": "Carter Hart",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -5154,7 +5154,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:21:00.632Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020358",
@@ -5389,7 +5389,7 @@
         "goalie": {
           "name": "Stuart Skinner",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -5397,7 +5397,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:15:15.816Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020354",
@@ -5653,7 +5653,7 @@
         "goalie": {
           "name": "Lukas Dostal",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -5661,7 +5661,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:17:26.139Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020356",
@@ -5902,7 +5902,7 @@
         "goalie": {
           "name": "Karel Vejmelka",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -5910,7 +5910,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-21T04:05:12.668Z",
           "source_name": "Brogan Houston",
           "source_url": "https://x.com/houston_brogan/status/2123851393123615055?s=20",
@@ -6172,7 +6172,7 @@
         "goalie": {
           "name": "Jesper Wallstedt",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -6180,7 +6180,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:15:56.680Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020355",
@@ -6421,7 +6421,7 @@
         "goalie": {
           "name": "Leevi Merilainen",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -6429,7 +6429,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-20T17:18:58.990Z",
           "source_name": "Last Game (2026-11-19)",
           "source_url": "https://www.nhl.com/gamecenter/2026020357",
@@ -6667,7 +6667,7 @@
         "goalie": {
           "name": "Philipp Grubauer",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -6675,7 +6675,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-21T04:00:11.673Z",
           "source_name": "@sound_hockey",
           "source_url": "https://x.com/sound_hockey/status/2123864949080637843?s=46",
@@ -6916,7 +6916,7 @@
         "goalie": {
           "name": "Alex Nedeljkovic",
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -6924,7 +6924,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-21T06:09:06.892312-05:00",
+          "observed_at": "2026-11-21T07:04:37.589190-05:00",
           "updated_at": "2026-11-21T04:01:23.249Z",
           "source_name": "Sheng Peng",
           "source_url": "https://x.com/sheng_peng/status/2123861157262070089?s=46",
