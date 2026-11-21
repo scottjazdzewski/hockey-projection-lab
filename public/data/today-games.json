@@ -2,7 +2,7 @@
   "date": "2026-11-21",
   "timezone": "America/New_York",
   "display_date": "Saturday, November 21",
-  "updated_at": "2026-11-21T11:35:11.176932-05:00",
+  "updated_at": "2026-11-21T16:25:11.087522-05:00",
   "source": "Official NHL live score feed",
   "games": [
     {
@@ -13,7 +13,7 @@
       "home_name": "Carolina Hurricanes",
       "time_et": "1:00 PM ET",
       "start_time_et": "2026-11-21T13:00:00-05:00",
-      "state": "FUT"
+      "state": "FINAL"
     },
     {
       "game_id": 2026020360,
@@ -23,7 +23,7 @@
       "home_name": "Calgary Flames",
       "time_et": "3:30 PM ET",
       "start_time_et": "2026-11-21T15:30:00-05:00",
-      "state": "FUT"
+      "state": "LIVE"
     },
     {
       "game_id": 2026020361,
