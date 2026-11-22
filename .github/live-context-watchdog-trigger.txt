@@ -1,2 +1,2 @@
-Recovery requested: 2026-11-21T07:04:16-05:00
-Reason: November 21 slate and live context current (14 games); projections remain dated November 17 (11 games). Trigger production rescore.
+Recovery requested: 2026-11-22T06:07:38-05:00
+Reason: 2026-11-22 slate and live context current; game projections stale.
