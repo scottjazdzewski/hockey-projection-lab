@@ -1,2 +1,2 @@
-recovery_requested_at=2026-11-23T06:04:39-05:00
-reason=stale_game_projections_for_2026-11-23
+Hockey Lab live-context recovery requested at 2026-11-23T07:05:10-05:00
+Reason: 2026-11-23 projections stale; rescore today's NHL slate.
