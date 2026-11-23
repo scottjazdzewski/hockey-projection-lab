@@ -1,3 +1,3 @@
-Recovery requested: 2026-11-22T18:04:19-05:00
-Expected checkpoint: FIXED:2026-11-22T18:00:00-05:00
+Recovery requested: 2026-11-23T09:06:43-05:00
+Expected checkpoint: FIXED:2026-11-23T09:00:00-05:00
 Reason: missing sportsbook benchmark checkpoint; benchmark-only, no model changes.
