@@ -1,2 +1,2 @@
-Recovery requested: 2026-11-22T07:04:34-05:00
-Reason: 2026-11-22 slate and live context current; game projections stale.
+recovery_requested_at=2026-11-23T06:04:39-05:00
+reason=stale_game_projections_for_2026-11-23
