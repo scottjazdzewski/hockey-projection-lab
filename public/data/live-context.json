@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "date": "2026-11-24",
-  "generated_at": "2026-11-24T05:07:18.705497-05:00",
+  "generated_at": "2026-11-24T06:05:21.392196-05:00",
   "provider": {
     "name": "Daily Faceoff public pages",
     "access_mode": "PUBLIC_PAGE_NEXT_DATA",
@@ -17,7 +17,7 @@
         "goalie": {
           "name": "Carter Hart",
           "status": "PROJECTED",
-          "observed_at": "2026-11-24T05:07:18.705497-05:00",
+          "observed_at": "2026-11-24T06:05:21.392196-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -25,7 +25,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-24T05:07:18.705497-05:00",
+          "observed_at": "2026-11-24T06:05:21.392196-05:00",
           "updated_at": "2026-11-23T15:08:28.783Z",
           "source_name": "Last Game (2026-11-21)",
           "source_url": "https://www.nhl.com/gamecenter/2026020360",
@@ -260,7 +260,7 @@
         "goalie": {
           "name": "Devon Levi",
           "status": "PROJECTED",
-          "observed_at": "2026-11-24T05:07:18.705497-05:00",
+          "observed_at": "2026-11-24T06:05:21.392196-05:00",
           "source_timestamp": null,
           "source_name": null,
           "source_url": null,
@@ -268,7 +268,7 @@
         },
         "lineup": {
           "status": "PROJECTED",
-          "observed_at": "2026-11-24T05:07:18.705497-05:00",
+          "observed_at": "2026-11-24T06:05:21.392196-05:00",
           "updated_at": "2026-11-23T15:46:25.444Z",
           "source_name": "Last Game (2026-11-21)",
           "source_url": "https://www.nhl.com/gamecenter/2026020375",
