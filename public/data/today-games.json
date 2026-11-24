@@ -1,78 +1,18 @@
 {
-  "date": "2026-11-23",
+  "date": "2026-11-24",
   "timezone": "America/New_York",
-  "display_date": "Monday, November 23",
-  "updated_at": "2026-11-23T05:03:55.264636-05:00",
+  "display_date": "Tuesday, November 24",
+  "updated_at": "2026-11-24T05:07:04.067566-05:00",
   "source": "Official NHL live score feed",
   "games": [
     {
-      "game_id": 2026020378,
-      "away_abbr": "CBJ",
-      "away_name": "Columbus Blue Jackets",
-      "home_abbr": "NJD",
-      "home_name": "New Jersey Devils",
-      "time_et": "7:00 PM ET",
-      "start_time_et": "2026-11-23T19:00:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020379,
-      "away_abbr": "LAK",
-      "away_name": "Los Angeles Kings",
-      "home_abbr": "MTL",
-      "home_name": "Montreal Canadiens",
-      "time_et": "7:30 PM ET",
-      "start_time_et": "2026-11-23T19:30:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020380,
-      "away_abbr": "CGY",
-      "away_name": "Calgary Flames",
-      "home_abbr": "OTT",
-      "home_name": "Ottawa Senators",
-      "time_et": "7:30 PM ET",
-      "start_time_et": "2026-11-23T19:30:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020381,
-      "away_abbr": "TOR",
-      "away_name": "Toronto Maple Leafs",
-      "home_abbr": "NYI",
-      "home_name": "New York Islanders",
-      "time_et": "7:30 PM ET",
-      "start_time_et": "2026-11-23T19:30:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020382,
-      "away_abbr": "UTA",
-      "away_name": "Utah Mammoth",
-      "home_abbr": "WPG",
-      "home_name": "Winnipeg Jets",
-      "time_et": "7:30 PM ET",
-      "start_time_et": "2026-11-23T19:30:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020383,
-      "away_abbr": "ANA",
-      "away_name": "Anaheim Ducks",
-      "home_abbr": "SEA",
-      "home_name": "Seattle Kraken",
-      "time_et": "9:40 PM ET",
-      "start_time_et": "2026-11-23T21:40:00-05:00",
-      "state": "FUT"
-    },
-    {
-      "game_id": 2026020384,
-      "away_abbr": "MIN",
-      "away_name": "Minnesota Wild",
-      "home_abbr": "SJS",
-      "home_name": "San Jose Sharks",
-      "time_et": "10:00 PM ET",
-      "start_time_et": "2026-11-23T22:00:00-05:00",
+      "game_id": 2026020385,
+      "away_abbr": "VGK",
+      "away_name": "Vegas Golden Knights",
+      "home_abbr": "EDM",
+      "home_name": "Edmonton Oilers",
+      "time_et": "8:00 PM ET",
+      "start_time_et": "2026-11-24T20:00:00-05:00",
       "state": "FUT"
     }
   ]
